@@ -1,0 +1,70 @@
+.slideIn{
+    -webkit-animation: slideIn 0.5s ease-in;
+    -moz-animation: slideIn 0.5s ease-in;
+    animation: slideIn 0.5s ease-in;
+}
+
+.slideOut{
+-webkit-animation: slideOut 0.5s ease-in;
+-moz-animation: slideOut 0.5s ease-in;
+animation: slideOut 0.5s ease-in;
+}
+
+@-webkit-keyframes slideIn {
+    0% {
+       left: -80vw;
+    }
+    100% {
+       left: 0;
+    }
+}
+
+@-moz-keyframes slideIn {
+     0% {
+         left: -80vw;
+     }
+
+     100% {
+         left: 0;
+     }
+}
+
+@keyframes slideIn {
+    0% {
+        left: -80vw;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@-webkit-keyframes slideOut {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -80vw;
+    }
+}
+
+@-moz-keyframes slideOut {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -80vw;
+    }
+}
+
+@keyframes slideOut {
+     0% {
+         left: 0;
+     }
+
+     100% {
+         left: -80vw;
+     }
+}
