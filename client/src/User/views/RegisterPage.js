@@ -3,6 +3,10 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../_actions/user_action";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
+
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, FormDivCSS } from "../css/UserPageElement.js";
 
 function RegisterPage(props) {
