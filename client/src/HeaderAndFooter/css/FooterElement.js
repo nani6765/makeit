@@ -7,20 +7,80 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const FooterDiv = styled.div`
-    height: auto;
-    min-height: 300px;
-    background: #cdabe9;
+  display: flex;
+  background: #cdabe9;
+  ${mq[1]} {
+    margin-bottom: 75px;
   }
 `;
 
 const FooterArea = styled.div`
-    width:70%;
-    margin: 0 auto;
-    padding-top:5vh;
-    padding-bottom:5vh;
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  ${mq[1]} {}
+  width: 90%;
   }
 `;
 
+const FooterMenuArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 20px;
+  border-bottom: 1px solid #ececec;
+  div {
+    margin-right: 20px;
+    p {
+      font-weight: 700;
+      font-size: 14px;
+      color: #eee;
+      padding: 16px 0;
+      line-height: 1.43;
+      word-break: keep-all;
+      ${mq[0]} {
+        font-size: 12px;
+      }
+    }
+  }
+  ${mq[1]} {
+    flex-direction: column;
+    justify-content: normal;
+    padding: 10px 20px 0;
+    border-bottom: none;
+    div {
+      border-bottom: 1px solid #b182c2;
+    }
+    .mobileHidden {
+      display: none;
+    }
+  }
+`;
+
+const FooterContentArea = styled.div`
+  display: flex;
+  padding: 1rem 20px;
+  justify-content: flex-start;
+  font-size: 12px;
+  line-height: 1.5;
+  .onlyMoblie {
+    display: none;
+    color: #b182c2;
+  }
+  ${mq[0]} {
+    font-size: 10px;
+  }
+  ${mq[1]} {
+    display: block;
+    text-align: center;
+    .mobileHidden {
+      display: none;
+    }
+    .onlyMoblie {
+      display: block;
+    }
+  }
+`;
 const MobileFooterDiv = styled.div`
   display: none;
   background-color: white;
@@ -30,7 +90,9 @@ const MobileFooterDiv = styled.div`
   bottom: 0;
   z-index: 50;
   width: 100%;
-  height: auto;
+  height: 75px;
+  max-height: 75px;
+  min-height: 75px;
   ${mq[1]} {
     display: block;
     ul {
@@ -65,4 +127,10 @@ const MobileFooterDiv = styled.div`
   }
 `;
 
-export { FooterDiv, FooterArea, MobileFooterDiv };
+export {
+  FooterDiv,
+  FooterArea,
+  FooterMenuArea,
+  FooterContentArea,
+  MobileFooterDiv,
+};

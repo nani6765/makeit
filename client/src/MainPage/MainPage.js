@@ -1,20 +1,18 @@
 import React from "react";
-import MainBanner from "./views/MainBanner.js";
 import FriendsVideo from "./views/FriendsVideo.js";
 import CommunityPost from "./views/CommunityPost.js";
 import ProArea from "./views/ProArea.js";
-import Header from "../HeaderAndFooter/Header.js";
-import Footer from "../HeaderAndFooter/Footer.js";
+import MainBanner from "./views/MainBanner.js";
+import MobileFooter from "../HeaderAndFooter/MobileFooter.js";
 
 function MainPage() {
   return (
     <>
-      <Header />
       <MainBanner />
       <FriendsVideo />
       <CommunityPost />
       <ProArea />
-      <Footer />
+      <MobileFooter path="/" />
     </>
   );
 }

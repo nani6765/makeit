@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import {
@@ -13,8 +13,9 @@ import {
   MobileBell,
   MobileProfile,
   MobileSideBackDiv,
-  MobileSideDiv,
+  MobileSlideDiv,
 } from "./css/HeaderElement.js";
+import MobileSlide from "./MobileSlide.js";
 import { withRouter } from "react-router-dom";
 import useDocScroll from "./hooks/useDocScroll.js";
 import "./css/header.css";
@@ -23,8 +24,12 @@ import "./css/animation.css";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
+import { useSelector } from "react-redux";
 
 function Header(props) {
+  const user = useSelector((state) => state.user);
+
+  //scroll function
   const [shouldHideHeader, setShouldHideHeader] = useState(false);
   const [shouldShowShadow, setShouldShowShadow] = useState(false);
   const MINIMUM_SCROLL = 80;
@@ -74,8 +79,9 @@ function Header(props) {
     axios.get("api/user/logout").then((res) => {
       if (res.data.success) {
         props.history.push("/");
+        window.location.reload();
       } else {
-        props.history.push("/login");
+        alert("로그아웃 하는 데 실패했습니다.");
       }
     });
   };
@@ -104,22 +110,24 @@ function Header(props) {
                 <a href="/">영상제작</a>
               </li>
               <li>
-                <a href="/">커뮤니티</a>
+                <a href="/community">커뮤니티</a>
               </li>
             </ul>
           </HeaderNav>
           <HeaderSearch>
-            <div>
-              <form action="/search" method="GET">
-                <input type="text" placeholder="Search..." />
-              </form>
-            </div>
+            <form action="/search" method="GET">
+              <input type="text" placeholder="Search..." />
+            </form>
           </HeaderSearch>
           <HeaderLogin>
             <div>
-              <Link to="/login">
-                <button>login</button>
-              </Link>
+              {user.userData && !user.userData.isAuth ? (
+                <Link to="/login">
+                  <button>login</button>
+                </Link>
+              ) : (
+                <button onClick={() => logoutHandler()}>logout</button>
+              )}
             </div>
           </HeaderLogin>
 
@@ -134,16 +142,25 @@ function Header(props) {
             <i className="bi bi-bell"></i>
           </MobileBell>
           <MobileProfile>
-            <i className="bi bi-person-circle"></i>
+            {user.userData && !user.userData.isAuth ? (
+              <Link to="/login">
+                <i className="bi bi-person-circle"></i>
+              </Link>
+            ) : (
+              <Link to="MyPage">
+                <i className="bi bi-person-circle"></i>
+              </Link>
+            )}
           </MobileProfile>
         </HeaderGrid>
-        <button onClick={logoutHandler}>logout</button>
       </HeaderDiv>
       <MobileSideBackDiv
         className="MobileSideBack"
         onClick={() => hideSide()}
       />
-      <MobileSideDiv className="MobileSideBar"></MobileSideDiv>
+      <MobileSlideDiv className="MobileSideBar">
+        <MobileSlide />
+      </MobileSlideDiv>
     </>
   );
 }

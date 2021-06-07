@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { registerUser } from "../../_actions/user_action";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
-
+import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { DivCSS, BoxDivCSS, FormDivCSS } from "../css/UserPageElement.js";
+import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 
 function RegisterPage(props) {
   const dispatch = useDispatch();
@@ -42,26 +42,34 @@ function RegisterPage(props) {
     <>
       <div css={DivCSS}>
         <div css={BoxDivCSS}>
+          <div css={Logo}>
+            <img src={process.env.PUBLIC_URL + "/Img/logo.png"} alt="" />
+            <p>
+              영상의 시작,
+              <br />
+              영상이 쉬워지는 곳
+            </p>
+          </div>
           <form css={FormDivCSS} onSubmit={onSubmitHandler}>
-            <label>Email</label>
+            <label>이메일</label>
             <input
               type="email"
               value={Email}
               onChange={(e) => setEmail(e.currentTarget.value)}
             />
-            <label>name</label>
+            <label>이름</label>
             <input
               type="text"
               value={Name}
               onChange={(e) => setName(e.currentTarget.value)}
             />
-            <label>Password</label>
+            <label>비밀번호</label>
             <input
               type="password"
               value={Password}
               onChange={(e) => setPassword(e.currentTarget.value)}
             />
-            <label>Confirm Password</label>
+            <label>비밀번호확인</label>
             <input
               type="password"
               value={ConfirmPassword}
@@ -72,6 +80,7 @@ function RegisterPage(props) {
           </form>
         </div>
       </div>
+      <MobileFooter />
     </>
   );
 }

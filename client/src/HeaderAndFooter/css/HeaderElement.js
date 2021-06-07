@@ -296,7 +296,7 @@ const MobileSideBackDiv = styled.div`
   display: none;
 `;
 
-const MobileSideDiv = styled.div`
+const MobileSlideDiv = styled.div`
   position: fixed;
   width: 80vw;
   height: 100%;
@@ -305,6 +305,10 @@ const MobileSideDiv = styled.div`
   bottom: 0;
   left: -80vw;
   background-color: white;
+`;
+
+const MobileSlideDivContent = styled.div`
+  padding: 30px 20px 30px 20px;
 `;
 
 export {
@@ -320,5 +324,6 @@ export {
   MobileBell,
   MobileProfile,
   MobileSideBackDiv,
-  MobileSideDiv,
+  MobileSlideDiv,
+  MobileSlideDivContent,
 };
