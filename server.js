@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookeParser());
 app.use("/api/user", require("./routes/user.js"));
 
-const port = process.env.PORT;
+const port = config.PORT;
 const mongoose = require("mongoose");
 mongoose
   .connect(config.mongoURI, {
