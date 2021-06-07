@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookeParser());
 app.use("/api/user", require("./routes/user.js"));
 
-const port = config.PORT;
+const port = process.env.PORT || 5000;
 const mongoose = require("mongoose");
 mongoose
   .connect(config.mongoURI, {
@@ -22,7 +22,6 @@ mongoose
     console.log("MongoDB Connecting...");
     http.listen(port, function () {
       console.log("listening on", port);
-      //Http listening here
     });
   })
   .catch((err) => console.log(err));
