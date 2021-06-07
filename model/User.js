@@ -20,6 +20,9 @@ const userSchema = mongoose.Schema({
     type: String,
     minlength: 8,
   },
+  image: {
+    type: String,
+  },
   role: {
     type: Number,
     default: 0,

@@ -3,13 +3,13 @@ const path = require("path");
 const cookeParser = require("cookie-parser");
 const app = express();
 const http = require("http").createServer(app);
-const config = require("./config/dev");
+const config = require("./config/key");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookeParser());
 app.use("/api/user", require("./routes/user.js"));
 
-const port = 5000;
+const port = config.PORT;
 const mongoose = require("mongoose");
 mongoose
   .connect(config.mongoURI, {
@@ -21,7 +21,7 @@ mongoose
   .then(() => {
     console.log("MongoDB Connecting...");
     http.listen(port, function () {
-      console.log("listening on port");
+      console.log("listening on", port);
       //Http listening here
     });
   })
@@ -29,10 +29,10 @@ mongoose
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("/", function (요청, 응답) {
-  응답.sendFile(path.join(__dirname, "/client/build/index.html"));
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
-app.get("*", function (요청, 응답) {
-  응답.sendFile(path.join(__dirname, "/client/build/index.html"));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
