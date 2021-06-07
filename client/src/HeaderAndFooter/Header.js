@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   HeaderDiv,
   HeaderGrid,
@@ -14,6 +15,7 @@ import {
   MobileSideBackDiv,
   MobileSideDiv,
 } from "./css/HeaderElement.js";
+import { withRouter } from "react-router-dom";
 import useDocScroll from "./hooks/useDocScroll.js";
 import "./css/header.css";
 import "./css/animation.css";
@@ -22,7 +24,7 @@ import "./css/animation.css";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 
-function Header() {
+function Header(props) {
   const [shouldHideHeader, setShouldHideHeader] = useState(false);
   const [shouldShowShadow, setShouldShowShadow] = useState(false);
   const MINIMUM_SCROLL = 80;
@@ -67,6 +69,16 @@ function Header() {
     }, 450);
     console.log(sideBar);
   }
+
+  const logoutHandler = () => {
+    axios.get("api/user/logout").then((res) => {
+      if (res.data.success) {
+        props.history.push("/");
+      } else {
+        props.history.push("/login");
+      }
+    });
+  };
 
   return (
     <>
@@ -125,6 +137,7 @@ function Header() {
             <i className="bi bi-person-circle"></i>
           </MobileProfile>
         </HeaderGrid>
+        <button onClick={logoutHandler}>logout</button>
       </HeaderDiv>
       <MobileSideBackDiv
         className="MobileSideBack"
@@ -135,4 +148,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default withRouter(Header);
