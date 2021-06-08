@@ -14,8 +14,8 @@ import {
   MainPageGridPrevAndNext,
   MainPageGridContent,
 } from "../css/MainPageElement.js";
-import SampleImg from "../../Img/sample.png";
-import PlayButton from "../../Img/playButton.png";
+import SampleImg from "../../../Img/sample.png";
+import PlayButton from "../../../Img/playButton.png";
 
 function FriendsVideo() {
   let FVGridContent = MainPageGridContent(310);

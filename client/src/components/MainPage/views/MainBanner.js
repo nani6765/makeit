@@ -44,7 +44,7 @@ let BannerImg = css`
 function ContentBanner() {
   return (
     <>
-      <BannerDiv>
+      <div>
         <Banner>
           <img
             src={process.env.PUBLIC_URL + "/Img/BackgroundContent.png"}
@@ -52,7 +52,7 @@ function ContentBanner() {
             css={BannerImg}
           />
         </Banner>
-      </BannerDiv>
+      </div>
     </>
   );
 }

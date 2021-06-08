@@ -1,17 +1,9 @@
 const mongoose = require("mongoose");
 
 const coPostSchema = mongoose.Schema({
-  auther: {
-    type: String,
-    maxlength: 50,
-  },
   postNum: {
     type: 0,
     unique: true,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
   },
   title: {
     type: String,
@@ -21,12 +13,25 @@ const coPostSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  auther: {
+    type: String,
+  },
+  category: {
+    type: Number,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  link: {
+    type: String,
+  },
   repleNum: {
-    type: Num,
+    type: Number,
     default: 0,
   },
   likeNum: {
-    type: Num,
+    type: Number,
     default: 0,
   },
 });

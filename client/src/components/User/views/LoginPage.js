@@ -1,42 +1,51 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../_actions/user_action";
 import Axios from "axios";
+import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { loginUser } from "../../../_actions/user_action";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 
-function RegisterPage(props) {
+function LoginPage(props) {
   const dispatch = useDispatch();
   const [Email, setEmail] = useState("");
-  const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (Password !== ConfirmPassword) {
-      return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
-    }
-
     let body = {
       email: Email,
       password: Password,
-      name: Name,
     };
-    console.log("body", body);
-    dispatch(registerUser(body)).then((response) => {
-      console.log("response", response);
-      if (response.payload.success) {
-        props.history.push("/login");
+    dispatch(loginUser(body)).then((response) => {
+      if (response.payload.loginSuccess) {
+        props.history.push("/");
       } else {
-        alert("Failed to sign up");
+        alert("Error");
       }
     });
   };
+
+  const passwordFind = css`
+    width: 100%;
+    text-align: right;
+    color: #454345;
+    font-size: 10px;
+  `;
+
+  const GoRegister = css`
+    font-size: 12px;
+    line-height: 19px;
+    text-align: center;
+    color: #454345;
+    span {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  `;
 
   return (
     <>
@@ -50,6 +59,7 @@ function RegisterPage(props) {
               영상이 쉬워지는 곳
             </p>
           </div>
+
           <form css={FormDivCSS} onSubmit={onSubmitHandler}>
             <label>이메일</label>
             <input
@@ -57,27 +67,26 @@ function RegisterPage(props) {
               value={Email}
               onChange={(e) => setEmail(e.currentTarget.value)}
             />
-            <label>이름</label>
-            <input
-              type="text"
-              value={Name}
-              onChange={(e) => setName(e.currentTarget.value)}
-            />
             <label>비밀번호</label>
             <input
               type="password"
               value={Password}
               onChange={(e) => setPassword(e.currentTarget.value)}
             />
-            <label>비밀번호확인</label>
-            <input
-              type="password"
-              value={ConfirmPassword}
-              onChange={(e) => setConfirmPassword(e.currentTarget.value)}
-            />
             <br />
-            <button type="submit">회원 가입</button>
+            <p css={passwordFind}>비밀번호찾기</p>
+            <button type="submit">로그인</button>
           </form>
+          <p css={GoRegister}>
+            아직 계정이 없으신가요?{" "}
+            <span
+              onClick={() => {
+                window.location.href = "/register";
+              }}
+            >
+              간편가입하기
+            </span>
+          </p>
         </div>
       </div>
       <MobileFooter />
@@ -85,4 +94,4 @@ function RegisterPage(props) {
   );
 }
 
-export default withRouter(RegisterPage);
+export default withRouter(LoginPage);

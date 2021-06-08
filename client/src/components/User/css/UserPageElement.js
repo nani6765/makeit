@@ -6,14 +6,7 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const DivCSS = css`
-  padding-top: 80px;
   text-align: center;
-  ${mq[0]} {
-    padding-top: 50px;
-  }
-  ${mq[1]} {
-    padding-top: 30px;
-  }
 `;
 
 const BoxDivCSS = css`

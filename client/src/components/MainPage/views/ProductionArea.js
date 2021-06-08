@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import SampleImg from "../Img/sample.png";
+import SampleImg from "../../../Img/sample.png";
 import ScrollContainer from "react-indiana-drag-scroll";
 
 function ProductionArea() {
