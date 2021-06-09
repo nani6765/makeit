@@ -76,7 +76,8 @@ function Header(props) {
   }
 
   const logoutHandler = () => {
-    axios.get("api/user/logout").then((res) => {
+    axios.get("/api/user/logout").then((res) => {
+      console.log(res.data);
       if (res.data.success) {
         props.history.push("/");
         window.location.reload();
