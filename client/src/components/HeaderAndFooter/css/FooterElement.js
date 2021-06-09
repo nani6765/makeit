@@ -19,8 +19,8 @@ const FooterArea = styled.div`
   margin: 0 auto;
   padding-top: 5vh;
   padding-bottom: 5vh;
-  ${mq[1]} {}
-  width: 90%;
+  ${mq[1]} {
+    width: 90%;
   }
 `;
 

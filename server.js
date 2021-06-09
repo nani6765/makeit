@@ -7,7 +7,9 @@ const config = require("./config/key");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookeParser());
+
 app.use("/api/user", require("./routes/user.js"));
+app.use("/api/community", require("./routes/commpunity.js"));
 
 const port = process.env.PORT || 5000;
 const mongoose = require("mongoose");

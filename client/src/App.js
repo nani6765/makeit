@@ -20,11 +20,6 @@ function App() {
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route
           exact
-          path="/community"
-          component={Auth(CommunityUpload, true)}
-        />
-        <Route
-          exact
           path="/community/upload"
           component={Auth(CommunityUpload, true)}
         />

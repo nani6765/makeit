@@ -1,40 +1,48 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const coPostSchema = mongoose.Schema({
-  postNum: {
-    type: 0,
-    unique: true,
+const coPostSchema = mongoose.Schema(
+  {
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    email: {
+      type: String,
+    },
+    title: {
+      type: String,
+    },
+    content: {
+      type: String,
+    },
+    images: {
+      type: Array,
+      default: [],
+    },
+    category: {
+      type: Number,
+      default: 0,
+    },
+    views: {
+      type: Number,
+      default: 0,
+    },
+    repleNum: {
+      type: Number,
+      default: 0,
+    },
+    likeNum: {
+      type: Number,
+      default: 0,
+    },
+    postNum: {
+      type: Number,
+      //unique: true,
+    },
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  auther: {
-    type: String,
-  },
-  category: {
-    type: Number,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-  link: {
-    type: String,
-  },
-  repleNum: {
-    type: Number,
-    default: 0,
-  },
-  likeNum: {
-    type: Number,
-    default: 0,
-  },
-});
+  { timeStamps: true }
+);
 
-const coPostSchema = mongoose.model("coPostSchema", coPostSchema);
-module.exports = { coPostSchema };
+const Community = mongoose.model("coPostSchema", coPostSchema);
+module.exports = { Community };

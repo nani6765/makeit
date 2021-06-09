@@ -1,9 +1,13 @@
 import React from "react";
+import { UploadDiv } from "../css/CommunityElement.js";
+import UploadForm from "./UploadForm.js";
 
-function CommunityUpload() {
+function CommunityUpload(props) {
   return (
     <>
-      <div>test</div>
+      <UploadDiv>
+        <UploadForm user={props.user.userData} />
+      </UploadDiv>
     </>
   );
 }
