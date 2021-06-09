@@ -11,10 +11,8 @@ const S3 = new AWS.S3({
   endpoint: endpoint,
   region: region,
   credentials: {
-    accessKeyId: "CpjVKZ482dCyHh72SWEJ",
-    secretAccessKey: "p7pB3ddHIsKDK5L2qfgufIqYWk8njr4JodBqNy4q",
-    //accessKeyId: config.access_key,
-    //secretAccessKey: config.secret_key,
+    accessKeyId: config.access_key,
+    secretAccessKey: config.secret_key,
   },
 });
 
