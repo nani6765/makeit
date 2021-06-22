@@ -13,10 +13,6 @@ import {
 
 function Footer(props) {
   const [path, setpath] = useState("");
-  useEffect(() => {
-    console.log("Footer Props", props.key);
-  });
-
   return (
     <>
       <FooterDiv>

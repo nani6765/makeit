@@ -3,37 +3,43 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 
-const userSchema = mongoose.Schema({
-  name: {
-    type: String,
-    maxlength: 50,
+const userSchema = mongoose.Schema(
+  {
+    name: {
+      type: String,
+      maxlength: 50,
+    },
+    email: {
+      type: String,
+      trim: true,
+      unique: 1,
+    },
+    phone: {
+      type: Number,
+    },
+    password: {
+      type: String,
+      minlength: 8,
+    },
+    image: {
+      type: String,
+    },
+    role: {
+      type: Number,
+      default: 0,
+    },
+    userNum: {
+      type: Number,
+    },
+    token: {
+      type: String,
+    },
+    tokenExp: {
+      type: Number,
+    },
   },
-  email: {
-    type: String,
-    trim: true,
-    unique: 1,
-  },
-  phone: {
-    type: Number,
-  },
-  password: {
-    type: String,
-    minlength: 8,
-  },
-  image: {
-    type: String,
-  },
-  role: {
-    type: Number,
-    default: 0,
-  },
-  token: {
-    type: String,
-  },
-  tokenExp: {
-    type: Number,
-  },
-});
+  { collection: "userInfo" }
+);
 
 userSchema.pre("save", function (next) {
   var user = this;

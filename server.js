@@ -4,6 +4,7 @@ const cookeParser = require("cookie-parser");
 const app = express();
 const http = require("http").createServer(app);
 const config = require("./config/key");
+const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookeParser());
@@ -12,7 +13,7 @@ app.use("/api/user", require("./routes/user.js"));
 app.use("/api/community", require("./routes/commpunity.js"));
 
 const port = process.env.PORT || 5000;
-const mongoose = require("mongoose");
+
 mongoose
   .connect(config.mongoURI, {
     useNewUrlParser: true,

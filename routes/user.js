@@ -1,13 +1,23 @@
 var router = require("express").Router();
 const { User } = require("../model/User");
 const { auth } = require("../middleware/auth");
+const { Counter } = require("../model/Counter.js");
 
 router.post("/register", (req, res) => {
-  const user = new User(req.body);
-  user.save((err, doc) => {
-    if (err) return res.json({ success: false, err });
-    return res.status(200).json({
-      success: true,
+  let temp = req.body;
+  Counter.findOne({ name: "counter" }, (err, counter) => {
+    if (err) return res.status(400).json({ success: false, err });
+    temp.userNum = counter.users;
+    const user = new User(temp);
+
+    user.save((err, doc) => {
+      if (err) return res.json({ success: false, err });
+      counter.updateOne({ $inc: { users: 1 } }, (err) => {
+        if (err) return res.json({ success: false, err });
+        return res.status(200).json({
+          success: true,
+        });
+      });
     });
   });
 });
@@ -47,7 +57,6 @@ router.get("/auth", auth, (req, res) => {
     email: req.user.email,
     name: req.user.name,
     role: req.user.role,
-    //lastname: req.user.lastname,
     //image: req.user.image,
   });
 });
