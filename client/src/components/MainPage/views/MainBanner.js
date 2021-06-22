@@ -7,16 +7,6 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-let BannerDiv = styled.div`
-  padding-top: 80px;
-  ${mq[0]} {
-    padding-top: 80px;
-  }
-  ${mq[1]} {
-    padding-top: 60px;
-  }
-`;
-
 let Banner = styled.div`
   width: 100%;
   height: 450px;

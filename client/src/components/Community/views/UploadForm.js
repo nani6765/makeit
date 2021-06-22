@@ -16,7 +16,6 @@ function UploadForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
-
   const updateImages = (newImages) => {
     setImage(newImages);
   };
@@ -32,6 +31,7 @@ function UploadForm(props) {
       title: Title,
       content: Content,
       images: Image,
+      category: props.category,
     };
 
     axios.post("/api/community/postSubmit", body).then((response) => {

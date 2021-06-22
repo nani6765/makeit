@@ -6,6 +6,8 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
+const CommunityDiv = styled.div``;
+
 const UploadDiv = styled.div`
   width: 60%;
   margin: 0 auto;
@@ -117,4 +119,70 @@ const CancelBtn = styled.button`
   border: 1px solid #dedede;
 `;
 
-export { UploadDiv, FormDiv, BtnDiv, SubmitBtn, CancelBtn };
+const GNBDiv = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  ${mq[1]} {
+    width: 90%;
+  }
+`;
+
+const GNBBtnDiv = styled.div`
+  display: flex;
+  align-content: center;
+  width: 100%;
+  justify-content: space-evenly;
+  ${mq[1]} {
+    display: none;
+  }
+`;
+
+const GNBMobileDiv = styled.div`
+  display: none;
+  ${mq[1]} {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    width: 100%;
+  }
+`;
+
+const GNBMobileContentDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
+const GNBCategoryBtn = styled.button`
+  padding: 5px 10px 5px 10px;
+  background: #ffffff;
+  color: #702c8a;
+  border: 1px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 22px;
+  font-size: 14px;
+  ${mq[0]} {
+    padding: 5px 10px 5px 10px;
+    font-size: 12px;
+  }
+  ${mq[1]} {
+    padding: 2px 5px 2px 5px;
+    font-size: 10px;
+  }
+`;
+
+export {
+  CommunityDiv,
+  UploadDiv,
+  FormDiv,
+  BtnDiv,
+  SubmitBtn,
+  CancelBtn,
+  GNBDiv,
+  GNBBtnDiv,
+  GNBMobileDiv,
+  GNBMobileContentDiv,
+  GNBCategoryBtn,
+};

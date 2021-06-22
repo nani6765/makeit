@@ -8,7 +8,6 @@ const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookeParser());
-
 app.use("/api/user", require("./routes/user.js"));
 app.use("/api/community", require("./routes/commpunity.js"));
 

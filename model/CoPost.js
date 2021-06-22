@@ -31,7 +31,7 @@ const coPostSchema = mongoose.Schema(
       default: [],
     },
     category: {
-      type: Number,
+      type: String,
       default: 0,
     },
     views: {
