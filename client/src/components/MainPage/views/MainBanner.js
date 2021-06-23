@@ -4,47 +4,36 @@ import React from "react";
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const breakpoints = [1200, 576];
-const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
+function MainBanner() {
+  const breakpoints = [1200, 576];
+  const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-let Banner = styled.div`
-  width: 100%;
-  height: 450px;
-  background-image: url(/Img/BannerBackground.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: inline-flex;
-  align-items: center;
-  overflow: hidden;
-  ${mq[0]} {
-    height: 300px;
-  }
-`;
-
-let BannerImg = css`
-  display: block;
-  margin: 0 auto;
-  width: 80%;
-  ${mq[0]} {
+  let Banner = styled.img`
     width: 100%;
-    height: 50%;
-  }
-`;
+    height: 450px;
+    overflow: hidden;
+    ${mq[0]} {
+      height: 300px;
+    }
+  `;
 
-function ContentBanner() {
+  let BannerImg = css`
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    ${mq[0]} {
+      width: 100%;
+      height: 50%;
+    }
+  `;
+
   return (
     <>
       <div>
-        <Banner>
-          <img
-            src={process.env.PUBLIC_URL + "/Img/BackgroundContent.png"}
-            alt=""
-            css={BannerImg}
-          />
-        </Banner>
+        <Banner src={process.env.PUBLIC_URL + "/Img/MainBanner.jpg"} alt="" />
       </div>
     </>
   );
 }
 
-export default ContentBanner;
+export default MainBanner;

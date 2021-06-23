@@ -63,6 +63,12 @@ const FooterContentArea = styled.div`
   justify-content: flex-start;
   font-size: 12px;
   line-height: 1.5;
+  .mobileHidden {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: stretch;
+  }
   .onlyMoblie {
     display: none;
     color: #b182c2;
