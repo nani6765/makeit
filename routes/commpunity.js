@@ -4,28 +4,34 @@ const { Counter } = require("../model/Counter.js");
 const setUpload = require("../model/multer/upload.js");
 const setDelete = require("../model/multer/delete.js");
 
+router.post("/length", (req, res) => {
+  let filter = {};
+  filter.category = req.body.category;
+  Community.find(filter).exec((err, postInfo) => {
+    let idx = postInfo.length;
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).json({ success: true, idx });
+  });
+});
+
 router.post("/", (req, res) => {
   let filter = {};
   filter.category = req.body.category;
+  let tempSkip = req.body.pageSkip ? parseInt(req.body.pageSkip) : 0;
+  let limit = 10;
+  let skip = tempSkip === 0 ? 0 : tempSkip * 10;
+  let sort = {};
+  if (req.body.sortPost === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.views = -1;
+  }
   Community.find(filter)
     .populate("auther")
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
     .exec((err, postInfo) => {
-      if (req.body.sortPost === "최신순") {
-        postInfo.sort((a, b) => {
-          return new Date(b.createAt) - new Date(a.createAt);
-        });
-      } else {
-        postInfo.sort((a, b) => {
-          if (a.views > b.views) {
-            return 1;
-          }
-          if (a.views < b.views) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, postInfo });
     });

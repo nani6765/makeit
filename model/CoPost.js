@@ -58,10 +58,12 @@ const coPostSchema = mongoose.Schema(
       type: Number,
       //unique: true,
     },
+    /*
     createAt: {
       type: Date,
       default: getTime(),
     },
+    */
     realTime: {
       type: String,
       default: realTime(),
@@ -69,6 +71,7 @@ const coPostSchema = mongoose.Schema(
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
+    timestamps: true,
     collection: "coPosts",
   }
 );

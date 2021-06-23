@@ -98,7 +98,7 @@ const PostCard = styled.div`
   grid-template-columns: 50px auto 1fr 80px 80px 80px;
   grid-template-rows: 25px 25px auto auto auto;
   grid-template-areas:
-    "avatar author . . . ."
+    "avatar author . . . view"
     "avatar date . . . ."
     "title title title title title title"
     "desc desc desc desc desc desc"
@@ -113,6 +113,12 @@ const PostCard = styled.div`
     grid-area: author;
     font-weight: 600;
     margin-left: 10px;
+  }
+  .view {
+    text-align: right;
+    grid-area: view;
+    font-size: 14px;
+    color: 686868;
   }
   .date {
     grid-area: date;
@@ -165,6 +171,31 @@ const PostCard = styled.div`
   }
 `;
 
+const PageUL = styled.ul`
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  li {
+    border-right: 1px solid black;
+    button {
+      padding-left: 5px;
+      padding-right: 5px;
+      background-color: rgba(255, 255, 255, 0);
+      border: none;
+      font-size: 20px;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+    .active {
+      font-weight: bold;
+    }
+    &:nth-last-child(1) {
+      border: none;
+    }
+  }
+`;
+
 export {
   GNBDiv,
   GNBBtnDiv,
@@ -172,6 +203,7 @@ export {
   GNBMobileContentDiv,
   GNBCategoryBtn,
   PostLabelDiv,
+  PageUL,
   PostListDiv,
   PostCard,
 };

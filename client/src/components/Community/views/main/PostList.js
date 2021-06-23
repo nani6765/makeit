@@ -1,45 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { PostListDiv, PostCard } from "../../css/CommunityMainElement.js";
-import PostLabel from "./PostLabel.js";
 import axios from "axios";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
 
 function PostList(props) {
-  const [category, setcategory] = useState(props.category);
-  const [sortPost, setsortPost] = useState("최신순");
   const [posts, setposts] = useState([]);
 
   useEffect(() => {
-    setcategory(props.category);
-  }, [props.category]);
-
-  useEffect(() => {
     let body = {
-      category: category,
-      sortPost: sortPost,
+      category: props.category,
+      sortPost: props.sortPost,
+      pageSkip: props.pageSkip,
     };
 
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
-        let tempArray = [...response.data.postInfo];
-        setposts(tempArray);
+        setposts([...response.data.postInfo]);
       } else {
         alert("게시글을 불러오는 데 실패했습니다.");
       }
     });
-  }, [category, sortPost]);
+  }, [props.category, props.sortPost, props.pageSkip]);
 
   return (
     <>
-      <PostLabel
-        category={category}
-        sortPost={sortPost}
-        setsortPost={setsortPost}
-      />
       <PostListDiv>
         {posts.map((post, idx) => {
-          console.log("post", post);
           return (
             <PostCard key={idx}>
               <Avatar
@@ -48,8 +35,8 @@ function PostList(props) {
                 round={true}
                 style={{ border: "1px solid #c6c6c6" }}
               />
-
               <p className="author">{post.auther.name}</p>
+              <p className="view">조회수 {post.views}</p>
               <p className="date">{post.realTime}</p>
               <p className="title">{post.title}</p>
               <TextEllipsis lines={2} tag={"p"} tagClass={"desc"}>
