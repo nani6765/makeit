@@ -16,11 +16,13 @@ function CommunityPostCard(props) {
         <p className="author">{props.post.auther.name}</p>
         <p className="view">조회수 {props.post.views}</p>
         <p className="title">{props.post.title}</p>
-        <TextEllipsis lines={2} tag={"p"} tagClass={"desc"}>
+        <TextEllipsis lines={1} tag={"p"} tagClass={"desc"}>
           {props.post.content}
         </TextEllipsis>
         <p className="date">{props.post.realTime}</p>
-        <p className="category">{props.post.category}</p>
+        <div className="category">
+          <p>{props.post.category}</p>
+        </div>
         <p className="like">
           <i className="bi bi-emoji-smile"></i>
           공감({props.post.likeNum})

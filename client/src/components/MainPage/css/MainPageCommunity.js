@@ -88,6 +88,7 @@ const CardImg = styled.article`
     grid-area: view;
     text-align: right;
     color: #5b4949;
+    align-self: center;
   }
   .title {
     grid-area: title;
@@ -111,7 +112,8 @@ const CardImg = styled.article`
   .category {
     grid-area: category;
     background-color: #efe9e9;
-    padding: 3px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     border-radius: 6px;
     border: none;
     align-items: center;
@@ -119,6 +121,10 @@ const CardImg = styled.article`
     justify-content: center;
     p {
       color: #908b8b;
+      font-size: 14px;
+      ${mq[1]} {
+        font-size: 12px;
+      }
     }
   }
   .like {
