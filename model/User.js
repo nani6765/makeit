@@ -21,8 +21,9 @@ const userSchema = mongoose.Schema(
       type: String,
       minlength: 8,
     },
-    image: {
+    avatar: {
       type: String,
+      default: "https://kr.object.ncloudstorage.com/makeit/user/profile.png",
     },
     role: {
       type: Number,

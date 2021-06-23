@@ -83,6 +83,88 @@ const PostListDiv = styled.div`
   }
 `;
 
+const PostCard = styled.div`
+  width: 100%;
+  height: auto;
+  min-height: 120px;
+  background: #ffffff;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 50px auto 1fr 80px 80px 80px;
+  grid-template-rows: 25px 25px auto auto auto;
+  grid-template-areas:
+    "avatar author . . . ."
+    "avatar date . . . ."
+    "title title title title title title"
+    "desc desc desc desc desc desc"
+    ". . . image like reple";
+  ${mq[1]} {
+    grid-template-columns: 50px auto 1fr 50px 50px 50px;
+  }
+  .avatar {
+    grid-area: avatar;
+  }
+  .author {
+    grid-area: author;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+  .date {
+    grid-area: date;
+    color: #5b4949;
+    margin-left: 10px;
+  }
+  .title {
+    grid-area: title;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .desc {
+    grid-area: desc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .like {
+    grid-area: like;
+    font-size: 14px;
+    text-align: right;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+    i {
+      margin-right: 5px;
+    }
+  }
+  .reple {
+    grid-area: reple;
+    font-size: 14px;
+    text-align: right;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+    i {
+      margin-right: 5px;
+    }
+  }
+  .image {
+    grid-area: image;
+    font-size: 14px;
+    text-align: right;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+    i {
+      margin-right: 5px;
+    }
+  }
+`;
+
 export {
   GNBDiv,
   GNBBtnDiv,
@@ -91,4 +173,5 @@ export {
   GNBCategoryBtn,
   PostLabelDiv,
   PostListDiv,
+  PostCard,
 };

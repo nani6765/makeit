@@ -37,7 +37,7 @@ function UploadForm(props) {
     axios.post("/api/community/postSubmit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 등록 성공");
-        props.history.push("/");
+        props.history.push("/community");
       } else {
         alert("게시글 등록 실패");
       }

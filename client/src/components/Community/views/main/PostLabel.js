@@ -70,21 +70,21 @@ function PostLabel(props) {
             <button
               className="left"
               style={
-                props.alignPost === "최신순"
+                props.sortPost === "최신순"
                   ? { backgroundColor: "#935EA5", color: "white" }
                   : null
               }
-              onClick={() => props.setalignPost("최신순")}
+              onClick={() => props.setsortPost("최신순")}
             >
               최신순
             </button>
             <button
               style={
-                props.alignPost === "인기순"
+                props.sortPost === "인기순"
                   ? { backgroundColor: "#935EA5", color: "white" }
                   : null
               }
-              onClick={() => props.setalignPost("인기순")}
+              onClick={() => props.setsortPost("인기순")}
             >
               인기순
             </button>

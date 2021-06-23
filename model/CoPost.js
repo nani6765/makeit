@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+var moment = require("moment");
+require("moment-timezone");
+moment.tz.setDefault("Asia/Seoul");
 
 function getTime() {
   var date = new Date();
@@ -11,11 +14,16 @@ function getTime() {
   return new Date(Date.UTC(year, month, day, hours, minutes));
 }
 
+function realTime() {
+  return moment().format("YY-MM-DD[ ]HH:mm");
+}
+
 const coPostSchema = mongoose.Schema(
   {
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     email: {
       type: String,
@@ -53,6 +61,10 @@ const coPostSchema = mongoose.Schema(
     createAt: {
       type: Date,
       default: getTime(),
+    },
+    realTime: {
+      type: String,
+      default: realTime(),
     },
   },
   {
