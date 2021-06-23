@@ -40,7 +40,7 @@ function Footer(props) {
           <FooterContentArea>
             <div style={{ width: "30%" }} className="mobileHidden">
               <img
-                src={process.env.PUBLIC_URL + "/Img/logo.png"}
+                src={process.env.PUBLIC_URL + "/Img/comLogo.png"}
                 alt="MainLogo"
                 className="img-fluid"
               />

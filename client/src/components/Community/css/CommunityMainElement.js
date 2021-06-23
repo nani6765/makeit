@@ -98,13 +98,13 @@ const PostCard = styled.div`
   grid-template-columns: 50px auto 1fr 80px 80px 80px;
   grid-template-rows: 25px 25px auto auto auto;
   grid-template-areas:
-    "avatar author . . . view"
-    "avatar date . . . ."
+    "avatar author author author . view"
+    "avatar date date date . ."
     "title title title title title title"
     "desc desc desc desc desc desc"
     ". . . image like reple";
   ${mq[1]} {
-    grid-template-columns: 50px auto 1fr 50px 50px 50px;
+    grid-template-columns: 50px auto 1fr 60px 60px 60px;
   }
   .avatar {
     grid-area: avatar;
@@ -119,11 +119,18 @@ const PostCard = styled.div`
     grid-area: view;
     font-size: 14px;
     color: 686868;
+    ${mq[1]} {
+      font-size: 10px;
+    }
   }
   .date {
     grid-area: date;
     color: #5b4949;
     margin-left: 10px;
+    font-size: 14px;
+    ${mq[1]} {
+      font-size: 10px;
+    }
   }
   .title {
     grid-area: title;

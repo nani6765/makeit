@@ -37,8 +37,8 @@ function MobileFooter(props) {
             <FooterMobileBottom4 />
           </Link>
         </li>
-        <li className={path === "/comunity" ? "active" : null}>
-          <Link to="/comunity">
+        <li className={path === "/community" ? "active" : null}>
+          <Link to="/community">
             <FooterMobileBottom5 />
           </Link>
         </li>
