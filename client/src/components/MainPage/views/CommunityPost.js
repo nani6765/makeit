@@ -1,75 +1,75 @@
-import React from "react";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
+import React, { useState, useEffect } from "react";
+import { Link, withRouter } from "react-router-dom";
+import axios from "axios";
 import {
   MainPageDiv,
   MainPageHading,
   MainPageSubHading,
 } from "../css/MainPageElement.js";
+import CommunityPostCard from "./CommunityPostCard.js";
+import {
+  CPGridDiv,
+  CPGridHot,
+  CPGridNew,
+  CPGridComment,
+  GridTitle,
+} from "../css/MainPageCommunity.js";
 
-const breakpoints = [1200, 576];
-const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
 
 function CommunityPost() {
-  const CPGridDiv = styled.div`
-    display: grid;
-    padding-top: 3rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 100%;
-    grid-template-areas: "hot new comment";
-    column-gap: 2rem;
-    ${mq[1]} {
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto;
-      column-gap: 0.5rem;
-      grid-template-areas:
-        "hot"
-        "new"
-        "comment";
-    }
-  `;
-  const CPGridHot = styled.div`
-    grid-area: hot;
-    text-align: center;
-  `;
-  const CPGridNew = styled.div`
-    grid-area: new;
-    text-align: center;
-  `;
-  const CPGridComment = styled.div`
-    grid-area: comment;
-    text-align: center;
-  `;
+  const [hotPost, sethotPost] = useState([]);
+  const [newPost, setnewPost] = useState([]);
+  const [commentPost, setcommentPost] = useState([]);
 
-  const GridTitle = css`
-    font-weight: bold;
-    display: inline;
-    font-size: 18px;
-    line-height: 25px;
-    color: #702c8a;
-    background-color: #efe9e9;
-    padding: 10px 50px 10px 50px;
-    border-radius: 20px;
-    ${mq[0]} {
-      padding: 5px 10px 5px 10px;
-      line-height: 20px;
-      font-size: 15px;
-    }
-    ${mq[1]} {
-      padding: 5px 10px 5px 10px;
-      line-height: 15px;
-      font-size: 15px;
-    }
-  `;
+  useEffect(() => {
+    let body = {
+      sort: "hot",
+    };
+    axios.post("/api/main/community", body).then((response) => {
+      if (response.data.success) {
+        sethotPost([...response.data.postInfo]);
+      } else {
+        alert("게시글을 불러오는 데 실패했습니다.");
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    let body = {
+      sort: "new",
+    };
+    axios.post("/api/main/community", body).then((response) => {
+      if (response.data.success) {
+        setnewPost([...response.data.postInfo]);
+      } else {
+        alert("게시글을 불러오는 데 실패했습니다.");
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    let body = {
+      sort: "comment",
+    };
+    axios.post("/api/main/community", body).then((response) => {
+      if (response.data.success) {
+        setcommentPost([...response.data.postInfo]);
+      } else {
+        alert("게시글을 불러오는 데 실패했습니다.");
+      }
+    });
+  }, []);
 
   return (
     <>
       <div style={{ backgroundColor: "#FAF6F6" }}>
         <MainPageDiv>
           <p css={MainPageHading}>
-            커뮤니티 게시글<a href="/">더보기 &gt;</a>
+            커뮤니티 게시글
+            <Link to="/community">더보기 &gt;</Link>
           </p>
           <p css={MainPageSubHading}>
             영상, 그리고 변화를 만드는 사람들과 소통해보세요!
@@ -77,18 +77,21 @@ function CommunityPost() {
           <CPGridDiv>
             <CPGridHot>
               <p css={GridTitle}>Hot 게시글</p>
-              <CardImg></CardImg>
-              <CardImg></CardImg>
+              {hotPost.map((post, idx) => (
+                <CommunityPostCard post={post} key={idx} />
+              ))}
             </CPGridHot>
             <CPGridNew>
               <p css={GridTitle}>최신 게시글</p>
-              <CardImg></CardImg>
-              <CardImg></CardImg>
+              {newPost.map((post, idx) => (
+                <CommunityPostCard post={post} key={idx} />
+              ))}
             </CPGridNew>
             <CPGridComment>
               <p css={GridTitle}>댓글 많은 게시글</p>
-              <CardImg></CardImg>
-              <CardImg></CardImg>
+              {commentPost.map((post, idx) => (
+                <CommunityPostCard post={post} key={idx} />
+              ))}
             </CPGridComment>
           </CPGridDiv>
         </MainPageDiv>
@@ -97,17 +100,4 @@ function CommunityPost() {
   );
 }
 
-function CardImg() {
-  const CardImg = styled.article`
-    width: 100%;
-    height: 180px;
-    background-color: white;
-    border-radius: 10px;
-    display: block;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  `;
-  return <CardImg></CardImg>;
-}
-
-export default CommunityPost;
+export default withRouter(CommunityPost);

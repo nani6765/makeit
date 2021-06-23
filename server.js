@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(cookeParser());
 app.use("/api/user", require("./routes/user.js"));
 app.use("/api/community", require("./routes/commpunity.js"));
+app.use("/api/main", require("./routes/main.js"));
 
 const port = process.env.PORT || 5000;
 

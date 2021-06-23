@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import {
   HeaderDiv,
@@ -16,7 +16,6 @@ import {
   MobileSlideDiv,
 } from "./css/HeaderElement.js";
 import MobileSlide from "./MobileSlide.js";
-import { withRouter } from "react-router-dom";
 import useDocScroll from "./hooks/useDocScroll.js";
 import "./css/header.css";
 import "./css/animation.css";
