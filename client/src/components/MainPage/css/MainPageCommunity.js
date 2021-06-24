@@ -68,7 +68,7 @@ const CardImg = styled.article`
   display: grid;
   padding: 10px 20px 10px 20px;
   grid-template-columns: 1fr 1fr 1fr 2fr 2fr;
-  grid-template-rows: 2fr 1fr 1fr 1fr 2fr;
+  grid-template-rows: 2fr 1fr 14px 1fr 1fr;
   grid-template-areas:
     "profile author author author view"
     "title title title title title"
@@ -77,6 +77,12 @@ const CardImg = styled.article`
     "category category . like comment";
   .profile {
     grid-area: profile;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    height: 100%;
   }
   .author {
     margin-left: 5px;
@@ -97,17 +103,19 @@ const CardImg = styled.article`
     text-align: left;
   }
   .desc {
-    margin-top: 5px;
-    padding-bottom: 5px;
     grid-area: desc;
     text-align: left;
+    font-size: 14px;
+    line-height: 14px;
   }
   .date {
     grid-area: date;
     text-align: right;
     border-bottom: 1px solid #efe9e9;
+    padding-top: 5px;
     margin-bottom: 5px;
     padding-bottom: 5px;
+    font-size: 12px;
   }
   .category {
     grid-area: category;

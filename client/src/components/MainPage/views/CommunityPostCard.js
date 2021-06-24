@@ -7,12 +7,15 @@ function CommunityPostCard(props) {
   return (
     <>
       <CardImg>
-        <Avatar
-          src={props.post.auther.avatar}
-          size="50"
-          round={true}
-          style={{ border: "1px solid #c6c6c6" }}
-        />
+        <div className="profile">
+          <Avatar
+            src={props.post.auther.avatar}
+            size="50"
+            round={true}
+            style={{ border: "1px solid #c6c6c6" }}
+          />
+        </div>
+
         <p className="author">{props.post.auther.name}</p>
         <p className="view">조회수 {props.post.views}</p>
         <p className="title">{props.post.title}</p>

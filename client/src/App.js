@@ -8,8 +8,8 @@ import MainPage from "./components/MainPage/MainPage.js";
 import LoginPage from "./components/User/views/LoginPage.js";
 import RegisterPage from "./components/User/views/RegisterPage.js";
 import CommunityMain from "./components/Community/views/CommunityMain.js";
+import CommunityPostDetail from "./components/Community/views/PostDetail.js";
 import CommunityUpload from "./components/Community/views/CommunityUpload.js";
-
 function App() {
   return (
     <>
@@ -20,6 +20,11 @@ function App() {
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/community" component={Auth(CommunityMain, null)} />
+        <Route
+          exact
+          path="/community/post/:postId"
+          component={Auth(CommunityPostDetail, null)}
+        />
         <Route
           exact
           path="/community/upload"
