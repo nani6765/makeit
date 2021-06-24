@@ -78,19 +78,37 @@ function CommunityPost() {
             <CPGridHot>
               <p css={GridTitle}>Hot 게시글</p>
               {hotPost.map((post, idx) => (
-                <CommunityPostCard post={post} key={idx} />
+                <Link
+                  to={"/community/post/" + post.postNum}
+                  style={{ textDecorationLine: "none", color: "black" }}
+                  key={idx}
+                >
+                  <CommunityPostCard post={post} />
+                </Link>
               ))}
             </CPGridHot>
             <CPGridNew>
               <p css={GridTitle}>최신 게시글</p>
               {newPost.map((post, idx) => (
-                <CommunityPostCard post={post} key={idx} />
+                <Link
+                  to={"/community/post/" + post.postNum}
+                  style={{ textDecorationLine: "none", color: "black" }}
+                  key={idx}
+                >
+                  <CommunityPostCard post={post} />
+                </Link>
               ))}
             </CPGridNew>
             <CPGridComment>
               <p css={GridTitle}>댓글 많은 게시글</p>
               {commentPost.map((post, idx) => (
-                <CommunityPostCard post={post} key={idx} />
+                <Link
+                  to={"/community/post/" + post.postNum}
+                  style={{ textDecorationLine: "none", color: "black" }}
+                  key={idx}
+                >
+                  <CommunityPostCard post={post} />
+                </Link>
               ))}
             </CPGridComment>
           </CPGridDiv>

@@ -24,13 +24,25 @@ router.post("/", (req, res) => {
   if (req.body.sortPost === "최신순") {
     sort.createdAt = -1;
   } else {
-    sort.views = -1;
+    sort.likeNum = -1;
   }
   Community.find(filter)
     .populate("auther")
     .sort(sort)
     .skip(skip)
     .limit(limit)
+    .exec((err, postInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, postInfo });
+    });
+});
+
+router.post("/postDetail", (req, res) => {
+  let filter = {};
+  filter.postNum = req.body.postNum;
+
+  Community.findOneAndUpdate(filter, { $inc: { views: 1 } })
+    .populate("auther")
     .exec((err, postInfo) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, postInfo });

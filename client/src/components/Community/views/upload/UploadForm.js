@@ -7,10 +7,10 @@ import {
   BtnDiv,
   SubmitBtn,
   CancelBtn,
-} from "../css/CommunityElement.js";
+} from "../../css/CommunityElement.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import FileUpload from "../../utils/FileUpload.js";
+import FileUpload from "../../../utils/FileUpload.js";
 
 function UploadForm(props) {
   const [Title, setTitle] = useState("");
