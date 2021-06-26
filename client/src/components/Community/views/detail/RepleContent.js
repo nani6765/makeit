@@ -1,30 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
-import { DetailDiv, ModalDiv } from "../../css/CommunityDetailElement.js";
+import { RepleContentGrid } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import Modal from "./Modal.js";
 
-function PostDetailContent(props) {
-  const [postInfo, setpostInfo] = useState(props.postInfo);
-  const [userInfo, setuserInfo] = useState(props.user);
+function RepleContent(props) {
   const [hambucControl, sethambucControl] = useState(false);
+  const [Reple, setReple] = useState(props.reple);
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
 
   return (
     <>
-      <DetailDiv>
+      <RepleContentGrid key={props.idx}>
         <div className="content">
           <div className="avatar">
             <Avatar
-              src={postInfo.auther.avatar}
+              src={Reple.auther.avatar}
               size="50"
               round={true}
               style={{ border: "1px solid #c6c6c6" }}
             />
           </div>
-          <p className="author">{postInfo.auther.name}</p>
-          {userInfo.userData._id === postInfo.auther._id ? (
+          <p className="author">{Reple.auther.name}</p>
+          {props.user.userData._id === Reple.auther._id ? (
             <div
               className="hambuc"
               onClick={() => sethambucControl(true)}
@@ -38,11 +37,10 @@ function PostDetailContent(props) {
             </div>
           ) : null}
 
-          <p className="date">{postInfo.realTime}</p>
-          <p className="title">{postInfo.title}</p>
-          <p className="desc">{postInfo.content}</p>
+          <p className="date">{Reple.realTime}</p>
+          <p className="desc">{Reple.content}</p>
         </div>
-      </DetailDiv>
+      </RepleContentGrid>
     </>
   );
 }
@@ -68,4 +66,4 @@ function useOuterClick(callback) {
   return innerRef;
 }
 
-export default PostDetailContent;
+export default RepleContent;
