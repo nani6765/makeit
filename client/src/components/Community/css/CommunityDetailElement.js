@@ -88,17 +88,28 @@ const ModalDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-content: center;
-  .edit {
-    display: inline;
-    i {
-      margin-right: 1rem;
+  div {
+    button {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-aling: center;
+      background-color: rgba(255, 255, 255, 1);
     }
-  }
-  .delete {
-    display: inline;
-    color: #d70000;
-    i {
-      margin-right: 1rem;
+    .edit {
+      display: inline;
+      i {
+        margin-right: 1rem;
+      }
+    }
+    .delete {
+      margin-top: 10px;
+      display: inline;
+      color: #d70000;
+      i {
+        margin-right: 1rem;
+      }
     }
   }
 `;
