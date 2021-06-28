@@ -66,24 +66,6 @@ function PostDetail(props) {
     });
   };
 
-  function RepleDivArea() {
-    return (
-      <RepleBtnDiv>
-        <button className="Total">{TotalSize}개의 댓글이 있습니다.</button>
-      </RepleBtnDiv>
-    );
-  }
-
-  function RepleBtnArea() {
-    return (
-      <RepleBtnDiv>
-        <button className="left" onClick={loadMoreHanlder}>
-          댓글 더보기({parseInt(TotalSize - Reples.length)})
-        </button>
-      </RepleBtnDiv>
-    );
-  }
-
   return (
     <>
       {postInfo._id != null ? (
@@ -92,13 +74,21 @@ function PostDetail(props) {
 
       {TotalSize > 0 ? (
         <>
-          {RepleDivArea}
+          <RepleBtnDiv>
+            <button className="Total">{TotalSize}개의 댓글이 있습니다.</button>
+          </RepleBtnDiv>
           <RepleList
             repleInfo={Reples}
             loadMoreHanlder={loadMoreHanlder}
             user={props.user}
           />
-          {TotalSize > Reples.length ? { RepleBtnArea } : null}
+          {TotalSize > Reples.length ? (
+            <RepleBtnDiv>
+              <button className="left" onClick={loadMoreHanlder}>
+                댓글 더보기({parseInt(TotalSize - Reples.length)})
+              </button>
+            </RepleBtnDiv>
+          ) : null}
           <RepleUpload postInfo={postInfo} user={props.user} />
         </>
       ) : null}
