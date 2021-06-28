@@ -121,12 +121,12 @@ function Header(props) {
           </HeaderSearch>
           <HeaderLogin>
             <div>
-              {!user.userData && user.userData.isAuth ? (
-                <button onClick={() => logoutHandler()}>logout</button>
-              ) : (
+              {user.userData && !user.userData.isAuth ? (
                 <Link to="/login">
                   <button>login</button>
                 </Link>
+              ) : (
+                <button onClick={() => logoutHandler()}>logout</button>
               )}
             </div>
           </HeaderLogin>

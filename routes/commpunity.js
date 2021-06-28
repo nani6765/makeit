@@ -55,7 +55,6 @@ router.post("/postDetail/reple", (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 5;
   let sort = {};
   sort.createdAt = -1;
-  console.log("skip : ", skip, ", limit : ", limit);
   CommunityReple.find(filter).exec((err, totalReple) => {
     if (err) return res.status(400).json({ success: false, err });
     CommunityReple.find(filter)
@@ -64,7 +63,6 @@ router.post("/postDetail/reple", (req, res) => {
       .skip(skip)
       .limit(limit)
       .exec((err, repleInfo) => {
-        console.log("repleInfo", repleInfo);
         if (err) return res.status(400).json({ success: false, err });
         return res.status(200).json({
           success: true,

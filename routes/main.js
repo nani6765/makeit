@@ -11,7 +11,6 @@ router.post("/community", (req, res) => {
   } else {
     sort.repleNum = -1;
   }
-  console.log("sort", sort);
   Community.find()
     .populate("auther")
     .sort(sort)
