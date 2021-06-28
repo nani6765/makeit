@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { render } from "react-dom";
 import ImageViewer from "react-simple-image-viewer";
-
+import "../../css/ImageViewer.css";
 function PostImages(props) {
   const [Images, setImages] = useState([...props.images]);
   const [currentImage, setCurrentImage] = useState(0);
@@ -43,6 +43,7 @@ function PostImages(props) {
             src={ImageArray()}
             currentIndex={currentImage}
             onClose={closeImageViewer}
+            style={{ zIndex: "99" }}
           />
         )}
       </div>
