@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import PostImages from "./PostImages.js";
 import { DetailDiv, ModalDiv } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import Modal from "./Modal.js";
@@ -10,7 +11,6 @@ function PostDetailContent(props) {
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
-
   return (
     <>
       <DetailDiv>
@@ -41,6 +41,11 @@ function PostDetailContent(props) {
           <p className="date">{postInfo.realTime}</p>
           <p className="title">{postInfo.title}</p>
           <p className="desc">{postInfo.content}</p>
+          {postInfo.images.length > 0 ? (
+            <>
+              <PostImages images={postInfo.images} />
+            </>
+          ) : null}
         </div>
       </DetailDiv>
     </>

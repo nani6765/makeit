@@ -12,7 +12,8 @@ function RepleUpload(props) {
       return alert("댓글 내용을 입력해주세요.");
     }
     if (props.user.userData.error === true) {
-      props.history.push("/");
+      alert("로그인한 회원만 댓글을 입력할 수 있습니다.");
+      props.history.push("/login");
     }
     const body = {
       auther: props.user.userData._id,

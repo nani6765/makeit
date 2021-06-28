@@ -19,12 +19,13 @@ const DetailDiv = styled.div`
   .content {
     display: grid;
     grid-template-columns: 50px 100px 1fr 50px;
-    grid-template-rows: 25px 25px auto auto;
+    grid-template-rows: 25px 25px auto auto auto;
     grid-template-areas:
       "avatar author author hambuc"
       "avatar date date ."
       "title title title title"
-      "desc desc desc desc";
+      "desc desc desc desc"
+      "image image image image";
     .avatar {
       grid-area: avatar;
       display: flex;
@@ -65,6 +66,10 @@ const DetailDiv = styled.div`
       grid-area: desc;
       text-align: left;
       word-break: keep-all;
+    }
+    .image {
+      grid-area: image;
+      margin-top: 30px;
     }
   }
   ${mq[1]} {
