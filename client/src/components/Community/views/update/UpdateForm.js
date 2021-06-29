@@ -17,15 +17,20 @@ function UpdateForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
+  const [Check, setCheck] = useState(false);
 
   useEffect(() => {
-    console.log(props.PostInfo.title, props.PostInfo.content);
     setPostInfo(props.PostInfo);
     setTitle(props.PostInfo.title);
     setContent(props.PostInfo.content);
-    setImage(props.PostInfo.images);
-    console.log(Title, Content);
+    let temp = props.PostInfo.images;
+    setImage(temp);
+    setCheck(true);
   }, [props]);
+
+  useEffect(() => {
+    console.log("Image", Image);
+  }, [Image]);
 
   const updateImages = (newImages) => {
     setImage(newImages);
@@ -74,7 +79,9 @@ function UpdateForm(props) {
           value={Content}
           onChange={(e) => setContent(e.currentTarget.value)}
         ></textarea>
-        <FileUpload updateImages={updateImages} />
+        {Check ? (
+          <FileUpload updateImages={updateImages} originImages={Image} />
+        ) : null}
         <BtnDiv>
           <CancelBtn
             onClick={() => {
