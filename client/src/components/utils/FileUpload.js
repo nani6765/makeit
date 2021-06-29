@@ -5,30 +5,14 @@ import {
   DropZoneContent,
   ImageArea,
 } from "./FileUploadContent.js";
-import ImageDiv from "./ImageDiv.js";
 import axios from "axios";
+
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 
 function FileUpload(props) {
   const [Images, setImages] = useState([]);
-  const [Check, setCheck] = useState(Images.length);
-
-  useEffect(() => {
-    if (props.originImages != undefined) {
-      setImages(props.originImages);
-      setCheck(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    setCheck(Images.length);
-  }, [Images]);
-
-  function Test() {
-    return <ImageDiv Images={Images} deleteHandler={deleteHandler} />;
-  }
 
   const dropHandler = (files) => {
     let formData = new FormData();
@@ -44,7 +28,7 @@ function FileUpload(props) {
           ...Images,
           { path: response.data.filePath, key: response.data.key },
         ]);
-        props.updateImages([
+        props.setImage([
           ...Images,
           { path: response.data.filePath, key: response.data.key },
         ]);
@@ -85,7 +69,18 @@ function FileUpload(props) {
         )}
       </Dropzone>
       {Images[0] ? (
-        <ImageDiv Images={Images} deleteHandler={deleteHandler} />
+        <div css={ImageArea}>
+          {Images.map((image, idx) => (
+            <figure key={idx}>
+              <img
+                src={image.path}
+                alt={image.key}
+                style={{ marginLeft: "10px" }}
+              />
+              <figcaption onClick={() => deleteHandler(image)}>X</figcaption>
+            </figure>
+          ))}
+        </div>
       ) : null}
     </div>
   );

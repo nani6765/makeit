@@ -7,15 +7,18 @@ import {
   BtnDiv,
   SubmitBtn,
   CancelBtn,
+  DropZoneDiv,
 } from "../../css/CommunityElement.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import FileUpload from "../../../utils/FileUpload.js";
+import FileUploadArea from "../../../utils/FileUploadArea.js";
+import FileShowArea from "../../../utils/FileShowArea.js";
 
 function UploadForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
+
   const updateImages = (newImages) => {
     setImage(newImages);
   };
@@ -63,7 +66,14 @@ function UploadForm(props) {
           value={Content}
           onChange={(e) => setContent(e.currentTarget.value)}
         ></textarea>
-        <FileUpload updateImages={updateImages} />
+
+        <DropZoneDiv>
+          <FileUploadArea Images={Image} setImages={setImage} />
+          {Image[0] ? (
+            <FileShowArea Images={Image} setImages={setImage} />
+          ) : null}
+        </DropZoneDiv>
+
         <BtnDiv>
           <CancelBtn
             onClick={() => {

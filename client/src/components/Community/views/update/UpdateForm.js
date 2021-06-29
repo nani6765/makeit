@@ -7,34 +7,32 @@ import {
   BtnDiv,
   SubmitBtn,
   CancelBtn,
+  DropZoneDiv,
 } from "../../css/CommunityElement.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import FileUpload from "../../../utils/FileUpload.js";
+import FileUploadArea from "../../../utils/FileUploadArea.js";
+import FileShowArea from "../../../utils/FileShowArea.js";
 
 function UpdateForm(props) {
   const [PostInfo, setPostInfo] = useState("");
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
-  const [Check, setCheck] = useState(false);
+  const [Check, setCheck] = useState(0);
 
   useEffect(() => {
     setPostInfo(props.PostInfo);
     setTitle(props.PostInfo.title);
     setContent(props.PostInfo.content);
     let temp = props.PostInfo.images;
+    console.log(temp);
     setImage(temp);
-    setCheck(true);
   }, [props]);
 
   useEffect(() => {
-    console.log("Image", Image);
+    if (Image != undefined) setCheck(Image.length);
   }, [Image]);
-
-  const updateImages = (newImages) => {
-    setImage(newImages);
-  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -79,9 +77,12 @@ function UpdateForm(props) {
           value={Content}
           onChange={(e) => setContent(e.currentTarget.value)}
         ></textarea>
-        {Check ? (
-          <FileUpload updateImages={updateImages} originImages={Image} />
-        ) : null}
+
+        <DropZoneDiv>
+          <FileUploadArea Images={Image} setImages={setImage} />
+          {Check ? <FileShowArea Images={Image} setImages={setImage} /> : null}
+        </DropZoneDiv>
+
         <BtnDiv>
           <CancelBtn
             onClick={() => {
