@@ -13,7 +13,7 @@ function PostList(props) {
       sortPost: props.sortPost,
       pageSkip: props.pageSkip,
     };
-
+    
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
         setposts([...response.data.postInfo]);

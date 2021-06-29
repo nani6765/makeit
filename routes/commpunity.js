@@ -20,18 +20,18 @@ router.post("/", (req, res) => {
   let tempSkip = req.body.pageSkip ? parseInt(req.body.pageSkip) : 0;
   let limit = 10;
   let skip = tempSkip === 0 ? 0 : tempSkip * 10;
-  let sort = {};
+  let sort = {}; //{정렬기준이 되는 필드 이름: 1 or -1} 1이면 오름차순, -1이면 내림차순
   if (req.body.sortPost === "최신순") {
     sort.createdAt = -1;
   } else {
     sort.views = -1;
   }
   Community.find(filter)
-    .populate("auther")
+    .populate("auther")  //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
     .sort(sort)
-    .skip(skip)
-    .limit(limit)
-    .exec((err, postInfo) => {
+    .skip(skip) //출력을 시작할 부분 skip만큼 건너뛰고 skip+1부터 출력
+    .limit(limit) //출력할 오브젝트의 개수 제한
+    .exec((err, postInfo) => { //쿼리를 promise로 만들기 위해,,
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, postInfo });
     });
