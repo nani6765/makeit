@@ -89,7 +89,6 @@ function PostDetail(props) {
               </button>
             </RepleBtnDiv>
           ) : null}
-          <RepleUpload postInfo={postInfo} user={props.user} />
         </>
       ) : null}
 

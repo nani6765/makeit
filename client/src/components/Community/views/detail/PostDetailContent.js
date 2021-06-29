@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import PostImages from "./PostImages.js";
-import { DetailDiv, ModalDiv } from "../../css/CommunityDetailElement.js";
+import { DetailDiv } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
-import Modal from "./Modal.js";
+import PostModal from "./PostModal.js";
 
 function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);
@@ -34,7 +34,7 @@ function PostDetailContent(props) {
                 className="bi bi-three-dots"
                 onClick={() => sethambucControl(true)}
               ></i>
-              {hambucControl ? <Modal /> : null}
+              {hambucControl ? <PostModal postInfo={postInfo} /> : null}
             </div>
           ) : null}
 

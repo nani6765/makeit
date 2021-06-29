@@ -125,4 +125,19 @@ router.post("/repleSubmit", (req, res) => {
   });
 });
 
+router.post("/postDelete", (req, res) => {
+  let temp = req.body;
+
+  CommunityReple.deleteMany({ postNum: temp.postNum }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    for (let i = 0; i < temp.imageLength; i++) {
+      setDelete("makeit/community", temp.images[i].key);
+    }
+    Community.deleteOne({ _id: temp.postInfoId }, (err, result) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    });
+  });
+});
+
 module.exports = router;

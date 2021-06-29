@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RepleContentGrid } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
-import Modal from "./Modal.js";
+import PostModal from "./PostModal.js";
 
 function RepleContent(props) {
   const [hambucControl, sethambucControl] = useState(false);
@@ -33,7 +33,7 @@ function RepleContent(props) {
                 className="bi bi-three-dots"
                 onClick={() => sethambucControl(true)}
               ></i>
-              {hambucControl ? <Modal /> : null}
+              {hambucControl ? <PostModal /> : null}
             </div>
           ) : null}
 
