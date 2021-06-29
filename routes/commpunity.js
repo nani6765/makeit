@@ -140,4 +140,21 @@ router.post("/postDelete", (req, res) => {
   });
 });
 
+router.post("/repleDelete", (req, res) => {
+  let temp = req.body;
+  console.log(temp);
+
+  CommunityReple.deleteOne({ _id: temp.repleId }, (err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    console.log("result: ", result);
+    Community.findOneAndUpdate(
+      { postNum: temp.postNum },
+      { $inc: { repleNum: -1 } }
+    ).exec((err, post) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    });
+  });
+});
+
 module.exports = router;
