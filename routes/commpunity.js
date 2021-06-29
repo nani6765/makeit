@@ -160,8 +160,19 @@ router.post("/postUpdate", (req, res) => {
   temp.content = req.body.content;
   temp.images = req.body.images;
   let key = req.body.id;
-  console.log(temp, key);
   Community.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
+    (err, post) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    }
+  );
+});
+
+router.post("/repleUpdate", (req, res) => {
+  let temp = {};
+  temp.content = req.body.content;
+  let key = req.body.id;
+  CommunityReple.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
     (err, post) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).send({ success: true });

@@ -2,10 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { RepleContentGrid } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import RepleModal from "./RepleModal.js";
+import RepleEditForm from "./RepleEditForm.js";
 
 function RepleContent(props) {
   const [hambucControl, sethambucControl] = useState(false);
   const [Reple, setReple] = useState(props.reple);
+  const [UpdateCheck, setUpdateCheck] = useState(false);
+
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
@@ -33,12 +36,20 @@ function RepleContent(props) {
                 className="bi bi-three-dots"
                 onClick={() => sethambucControl(true)}
               ></i>
-              {hambucControl ? <RepleModal repleInfo={Reple} /> : null}
+              {hambucControl ? (
+                <RepleModal repleInfo={Reple} setUpdateCheck={setUpdateCheck} />
+              ) : null}
             </div>
           ) : null}
 
           <p className="date">{Reple.realTime}</p>
-          <p className="desc">{Reple.content}</p>
+          {UpdateCheck ? (
+            <div className="desc">
+              <RepleEditForm setUpdateCheck={setUpdateCheck} Reple={Reple} />
+            </div>
+          ) : (
+            <p className="desc">{Reple.content}</p>
+          )}
         </div>
       </RepleContentGrid>
     </>
@@ -59,8 +70,14 @@ function useOuterClick(callback) {
         innerRef.current &&
         callbackRef.current &&
         !innerRef.current.contains(e.target)
-      )
+      ) {
         callbackRef.current(e);
+      }
+
+      //수정버튼 클릭시
+      if (e.target.className === "edit") {
+        callbackRef.current(!e);
+      }
     }
   }, []);
   return innerRef;

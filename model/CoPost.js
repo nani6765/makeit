@@ -58,6 +58,10 @@ const coPostSchema = mongoose.Schema(
       type: Number,
       //unique: true,
     },
+    edit: {
+      type: Boolean,
+      default: false,
+    },
     /*
     createAt: {
       type: Date,
@@ -100,6 +104,10 @@ const coRepleSchema = mongoose.Schema(
     realTime: {
       type: String,
       default: realTime(),
+    },
+    edit: {
+      type: Boolean,
+      default: false,
     },
   },
   {

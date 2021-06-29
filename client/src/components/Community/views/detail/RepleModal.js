@@ -5,10 +5,10 @@ import axios from "axios";
 
 function RepleModal(props) {
   const [RepleInfo, setRepleInfo] = useState(props.repleInfo);
-  /*
-  useEffect(() => {
-      console.log("RepleInfo: ", RepleInfo);
-  }, []);*/
+
+  function EditHandler() {
+    props.setUpdateCheck(true);
+  }
 
   function RemoveHandler() {
     let body = {
@@ -29,8 +29,9 @@ function RepleModal(props) {
   return (
     <ModalDiv>
       <div>
-        <button className="edit">
-          <i className="bi bi-pencil-square"></i>수정
+        <button className="edit" onClick={() => EditHandler()}>
+          <i className="bi bi-pencil-square"></i>
+          수정
         </button>
       </div>
       <div>
