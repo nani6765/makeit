@@ -12,10 +12,21 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import FileUpload from "../../../utils/FileUpload.js";
 
-function UploadForm(props) {
+function UpdateForm(props) {
+  const [PostInfo, setPostInfo] = useState("");
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
+
+  useEffect(() => {
+    console.log(props.PostInfo.title, props.PostInfo.content);
+    setPostInfo(props.PostInfo);
+    setTitle(props.PostInfo.title);
+    setContent(props.PostInfo.content);
+    setImage(props.PostInfo.images);
+    console.log(Title, Content);
+  }, [props]);
+
   const updateImages = (newImages) => {
     setImage(newImages);
   };
@@ -36,16 +47,16 @@ function UploadForm(props) {
 
     axios.post("/api/community/postSubmit", body).then((response) => {
       if (response.data.success) {
-        alert("게시글 등록 성공");
+        alert("게시글 수정 성공");
         props.history.push("/community");
       } else {
-        alert("게시글 등록 실패");
+        alert("게시글 수정 실패");
       }
     });
   };
 
   return (
-    <>
+    <div>
       <FormDiv onSubmit={submitHandler}>
         <input
           name="title"
@@ -77,8 +88,8 @@ function UploadForm(props) {
           </button>
         </BtnDiv>
       </FormDiv>
-    </>
+    </div>
   );
 }
 
-export default withRouter(UploadForm);
+export default withRouter(UpdateForm);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ModalDiv } from "../../css/CommunityDetailElement.js";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 
 function PostModal(props) {
@@ -27,9 +27,16 @@ function PostModal(props) {
   return (
     <ModalDiv>
       <div>
-        <button className="edit">
-          <i className="bi bi-pencil-square"></i>수정
-        </button>
+        <Link
+          to={{
+            pathname: "/community/update/" + PostInfo.postNum,
+            state: { postInfo: PostInfo },
+          }}
+        >
+          <button className="edit">
+            <i className="bi bi-pencil-square"></i>수정
+          </button>
+        </Link>
       </div>
       <div>
         <button className="delete" onClick={() => RemoveHandler()}>
