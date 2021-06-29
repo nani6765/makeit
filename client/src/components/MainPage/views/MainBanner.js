@@ -8,10 +8,15 @@ function MainBanner() {
   const breakpoints = [1200, 576];
   const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-  let Banner = styled.img`
+  let Banner = styled.div`
     width: 100%;
     height: 450px;
     overflow: hidden;
+    background-image: url("/Img/BannerBackground.png");
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     ${mq[0]} {
       height: 300px;
     }
@@ -30,7 +35,13 @@ function MainBanner() {
   return (
     <>
       <div>
-        <Banner src={process.env.PUBLIC_URL + "/Img/MainBanner.jpg"} alt="" />
+        <Banner>
+          <img
+            css={BannerImg}
+            src={process.env.PUBLIC_URL + "/Img/BackgroundContent.png"}
+            alt=""
+          />
+        </Banner>
       </div>
     </>
   );

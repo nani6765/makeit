@@ -76,5 +76,39 @@ const coPostSchema = mongoose.Schema(
   }
 );
 
+const coRepleSchema = mongoose.Schema(
+  {
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    name: {
+      type: String,
+      maxlength: 50,
+    },
+    postNum: {
+      type: Number,
+    },
+    content: {
+      type: String,
+    },
+    likeNum: {
+      type: Number,
+      default: 0,
+    },
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
+  },
+  {
+    //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
+    timestamps: true,
+    collection: "coReples",
+  }
+);
+
 const Community = mongoose.model("coPostSchema", coPostSchema);
-module.exports = { Community };
+const CommunityReple = mongoose.model("coRepleSchema", coRepleSchema);
+module.exports = { Community, CommunityReple };

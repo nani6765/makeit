@@ -130,6 +130,7 @@ const CardImg = styled.article`
     p {
       color: #908b8b;
       font-size: 14px;
+      margin-bottom: 0px;
       ${mq[1]} {
         font-size: 12px;
       }
@@ -139,6 +140,7 @@ const CardImg = styled.article`
     grid-area: like;
     text-align: right;
     align-items: center;
+    margin-bottom: 0px;
     display: flex;
     justify-content: flex-end;
     p {
@@ -151,6 +153,7 @@ const CardImg = styled.article`
   .comment {
     grid-area: comment;
     text-align: right;
+    margin-bottom: 0px;
     align-items: center;
     display: flex;
     justify-content: flex-end;

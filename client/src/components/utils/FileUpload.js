@@ -30,13 +30,23 @@ function FileUpload(props) {
     overflow-x: scroll;
     overflow-y: hidden;
     align-self: center;
-    margin-left: 30px;
-    div {
+    figure {
+      position: relative;
+      margin-right: 30px;
       img {
-        width: 300px;
-        height: 300px;
-        minwidth: 300px;
+        max-width: 300px;
+        height: 100%;
         margin-bottom: 10px;
+      }
+      figcaption {
+        background-color: black;
+        padding: 10px;
+        border-radius: 100%;
+        color: white;
+        position: absolute;
+        top: 8%;
+        left: 85%;
+        cursor: pointer;
       }
     }
     &::-webkit-scrollbar {
@@ -137,9 +147,14 @@ function FileUpload(props) {
       {Images[0] ? (
         <div css={ImageArea}>
           {Images.map((image, idx) => (
-            <div key={idx} onClick={() => deleteHandler(image)}>
-              <img src={image.path} alt={image.key} />
-            </div>
+            <figure key={idx}>
+              <img
+                src={image.path}
+                alt={image.key}
+                style={{ marginLeft: "10px" }}
+              />
+              <figcaption onClick={() => deleteHandler(image)}>X</figcaption>
+            </figure>
           ))}
         </div>
       ) : null}

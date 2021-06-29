@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { UploadDiv } from "../css/CommunityElement.js";
-import UploadForm from "./UploadForm.js";
+import UploadForm from "./upload/UploadForm.js";
 
 function CommunityUpload(props) {
   const [category, setcategory] = useState("");

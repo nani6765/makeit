@@ -7,11 +7,10 @@ router.post("/community", (req, res) => {
   if (req.body.sort === "new") {
     sort.createdAt = -1;
   } else if (req.body.sort === "hot") {
-    sort.views = -1;
+    sort.likeNum = -1;
   } else {
     sort.repleNum = -1;
   }
-  console.log("sort", sort);
   Community.find()
     .populate("auther")
     .sort(sort)
