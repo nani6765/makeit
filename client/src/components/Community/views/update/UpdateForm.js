@@ -26,7 +26,6 @@ function UpdateForm(props) {
     setTitle(props.PostInfo.title);
     setContent(props.PostInfo.content);
     let temp = props.PostInfo.images;
-    console.log(temp);
     setImage(temp);
   }, [props]);
 
@@ -39,16 +38,17 @@ function UpdateForm(props) {
     if (!Title || !Content) {
       return alert("제목과 내용을 입력해주세요.");
     }
+
     const body = {
-      auther: props.user._id,
-      email: props.user.email,
+      id: props.PostInfo._id,
       title: Title,
       content: Content,
       images: Image,
-      category: props.category,
     };
 
-    axios.post("/api/community/postSubmit", body).then((response) => {
+    console.log("body체크", body);
+
+    axios.post("/api/community/postUpdate", body).then((response) => {
       if (response.data.success) {
         alert("게시글 수정 성공");
         props.history.push("/community");
