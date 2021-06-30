@@ -95,7 +95,11 @@ function PostDetailContent(props) {
               onClick={LikeHandler}
               type="button"
             >
-              <i className="bi bi-emoji-smile"></i>
+              {likeFlag ? (
+                <i className="bi bi-emoji-smile-fill"></i>
+              ) : (
+                <i className="bi bi-emoji-smile"></i>
+              )}
               공감({postInfo.likeNum})
             </button>
           </div>
