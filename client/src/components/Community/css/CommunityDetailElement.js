@@ -93,6 +93,10 @@ const DetailDiv = styled.div`
           color: #935ea5;
           font-weight: bold;
         }
+        &:active,
+        &:focus {
+          border: none;
+        }
       }
     }
   }
