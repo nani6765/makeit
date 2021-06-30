@@ -181,4 +181,36 @@ router.post("/repleUpdate", (req, res) => {
   );
 });
 
+router.post("/like", (req, res) => {
+  let postNum = req.body.postNum;
+  let key = req.body.likeFlag;
+  let user = req.body.userId;
+  let temp = {};
+//  temp.$inc = {likeNum: 1};
+  temp.$push = { "likeArray": user };
+
+  console.log(user);
+  if(key) { //likeArray에서 userId 삭제
+    Community.findOneAndUpdate(
+      { postNum: postNum },
+      {$inc: {likeNum: -1}, "$pull": {"likeArray": user}}
+    ).exec((err, result) => {
+      if (err) return res.status(400).json({ success: false, err });
+      console.log(result);
+      return res.status(200).send({ success: true });
+    });
+    
+  } else { //userId 삽입
+    Community.findOneAndUpdate(
+      { postNum: postNum },
+      {$inc: {likeNum: 1}, "$push": {"likeArray": user}}
+    ).exec((err, result) => {
+      if (err) return res.status(400).json({ success: false, err });
+      console.log(result);
+      return res.status(200).send({ success: true });
+    });
+  }
+
+})
+
 module.exports = router;

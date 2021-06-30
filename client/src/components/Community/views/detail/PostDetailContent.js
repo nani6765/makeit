@@ -3,14 +3,56 @@ import PostImages from "./PostImages.js";
 import { DetailDiv } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import PostModal from "./PostModal.js";
+import axios from "axios";
 
 function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);
   const [userInfo, setuserInfo] = useState(props.user);
   const [hambucControl, sethambucControl] = useState(false);
+  const [likeFlag, setlikeFlag] = useState(false);
+
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
+
+  
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
+
+  useEffect(() => {
+    if(postInfo.auther._id === userInfo.userData._id) {
+      return setlikeFlag(false);
+    } else {
+      if(postInfo.likeArray.includes(userInfo.userData._id)) {
+        setlikeFlag(true);
+      } else {
+        setlikeFlag(false);
+      }
+    }
+  }, [])
+
+  function LikeHandler() {
+    let target = document.querySelector("#likeArea");
+    target.style.disable = "true";
+
+    let body = {
+      postNum: postInfo.postNum,
+      likeFlag: true,
+      userId: userInfo.userData._id,
+    }
+
+
+    axios.post("/api/community/like", body).then((response) => {
+      if (response.data.success) {
+        target.style.disable="false";
+        window.location.reload();
+      } else {
+        window.location.reload();
+      }
+    });
+  }
+
   return (
     <>
       <DetailDiv>
@@ -45,7 +87,7 @@ function PostDetailContent(props) {
               <PostImages images={postInfo.images} />
             </>
           ) : null}
-          <div className="like">
+          <div className={likeFlag ? ("like active") : ("like")} id="likeArea" onClick = {LikeHandler}>
             <span>
               <i className="bi bi-emoji-smile"></i>
               공감({postInfo.likeNum})
