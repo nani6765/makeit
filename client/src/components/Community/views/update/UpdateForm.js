@@ -14,41 +14,52 @@ import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../utils/FileShowArea.js";
 
-function UploadForm(props) {
+function UpdateForm(props) {
+  const [PostInfo, setPostInfo] = useState("");
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
+  const [Check, setCheck] = useState(0);
 
-  const updateImages = (newImages) => {
-    setImage(newImages);
-  };
+  useEffect(() => {
+    setPostInfo(props.PostInfo);
+    setTitle(props.PostInfo.title);
+    setContent(props.PostInfo.content);
+    let temp = props.PostInfo.images;
+    setImage(temp);
+  }, [props]);
+
+  useEffect(() => {
+    if (Image != undefined) setCheck(Image.length);
+  }, [Image]);
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (!Title || !Content) {
       return alert("제목과 내용을 입력해주세요.");
     }
+
     const body = {
-      auther: props.user._id,
-      email: props.user.email,
+      id: props.PostInfo._id,
       title: Title,
       content: Content,
       images: Image,
-      category: props.category,
     };
 
-    axios.post("/api/community/postSubmit", body).then((response) => {
+    console.log("body체크", body);
+
+    axios.post("/api/community/postUpdate", body).then((response) => {
       if (response.data.success) {
-        alert("게시글 등록 성공");
+        alert("게시글 수정 성공");
         props.history.push("/community");
       } else {
-        alert("게시글 등록 실패");
+        alert("게시글 수정 실패");
       }
     });
   };
 
   return (
-    <>
+    <div>
       <FormDiv onSubmit={submitHandler}>
         <input
           name="title"
@@ -69,9 +80,7 @@ function UploadForm(props) {
 
         <DropZoneDiv>
           <FileUploadArea Images={Image} setImages={setImage} />
-          {Image[0] ? (
-            <FileShowArea Images={Image} setImages={setImage} />
-          ) : null}
+          {Check ? <FileShowArea Images={Image} setImages={setImage} /> : null}
         </DropZoneDiv>
 
         <BtnDiv>
@@ -87,8 +96,8 @@ function UploadForm(props) {
           </button>
         </BtnDiv>
       </FormDiv>
-    </>
+    </div>
   );
 }
 
-export default withRouter(UploadForm);
+export default withRouter(UpdateForm);

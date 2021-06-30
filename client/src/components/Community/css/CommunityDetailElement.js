@@ -206,10 +206,47 @@ const RepleContentGrid = styled.div`
     }
     .desc {
       grid-area: desc;
-      font-size: 15px;
-      text-align: left;
       margin-top: 1rem;
       margin-bottom: 1rem;
+      font-size: 15px;
+      text-align: left;
+
+      .edit {
+        input {
+          width: 100%;
+          background: #ffffff;
+          border: 1.5px solid #dfdfdf;
+          box-sizing: border-box;
+          border-radius: 7px;
+          padding: 15px;
+          &:focus {
+            outline: none;
+          }
+        }
+        div {
+          width: 100%;
+          text-align: right;
+          margin-top: 15px;
+          button {
+            border-radius: 10px;
+            text-align: center;
+            padding: 5px 15px 5px 15px;
+
+            &.cancel {
+              background: #ffffff;
+              border: 1px solid #935ea5;
+              color: #000000;
+              margin-right: 15px;
+            }
+            &.submit {
+              background: #935ea5;
+              border: 1px solid #935ea5;
+              font-weight: bold;
+              color: #ffffff;
+            }
+          }
+        }
+      }
     }
   }
 `;

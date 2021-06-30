@@ -173,6 +173,13 @@ const GNBCategoryBtn = styled.button`
   }
 `;
 
+const DropZoneDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-left: 10px;
+`;
+
 export {
   CommunityDiv,
   UploadDiv,
@@ -185,4 +192,5 @@ export {
   GNBMobileDiv,
   GNBMobileContentDiv,
   GNBCategoryBtn,
+  DropZoneDiv,
 };

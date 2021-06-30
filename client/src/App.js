@@ -10,6 +10,8 @@ import RegisterPage from "./components/User/views/RegisterPage.js";
 import CommunityMain from "./components/Community/views/CommunityMain.js";
 import CommunityPostDetail from "./components/Community/views/PostDetail.js";
 import CommunityUpload from "./components/Community/views/CommunityUpload.js";
+import CommunityUpdate from "./components/Community/views/CommunityUpdate.js";
+
 function App() {
   return (
     <>
@@ -29,6 +31,11 @@ function App() {
           exact
           path="/community/upload"
           component={Auth(CommunityUpload, true)}
+        />
+        <Route
+          exact
+          path="/community/update/:postId"
+          component={Auth(CommunityUpdate, true)}
         />
       </Switch>
       <Footer />

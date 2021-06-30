@@ -140,13 +140,11 @@ router.post("/postDelete", (req, res) => {
   });
 });
 
+
 router.post("/repleDelete", (req, res) => {
   let temp = req.body;
-  console.log(temp);
-
-  CommunityReple.deleteOne({_id: temp.repleId}, (err, result) => {
+  CommunityReple.deleteOne({ _id: temp.repleId }, (err, result) => {
     if (err) return res.status(400).json({ success: false, err });
-    console.log("result: ", result);
     Community.findOneAndUpdate(
       { postNum: temp.postNum },
       { $inc: { repleNum: -1 } }
@@ -155,6 +153,32 @@ router.post("/repleDelete", (req, res) => {
       return res.status(200).send({ success: true });
     });
   });
+});
+
+router.post("/postUpdate", (req, res) => {
+  let temp = {};
+  temp.title = req.body.title;
+  temp.content = req.body.content;
+  temp.images = req.body.images;
+  let key = req.body.id;
+  Community.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
+    (err, post) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    }
+  );
+});
+
+router.post("/repleUpdate", (req, res) => {
+  let temp = {};
+  temp.content = req.body.content;
+  let key = req.body.id;
+  CommunityReple.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
+    (err, post) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    }
+  );
 });
 
 module.exports = router;
