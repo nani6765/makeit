@@ -20,14 +20,10 @@ function PostDetailContent(props) {
   }, [likeFlag]);
 
   useEffect(() => {
-    if (postInfo.auther._id === userInfo.userData._id) {
-      return setlikeFlag(false);
+    if (postInfo.likeArray.includes(userInfo.userData._id)) {
+      setlikeFlag(true);
     } else {
-      if (postInfo.likeArray.includes(userInfo.userData._id)) {
-        setlikeFlag(true);
-      } else {
-        setlikeFlag(false);
-      }
+      setlikeFlag(false);
     }
   }, []);
 

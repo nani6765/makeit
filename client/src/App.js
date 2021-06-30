@@ -5,6 +5,7 @@ import Header from "./components/HeaderAndFooter/Header.js";
 import TopArea from "./components/utils/TopArea.js";
 import Footer from "./components/HeaderAndFooter/Footer.js";
 import MainPage from "./components/MainPage/MainPage.js";
+import LandingPage from "./components/LandingPage/LandingPage.js";
 import LoginPage from "./components/User/views/LoginPage.js";
 import RegisterPage from "./components/User/views/RegisterPage.js";
 import CommunityMain from "./components/Community/views/CommunityMain.js";
@@ -19,6 +20,7 @@ function App() {
       <TopArea />
       <Switch>
         <Route exact path="/" component={Auth(MainPage, null)} />
+        <Route exact path="/landingPage" component={Auth(LandingPage, null)} />
         <Route exact path="/login" component={Auth(LoginPage, false)} />
         <Route exact path="/register" component={Auth(RegisterPage, false)} />
         <Route exact path="/community" component={Auth(CommunityMain, null)} />
