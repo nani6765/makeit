@@ -112,6 +112,9 @@ const coRepleSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    likeArray: {
+      type: Array,
+    },
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },

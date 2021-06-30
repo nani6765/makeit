@@ -199,11 +199,12 @@ const RepleContentGrid = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: 50px 100px 1fr 50px;
-    grid-template-rows: 25px 25px auto auto;
+    grid-template-rows: 25px 25px auto auto auto;
     grid-template-areas:
       "avatar author author hambuc"
       "avatar date date ."
-      "desc desc desc desc";
+      "desc desc desc desc"
+      "like like like like";
     .avatar {
       grid-area: avatar;
       display: flex;
@@ -275,6 +276,26 @@ const RepleContentGrid = styled.div`
           }
         }
       }
+    }
+    .like {
+      grid-area: like;
+      text-align: right;
+      margin-top0px;
+      button {
+        padding: 0px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
+        i {
+          margin-right: 5px;
+        }
+        &.active {
+          color: #935ea5;
+          font-weight: bold;
+        }
+        &:active,
+        &:focus {
+          border: none;
+        }
     }
   }
 `;
