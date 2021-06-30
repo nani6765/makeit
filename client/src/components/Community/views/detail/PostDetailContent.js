@@ -37,7 +37,6 @@ function PostDetailContent(props) {
               {hambucControl ? <PostModal postInfo={postInfo} /> : null}
             </div>
           ) : null}
-
           <p className="date">{postInfo.realTime}</p>
           <p className="title">{postInfo.title}</p>
           <p className="desc">{postInfo.content}</p>
@@ -46,6 +45,12 @@ function PostDetailContent(props) {
               <PostImages images={postInfo.images} />
             </>
           ) : null}
+          <div className="like">
+            <span>
+              <i className="bi bi-emoji-smile"></i>
+              공감({postInfo.likeNum})
+            </span>
+          </div>
         </div>
       </DetailDiv>
     </>
