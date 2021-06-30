@@ -23,17 +23,17 @@ function MobileFooter(props) {
           </Link>
         </li>
         <li>
-          <Link>
+          <Link to="/landingPage">
             <FooterMobileBottom2 />
           </Link>
         </li>
         <li>
-          <Link>
+          <Link to="/landingPage">
             <FooterMobileBottom3 />
           </Link>
         </li>
         <li>
-          <Link>
+          <Link to="/landingPage">
             <FooterMobileBottom4 />
           </Link>
         </li>

@@ -33,6 +33,22 @@ const FirstDiv = styled.div`
       font-size: 32px;
     }
   }
+  ${mq[1]} {
+    height: 500px;
+    div {
+      width: auto;
+      margin-left: 10px;
+      h1 {
+        font-size: 20px;
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
 `;
 const SecondDiv = styled.div`
   width: 100%;
@@ -61,6 +77,22 @@ const SecondDiv = styled.div`
     p {
       color: #330033;
       font-size: 32px;
+    }
+  }
+  ${mq[1]} {
+    height: 500px;
+    div {
+      width: auto;
+      margin-left: 10px;
+      h1 {
+        font-size: 20px;
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        font-size: 12px;
+      }
     }
   }
 `;
@@ -100,6 +132,22 @@ const ThirdDiv = styled.div`
       font-size: 32px;
     }
   }
+  ${mq[1]} {
+    height: 500px;
+    div {
+      width: auto;
+      margin-left: 10px;
+      h1 {
+        font-size: 20px;
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+  }
 `;
 const FourthDiv = styled.div`
   width: 100%;
@@ -134,6 +182,22 @@ const FourthDiv = styled.div`
     p {
       color: #5d4692;
       font-size: 32px;
+    }
+  }
+  ${mq[1]} {
+    height: 500px;
+    div {
+      width: auto;
+      margin-left: 10px;
+      h1 {
+        font-size: 20px;
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        font-size: 12px;
+      }
     }
   }
 `;
@@ -172,6 +236,22 @@ const FifthDiv = styled.div`
       font-size: 32px;
     }
   }
+  ${mq[1]} {
+    height: 500px;
+    div {
+      width: auto;
+      margin-left: 10px;
+      h1 {
+        font-size: 20px;
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        font-size: 11px;
+      }
+    }
+  }
 `;
 
 const SixthDiv = styled.div`
@@ -206,6 +286,22 @@ const SixthDiv = styled.div`
     p {
       color: #412280;
       font-size: 32px;
+    }
+  }
+  ${mq[1]} {
+    height: 500px;
+    div {
+      width: auto;
+      margin-left: 10px;
+      h1 {
+        font-size: 20px;
+        span {
+          margin-right: 10px;
+        }
+      }
+      p {
+        font-size: 12px;
+      }
     }
   }
 `;
