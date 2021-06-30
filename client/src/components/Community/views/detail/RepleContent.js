@@ -1,17 +1,57 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RepleContentGrid } from "../../css/CommunityDetailElement.js";
+import { withRouter } from "react-router";
 import Avatar from "react-avatar";
 import RepleModal from "./RepleModal.js";
 import RepleEditForm from "./RepleEditForm.js";
+import axios from "axios";
 
 function RepleContent(props) {
   const [hambucControl, sethambucControl] = useState(false);
   const [Reple, setReple] = useState(props.reple);
   const [UpdateCheck, setUpdateCheck] = useState(false);
+  const [likeFlag, setlikeFlag] = useState(false);
 
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
+
+  useEffect(() => {
+    if (Reple.likeArray.includes(props.user.userData._id)) {
+      setlikeFlag(true);
+    } else {
+      setlikeFlag(false);
+    }
+  }, []);
+
+  function LikeHandler() {
+    console.log(Reple);
+
+    if (Reple.auther._id === props.user.userData._id) {
+      return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
+    }
+    if (props.user.userData.error === true) {
+      alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
+      return props.history.push("/login");
+    }
+    let target = document.querySelector("#likeArea");
+    target.style.disable = "true";
+
+    let body = {
+      repleId: Reple._id,
+      likeFlag: likeFlag,
+      userId: props.user.userData._id,
+    };
+
+    axios.post("/api/community/repleLike", body).then((response) => {
+      if (response.data.success) {
+        target.style.disable = "false";
+        window.location.reload();
+      } else {
+        window.location.reload();
+      }
+    });
+  }
 
   return (
     <>
@@ -50,6 +90,21 @@ function RepleContent(props) {
           ) : (
             <p className="desc">{Reple.content}</p>
           )}
+          <div className="like">
+            <button
+              className={likeFlag ? "active" : null}
+              id="likeArea"
+              onClick={LikeHandler}
+              type="button"
+            >
+              {likeFlag ? (
+                <i className="bi bi-emoji-smile-fill"></i>
+              ) : (
+                <i className="bi bi-emoji-smile"></i>
+              )}
+              공감({Reple.likeNum})
+            </button>
+          </div>
         </div>
       </RepleContentGrid>
     </>
@@ -73,7 +128,6 @@ function useOuterClick(callback) {
       ) {
         callbackRef.current(e);
       }
-
       //수정버튼 클릭시
       if (e.target.className === "edit") {
         callbackRef.current(!e);
@@ -83,4 +137,4 @@ function useOuterClick(callback) {
   return innerRef;
 }
 
-export default RepleContent;
+export default withRouter(RepleContent);

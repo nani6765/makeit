@@ -3,6 +3,7 @@ import PostImages from "./PostImages.js";
 import { DetailDiv } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import PostModal from "./PostModal.js";
+import { withRouter } from "react-router";
 import axios from "axios";
 
 function PostDetailContent(props) {
@@ -20,20 +21,20 @@ function PostDetailContent(props) {
   }, [likeFlag]);
 
   useEffect(() => {
-    if (postInfo.auther._id === userInfo.userData._id) {
-      return setlikeFlag(false);
+    if (postInfo.likeArray.includes(userInfo.userData._id)) {
+      setlikeFlag(true);
     } else {
-      if (postInfo.likeArray.includes(userInfo.userData._id)) {
-        setlikeFlag(true);
-      } else {
-        setlikeFlag(false);
-      }
+      setlikeFlag(false);
     }
   }, []);
 
   function LikeHandler() {
     if (postInfo.auther._id === userInfo.userData._id) {
       return alert("본인 글에는 좋아요를 누를 수 없습니다!");
+    }
+    if (props.user.userData.error === true) {
+      alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
+      return props.history.push("/login");
     }
     let target = document.querySelector("#likeArea");
     target.style.disable = "true";
@@ -130,4 +131,4 @@ function useOuterClick(callback) {
   return innerRef;
 }
 
-export default PostDetailContent;
+export default withRouter(PostDetailContent);

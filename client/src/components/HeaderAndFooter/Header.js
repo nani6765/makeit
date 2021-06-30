@@ -101,13 +101,13 @@ function Header(props) {
           <HeaderNav>
             <ul>
               <li>
-                <a href="/">프로젝트</a>
+                <a href="/landingPage">프로젝트</a>
               </li>
               <li>
-                <a href="/">포트폴리오</a>
+                <a href="/landingPage">포트폴리오</a>
               </li>
               <li>
-                <a href="/">영상제작</a>
+                <a href="/landingPage">영상제작</a>
               </li>
               <li>
                 <a href="/community">커뮤니티</a>

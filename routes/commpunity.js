@@ -27,11 +27,12 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
   Community.find(filter)
-    .populate("auther")  //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
+    .populate("auther") //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
     .sort(sort)
     .skip(skip) //출력을 시작할 부분 skip만큼 건너뛰고 skip+1부터 출력
     .limit(limit) //출력할 오브젝트의 개수 제한
-    .exec((err, postInfo) => { //쿼리를 promise로 만들기 위해,,
+    .exec((err, postInfo) => {
+      //쿼리를 promise로 만들기 위해,,
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, postInfo });
     });
@@ -140,7 +141,6 @@ router.post("/postDelete", (req, res) => {
   });
 });
 
-
 router.post("/repleDelete", (req, res) => {
   let temp = req.body;
   CommunityReple.deleteOne({ _id: temp.repleId }, (err, result) => {
@@ -186,31 +186,59 @@ router.post("/like", (req, res) => {
   let key = req.body.likeFlag;
   let user = req.body.userId;
   let temp = {};
-//  temp.$inc = {likeNum: 1};
-  temp.$push = { "likeArray": user };
+  //  temp.$inc = {likeNum: 1};
+  temp.$push = { likeArray: user };
 
   console.log(user);
-  if(key) { //likeArray에서 userId 삭제
+  if (key) {
+    //likeArray에서 userId 삭제
     Community.findOneAndUpdate(
       { postNum: postNum },
-      {$inc: {likeNum: -1}, "$pull": {"likeArray": user}}
+      { $inc: { likeNum: -1 }, $pull: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       console.log(result);
       return res.status(200).send({ success: true });
     });
-    
-  } else { //userId 삽입
+  } else {
+    //userId 삽입
     Community.findOneAndUpdate(
       { postNum: postNum },
-      {$inc: {likeNum: 1}, "$push": {"likeArray": user}}
+      { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       console.log(result);
       return res.status(200).send({ success: true });
     });
   }
+});
 
-})
+//댓글 좋아요
+router.post("/repleLike", (req, res) => {
+  let repleId = req.body.repleId;
+  let key = req.body.likeFlag;
+  let user = req.body.userId;
+  if (key) {
+    //likeArray에서 userId 삭제
+    CommunityReple.findOneAndUpdate(
+      { _id: repleId },
+      { $inc: { likeNum: -1 }, $pull: { likeArray: user } }
+    ).exec((err, result) => {
+      if (err) return res.status(400).json({ success: false, err });
+      console.log("좋아요 취소: ", result);
+      return res.status(200).send({ success: true });
+    });
+  } else {
+    //userId 삽입
+    CommunityReple.findOneAndUpdate(
+      { _id: repleId },
+      { $inc: { likeNum: 1 }, $push: { likeArray: user } }
+    ).exec((err, result) => {
+      if (err) return res.status(400).json({ success: false, err });
+      console.log("좋아요: ", result);
+      return res.status(200).send({ success: true });
+    });
+  }
+});
 
 module.exports = router;
