@@ -72,11 +72,7 @@ function FileUpload(props) {
         <div css={ImageArea}>
           {Images.map((image, idx) => (
             <figure key={idx}>
-              <img
-                src={image.path}
-                alt={image.key}
-                style={{ marginLeft: "10px" }}
-              />
+              <img src={image.path} alt={image.key} />
               <figcaption onClick={() => deleteHandler(image)}>X</figcaption>
             </figure>
           ))}

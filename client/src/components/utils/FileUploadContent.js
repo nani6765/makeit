@@ -11,6 +11,8 @@ const DropZoneDiv = css`
   justify-content: flex-start;
   margin-top: 20px;
   margin-left: 10px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
 const DropZoneContent = css`
@@ -27,12 +29,16 @@ const ImageArea = css`
   overflow-y: hidden;
   align-self: center;
   figure {
+    overflow-x: scroll;
+    overflow-y: hidden;
     position: relative;
     margin-right: 30px;
     img {
       max-width: 300px;
-      height: 100%;
+      width: 100%;
+      height: auto;
       margin-bottom: 10px;
+      margin-left: 10px;
     }
     figcaption {
       background-color: black;
@@ -40,8 +46,8 @@ const ImageArea = css`
       border-radius: 100%;
       color: white;
       position: absolute;
-      top: 8%;
-      left: 85%;
+      top: 5%;
+      right: 5%;
       cursor: pointer;
     }
   }
@@ -59,26 +65,26 @@ const ImageArea = css`
     display: none;
   }
   ${mq[0]} {
-    height: 210px;
-    margin-left: 20px;
-    div {
-      img {
-        width: 200px;
-        height: 200px;
-        minwidth: 200px;
-        margin-bottom: 10px;
-      }
-    }
-  }
-  ${mq[1]} {
-    height: 110px;
+    width: 80%;
     margin-left: 10px;
-    div {
+    flex-direction: column;
+    height: auto;
+    figure {
+      position: relative;
+      margin-right: 0px;
       img {
-        width: 100px;
-        height: 100px;
-        minwidth: 100px;
-        margin-bottom: 10px;
+        height: 100%;
+        margin: 0px;
+      }
+      figcaption {
+        background-color: black;
+        padding: 10px;
+        border-radius: 100%;
+        color: white;
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        cursor: pointer;
       }
     }
   }

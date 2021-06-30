@@ -71,15 +71,27 @@ const DetailDiv = styled.div`
     .image {
       grid-area: image;
       margin-top: 30px;
+      img {
+        width: 300px;
+        ${mq[0]} {
+          width: 100%;
+        }
+      }
     }
     .like {
       grid-area: like;
       text-align: right;
       margin-top: 30px;
-      span {
-        cursor: pointer;
+      button {
+        padding: 0px;
+        border: none;
+        background-color: rgba(255, 255, 255, 0);
         i {
           margin-right: 5px;
+        }
+        &.active {
+          color: #935ea5;
+          font-weight: bold;
         }
       }
     }

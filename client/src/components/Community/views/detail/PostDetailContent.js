@@ -15,37 +15,38 @@ function PostDetailContent(props) {
     sethambucControl(false);
   });
 
-  
   useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
+    console.log("likeFlag", likeFlag);
+  }, [likeFlag]);
 
   useEffect(() => {
-    if(postInfo.auther._id === userInfo.userData._id) {
+    if (postInfo.auther._id === userInfo.userData._id) {
       return setlikeFlag(false);
     } else {
-      if(postInfo.likeArray.includes(userInfo.userData._id)) {
+      if (postInfo.likeArray.includes(userInfo.userData._id)) {
         setlikeFlag(true);
       } else {
         setlikeFlag(false);
       }
     }
-  }, [])
+  }, []);
 
   function LikeHandler() {
+    if (postInfo.auther._id === userInfo.userData._id) {
+      return alert("본인 글에는 좋아요를 누를 수 없습니다!");
+    }
     let target = document.querySelector("#likeArea");
     target.style.disable = "true";
 
     let body = {
       postNum: postInfo.postNum,
-      likeFlag: true,
+      likeFlag: likeFlag,
       userId: userInfo.userData._id,
-    }
-
+    };
 
     axios.post("/api/community/like", body).then((response) => {
       if (response.data.success) {
-        target.style.disable="false";
+        target.style.disable = "false";
         window.location.reload();
       } else {
         window.location.reload();
@@ -87,11 +88,16 @@ function PostDetailContent(props) {
               <PostImages images={postInfo.images} />
             </>
           ) : null}
-          <div className={likeFlag ? ("like active") : ("like")} id="likeArea" onClick = {LikeHandler}>
-            <span>
+          <div className="like">
+            <button
+              className={likeFlag ? "active" : null}
+              id="likeArea"
+              onClick={LikeHandler}
+              type="button"
+            >
               <i className="bi bi-emoji-smile"></i>
               공감({postInfo.likeNum})
-            </span>
+            </button>
           </div>
         </div>
       </DetailDiv>

@@ -32,7 +32,6 @@ function PostImages(props) {
           <img
             src={src}
             onClick={() => openImageViewer(idx)}
-            width="300"
             key={idx}
             style={{ margin: "2px" }}
             alt=""
