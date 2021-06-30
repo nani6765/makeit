@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Auth from "./hoc/auth.js";
 import Header from "./components/HeaderAndFooter/Header.js";
-import TopArea from "./components/TopArea.js";
+import TopArea from "./components/utils/TopArea.js";
 import Footer from "./components/HeaderAndFooter/Footer.js";
 import MainPage from "./components/MainPage/MainPage.js";
 import LoginPage from "./components/User/views/LoginPage.js";
