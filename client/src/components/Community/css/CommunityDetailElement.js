@@ -115,7 +115,7 @@ const ModalDiv = styled.div`
   right: 10px;
   top: 20px;
   min-width: 150px;
-  min-height: 60px;
+  min-height: 70px;
   z-index: 10;
   display: flex;
   flex-direction: column;
