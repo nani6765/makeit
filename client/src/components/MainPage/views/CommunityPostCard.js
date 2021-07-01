@@ -4,6 +4,7 @@ import Avatar from "react-avatar";
 import { CardImg } from "../css/MainPageCommunity.js";
 
 function CommunityPostCard(props) {
+
   return (
     <>
       <CardImg>
