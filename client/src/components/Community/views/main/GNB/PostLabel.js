@@ -8,27 +8,27 @@ function PostLabel(props) {
       <div style={{ backgroundColor: "#faf6f6" }}>
         <PostLabelDiv>
           <LabelDiv>
-            <p>{props.category}</p>
+            <p>{props.MainCategoryContent}</p>
           </LabelDiv>
           <LabelBtn>
             <button
               className="left"
               style={
-                props.sortPost === "최신순"
+                props.SortPost === "최신순"
                   ? { backgroundColor: "#935EA5", color: "white" }
                   : null
               }
-              onClick={() => props.setsortPost("최신순")}
+              onClick={() => props.setSortPost("최신순")}
             >
               최신순
             </button>
             <button
               style={
-                props.sortPost === "인기순"
+                props.SortPost === "인기순"
                   ? { backgroundColor: "#935EA5", color: "white" }
                   : null
               }
-              onClick={() => props.setsortPost("인기순")}
+              onClick={() => props.setSortPost("인기순")}
             >
               인기순
             </button>
@@ -37,7 +37,7 @@ function PostLabel(props) {
             <Link
               to={{
                 pathname: "/community/upload/",
-                params: { category: props.category },
+                params: { category: props.MainCategoryContent },
               }}
             >
               <button>

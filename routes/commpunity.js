@@ -21,11 +21,13 @@ router.post("/", (req, res) => {
   let limit = 10;
   let skip = tempSkip === 0 ? 0 : tempSkip * 10;
   let sort = {}; //{정렬기준이 되는 필드 이름: 1 or -1} 1이면 오름차순, -1이면 내림차순
+
   if (req.body.sortPost === "최신순") {
     sort.createdAt = -1;
   } else {
     sort.likeNum = -1;
   }
+
   Community.find(filter)
     .populate("auther") //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
     .sort(sort)
