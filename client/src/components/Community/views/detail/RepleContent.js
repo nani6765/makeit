@@ -3,13 +3,14 @@ import { RepleContentGrid } from "../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router";
 import Avatar from "react-avatar";
 import RepleModal from "./RepleModal.js";
+import RepleGuestModal from "./RepleGuestModal.js";
 import RepleEditForm from "./RepleEditForm.js";
 import axios from "axios";
 
 function RepleContent(props) {
   const [hambucControl, sethambucControl] = useState(false);
   const [Reple, setReple] = useState(props.reple);
-  const [UpdateCheck, setUpdateCheck] = useState(false);
+  const [UpdateCheck, setUpdateCheck] = useState(false); //글수정 업데이트체크2
   const [likeFlag, setlikeFlag] = useState(false);
 
   const innerRef = useOuterClick((e) => {
@@ -66,7 +67,8 @@ function RepleContent(props) {
             />
           </div>
           <p className="author">{Reple.auther.name}</p>
-          {props.user.userData._id === Reple.auther._id ? (
+
+          {props.user.userData.error === true ? null : (
             <div
               className="hambuc"
               onClick={() => sethambucControl(true)}
@@ -77,10 +79,17 @@ function RepleContent(props) {
                 onClick={() => sethambucControl(true)}
               ></i>
               {hambucControl ? (
-                <RepleModal repleInfo={Reple} setUpdateCheck={setUpdateCheck} />
+                props.user.userData._id === Reple.auther._id ? (
+                  <RepleModal
+                    repleInfo={Reple}
+                    setUpdateCheck={setUpdateCheck}
+                  />
+                ) : props.user.userData.error === true ? null : (
+                  <RepleGuestModal />
+                )
               ) : null}
             </div>
-          ) : null}
+          )}
 
           <p className="date">{Reple.realTime}</p>
           {UpdateCheck ? (
