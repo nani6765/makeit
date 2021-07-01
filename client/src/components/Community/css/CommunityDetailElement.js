@@ -43,7 +43,7 @@ const DetailDiv = styled.div`
     .hambuc {
       grid-area: hambuc;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       color: #c4c4c4;
       position: relative;
@@ -112,10 +112,10 @@ const ModalDiv = styled.div`
   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
   position: absolute;
-  right: 20px;
+  right: 10px;
   top: 20px;
-  min-width: 90px;
-  min-height: 60px;
+  min-width: 150px;
+  min-height: 70px;
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -131,7 +131,6 @@ const ModalDiv = styled.div`
       background-color: rgba(255, 255, 255, 1);
     }
     .edit {
-      display: inline;
       i {
         margin-right: 1rem;
       }
