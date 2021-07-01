@@ -55,7 +55,7 @@ router.post("/postDetail/reple", (req, res) => {
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let limit = req.body.limit ? parseInt(req.body.limit) : 5;
   let sort = {};
-  sort.createdAt = -1;
+  sort.createdAt = 1;
   CommunityReple.find(filter).exec((err, totalReple) => {
     if (err) return res.status(400).json({ success: false, err });
     CommunityReple.find(filter)

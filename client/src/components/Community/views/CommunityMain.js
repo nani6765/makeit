@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CommunityGNB from "./main/CommunityGNB.js";
-import PostLabel from "./main/PostLabel.js";
 import PostPage from "./main/PostPage.js";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 function CommunityMain() {
@@ -10,11 +9,6 @@ function CommunityMain() {
   return (
     <>
       <CommunityGNB category={category} setCategory={setcategory} />
-      <PostLabel
-        category={category}
-        sortPost={sortPost}
-        setsortPost={setsortPost}
-      />
       <PostPage category={category} sortPost={sortPost} />
       <MobileFooter path="/community" />
     </>

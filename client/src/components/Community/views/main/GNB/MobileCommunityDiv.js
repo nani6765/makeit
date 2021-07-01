@@ -1,35 +1,18 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
 import React from "react";
-import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
+import { MobileUl } from "./GNBContent.js";
 
 function MobileCommunityDiv(props) {
-  const breakpoints = [1200, 576];
-  const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
-
-  const Ul = styled.ul`
-    text-align: right;
-    list-style: none;
-    li {
-      margin-top: 5px;
-      padding-top: 5px;
-      padding-bottom: 5px;
-      color: #c6c6c6;
-      font-size: 12px;
-    }
-  `;
   return (
     <>
-      <Ul>
+      <MobileUl>
         <li
-          style={props.category === "자유게시판" ? { color: "#702c8a" } : null}
+          style={props.category === "게시판" ? { color: "#702c8a" } : null}
           onClick={() => {
-            props.setCategory("자유게시판");
+            props.setCategory("게시판");
             props.setMobileGnb(false);
           }}
         >
-          자유게시판
+          게시판
         </li>
         <li
           style={props.category === "파트너찾기" ? { color: "#702c8a" } : null}
@@ -67,16 +50,7 @@ function MobileCommunityDiv(props) {
         >
           자료실
         </li>
-        <li
-          style={props.category === "QnA" ? { color: "#702c8a" } : null}
-          onClick={() => {
-            props.setCategory("QnA");
-            props.setMobileGnb(false);
-          }}
-        >
-          Q&amp;A
-        </li>
-      </Ul>
+      </MobileUl>
     </>
   );
 }

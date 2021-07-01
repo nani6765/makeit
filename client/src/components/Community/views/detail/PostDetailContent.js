@@ -3,6 +3,7 @@ import PostImages from "./PostImages.js";
 import { DetailDiv } from "../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import PostModal from "./PostModal.js";
+import PostGuestModal from "./PostGuestModal.js";
 import { withRouter } from "react-router";
 import axios from "axios";
 
@@ -68,7 +69,7 @@ function PostDetailContent(props) {
             />
           </div>
           <p className="author">{postInfo.auther.name}</p>
-          {userInfo.userData._id === postInfo.auther._id ? (
+          {props.user.userData.error === true ? null : (
             <div
               className="hambuc"
               onClick={() => sethambucControl(true)}
@@ -78,9 +79,15 @@ function PostDetailContent(props) {
                 className="bi bi-three-dots"
                 onClick={() => sethambucControl(true)}
               ></i>
-              {hambucControl ? <PostModal postInfo={postInfo} /> : null}
+              {hambucControl ? (
+                userInfo.userData._id === postInfo.auther._id ? (
+                  <PostModal postInfo={postInfo} />
+                ) : (
+                  <PostGuestModal />
+                )
+              ) : null}
             </div>
-          ) : null}
+          )}
           <p className="date">{postInfo.realTime}</p>
           <p className="title">{postInfo.title}</p>
           <p className="desc">{postInfo.content}</p>
