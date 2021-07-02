@@ -7,26 +7,6 @@ import axios from "axios";
 function PostModal(props) {
   const [ModalFlag, setModalFlag] = useState(false);
   const [PostInfo, setPostInfo] = useState(props.postInfo);
-  /*
-  function RemoveHandler() {
-
-    let body = {
-      postInfoId: PostInfo._id,
-      postNum: PostInfo.postNum,
-      images: PostInfo.images,
-      imageLength: PostInfo.images.length,
-    };
-
-    axios.post("/api/community/postDelete", body).then((response) => {
-      if (response.data.success) {
-        alert("게시글 삭제 성공");
-        props.history.push("/community");
-      } else {
-        alert("게시글 삭제 실패");
-      }
-    });
-  }
-*/
   return (
     <>
       <ModalDiv>
@@ -48,7 +28,7 @@ function PostModal(props) {
           </button>
         </div>
       </ModalDiv>
-      {ModalFlag ? <DeleteModal /> : null}
+      {ModalFlag ? <DeleteModal PostInfo = {PostInfo} setModalFlag = {setModalFlag} type="post"/> : null}
     </>
   );
 }

@@ -1,29 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ModalDiv } from "../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
+import DeleteModal from "./DeleteModal"
 import axios from "axios";
 
 function RepleModal(props) {
   const [RepleInfo, setRepleInfo] = useState(props.repleInfo);
+  const [ModalFlag, setModalFlag] = useState(false);
 
   function EditHandler() {
     props.setUpdateCheck(true);
-  }
-
-  function RemoveHandler() {
-    let body = {
-      repleId: RepleInfo._id,
-      postNum: RepleInfo.postNum,
-    };
-
-    axios.post("/api/community/repleDelete", body).then((response) => {
-      if (response.data.success) {
-        alert("댓글 삭제 성공");
-        window.location.reload();
-      } else {
-        alert("댓글 삭제 실패");
-      }
-    });
   }
 
   return (
@@ -35,10 +21,11 @@ function RepleModal(props) {
         </button>
       </div>
       <div>
-        <button className="delete" onClick={() => RemoveHandler()}>
+        <button className="delete" onClick={() => setModalFlag(true)}>
           <i className="bi bi-trash"></i>삭제
         </button>
       </div>
+      {ModalFlag ? <DeleteModal RepleInfo = {RepleInfo} setModalFlag = {setModalFlag} type="Reple"/> : null}
     </ModalDiv>
   );
 }
