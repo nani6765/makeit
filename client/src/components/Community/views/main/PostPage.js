@@ -12,6 +12,7 @@ function PostPage(props) {
   useEffect(() => {
     let body = {
       category: props.MainCategoryContent,
+      key: false,
     };
 
     axios.post("/api/community/length", body).then((response) => {

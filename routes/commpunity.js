@@ -17,6 +17,10 @@ router.post("/length", (req, res) => {
 router.post("/", (req, res) => {
   let filter = {};
   filter.category = req.body.category;
+  
+  if(req.body.key) {
+    filter.subCategory = req.body.subCategory;
+  }
   let tempSkip = req.body.pageSkip ? parseInt(req.body.pageSkip) : 0;
   let limit = 10;
   let skip = tempSkip === 0 ? 0 : tempSkip * 10;
