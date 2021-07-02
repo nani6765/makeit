@@ -347,6 +347,72 @@ const RepleUploadDiv = styled.div`
   }
 `;
 
+const DeleteModalDiv = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .gridDiv {
+    background: #ffffff;
+    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+    border-radius: 11px;
+    display: grid;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-gap: 5px;
+    grid-template-rows: auto auto auto;
+    padding: 20px;
+    grid-template-areas:
+      ". title delete"
+      ". desc ."
+      ". buttonDiv .";
+    z-index: 101;
+    .title {
+      grid-area: title;
+      text-align: center;
+      color: #000000;
+      font-weight: bold;
+    }
+    .delete {
+      grid-area: delete;
+      text-align: center;
+      color: #000000;
+      padding: 5px;
+      cursor: pointer;
+    }
+    .desc {
+      grid-area: desc;
+      color: #000000;
+      line-height: 25px;
+    }
+    .buttonDiv {
+      margin-top: 20px;
+      grid-area: buttonDiv;
+      text-align: center;
+      button {
+        box-sizing: border-box;
+        border-radius: 16px;
+        padding: 5px 10px 5px 10px;
+        &.cancel {
+          background: #ffffff;
+          border: 1.5px solid #000000;
+          color: black;
+          margin-right: 20px;
+        }
+        &.delete {
+          background: #d70000;
+          border: 1.5px solid #d70000;
+          color: white;
+        }
+      }
+    }
+  }
+`;
 export {
   DetailDiv,
   GNBMobileContentDiv,
@@ -355,4 +421,5 @@ export {
   RepleBtnDiv,
   RepleContentGrid,
   RepleUploadDiv,
+  DeleteModalDiv,
 };
