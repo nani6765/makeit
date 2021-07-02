@@ -348,16 +348,22 @@ const RepleUploadDiv = styled.div`
 `;
 
 const DeleteModalDiv = styled.div`
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .content{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:50;
+    .background {
+      background-color: rgba(0, 0, 0, 0.5);
+      width:100%;
+      height:100%;
+      z-index:50;
+    }
   .gridDiv {
     background: #ffffff;
     box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
@@ -371,7 +377,8 @@ const DeleteModalDiv = styled.div`
       ". title delete"
       ". desc ."
       ". buttonDiv .";
-    z-index: 101;
+    z-index: 51;
+    position:fixed;
     .title {
       grid-area: title;
       text-align: center;
@@ -398,6 +405,7 @@ const DeleteModalDiv = styled.div`
         box-sizing: border-box;
         border-radius: 16px;
         padding: 5px 10px 5px 10px;
+        width: auto;
         &.cancel {
           background: #ffffff;
           border: 1.5px solid #000000;
@@ -411,6 +419,7 @@ const DeleteModalDiv = styled.div`
         }
       }
     }
+  }
   }
 `;
 export {
