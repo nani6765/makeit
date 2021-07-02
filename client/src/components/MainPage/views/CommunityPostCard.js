@@ -15,7 +15,6 @@ function CommunityPostCard(props) {
     let day = hour * 24;
     let month = day * 30;
     let year = month*12;
-    console.log(timeGap/hour, props.post.realTime);
 
     if(parseInt(timeGap/year) > 0) {
       return parseInt(timeGap / year)+"년 전";
