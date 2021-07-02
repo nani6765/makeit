@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const GNBDiv = styled.div`
+const MainCategoryDiv = styled.div`
   width: 70%;
   margin: 0 auto;
   padding-top: 5vh;
@@ -16,13 +16,55 @@ const GNBDiv = styled.div`
   }
 `;
 
-const GNBBtnDiv = styled.div`
+const MainCategoryBtnDiv = styled.div`
   display: flex;
   align-content: center;
   width: 100%;
   justify-content: space-evenly;
   ${mq[1]} {
     display: none;
+  }
+`;
+
+const SubCategoryDiv = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  ul {
+    font-size: 14px;
+    display: flex;
+    li {
+      &::after {
+        content: "|";
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+      &:last-child {
+        &::after {
+          content: "";
+        }
+      }
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+  ${mq[1]} {
+    width: 90%;
+    ul {
+      font-size: 12px;
+      li {
+        margin-left: 6px;
+        &::after {
+          content: "";
+          margin-left: 0px;
+          margin-right: 0px;
+        }
+        &:first-child {
+          margin-left: 0px;
+        }
+      }
+    }
   }
 `;
 
@@ -43,13 +85,13 @@ const GNBMobileContentDiv = styled.div`
 `;
 
 const GNBCategoryBtn = styled.button`
-  padding: 5px 30px 5px 30px;
+  padding: 10px 30px 10px 30px;
   background: #ffffff;
   color: #702c8a;
   border: 1px solid #d5d5d5;
   box-sizing: border-box;
   border-radius: 22px;
-  font-size: 14px;
+  font-size: 18px;
   ${mq[0]} {
     padding: 5px 10px 5px 10px;
     font-size: 12px;
@@ -78,7 +120,7 @@ const PostLabelDiv = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   display: grid;
-  grid-template-columns: 100px 120px 1fr 80px;
+  grid-template-columns: auto 120px 1fr 80px;
   grid-template-rows: auto;
   grid-template-areas: "label btn . upload";
   place-items: center;
@@ -104,6 +146,7 @@ const LabelBtn = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
+  margin-left: 10px;
   button {
     display: inline;
     border-radius: 16px;
@@ -137,8 +180,9 @@ const LabelUpload = styled.div`
 `;
 
 export {
-  GNBDiv,
-  GNBBtnDiv,
+  MainCategoryDiv,
+  MainCategoryBtnDiv,
+  SubCategoryDiv,
   GNBMobileDiv,
   GNBMobileContentDiv,
   GNBCategoryBtn,
