@@ -32,14 +32,14 @@ const HeaderGrid = styled.div`
   background-color: white;
   grid-template-columns: 150px 1fr 200px 120px;
   grid-template-rows: 80px;
-  grid-template-areas: "logo nav search login";
+  grid-template-areas: "logo nav search loginDiv";
   ${mq[0]} {
     -webkit-box-align: center;
     place-items: center;
     grid-template-rows: 40px 40px;
     grid-template-columns: 120px 1fr 50px 50px;
     grid-template-areas:
-      "logo searchArea msearch profile"
+      "logo searchArea loginDiv loginDiv"
       "nav nav nav nav";
   }
   ${mq[1]} {
@@ -48,7 +48,7 @@ const HeaderGrid = styled.div`
     place-items: center;
     grid-template-rows: 60px;
     grid-template-columns: 50px 50px 1fr 50px 50px;
-    grid-template-areas: "hambuck . logo bell profile";
+    grid-template-areas: "hambuck . logo loginDiv loginDiv";
   }
 `;
 
@@ -150,29 +150,33 @@ const HeaderSearch = styled.div`
   }
 `;
 
-const HeaderLogin = styled.div`
-  grid-area: login;
+const HeaderLoginDiv = styled.div`
+  grid-area: loginDiv;
   height: 100%;
+  width: 100%;
+  display: flex;
   text-align: center;
-  div {
-    height: inherit;
-    display: inline-flex;
-    align-items: center;
-    button {
-      background-color: #702b8a;
-      border: none;
-      border-radius: 15px;
-      padding: 5px 15px 5px 15px;
-      color: white;
-      font-family: Noto Sans;
-      font-style: normal;
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 25px;
-    }
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  .loginBtn {
+    background: #702c8a;
+    border-radius: 6px;
+    color: white;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    font-weight: bold;
   }
-  ${mq[0]} {
-    display: none;
+  .bell {
+    color: #702c8a;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .profile {
+    img {
+      width: 30px;
+      height: 30px;
+    }
   }
 `;
 
@@ -189,27 +193,6 @@ const MobileLogo = styled.div`
   img {
     width: 100%;
     height: 100%;
-  }
-  ${mq[0]} {
-    display: flex;
-  }
-  ${mq[1]} {
-    display: none;
-  }
-`;
-
-const MobileSearch = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  text-align: center;
-  background-color: white;
-  grid-area: msearch;
-  justify-content: flex-end;
-  i {
-    color: #a95ddd;
-    font-size: 20px;
   }
   ${mq[0]} {
     display: flex;
@@ -236,51 +219,6 @@ const MobileHambuck = styled.div`
     i {
       color: #a95ddd;
       font-size: 30px;
-    }
-  }
-`;
-
-const MobileBell = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  text-align: center;
-  background-color: white;
-  grid-area: bell;
-  ${mq[0]} {
-    display: none;
-  }
-  ${mq[1]} {
-    display: flex;
-    justify-content: flex-end;
-    i {
-      color: #a95ddd;
-      font-size: 20px;
-    }
-  }
-`;
-
-const MobileProfile = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  text-align: center;
-  background-color: white;
-  grid-area: profile;
-  justify-content: flex-end;
-  i {
-    color: #a95ddd;
-    font-size: 20px;
-  }
-  ${mq[0]} {
-    display: flex;
-  }
-  ${mq[1]} {
-    justify-content: center;
-    i {
-      font-size: 20px;
     }
   }
 `;
@@ -317,12 +255,9 @@ export {
   HeaderLogo,
   HeaderNav,
   HeaderSearch,
-  HeaderLogin,
+  HeaderLoginDiv,
   MobileLogo,
-  MobileSearch,
   MobileHambuck,
-  MobileBell,
-  MobileProfile,
   MobileSideBackDiv,
   MobileSlideDiv,
   MobileSlideDivContent,

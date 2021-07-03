@@ -7,16 +7,14 @@ import {
   HeaderLogo,
   HeaderNav,
   HeaderSearch,
-  HeaderLogin,
-  MobileSearch,
+  HeaderLoginDiv,
   MobileHambuck,
-  MobileBell,
-  MobileProfile,
   MobileSideBackDiv,
   MobileSlideDiv,
 } from "./css/HeaderElement.js";
 import MobileSlide from "./MobileSlide.js";
 import useDocScroll from "./hooks/useDocScroll.js";
+import Avatar from "react-avatar";
 import "./css/header.css";
 import "./css/animation.css";
 
@@ -114,46 +112,37 @@ function Header(props) {
               </li>
             </ul>
           </HeaderNav>
+
           <HeaderSearch>
             <form action="/search" method="GET">
               <input type="text" placeholder="Search..." />
             </form>
           </HeaderSearch>
-          <HeaderLogin>
-            <div>
-              {user.userData && !user.userData.isAuth ? (
-                <Link to="/login">
-                  <button>login</button>
-                </Link>
-              ) : (
-                <button onClick={() => logoutHandler()}>logout</button>
-              )}
-            </div>
-          </HeaderLogin>
 
-          <MobileSearch>
-            <i className="bi bi-search"></i>
-          </MobileSearch>
+          <HeaderLoginDiv>
+            {user.userData && !user.userData.isAuth ? (
+              <Link to="/login">
+                <button className="loginBtn">Login</button>
+              </Link>
+            ) : (
+              <>
+                <i className="bell bi bi-bell"></i>
+                <Avatar
+                  className="profile"
+                  src={user.userData ? user.userData.avatar : "./test.png"}
+                  size="35px"
+                  round={true}
+                />
+              </>
+            )}
+          </HeaderLoginDiv>
+
           <MobileHambuck>
             <i className="bi bi-list" onClick={() => showSide()}></i>
           </MobileHambuck>
-
-          <MobileBell>
-            <i className="bi bi-bell"></i>
-          </MobileBell>
-          <MobileProfile>
-            {user.userData && !user.userData.isAuth ? (
-              <Link to="/login">
-                <i className="bi bi-person-circle"></i>
-              </Link>
-            ) : (
-              <Link to="MyPage">
-                <i className="bi bi-person-circle"></i>
-              </Link>
-            )}
-          </MobileProfile>
         </HeaderGrid>
       </HeaderDiv>
+
       <MobileSideBackDiv
         className="MobileSideBack"
         onClick={() => hideSide()}
