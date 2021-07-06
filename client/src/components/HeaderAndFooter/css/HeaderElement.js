@@ -178,6 +178,13 @@ const HeaderLoginDiv = styled.div`
       height: 30px;
     }
   }
+  .hambuc {
+    grid-area: hambuc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
 `;
 
 const MobileLogo = styled.div`
@@ -249,6 +256,41 @@ const MobileSlideDivContent = styled.div`
   padding: 30px 20px 30px 20px;
 `;
 
+const ModalDiv = styled.div`
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  min-width: 150px;
+  min-height: 70px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  div {
+    button {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-aling: center;
+      background-color: rgba(255, 255, 255, 1);
+    }
+    .logout {
+      margin-top: 10px;
+      display: inline;
+      color: #d70000;
+      i {
+        margin-right: 1rem;
+      }
+    }
+  }
+`;
+
 export {
   HeaderDiv,
   HeaderGrid,
@@ -261,4 +303,5 @@ export {
   MobileSideBackDiv,
   MobileSlideDiv,
   MobileSlideDivContent,
+  ModalDiv,
 };

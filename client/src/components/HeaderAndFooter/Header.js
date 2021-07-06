@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import {
@@ -15,6 +15,8 @@ import {
 import MobileSlide from "./MobileSlide.js";
 import useDocScroll from "./hooks/useDocScroll.js";
 import Avatar from "react-avatar";
+import AlarmModal from "./AlarmModal.js";
+import MyPageModal from "./MyPageModal.js";
 import "./css/header.css";
 import "./css/animation.css";
 
@@ -25,6 +27,17 @@ import { useSelector } from "react-redux";
 
 function Header(props) {
   const user = useSelector((state) => state.user);
+
+  //modal
+  const [alarmHambucControl, setalarmHambucControl] = useState(false);
+  const [myPageHambucControl, setmyPageHambucControl] = useState(false)
+
+  const alarmInnerRef = useOuterClick((e) => {
+    setalarmHambucControl(false);
+  });
+  const myPageInnerRef = useOuterClick((e) => {
+    setmyPageHambucControl(false);
+  });
 
   //scroll function
   const [shouldHideHeader, setShouldHideHeader] = useState(false);
@@ -72,17 +85,31 @@ function Header(props) {
     console.log(sideBar);
   }
 
-  const logoutHandler = () => {
-    axios.get("/api/user/logout").then((res) => {
-      console.log(res.data);
-      if (res.data.success) {
-        props.history.push("/");
-        window.location.reload();
-      } else {
-        alert("로그아웃 하는 데 실패했습니다.");
-      }
+  function useOuterClick(callback) {
+    const callbackRef = useRef();
+    const innerRef = useRef();
+    useEffect(() => {
+      callbackRef.current = callback;
     });
-  };
+    useEffect(() => {
+      document.addEventListener("click", handleClick);
+      return () => document.removeEventListener("click", handleClick);
+      function handleClick(e) {
+        if (
+          innerRef.current &&
+          callbackRef.current &&
+          !innerRef.current.contains(e.target)
+        ) {
+          callbackRef.current(e);
+        }
+        //수정버튼 클릭시
+        if (e.target.className === "edit") {
+          callbackRef.current(!e);
+        }
+      }
+    }, []);
+    return innerRef;
+  }
 
   return (
     <>
@@ -126,13 +153,28 @@ function Header(props) {
               </Link>
             ) : (
               <>
-                <i className="bell bi bi-bell"></i>
+                <div className="hambuc" ref = {alarmInnerRef}>
+                <i className="bell bi bi-bell" onClick = {() => setalarmHambucControl(true)}></i>
+                {
+                  alarmHambucControl ? (
+                    <AlarmModal />
+                  ) : null
+                }
+                </div>
+                <div className="hambuc" ref={myPageInnerRef}>
                 <Avatar
                   className="profile"
                   src={user.userData ? user.userData.avatar : "./test.png"}
                   size="35px"
                   round={true}
+                  onClick = {() => setmyPageHambucControl(true)}
                 />
+                {
+                myPageHambucControl ? (
+                  <MyPageModal />
+                ) : null
+                }
+                </div>
               </>
             )}
           </HeaderLoginDiv>
