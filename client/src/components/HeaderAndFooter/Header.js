@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
 import {
@@ -15,6 +15,7 @@ import {
 import MobileSlide from "./MobileSlide.js";
 import useDocScroll from "./hooks/useDocScroll.js";
 import Avatar from "react-avatar";
+import AlarmModal from "./AlarmModal.js";
 import "./css/header.css";
 import "./css/animation.css";
 
@@ -25,6 +26,13 @@ import { useSelector } from "react-redux";
 
 function Header(props) {
   const user = useSelector((state) => state.user);
+
+  //modal
+  const [hambucControl, sethambucControl] = useState(false);
+
+  const innerRef = useOuterClick((e) => {
+    sethambucControl(false);
+  });
 
   //scroll function
   const [shouldHideHeader, setShouldHideHeader] = useState(false);
@@ -84,6 +92,32 @@ function Header(props) {
     });
   };
 
+  function useOuterClick(callback) {
+    const callbackRef = useRef();
+    const innerRef = useRef();
+    useEffect(() => {
+      callbackRef.current = callback;
+    });
+    useEffect(() => {
+      document.addEventListener("click", handleClick);
+      return () => document.removeEventListener("click", handleClick);
+      function handleClick(e) {
+        if (
+          innerRef.current &&
+          callbackRef.current &&
+          !innerRef.current.contains(e.target)
+        ) {
+          callbackRef.current(e);
+        }
+        //수정버튼 클릭시
+        if (e.target.className === "edit") {
+          callbackRef.current(!e);
+        }
+      }
+    }, []);
+    return innerRef;
+  }
+
   return (
     <>
       <HeaderDiv className={`header ${shadowStyle} ${hiddenStyle}`}>
@@ -126,7 +160,14 @@ function Header(props) {
               </Link>
             ) : (
               <>
-                <i className="bell bi bi-bell"></i>
+                <div>
+                <i className="bell bi bi-bell" onClick = {() => sethambucControl(true)}></i>
+                {
+                  hambucControl ? (
+                    <AlarmModal />
+                  ) : null
+                }
+                </div>
                 <Avatar
                   className="profile"
                   src={user.userData ? user.userData.avatar : "./test.png"}
