@@ -27,20 +27,24 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
-  //let tempSkip = req.body.pageSkip ? parseInt(req.body.pageSkip) : 0;
-  //let limit = 10;
-  //let skip = tempSkip === 0 ? 0 : tempSkip * 10;
+  let limit = 10;
+  let skipTemp = parseInt(req.body.PageIdx);
+  let skip = (skipTemp - 1) * 10;
 
-  Community.find(filter)
-    .populate("auther") //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
-    .sort(sort)
-    //.skip(skip)
-    //.limit(limit)
-    .exec((err, postInfo) => {
-      console.log(postInfo, "postInfo");
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).json({ success: true, postInfo });
-    });
+  console.log("skip", skip);
+  Community.find(filter).exec((err, postList) => {
+    let totalIdx = postList.length;
+    if (err) return res.status(400).json({ success: false, err });
+    Community.find(filter)
+      .populate("auther") //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .exec((err, postInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({ success: true, postInfo, totalIdx });
+      });
+  });
 });
 
 router.post("/postDetail", (req, res) => {
@@ -194,7 +198,6 @@ router.post("/like", (req, res) => {
   //  temp.$inc = {likeNum: 1};
   temp.$push = { likeArray: user };
 
-  console.log(user);
   if (key) {
     //likeArray에서 userId 삭제
     Community.findOneAndUpdate(
@@ -212,7 +215,6 @@ router.post("/like", (req, res) => {
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
-      console.log(result);
       return res.status(200).send({ success: true });
     });
   }
@@ -230,7 +232,6 @@ router.post("/repleLike", (req, res) => {
       { $inc: { likeNum: -1 }, $pull: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
-      console.log("좋아요 취소: ", result);
       return res.status(200).send({ success: true });
     });
   } else {
@@ -240,7 +241,6 @@ router.post("/repleLike", (req, res) => {
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
-      console.log("좋아요: ", result);
       return res.status(200).send({ success: true });
     });
   }

@@ -85,18 +85,6 @@ function Header(props) {
     console.log(sideBar);
   }
 
-  const logoutHandler = () => {
-    axios.get("/api/user/logout").then((res) => {
-      console.log(res.data);
-      if (res.data.success) {
-        props.history.push("/");
-        window.location.reload();
-      } else {
-        alert("로그아웃 하는 데 실패했습니다.");
-      }
-    });
-  };
-
   function useOuterClick(callback) {
     const callbackRef = useRef();
     const innerRef = useRef();

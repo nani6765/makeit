@@ -21,9 +21,6 @@ function CommunityGNB(props) {
   ];
 
   useEffect(() => {
-    props.setMainCategoryArrayIdx(
-      MainCategoryList.indexOf(props.MainCategoryContent)
-    );
     props.setSubCategoryName("전체");
   }, [props.MainCategoryContent]);
 

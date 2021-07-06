@@ -41,7 +41,7 @@ function SubCategory(props) {
           <SubCategoryDiv>
             <ul>
               {LocationSubCategory.map((category, idx) => (
-                <li key={idx}>
+                <li key={idx} style={{ listStyle: "none" }}>
                   <SubCategoryContent
                     category={category}
                     SubCategoryName={props.SubCategoryName}

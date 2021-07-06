@@ -183,7 +183,6 @@ const HeaderLoginDiv = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #c4c4c4;
     position: relative;
   }
 `;
