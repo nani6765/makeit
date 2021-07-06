@@ -13,6 +13,16 @@ const MainCategoryDiv = styled.div`
   padding-bottom: 5vh;
   ${mq[1]} {
     width: 90%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+`;
+
+const MobileCategoryDiv = styled.div`
+  background-color: #faf6f6;
+  display: none;
+  ${mq[1]} {
+    display: block;
   }
 `;
 
@@ -22,7 +32,7 @@ const MainCategoryBtnDiv = styled.div`
   width: 100%;
   justify-content: space-evenly;
   ${mq[1]} {
-    display: none;
+    display: block;
   }
 `;
 
@@ -68,22 +78,6 @@ const SubCategoryDiv = styled.div`
   }
 `;
 
-const GNBMobileDiv = styled.div`
-  display: none;
-  ${mq[1]} {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    width: 100%;
-  }
-`;
-
-const GNBMobileContentDiv = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-`;
-
 const GNBCategoryBtn = styled.button`
   padding: 10px 30px 10px 30px;
   background: #ffffff;
@@ -94,11 +88,14 @@ const GNBCategoryBtn = styled.button`
   font-size: 18px;
   ${mq[0]} {
     padding: 5px 10px 5px 10px;
-    font-size: 12px;
+    font-size: 16px;
   }
   ${mq[1]} {
-    padding: 2px 5px 2px 5px;
-    font-size: 10px;
+    padding: 3px 5px 3px 5px;
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 15px;
   }
 `;
 
@@ -181,10 +178,9 @@ const LabelUpload = styled.div`
 
 export {
   MainCategoryDiv,
+  MobileCategoryDiv,
   MainCategoryBtnDiv,
   SubCategoryDiv,
-  GNBMobileDiv,
-  GNBMobileContentDiv,
   GNBCategoryBtn,
   MobileUl,
   PostLabelDiv,

@@ -1,18 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { SubCategoryDiv } from "./GNBContent.js";
+import SubCategoryContent from "./SubCategoryContent.js";
 
 function SubCategory(props) {
-  return (
-    <span
-      style={
-        props.category === props.SubCategoryContent
-          ? { fontWeight: "bold" }
-          : null
-      }
-      onClick={() => props.setSubCategoryContent(props.category)}
-    >
-      {props.category}
-    </span>
-  );
+  const LocationSubCategory = [
+    "전체",
+    "세트장",
+    "스튜디오",
+    "식당",
+    "기타",
+    "질문게시판",
+  ];
+
+  const BoardSubCategoty = ["전체", "자유게시판", "홍보게시판", "질문게시판"];
+
+  const SwitchSubCategory = () => {
+    switch (props.MainCategoryContent) {
+      case "게시판":
+        return (
+          <SubCategoryDiv>
+            <ul>
+              {BoardSubCategoty.map((category, idx) => (
+                <li key={idx}>
+                  <SubCategoryContent
+                    category={category}
+                    SubCategoryName={props.SubCategoryName}
+                    setSubCategoryName={props.setSubCategoryName}
+                  />
+                </li>
+              ))}
+            </ul>
+          </SubCategoryDiv>
+        );
+      case "파트너찾기":
+        return null;
+      case "배우찾기":
+        return null;
+      case "로케이션":
+        return (
+          <SubCategoryDiv>
+            <ul>
+              {LocationSubCategory.map((category, idx) => (
+                <li key={idx}>
+                  <SubCategoryContent
+                    category={category}
+                    SubCategoryName={props.SubCategoryName}
+                    setSubCategoryName={props.setSubCategoryName}
+                  />
+                </li>
+              ))}
+            </ul>
+          </SubCategoryDiv>
+        );
+      case "건의함":
+        return null;
+    }
+  };
+
+  return <>{SwitchSubCategory()}</>;
 }
 
 export default SubCategory;

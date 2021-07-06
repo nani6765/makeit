@@ -113,7 +113,7 @@ function MainPageGridContent(parameter) {
       content: "";
       width: 150px;
       height: ${height}px;
-      z-index: 10;
+      z-index: 5;
       background: linear-gradient(
         270deg,
         #ffffff 0%,
@@ -127,7 +127,7 @@ function MainPageGridContent(parameter) {
       width: 150px;
       height: ${height}px;
       right: calc(15vw + 45px);
-      z-index: 10;
+      z-index: 5;
       background: linear-gradient(
         270deg,
         #ffffff 0%,
