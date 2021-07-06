@@ -44,6 +44,7 @@ const coPostSchema = mongoose.Schema(
     },
     subCategory: {
       type: String,
+      default: "전체",
     },
     views: {
       type: Number,
