@@ -9,6 +9,7 @@ function PostPage(props) {
   const [pageSkip, setpageSkip] = useState(0);
   const [pageIdx, setpageIdx] = useState(1);
 
+  /*
   useEffect(() => {
     let body = {
       category: props.MainCategoryContent,
@@ -26,7 +27,7 @@ function PostPage(props) {
       }
     });
   }, [props.MainCategoryContent]);
-
+  
   useEffect(() => {
     //전체 페이지 수 바뀌면 실행 pageToTalArray에 페이지 수만큼 배열
     let temp = [];
@@ -49,7 +50,7 @@ function PostPage(props) {
       behavior: "smooth",
     });
   }, [pageIdx]);
-
+*/
   return (
     <>
       <PostList

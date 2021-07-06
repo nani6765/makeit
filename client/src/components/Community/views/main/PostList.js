@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { PostListDiv, PostCard } from "../../css/CommunityMainElement.js";
-import axios from "axios";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
 
@@ -9,21 +8,8 @@ function PostList(props) {
   const [posts, setposts] = useState([]);
 
   useEffect(() => {
-    let body = {
-      category: props.category,
-      //subCategory: props.subCategory,
-      sortPost: props.sortPost,
-      pageSkip: props.pageSkip,
-    };
-
-    axios.post("/api/community/", body).then((response) => {
-      if (response.data.success) {
-        setposts([...response.data.postInfo]);
-      } else {
-        alert("게시글을 불러오는 데 실패했습니다.");
-      }
-    });
-  }, [props.category, props.sortPost, props.pageSkip]);
+    setposts([...props.PostArray]);
+  }, [props.PostArray]);
 
   return (
     <>

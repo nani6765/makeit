@@ -178,6 +178,14 @@ const HeaderLoginDiv = styled.div`
       height: 30px;
     }
   }
+  .hambuc {
+    grid-area: hambuc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #c4c4c4;
+    position: relative;
+  }
 `;
 
 const MobileLogo = styled.div`
@@ -273,12 +281,7 @@ const ModalDiv = styled.div`
       text-aling: center;
       background-color: rgba(255, 255, 255, 1);
     }
-    .edit {
-      i {
-        margin-right: 1rem;
-      }
-    }
-    .delete {
+    .logout {
       margin-top: 10px;
       display: inline;
       color: #d70000;

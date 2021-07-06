@@ -16,6 +16,7 @@ import MobileSlide from "./MobileSlide.js";
 import useDocScroll from "./hooks/useDocScroll.js";
 import Avatar from "react-avatar";
 import AlarmModal from "./AlarmModal.js";
+import MyPageModal from "./MyPageModal.js";
 import "./css/header.css";
 import "./css/animation.css";
 
@@ -28,10 +29,14 @@ function Header(props) {
   const user = useSelector((state) => state.user);
 
   //modal
-  const [hambucControl, sethambucControl] = useState(false);
+  const [alarmHambucControl, setalarmHambucControl] = useState(false);
+  const [myPageHambucControl, setmyPageHambucControl] = useState(false)
 
-  const innerRef = useOuterClick((e) => {
-    sethambucControl(false);
+  const alarmInnerRef = useOuterClick((e) => {
+    setalarmHambucControl(false);
+  });
+  const myPageInnerRef = useOuterClick((e) => {
+    setmyPageHambucControl(false);
   });
 
   //scroll function
@@ -160,20 +165,28 @@ function Header(props) {
               </Link>
             ) : (
               <>
-                <div>
-                <i className="bell bi bi-bell" onClick = {() => sethambucControl(true)}></i>
+                <div className="hambuc" ref = {alarmInnerRef}>
+                <i className="bell bi bi-bell" onClick = {() => setalarmHambucControl(true)}></i>
                 {
-                  hambucControl ? (
+                  alarmHambucControl ? (
                     <AlarmModal />
                   ) : null
                 }
                 </div>
+                <div className="hambuc" ref={myPageInnerRef}>
                 <Avatar
                   className="profile"
                   src={user.userData ? user.userData.avatar : "./test.png"}
                   size="35px"
                   round={true}
+                  onClick = {() => setmyPageHambucControl(true)}
                 />
+                {
+                myPageHambucControl ? (
+                  <MyPageModal />
+                ) : null
+                }
+                </div>
               </>
             )}
           </HeaderLoginDiv>
