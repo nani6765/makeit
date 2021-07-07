@@ -5,7 +5,7 @@ import axios from "axios";
 
 function DeleteModal(props) {
   useEffect(() => {
-    console.log(props.type);
+    console.log("props", props);
   }, []);
 
   function RemoveHandler() {
@@ -25,13 +25,28 @@ function DeleteModal(props) {
           alert("게시글 삭제 실패");
         }
       });
-    } else {
+    } else if (props.type === "Reple") {
       let body = {
         repleId: props.RepleInfo._id,
         postNum: props.RepleInfo.postNum,
+        rerepleNum: props.RepleInfo.rerepleNum,
       };
 
       axios.post("/api/community/repleDelete", body).then((response) => {
+        if (response.data.success) {
+          alert("댓글 삭제 성공");
+          window.location.reload();
+        } else {
+          alert("댓글 삭제 실패");
+        }
+      });
+    } else {
+      let body = {
+        reple: props.reple,
+        rereple: props.rereple,
+      };
+
+      axios.post("/api/community/rerepleDelete", body).then((response) => {
         if (response.data.success) {
           alert("댓글 삭제 성공");
           window.location.reload();

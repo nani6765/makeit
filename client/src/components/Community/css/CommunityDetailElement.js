@@ -458,7 +458,7 @@ const DeleteModalDiv = styled.div`
       box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
       border-radius: 11px;
       display: grid;
-      grid-template-columns: 1fr 7fr 1fr;
+      grid-template-columns: 1fr 8fr 1fr;
       grid-gap: 5px;
       grid-template-rows: auto auto auto;
       padding: 20px;
@@ -568,6 +568,39 @@ const RerepleContentGrid = styled.div`
       margin-bottom: 1rem;
       font-size: 15px;
       text-align: left;
+      input{
+         width: 100%;
+          background: #ffffff;
+          border: 1.5px solid #dfdfdf;
+          box-sizing: border-box;
+          border-radius: 7px;
+          padding: 10px;
+           margin-bottom:10px;
+          &:focus {
+            outline: none;
+          }
+      }
+      div{
+        width: 100%;
+        text-align: right;
+        button{
+          border-radius: 10px;
+          padding: 5px 10px 5px 10px;
+        }
+        .cancel{
+          background: #FFFFFF;
+          border: 1px solid #935EA5;
+          box-sizing: border-box;
+          
+          color: black;
+          margin-right: 10px;
+        }
+        .submit{
+          background: #935EA5;
+          border: 1px solid #935EA5;
+          color: white;
+        }
+      }
     }
     .like {
       grid-area: like;

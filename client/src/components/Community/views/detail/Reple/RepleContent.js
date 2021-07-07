@@ -137,7 +137,7 @@ function RepleContent(props) {
             return (
               <RerepleContent
                 rereple={rereple}
-                replePid={Reple._id}
+                reple={Reple}
                 user={props.user.userData}
               />
             );

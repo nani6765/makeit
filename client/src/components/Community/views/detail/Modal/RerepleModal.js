@@ -26,9 +26,10 @@ function RerepleModal(props) {
       </div>
       {ModalFlag ? (
         <DeleteModal
-          RepleInfo={RepleInfo}
+          reple={props.reple}
+          rereple={props.rereple}
           setModalFlag={setModalFlag}
-          type="Reple"
+          type="rereple"
         />
       ) : null}
     </ModalDiv>

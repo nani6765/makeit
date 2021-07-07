@@ -4,7 +4,9 @@ import { withRouter } from "react-router-dom";
 
 function RerepleGuestModal(props) {
   return (
-    <ModalDiv>
+    <ModalDiv
+      style={{ minHeight: "50px", display: "flex", justifyContent: "center" }}
+    >
       <div>
         <button className="edit">
           <i className="bi bi-envelope-open"></i>
