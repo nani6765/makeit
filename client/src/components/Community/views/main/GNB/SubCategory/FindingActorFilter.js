@@ -4,7 +4,6 @@ import {
   ActorFilterDiv,
   ActorInputDiv,
 } from "./SubCategoryContent.js";
-import "./LabelBefore.css";
 
 function FindingActorFilter() {
   return (

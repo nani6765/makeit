@@ -3,6 +3,7 @@ const { Community, CommunityReple } = require("../model/CoPost.js");
 const { Counter } = require("../model/Counter.js");
 const setUpload = require("../model/multer/upload.js");
 const setDelete = require("../model/multer/delete.js");
+const realTime = require("../model/multer/realTIme.js");
 
 router.post("/length", (req, res) => {
   let filter = {};
@@ -129,6 +130,32 @@ router.post("/repleSubmit", (req, res) => {
     if (err) return res.status(400).json({ success: false, err });
     const communityReple = new CommunityReple(temp);
     communityReple.save((err, doc) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    });
+  });
+});
+
+router.post("/rerepleSubmit", (req, res) => {
+  let temp = req.body;
+  let newRereple = {
+    _id: temp._id,
+    auther: temp.auther,
+    avatar: temp.avatar,
+    email: temp.email,
+    name: temp.name,
+    content: temp.content,
+    realTime: realTime(),
+  }
+  Community.findOneAndUpdate(
+    { postNum: temp.postNum },
+    { $inc: { repleNum: 1 } }
+  ).exec((err, post) => {
+    if (err) return res.status(400).json({ success: false, err });
+    CommunityReple.findOneAndUpdate(
+      { _id: temp.replePid },
+      {  $inc: { rerepleNum: 1, rerepleIdx: 1 }, $push: { rerepleArray: newRereple } }
+    ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).send({ success: true });
     });

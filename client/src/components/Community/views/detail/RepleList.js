@@ -11,7 +11,7 @@ function RepleList(props) {
   return (
     <RepleDiv>
       {repleList.map((reple, idx) => {
-        return <RepleContent key={idx} reple={reple} user={props.user} />;
+        return <RepleContent key={idx} reple={reple} user={props.user} postInfo={props.postInfo}/>;
       })}
     </RepleDiv>
   );
