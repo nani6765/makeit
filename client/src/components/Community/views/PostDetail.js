@@ -10,7 +10,7 @@ function PostDetail(props) {
   const [Reples, setReples] = useState([]);
   const [TotalSize, setTotalSize] = useState(0);
   const [Skip, setSkip] = useState(0);
-  const [Limit, setLimit] = useState(3);
+  const [Limit, setLimit] = useState(5);
 
   useEffect(() => {
     let body = {

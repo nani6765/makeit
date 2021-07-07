@@ -47,6 +47,21 @@ function UploadForm(props) {
     });
   };
 
+  const SwitchSubCategory = () => {
+    switch (props.category) {
+      case "게시판":
+        return <></>;
+      case "파트너찾기":
+        return <></>;
+      case "배우찾기":
+        return <></>;
+      case "로케이션":
+        return <></>;
+      case "건의함":
+        return <></>;
+    }
+  };
+
   return (
     <>
       <FormDiv onSubmit={submitHandler}>
@@ -57,6 +72,7 @@ function UploadForm(props) {
           value={Title}
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
+        <div className="filterDiv"></div>
         <textarea
           name="content"
           className="content"

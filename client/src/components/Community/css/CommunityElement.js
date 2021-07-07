@@ -11,7 +11,7 @@ const CommunityDiv = styled.div``;
 const UploadDiv = styled.div`
   width: 60%;
   margin: 0 auto;
-  padding-top: 10vh;
+  padding-top: 5vh;
   padding-bottom: 10vh;
   ${mq[1]} {
     width: 90%;
@@ -43,14 +43,23 @@ const FormDiv = styled.form`
       outline: none;
     }
   }
-  .content {
-    min-height: 500px;
+  .filterDiv {
+    border-radius: 15px 15px 0px 0px;
     margin-top: 30px;
+    background: #ede7f6;
     padding: 20px;
     border: none;
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
       0px 9px 30px rgba(163, 1, 79, 0.05);
-    border-radius: 15px;
+    height: auto;
+  }
+  .content {
+    min-height: 500px;
+    padding: 20px;
+    border: none;
+    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+      0px 9px 30px rgba(163, 1, 79, 0.05);
+    border-radius: 0px 0px 15px 15px;
     resize: none;
     &:focus {
       outline: none;
