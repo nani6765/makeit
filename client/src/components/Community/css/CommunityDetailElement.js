@@ -157,7 +157,6 @@ const RepleDiv = styled.div`
   margin: 0 auto;
   ${mq[1]} {
     width: 90%;
-    padding: 20px;
   }
 `;
 
@@ -347,8 +346,98 @@ const RepleUploadDiv = styled.div`
   }
 `;
 
+const RerepleUploadDiv = styled.div`
+  width: 95%;
+  margin-left: 5%;
+  padding: 20px;
+  background: #fbf7fb;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  form {
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 50px 100px 1fr 70px 70px;
+    grid-template-rows: 25px 25px auto auto;
+    grid-template-areas:
+      "avatar name . . ."
+      "avatar inputContent inputContent inputContent inputContent"
+      ". inputContent inputContent inputContent inputContent"
+      ". . . cancel submit";
+    .avatar {
+      grid-area: avatar;
+    }
+    .name {
+      grid-area: name;
+    }
+    .inputContent {
+      grid-area: inputContent;
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid #dfdfdf;
+      box-sizing: border-box;
+      border-radius: 7px;
+      padding: 15px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .cancel {
+      grid-area: cancel;
+      background: #ffffff;
+      border: 1px solid #935ea5;
+      box-sizing: border-box;
+      border-radius: 10px;
+      color: black;
+    }
+    .submit {
+      grid-area: submit;
+      background: #935ea5;
+      border: 1px solid #935ea5;
+      border-radius: 10px;
+      color: white;
+    }
+    ${mq[1]} {
+      grid-template-columns: 50px auto 1fr 50px 5px 50px;
+      grid-template-rows: 50px auto auto;
+      grid-gap: 0px;
+      grid-template-areas:
+        "avatar name . . . ."
+        "inputContent inputContent inputContent inputContent inputContent inputContent"
+        ". . . cancel . submit";
+      .name {
+        grid-area: name;
+        align-self: center;
+        display: flex;
+        margin-bottom: 0px;
+        margin-left: 10px;
+      }
+      .inputContent {
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .cancel {
+        font-size: 12px;
+      }
+      .submit {
+        font-size: 12px;
+      }
+    }
+  }
+
+  ${mq[1]} {
+    width: 90%;
+    padding: 10px;
+  }
+`;
+
 const DeleteModalDiv = styled.div`
-  .content{
+  .content {
     height: 100vh;
     width: 100vw;
     position: fixed;
@@ -357,74 +446,75 @@ const DeleteModalDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index:50;
+    z-index: 50;
     .background {
       background-color: rgba(0, 0, 0, 0.5);
-      width:100%;
-      height:100%;
-      z-index:50;
+      width: 100%;
+      height: 100%;
+      z-index: 50;
     }
-  .gridDiv {
-    background: #ffffff;
-    box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
-    border-radius: 11px;
-    display: grid;
-    grid-template-columns: 1fr 7fr 1fr;
-    grid-gap: 5px;
-    grid-template-rows: auto auto auto;
-    padding: 20px;
-    grid-template-areas:
-      ". title delete"
-      ". desc ."
-      ". buttonDiv .";
-    z-index: 51;
-    position:fixed;
-    .title {
-      grid-area: title;
-      text-align: center;
-      color: #000000;
-      font-weight: bold;
-    }
-    .delete {
-      grid-area: delete;
-      text-align: center;
-      color: #000000;
-      padding: 5px;
-      cursor: pointer;
-    }
-    .desc {
-      grid-area: desc;
-      color: #000000;
-      line-height: 25px;
-    }
-    .buttonDiv {
-      margin-top: 20px;
-      grid-area: buttonDiv;
-      text-align: center;
-      button {
-        box-sizing: border-box;
-        border-radius: 16px;
-        padding: 5px 10px 5px 10px;
-        width: auto;
-        &.cancel {
-          background: #ffffff;
-          border: 1.5px solid #000000;
-          color: black;
-          margin-right: 20px;
-        }
-        &.delete {
-          background: #d70000;
-          border: 1.5px solid #d70000;
-          color: white;
+    .gridDiv {
+      background: #ffffff;
+      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+      border-radius: 11px;
+      display: grid;
+      grid-template-columns: 1fr 7fr 1fr;
+      grid-gap: 5px;
+      grid-template-rows: auto auto auto;
+      padding: 20px;
+      grid-template-areas:
+        ". title delete"
+        ". desc ."
+        ". buttonDiv .";
+      z-index: 51;
+      position: fixed;
+      .title {
+        grid-area: title;
+        text-align: center;
+        color: #000000;
+        font-weight: bold;
+      }
+      .delete {
+        grid-area: delete;
+        text-align: center;
+        color: #000000;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .desc {
+        grid-area: desc;
+        color: #000000;
+        line-height: 25px;
+      }
+      .buttonDiv {
+        margin-top: 20px;
+        grid-area: buttonDiv;
+        text-align: center;
+        button {
+          box-sizing: border-box;
+          border-radius: 16px;
+          padding: 5px 10px 5px 10px;
+          width: auto;
+          &.cancel {
+            background: #ffffff;
+            border: 1.5px solid #000000;
+            color: black;
+            margin-right: 20px;
+          }
+          &.delete {
+            background: #d70000;
+            border: 1.5px solid #d70000;
+            color: white;
+          }
         }
       }
     }
   }
-  }
 `;
 
 const RerepleContentGrid = styled.div`
-  width: 100%;
+  width: 95%;
+  margin-left: 5%;
   background: #FBF7FB;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
@@ -432,6 +522,8 @@ const RerepleContentGrid = styled.div`
   padding: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
+  position: relative;
+
   .content {
     width: 100%;
     display: grid;
@@ -441,7 +533,7 @@ const RerepleContentGrid = styled.div`
       "avatar author author hambuc"
       "avatar date date ."
       "desc desc desc desc"
-      "like like like like";
+      ". . . like";
     .avatar {
       grid-area: avatar;
       display: flex;
@@ -476,43 +568,6 @@ const RerepleContentGrid = styled.div`
       margin-bottom: 1rem;
       font-size: 15px;
       text-align: left;
-
-      .edit {
-        input {
-          width: 100%;
-          background: #ffffff;
-          border: 1.5px solid #dfdfdf;
-          box-sizing: border-box;
-          border-radius: 7px;
-          padding: 15px;
-          &:focus {
-            outline: none;
-          }
-        }
-        div {
-          width: 100%;
-          text-align: right;
-          margin-top: 15px;
-          button {
-            border-radius: 10px;
-            text-align: center;
-            padding: 5px 15px 5px 15px;
-
-            &.cancel {
-              background: #ffffff;
-              border: 1px solid #935ea5;
-              color: #000000;
-              margin-right: 15px;
-            }
-            &.submit {
-              background: #935ea5;
-              border: 1px solid #935ea5;
-              font-weight: bold;
-              color: #ffffff;
-            }
-          }
-        }
-      }
     }
     .like {
       grid-area: like;
@@ -535,6 +590,19 @@ const RerepleContentGrid = styled.div`
         }
     }
   }
+  /*
+  &:before{
+    content: "↳";
+    position: absolute;
+    left: -35px;
+    top: -5px;
+    font-size: 24px;
+    color: #D0D5E4;
+    ${mq[0]} {
+      display: none;
+    }
+  }
+  */
 `;
 
 export {
@@ -546,5 +614,6 @@ export {
   RepleContentGrid,
   RepleUploadDiv,
   DeleteModalDiv,
+  RerepleUploadDiv,
   RerepleContentGrid,
 };

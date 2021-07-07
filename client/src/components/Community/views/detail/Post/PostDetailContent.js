@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import PostImages from "./PostImages.js";
-import { DetailDiv } from "../../css/CommunityDetailElement.js";
+import { DetailDiv } from "../../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
-import PostModal from "./PostModal.js";
-import PostGuestModal from "./PostGuestModal.js";
+import PostModal from "../Modal/PostModal";
+import PostGuestModal from "../Modal/PostGuestModal";
 import { withRouter } from "react-router";
 import axios from "axios";
 

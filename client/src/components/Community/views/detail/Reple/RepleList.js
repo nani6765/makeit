@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RepleDiv } from "../../css/CommunityDetailElement.js";
+import { RepleDiv } from "../../../css/CommunityDetailElement.js";
 import RepleContent from "./RepleContent.js";
 
 function RepleList(props) {
@@ -11,7 +11,14 @@ function RepleList(props) {
   return (
     <RepleDiv>
       {repleList.map((reple, idx) => {
-        return <RepleContent key={idx} reple={reple} user={props.user} postInfo={props.postInfo}/>;
+        return (
+          <RepleContent
+            key={idx}
+            reple={reple}
+            user={props.user}
+            postInfo={props.postInfo}
+          />
+        );
       })}
     </RepleDiv>
   );

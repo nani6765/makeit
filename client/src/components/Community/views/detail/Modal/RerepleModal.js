@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ModalDiv } from "../../css/CommunityDetailElement.js";
+import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
-import DeleteModal from "./DeleteModal"
-import axios from "axios";
+import DeleteModal from "./DeleteModal";
 
-function RepleModal(props) {
+function RerepleModal(props) {
   const [RepleInfo, setRepleInfo] = useState(props.repleInfo);
   const [ModalFlag, setModalFlag] = useState(false);
 
@@ -25,9 +24,15 @@ function RepleModal(props) {
           <i className="bi bi-trash"></i>삭제
         </button>
       </div>
-      {ModalFlag ? <DeleteModal RepleInfo = {RepleInfo} setModalFlag = {setModalFlag} type="Reple"/> : null}
+      {ModalFlag ? (
+        <DeleteModal
+          RepleInfo={RepleInfo}
+          setModalFlag={setModalFlag}
+          type="Reple"
+        />
+      ) : null}
     </ModalDiv>
   );
 }
 
-export default withRouter(RepleModal);
+export default withRouter(RerepleModal);

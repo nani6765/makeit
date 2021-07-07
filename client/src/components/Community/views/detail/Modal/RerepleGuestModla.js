@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ModalDiv } from "../../css/CommunityDetailElement.js";
+import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
-function PostGuestModal() {
+function RerepleGuestModal(props) {
   return (
     <ModalDiv>
       <div>
@@ -16,4 +15,4 @@ function PostGuestModal() {
   );
 }
 
-export default withRouter(PostGuestModal);
+export default withRouter(RerepleGuestModal);

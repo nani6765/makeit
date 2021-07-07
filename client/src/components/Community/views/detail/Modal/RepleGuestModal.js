@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { ModalDiv } from "../../css/CommunityDetailElement.js";
+import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
-import axios from "axios";
 
 function RepleGuestModal(props) {
   return (
