@@ -1,6 +1,6 @@
 import React from "react";
 
-function SubCategoryContent(props) {
+function SubCategoryBasicFilter(props) {
   return (
     <span
       style={
@@ -13,4 +13,4 @@ function SubCategoryContent(props) {
   );
 }
 
-export default SubCategoryContent;
+export default SubCategoryBasicFilter;
