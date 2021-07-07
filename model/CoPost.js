@@ -119,6 +119,17 @@ const coRepleSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
+    rerepleNum : { //현재 대댓글 개수
+      type: Number,
+      default: 0,
+    },
+    rerepleIdx : { //만들어진 대댓글 개수(아이디)
+      type: Number,
+      default: 0,
+    },
+    rerepleArray: {
+      type: Array,
+    }
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },

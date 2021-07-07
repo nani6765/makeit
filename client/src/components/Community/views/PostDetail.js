@@ -81,6 +81,7 @@ function PostDetail(props) {
             repleInfo={Reples}
             loadMoreHanlder={loadMoreHanlder}
             user={props.user}
+            postInfo={postInfo}
           />
           {TotalSize > Reples.length ? (
             <RepleBtnDiv>

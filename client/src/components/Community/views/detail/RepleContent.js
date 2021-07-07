@@ -5,6 +5,8 @@ import Avatar from "react-avatar";
 import RepleModal from "./RepleModal.js";
 import RepleGuestModal from "./RepleGuestModal.js";
 import RepleEditForm from "./RepleEditForm.js";
+import RerepleUpload from "./RerepleUpload.js";
+import RerepleContent from "./RerepleContent.js";
 import axios from "axios";
 
 function RepleContent(props) {
@@ -12,6 +14,8 @@ function RepleContent(props) {
   const [Reple, setReple] = useState(props.reple);
   const [UpdateCheck, setUpdateCheck] = useState(false); //글수정 업데이트체크2
   const [likeFlag, setlikeFlag] = useState(false);
+  const [rerepleUpload, setrerepleUpload] = useState(false);
+  //const [rerepleInfo, setrerepleInfo] = useState([])
 
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
@@ -24,6 +28,7 @@ function RepleContent(props) {
       setlikeFlag(false);
     }
   }, []);
+
 
   function LikeHandler() {
     console.log(Reple);
@@ -85,7 +90,7 @@ function RepleContent(props) {
                     setUpdateCheck={setUpdateCheck}
                   />
                 ) : props.user.userData.error === true ? null : (
-                  <RepleGuestModal />
+                  <RepleGuestModal setrerepleUpload={setrerepleUpload}/>
                 )
               ) : null}
             </div>
@@ -116,6 +121,19 @@ function RepleContent(props) {
           </div>
         </div>
       </RepleContentGrid>
+      {
+        rerepleUpload ? (
+          <RerepleUpload Reple={Reple} userData={props.user.userData} postInfo={props.postInfo}/>
+        ) : null
+      }
+      {
+        Reple.rerepleNum === 0 ? null
+        : (
+          Reple.rerepleArray.map((rereple, idx) => {
+            return <RerepleContent rereple={rereple} replePid={Reple._id} />
+          })
+        )
+      }
     </>
   );
 }

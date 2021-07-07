@@ -3,7 +3,7 @@ import { ModalDiv } from "../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-function RepleGuestModal() {
+function RepleGuestModal(props) {
   return (
     <ModalDiv>
       <div>
@@ -13,7 +13,7 @@ function RepleGuestModal() {
         </button>
       </div>
       <div>
-        <button className="edit">
+        <button className="edit" onClick={() => props.setrerepleUpload(true)}>
           <i className="bi bi-chat-right"></i>대댓글 달기
         </button>
       </div>
