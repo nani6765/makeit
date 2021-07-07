@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { SubCategoryDiv } from "./GNBContent.js";
-import SubCategoryContent from "./SubCategoryContent.js";
+import SubCategoryBasicFilter from "./SubCategory/SubCategoryBasicFilter.js";
+import FindingActorFilter from "./SubCategory/FindingActorFilter.js";
 
 function SubCategory(props) {
   const LocationSubCategory = [
@@ -22,7 +23,7 @@ function SubCategory(props) {
             <ul>
               {BoardSubCategoty.map((category, idx) => (
                 <li key={idx}>
-                  <SubCategoryContent
+                  <SubCategoryBasicFilter
                     category={category}
                     SubCategoryName={props.SubCategoryName}
                     setSubCategoryName={props.setSubCategoryName}
@@ -35,14 +36,14 @@ function SubCategory(props) {
       case "파트너찾기":
         return null;
       case "배우찾기":
-        return null;
+        return <FindingActorFilter />;
       case "로케이션":
         return (
           <SubCategoryDiv>
             <ul>
               {LocationSubCategory.map((category, idx) => (
                 <li key={idx} style={{ listStyle: "none" }}>
-                  <SubCategoryContent
+                  <SubCategoryBasicFilter
                     category={category}
                     SubCategoryName={props.SubCategoryName}
                     setSubCategoryName={props.setSubCategoryName}
