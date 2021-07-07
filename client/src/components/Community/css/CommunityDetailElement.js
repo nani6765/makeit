@@ -533,7 +533,7 @@ const RerepleContentGrid = styled.div`
       "avatar author author hambuc"
       "avatar date date ."
       "desc desc desc desc"
-      ". . . like";
+      ". . like like";
     .avatar {
       grid-area: avatar;
       display: flex;
