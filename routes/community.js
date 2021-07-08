@@ -3,7 +3,7 @@ const { Community, CommunityReple } = require("../model/CoPost.js");
 const { Counter } = require("../model/Counter.js");
 const setUpload = require("../model/multer/upload.js");
 const setDelete = require("../model/multer/delete.js");
-//const realTime = require("../model/multer/realTIme.js");
+const setRealTime = require("../model/multer/realTime.js");
 
 ////////////////////////////
 //          POST          //
@@ -267,7 +267,7 @@ router.post("/rerepleSubmit", (req, res) => {
     name: temp.name,
     content: temp.content,
     likeArray: [],
-    //realTime: realTime(),
+    realTime: setRealTime(),
   };
   Community.findOneAndUpdate(
     { postNum: temp.postNum },
@@ -300,7 +300,7 @@ router.post("/rerepleUpdate", (req, res) => {
       (rereple) => rereple._id === Idx
     );
     repleTemp.rerepleArray[targetIdx].content = req.body.content;
-    //repleTemp.rerepleArray[targetIdx].realTime = realTime();
+    repleTemp.rerepleArray[targetIdx].realTime = setRealTime();
     console.log(repleTemp.rerepleArray[targetIdx]);
     CommunityReple.findByIdAndUpdate({ _id: key }, { $set: repleTemp }).exec(
       (err, post) => {
