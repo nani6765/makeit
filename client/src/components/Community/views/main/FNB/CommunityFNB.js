@@ -18,17 +18,16 @@ function CommunityFNB(props) {
     target.addEventListener("keyup", (e) => {
       if (e.key === "Enter") CommunitySearch("Enter");
     });
-  }, []);
+  }, [props.SearchCheck]);
 
   function CommunitySearch(flag) {
-    if (flag === "Enter") {
-      const target = document.querySelector("#CommunitySearch");
-      if (target.value === "") return alert("검색어를 입력해주세요.");
+    const target = document.querySelector("#CommunitySearch");
+    if (flag === "Enter" && target.value === "") {
+      return alert("검색어를 입력해주세요.");
     }
     if (flag === "Click" && props.SearchTerm === "") {
       return alert("검색어를 입력해주세요.");
     }
-    console.log("props.searchTerm", props.SearchTerm);
     props.setSearchCheck(!props.SearchCheck);
   }
 

@@ -17,7 +17,7 @@ const FNBSearchDiv = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
-
+  margin-bottom: 30px;
   input {
     border: none;
     &:focus {
