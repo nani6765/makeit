@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { RepleUploadDiv } from "../../css/CommunityDetailElement.js";
+import { RepleUploadDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 

@@ -43,7 +43,9 @@ const SubCategoryDiv = styled.div`
   ul {
     font-size: 14px;
     display: flex;
+    list-style: none;
     li {
+      list-style: none;
       &::after {
         content: "|";
         margin-left: 10px;

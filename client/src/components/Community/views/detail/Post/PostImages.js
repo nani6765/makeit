@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { render } from "react-dom";
 import ImageViewer from "react-simple-image-viewer";
-import "../../css/ImageViewer.css";
+import "../../../css/ImageViewer.css";
 function PostImages(props) {
   const [Images, setImages] = useState([...props.images]);
   const [currentImage, setCurrentImage] = useState(0);

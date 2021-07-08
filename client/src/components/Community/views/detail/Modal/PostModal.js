@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DeleteModal from "./DeleteModal.js";
-import { ModalDiv } from "../../css/CommunityDetailElement.js";
+import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter, Link } from "react-router-dom";
-import axios from "axios";
 
 function PostModal(props) {
   const [ModalFlag, setModalFlag] = useState(false);
@@ -28,7 +27,13 @@ function PostModal(props) {
           </button>
         </div>
       </ModalDiv>
-      {ModalFlag ? <DeleteModal PostInfo = {PostInfo} setModalFlag = {setModalFlag} type="post"/> : null}
+      {ModalFlag ? (
+        <DeleteModal
+          PostInfo={PostInfo}
+          setModalFlag={setModalFlag}
+          type="post"
+        />
+      ) : null}
     </>
   );
 }

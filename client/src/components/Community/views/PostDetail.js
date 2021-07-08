@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import PostDetailContent from "./detail/PostDetailContent.js";
-import RepleList from "./detail/RepleList.js";
-import RepleUpload from "./detail/RepleUpload.js";
+import PostDetailContent from "./detail/Post/PostDetailContent.js";
+import RepleList from "./detail/Reple/RepleList.js";
+import RepleUpload from "./detail/Reple/RepleUpload.js";
 import { RepleBtnDiv } from "../css/CommunityDetailElement.js";
 
 function PostDetail(props) {
@@ -10,7 +10,7 @@ function PostDetail(props) {
   const [Reples, setReples] = useState([]);
   const [TotalSize, setTotalSize] = useState(0);
   const [Skip, setSkip] = useState(0);
-  const [Limit, setLimit] = useState(3);
+  const [Limit, setLimit] = useState(5);
 
   useEffect(() => {
     let body = {

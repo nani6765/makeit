@@ -14,6 +14,8 @@ function CommunityMain() {
   const [SubCategoryName, setSubCategoryName] = useState("전체"); //SubCategory
   const [PageTotalIdx, setPageTotalIdx] = useState(0);
   const [PageIdx, setPageIdx] = useState(1);
+  const [SearchTerm, setSearchTerm] = useState("abc");
+  const [SearchCheck, setSearchCheck] = useState(false);
 
   useEffect(() => {
     setPageIdx(1);
@@ -27,6 +29,7 @@ function CommunityMain() {
       },
       sortPost: SortPost,
       PageIdx: PageIdx,
+      term: "",
     };
     console.log("body", body);
 
@@ -44,6 +47,29 @@ function CommunityMain() {
   useEffect(() => {
     console.log("PostArray", PostArray);
   }, [PostArray]);
+
+  useEffect(() => {
+    let body = {
+      filter: {
+        category: MainCategoryContent,
+        subCategory: SubCategoryName,
+      },
+      sortPost: SortPost,
+      PageIdx: PageIdx,
+      term: SearchTerm,
+    };
+
+    axios.post("/api/community/", body).then((response) => {
+      if (response.data.success) {
+        setPostArray([...response.data.postInfo]);
+        setPageTotalIdx(response.data.totalIdx);
+        setAxiosCheck(true);
+        console.log("검색", response.data.postInfo);
+      } else {
+        alert("error");
+      }
+    });
+  }, [SearchCheck])
 
   return (
     <>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RepleContentGrid } from "../../css/CommunityDetailElement.js";
+import { RepleContentGrid } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router";
 import Avatar from "react-avatar";
-import RepleModal from "./RepleModal.js";
-import RepleGuestModal from "./RepleGuestModal.js";
+import RepleModal from "../Modal/RepleModal.js";
+import RepleGuestModal from "../Modal/RepleGuestModal.js";
 import RepleEditForm from "./RepleEditForm.js";
-import RerepleUpload from "./RerepleUpload.js";
-import RerepleContent from "./RerepleContent.js";
+import RerepleUpload from "../Rereple/RerepleUpload.js";
+import RerepleContent from "../Rereple/RerepleContent.js";
 import axios from "axios";
 
 function RepleContent(props) {
@@ -28,7 +28,6 @@ function RepleContent(props) {
       setlikeFlag(false);
     }
   }, []);
-
 
   function LikeHandler() {
     console.log(Reple);
@@ -88,9 +87,10 @@ function RepleContent(props) {
                   <RepleModal
                     repleInfo={Reple}
                     setUpdateCheck={setUpdateCheck}
+                    setrerepleUpload={setrerepleUpload}
                   />
                 ) : props.user.userData.error === true ? null : (
-                  <RepleGuestModal setrerepleUpload={setrerepleUpload}/>
+                  <RepleGuestModal setrerepleUpload={setrerepleUpload} />
                 )
               ) : null}
             </div>
@@ -104,6 +104,7 @@ function RepleContent(props) {
           ) : (
             <p className="desc">{Reple.content}</p>
           )}
+
           <div className="like">
             <button
               className={likeFlag ? "active" : null}
@@ -121,19 +122,27 @@ function RepleContent(props) {
           </div>
         </div>
       </RepleContentGrid>
-      {
-        rerepleUpload ? (
-          <RerepleUpload Reple={Reple} userData={props.user.userData} postInfo={props.postInfo}/>
-        ) : null
-      }
-      {
-        Reple.rerepleNum === 0 ? null
-        : (
-          Reple.rerepleArray.map((rereple, idx) => {
-            return <RerepleContent rereple={rereple} replePid={Reple._id} />
-          })
-        )
-      }
+
+      {rerepleUpload ? (
+        <RerepleUpload
+          Reple={Reple}
+          userData={props.user.userData}
+          postInfo={props.postInfo}
+          setrerepleUpload={setrerepleUpload}
+        />
+      ) : null}
+
+      {Reple.rerepleNum === 0
+        ? null
+        : Reple.rerepleArray.map((rereple, idx) => {
+            return (
+              <RerepleContent
+                rereple={rereple}
+                reple={Reple}
+                user={props.user.userData}
+              />
+            );
+          })}
     </>
   );
 }
