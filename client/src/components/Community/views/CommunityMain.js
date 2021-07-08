@@ -22,13 +22,14 @@ function CommunityMain() {
   }, [MainCategoryContent, SortPost, SubCategoryName]);
 
   useEffect(() => {
-    let body = {
+      let body = {
       filter: {
         category: MainCategoryContent,
         subCategory: SubCategoryName,
       },
       sortPost: SortPost,
       PageIdx: PageIdx,
+      term: SearchTerm,
     };
     console.log("body", body);
 
@@ -41,11 +42,12 @@ function CommunityMain() {
         alert("error");
       }
     });
-  }, [MainCategoryContent, SortPost, SubCategoryName, PageIdx]);
+  }, [MainCategoryContent, SortPost, SubCategoryName, PageIdx, SearchCheck]);
+
 
   useEffect(() => {
-    console.log("PostArray", PostArray);
-  }, [PostArray]);
+    setSearchTerm("");
+  }, [MainCategoryContent, SubCategoryName]);
 
   return (
     <>
@@ -57,6 +59,9 @@ function CommunityMain() {
         setSortPost={setSortPost}
         SubCategoryName={SubCategoryName}
         setSubCategoryName={setSubCategoryName}
+        setSearchTerm={setSearchTerm}
+        setSearchCheck={setSearchCheck}
+        SearchCheck={SearchCheck}
       />
 
       {/*Post결과*/}
@@ -71,6 +76,7 @@ function CommunityMain() {
             SearchTerm={SearchTerm}
             setSearchTerm={setSearchTerm}
             setSearchCheck={setSearchCheck}
+            SearchCheck={SearchCheck}
           />
         </>
       ) : null}
