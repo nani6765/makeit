@@ -14,7 +14,7 @@ function FindingActorFilter() {
           <span>별</span>
         </p>
         <ActorInputDiv className="genderFilter">
-          <input type="checkbox" name="" id="genderAll" />
+          <input type="checkbox" name="" id="genderAll" checked/>
           <label htmlFor="genderAll">전체</label>
           <input type="checkbox" name="" id="genderMale" />
           <label htmlFor="genderMale">남자</label>
