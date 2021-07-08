@@ -25,7 +25,7 @@ function CommunityFNB(props) {
       const target = document.querySelector("#CommunitySearch");
       if (target.value === "") return alert("검색어를 입력해주세요.");
     }
-    if (props.SearchTerm === "") {
+    if (flag === "Click" && props.SearchTerm === "") {
       return alert("검색어를 입력해주세요.");
     }
     console.log("props.searchTerm", props.SearchTerm);

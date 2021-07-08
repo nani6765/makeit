@@ -42,6 +42,9 @@ function CommunityGNB(props) {
               category={category}
               MainCategoryContent={props.MainCategoryContent}
               setMainCategoryContent={props.setMainCategoryContent}
+              setSearchTerm={props.setSearchTerm}
+              setSearchCheck={props.setSearchCheck}
+              SearchCheck={props.SearchCheck}
             />
           ))}
         </MainCategoryBtnDiv>

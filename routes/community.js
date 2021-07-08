@@ -26,12 +26,26 @@ router.post("/", (req, res) => {
   let skipTemp = parseInt(req.body.PageIdx);
   let skip = (skipTemp - 1) * 10;
 
-  //if(term)
-  //검색어 있는 경우
-  //return postInfo, totalIdx, searchFlag : true, searchtearm
-  //else
-  //검색어 없는 경우
-  console.log("skip", skip);
+  if(req.body.term) {
+    Community.find(filter)
+    .find({ $or : [ {'title' : {'$regex': req.body.term}}, {'content' : {'$regex': req.body.term}}]})
+    .exec((err, postList) => {
+      let totalIdx = postList.length;
+      if (err) return res.status(400).json({ success: false, err });
+      Community.find(filter)
+      .find({ $or : [ {'title' : {'$regex': req.body.term}}, {'content' : {'$regex': req.body.term}}]})
+      .populate("auther")
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .exec((err, postInfo) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({ success: true, postInfo, totalIdx, searchFlag: true });
+      });
+    });
+
+  } else {
+
   Community.find(filter).exec((err, postList) => {
     let totalIdx = postList.length;
     if (err) return res.status(400).json({ success: false, err });
@@ -44,7 +58,8 @@ router.post("/", (req, res) => {
         if (err) return res.status(400).json({ success: false, err });
         return res.status(200).json({ success: true, postInfo, totalIdx }); //searchFlag : false
       });
-  });
+    });
+  }
 });
 
 router.post("/length", (req, res) => {

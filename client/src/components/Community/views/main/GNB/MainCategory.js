@@ -12,6 +12,8 @@ function MainCateGory(props) {
         }
         onClick={() => {
           props.setMainCategoryContent(props.category);
+          props.setSearchTerm("");
+          props.setSearchCheck(!props.SearchCheck);
         }}
       >
         {props.category}
