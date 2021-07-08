@@ -76,8 +76,8 @@ const coPostSchema = mongoose.Schema(
     subCategory: {
       type: String,
     },
-    fillters: {
-      type: Object,
+    filters: {
+      type: Array,
     },
   },
   {

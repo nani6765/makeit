@@ -21,7 +21,7 @@ function UploadForm(props) {
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
   const [FilterCheck, setFilterCheck] = useState(false); //에러처리
-  const [FilterElement, setFilterElement] = useState({});
+  const [FilterElement, setFilterElement] = useState([]);
 
   const updateImages = (newImages) => {
     setImage(newImages);
@@ -29,6 +29,9 @@ function UploadForm(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if(!FilterCheck) {
+      return alert("체크 박스를 선택해주세요.");
+    }
     if (!Title || !Content) {
       return alert("제목과 내용을 입력해주세요.");
     }
@@ -39,6 +42,7 @@ function UploadForm(props) {
       content: Content,
       images: Image,
       category: props.category,
+      filters: FilterElement,
     };
 
     axios.post("/api/community/postSubmit", body).then((response) => {
@@ -64,6 +68,7 @@ function UploadForm(props) {
             FilterElement={FilterElement}
             setFilterElement={setFilterElement}
             setFilterCheck={setFilterCheck}
+            FilterCheck={FilterCheck}
           />
         );
       case "로케이션":
