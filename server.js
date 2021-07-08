@@ -12,7 +12,7 @@ app.use("/api/user", require("./routes/user.js"));
 app.use("/api/community", require("./routes/commpunity.js"));
 app.use("/api/main", require("./routes/main.js"));
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 
 mongoose
   .connect(config.mongoURI, {
