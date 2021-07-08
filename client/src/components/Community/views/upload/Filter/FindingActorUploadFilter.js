@@ -18,6 +18,39 @@ function FindingActorUploadFilter(props) {
     }
   }, [GenderFilter, TypeFilter, ClassficationFilter]);
 
+  function GenderManager(name) {
+    let idx = GenderFilter.indexOf(name);
+    let temp = [...GenderFilter];
+    if (idx == -1) {
+      temp.push(name);
+    } else {
+      temp.splice(idx, 1);
+    }
+    setGenderFilter([...temp]);
+  }
+
+  function TypeManager(name) {
+    let idx = TypeFilter.indexOf(name);
+    let temp = [...TypeFilter];
+    if (idx == -1) {
+      temp.push(name);
+    } else {
+      temp.splice(idx, 1);
+    }
+    setTypeFilter([...temp]);
+  }
+
+  function ClassficationManager(name) {
+    let idx = ClassficationFilter.indexOf(name);
+    let temp = [...ClassficationFilter];
+    if (idx == -1) {
+      temp.push(name);
+    } else {
+      temp.splice(idx, 1);
+    }
+    setClassficationFilter([...temp]);
+  }
+
   return (
     <ActorFilterDiv>
       <p className="gender">
