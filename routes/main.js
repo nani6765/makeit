@@ -2,6 +2,7 @@ var router = require("express").Router();
 const { User } = require("../model/User");
 const { Community } = require("../model/CoPost.js");
 
+//MainPage
 router.post("/community", (req, res) => {
   let sort = {};
   if (req.body.sort === "new") {
