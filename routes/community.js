@@ -22,6 +22,8 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
+  console.log(filter);
+
   let limit = 10;
   let skipTemp = parseInt(req.body.PageIdx);
   let skip = (skipTemp - 1) * 10;
@@ -127,6 +129,7 @@ router.post("/image/delete", (req, res) => {
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
+  console.log("postSubmit", temp);
   Counter.findOne({ name: "counter" }, (err, counter) => {
     if (err) return res.status(400).json({ success: false, err });
     temp.postNum = counter.coPosts;

@@ -22,10 +22,14 @@ function CommunityMain() {
   }, [MainCategoryContent, SortPost, SubCategoryName]);
 
   useEffect(() => {
+
+    let body2 = {};
+    body2["filters.gender"] = "여자";
       let body = {
       filter: {
         category: MainCategoryContent,
         subCategory: SubCategoryName,
+        ...body2,
       },
       sortPost: SortPost,
       PageIdx: PageIdx,
