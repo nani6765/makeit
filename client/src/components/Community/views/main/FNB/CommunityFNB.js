@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PageUL } from "../../../css/CommunityMainElement.js";
+import FNBSearchDiv from "./FNBContent.js";
 
 function CommunityFNB(props) {
   const [pageTotalArray, setpageTotalArray] = useState([]);
@@ -49,7 +50,7 @@ function CommunityFNB(props) {
           );
         })}
       </PageUL>
-      <div style={{ width: "100%", textAlign: "center" }}>
+      <FNBSearchDiv>
         <input
           id="CommunitySearch"
           type="text"
@@ -61,9 +62,9 @@ function CommunityFNB(props) {
           htmlFor="CommunitySearch"
           onClick={() => CommunitySearch("Click")}
         >
-          검색
+          <i className="bi bi-search"></i>
         </label>
-      </div>
+      </FNBSearchDiv>
     </>
   );
 }
