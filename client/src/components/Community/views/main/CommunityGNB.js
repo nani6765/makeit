@@ -60,6 +60,8 @@ function CommunityGNB(props) {
         MainCategoryContent={props.MainCategoryContent}
         SubCategoryName={props.SubCategoryName}
         setSubCategoryName={props.setSubCategoryName}
+        FiltersObject={props.FiltersObject}
+        setFiltersObject={props.setFiltersObject}
       />
     </>
   );

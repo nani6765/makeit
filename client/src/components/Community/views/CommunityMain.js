@@ -16,26 +16,23 @@ function CommunityMain() {
   const [PageIdx, setPageIdx] = useState(1);
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchCheck, setSearchCheck] = useState(false);
+  const [FiltersObject, setFiltersObject] = useState([]);
 
   useEffect(() => {
     setPageIdx(1);
   }, [MainCategoryContent, SortPost, SubCategoryName]);
 
   useEffect(() => {
-
-    let body2 = {};
-    body2["filters.gender"] = "여자";
-      let body = {
-      filter: {
+    let body = {
+      category: {
         category: MainCategoryContent,
         subCategory: SubCategoryName,
-        ...body2,
       },
       sortPost: SortPost,
       PageIdx: PageIdx,
       term: SearchTerm,
+      filter: [...FiltersObject],
     };
-    console.log("body", body);
 
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
@@ -46,8 +43,14 @@ function CommunityMain() {
         alert("error");
       }
     });
-  }, [MainCategoryContent, SortPost, SubCategoryName, PageIdx, SearchCheck]);
-
+  }, [
+    MainCategoryContent,
+    SortPost,
+    SubCategoryName,
+    PageIdx,
+    SearchCheck,
+    FiltersObject,
+  ]);
 
   useEffect(() => {
     setSearchTerm("");
@@ -66,6 +69,8 @@ function CommunityMain() {
         setSearchTerm={setSearchTerm}
         setSearchCheck={setSearchCheck}
         SearchCheck={SearchCheck}
+        FiltersObject={FiltersObject}
+        setFiltersObject={setFiltersObject}
       />
 
       {/*Post결과*/}

@@ -18,6 +18,17 @@ function FindingActorUploadFilter(props) {
     }
   }, [GenderFilter, TypeFilter, ClassficationFilter]);
 
+  useEffect(() => {
+    let tempObject = {};
+    tempObject.gender = GenderFilter;
+    tempObject.type = TypeFilter;
+    tempObject.classfication = ClassficationFilter;
+
+    let temp = [];
+    temp.push(tempObject);
+    props.setFilterElement([...temp]);
+  }, [GenderFilter, TypeFilter, ClassficationFilter]);
+
   function GenderManager(name) {
     let idx = GenderFilter.indexOf(name);
     let temp = [...GenderFilter];

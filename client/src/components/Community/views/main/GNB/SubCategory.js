@@ -36,7 +36,12 @@ function SubCategory(props) {
       case "파트너찾기":
         return null;
       case "배우찾기":
-        return <FindingActorFilter />;
+        return (
+          <FindingActorFilter
+            FiltersObject={props.FiltersObject}
+            setFiltersObject={props.setFiltersObject}
+          />
+        );
       case "로케이션":
         return (
           <SubCategoryDiv>

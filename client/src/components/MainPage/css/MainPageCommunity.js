@@ -95,6 +95,7 @@ const CardImg = styled.article`
     text-align: right;
     color: #5b4949;
     align-self: center;
+    font-size: 12px;
   }
   .title {
     grid-area: title;
@@ -143,6 +144,7 @@ const CardImg = styled.article`
     margin-bottom: 0px;
     display: flex;
     justify-content: flex-end;
+    font-size: 12px;
     p {
       i {
         margin-right: 5px;
@@ -157,6 +159,7 @@ const CardImg = styled.article`
     align-items: center;
     display: flex;
     justify-content: flex-end;
+    font-size: 12px;
     p {
       i {
         margin-right: 5px;

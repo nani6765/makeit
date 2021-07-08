@@ -29,7 +29,7 @@ function UploadForm(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(!FilterCheck) {
+    if (!FilterCheck) {
       return alert("체크 박스를 선택해주세요.");
     }
     if (!Title || !Content) {
@@ -44,7 +44,7 @@ function UploadForm(props) {
       category: props.category,
       filters: FilterElement,
     };
-
+    console.log(FilterElement);
     axios.post("/api/community/postSubmit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 등록 성공");
