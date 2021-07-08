@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CommunityGNB from "./main/CommunityGNB.js";
 import PostList from "./main/PostList.js";
-import CommunityFNB from "./main/CommunityFNB.js";
+import CommunityFNB from "./main/FNB/CommunityFNB.js";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ function CommunityMain() {
   const [SubCategoryName, setSubCategoryName] = useState("전체"); //SubCategory
   const [PageTotalIdx, setPageTotalIdx] = useState(0);
   const [PageIdx, setPageIdx] = useState(1);
-  const [SearchTerm, setSearchTerm] = useState("abc");
+  const [SearchTerm, setSearchTerm] = useState("");
   const [SearchCheck, setSearchCheck] = useState(false);
 
   useEffect(() => {
@@ -22,14 +22,14 @@ function CommunityMain() {
   }, [MainCategoryContent, SortPost, SubCategoryName]);
 
   useEffect(() => {
-    let body = {
+      let body = {
       filter: {
         category: MainCategoryContent,
         subCategory: SubCategoryName,
       },
       sortPost: SortPost,
       PageIdx: PageIdx,
-      term: "",
+      term: SearchTerm,
     };
     console.log("body", body);
 
@@ -42,34 +42,12 @@ function CommunityMain() {
         alert("error");
       }
     });
-  }, [MainCategoryContent, SortPost, SubCategoryName, PageIdx]);
+  }, [MainCategoryContent, SortPost, SubCategoryName, PageIdx, SearchCheck]);
+
 
   useEffect(() => {
-    console.log("PostArray", PostArray);
-  }, [PostArray]);
-
-  useEffect(() => {
-    let body = {
-      filter: {
-        category: MainCategoryContent,
-        subCategory: SubCategoryName,
-      },
-      sortPost: SortPost,
-      PageIdx: PageIdx,
-      term: SearchTerm,
-    };
-
-    axios.post("/api/community/", body).then((response) => {
-      if (response.data.success) {
-        setPostArray([...response.data.postInfo]);
-        setPageTotalIdx(response.data.totalIdx);
-        setAxiosCheck(true);
-        console.log("검색", response.data.postInfo);
-      } else {
-        alert("error");
-      }
-    });
-  }, [SearchCheck])
+    setSearchTerm("");
+  }, [MainCategoryContent, SubCategoryName]);
 
   return (
     <>
@@ -81,6 +59,9 @@ function CommunityMain() {
         setSortPost={setSortPost}
         SubCategoryName={SubCategoryName}
         setSubCategoryName={setSubCategoryName}
+        setSearchTerm={setSearchTerm}
+        setSearchCheck={setSearchCheck}
+        SearchCheck={SearchCheck}
       />
 
       {/*Post결과*/}
@@ -92,6 +73,10 @@ function CommunityMain() {
             PageTotalIdx={PageTotalIdx}
             PageIdx={PageIdx}
             setPageIdx={setPageIdx}
+            SearchTerm={SearchTerm}
+            setSearchTerm={setSearchTerm}
+            setSearchCheck={setSearchCheck}
+            SearchCheck={SearchCheck}
           />
         </>
       ) : null}

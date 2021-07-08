@@ -11,7 +11,6 @@ const setRealTime = require("../model/multer/realTime.js");
 
 router.post("/", (req, res) => {
   let filter = req.body.filter;
-  console.log(filter);
   if (filter.subCategory === "전체") {
     delete filter.subCategory;
   }
@@ -29,12 +28,12 @@ router.post("/", (req, res) => {
 
   if(req.body.term) {
     Community.find(filter)
-    .find({ $or : [ {'title' : {'$regex': term}}, {'content' : {'$regex': term}}]})
+    .find({ $or : [ {'title' : {'$regex': req.body.term}}, {'content' : {'$regex': req.body.term}}]})
     .exec((err, postList) => {
       let totalIdx = postList.length;
       if (err) return res.status(400).json({ success: false, err });
       Community.find(filter)
-      .find({ $or : [ {'title' : {'$regex': term}}, {'content' : {'$regex': term}}]})
+      .find({ $or : [ {'title' : {'$regex': req.body.term}}, {'content' : {'$regex': req.body.term}}]})
       .populate("auther")
       .sort(sort)
       .skip(skip)
@@ -57,7 +56,7 @@ router.post("/", (req, res) => {
       .limit(limit)
       .exec((err, postInfo) => {
         if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).json({ success: true, postInfo, totalIdx });
+        return res.status(200).json({ success: true, postInfo, totalIdx }); //searchFlag : false
       });
     });
   }
