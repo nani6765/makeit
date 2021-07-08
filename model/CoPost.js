@@ -20,6 +20,7 @@ function realTime() {
 
 const coPostSchema = mongoose.Schema(
   {
+    //쓰니정보
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -28,6 +29,7 @@ const coPostSchema = mongoose.Schema(
     email: {
       type: String,
     },
+    //글정보
     title: {
       type: String,
     },
@@ -38,14 +40,15 @@ const coPostSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
-    category: {
+    realTime: {
       type: String,
-      default: 0,
+      default: realTime(),
     },
-    subCategory: {
-      type: String,
-      default: "전체",
+    edit: {
+      type: Boolean,
+      default: false,
     },
+    //post속성
     views: {
       type: Number,
       default: 0,
@@ -65,23 +68,19 @@ const coPostSchema = mongoose.Schema(
       type: Number,
       //unique: true,
     },
-    edit: {
-      type: Boolean,
-      default: false,
-    },
-    /*
-    createAt: {
-      type: Date,
-      default: getTime(),
-    },
-    */
-    realTime: {
+    //필터
+    category: {
       type: String,
-      default: realTime(),
+      default: 0,
+    },
+    subCategory: {
+      type: String,
+    },
+    fillters: {
+      type: Object,
     },
   },
   {
-    //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
     timestamps: true,
     collection: "coPosts",
   }
@@ -119,17 +118,19 @@ const coRepleSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
-    rerepleNum : { //현재 대댓글 개수
+    rerepleNum: {
+      //현재 대댓글 개수
       type: Number,
       default: 0,
     },
-    rerepleIdx : { //만들어진 대댓글 개수(아이디)
+    rerepleIdx: {
+      //만들어진 대댓글 개수(아이디)
       type: Number,
       default: 0,
     },
     rerepleArray: {
       type: Array,
-    }
+    },
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },

@@ -9,6 +9,8 @@ import {
   CancelBtn,
   DropZoneDiv,
 } from "../../css/CommunityElement.js";
+
+import FindingActorUploadFilter from "./Filter/FindingActorUploadFilter.js";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
@@ -18,6 +20,8 @@ function UploadForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
+  const [FilterCheck, setFilterCheck] = useState(false); //에러처리
+  const [FilterElement, setFilterElement] = useState({});
 
   const updateImages = (newImages) => {
     setImage(newImages);
@@ -48,13 +52,20 @@ function UploadForm(props) {
   };
 
   const SwitchSubCategory = () => {
+    console.log("props.category", props.category);
     switch (props.category) {
       case "게시판":
         return <></>;
       case "파트너찾기":
         return <></>;
       case "배우찾기":
-        return <></>;
+        return (
+          <FindingActorUploadFilter
+            FilterElement={FilterElement}
+            setFilterElement={setFilterElement}
+            setFilterCheck={setFilterCheck}
+          />
+        );
       case "로케이션":
         return <></>;
       case "건의함":
@@ -72,7 +83,9 @@ function UploadForm(props) {
           value={Title}
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
-        <div className="filterDiv"></div>
+
+        <div className="filterDiv">{SwitchSubCategory()}</div>
+
         <textarea
           name="content"
           className="content"
