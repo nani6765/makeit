@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CommunityGNB from "./main/CommunityGNB.js";
 import PostList from "./main/PostList.js";
-import CommunityFNB from "./main/CommunityFNB.js";
+import CommunityFNB from "./main/FNB/CommunityFNB.js";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 import axios from "axios";
 
@@ -14,6 +14,8 @@ function CommunityMain() {
   const [SubCategoryName, setSubCategoryName] = useState("전체"); //SubCategory
   const [PageTotalIdx, setPageTotalIdx] = useState(0);
   const [PageIdx, setPageIdx] = useState(1);
+  const [SearchTerm, setSearchTerm] = useState("");
+  const [SearchCheck, setSearchCheck] = useState(false);
 
   useEffect(() => {
     setPageIdx(1);
@@ -66,6 +68,9 @@ function CommunityMain() {
             PageTotalIdx={PageTotalIdx}
             PageIdx={PageIdx}
             setPageIdx={setPageIdx}
+            SearchTerm={SearchTerm}
+            setSearchTerm={setSearchTerm}
+            setSearchCheck={setSearchCheck}
           />
         </>
       ) : null}

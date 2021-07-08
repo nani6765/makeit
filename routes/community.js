@@ -26,6 +26,11 @@ router.post("/", (req, res) => {
   let skipTemp = parseInt(req.body.PageIdx);
   let skip = (skipTemp - 1) * 10;
 
+  //if(term)
+  //검색어 있는 경우
+  //return postInfo, totalIdx, searchFlag : true, searchtearm
+  //else
+  //검색어 없는 경우
   console.log("skip", skip);
   Community.find(filter).exec((err, postList) => {
     let totalIdx = postList.length;
@@ -37,7 +42,7 @@ router.post("/", (req, res) => {
       .limit(limit)
       .exec((err, postInfo) => {
         if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).json({ success: true, postInfo, totalIdx });
+        return res.status(200).json({ success: true, postInfo, totalIdx }); //searchFlag : false
       });
   });
 });
