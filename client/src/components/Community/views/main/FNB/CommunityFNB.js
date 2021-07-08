@@ -28,7 +28,7 @@ function CommunityFNB(props) {
       return alert("검색어를 입력해주세요.");
     }
     console.log("props.searchTerm", props.SearchTerm);
-    props.setSearchCheck(true);
+    props.setSearchCheck(!props.SearchCheck);
   }
 
   return (

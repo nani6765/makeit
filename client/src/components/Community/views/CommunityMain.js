@@ -70,6 +70,7 @@ function CommunityMain() {
             setPageIdx={setPageIdx}
             SearchTerm={SearchTerm}
             setSearchTerm={setSearchTerm}
+            SearchCheck={SearchCheck}
             setSearchCheck={setSearchCheck}
           />
         </>
