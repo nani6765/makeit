@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Avatar from "react-avatar";
+import RepleModal from "./RepleModal.js";
 import { RerepleContentGrid } from '../../css/CommunityDetailElement.js';
 
 function RerepleContent(props) {
