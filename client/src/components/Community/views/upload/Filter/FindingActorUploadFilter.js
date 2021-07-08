@@ -12,12 +12,6 @@ function FindingActorUploadFilter(props) {
     }
   }, [GenderFilter, TypeFilter, ClassficationFilter]);
 
-  //f
-
-  //f
-
-  //f
-
   return (
     <ActorFilterDiv>
       <p className="gender">
@@ -55,7 +49,6 @@ function FindingActorUploadFilter(props) {
         <label
           htmlFor="classShort"
           data-name="단편"
-          id="test"
           onClick={(e) => console.log(e.currentTarget.dataset.name)}
         >
           단편
