@@ -22,10 +22,10 @@ function CommunityFNB(props) {
 
   function CommunitySearch(flag) {
     const target = document.querySelector("#CommunitySearch");
-    if (flag === "Enter" && target.value === "") {
+    if (flag === "Enter" && !/\S/.test(target.value)) {
       return alert("검색어를 입력해주세요.");
     }
-    if (flag === "Click" && props.SearchTerm === "") {
+    if (flag === "Click" && !/\S/.test(target.value)) {
       return alert("검색어를 입력해주세요.");
     }
     props.setSearchCheck(!props.SearchCheck);

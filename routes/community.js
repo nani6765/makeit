@@ -10,11 +10,13 @@ const setRealTime = require("../model/multer/realTime.js");
 ////////////////////////////
 
 router.post("/", (req, res) => {
-  let filter = req.body.filter;
-  if (filter.subCategory === "전체") {
-    delete filter.subCategory;
+  //카테고리 정렬
+  let category = req.body.category;
+  if (category.subCategory === "전체") {
+    delete category.subCategory;
   }
 
+  //최신순&&인기순 정렬
   let sort = {};
   if (req.body.sortPost === "최신순") {
     sort.createdAt = -1;
@@ -22,45 +24,120 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
-  console.log(filter);
+  //필터정렬
+  let filter = req.body.filter;
 
-  let limit = 10;
+  //글 개수 정렬
+  let limit = 5;
   let skipTemp = parseInt(req.body.PageIdx);
-  let skip = (skipTemp - 1) * 10;
+  let skip = (skipTemp - 1) * 5;
 
-  if(req.body.term) {
-    Community.find(filter)
-    .find({ $or : [ {'title' : {'$regex': req.body.term}}, {'content' : {'$regex': req.body.term}}]})
-    .exec((err, postList) => {
-      let totalIdx = postList.length;
-      if (err) return res.status(400).json({ success: false, err });
-      Community.find(filter)
-      .find({ $or : [ {'title' : {'$regex': req.body.term}}, {'content' : {'$regex': req.body.term}}]})
-      .populate("auther")
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .exec((err, postInfo) => {
+  //필터가 있을시
+  if (filter.length > 0) {
+    //검색어가 있을 시
+    if (req.body.term) {
+      Community.find(category)
+        .find({ $or: filter })
+        .find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+          ],
+        })
+        .exec((err, postList) => {
+          let totalIdx = postList.length;
+          if (err) return res.status(400).json({ success: false, err });
+          Community.find(category)
+            .find({ $or: filter })
+            .find({
+              $or: [
+                { title: { $regex: req.body.term } },
+                { content: { $regex: req.body.term } },
+              ],
+            })
+            .populate("auther")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec((err, postInfo) => {
+              if (err) return res.status(400).json({ success: false, err });
+              return res
+                .status(200)
+                .json({ success: true, postInfo, totalIdx, searchFlag: true });
+            });
+        });
+    }
+    //검색어가 없을 시
+    else {
+      Community.find(category)
+        .find({ $or: filter })
+        .exec((err, postList) => {
+          let totalIdx = postList.length;
+          if (err) return res.status(400).json({ success: false, err });
+          Community.find(category)
+            .find({ $or: filter })
+            .populate("auther")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec((err, postInfo) => {
+              if (err) return res.status(400).json({ success: false, err });
+              return res
+                .status(200)
+                .json({ success: true, postInfo, totalIdx });
+            });
+        });
+    }
+  }
+  //필터가 없을시
+  else {
+    //검색어가 있을 시
+    if (req.body.term) {
+      Community.find(category)
+        .find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+          ],
+        })
+        .exec((err, postList) => {
+          let totalIdx = postList.length;
+          if (err) return res.status(400).json({ success: false, err });
+          Community.find(category)
+            .find({
+              $or: [
+                { title: { $regex: req.body.term } },
+                { content: { $regex: req.body.term } },
+              ],
+            })
+            .populate("auther")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec((err, postInfo) => {
+              if (err) return res.status(400).json({ success: false, err });
+              return res
+                .status(200)
+                .json({ success: true, postInfo, totalIdx, searchFlag: true });
+            });
+        });
+    }
+    //검색어가 없을 시
+    else {
+      Community.find(category).exec((err, postList) => {
+        let totalIdx = postList.length;
         if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).json({ success: true, postInfo, totalIdx, searchFlag: true });
+        Community.find(category)
+          .populate("auther")
+          .sort(sort)
+          .skip(skip)
+          .limit(limit)
+          .exec((err, postInfo) => {
+            if (err) return res.status(400).json({ success: false, err });
+            return res.status(200).json({ success: true, postInfo, totalIdx });
+          });
       });
-    });
-
-  } else {
-
-  Community.find(filter).exec((err, postList) => {
-    let totalIdx = postList.length;
-    if (err) return res.status(400).json({ success: false, err });
-    Community.find(filter)
-      .populate("auther") //조인이랑 비슷함 (다른 테이블의 아이디가 같은 객체를 불러옴) 근데 조인처럼 db에서 합치는게 아니라 자바스크립트 단에서 합쳐줌
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .exec((err, postInfo) => {
-        if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).json({ success: true, postInfo, totalIdx }); //searchFlag : false
-      });
-    });
+    }
   }
 });
 

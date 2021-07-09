@@ -29,8 +29,10 @@ function UploadForm(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!FilterCheck) {
-      return alert("체크 박스를 선택해주세요.");
+    if(props.category==="배우찾기" || props.category==="파트너찾기") {
+      if (!FilterCheck) {
+        return alert("체크 박스를 선택해주세요.");
+      }
     }
     if (!Title || !Content) {
       return alert("제목과 내용을 입력해주세요.");
@@ -48,7 +50,10 @@ function UploadForm(props) {
     axios.post("/api/community/postSubmit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 등록 성공");
-        props.history.push("/community");
+        props.history.push({
+          pathname: "/community",
+          state: {category: props.category}
+        });
       } else {
         alert("게시글 등록 실패");
       }
@@ -56,7 +61,6 @@ function UploadForm(props) {
   };
 
   const SwitchSubCategory = () => {
-    console.log("props.category", props.category);
     switch (props.category) {
       case "게시판":
         return <></>;

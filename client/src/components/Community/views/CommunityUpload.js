@@ -16,7 +16,10 @@ function CommunityUpload(props) {
   }, []);
 
   function BackHandler() {
-    props.history.push("/community");
+    props.history.push({
+      pathname: "/community",
+      state: {category: category}
+    });
   }
 
   return (

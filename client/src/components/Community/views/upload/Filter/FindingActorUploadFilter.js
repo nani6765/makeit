@@ -27,6 +27,7 @@ function FindingActorUploadFilter(props) {
     let temp = [];
     temp.push(tempObject);
     props.setFilterElement([...temp]);
+     console.log(props.FilterElement);
   }, [GenderFilter, TypeFilter, ClassficationFilter]);
 
   function GenderManager(name) {
@@ -135,7 +136,7 @@ function FindingActorUploadFilter(props) {
         <label
           htmlFor="classShort"
           data-name="단편"
-          onClick={(e) => console.log(e.currentTarget.dataset.name)}
+          onClick={(e) => ClassficationManager(e.currentTarget.dataset.name)}
         >
           단편
         </label>
