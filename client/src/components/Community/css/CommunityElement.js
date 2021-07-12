@@ -6,8 +6,6 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const CommunityDiv = styled.div``;
-
 const UploadDiv = styled.div`
   width: 60%;
   margin: 0 auto;
@@ -136,7 +134,6 @@ const DropZoneDiv = styled.div`
 `;
 
 export {
-  CommunityDiv,
   UploadDiv,
   FormDiv,
   BtnDiv,

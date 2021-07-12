@@ -15,6 +15,7 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../utils/FileShowArea.js";
+import ChooseSubCategory from "./Filter/ChooseSubCategory.js";
 
 function UploadForm(props) {
   const [Title, setTitle] = useState("");
@@ -63,7 +64,7 @@ function UploadForm(props) {
   const SwitchSubCategory = () => {
     switch (props.category) {
       case "게시판":
-        return <></>;
+        return <ChooseSubCategory />;
       case "파트너찾기":
         return <></>;
       case "배우찾기":
