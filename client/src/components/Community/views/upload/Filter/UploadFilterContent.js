@@ -110,6 +110,19 @@ const SubCategoryFilterDiv = styled.div`
     text-align: center;
     -ms-text-align-last: center;
     -moz-text-align-last: center;
+    &:focus {
+      border: 1px solid #D8D8D8;
+    }
+    option {
+      text-align: center;
+      -ms-text-align-last: center;
+      -moz-text-align-last: center;
+      align-items: center;
+      &:active {
+        background: #111111;
+        opacity: 0.1;
+      }
+    }
   }
 `;
 export { ActorFilterDiv, ActorInputDiv, SubCategoryFilterDiv };
