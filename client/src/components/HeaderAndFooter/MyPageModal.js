@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { ModalDiv } from "./css/HeaderElement.js";
 
 function AlarmModal(props) {
@@ -18,7 +18,11 @@ function AlarmModal(props) {
 
   return (
     <ModalDiv style={{ top: "25px", right: "20px" }}>
-      <div>마이페이지</div>
+      <div>
+        <Link to="/MyPage" style={{ color: "black", textDecoration: "none" }}>
+          마이페이지
+        </Link>
+      </div>
       <div>
         <button
           className="logout"
