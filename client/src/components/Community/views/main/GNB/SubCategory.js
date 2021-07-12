@@ -20,7 +20,7 @@ function SubCategory(props) {
       case "게시판":
         return (
           <SubCategoryDiv>
-            <ul>
+            <ul style={{paddingLeft:'0px'}}>
               {BoardSubCategoty.map((category, idx) => (
                 <li key={idx}>
                   <SubCategoryBasicFilter

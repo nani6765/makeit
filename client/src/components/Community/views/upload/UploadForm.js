@@ -15,7 +15,8 @@ import { withRouter } from "react-router-dom";
 import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../utils/FileShowArea.js";
-import ChooseSubCategory from "./Filter/ChooseSubCategory.js";
+import PostBoardFilter from "./Filter/PostBoardFilter.js";
+import LocationFilter from "./Filter/LocationFilter.js";
 
 function UploadForm(props) {
   const [Title, setTitle] = useState("");
@@ -23,6 +24,7 @@ function UploadForm(props) {
   const [Image, setImage] = useState([]);
   const [FilterCheck, setFilterCheck] = useState(false); //에러처리
   const [FilterElement, setFilterElement] = useState([]);
+  const [SubCategory, setSubCategory] = useState("");
 
   const updateImages = (newImages) => {
     setImage(newImages);
@@ -46,8 +48,8 @@ function UploadForm(props) {
       images: Image,
       category: props.category,
       filters: FilterElement,
+      subCategory: SubCategory,
     };
-    console.log(FilterElement);
     axios.post("/api/community/postSubmit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 등록 성공");
@@ -64,7 +66,7 @@ function UploadForm(props) {
   const SwitchSubCategory = () => {
     switch (props.category) {
       case "게시판":
-        return <ChooseSubCategory />;
+        return <PostBoardFilter setSubCategory = {setSubCategory}/>;
       case "파트너찾기":
         return <></>;
       case "배우찾기":
@@ -77,7 +79,7 @@ function UploadForm(props) {
           />
         );
       case "로케이션":
-        return <></>;
+        return <LocationFilter setSubCategory = {setSubCategory} />;
       case "건의함":
         return <></>;
     }
