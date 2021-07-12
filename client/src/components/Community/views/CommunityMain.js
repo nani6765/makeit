@@ -5,7 +5,8 @@ import CommunityFNB from "./main/FNB/CommunityFNB.js";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 import axios from "axios";
 
-function CommunityMain() {
+function CommunityMain(props) {
+
   const [AxiosCheck, setAxiosCheck] = useState(false);
   const [PostArray, setPostArray] = useState([]); //글 목록
 
@@ -17,6 +18,14 @@ function CommunityMain() {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchCheck, setSearchCheck] = useState(false);
   const [FiltersObject, setFiltersObject] = useState([]);
+
+  useEffect(() => {
+    if(props.location.state === undefined) {
+      setMainCategoryContent("게시판");
+    } else {
+      setMainCategoryContent(props.location.state.category);
+    }
+  }, []);
 
   useEffect(() => {
     setPageIdx(1);
