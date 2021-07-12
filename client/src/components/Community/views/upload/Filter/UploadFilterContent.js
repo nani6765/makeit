@@ -91,4 +91,25 @@ const ActorInputDiv = styled.div`
     }
   }
 `;
-export { ActorFilterDiv, ActorInputDiv };
+
+const SubCategoryFilterDiv = styled.div`
+  span {
+    font-weight:bold;
+    margin: 0px 10px;
+  }
+  select {
+    margin-left: 10px;
+    padding: 5px;
+    width: 13rem;
+    -moz-appearance: none;
+	  -webkit-appearance: none;
+	  appearance: none;
+    border: 1px solid #D8D8D8;
+    border-radius: 0.3em;
+    text-align-last: center;
+    text-align: center;
+    -ms-text-align-last: center;
+    -moz-text-align-last: center;
+  }
+`;
+export { ActorFilterDiv, ActorInputDiv, SubCategoryFilterDiv };

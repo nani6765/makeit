@@ -56,7 +56,7 @@ function CommunityGNB(props) {
         setSortPost={props.setSortPost}
       />
 
-      <SubC ategory
+      <SubCategory
         MainCategoryContent={props.MainCategoryContent}
         SubCategoryName={props.SubCategoryName}
         setSubCategoryName={props.setSubCategoryName}
