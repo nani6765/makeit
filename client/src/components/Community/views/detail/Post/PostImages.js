@@ -41,7 +41,6 @@ function PostImages(props) {
             src={ImageArray()}
             currentIndex={currentImage}
             onClose={closeImageViewer}
-            style={{ zIndex: "99" }}
           />
         )}
       </div>

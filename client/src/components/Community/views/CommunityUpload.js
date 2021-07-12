@@ -3,6 +3,7 @@ import { UploadDiv } from "../css/CommunityElement.js";
 import UploadForm from "./upload/UploadForm.js";
 import { LabelDiv, UploadLavelDiv } from "./main/GNB/GNBContent.js";
 import { withRouter } from "react-router-dom";
+import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 
 function CommunityUpload(props) {
   const [category, setcategory] = useState("");
@@ -47,6 +48,8 @@ function CommunityUpload(props) {
       <UploadDiv>
         <UploadForm user={props.user.userData} category={category} />
       </UploadDiv>
+
+      <MobileFooter path="/community" />
     </>
   );
 }

@@ -4,6 +4,7 @@ import PostDetailContent from "./detail/Post/PostDetailContent.js";
 import RepleList from "./detail/Reple/RepleList.js";
 import RepleUpload from "./detail/Reple/RepleUpload.js";
 import { RepleBtnDiv } from "../css/CommunityDetailElement.js";
+import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 
 function PostDetail(props) {
   const [postInfo, setpostInfo] = useState({ _id: null });
@@ -96,6 +97,8 @@ function PostDetail(props) {
       {postInfo._id != null ? (
         <RepleUpload postInfo={postInfo} user={props.user} />
       ) : null}
+
+      <MobileFooter path="/community" />
     </>
   );
 }
