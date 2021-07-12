@@ -44,6 +44,7 @@ function LoginPage(props) {
     span {
       font-weight: bold;
       text-decoration: underline;
+      pointer: cursor;
     }
   `;
 

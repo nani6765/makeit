@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { UploadDiv } from "../css/CommunityElement.js";
 import UploadForm from "./upload/UploadForm.js";
-import { LabelDiv } from "./main/GNB/GNBContent.js";
+import { LabelDiv, UploadLavelDiv } from "./main/GNB/GNBContent.js";
 import { withRouter } from "react-router-dom";
+import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 
 function CommunityUpload(props) {
   const [category, setcategory] = useState("");
@@ -18,7 +19,7 @@ function CommunityUpload(props) {
   function BackHandler() {
     props.history.push({
       pathname: "/community",
-      state: {category: category}
+      state: { category: category },
     });
   }
 
@@ -31,7 +32,7 @@ function CommunityUpload(props) {
           paddingBottom: "15px",
         }}
       >
-        <div style={{ width: "60%", margin: "0 auto" }}>
+        <UploadLavelDiv>
           <p>
             <span
               onClick={() => BackHandler()}
@@ -41,12 +42,14 @@ function CommunityUpload(props) {
             </span>
             {category}
           </p>
-        </div>
+        </UploadLavelDiv>
       </LabelDiv>
 
       <UploadDiv>
         <UploadForm user={props.user.userData} category={category} />
       </UploadDiv>
+
+      <MobileFooter path="/community" />
     </>
   );
 }

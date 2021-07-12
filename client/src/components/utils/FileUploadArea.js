@@ -34,7 +34,7 @@ function FileUploadArea(props) {
         <section>
           <div {...getRootProps()} css={DropZoneContent}>
             <input {...getInputProps()} />
-            <i className="bi bi-camera"></i>
+            <i className="bi bi-camera" style={{ cursor: "pointer" }}></i>
           </div>
         </section>
       )}

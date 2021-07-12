@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { UploadDiv } from "../css/CommunityElement.js";
 import UpdateFrorm from "./update/UpdateForm.js";
 import axios from "axios";
+import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 
 function CommunityUpdate(props) {
   const [PostInfo, setPostInfo] = useState({ checkPosition: 0 });
