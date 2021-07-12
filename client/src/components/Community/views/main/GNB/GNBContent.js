@@ -140,6 +140,14 @@ const LabelDiv = styled.div`
   }
 `;
 
+const UploadLavelDiv = styled.div`
+  width: 60%;
+  margin: 0 auto;
+  ${mq[1]} {
+    width: 90%;
+  }
+`;
+
 const LabelBtn = styled.div`
   grid-area: btn;
   width: 100%;
@@ -187,6 +195,7 @@ export {
   MobileUl,
   PostLabelDiv,
   LabelDiv,
+  UploadLavelDiv,
   LabelBtn,
   LabelUpload,
 };
