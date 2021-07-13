@@ -90,7 +90,7 @@ function RepleContent(props) {
                     setrerepleUpload={setrerepleUpload}
                   />
                 ) : props.user.userData.error === true ? null : (
-                  <RepleGuestModal setrerepleUpload={setrerepleUpload} />
+                  <RepleGuestModal setrerepleUpload={setrerepleUpload} userId = {props.user.userData._id} postInfo={props.postInfo}/>
                 )
               ) : null}
             </div>

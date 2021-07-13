@@ -119,7 +119,7 @@ const ModalDiv = styled.div`
   z-index: 10;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
   div {
     button {
