@@ -83,7 +83,7 @@ function PostDetailContent(props) {
                 userInfo.userData._id === postInfo.auther._id ? (
                   <PostModal postInfo={postInfo} />
                 ) : (
-                  <PostGuestModal />
+                  <PostGuestModal userId={userInfo.userData._id} postInfo={postInfo}/>
                 )
               ) : null}
             </div>

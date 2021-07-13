@@ -16,6 +16,7 @@ import LandingPage from "./components/LandingPage/LandingPage.js";
 import LoginPage from "./components/User/views/LoginPage.js";
 import RegisterPage from "./components/User/views/RegisterPage.js";
 import MyPage from "./components/MyPage/MyPage.js";
+import ChatDetail from "./components/MyPage/Chat/ChatDetail.js";
 
 //Comminity
 import CommunityMain from "./components/Community/views/CommunityMain.js";
@@ -50,6 +51,7 @@ function App() {
           component={Auth(CommunityUpdate, true)}
         />
         <Route exact path="/myPage" component={Auth(MyPage, true)} />
+        <Route exact path="/chat/:chatid" component={Auth(ChatDetail, true)} />
       </Switch>
       <Footer />
     </>
