@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MyPageMainDiv, MyPageSubTitle } from "./css/MyPageElement.js";
+import { MyPageMainDiv, MyPageSubTitle, PCOnly } from "./css/MyPageElement.js";
 import Avatar from "react-avatar";
 
 function MyPage(props) {
@@ -18,7 +18,11 @@ function MyPage(props) {
 
       <div className="profile">
         <h1>프로필</h1>
-        <p>자신의 색깔을 나타낼 수 있는 프로필 사진을 등록해주세요!</p>
+        <p>
+          <PCOnly>
+            자신의 색깔을 나타낼 수 있는 프로필 사진을 등록해주세요!
+          </PCOnly>
+        </p>
         <div className="profileContainer">
           <Avatar
             src={User.avatar}
@@ -34,7 +38,11 @@ function MyPage(props) {
           </div>
         </div>
         <h1>상태메세지</h1>
-        <p>상태 메세지에 관심사, 소속, 직업 등을 적어 자신을 표현해보세요!</p>
+        <p>
+          <PCOnly>
+            상태 메세지에 관심사, 소속, 직업 등을 적어 자신을 표현해보세요!
+          </PCOnly>
+        </p>
         <div></div>
       </div>
 

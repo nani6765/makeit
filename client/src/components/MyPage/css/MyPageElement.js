@@ -136,4 +136,10 @@ const MyPageSubTitle = styled.div`
   }
 `;
 
-export { MyPageMainDiv, MyPageSubTitle };
+const PCOnly = styled.span`
+  display: block;
+  ${mq[1]} {
+    display: none;
+  }
+`;
+export { MyPageMainDiv, MyPageSubTitle, PCOnly };

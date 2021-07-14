@@ -18,7 +18,7 @@ function AlarmModal(props) {
 
   return (
     <ModalDiv style={{ top: "25px", right: "20px" }}>
-      <div>
+      <div onClick={() => props.setmyPageHambucControl(false)}>
         <Link to="/MyPage" style={{ color: "black", textDecoration: "none" }}>
           마이페이지
         </Link>

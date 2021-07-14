@@ -30,7 +30,7 @@ function Header(props) {
 
   //modal
   const [alarmHambucControl, setalarmHambucControl] = useState(false);
-  const [myPageHambucControl, setmyPageHambucControl] = useState(false)
+  const [myPageHambucControl, setmyPageHambucControl] = useState(false);
 
   const alarmInnerRef = useOuterClick((e) => {
     setalarmHambucControl(false);
@@ -153,27 +153,26 @@ function Header(props) {
               </Link>
             ) : (
               <>
-                <div className="hambuc" ref = {alarmInnerRef}>
-                <i className="bell bi bi-bell" onClick = {() => setalarmHambucControl(true)}></i>
-                {
-                  alarmHambucControl ? (
-                    <AlarmModal />
-                  ) : null
-                }
+                <div className="hambuc" ref={alarmInnerRef}>
+                  <i
+                    className="bell bi bi-bell"
+                    onClick={() => setalarmHambucControl(true)}
+                  ></i>
+                  {alarmHambucControl ? <AlarmModal /> : null}
                 </div>
                 <div className="hambuc" ref={myPageInnerRef}>
-                <Avatar
-                  className="profile"
-                  src={user.userData ? user.userData.avatar : "./test.png"}
-                  size="35px"
-                  round={true}
-                  onClick = {() => setmyPageHambucControl(true)}
-                />
-                {
-                myPageHambucControl ? (
-                  <MyPageModal />
-                ) : null
-                }
+                  <Avatar
+                    className="profile"
+                    src={user.userData ? user.userData.avatar : "./test.png"}
+                    size="35px"
+                    round={true}
+                    onClick={() => setmyPageHambucControl(true)}
+                  />
+                  {myPageHambucControl ? (
+                    <MyPageModal
+                      setmyPageHambucControl={setmyPageHambucControl}
+                    />
+                  ) : null}
                 </div>
               </>
             )}
