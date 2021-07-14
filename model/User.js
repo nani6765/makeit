@@ -32,9 +32,11 @@ const userSchema = mongoose.Schema(
     userNum: {
       type: Number,
     },
+    //login
     token: {
       type: String,
     },
+    //사용X
     tokenExp: {
       type: Number,
     },
