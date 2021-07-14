@@ -9,6 +9,7 @@ import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 import GoogleLoginBtn from "./GoogleLoginBtn.js";
+import KaKaoLoginBtn from "./KaKaoLoginBtn.js";
 
 function LoginPage(props) {
   const dispatch = useDispatch();
@@ -80,6 +81,7 @@ function LoginPage(props) {
             <button type="submit">로그인</button>
           </form>
           <GoogleLoginBtn />
+          <KaKaoLoginBtn />
           <div id="naverIdLogin"></div>
           <p css={GoRegister}>
             아직 계정이 없으신가요?{" "}
