@@ -8,7 +8,7 @@ import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
-import GoogleTest from "./GoogleTest.js";
+import GoogleLoginBtn from "./GoogleLoginBtn.js";
 
 function LoginPage(props) {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function LoginPage(props) {
       email: Email,
       password: Password,
     };
-    dispatch(loginUser(body)).then((response) => {
+    dispatch(loginUser(body, "makeit")).then((response) => {
       if (response.payload.loginSuccess) {
         props.history.push("/");
       } else {
@@ -79,8 +79,8 @@ function LoginPage(props) {
             <p css={passwordFind}>비밀번호찾기</p>
             <button type="submit">로그인</button>
           </form>
-          <GoogleTest />
-
+          <GoogleLoginBtn />
+          <div id="naverIdLogin"></div>
           <p css={GoRegister}>
             아직 계정이 없으신가요?{" "}
             <span

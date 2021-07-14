@@ -9,7 +9,7 @@ router.post("/register", (req, res) => {
     if (err) return res.status(400).json({ success: false, err });
     temp.userNum = counter.users;
     const user = new User(temp);
-
+    console.log(user);
     user.save((err, doc) => {
       if (err) return res.json({ success: false, err });
       counter.updateOne({ $inc: { users: 1 } }, (err) => {
