@@ -1,24 +1,19 @@
 import axios from "axios";
 import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types";
 
-export function loginUser(dataToSubmit) {
-  const request = axios
-    .post("/api/user/login", dataToSubmit)
-    .then((response) => response.data);
-
 export function loginUser(dataToSubmit, type) {
   switch (type) {
     case "google":
       var request = axios
-       .post("/api/oauth/google/login", dataToSubmit)
-       .then((response) => response.data);
+        .post("/api/oauth/google/login", dataToSubmit)
+        .then((response) => response.data);
       break;
-  
+
     default:
-       var request = axios
-       .post("/api/user/login", dataToSubmit)
-       .then((response) => response.data);
-       break;
+      var request = axios
+        .post("/api/user/login", dataToSubmit)
+        .then((response) => response.data);
+      break;
   }
   return {
     type: LOGIN_USER,
