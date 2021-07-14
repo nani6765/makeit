@@ -3,7 +3,6 @@ const { User } = require("../model/User");
 const { Chat } = require("../model/Chat.js");
 const { Counter } = require("../model/Counter.js");
 
-
 router.post("/chatdetail/checkuser", (req, res) => {
     let user = [];
     user.push(req.body.user);
