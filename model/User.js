@@ -32,6 +32,10 @@ const userSchema = mongoose.Schema(
     userNum: {
       type: Number,
     },
+    type: {
+      type: String,
+      default: "MakeIT",
+    },
     //login
     token: {
       type: String,

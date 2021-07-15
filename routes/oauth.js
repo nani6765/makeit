@@ -2,23 +2,23 @@ var router = require("express").Router();
 const { User } = require("../model/User");
 const { Counter } = require("../model/Counter.js");
 
-router.post("/google/check", (req, res) => {
+router.post("/sns/check", (req, res) => {
   User.findOne({ email: req.body.email }, (err, userInfo) => {
     if (err) return res.status(400).json({ success: false, err });
     if (!userInfo) {
-        return res.status(200).json({
-          success: true,
-          googleCheck: false,
-        });
+      return res.status(200).json({
+        success: true,
+        snsCheck: false,
+      });
     }
     return res.status(200).json({
       success: true,
-      googleCheck: true,
+      snsCheck: true,
     });
   });
 });
 
-router.post("/google/login", (req, res) => {
+router.post("/sns/login", (req, res) => {
   User.findOne({ email: req.body.email }, (err, userInfo) => {
     if (!userInfo) {
       return res.json({
@@ -30,9 +30,9 @@ router.post("/google/login", (req, res) => {
     userInfo.generateToken((err, user) => {
       if (err) return res.status(400).send(err);
       res
-      .cookie("friends", user.token)
-      .status(200)
-      .json({ loginSuccess: true, userId: user._id });
+        .cookie("friends", user.token)
+        .status(200)
+        .json({ loginSuccess: true, userId: user._id });
     });
   });
 });
