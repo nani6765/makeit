@@ -1,13 +1,16 @@
 // GoogleButton.js
 import React from "react";
-import GoogleLogin from "react-google-login";
 import { withRouter } from "react-router-dom";
+
+/*
+import GoogleLogin from "react-google-login";
 import { useDispatch } from "react-redux";
-import { loginUser, registerUser } from "../../../_actions/user_action";
+import { loginUser, registerUser } from "../../../redux/_actions/user_action";
 import { googleClientId } from "../../../hoc/key.js";
 import axios from "axios";
-
+*/
 function GoogleLoginBtn(props) {
+  /*
   const dispatch = useDispatch();
 
   const onSuccess = (result) => {
@@ -68,9 +71,10 @@ function GoogleLoginBtn(props) {
   const onFailure = (error) => {
     console.log(error);
   };
-
+  */
   return (
     <div style={{ marginBottom: "30px" }}>
+      {/*
       <GoogleLogin
         clientId={googleClientId}
         responseType={"id_token"}
@@ -78,6 +82,7 @@ function GoogleLoginBtn(props) {
         onFailure={onFailure}
         buttonText="Google Login"
       />
+      */}
     </div>
   );
 }

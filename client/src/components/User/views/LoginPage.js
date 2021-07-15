@@ -1,34 +1,37 @@
 import React, { useState } from "react";
-import Axios from "axios";
-import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { loginUser } from "../../../_actions/user_action";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 import GoogleLoginBtn from "./GoogleLoginBtn.js";
 import KaKaoLoginBtn from "./KaKaoLoginBtn.js";
+import firebase from "../../../firebase.js";
+
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
 
 function LoginPage(props) {
-  const dispatch = useDispatch();
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [ErrorLogin, setErrorLogin] = useState("");
+  const [Loading, setLoading] = useState(false);
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     let body = {
       email: Email,
       password: Password,
     };
-    dispatch(loginUser(body, "makeit")).then((response) => {
-      if (response.payload.loginSuccess) {
-        props.history.push("/");
-      } else {
-        alert("Error");
-      }
-    });
+    try {
+      setLoading(true);
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(body.email, body.password);
+      setLoading(false);
+    } catch (error) {
+      setErrorLogin(error.message);
+      setLoading(false);
+    }
   };
 
   const passwordFind = css`
@@ -78,7 +81,10 @@ function LoginPage(props) {
             />
             <br />
             <p css={passwordFind}>비밀번호찾기</p>
-            <button type="submit">로그인</button>
+            {ErrorLogin && <p>{ErrorLogin}</p>}
+            <button type="submit" disabled={Loading}>
+              로그인
+            </button>
           </form>
           <GoogleLoginBtn />
           <KaKaoLoginBtn />

@@ -1,6 +1,9 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
-import Auth from "./hoc/auth.js";
+import React, { useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "./redux/_actions/user_action.js";
+import firebase from "./firebase.js";
+
 //Basic
 import Header from "./components/HeaderAndFooter/Header.js";
 import TopArea from "./components/utils/TopArea.js";
@@ -25,37 +28,53 @@ import CommunityUpload from "./components/Community/views/CommunityUpload.js";
 import CommunityUpdate from "./components/Community/views/CommunityUpdate.js";
 
 function App() {
-  return (
-    <>
-      <Header />
-      <TopArea />
-      <Switch>
-        <Route exact path="/" component={Auth(MainPage, null)} />
-        <Route exact path="/landingPage" component={Auth(LandingPage, null)} />
-        <Route exact path="/login" component={Auth(LoginPage, false)} />
-        <Route exact path="/register" component={Auth(RegisterPage, false)} />
-        <Route exact path="/community" component={Auth(CommunityMain, null)} />
-        <Route
-          exact
-          path="/community/post/:postId"
-          component={Auth(CommunityPostDetail, null)}
-        />
-        <Route
-          exact
-          path="/community/upload"
-          component={Auth(CommunityUpload, true)}
-        />
-        <Route
-          exact
-          path="/community/update/:postId"
-          component={Auth(CommunityUpdate, true)}
-        />
-        <Route exact path="/myPage" component={Auth(MyPage, true)} />
-        <Route exact path="/chat/:chatid" component={Auth(ChatDetail, true)} />
-      </Switch>
-      <Footer />
-    </>
-  );
+  let history = useHistory();
+  let dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.user.isLoading);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log("user", user);
+      if (user) {
+        history.push("/");
+        dispatch(setUser(user));
+      } else {
+        history.push("/login");
+      }
+    });
+  }, []);
+
+  if (isLoading) {
+    return <div>...loading</div>;
+  } else {
+    return (
+      <>
+        <Header />
+        <TopArea />
+        <Switch>
+          <Route exact path="/" component={MainPage} />
+          <Route exact path="/landingPage" component={LandingPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/register" component={RegisterPage} />
+          <Route exact path="/community" component={CommunityMain} />
+          <Route
+            exact
+            path="/community/post/:postId"
+            component={CommunityPostDetail}
+          />
+          <Route exact path="/community/upload" component={CommunityUpload} />
+          <Route
+            exact
+            path="/community/update/:postId"
+            component={CommunityUpdate}
+          />
+          <Route exact path="/myPage" component={MyPage} />
+          <Route exact path="/chat/:chatid" component={ChatDetail} />
+        </Switch>
+        <Footer />
+      </>
+    );
+  }
 }
 
 export default App;

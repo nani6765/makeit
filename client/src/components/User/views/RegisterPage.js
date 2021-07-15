@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../../_actions/user_action";
-import Axios from "axios";
 import { withRouter } from "react-router-dom";
 import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 /** @jsxRuntime classic */
@@ -9,6 +7,7 @@ import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 import axios from "axios";
+import firebase from "../../../firebase.js";
 
 function RegisterPage(props) {
   const dispatch = useDispatch();
@@ -16,8 +15,10 @@ function RegisterPage(props) {
   const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [ErrorFormSubmit, setErrorFormSubmit] = useState("");
+  const [Loading, setLoading] = useState(false);
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (Password !== ConfirmPassword) {
       return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
@@ -29,12 +30,32 @@ function RegisterPage(props) {
       name: Name,
     };
 
+    try {
+      setLoading(true);
+      let createUser = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(body.email, body.password);
+
+      await createUser.user.updateProfile({
+        displayName: body.name,
+        photoURL: `https://kr.object.ncloudstorage.com/makeit/user/profile.png`,
+      });
+
+      console.log("createUser", createUser);
+      setLoading(false);
+    } catch (error) {
+      setErrorFormSubmit(error.message);
+      setLoading(false);
+    }
+
+    /*
     axios.post("/api/oauth/sns/check", body).then((response) => {
-      if(response.data.success) {
+      if (response.data.success) {
         //이미 계정이 있음
-        if(response.data.snsCheck) {
+        if (response.data.snsCheck) {
           alert("이미 존재하는 이메일입니다.");
-        } else { //계정 없음 -> 디비에 저장
+        } else {
+          //계정 없음 -> 디비에 저장
           dispatch(registerUser(body)).then((response) => {
             console.log("response", response);
             if (response.payload.success) {
@@ -48,6 +69,7 @@ function RegisterPage(props) {
         alert("다시 시도하세요.");
       }
     });
+    */
   };
 
   return (
@@ -88,7 +110,10 @@ function RegisterPage(props) {
               onChange={(e) => setConfirmPassword(e.currentTarget.value)}
             />
             <br />
-            <button type="submit">회원 가입</button>
+            {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
+            <button type="submit" disabled={Loading}>
+              회원 가입
+            </button>
           </form>
         </div>
       </div>

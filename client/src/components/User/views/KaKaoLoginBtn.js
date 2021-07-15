@@ -1,16 +1,21 @@
 import React from "react";
-import KakaoLogin from "react-kakao-login";
 import { withRouter } from "react-router-dom";
+
+/*
+import KakaoLogin from "react-kakao-login";
 import { useDispatch } from "react-redux";
-import { loginUser, registerUser } from "../../../_actions/user_action";
+import { loginUser, registerUser } from "../../../redux/_actions/user_action";
 import axios from "axios";
 import { kakaoClientId } from "../../../hoc/key.js";
+*/
+
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
+//import { jsx, css } from "@emotion/react";
+//import styled from "@emotion/styled";
 
 function KaKaoLoginBtn(props) {
+  /*
   const dispatch = useDispatch();
 
   const onSuccess = (result) => {
@@ -89,14 +94,16 @@ function KaKaoLoginBtn(props) {
       box-shadow: 0 0px 15px 0 rgba(0, 0, 0, 0.2);
     }
   `;
-
+  */
   return (
     <>
+      {/*
       <KaKaoBtn
         token={kakaoClientId}
         onSuccess={onSuccess}
         onFail={onFailure}
       ></KaKaoBtn>
+    */}
     </>
   );
 }

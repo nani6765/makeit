@@ -1,5 +1,4 @@
 var router = require("express").Router();
-const { User } = require("../model/User");
 const { Community } = require("../model/CoPost.js");
 
 //MainPage
