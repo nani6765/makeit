@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Dropzone from "react-dropzone";
-import { DropZoneDiv, DropZoneContent } from "./FileUploadContent.js";
+import { DropZoneContent } from "./FileUploadContent.js";
 import axios from "axios";
 
 /** @jsxRuntime classic */

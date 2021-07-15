@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { MobileSlideDivContent } from "../../css/HeaderElement.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */

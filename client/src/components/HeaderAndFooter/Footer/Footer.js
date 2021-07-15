@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import {
   FooterDiv,
@@ -6,13 +6,8 @@ import {
   FooterMenuArea,
   FooterContentArea,
 } from "../css/FooterElement.js";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
 
 function Footer(props) {
-  const [path, setpath] = useState("");
   return (
     <>
       <FooterDiv>

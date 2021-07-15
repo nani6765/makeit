@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
 import useDocScroll from "../hooks/useDocScroll.js";
 import HeaderElement from "./HeaderElement/HeaderElement.js";
 
@@ -60,4 +59,4 @@ function hideSide() {
   console.log(sideBar);
 }
 
-export default withRouter(Header);
+export default Header;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
@@ -32,7 +32,7 @@ function UploadForm(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if(props.category==="배우찾기" || props.category==="파트너찾기") {
+    if (props.category === "배우찾기" || props.category === "파트너찾기") {
       if (!FilterCheck) {
         return alert("체크 박스를 선택해주세요.");
       }
@@ -55,7 +55,7 @@ function UploadForm(props) {
         alert("게시글 등록 성공");
         props.history.push({
           pathname: "/community",
-          state: {category: props.category}
+          state: { category: props.category },
         });
       } else {
         alert("게시글 등록 실패");
@@ -66,7 +66,7 @@ function UploadForm(props) {
   const SwitchSubCategory = () => {
     switch (props.category) {
       case "게시판":
-        return <PostBoardFilter setSubCategory = {setSubCategory}/>;
+        return <PostBoardFilter setSubCategory={setSubCategory} />;
       case "파트너찾기":
         return <></>;
       case "배우찾기":
@@ -79,7 +79,7 @@ function UploadForm(props) {
           />
         );
       case "로케이션":
-        return <LocationFilter setSubCategory = {setSubCategory} />;
+        return <LocationFilter setSubCategory={setSubCategory} />;
       case "건의함":
         return <></>;
     }

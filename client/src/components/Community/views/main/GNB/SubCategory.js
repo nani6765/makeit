@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { SubCategoryDiv } from "./GNBContent.js";
 import SubCategoryBasicFilter from "./SubCategory/SubCategoryBasicFilter.js";
 import FindingActorFilter from "./SubCategory/FindingActorFilter.js";
@@ -20,7 +20,7 @@ function SubCategory(props) {
       case "게시판":
         return (
           <SubCategoryDiv>
-            <ul style={{paddingLeft:'0px'}}>
+            <ul style={{ paddingLeft: "0px" }}>
               {BoardSubCategoty.map((category, idx) => (
                 <li key={idx}>
                   <SubCategoryBasicFilter

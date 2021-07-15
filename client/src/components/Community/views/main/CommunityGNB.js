@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MainCategory from "./GNB/MainCategory.js";
 import PostLabel from "./GNB/PostLabel.js";
 import SubCategory from "./GNB/SubCategory.js";

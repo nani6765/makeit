@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
-import GoogleLoginBtn from "./GoogleLoginBtn.js";
-import KaKaoLoginBtn from "./KaKaoLoginBtn.js";
 import firebase from "../../../firebase.js";
 
 /** @jsxRuntime classic */
