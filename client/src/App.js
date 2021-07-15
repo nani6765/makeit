@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "./redux/_actions/user_action.js";
+import { setUser, clearUser } from "./redux/_actions/user_action.js";
 import firebase from "./firebase.js";
 
 //Basic
-import Header from "./components/HeaderAndFooter/Header.js";
+import Header from "./components/HeaderAndFooter/Header/Header.js";
+import Footer from "./components/HeaderAndFooter/Footer/Footer.js";
 import TopArea from "./components/utils/TopArea.js";
-import Footer from "./components/HeaderAndFooter/Footer.js";
 
 //Main
 import MainPage from "./components/MainPage/MainPage.js";
@@ -39,7 +39,8 @@ function App() {
         history.push("/");
         dispatch(setUser(user));
       } else {
-        history.push("/login");
+        history.push("/");
+        dispatch(clearUser());
       }
     });
   }, []);

@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import Avatar from "react-avatar";
+import useDocScroll from "../hooks/useDocScroll.js";
+
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
 import {
   HeaderDiv,
   HeaderGrid,
@@ -11,23 +17,16 @@ import {
   MobileHambuck,
   MobileSideBackDiv,
   MobileSlideDiv,
-} from "./css/HeaderElement.js";
+} from "../css/HeaderElement.js";
 import MobileSlide from "./MobileSlide.js";
-import useDocScroll from "./hooks/useDocScroll.js";
-import Avatar from "react-avatar";
 import AlarmModal from "./AlarmModal.js";
 import MyPageModal from "./MyPageModal.js";
-import "./css/header.css";
-import "./css/animation.css";
-
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import { useSelector } from "react-redux";
+import "../css/header.css";
+import "../css/animation.css";
 
 function Header(props) {
   const user = useSelector((state) => state.user);
-
+  console.log("header", user);
   //modal
   const [alarmHambucControl, setalarmHambucControl] = useState(false);
   const [myPageHambucControl, setmyPageHambucControl] = useState(false);
@@ -59,57 +58,6 @@ function Header(props) {
 
   const shadowStyle = shouldShowShadow ? "shadow" : "";
   const hiddenStyle = shouldHideHeader ? "hidden" : "";
-
-  function showSide() {
-    var sideBackDiv = document.querySelector(".MobileSideBack");
-    var sideBar = document.querySelector(".MobileSideBar");
-    sideBackDiv.style.display = "block";
-    sideBar.classList.remove("slideOut");
-    sideBar.classList.add("slideIn");
-    setTimeout(() => {
-      sideBar.style.left = "0";
-    }, 450);
-
-    console.log(sideBar);
-  }
-
-  function hideSide() {
-    var sideBackDiv = document.querySelector(".MobileSideBack");
-    var sideBar = document.querySelector(".MobileSideBar");
-    sideBar.classList.remove("slideIn");
-    sideBar.classList.add("slideOut");
-    setTimeout(() => {
-      sideBar.style.left = "-80vw";
-      sideBackDiv.style.display = "none";
-    }, 450);
-    console.log(sideBar);
-  }
-
-  function useOuterClick(callback) {
-    const callbackRef = useRef();
-    const innerRef = useRef();
-    useEffect(() => {
-      callbackRef.current = callback;
-    });
-    useEffect(() => {
-      document.addEventListener("click", handleClick);
-      return () => document.removeEventListener("click", handleClick);
-      function handleClick(e) {
-        if (
-          innerRef.current &&
-          callbackRef.current &&
-          !innerRef.current.contains(e.target)
-        ) {
-          callbackRef.current(e);
-        }
-        //수정버튼 클릭시
-        if (e.target.className === "edit") {
-          callbackRef.current(!e);
-        }
-      }
-    }, []);
-    return innerRef;
-  }
 
   return (
     <>
@@ -193,6 +141,57 @@ function Header(props) {
       </MobileSlideDiv>
     </>
   );
+}
+
+function showSide() {
+  var sideBackDiv = document.querySelector(".MobileSideBack");
+  var sideBar = document.querySelector(".MobileSideBar");
+  sideBackDiv.style.display = "block";
+  sideBar.classList.remove("slideOut");
+  sideBar.classList.add("slideIn");
+  setTimeout(() => {
+    sideBar.style.left = "0";
+  }, 450);
+
+  console.log(sideBar);
+}
+
+function hideSide() {
+  var sideBackDiv = document.querySelector(".MobileSideBack");
+  var sideBar = document.querySelector(".MobileSideBar");
+  sideBar.classList.remove("slideIn");
+  sideBar.classList.add("slideOut");
+  setTimeout(() => {
+    sideBar.style.left = "-80vw";
+    sideBackDiv.style.display = "none";
+  }, 450);
+  console.log(sideBar);
+}
+
+function useOuterClick(callback) {
+  const callbackRef = useRef();
+  const innerRef = useRef();
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e) {
+      if (
+        innerRef.current &&
+        callbackRef.current &&
+        !innerRef.current.contains(e.target)
+      ) {
+        callbackRef.current(e);
+      }
+      //수정버튼 클릭시
+      if (e.target.className === "edit") {
+        callbackRef.current(!e);
+      }
+    }
+  }, []);
+  return innerRef;
 }
 
 export default withRouter(Header);

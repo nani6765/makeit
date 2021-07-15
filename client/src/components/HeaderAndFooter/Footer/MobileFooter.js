@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MobileFooterDiv } from "./css/FooterElement.js";
+import { MobileFooterDiv } from "../css/FooterElement.js";
 import { Link } from "react-router-dom";
 import {
   FooterMobileBottom1,
@@ -11,9 +11,7 @@ import {
 
 function MobileFooter(props) {
   const [path, setpath] = useState(props.path);
-  useEffect(() => {
-    console.log("mf", path);
-  });
+
   return (
     <MobileFooterDiv>
       <ul>

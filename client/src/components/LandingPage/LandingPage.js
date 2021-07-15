@@ -5,7 +5,6 @@ import ThirdLanding from "./views/ThirdLanding.js";
 import FourthLanding from "./views/FourthLanding.js";
 import FifthLanding from "./views/FifthLanding.js";
 import SixthLanding from "./views/SixthLanding.js";
-import MobileFooter from "../HeaderAndFooter/MobileFooter.js";
 
 function LandingPage() {
   return (
@@ -16,7 +15,6 @@ function LandingPage() {
       <FourthLanding />
       <FifthLanding />
       <SixthLanding />
-      <MobileFooter path="/" />
     </>
   );
 }

@@ -12,7 +12,6 @@ app.use(cookeParser());
 app.use("/api/community", require("./routes/community.js"));
 app.use("/api/main", require("./routes/main.js"));
 app.use("/api/chat", require("./routes/chat.js"));
-app.use("/api/oauth", require("./routes/oauth.js"));
 
 const port = process.env.PORT || 5000;
 

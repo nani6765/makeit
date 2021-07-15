@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
+import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 import GoogleLoginBtn from "./GoogleLoginBtn.js";
 import KaKaoLoginBtn from "./KaKaoLoginBtn.js";
@@ -31,6 +31,9 @@ function LoginPage(props) {
     } catch (error) {
       setErrorLogin(error.message);
       setLoading(false);
+      setTimeout(() => {
+        setErrorLogin("");
+      }, 5000);
     }
   };
 
@@ -86,8 +89,7 @@ function LoginPage(props) {
               로그인
             </button>
           </form>
-          <GoogleLoginBtn />
-          <KaKaoLoginBtn />
+
           <div id="naverIdLogin"></div>
           <p css={GoRegister}>
             아직 계정이 없으신가요?{" "}

@@ -1,8 +1,7 @@
 var router = require("express").Router();
-const { User } = require("../model/User");
 const { Chat } = require("../model/Chat.js");
 const { Counter } = require("../model/Counter.js");
-
+/*
 router.post("/chatdetail/checkuser", (req, res) => {
     let user = [];
     user.push(req.body.user);
@@ -23,7 +22,8 @@ router.post("/chatdetail/checkuser", (req, res) => {
         }
     });
 })
-
+*/
+/*
 router.post("/create", (req, res) => {
   let me = req.body.me;
   let you = req.body.you;
@@ -61,12 +61,6 @@ router.post("/create", (req, res) => {
         chatNum: result.chatNum,
     });
   });
-
-  /*
-  //save
-  */
-
-
 });
-
+*/
 module.exports = router;

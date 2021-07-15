@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import CommunityGNB from "./main/CommunityGNB.js";
 import PostList from "./main/PostList.js";
 import CommunityFNB from "./main/FNB/CommunityFNB.js";
-import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 import axios from "axios";
 
 function CommunityMain(props) {
-
   const [AxiosCheck, setAxiosCheck] = useState(false);
   const [PostArray, setPostArray] = useState([]); //글 목록
 
@@ -20,7 +18,7 @@ function CommunityMain(props) {
   const [FiltersObject, setFiltersObject] = useState([]);
 
   useEffect(() => {
-    if(props.location.state === undefined) {
+    if (props.location.state === undefined) {
       setMainCategoryContent("게시판");
     } else {
       setMainCategoryContent(props.location.state.category);
@@ -99,8 +97,6 @@ function CommunityMain(props) {
           />
         </>
       ) : null}
-
-      <MobileFooter path="/community" />
     </>
   );
 }

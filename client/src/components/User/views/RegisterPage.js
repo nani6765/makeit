@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
-import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
+import firebase from "../../../firebase.js";
+
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
-import axios from "axios";
-import firebase from "../../../firebase.js";
+import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 
-function RegisterPage(props) {
-  const dispatch = useDispatch();
+function RegisterPage() {
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
@@ -32,44 +30,27 @@ function RegisterPage(props) {
 
     try {
       setLoading(true);
-      let createUser = await firebase
+      let createdUser = await firebase
         .auth()
         .createUserWithEmailAndPassword(body.email, body.password);
 
-      await createUser.user.updateProfile({
+      await createdUser.user.updateProfile({
         displayName: body.name,
         photoURL: `https://kr.object.ncloudstorage.com/makeit/user/profile.png`,
       });
 
-      console.log("createUser", createUser);
+      await firebase.database().ref("users").child(createdUser.user.uid).set({
+        name: createdUser.user.displayName,
+        image: createdUser.user.photoURL,
+      });
       setLoading(false);
     } catch (error) {
       setErrorFormSubmit(error.message);
       setLoading(false);
+      setTimeout(() => {
+        setErrorFormSubmit("");
+      }, 5000);
     }
-
-    /*
-    axios.post("/api/oauth/sns/check", body).then((response) => {
-      if (response.data.success) {
-        //이미 계정이 있음
-        if (response.data.snsCheck) {
-          alert("이미 존재하는 이메일입니다.");
-        } else {
-          //계정 없음 -> 디비에 저장
-          dispatch(registerUser(body)).then((response) => {
-            console.log("response", response);
-            if (response.payload.success) {
-              props.history.push("/login");
-            } else {
-              alert("Failed to sign up");
-            }
-          });
-        }
-      } else {
-        alert("다시 시도하세요.");
-      }
-    });
-    */
   };
 
   return (

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
+
 import {
   FooterDiv,
   FooterArea,
   FooterMenuArea,
   FooterContentArea,
-} from "./css/FooterElement.js";
+} from "../css/FooterElement.js";
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 function Footer(props) {
   const [path, setpath] = useState("");
