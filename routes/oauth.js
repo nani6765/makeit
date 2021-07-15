@@ -11,10 +11,19 @@ router.post("/sns/check", (req, res) => {
         snsCheck: false,
       });
     }
-    return res.status(200).json({
-      success: true,
-      snsCheck: true,
-    });
+    if(userInfo.type === req.body.type) {
+      return res.status(200).json({
+        success: true,
+        snsCheck: true,
+        typeEqualFlag: true,
+      });
+    } else {
+      return res.status(200).json({
+        success: true,
+        snsCheck: true,
+        typeEqualFlag: false,
+      });
+    } 
   });
 });
 

@@ -8,6 +8,7 @@ import MobileFooter from "../../HeaderAndFooter/MobileFooter.js";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
+import axios from "axios";
 
 function RegisterPage(props) {
   const dispatch = useDispatch();
@@ -27,13 +28,24 @@ function RegisterPage(props) {
       password: Password,
       name: Name,
     };
-    console.log("body", body);
-    dispatch(registerUser(body)).then((response) => {
-      console.log("response", response);
-      if (response.payload.success) {
-        props.history.push("/login");
+
+    axios.post("/api/oauth/sns/check", body).then((response) => {
+      if(response.data.success) {
+        //이미 계정이 있음
+        if(response.data.snsCheck) {
+          alert("이미 존재하는 이메일입니다.");
+        } else { //계정 없음 -> 디비에 저장
+          dispatch(registerUser(body)).then((response) => {
+            console.log("response", response);
+            if (response.payload.success) {
+              props.history.push("/login");
+            } else {
+              alert("Failed to sign up");
+            }
+          });
+        }
       } else {
-        alert("Failed to sign up");
+        alert("다시 시도하세요.");
       }
     });
   };

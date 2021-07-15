@@ -36,7 +36,7 @@ const ActorFilterDiv = styled.div`
     width: 100%;
     font-weight: bold;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .genderFilter {
     grid-area: genderFilter;
@@ -46,7 +46,7 @@ const ActorFilterDiv = styled.div`
     width: 100%;
     font-weight: bold;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .typeFilter {
     grid-area: typeFilter;
@@ -56,7 +56,7 @@ const ActorFilterDiv = styled.div`
     width: 100%;
     font-weight: bold;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .classficationFilter {
     grid-area: classficationFilter;
