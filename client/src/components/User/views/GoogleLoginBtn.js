@@ -17,6 +17,7 @@ function GoogleLoginBtn(props) {
 
     let body = {
       email: email,
+      type: "Google",
     };
 
     axios.post("/api/oauth/sns/check", body).then((response) => {
@@ -24,19 +25,24 @@ function GoogleLoginBtn(props) {
         // 구글 로그인
         if (response.data.snsCheck) {
           //body.token = result.tokenId;
-          dispatch(loginUser(body, "google")).then((response) => {
-            if (response.payload.loginSuccess) {
-              props.history.push("/");
-            } else {
-              alert("Error");
-            }
-          });
+          if(response.data.typeEqualFlag) {
+            dispatch(loginUser(body, "google")).then((response) => {
+              if (response.payload.loginSuccess) {
+                props.history.push("/");
+              } else {
+                alert("Error");
+              }
+            });
+          } else {
+            alert("이미 존재하는 계정입니다!");
+            props.history.push("/");
+          }
         }
         // 구글 회원가입
         else {
           body.name = result.profileObj.name;
           body.avatar = result.profileObj.imageUrl;
-          body.type = "Google";
+          //body.type = "Google";
           dispatch(registerUser(body)).then((response) => {
             if (response.payload.success) {
               //body.token = result.tokenId;
