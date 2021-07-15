@@ -14,28 +14,38 @@ function KaKaoLoginBtn(props) {
   const dispatch = useDispatch();
 
   const onSuccess = (result) => {
-    console.log("success", result);
     const email = result.profile.kakao_account.email; //unique
+
+    if(email === undefined) {
+      alert("이메일이 있어야 가입을 할 수 있습니다.");
+      props.history.push("/login");
+    }
 
     let body = {
       email: email,
+      type: "kakao",
     };
 
     axios.post("/api/oauth/sns/check", body).then((response) => {
       if (response.data.success) {
         if (response.data.snsCheck) {
-          dispatch(loginUser(body, "kakao")).then((response) => {
-            if (response.payload.loginSuccess) {
-              props.history.push("/");
-            } else {
-              alert("Error");
-            }
-          });
+          if(response.data.typeEqualFlag) {
+            dispatch(loginUser(body, "kakao")).then((response) => {
+              if (response.payload.loginSuccess) {
+                props.history.push("/");
+              } else {
+                alert("Error");
+              }
+            });
+          } else {
+            alert("이미 존재하는 계정입니다!");
+            props.history.push("/");
+          }
         } else {
           body.name = result.profile.kakao_account.profile.nickname;
-          body.avatar =
-            result.profile.kakao_account.profile.profile_image_url || "";
-          body.type = "kakao";
+          if(result.profile.kakao_account.profile.profile_image_url != undefined) {
+            body.avatar = result.profile.kakao_account.profile.profile_image_url;
+          }
           dispatch(registerUser(body)).then((response) => {
             if (response.payload.success) {
               //body.token = result.tokenId;
