@@ -1,5 +1,5 @@
 import React from "react";
-import { ModalDiv } from "../css/HeaderElement.js";
+import { ModalDiv } from "../../css/HeaderElement.js";
 
 function AlarmModal() {
   return (
