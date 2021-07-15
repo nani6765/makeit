@@ -19,10 +19,10 @@ function GoogleLoginBtn(props) {
       email: email,
     };
 
-    axios.post("/api/oauth/google/check", body).then((response) => {
+    axios.post("/api/oauth/sns/check", body).then((response) => {
       if (response.data.success) {
         // 구글 로그인
-        if (response.data.googleCheck) {
+        if (response.data.snsCheck) {
           //body.token = result.tokenId;
           dispatch(loginUser(body, "google")).then((response) => {
             if (response.payload.loginSuccess) {
@@ -36,7 +36,7 @@ function GoogleLoginBtn(props) {
         else {
           body.name = result.profileObj.name;
           body.avatar = result.profileObj.imageUrl;
-
+          body.type = "Google";
           dispatch(registerUser(body)).then((response) => {
             if (response.payload.success) {
               //body.token = result.tokenId;
