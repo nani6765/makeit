@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { RepleContentGrid } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router";
-import Avatar from "react-avatar";
+import { useSelector } from "react-redux";
+
+import axios from "axios";
+
 import RepleModal from "../Modal/RepleModal.js";
 import RepleGuestModal from "../Modal/RepleGuestModal.js";
 import RepleEditForm from "./RepleEditForm.js";
 import RerepleUpload from "../Rereple/RerepleUpload.js";
-import RerepleContent from "../Rereple/RerepleContent.js";
-import axios from "axios";
+import RerepleContentDiv from "../Rereple/RerepleContentDiv.js";
+
+import { RepleContentGrid } from "../../../css/CommunityDetailElement.js";
+import Avatar from "react-avatar";
 
 function RepleContent(props) {
   const [hambucControl, sethambucControl] = useState(false);
@@ -15,27 +19,25 @@ function RepleContent(props) {
   const [UpdateCheck, setUpdateCheck] = useState(false); //글수정 업데이트체크2
   const [likeFlag, setlikeFlag] = useState(false);
   const [rerepleUpload, setrerepleUpload] = useState(false);
-  //const [rerepleInfo, setrerepleInfo] = useState([])
+  const user = useSelector((state) => state.user);
 
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
 
   useEffect(() => {
-    if (Reple.likeArray.includes(props.user.userData._id)) {
+    if (Reple.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
       setlikeFlag(false);
     }
-  }, []);
+  }, [likeFlag]);
 
   function LikeHandler() {
-    console.log(Reple);
-
-    if (Reple.auther._id === props.user.userData._id) {
+    if (Reple.auther.uid === user.userData.uid) {
       return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
     }
-    if (props.user.userData.error === true) {
+    if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
       return props.history.push("/login");
     }
@@ -45,7 +47,7 @@ function RepleContent(props) {
     let body = {
       repleId: Reple._id,
       likeFlag: likeFlag,
-      userId: props.user.userData._id,
+      userId: user.userData.uid,
     };
 
     axios.post("/api/community/repleLike", body).then((response) => {
@@ -64,37 +66,42 @@ function RepleContent(props) {
         <div className="content">
           <div className="avatar">
             <Avatar
-              src={Reple.auther.avatar}
+              src={Reple.auther.photoURL}
               size="50"
               round={true}
               style={{ border: "1px solid #c6c6c6" }}
             />
           </div>
-          <p className="author">{Reple.auther.name}</p>
+          <p className="author">{Reple.auther.displayName}</p>
 
-          {props.user.userData.error === true ? null : (
-            <div
-              className="hambuc"
-              onClick={() => sethambucControl(true)}
-              ref={innerRef}
-            >
-              <i
-                className="bi bi-three-dots"
+          {user.userData ? (
+            <>
+              <div
+                className="hambuc"
                 onClick={() => sethambucControl(true)}
-              ></i>
-              {hambucControl ? (
-                props.user.userData._id === Reple.auther._id ? (
-                  <RepleModal
-                    repleInfo={Reple}
-                    setUpdateCheck={setUpdateCheck}
-                    setrerepleUpload={setrerepleUpload}
-                  />
-                ) : props.user.userData.error === true ? null : (
-                  <RepleGuestModal setrerepleUpload={setrerepleUpload} userId = {props.user.userData._id} postInfo={props.postInfo}/>
-                )
-              ) : null}
-            </div>
-          )}
+                ref={innerRef}
+              >
+                <i
+                  className="bi bi-three-dots"
+                  onClick={() => sethambucControl(true)}
+                ></i>
+                {hambucControl ? (
+                  user.userData.uid === Reple.auther.uid ? (
+                    <RepleModal
+                      repleInfo={Reple}
+                      setUpdateCheck={setUpdateCheck}
+                      setrerepleUpload={setrerepleUpload}
+                    />
+                  ) : user.userData ? (
+                    <RepleGuestModal
+                      setrerepleUpload={setrerepleUpload}
+                      repleInfo={Reple}
+                    />
+                  ) : null
+                ) : null}
+              </div>
+            </>
+          ) : null}
 
           <p className="date">{Reple.realTime}</p>
           {UpdateCheck ? (
@@ -124,23 +131,14 @@ function RepleContent(props) {
       </RepleContentGrid>
 
       {rerepleUpload ? (
-        <RerepleUpload
-          Reple={Reple}
-          userData={props.user.userData}
-          postInfo={props.postInfo}
-          setrerepleUpload={setrerepleUpload}
-        />
+        <RerepleUpload Reple={Reple} setrerepleUpload={setrerepleUpload} />
       ) : null}
 
       {Reple.rerepleNum === 0
         ? null
         : Reple.rerepleArray.map((rereple, idx) => {
             return (
-              <RerepleContent
-                rereple={rereple}
-                reple={Reple}
-                user={props.user.userData}
-              />
+              <RerepleContentDiv rereple={rereple} reple={Reple} key={idx} />
             );
           })}
     </>

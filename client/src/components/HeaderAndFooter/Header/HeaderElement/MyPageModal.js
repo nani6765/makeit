@@ -3,14 +3,15 @@ import firebase from "../../../../firebase.js";
 import { Link, withRouter } from "react-router-dom";
 import { ModalDiv } from "../../css/HeaderElement.js";
 
-function AlarmModal(props) {
+function MyPageModal(props) {
   const logoutHandler = () => {
+    props.setmyPageHambucControl(false);
     firebase.auth().signOut();
   };
 
   return (
     <ModalDiv style={{ top: "25px", right: "20px" }}>
-      <div onClick={() => props.setmyPageHambucControl(false)}>
+      <div>
         <Link to="/MyPage" style={{ color: "black", textDecoration: "none" }}>
           마이페이지
         </Link>
@@ -29,4 +30,4 @@ function AlarmModal(props) {
   );
 }
 
-export default withRouter(AlarmModal);
+export default withRouter(MyPageModal);

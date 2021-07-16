@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -7,24 +7,15 @@ import { HeaderLoginDiv } from "../../css/HeaderElement.js";
 import MyPageModal from "./MyPageModal.js";
 import AlarmModal from "./AlarmModal.js";
 
-function HeaderLoginArea() {
+function HeaderLoginArea(props) {
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    if (user.userData) {
-      console.log("true");
-    } else {
-      console.log("flase");
-    }
-  }, []);
-  //modal
-  const [alarmHambucControl, setalarmHambucControl] = useState(false);
-  const [myPageHambucControl, setmyPageHambucControl] = useState(false);
 
   const alarmInnerRef = useOuterClick((e) => {
-    setalarmHambucControl(false);
+    props.setalarmHambucControl(false);
   });
+
   const myPageInnerRef = useOuterClick((e) => {
-    setmyPageHambucControl(false);
+    props.setmyPageHambucControl(false);
   });
 
   return (
@@ -34,20 +25,23 @@ function HeaderLoginArea() {
           <div className="hambuc" ref={alarmInnerRef}>
             <i
               className="bell bi bi-bell"
-              onClick={() => setalarmHambucControl(true)}
+              onClick={() => props.setalarmHambucControl(true)}
             ></i>
-            {alarmHambucControl ? <AlarmModal /> : null}
+            {props.alarmHambucControl ? <AlarmModal /> : null}
           </div>
           <div className="hambuc" ref={myPageInnerRef}>
             <Avatar
               className="profile"
-              src={user.userData ? user.userData.avatar : "./test.png"}
+              src={user.userData ? user.userData.photoURL : "./test.png"}
               size="35px"
               round={true}
-              onClick={() => setmyPageHambucControl(true)}
+              onClick={() => props.setmyPageHambucControl(true)}
             />
-            {myPageHambucControl ? (
-              <MyPageModal setmyPageHambucControl={setmyPageHambucControl} />
+
+            {props.myPageHambucControl ? (
+              <MyPageModal
+                setmyPageHambucControl={props.setmyPageHambucControl}
+              />
             ) : null}
           </div>
         </>

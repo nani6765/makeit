@@ -4,18 +4,15 @@ const counter = mongoose.Schema(
     name: {
       type: String,
     },
-    users: {
+    userNum: {
       type: Number,
     },
-    coPosts: {
+    coPostNum: {
       type: Number,
     },
-    chatNum: {
-      type: Number,
-    }
   },
   { collection: "counter" }
 );
 
-const Counter = mongoose.model("counter", counter);
+const Counter = mongoose.model("Counter", counter);
 module.exports = { Counter };

@@ -45,7 +45,7 @@ function CommunityUpload(props) {
       </LabelDiv>
 
       <UploadDiv>
-        <UploadForm user={props.user.userData} category={category} />
+        <UploadForm category={category} />
       </UploadDiv>
     </>
   );

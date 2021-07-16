@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { RepleDiv } from "../../../css/CommunityDetailElement.js";
 import RepleContent from "./RepleContent.js";
 
@@ -12,12 +12,7 @@ function RepleList(props) {
     <RepleDiv>
       {repleList.map((reple, idx) => {
         return (
-          <RepleContent
-            key={idx}
-            reple={reple}
-            user={props.user}
-            postInfo={props.postInfo}
-          />
+          <RepleContent key={idx} reple={reple} postInfo={props.postInfo} />
         );
       })}
     </RepleDiv>

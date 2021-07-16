@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { RerepleUploadDiv } from "../../../css/CommunityDetailElement.js";
+import { useSelector } from "react-redux";
 
 function RerepleUpload(props) {
   const [content, setContent] = useState("");
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    console.log(props.Reple);
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -12,13 +17,8 @@ function RerepleUpload(props) {
       return alert("댓글 내용을 입력해주세요.");
     }
     const body = {
-      auther: props.userData._id,
-      avatar: props.userData.avatar,
-      email: props.userData.email,
-      name: props.userData.name,
-      postNum: props.postInfo.postNum,
-      replePid: props.Reple._id,
-      _id: props.Reple.rerepleIdx,
+      uid: user.userData.uid,
+      repleInfo: props.Reple,
       content: content,
     };
 
@@ -37,14 +37,14 @@ function RerepleUpload(props) {
       <form action="post" onSubmit={submitHandler}>
         <div className="avatar">
           <Avatar
-            src={props.userData.avatar}
+            src={user.userData.photoURL}
             size="50"
             round={true}
             style={{ border: "1px solid #c6c6c6" }}
           />
         </div>
 
-        <p className="name">{props.userData.name}</p>
+        <p className="name">{user.userData.displayName}</p>
 
         <input
           type="text"

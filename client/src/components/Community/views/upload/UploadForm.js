@@ -1,4 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
+
+import FindingActorUploadFilter from "./Filter/FindingActorUploadFilter.js";
+import FileUploadArea from "../../../utils/FileUploadArea.js";
+import FileShowArea from "../../../utils/FileShowArea.js";
+import PostBoardFilter from "./Filter/PostBoardFilter.js";
+import LocationFilter from "./Filter/LocationFilter.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
@@ -10,14 +19,6 @@ import {
   DropZoneDiv,
 } from "../../css/CommunityElement.js";
 
-import FindingActorUploadFilter from "./Filter/FindingActorUploadFilter.js";
-import { withRouter } from "react-router-dom";
-import axios from "axios";
-import FileUploadArea from "../../../utils/FileUploadArea.js";
-import FileShowArea from "../../../utils/FileShowArea.js";
-import PostBoardFilter from "./Filter/PostBoardFilter.js";
-import LocationFilter from "./Filter/LocationFilter.js";
-
 function UploadForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
@@ -26,10 +27,7 @@ function UploadForm(props) {
   const [FilterElement, setFilterElement] = useState([]);
   const [SubCategory, setSubCategory] = useState("");
 
-  const updateImages = (newImages) => {
-    setImage(newImages);
-  };
-
+  const user = useSelector((state) => state.user);
   const submitHandler = (e) => {
     e.preventDefault();
     if (props.category === "배우찾기" || props.category === "파트너찾기") {
@@ -41,8 +39,7 @@ function UploadForm(props) {
       return alert("제목과 내용을 입력해주세요.");
     }
     const body = {
-      auther: props.user._id,
-      email: props.user.email,
+      uid: user.userData.uid,
       title: Title,
       content: Content,
       images: Image,
@@ -50,6 +47,7 @@ function UploadForm(props) {
       filters: FilterElement,
       subCategory: SubCategory,
     };
+
     axios.post("/api/community/postSubmit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 등록 성공");

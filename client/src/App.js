@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "./redux/_actions/user_action.js";
 import firebase from "./firebase.js";
@@ -28,18 +28,15 @@ import CommunityUpload from "./components/Community/views/CommunityUpload.js";
 import CommunityUpdate from "./components/Community/views/CommunityUpdate.js";
 
 function App() {
-  let history = useHistory();
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
-      console.log("user", user);
+      console.log(user);
       if (user) {
-        history.push("/");
         dispatch(setUser(user));
       } else {
-        history.push("/");
         dispatch(clearUser());
       }
     });

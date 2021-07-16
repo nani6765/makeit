@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from "react";
-import { ModalDiv } from "../../../css/CommunityDetailElement.js"
+import React from "react";
+import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
-import axios from 'axios';
+import { useSelector } from "react-redux";
+import axios from "axios";
 
 function RepleGuestModal(props) {
-
-    function ChatHandler() {
-        let body = {
-            me: props.userId,
-            you: props.postInfo.auther._id,
-        }
-        axios.post("/api/chat/create/", body).then((response) => {
-            if (response.data.success) {
-                props.history.push({
-                    pathname: "/chat/"+response.data.chatNum,
-                });
-            } else {
-                alert("error");
-            }
+  const user = useSelector((state) => state.user);
+  function ChatHandler() {
+    let body = {
+      me: user.userData.uid,
+      you: props.repleInfo.auther.uid,
+    };
+    axios.post("/api/chat/create/", body).then((response) => {
+      if (response.data.success) {
+        props.history.push({
+          pathname: "/chat/" + response.data.chatNum,
         });
-    }
-    
+      } else {
+        alert("error");
+      }
+    });
+  }
+
   return (
     <ModalDiv>
       <div>

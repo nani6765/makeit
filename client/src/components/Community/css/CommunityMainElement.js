@@ -128,7 +128,7 @@ const PageUL = styled.ul`
     .active {
       font-weight: bold;
     }
-    &:nth-last-child(1) {
+    &:nth-last-of-type {
       border: none;
     }
   }

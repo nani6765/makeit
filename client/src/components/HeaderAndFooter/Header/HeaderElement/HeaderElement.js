@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -19,6 +19,10 @@ import "../../css/header.css";
 import "../../css/animation.css";
 
 function HeaderElement(props) {
+  //modal
+  const [alarmHambucControl, setalarmHambucControl] = useState(false);
+  const [myPageHambucControl, setmyPageHambucControl] = useState(false);
+
   return (
     <>
       <HeaderDiv className={`header ${props.shadowStyle} ${props.hiddenStyle}`}>
@@ -40,7 +44,12 @@ function HeaderElement(props) {
             </form>
           </HeaderSearch>
 
-          <HeaderLoginArea />
+          <HeaderLoginArea
+            alarmHambucControl={alarmHambucControl}
+            setalarmHambucControl={setalarmHambucControl}
+            myPageHambucControl={myPageHambucControl}
+            setmyPageHambucControl={setmyPageHambucControl}
+          />
 
           <MobileHambuck>
             <i className="bi bi-list" onClick={() => props.showSide()}></i>

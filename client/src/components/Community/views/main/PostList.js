@@ -23,12 +23,12 @@ function PostList(props) {
             >
               <PostCard>
                 <Avatar
-                  src={post.auther.avatar}
+                  src={post.auther.photoURL}
                   size="50"
                   round={true}
                   style={{ border: "1px solid #c6c6c6" }}
                 />
-                <p className="author">{post.auther.name}</p>
+                <p className="author">{post.auther.displayName}</p>
                 <p className="view">조회수 {post.views}</p>
                 <p className="date">{post.realTime}</p>
                 <p className="title">{post.title}</p>

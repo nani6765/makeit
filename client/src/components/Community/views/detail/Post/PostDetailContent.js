@@ -1,28 +1,27 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { withRouter, useHistory } from "react-router";
+import axios from "axios";
+
 import PostImages from "./PostImages.js";
 import { DetailDiv } from "../../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
 import PostModal from "../Modal/PostModal";
 import PostGuestModal from "../Modal/PostGuestModal";
-import { withRouter } from "react-router";
-import axios from "axios";
 
 function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);
-  const [userInfo, setuserInfo] = useState(props.user);
   const [hambucControl, sethambucControl] = useState(false);
   const [likeFlag, setlikeFlag] = useState(false);
+  const user = useSelector((state) => state.user);
+  let history = useHistory();
 
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
 
   useEffect(() => {
-    console.log("likeFlag", likeFlag);
-  }, [likeFlag]);
-
-  useEffect(() => {
-    if (postInfo.likeArray.includes(userInfo.userData._id)) {
+    if (user.userData && postInfo.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
       setlikeFlag(false);
@@ -30,12 +29,12 @@ function PostDetailContent(props) {
   }, []);
 
   function LikeHandler() {
-    if (postInfo.auther._id === userInfo.userData._id) {
+    if (postInfo.auther.uid === user.userData.uid) {
       return alert("본인 글에는 좋아요를 누를 수 없습니다!");
     }
-    if (props.user.userData.error === true) {
+    if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
-      return props.history.push("/login");
+      return history.push("/login");
     }
     let target = document.querySelector("#likeArea");
     target.style.disable = "true";
@@ -43,7 +42,7 @@ function PostDetailContent(props) {
     let body = {
       postNum: postInfo.postNum,
       likeFlag: likeFlag,
-      userId: userInfo.userData._id,
+      userId: user.userData.uid,
     };
 
     axios.post("/api/community/like", body).then((response) => {
@@ -62,14 +61,14 @@ function PostDetailContent(props) {
         <div className="content">
           <div className="avatar">
             <Avatar
-              src={postInfo.auther.avatar}
+              src={postInfo.auther.photoURL}
               size="50"
               round={true}
               style={{ border: "1px solid #c6c6c6" }}
             />
           </div>
-          <p className="author">{postInfo.auther.name}</p>
-          {props.user.userData.error === true ? null : (
+          <p className="author">{postInfo.auther.displayName}</p>
+          {user.userData ? (
             <div
               className="hambuc"
               onClick={() => sethambucControl(true)}
@@ -80,14 +79,17 @@ function PostDetailContent(props) {
                 onClick={() => sethambucControl(true)}
               ></i>
               {hambucControl ? (
-                userInfo.userData._id === postInfo.auther._id ? (
+                user.userData.uid === postInfo.auther.uid ? (
                   <PostModal postInfo={postInfo} />
                 ) : (
-                  <PostGuestModal userId={userInfo.userData._id} postInfo={postInfo}/>
+                  <PostGuestModal
+                    userId={user.userData.uid}
+                    postInfo={postInfo}
+                  />
                 )
               ) : null}
             </div>
-          )}
+          ) : null}
           <p className="date">{postInfo.realTime}</p>
           <p className="title">{postInfo.title}</p>
           <p className="desc">{postInfo.content}</p>

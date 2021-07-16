@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, withRouter } from "react-router-dom";
 import { HeaderNav } from "../../css/HeaderElement.js";
 
 function HeaderNavArea() {
@@ -6,20 +7,20 @@ function HeaderNavArea() {
     <HeaderNav>
       <ul>
         <li>
-          <a href="/landingPage">프로젝트</a>
+          <Link to="/landingPage">프로젝트</Link>
         </li>
         <li>
-          <a href="/landingPage">포트폴리오</a>
+          <Link to="/landingPage">포트폴리오</Link>
         </li>
         <li>
-          <a href="/landingPage">영상제작</a>
+          <Link to="/landingPage">영상제작</Link>
         </li>
         <li>
-          <a href="/community">커뮤니티</a>
+          <Link to="/community">커뮤니티</Link>
         </li>
       </ul>
     </HeaderNav>
   );
 }
 
-export default HeaderNavArea;
+export default withRouter(HeaderNavArea);

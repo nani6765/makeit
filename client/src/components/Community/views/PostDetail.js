@@ -68,9 +68,7 @@ function PostDetail(props) {
 
   return (
     <>
-      {postInfo._id != null ? (
-        <PostDetailContent postInfo={postInfo} user={props.user} />
-      ) : null}
+      {postInfo._id != null ? <PostDetailContent postInfo={postInfo} /> : null}
 
       {TotalSize > 0 ? (
         <>
@@ -80,7 +78,6 @@ function PostDetail(props) {
           <RepleList
             repleInfo={Reples}
             loadMoreHanlder={loadMoreHanlder}
-            user={props.user}
             postInfo={postInfo}
           />
           {TotalSize > Reples.length ? (
@@ -93,9 +90,7 @@ function PostDetail(props) {
         </>
       ) : null}
 
-      {postInfo._id != null ? (
-        <RepleUpload postInfo={postInfo} user={props.user} />
-      ) : null}
+      {postInfo._id != null ? <RepleUpload postInfo={postInfo} /> : null}
     </>
   );
 }

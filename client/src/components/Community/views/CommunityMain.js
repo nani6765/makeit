@@ -84,6 +84,7 @@ function CommunityMain(props) {
       {AxiosCheck ? (
         <>
           <PostList PostArray={PostArray} />
+
           {/* 페이지번호, 검색 */}
           <CommunityFNB
             PageTotalIdx={PageTotalIdx}

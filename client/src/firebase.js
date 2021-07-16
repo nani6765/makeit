@@ -3,15 +3,17 @@ import "firebase/auth";
 import "firebase/database";
 import "firebase/storage";
 
+// Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyD572rjY2wMl4U9rq12kSQk7_RQdOCQLNc",
-  authDomain: "makeit-1376e.firebaseapp.com",
-  projectId: "makeit-1376e",
-  storageBucket: "makeit-1376e.appspot.com",
-  messagingSenderId: "508768254685",
-  appId: "1:508768254685:web:d3965bd20840f86b637934",
+  apiKey: "AIzaSyAy5zeQAO3KH6L5_J6werdiwdPDR8HU4RY",
+  authDomain: "makeit-f9791.firebaseapp.com",
+  databaseURL:
+    "https://makeit-f9791-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "makeit-f9791",
+  storageBucket: "makeit-f9791.appspot.com",
+  messagingSenderId: "340731554704",
+  appId: "1:340731554704:web:3ad7594702f8a4ce012115",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
 export default firebase;

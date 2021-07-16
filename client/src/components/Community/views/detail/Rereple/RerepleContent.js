@@ -1,41 +1,44 @@
 import React, { useState, useEffect, useRef } from "react";
+import { withRouter, useHistory } from "react-router";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
 import Avatar from "react-avatar";
-import { withRouter } from "react-router";
+
 import { RerepleContentGrid } from "../../../css/CommunityDetailElement.js";
 import RerepleModal from "../Modal/RerepleModal.js";
 import RerepleGuestModal from "../Modal/RerepleGuestModla.js";
 import RerepleEditForm from "./RerepleEditForm.js";
-import axios from "axios";
 
 function RerepleContent(props) {
   const [rereple, setrereple] = useState(props.rereple);
   const [hambucControl, sethambucControl] = useState(false);
   const [UpdateCheck, setUpdateCheck] = useState(false);
   const [likeFlag, setlikeFlag] = useState(false);
-
+  const user = useSelector((state) => state.user);
+  let history = useHistory();
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
 
   useEffect(() => {
-    console.log("리리플 컨텐츠", props);
-  }, []);
-
-  useEffect(() => {
-    if (rereple.likeArray.includes(props.user._id)) {
+    /*
+    if (rereple.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
       setlikeFlag(false);
     }
-  }, []);
+    */
+    console.log("rereple", rereple);
+  }, [rereple]);
 
   function LikeHandler() {
-    if (rereple.auther === props.user._id) {
+    if (rereple.auther.uid === user.userData.uid) {
       return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
     }
-    if (props.user.error === true) {
+    if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
-      return props.history.push("/login");
+      return history.push("/login");
     }
     let target = document.querySelector("#likeArea");
     target.style.disable = "true";
@@ -93,11 +96,11 @@ function RerepleContent(props) {
             ) : (
               <i className="bi bi-emoji-smile"></i>
             )}
-            공감({rereple.likeArray.length})
+            {/*공감({rereple.likeArray.length})*/}
           </button>
         </div>
 
-        {props.user.error === true ? null : (
+        {user.userData ? null : (
           <div
             className="hambuc"
             onClick={() => sethambucControl(true)}
@@ -115,7 +118,7 @@ function RerepleContent(props) {
                   rereple={rereple}
                   reple={props.reple}
                 />
-              ) : props.user.error === true ? null : (
+              ) : user.userData ? null : (
                 <RerepleGuestModal />
               )
             ) : null}

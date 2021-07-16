@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { RepleUploadDiv } from "../../../css/CommunityDetailElement.js";
-import { withRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 
 function RepleUpload(props) {
   const [content, setContent] = useState("");
+  const user = useSelector((state) => state.user);
+  let history = useHistory();
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (!content) {
       return alert("댓글 내용을 입력해주세요.");
     }
-    if (props.user.userData.error === true) {
+    if (user.userData === null) {
       alert("로그인한 회원만 댓글을 입력할 수 있습니다.");
-      return props.history.push("/login");
+      return history.push("/login");
     }
+
     const body = {
-      auther: props.user.userData._id,
-      email: props.user.userData.email,
-      name: props.user.userData.name,
+      uid: user.userData.uid,
       postNum: props.postInfo.postNum,
       content: content,
     };

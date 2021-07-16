@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter, useHistory } from "react-router-dom";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 import firebase from "../../../firebase.js";
@@ -13,6 +13,7 @@ function LoginPage(props) {
   const [Password, setPassword] = useState("");
   const [ErrorLogin, setErrorLogin] = useState("");
   const [Loading, setLoading] = useState(false);
+  let history = useHistory();
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -26,6 +27,7 @@ function LoginPage(props) {
         .auth()
         .signInWithEmailAndPassword(body.email, body.password);
       setLoading(false);
+      history.push("/");
     } catch (error) {
       setErrorLogin(error.message);
       setLoading(false);
@@ -47,10 +49,12 @@ function LoginPage(props) {
     line-height: 19px;
     text-align: center;
     color: #454345;
-    span {
+    a {
       font-weight: bold;
-      text-decoration: underline;
+      text-decoration: none;
       pointer: cursor;
+      color: #454345;
+      cursor: pointer;
     }
   `;
 
@@ -90,14 +94,7 @@ function LoginPage(props) {
 
           <div id="naverIdLogin"></div>
           <p css={GoRegister}>
-            아직 계정이 없으신가요?{" "}
-            <span
-              onClick={() => {
-                window.location.href = "/register";
-              }}
-            >
-              간편가입하기
-            </span>
+            아직 계정이 없으신가요? <Link to="/register">간편가입하기</Link>
           </p>
         </div>
       </div>
