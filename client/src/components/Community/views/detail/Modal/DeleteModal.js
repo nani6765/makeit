@@ -24,6 +24,7 @@ function DeleteModal(props) {
       });
       //댓글 삭제
     } else if (props.type === "Reple") {
+      console.log("props", props.RepleInfo);
       let body = {
         postNum: props.RepleInfo.postNum,
         repleId: props.RepleInfo._id,

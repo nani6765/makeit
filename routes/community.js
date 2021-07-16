@@ -317,39 +317,26 @@ router.post("/repleSubmit", (req, res) => {
 });
 
 router.post("/repleDelete", (req, res) => {
-  try {
-    if (!req.body.rerepleNum) {
-      CommunityReple.deleteOne({ _id: req.body.repleId });
-    } else {
-      CommunityReple.findOneAndUpdate(
-        { _id: req.body.repleId },
-        { isDeleted: true }
-      );
-    }
-  } catch (err) {
-    return res.status(400).json({ success: false, err });
-  }
   Community.findOneAndUpdate(
     { postNum: req.body.postNum },
     { $inc: { repleNum: -1 } }
-  ).exec((err, result) => {
-    if (err) return res.status(400).json({ success: false, err });
-    return res.status(200).send({ success: true });
-  });
-  /*
-  let temp = req.body;
-  let deleteRepleNum = req.body.rerepleNum + 1;
-  CommunityReple.deleteOne({ _id: temp.repleId }, (err, result) => {
-    if (err) return res.status(400).json({ success: false, err });
-    Community.findOneAndUpdate(
-      { postNum: temp.postNum },
-      { $inc: { repleNum: -deleteRepleNum } }
-    ).exec((err, post) => {
-      if (err) return res.status(400).json({ success: false, err });
+  )
+    .exec()
+    .then((result) => {
+      if (req.body.rerepleNum) {
+        CommunityReple.findOneAndUpdate(
+          { _id: req.body.repleId },
+          { $set: { isDeleted: true } }
+        ).exec();
+      } else {
+        CommunityReple.findOneAndDelete({ _id: req.body.repleId }).exec();
+      }
       return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      console.log("err", err);
+      if (err) return res.status(400).json({ success: false, err });
     });
-  });
-  */
 });
 
 router.post("/repleUpdate", (req, res) => {
@@ -449,35 +436,27 @@ router.post("/rerepleUpdate", (req, res) => {
 router.post("/rerepleDelete", (req, res) => {
   CommunityRereple.deleteOne({ _id: req.body.rerepleId })
     .exec()
-    .then((result) => {
-      return CommunityReple.findOne({ _id: req.body.repleId }).exec();
-    })
-    .then((repleInfo) => {
-      if (repleInfo.isDeleted && !repleInfo.rerepleNum) {
-        repleInfo.deleteOne();
-      } else {
-        //console.log("수정전", repleInfo);
-
-        let temp = { ...repleInfo };
-        temp._doc.rerepleNum = repleInfo.rerepleNum - 1;
-        temp.rerepleArray = [
-          ...repleInfo.rerepleArray.splice(
-            repleInfo.rerepleArray.indexOf(req.body.rerepleId)
-          ),
-        ];
-        repleInfo.updateOne({ $set: temp });
-        /*
-        repleInfo.updateOne({
-          $inc: { rerepleNum: -1 },
-          $pull: { rerepleArray: { _id: req.body.rerepleId } },
+    .then(() => {
+      CommunityReple.findOneAndUpdate({
+        $inc: { rerepleNum: -1 },
+        $pull: { rerepleArray: req.body.rerepleId },
+      })
+        .exec()
+        .then(() => {
+          return CommunityReple.findOne({ _id: req.body.repleId }).exec();
+        })
+        .then((repleInfo) => {
+          console.log("repleInfo", repleInfo);
+          console.log("check", repleInfo.isDeleted, repleInfo.rerepleNum);
+          if (repleInfo.isDeleted && !repleInfo.rerepleNum) {
+            repleInfo.deleteOne();
+          }
         });
-        */
-        //console.log("수정후", repleInfo);
-      }
       return res.status(200).send({ success: true });
     })
     .catch((err) => {
-      if (err) return res.status(400).json({ success: false, err });
+      console.log("err", err);
+      return res.status(400).json({ success: false, err });
     });
 });
 
