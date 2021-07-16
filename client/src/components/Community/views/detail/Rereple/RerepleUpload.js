@@ -7,9 +7,6 @@ import { useSelector } from "react-redux";
 function RerepleUpload(props) {
   const [content, setContent] = useState("");
   const user = useSelector((state) => state.user);
-  useEffect(() => {
-    console.log(props.Reple);
-  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -20,7 +17,9 @@ function RerepleUpload(props) {
       uid: user.userData.uid,
       repleInfo: props.Reple,
       content: content,
+      postNum: props.Reple.postNum,
     };
+    console.log("rereple", body);
 
     axios.post("/api/community/rerepleSubmit", body).then((response) => {
       if (response.data.success) {

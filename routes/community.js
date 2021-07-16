@@ -237,17 +237,23 @@ router.post("/postSubmit", (req, res) => {
 
 router.post("/postDelete", (req, res) => {
   let temp = req.body;
+  for (let i = 0; i < temp.imageLength; i++) {
+    setDelete("makeit/community", temp.images[i].key);
+  }
 
-  CommunityReple.deleteMany({ postNum: temp.postNum }, (err, result) => {
-    if (err) return res.status(400).json({ success: false, err });
-    for (let i = 0; i < temp.imageLength; i++) {
-      setDelete("makeit/community", temp.images[i].key);
-    }
-    Community.deleteOne({ _id: temp.postInfoId }, (err, result) => {
-      if (err) return res.status(400).json({ success: false, err });
+  CommunityRereple.deleteMany({ postNum: temp.postNum })
+    .exec()
+    .then(() => {
+      CommunityReple.deleteMany({ postNum: temp.postNum }).exec();
+    })
+    .then(() => {
+      Community.deleteOne({ _id: temp.postInfoId }).exec();
       return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false, err });
     });
-  });
 });
 
 router.post("/postUpdate", (req, res) => {
@@ -392,6 +398,7 @@ router.post("/rerepleGetAuther", (req, res) => {
 router.post("/rerepleSubmit", (req, res) => {
   let temp = req.body;
   let rereple = {};
+  rereple.postNum = temp.postNum;
   User.findOne({ uid: temp.uid }, (err, userInfo) => {
     if (err) return res.status(400).json({ success: false, err });
     rereple.auther = userInfo._id;

@@ -150,6 +150,9 @@ const coRerepleSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
+    postNum: {
+      type: Number,
+    },
   },
   {
     timestamps: true,
