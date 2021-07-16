@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DeleteModalDiv } from "../../../css/CommunityDetailElement";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
 function DeleteModal(props) {
-  useEffect(() => {
-    console.log("props", props);
-  }, []);
-
   function RemoveHandler() {
+    //게시글 삭제
     if (props.type === "post") {
       let body = {
         postInfoId: props.PostInfo._id,
@@ -25,13 +22,14 @@ function DeleteModal(props) {
           alert("게시글 삭제 실패");
         }
       });
+      //댓글 삭제
     } else if (props.type === "Reple") {
       let body = {
-        repleId: props.RepleInfo._id,
         postNum: props.RepleInfo.postNum,
+        repleId: props.RepleInfo._id,
         rerepleNum: props.RepleInfo.rerepleNum,
       };
-
+      console.log("body", body);
       axios.post("/api/community/repleDelete", body).then((response) => {
         if (response.data.success) {
           alert("댓글 삭제 성공");
@@ -40,12 +38,13 @@ function DeleteModal(props) {
           alert("댓글 삭제 실패");
         }
       });
+      //대댓글 삭제
     } else {
       let body = {
-        reple: props.reple,
-        rereple: props.rereple,
+        repleId: props.reple._id,
+        rerepleId: props.rereple._id,
       };
-
+      console.log(body);
       axios.post("/api/community/rerepleDelete", body).then((response) => {
         if (response.data.success) {
           alert("댓글 삭제 성공");

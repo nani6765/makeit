@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { withRouter, useHistory } from "react-router";
 import { useSelector } from "react-redux";
+import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 
 import Avatar from "react-avatar";
@@ -11,25 +11,30 @@ import RerepleGuestModal from "../Modal/RerepleGuestModla.js";
 import RerepleEditForm from "./RerepleEditForm.js";
 
 function RerepleContent(props) {
-  const [rereple, setrereple] = useState(props.rereple);
+  const [reple, setreple] = useState(props.repleInfo);
+  const [rereple, setrereple] = useState(props.rerepleInfo);
+
+  useEffect(() => {
+    console.log(reple, rereple);
+  }, []);
+
   const [hambucControl, sethambucControl] = useState(false);
   const [UpdateCheck, setUpdateCheck] = useState(false);
   const [likeFlag, setlikeFlag] = useState(false);
+
   const user = useSelector((state) => state.user);
   let history = useHistory();
+
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
 
   useEffect(() => {
-    /*
     if (rereple.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
       setlikeFlag(false);
     }
-    */
-    console.log("rereple", rereple);
   }, [rereple]);
 
   function LikeHandler() {
@@ -44,9 +49,8 @@ function RerepleContent(props) {
     target.style.disable = "true";
 
     let body = {
-      repleId: props.reple._id,
       likeFlag: likeFlag,
-      userId: props.user._id,
+      userId: user.userData.uid,
       rerepleId: rereple._id,
     };
 
@@ -65,20 +69,20 @@ function RerepleContent(props) {
       <div className="content">
         <div className="avatar">
           <Avatar
-            src={rereple.avatar}
+            src={rereple.auther.photoURL}
             size="50"
             round={true}
             style={{ border: "1px solid #c6c6c6" }}
           />
         </div>
-        <p className="author">{rereple.name}</p>
+        <p className="author">{rereple.auther.displayName}</p>
         <p className="date">{rereple.realTime}</p>
 
         {UpdateCheck ? (
           <RerepleEditForm
             rereple={rereple}
             setUpdateCheck={setUpdateCheck}
-            replePid={props.reple.replePid}
+            replePid={reple.replePid}
           />
         ) : (
           <p className="desc">{rereple.content}</p>
@@ -96,11 +100,11 @@ function RerepleContent(props) {
             ) : (
               <i className="bi bi-emoji-smile"></i>
             )}
-            {/*공감({rereple.likeArray.length})*/}
+            공감({rereple.likeArray.length})
           </button>
         </div>
 
-        {user.userData ? null : (
+        {user.userData ? (
           <div
             className="hambuc"
             onClick={() => sethambucControl(true)}
@@ -112,18 +116,18 @@ function RerepleContent(props) {
             ></i>
 
             {hambucControl ? (
-              props.user._id === rereple.auther ? (
+              user.userData.uid === rereple.auther.uid ? (
                 <RerepleModal
                   setUpdateCheck={setUpdateCheck}
+                  reple={reple}
                   rereple={rereple}
-                  reple={props.reple}
                 />
-              ) : user.userData ? null : (
+              ) : user.userData ? (
                 <RerepleGuestModal />
-              )
+              ) : null
             ) : null}
           </div>
-        )}
+        ) : null}
       </div>
     </RerepleContentGrid>
   );

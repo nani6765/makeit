@@ -7,9 +7,9 @@ const {
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 
-const setUpload = require("../model/multer/upload.js");
-const setDelete = require("../model/multer/delete.js");
-const setRealTime = require("../model/multer/realTime.js");
+const setUpload = require("../module/multer/upload.js");
+const setDelete = require("../module/multer/delete.js");
+const setRealTime = require("../module/multer/realTime.js");
 
 ////////////////////////////
 //          POST          //
@@ -212,7 +212,6 @@ router.post("/image/delete", (req, res) => {
 });
 
 router.post("/postSubmit", (req, res) => {
-  console.log(req.body);
   let temp = req.body;
   Counter.findOne({ name: "counter" }, (err, counter) => {
     if (err) return res.status(400).json({ success: false, err });
@@ -223,7 +222,6 @@ router.post("/postSubmit", (req, res) => {
       const communityPost = new Community(temp);
       communityPost.save((err, doc) => {
         if (err) {
-          console.log(err);
           return res.status(400).json({ success: false, err });
         }
         counter.updateOne({ $inc: { coPostNum: 1 } }, (err) => {
@@ -319,6 +317,26 @@ router.post("/repleSubmit", (req, res) => {
 });
 
 router.post("/repleDelete", (req, res) => {
+  try {
+    if (!req.body.rerepleNum) {
+      CommunityReple.deleteOne({ _id: req.body.repleId });
+    } else {
+      CommunityReple.findOneAndUpdate(
+        { _id: req.body.repleId },
+        { isDeleted: true }
+      );
+    }
+  } catch (err) {
+    return res.status(400).json({ success: false, err });
+  }
+  Community.findOneAndUpdate(
+    { postNum: req.body.postNum },
+    { $inc: { repleNum: -1 } }
+  ).exec((err, result) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).send({ success: true });
+  });
+  /*
   let temp = req.body;
   let deleteRepleNum = req.body.rerepleNum + 1;
   CommunityReple.deleteOne({ _id: temp.repleId }, (err, result) => {
@@ -331,6 +349,7 @@ router.post("/repleDelete", (req, res) => {
       return res.status(200).send({ success: true });
     });
   });
+  */
 });
 
 router.post("/repleUpdate", (req, res) => {
@@ -374,6 +393,15 @@ router.post("/repleLike", (req, res) => {
 //          rereple          //
 ///////////////////////////////
 
+router.post("/rerepleGetAuther", (req, res) => {
+  CommunityRereple.findOne({ _id: req.body._id })
+    .populate("auther")
+    .exec((err, rerepleInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, rerepleInfo });
+    });
+});
+
 router.post("/rerepleSubmit", (req, res) => {
   let temp = req.body;
   let rereple = {};
@@ -387,8 +415,8 @@ router.post("/rerepleSubmit", (req, res) => {
       CommunityReple.findOneAndUpdate(
         { _id: temp.repleInfo._id },
         {
-          $inc: { rerepleNum: 1, rerepleIdx: 1 },
-          $push: { rerepleArray: doc },
+          $inc: { rerepleNum: 1 },
+          $push: { rerepleArray: doc._id },
         }
       ).exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
@@ -407,72 +435,75 @@ router.post("/rerepleSubmit", (req, res) => {
 router.post("/rerepleUpdate", (req, res) => {
   let temp = {};
   temp.content = req.body.content;
-  let key = req.body.replePid;
-  let Idx = req.body.rerepleIdx;
-  CommunityReple.findOne({ _id: key }).exec((err, reple) => {
-    if (err) return res.status(400).json({ success: false, err });
-    let repleTemp = {};
-    repleTemp = reple;
-    let targetIdx = repleTemp.rerepleArray.findIndex(
-      (rereple) => rereple._id === Idx
-    );
-    repleTemp.rerepleArray[targetIdx].content = req.body.content;
-    repleTemp.rerepleArray[targetIdx].realTime = setRealTime();
-    console.log(repleTemp.rerepleArray[targetIdx]);
-    CommunityReple.findByIdAndUpdate({ _id: key }, { $set: repleTemp }).exec(
-      (err, post) => {
-        if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).send({ success: true });
-      }
-    );
-  });
+  temp.realTime = setRealTime();
+  let rerepleId = req.body.rerepleId;
+
+  CommunityRereple.findByIdAndUpdate({ _id: rerepleId }, { $set: temp }).exec(
+    (err, result) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+    }
+  );
 });
 
 router.post("/rerepleDelete", (req, res) => {
-  let temp = req.body;
-  let idx = req.body.rereple._id;
-  Community.findOneAndUpdate(
-    { postNum: temp.reple.postNum },
-    { $inc: { repleNum: -1 } }
-  ).exec((err, post) => {
-    if (err) return res.status(400).json({ success: false, err });
+  CommunityRereple.deleteOne({ _id: req.body.rerepleId })
+    .exec()
+    .then((result) => {
+      return CommunityReple.findOne({ _id: req.body.repleId }).exec();
+    })
+    .then((repleInfo) => {
+      if (repleInfo.isDeleted && !repleInfo.rerepleNum) {
+        repleInfo.deleteOne();
+      } else {
+        //console.log("수정전", repleInfo);
 
-    CommunityReple.findOneAndUpdate(
-      { _id: temp.reple._id },
-      { $inc: { rerepleNum: -1 }, $pull: { rerepleArray: { _id: idx } } }
+        let temp = { ...repleInfo };
+        temp._doc.rerepleNum = repleInfo.rerepleNum - 1;
+        temp.rerepleArray = [
+          ...repleInfo.rerepleArray.splice(
+            repleInfo.rerepleArray.indexOf(req.body.rerepleId)
+          ),
+        ];
+        repleInfo.updateOne({ $set: temp });
+        /*
+        repleInfo.updateOne({
+          $inc: { rerepleNum: -1 },
+          $pull: { rerepleArray: { _id: req.body.rerepleId } },
+        });
+        */
+        //console.log("수정후", repleInfo);
+      }
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      if (err) return res.status(400).json({ success: false, err });
+    });
+});
+
+router.post("/rerepleLike", (req, res) => {
+  let rerepleId = req.body.rerepleId;
+  let key = req.body.likeFlag;
+  let user = req.body.userId;
+  if (key) {
+    //likeArray에서 userId 삭제
+    CommunityRereple.findOneAndUpdate(
+      { _id: rerepleId },
+      { $inc: { likeNum: -1 }, $pull: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).send({ success: true });
     });
-  });
-});
-
-router.post("/rerepleLike", (req, res) => {
-  let repleId = req.body.repleId;
-  let key = req.body.likeFlag;
-  let userId = req.body.userId;
-  let rerepleId = req.body.rerepleId;
-  CommunityReple.findOne({ _id: repleId }).exec((err, reple) => {
-    if (err) return res.status(400).json({ success: false, err });
-    let repleTemp = {};
-    repleTemp = reple;
-    let targetIdx = repleTemp.rerepleArray.findIndex(
-      (rereple) => rereple._id === rerepleId
-    );
-    if (key) {
-      let likeIdx = repleTemp.rerepleArray[targetIdx].likeArray.indexOf(userId);
-      repleTemp.rerepleArray[targetIdx].likeArray.splice(likeIdx, 1);
-    } else {
-      repleTemp.rerepleArray[targetIdx].likeArray.push(userId);
-    }
-    CommunityReple.findByIdAndUpdate(
-      { _id: repleId },
-      { $set: repleTemp }
-    ).exec((err, post) => {
+  } else {
+    //userId 삽입
+    CommunityRereple.findOneAndUpdate(
+      { _id: rerepleId },
+      { $inc: { likeNum: 1 }, $push: { likeArray: user } }
+    ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).send({ success: true });
     });
-  });
+  }
 });
 
 module.exports = router;

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
 import DeleteModal from "./DeleteModal";
 
 function RerepleModal(props) {
-  const [RepleInfo, setRepleInfo] = useState(props.repleInfo);
   const [ModalFlag, setModalFlag] = useState(false);
 
   function EditHandler() {

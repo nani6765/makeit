@@ -11,6 +11,7 @@ function RepleGuestModal(props) {
       me: user.userData.uid,
       you: props.repleInfo.auther.uid,
     };
+    /*
     axios.post("/api/chat/create/", body).then((response) => {
       if (response.data.success) {
         props.history.push({
@@ -20,10 +21,11 @@ function RepleGuestModal(props) {
         alert("error");
       }
     });
+    */
   }
 
   return (
-    <ModalDiv>
+    <ModalDiv style={{ justifyContent: "space-around" }}>
       <div>
         <button className="edit" onClick={() => ChatHandler()}>
           <i className="bi bi-envelope-open"></i>

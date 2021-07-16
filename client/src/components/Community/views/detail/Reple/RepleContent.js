@@ -8,7 +8,7 @@ import RepleModal from "../Modal/RepleModal.js";
 import RepleGuestModal from "../Modal/RepleGuestModal.js";
 import RepleEditForm from "./RepleEditForm.js";
 import RerepleUpload from "../Rereple/RerepleUpload.js";
-import RerepleContentDiv from "../Rereple/RerepleContentDiv.js";
+import RerepleDiv from "../Rereple/RerepleDiv.js";
 
 import { RepleContentGrid } from "../../../css/CommunityDetailElement.js";
 import Avatar from "react-avatar";
@@ -138,7 +138,7 @@ function RepleContent(props) {
         ? null
         : Reple.rerepleArray.map((rereple, idx) => {
             return (
-              <RerepleContentDiv rereple={rereple} reple={Reple} key={idx} />
+              <RerepleDiv rerepleInfo={rereple} repleInfo={Reple} key={idx} />
             );
           })}
     </>

@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 function RerepleEditForm(props) {
   const [content, setContent] = useState(props.rereple.content || "");
-
-  useEffect(() => {
-    console.log("리리플", props);
-  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -15,12 +11,9 @@ function RerepleEditForm(props) {
     }
 
     const body = {
-      replePid: props.replePid,
-      rerepleIdx: props.rereple._id, //rereple의 id
-      content: content, //바꿔야 될 내용
+      content: content,
+      rerepleId: props.rereple._id,
     };
-
-    console.log("body", body);
 
     axios.post("/api/community/rerepleUpdate", body).then((response) => {
       if (response.data.success) {

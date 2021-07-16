@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { withRouter, useHistory } from "react-router-dom";
+
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
@@ -9,7 +12,6 @@ import {
   CancelBtn,
   DropZoneDiv,
 } from "../../css/CommunityElement.js";
-import { withRouter } from "react-router-dom";
 import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../utils/FileShowArea.js";
@@ -20,6 +22,8 @@ function UpdateForm(props) {
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
   const [Check, setCheck] = useState(0);
+  const user = useSelector((state) => state.user);
+  let history = useHistory();
 
   useEffect(() => {
     setPostInfo(props.PostInfo);
@@ -45,8 +49,6 @@ function UpdateForm(props) {
       content: Content,
       images: Image,
     };
-
-    console.log("body체크", body);
 
     axios.post("/api/community/postUpdate", body).then((response) => {
       if (response.data.success) {

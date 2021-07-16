@@ -81,7 +81,6 @@ const coRepleSchema = mongoose.Schema(
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
     postNum: {
       type: Number,
@@ -101,13 +100,16 @@ const coRepleSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    rerepleNum: {
+      type: Number,
+      default: 0,
+    },
     likeArray: {
       type: Array,
     },
-    rerepleNum: {
-      //현재 대댓글 개수
-      type: Number,
-      default: 0,
+    isDeleted: {
+      type: Boolean,
+      default: false,
     },
     rerepleArray: [
       {
@@ -118,7 +120,7 @@ const coRepleSchema = mongoose.Schema(
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
-    timestamps: true,
+    //timestamps: true,
     collection: "coReples",
   }
 );
