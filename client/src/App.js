@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "./redux/_actions/user_action.js";
-import firebase from "./firebase.js";
+import { firebase } from "./firebase.js";
 
 //Basic
 import Header from "./components/HeaderAndFooter/Header/Header.js";

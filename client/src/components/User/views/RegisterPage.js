@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter, useHistory } from "react-router-dom";
-import firebase from "../../../firebase.js";
+import { firebase, actionCodeSettings } from "../../../firebase.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
@@ -74,7 +74,17 @@ function RegisterPage() {
       }, 5000);
     }
   };
-
+  /*
+  const verEmail = () => {
+    firebase
+      .auth()
+      .currentUser.sendEmailVerification()
+      .then(() => {
+        // Email verification sent!
+        // ...
+      });
+  };
+  */
   return (
     <>
       <div css={DivCSS}>
@@ -95,6 +105,9 @@ function RegisterPage() {
               onChange={(e) => setEmail(e.currentTarget.value)}
               required
             />
+            <button type="button" onClick={() => verEmail()}>
+              test!
+            </button>
             <label>이름</label>
             <input
               type="text"
