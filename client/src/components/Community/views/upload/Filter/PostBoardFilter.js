@@ -1,4 +1,6 @@
+import { set } from 'mongoose';
 import React, { useState, useEffect } from 'react'
+import { Switch } from 'react-router-dom';
 import Select from "react-select";
 
 function PostBoardFilter(props) {
@@ -10,9 +12,30 @@ function PostBoardFilter(props) {
         { value: 'other', label:'기타'}
     ]
 
+    const [SubCategoryIdx, setSubCategoryIdx] = useState(0);
+    const [SubCategoryCheck, setSubCategoryCheck] = useState(false);
+
     useEffect(() => {
-        props.setSubCategory(category[0].label);
-    }, [])
+        switch (props.SubCategory) {
+            case "자유게시판":
+                setSubCategoryIdx(0);
+                break;
+            case "홍보게시판":
+                 setSubCategoryIdx(1);
+                break;
+            case "질문게시판":
+                 setSubCategoryIdx(2);
+                break;
+            case "기타":
+                 setSubCategoryIdx(3);
+                break;
+            default:
+                 setSubCategoryIdx(0);
+                break;
+        }
+        setSubCategoryCheck(true);
+        props.setSubCategory("자유게시판" || props.SubCategory);
+    }, [props.SubCategory])
 
     const selectStyles = {
         control: (styles, {isSelected}) => ({...styles, textAlign: 'center', width: '13rem', height: '1rem', margin: '0px', border:isSelected ? '1px solid #702cba' : null}),
@@ -45,8 +68,10 @@ function PostBoardFilter(props) {
         <>
         <div style={{display:"flex", flexWrap:"nowrap", alignItems:"center"}}>
             <p style={{marginBottom:"0px", marginRight:"1rem"}}>카테고리</p>
-            <Select options={category} defaultValue={category[0]} styles={selectStyles} onChange = {(e) => props.setSubCategory(e.label)}/>    
-        </div>
+            {SubCategoryCheck ? 
+            <Select options={category} defaultValue={category[SubCategoryIdx]} styles={selectStyles} onChange = {(e) => props.setSubCategory(e.label)}/>    
+         : null}
+         </div>
         </>
     )
 }

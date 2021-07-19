@@ -15,22 +15,27 @@ import {
 import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../utils/FileShowArea.js";
+import PostBoardFilter from "../upload/Filter/PostBoardFilter.js";
+import FindingActorUploadFilter from "../upload/Filter/FindingActorUploadFilter.js";
+import LocationFilter from "../upload/Filter/LocationFilter.js";
 
 function UpdateForm(props) {
-  const [PostInfo, setPostInfo] = useState("");
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
   const [Check, setCheck] = useState(0);
+  const [SubCategory, setSubCategory] = useState(props.PostInfo.subCategory);
+  const [FilterElement, setFilterElement] = useState([]);
+  const [FilterCheck, setFilterCheck] = useState(false); //에러처리
   const user = useSelector((state) => state.user);
   let history = useHistory();
 
   useEffect(() => {
-    setPostInfo(props.PostInfo);
     setTitle(props.PostInfo.title);
     setContent(props.PostInfo.content);
     let temp = props.PostInfo.images;
     setImage(temp);
+    setSubCategory(props.PostInfo.subCategory);
   }, [props]);
 
   useEffect(() => {
@@ -43,21 +48,56 @@ function UpdateForm(props) {
       return alert("제목과 내용을 입력해주세요.");
     }
 
+    console.log(FilterElement)
+
     const body = {
       id: props.PostInfo._id,
       title: Title,
       content: Content,
       images: Image,
+      subCategory: SubCategory,
+      filters: FilterElement,
     };
 
     axios.post("/api/community/postUpdate", body).then((response) => {
       if (response.data.success) {
         alert("게시글 수정 성공");
-        props.history.push("/community");
+        props.history.push({
+          pathname: "/community",
+          state: { category: props.PostInfo.category },
+        });
       } else {
         alert("게시글 수정 실패");
       }
     });
+  };
+
+
+  
+  const SwitchSubCategory = () => {
+    switch (props.PostInfo.category) {
+      case "게시판":
+        return <PostBoardFilter SubCategory = {props.PostInfo.subCategory} setSubCategory={setSubCategory} />;
+      case "파트너찾기":
+        return <></>;
+      case "배우찾기":
+        return (
+          
+          <FindingActorUploadFilter
+            FilterElement={FilterElement}
+            setFilterElement={setFilterElement}
+            setFilterCheck={setFilterCheck}
+            FilterCheck={FilterCheck}
+            GenderFilter = {[...props.PostInfo.filters[0].gender]}
+            TypeFilter = {[...props.PostInfo.filters[0].type]}
+            ClassficationFilter = {[...props.PostInfo.filters[0].classfication]}
+          />
+        );
+      case "로케이션":
+        return <LocationFilter SubCategory = {props.PostInfo.subCategory} setSubCategory={setSubCategory} />;
+      case "건의함":
+        return <></>;
+    }
   };
 
   return (
@@ -70,6 +110,9 @@ function UpdateForm(props) {
           value={Title}
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
+        <div className="filterDiv">
+          {SwitchSubCategory()}
+        </div>
         <textarea
           name="content"
           className="content"

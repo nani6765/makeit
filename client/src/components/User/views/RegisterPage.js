@@ -17,6 +17,7 @@ function RegisterPage() {
   const [Loading, setLoading] = useState(false);
 
   let history = useHistory();
+  let cUser = '';
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -35,7 +36,6 @@ function RegisterPage() {
       let createdUser = await firebase
         .auth()
         .createUserWithEmailAndPassword(body.email, body.password);
-      console.log("createdUser", createdUser);
 
       await createdUser.user.updateProfile({
         displayName: body.name,
@@ -62,9 +62,24 @@ function RegisterPage() {
         name: createdUser.user.displayName,
         image: createdUser.user.photoURL,
       });
+      
+      var currentUser = firebase.auth().currentUser;
+      currentUser.sendEmailVerification({url: "http://localhost:3000"})
+      .then(function () {
+        console.log("이메일이 전송됨");
+      }).catch('email not sent');
 
+      if(currentUser.emailVerified == false) {
+        alert("이메일 인증을 완료해야합니다.");
+        firebase.auth().signOut().then(() => {
+          setLoading(false);
+          history.push("/");
+        }).catch((error) => {
+          console.log("logout error");
+        })
+      }
       setLoading(false);
-      history.push("/");
+     history.push("/");
     } catch (error) {
       console.log(error);
       setErrorFormSubmit(error.message);
@@ -74,8 +89,9 @@ function RegisterPage() {
       }, 5000);
     }
   };
-  /*
+  
   const verEmail = () => {
+    /*
     firebase
       .auth()
       .currentUser.sendEmailVerification()
@@ -83,8 +99,9 @@ function RegisterPage() {
         // Email verification sent!
         // ...
       });
+      */
   };
-  */
+  
   return (
     <>
       <div css={DivCSS}>

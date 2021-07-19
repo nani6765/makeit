@@ -5,6 +5,18 @@ function FindingActorUploadFilter(props) {
   const [GenderFilter, setGenderFilter] = useState([]);
   const [TypeFilter, setTypeFilter] = useState([]);
   const [ClassficationFilter, setClassficationFilter] = useState([]);
+  
+  useEffect(() => {
+    if(props.GenderFilter != undefined) {
+      setGenderFilter([...props.GenderFilter]);
+    }
+    if(props.TypeFilter != undefined) {
+      setTypeFilter([...props.TypeFilter]);
+    }
+    if(props.ClassficationFilter != undefined) {
+      setClassficationFilter([...props.ClassficationFilter]);
+    }
+  }, []);
 
   useEffect(() => {
     if (
@@ -16,6 +28,14 @@ function FindingActorUploadFilter(props) {
     } else {
       props.setFilterCheck(false);
     }
+    let tempObject = {};
+    tempObject.gender = GenderFilter;
+    tempObject.type = TypeFilter;
+    tempObject.classfication = ClassficationFilter;
+
+    let temp = [];
+    temp.push(tempObject);
+    props.setFilterElement([...temp]);
   }, [GenderFilter, TypeFilter, ClassficationFilter]);
 
   useEffect(() => {
@@ -27,7 +47,6 @@ function FindingActorUploadFilter(props) {
     let temp = [];
     temp.push(tempObject);
     props.setFilterElement([...temp]);
-     console.log(props.FilterElement);
   }, [GenderFilter, TypeFilter, ClassficationFilter]);
 
   function GenderManager(name) {
@@ -70,7 +89,8 @@ function FindingActorUploadFilter(props) {
         <span>별</span>
       </p>
       <ActorInputDiv className="genderFilter">
-        <input type="checkbox" name="" id="genderMale" />
+        <input type="checkbox" name="" id="genderMale"
+        defaultChecked = {props.GenderFilter ? (props.GenderFilter.includes("남자") ? true : false ) : null}/>
         <label
           htmlFor="genderMale"
           data-name="남자"
@@ -78,7 +98,8 @@ function FindingActorUploadFilter(props) {
         >
           남자
         </label>
-        <input type="checkbox" name="" id="genderFemale" />
+        <input type="checkbox" name="" id="genderFemale"
+        defaultChecked = {props.GenderFilter ? (props.GenderFilter.includes("여자") ? true : false ) : null}/>
         <label
           htmlFor="genderFemale"
           data-name="여자"
@@ -86,7 +107,8 @@ function FindingActorUploadFilter(props) {
         >
           여자
         </label>
-        <input type="checkbox" name="" id="genderNone" />
+        <input type="checkbox" name="" id="genderNone"
+        defaultChecked = {props.GenderFilter ? (props.GenderFilter.includes("무관") ? true : false ) : null}/>
         <label
           htmlFor="genderNone"
           data-name="무관"
@@ -101,7 +123,8 @@ function FindingActorUploadFilter(props) {
         <span>형태</span>
       </p>
       <ActorInputDiv className="typeFilter">
-        <input type="checkbox" name="" id="typeVideo" />
+        <input type="checkbox" name="" id="typeVideo"
+        defaultChecked = {props.TypeFilter ? (props.TypeFilter.includes("영상") ? true : false ) : null}/>
         <label
           htmlFor="typeVideo"
           data-name="영상"
@@ -109,7 +132,8 @@ function FindingActorUploadFilter(props) {
         >
           영상
         </label>
-        <input type="checkbox" name="" id="typeImage" />
+        <input type="checkbox" name="" id="typeImage" 
+        defaultChecked = {props.TypeFilter ? (props.TypeFilter.includes("사진") ? true : false ) : null}/>
         <label
           htmlFor="typeImage"
           data-name="사진"
@@ -117,7 +141,8 @@ function FindingActorUploadFilter(props) {
         >
           사진
         </label>
-        <input type="checkbox" name="" id="typeOthers" />
+        <input type="checkbox" name="" id="typeOthers" 
+        defaultChecked = {props.TypeFilter ? (props.TypeFilter.includes("기타") ? true : false ) : null}/>
         <label
           htmlFor="typeOthers"
           data-name="기타"
@@ -132,7 +157,8 @@ function FindingActorUploadFilter(props) {
         <span>류</span>
       </p>
       <ActorInputDiv className="classficationFilter">
-        <input type="checkbox" name="" id="classShort" />
+        <input type="checkbox" name="" id="classShort"
+        defaultChecked = {props.ClassficationFilter ? (props.ClassficationFilter.includes("단편") ? true : false ) : null}/>
         <label
           htmlFor="classShort"
           data-name="단편"
@@ -140,7 +166,8 @@ function FindingActorUploadFilter(props) {
         >
           단편
         </label>
-        <input type="checkbox" name="" id="classLong" />
+        <input type="checkbox" name="" id="classLong"
+        defaultChecked = {props.ClassficationFilter ? (props.ClassficationFilter.includes("장편") ? true : false ) : null}/>
         <label
           htmlFor="classLong"
           data-name="장편"
@@ -148,7 +175,8 @@ function FindingActorUploadFilter(props) {
         >
           장편
         </label>
-        <input type="checkbox" name="" id="classAd" />
+        <input type="checkbox" name="" id="classAd"
+        defaultChecked = {props.ClassficationFilter ? (props.ClassficationFilter.includes("광고") ? true : false ) : null}/>
         <label
           htmlFor="classAd"
           data-name="광고"
@@ -156,7 +184,8 @@ function FindingActorUploadFilter(props) {
         >
           광고
         </label>
-        <input type="checkbox" name="" id="classTV" />
+        <input type="checkbox" name="" id="classTV"
+        defaultChecked = {props.ClassficationFilter ? (props.ClassficationFilter.includes("TV") ? true : false ) : null}/>
         <label
           htmlFor="classTV"
           data-name="TV"
@@ -164,7 +193,8 @@ function FindingActorUploadFilter(props) {
         >
           TV
         </label>
-        <input type="checkbox" name="" id="classPictorial" />
+        <input type="checkbox" name="" id="classPictorial"
+        defaultChecked = {props.ClassficationFilter ? (props.ClassficationFilter.includes("화보") ? true : false ) : null}/>
         <label
           htmlFor="classPictorial"
           data-name="화보"
@@ -172,7 +202,8 @@ function FindingActorUploadFilter(props) {
         >
           화보
         </label>
-        <input type="checkbox" name="" id="classOthers" />
+        <input type="checkbox" name="" id="classOthers"
+        defaultChecked = {props.ClassficationFilter ? (props.ClassficationFilter.includes("기타") ? true : false ) : null}/>
         <label
           htmlFor="classOthers"
           data-name="기타"

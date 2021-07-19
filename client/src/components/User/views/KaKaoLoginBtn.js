@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 /*
 import KakaoLogin from "react-kakao-login";
 import { useDispatch } from "react-redux";
-import { loginUser, registerUser } from "../../../redux/_actions/user_action";
+import { loginUser, registerUser } from "../../../_actions/user_action";
 import axios from "axios";
 import { kakaoClientId } from "../../../hoc/key.js";
 */
@@ -95,15 +95,15 @@ function KaKaoLoginBtn(props) {
     }
   `;
   */
+
   return (
     <>
-      {/*
+    {/*
       <KaKaoBtn
         token={kakaoClientId}
         onSuccess={onSuccess}
         onFail={onFailure}
-      ></KaKaoBtn>
-    */}
+    ></KaKaoBtn>*/}
     </>
   );
 }
