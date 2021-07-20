@@ -26,6 +26,18 @@ function LoginPage(props) {
       await firebase
         .auth()
         .signInWithEmailAndPassword(body.email, body.password);
+
+      var user = firebase.auth().currentUser;
+
+      if(user.emailVerified == false) {
+        alert("이메일 인증을 완료해야합니다.");
+        firebase.auth().signOut().then(() => {
+          setLoading(false);
+          history.push("/");
+        }).catch((error) => {
+          console.log("logout error");
+        })
+      }
       setLoading(false);
       history.push("/");
     } catch (error) {

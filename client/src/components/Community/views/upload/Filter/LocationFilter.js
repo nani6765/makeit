@@ -1,17 +1,40 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Select from "react-select";
 
 function LocationFilter(props) {
+    const [SubCategoryIdx, setSubCategoryIdx] = useState(0);
+    const [SubCategoryCheck, setSubCategoryCheck] = useState(false);
     const category = [
         { value: 'set', label:'세트장'},
         { value: 'studio', label:'스튜디오'},
-        { value: 'restaurant', label:'레스토랑'},
+        { value: 'restaurant', label:'식당'},
         { value: 'other', label:'기타'},
         { value: 'qna', label: '질문게시판'},
     ]
     
     useEffect(() => {
-        props.setSubCategory(category[0].label);
+        switch (props.SubCategory) {
+            case "세트장":
+                setSubCategoryIdx(0);
+                break;
+            case "스튜디오":
+                 setSubCategoryIdx(1);
+                break;
+            case "식당":
+                 setSubCategoryIdx(2);
+                break;
+            case "기타":
+                 setSubCategoryIdx(3);
+                break;
+            case "질문게시판":
+                 setSubCategoryIdx(4);
+                break;
+            default:
+                 setSubCategoryIdx(0);
+                break;
+        }
+        setSubCategoryCheck(true);
+        props.setSubCategory(category[0].label || props.SubCategory);
     }, [])
 
     const selectStyles = {
@@ -45,7 +68,9 @@ function LocationFilter(props) {
         <>
         <div style={{display:"flex", flexWrap:"nowrap", alignItems:"center"}}>
             <p style={{marginBottom:"0px", marginRight:"1rem"}}>카테고리</p>
-            <Select options={category} defaultValue={category[0]} styles={selectStyles} onChange = {(e) => props.setSubCategory(e.label)}/>    
+            {SubCategoryCheck ?
+            <Select options={category} defaultValue={category[SubCategoryIdx]} styles={selectStyles} onChange = {(e) => props.setSubCategory(e.label)}/>
+            : null}    
         </div>
         </>
     )

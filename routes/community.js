@@ -218,6 +218,7 @@ router.post("/postSubmit", (req, res) => {
     temp.postNum = counter.coPostNum;
     User.findOne({ uid: req.body.uid }, (err, userInfo) => {
       if (err) return res.status(400).json({ success: false, err });
+      console.log(userInfo)
       temp.auther = userInfo._id;
       const communityPost = new Community(temp);
       communityPost.save((err, doc) => {
@@ -261,6 +262,8 @@ router.post("/postUpdate", (req, res) => {
   temp.title = req.body.title;
   temp.content = req.body.content;
   temp.images = req.body.images;
+  temp.subCategory = req.body.subCategory;
+  temp.filters = req.body.filters;
   let key = req.body.id;
   Community.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
     (err, post) => {
