@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ModalDiv } from "../../../css/CommunityDetailElement.js";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -6,28 +6,13 @@ import axios from "axios";
 
 function RepleGuestModal(props) {
   const user = useSelector((state) => state.user);
-  function ChatHandler() {
-    let body = {
-      me: user.userData.uid,
-      you: props.repleInfo.auther.uid,
-    };
-    /*
-    axios.post("/api/chat/create/", body).then((response) => {
-      if (response.data.success) {
-        props.history.push({
-          pathname: "/chat/" + response.data.chatNum,
-        });
-      } else {
-        alert("error");
-      }
-    });
-    */
-  }
-
+  useEffect(() => {
+    console.log("Reple :: props : ", props, ", user : ", user);
+  }, []);
   return (
     <ModalDiv style={{ justifyContent: "space-around" }}>
       <div>
-        <button className="edit" onClick={() => ChatHandler()}>
+        <button className="edit">
           <i className="bi bi-envelope-open"></i>
           쪽지 보내기
         </button>

@@ -1,21 +1,17 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
 const chatSchema = mongoose.Schema(
   {
-    chatNum: {
+    url: {
       type: Number,
       unique: 1,
     },
     users: {
-        type: [{
-            type: Schema.Types.ObjectId,
-            ref: "User",
-        }],
+      type: Array,
     },
-    chatLog: {
-        type: Array,
-    }
+    chatRoomId: {
+      type: String,
+    },
   },
   { collection: "chatInfo" }
 );

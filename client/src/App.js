@@ -66,7 +66,7 @@ function App() {
             component={CommunityUpdate}
           />
           <Route exact path="/myPage" component={MyPage} />
-          <Route exact path="/chat/:chatid" component={ChatDetail} />
+          <Route exact path="/chat/:chatUrl" component={ChatDetail} />
         </Switch>
         <Footer />
       </>

@@ -10,6 +10,9 @@ const counter = mongoose.Schema(
     coPostNum: {
       type: Number,
     },
+    chatNum: {
+      type: Number,
+    },
   },
   { collection: "counter" }
 );

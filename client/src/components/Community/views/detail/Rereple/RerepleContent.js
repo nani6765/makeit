@@ -123,7 +123,7 @@ function RerepleContent(props) {
                   rereple={rereple}
                 />
               ) : user.userData ? (
-                <RerepleGuestModal />
+                <RerepleGuestModal rereple={rereple} />
               ) : null
             ) : null}
           </div>
