@@ -19,7 +19,7 @@ import LandingPage from "./components/LandingPage/LandingPage.js";
 import LoginPage from "./components/User/views/LoginPage.js";
 import RegisterPage from "./components/User/views/RegisterPage.js";
 import MyPage from "./components/MyPage/MyPage.js";
-import ChatDetail from "./components/MyPage/Chat/ChatDetail.js";
+import ChatDetailDiv from "./components/MyPage/Chat/ChatDetailDiv.js";
 
 //Comminity
 import CommunityMain from "./components/Community/views/CommunityMain.js";
@@ -66,7 +66,7 @@ function App() {
             component={CommunityUpdate}
           />
           <Route exact path="/myPage" component={MyPage} />
-          <Route exact path="/chat/:chatUrl" component={ChatDetail} />
+          <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
         </Switch>
         <Footer />
       </>

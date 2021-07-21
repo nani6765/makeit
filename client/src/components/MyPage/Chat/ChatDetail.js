@@ -1,37 +1,66 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+
+import { firebase } from "../../../firebase.js";
 import { useSelector } from "react-redux";
-import { useHistory, withRouter } from "react-router";
-import axios from "axios";
-import ChatDetailContent from "./ChatDetailContent.js";
+
+import ChatMeDetailContent from "./Content/ChatMeDetailContent.js";
+import ChatYouDetailContent from "./Content/ChatYouDetailContent.js";
+import ChatUpload from "./Content/ChatUpload.js";
+import ImageUpload from "./Content/ImageUpload.js";
+import ChatDateDetailContent from "./Content/ChatDateDetailContent.js";
+
+import { ChatContentDiv } from "../css/ChatDetailElement.js";
 
 function ChatDetail(props) {
-  const [CheckUser, setCheckUser] = useState(false);
-  const [ChatRoomId, setChatRoomId] = useState("");
+  const [CommentGroup, setCommentGroup] = useState([]);
+  const [Date, setDate] = useState("");
   const user = useSelector((state) => state.user);
-  let history = useHistory();
+
+  let MessageRef = firebase.database().ref("chats");
 
   useEffect(() => {
-    let body = {
-      uid: user.userData.uid,
-      url: props.match.params.chatUrl,
-    };
-    axios.post("/api/chat/userCheck", body).then((response) => {
-      if (response.data.success) {
-        setCheckUser(true);
-        setChatRoomId(response.data.chatInfo.chatRoomId);
-      } else {
-        alert("유효하지 않은 사용자입니다.");
-        history.push("/");
-      }
+    if (props.ChatRoomId != "") {
+      ReadMessage(props.ChatRoomId);
+    }
+  }, [props]);
+
+  const ReadMessage = (ChatRoomId) => {
+    console.log(ChatRoomId);
+
+    let comments = [];
+    MessageRef.child(ChatRoomId).on("child_added", (DataSnapshot) => {
+      comments.push(DataSnapshot.val());
+      setCommentGroup([...comments]);
     });
-  }, []);
+  };
+
   return (
     <>
-      {CheckUser && ChatRoomId != "" ? (
-        <ChatDetailContent ChatRoomId={ChatRoomId} />
-      ) : null}
+      <ChatContentDiv>
+        {CommentGroup.map((comments) => {
+          let temp = [{ ...comments }];
+          console.log("temp", temp);
+          /*
+          comments.map((comment, idx) => {
+            console.log("comment", comment);
+            return (
+              <React.Fragment key={idx}>
+                {comment.uid === user.userData.uid ? (
+                  <ChatMeDetailContent comment={comment} />
+                ) : (
+                  <ChatYouDetailContent comment={comment} />
+                )}
+              </React.Fragment>
+            );
+          });
+          */
+        })}
+
+        <ChatUpload ChatRoomId={props.ChatRoomId} user={user} />
+        <ImageUpload ChatRoomId={props.ChatRoomId} />
+      </ChatContentDiv>
     </>
   );
 }
 
-export default withRouter(ChatDetail);
+export default ChatDetail;
