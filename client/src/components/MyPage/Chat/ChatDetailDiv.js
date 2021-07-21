@@ -4,6 +4,7 @@ import { useHistory, withRouter } from "react-router";
 import axios from "axios";
 import ChatDetail from "./ChatDetail.js";
 import { ChatDiv } from "../css/ChatDetailElement.js";
+
 function ChatDetailDiv(props) {
   const [CheckUser, setCheckUser] = useState(false);
   const [ChatRoomId, setChatRoomId] = useState("");

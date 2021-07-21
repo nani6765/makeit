@@ -29,6 +29,82 @@ const ChatDiv = styled.div`
 const ChatContentDiv = styled.div`
   background: #f7f9fe;
   border-radius: 11px;
+  padding: 5px;
 `;
 
-export { ChatDiv, ChatContentDiv };
+const ChatContentDate = styled.p`
+  text-align: center;
+  color: #c4c4c4;
+`;
+
+const ChatForContentDiv = styled.div`
+  max-height: 70vh;
+  overflow-y: scroll;
+`;
+
+const ChatMeContentGrid = css`
+  max-width: 70%;
+  margin-left: 30%;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  grid-template-rows: auto;
+  grid-template-areas: ". date content";
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+  .date {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    min-width: 50px;
+    margin-bottom: 0px;
+    font-size: 10px;
+  }
+  .content {
+    text-align: right;
+    p {
+      display: inline-block;
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 10px 15px 10px 15px;
+      margin-bottom: 0px;
+    }
+  }
+`;
+
+const ChatYouContentGrid = css`
+  max-width: 70%;
+  margin-left: 30%;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "content date .";
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+  .date {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    min-width: 50px;
+    margin-bottom: 0px;
+    font-size: 10px;
+  }
+  .content {
+    text-align: left;
+    p {
+      display: inline-block;
+      background: #ffffff;
+      border-radius: 30px;
+      padding: 10px 15px 10px 15px;
+      margin-bottom: 0px;
+    }
+  }
+`;
+
+export {
+  ChatDiv,
+  ChatContentDiv,
+  ChatContentDate,
+  ChatForContentDiv,
+  ChatMeContentGrid,
+  ChatYouContentGrid,
+};

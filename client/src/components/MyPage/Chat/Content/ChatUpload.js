@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { firebase } from "../../../firebase.js";
 
 function ChatUpload(props) {
-  let MessageRef = firebase.database().ref("chats");
+  const [Loading, setLoading] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
     props.CreateMessage(props.ChatRoomId, "text");
+    props.setSendComment("");
+    setLoading(false);
   };
 
   return (
@@ -17,7 +19,9 @@ function ChatUpload(props) {
           onChange={(e) => props.setSendComment(e.currentTarget.value)}
           rows="3"
         ></textarea>
-        <button type="submit">전송</button>
+        <button type="submit" disabled={Loading}>
+          전송
+        </button>
       </form>
     </div>
   );

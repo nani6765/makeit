@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react";
-import { firebase } from "../../../firebase.js";
+import { firebase } from "../../../../firebase.js";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import mime from "mime-types";
+
+import moment from "moment";
+import "moment/locale/ko";
 
 function ImageUpload(props) {
   const [Percentage, setPercentage] = useState(0);
@@ -9,6 +12,7 @@ function ImageUpload(props) {
   const inputOpenImageRef = useRef();
   const storageRef = firebase.storage().ref();
   let MessageRef = firebase.database().ref("chats");
+  moment.locale("ko");
 
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
@@ -19,7 +23,8 @@ function ImageUpload(props) {
 
     if (!file) return;
 
-    const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
+    const Date = moment().format("YYYY[년] MM[월] DD[일]");
+    const filePath = `/chats/${props.ChatRoomId}/${Date}/${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
     try {
