@@ -38,12 +38,25 @@ function ImageUpload(props) {
                 console.log(err);
             },
             () => {
-                //파일 메시지 전송
-
-                //스토리지에서 이미지 url
+                //파일을 메시지로 전송
+                //스토리지에서 이미지 url 가져오기
                 uploadTask.snapshot.ref.getDownloadURL()
                     .then(downloadURL => {
-                        console.log('downloadURL', downloadURL);
+                        let message = {
+                            timestamp: firebase.database.ServerValue.TIMESTAMP,   
+                            username: props.user.userData.displayName,        
+                            profile_picture: props.user.userData.photoURL,
+                            uid: props.user.userData.uid,
+                            src: downloadURL,
+                        }
+
+                        if(file.type.includes("image")) {
+                            message.type = "image";
+                        } else {
+                            message.type = "file";
+                        }
+
+                        MessageRef.child(props.ChatRoomId).push().set(message);
                     })
             }
         );
@@ -61,7 +74,7 @@ function ImageUpload(props) {
           <ProgressBar variant="warning" label={`${Percentage}%`} now={Percentage} />
         }
         <button onClick = {handleOpenImageRef}>사진 업로드</button>
-        <input type = 'file' style = {{display : 'none'}} ref = {inputOpenImageRef} onChange = {handleImageUpload}/>
+        <input accept = 'image/*, .doc, .docx, .hwp, .pdf, .txt, .zip' type = 'file' style = {{display : 'none'}} ref = {inputOpenImageRef} onChange = {handleImageUpload}/>
         </>
     )
 }
