@@ -10,6 +10,9 @@ const { User } = require("../model/User.js");
 const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
 const setRealTime = require("../module/multer/realTime.js");
+var moment = require("moment");
+require("moment-timezone");
+moment.tz.setDefault("Asia/Seoul");
 
 ////////////////////////////
 //          POST          //
@@ -220,6 +223,7 @@ router.post("/postSubmit", (req, res) => {
       if (err) return res.status(400).json({ success: false, err });
       console.log(userInfo)
       temp.auther = userInfo._id;
+      temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
       const communityPost = new Community(temp);
       communityPost.save((err, doc) => {
         if (err) {
@@ -311,6 +315,7 @@ router.post("/repleSubmit", (req, res) => {
   User.findOne({ uid: temp.uid }).exec((err, userInfo) => {
     if (err) return res.status(400).json({ success: false, err });
     temp.auther = userInfo._id;
+    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
     const communityReple = new CommunityReple(temp);
     communityReple.save((err, doc) => {
       if (err) return res.status(400).json({ success: false, err });
@@ -406,6 +411,7 @@ router.post("/rerepleSubmit", (req, res) => {
     if (err) return res.status(400).json({ success: false, err });
     rereple.auther = userInfo._id;
     rereple.content = temp.content;
+    rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
     const rerepleObj = new CommunityRereple(rereple);
     rerepleObj.save((err, doc) => {
       if (err) return res.status(400).json({ success: false, err });
