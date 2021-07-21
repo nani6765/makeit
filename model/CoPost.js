@@ -5,6 +5,7 @@ require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
 function realTime() {
+  console.log("???", moment().format("YY-MM-DD[ ]HH:mm"));
   return moment().format("YY-MM-DD[ ]HH:mm");
 }
 
