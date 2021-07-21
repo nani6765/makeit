@@ -17,7 +17,6 @@ function ChatDetail(props) {
     };
     axios.post("/api/chat/userCheck", body).then((response) => {
       if (response.data.success) {
-        //Firebase 데이터베이스에 저장해주기
         setCheckUser(true);
         setChatRoomId(response.data.chatInfo.chatRoomId);
       } else {
@@ -27,7 +26,11 @@ function ChatDetail(props) {
     });
   }, []);
   return (
-    <>{CheckUser ? <ChatDetailContent ChatRoomId={ChatRoomId} /> : null}</>
+    <>
+      {CheckUser && ChatRoomId != "" ? (
+        <ChatDetailContent ChatRoomId={ChatRoomId} />
+      ) : null}
+    </>
   );
 }
 
