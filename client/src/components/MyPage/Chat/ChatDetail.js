@@ -3,7 +3,7 @@ import { firebase } from "../../../firebase.js";
 import { useSelector } from "react-redux";
 
 import ChatUpload from "./Content/ChatUpload.js";
-import ImageUpload from "./Content/ImageUpload.js";
+import FileUpload from "./Content/FileUpload.js";
 import ChatDetailContent from "./Content/ChatDetailContent.js";
 
 import moment from "moment";
@@ -54,11 +54,16 @@ function ChatDetail(props) {
 
   const ScrollFunction = () => {
     let TargetDIv = document.querySelector("#ChatForContentDiv");
+<<<<<<< HEAD
+=======
+    console.log("scroll Height", TargetDIv.scrollHeight, ", Start", TargetDIv.scrollTop);
+>>>>>>> 4cc7f7a1acb7d527d92fb8c6f2866a2c1f6b8f99
     TargetDIv.scrollTo({
       top: `${TargetDIv.scrollHeight}`,
       left: 0,
       behavior: "smooth",
     });
+    console.log("scroll Height", TargetDIv.scrollHeight, ", End", TargetDIv.scrollTop);
   };
 
   const LoadMessages = (ChatRoomId) => {
@@ -72,7 +77,6 @@ function ChatDetail(props) {
     MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
-      console.log(comments[0].values)
       setComments([...comments]);
       ScrollFunction();
 =======
@@ -140,7 +144,7 @@ function ChatDetail(props) {
           <UploadDiv>
             <ChatUpload ChatRoomId={ChatRoomId} user={user} />
 
-            <ImageUpload ChatRoomId={ChatRoomId} user={user} />
+            <FileUpload ChatRoomId={ChatRoomId} user={user} />
           </UploadDiv>
 =======
           <div>
