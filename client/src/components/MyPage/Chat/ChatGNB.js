@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ChatGNBDiv } from "../css/ChatDetailElement.js";
 import Avatar from "react-avatar";
 import DeleteIcon from "../css/DeleteIcon.svg";
+import { firebase } from "../../../firebase.js";
 
-function ChatGNB() {
+function ChatGNB(props) {
+  let InfoRef = firebase.database().ref("users");
+
+  const [OtherInfo, setOtherInfo] = useState({});
+
+  useEffect(() => {
+    InfoRef.child(props.OthersUid).once('value', (DataSnapshot) => {
+      setOtherInfo(DataSnapshot.val());
+    })
+  }, [])
+
   return (
     <ChatGNBDiv>
       <div className="back">
@@ -33,12 +44,12 @@ function ChatGNB() {
       </div>
       <div className="profile">
         <Avatar
-          src={""}
+          src={OtherInfo.image}
           size="35"
           round={true}
           style={{ border: "1px solid #c6c6c6" }}
         />
-        <p>name</p>
+        <p>{OtherInfo.name}</p>
       </div>
       <div className="delete">
         <img

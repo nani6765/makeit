@@ -6,7 +6,7 @@ import mime from "mime-types";
 import moment from "moment";
 import "moment/locale/ko";
 
-function ImageUpload(props) {
+function FileUpload(props) {
   const [Percentage, setPercentage] = useState(0);
 
   const inputOpenImageRef = useRef();
@@ -90,6 +90,7 @@ function ImageUpload(props) {
         <i className="bi bi-upload"></i>
       </button>
       <input
+        accept = 'image/*, .doc, .docx, .hwp, .pdf, .ppt, .pptx, .txt'
         type="file"
         style={{ display: "none" }}
         ref={inputOpenImageRef}
@@ -99,4 +100,4 @@ function ImageUpload(props) {
   );
 }
 
-export default ImageUpload;
+export default FileUpload;

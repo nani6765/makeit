@@ -3,7 +3,7 @@ import { firebase } from "../../../firebase.js";
 import { useSelector } from "react-redux";
 
 import ChatUpload from "./Content/ChatUpload.js";
-import ImageUpload from "./Content/ImageUpload.js";
+import FileUpload from "./Content/FileUpload.js";
 import ChatDetailContent from "./Content/ChatDetailContent.js";
 
 import moment from "moment";
@@ -103,7 +103,7 @@ function ChatDetail(props) {
           <UploadDiv>
             <ChatUpload ChatRoomId={ChatRoomId} user={user} />
 
-            <ImageUpload ChatRoomId={ChatRoomId} user={user} />
+            <FileUpload ChatRoomId={ChatRoomId} user={user} />
           </UploadDiv>
         )}
       </ChatContentDiv>
