@@ -40,37 +40,40 @@ function ChatDetail(props) {
   useEffect(() => {
     if (ChatRoomId != "") {
       LoadMessages(ChatRoomId);
-      ReadMessage(ChatRoomId);
     }
   }, [ChatRoomId]);
 
-  useEffect(() => {
-    console.log("Comments", Comments);
-
-  }, [Comments]);
+  const ScrollFunction = () => {
+    let TargetDIv = document.querySelector("#ChatForContentDiv");
+    console.log("hello?", TargetDIv.scrollHeight);
+    TargetDIv.scrollTo({
+      top: `${TargetDIv.scrollHeight}`,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
 
   const LoadMessages = (ChatRoomId) => {
     MessageRef.child(ChatRoomId).once("child_added", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
-      console.log(comments[0].values)
       setComments([...comments]);
-    })
-  }
-  
-  const ReadMessage = (ChatRoomId) => {
+      ScrollFunction();
+    });
+
     MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
       console.log(comments[0].values)
       setComments([...comments]);
+      ScrollFunction();
     });
   };
 
   return (
     <>
       <ChatContentDiv>
-        <ChatForContentDiv>
+        <ChatForContentDiv id="ChatForContentDiv">
           {Comments.map((commentGroup, idx) => {
             return Object.values(commentGroup).map((comment, idx) => {
               return (
