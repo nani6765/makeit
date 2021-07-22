@@ -30,7 +30,7 @@ function ChatUpload(props) {
     const Date = moment().format("YYYY[년] MM[월] DD[일]");
     let message = {
       timestamp: firebase.database.ServerValue.TIMESTAMP,
-      username: props.user.userData.displayName,
+      username: user.userData.displayName,
       profile_picture: user.userData.photoURL,
       uid: user.userData.uid,
       type: "message",

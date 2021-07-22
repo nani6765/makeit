@@ -63,6 +63,7 @@ function ChatDetail(props) {
     MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
+      console.log(comments[0].values)
       setComments([...comments]);
       ScrollFunction();
     });
