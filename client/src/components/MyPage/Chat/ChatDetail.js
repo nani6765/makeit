@@ -1,34 +1,111 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { firebase } from "../../../firebase.js";
 import { useSelector } from "react-redux";
-import { useHistory, withRouter } from "react-router";
-import axios from "axios";
-import ChatDetailContent from "./ChatDetailContent.js";
+
+import ChatUpload from "./Content/ChatUpload.js";
+import ImageUpload from "./Content/ImageUpload.js";
+import ChatDetailContent from "./Content/ChatDetailContent.js";
+
+import moment from "moment";
+import "moment/locale/ko";
+
+import {
+  ChatContentDiv,
+  ChatForContentDiv,
+  ChatContentDate,
+  ChatMeContentGrid,
+  ChatYouContentGrid,
+  UploadDiv,
+} from "../css/ChatDetailElement.js";
+
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
 
 function ChatDetail(props) {
-  const [CheckUser, setCheckUser] = useState(false);
+  const [Comments, setComments] = useState([]);
   const [ChatRoomId, setChatRoomId] = useState("");
+
   const user = useSelector((state) => state.user);
-  let history = useHistory();
+  moment.locale("ko");
+
+  let MessageRef = firebase.database().ref("chats");
+
+  //ChatRoomId 부모에게서 받아오기
+  useEffect(() => {
+    setChatRoomId(props.ChatRoomId);
+  }, [props]);
+
+  //ChatRoomId 받아왔을 때 ChatRoomId 설정
+  useEffect(() => {
+    if (ChatRoomId != "") {
+      LoadMessages(ChatRoomId);
+      ReadMessage(ChatRoomId);
+    }
+  }, [ChatRoomId]);
 
   useEffect(() => {
-    let body = {
-      uid: user.userData.uid,
-      url: props.match.params.chatUrl,
-    };
-    axios.post("/api/chat/userCheck", body).then((response) => {
-      if (response.data.success) {
-        //Firebase 데이터베이스에 저장해주기
-        setCheckUser(true);
-        setChatRoomId(response.data.chatInfo.chatRoomId);
-      } else {
-        alert("유효하지 않은 사용자입니다.");
-        history.push("/");
-      }
+    console.log("Comments", Comments);
+
+  }, [Comments]);
+
+  const LoadMessages = (ChatRoomId) => {
+    MessageRef.child(ChatRoomId).once("child_added", (DataSnapshot) => {
+      let comments = [];
+      comments.push(DataSnapshot.val());
+      console.log(comments[0].values)
+      setComments([...comments]);
+    })
+  }
+  
+  const ReadMessage = (ChatRoomId) => {
+    MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
+      let comments = [];
+      comments.push(DataSnapshot.val());
+      console.log(comments[0].values)
+      setComments([...comments]);
     });
-  }, []);
+  };
+
   return (
-    <>{CheckUser ? <ChatDetailContent ChatRoomId={ChatRoomId} /> : null}</>
+    <>
+      <ChatContentDiv>
+        <ChatForContentDiv>
+          {Comments.map((commentGroup, idx) => {
+            return Object.values(commentGroup).map((comment, idx) => {
+              return (
+                <React.Fragment key={idx}>
+                  {idx === 0 && (
+                    <ChatContentDate>
+                      {moment(comment.timestamp).format(
+                        "YYYY[년] MM[월] DD[일]"
+                      )}
+                    </ChatContentDate>
+                  )}
+                  <div
+                    css={
+                      user.userData.uid === comment.uid
+                        ? ChatMeContentGrid
+                        : ChatYouContentGrid
+                    }
+                  >
+                    <ChatDetailContent comment={comment} />
+                  </div>
+                </React.Fragment>
+              );
+            });
+          })}
+        </ChatForContentDiv>
+        {ChatRoomId === "" ? null : (
+          <UploadDiv>
+            <ChatUpload ChatRoomId={ChatRoomId} user={user} />
+
+            <ImageUpload ChatRoomId={ChatRoomId} user={user} />
+          </UploadDiv>
+        )}
+      </ChatContentDiv>
+    </>
   );
 }
 
-export default withRouter(ChatDetail);
+export default ChatDetail;

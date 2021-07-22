@@ -221,7 +221,6 @@ router.post("/postSubmit", (req, res) => {
     temp.postNum = counter.coPostNum;
     User.findOne({ uid: req.body.uid }, (err, userInfo) => {
       if (err) return res.status(400).json({ success: false, err });
-      console.log(userInfo)
       temp.auther = userInfo._id;
       temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
       const communityPost = new Community(temp);
@@ -356,6 +355,7 @@ router.post("/repleDelete", (req, res) => {
 router.post("/repleUpdate", (req, res) => {
   let temp = {};
   temp.content = req.body.content;
+  temp.realTime = setRealTime();
   let key = req.body.id;
   CommunityReple.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
     (err, post) => {
@@ -462,8 +462,6 @@ router.post("/rerepleDelete", (req, res) => {
           return CommunityReple.findOne({ _id: req.body.repleId }).exec();
         })
         .then((repleInfo) => {
-          console.log("repleInfo", repleInfo);
-          console.log("check", repleInfo.isDeleted, repleInfo.rerepleNum);
           if (repleInfo.isDeleted && !repleInfo.rerepleNum) {
             repleInfo.deleteOne();
           }
