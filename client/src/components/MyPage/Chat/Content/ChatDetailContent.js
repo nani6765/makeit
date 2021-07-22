@@ -28,7 +28,7 @@ function ChatDetailContent(props) {
             src={props.comment.src}
             style={{ maxWidth: "100%", height: "auto" }}
             className="img"
-            //onLoad={() => ScrollFunction}
+            onLoad={() => ScrollFunction}
           />
         ) : (
           <a href={props.comment.src}>{props.comment.comment}</a>
