@@ -12,6 +12,7 @@ function ImageUpload(props) {
   const inputOpenImageRef = useRef();
   const storageRef = firebase.storage().ref();
   let MessageRef = firebase.database().ref("chats");
+  moment.locale("ko");
 
   moment.locale("ko");
 
@@ -25,7 +26,8 @@ function ImageUpload(props) {
 
     if (!file) return;
 
-    const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
+    const Date = moment().format("YYYY[년] MM[월] DD[일]");
+    const filePath = `/chats/${props.ChatRoomId}/${Date}/${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
     console.log("파일", file);
@@ -48,9 +50,8 @@ function ImageUpload(props) {
           console.log(err);
         },
         () => {
-          //파일 메시지 전송
-
-          //스토리지에서 이미지 url
+          //파일을 메시지로 전송
+          //스토리지에서 이미지 url 가져오기
           uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
             let message = {
               timestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -58,7 +59,10 @@ function ImageUpload(props) {
               profile_picture: props.user.userData.photoURL,
               uid: props.user.userData.uid,
               src: downloadURL,
+<<<<<<< HEAD
               comment: file.name,
+=======
+>>>>>>> kimdoyoen-develop
             };
 
             if (file.type.includes("image")) {
@@ -67,7 +71,11 @@ function ImageUpload(props) {
               message.type = "file";
             }
 
+<<<<<<< HEAD
             MessageRef.child(`${props.ChatRoomId}/${Date}`).push().set(message);
+=======
+            MessageRef.child(props.ChatRoomId).push().set(message);
+>>>>>>> kimdoyoen-develop
           });
         }
       );
@@ -89,6 +97,7 @@ function ImageUpload(props) {
         <i className="bi bi-upload"></i>
       </button>
       <input
+        accept="image/*, .doc, .docx, .hwp, .pdf, .txt, .zip"
         type="file"
         style={{ display: "none" }}
         ref={inputOpenImageRef}

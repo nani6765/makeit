@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+<<<<<<< HEAD
 import { firebase } from "../../../../firebase.js";
 import { useSelector } from "react-redux";
 
@@ -24,6 +25,18 @@ function ChatUpload(props) {
     CreateMessage(props.ChatRoomId);
     setSendComment("");
     setSendCommentLoading(false);
+=======
+
+function ChatUpload(props) {
+  const [Loading, setLoading] = useState(false);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    props.CreateMessage(props.ChatRoomId, "text");
+    props.setSendComment("");
+    setLoading(false);
+>>>>>>> kimdoyoen-develop
   };
 
   const CreateMessage = (ChatRoomId) => {
@@ -43,6 +56,7 @@ function ChatUpload(props) {
     <>
       <form onSubmit={submitHandler} className="form">
         <textarea
+<<<<<<< HEAD
           value={SendComment}
           onChange={(e) => setSendComment(e.currentTarget.value)}
           rows="1"
@@ -53,6 +67,14 @@ function ChatUpload(props) {
         <button className="btn" type="submit" disabled={SendCommentLoading}>
           <i className="bi bi-envelope-open"></i>
           <span>보내기</span>
+=======
+          value={props.SendComment}
+          onChange={(e) => props.setSendComment(e.currentTarget.value)}
+          rows="3"
+        ></textarea>
+        <button type="submit" disabled={Loading}>
+          전송
+>>>>>>> kimdoyoen-develop
         </button>
       </form>
     </>
