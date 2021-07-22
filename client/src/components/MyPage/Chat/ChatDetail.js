@@ -39,13 +39,18 @@ function ChatDetail(props) {
   //ChatRoomId 받아왔을 때 ChatRoomId 설정
   useEffect(() => {
     if (ChatRoomId != "") {
-      ReadMessage(ChatRoomId);
+      LoadMessages(ChatRoomId);
     }
   }, [ChatRoomId]);
 
-  const ReadMessage = (ChatRoomId) => {
-    let comments = [];
-    MessageRef.child(ChatRoomId).on("child_added", (DataSnapshot) => {
+  const LoadMessages = (ChatRoomId) => {
+    MessageRef.child(ChatRoomId).once("child_added", (DataSnapshot) => {
+      let comments = [];
+      comments.push(DataSnapshot.val());
+      setComments([...comments]);
+    });
+    MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
+      let comments = [];
       comments.push(DataSnapshot.val());
       setComments([...comments]);
     });

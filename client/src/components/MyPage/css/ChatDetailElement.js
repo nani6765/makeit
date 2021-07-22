@@ -122,7 +122,7 @@ const ChatMeContentGrid = css`
 
 const ChatYouContentGrid = css`
   max-width: 70%;
-  margin-left: 30%;
+  margin-right: 30%;
   display: grid;
   grid-template-columns: auto auto 1fr;
   grid-template-rows: auto;
@@ -130,6 +130,7 @@ const ChatYouContentGrid = css`
   grid-gap: 1rem;
   margin-bottom: 1rem;
   .date {
+    grid-area: date;
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -138,6 +139,7 @@ const ChatYouContentGrid = css`
     font-size: 10px;
   }
   .content {
+    grid-area: content;
     text-align: left;
     p {
       display: inline-block;

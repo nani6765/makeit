@@ -16,8 +16,11 @@ function ChatUpload(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!/\S/.test(SendComment)) {
+      return;
+    }
     setSendCommentLoading(true);
-    //console.log(props.ChatRoomId);
+    console.log(SendComment);
     CreateMessage(props.ChatRoomId);
     setSendComment("");
     setSendCommentLoading(false);
