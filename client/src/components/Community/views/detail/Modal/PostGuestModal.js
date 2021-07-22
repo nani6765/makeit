@@ -12,9 +12,11 @@ function PostGuestModal(props) {
   let history = useHistory();
 
   function SendMessage() {
+    console.log(props);
+
     let body = {
       me: user.userData.uid,
-      you: props.postInfo.auther.uid,
+      you: props.rerepleInfo.auther.uid,
     };
     axios.post("/api/chat/create", body).then((response) => {
       console.log(response.data);
