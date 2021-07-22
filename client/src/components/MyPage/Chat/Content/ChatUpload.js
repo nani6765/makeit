@@ -27,7 +27,7 @@ function ChatUpload(props) {
 
   
   const handleKeyDown = (event) => {
-    if (event.ctrlKey && event.keyCode === 13) {
+    if (!event.shiftKey && event.keyCode === 13) {
       submitHandler(event);
     }
   }
