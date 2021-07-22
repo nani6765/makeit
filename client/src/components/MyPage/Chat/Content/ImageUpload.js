@@ -28,7 +28,7 @@ function ImageUpload(props) {
     const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
-    console.log("파일", file)
+    console.log("파일", file);
     try {
       //파일 저장
       let uploadTask = storageRef.child(filePath).put(file, metadata);
@@ -51,25 +51,24 @@ function ImageUpload(props) {
           //파일 메시지 전송
 
           //스토리지에서 이미지 url
-          uploadTask.snapshot.ref.getDownloadURL()
-                    .then(downloadURL => {
-                        let message = {
-                            timestamp: firebase.database.ServerValue.TIMESTAMP,   
-                            username: props.user.userData.displayName,        
-                            profile_picture: props.user.userData.photoURL,
-                            uid: props.user.userData.uid,
-                            src: downloadURL,
-                            comment: file.name,
-                        }
+          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+            let message = {
+              timestamp: firebase.database.ServerValue.TIMESTAMP,
+              username: props.user.userData.displayName,
+              profile_picture: props.user.userData.photoURL,
+              uid: props.user.userData.uid,
+              src: downloadURL,
+              comment: file.name,
+            };
 
-                        if(file.type.includes("image")) {
-                            message.type = "image";
-                        } else {
-                            message.type = "file";
-                        }
+            if (file.type.includes("image")) {
+              message.type = "image";
+            } else {
+              message.type = "file";
+            }
 
-                        MessageRef.child(`${props.ChatRoomId}/${Date}`).push().set(message);
-                    })
+            MessageRef.child(`${props.ChatRoomId}/${Date}`).push().set(message);
+          });
         }
       );
     } catch (error) {
@@ -94,6 +93,7 @@ function ImageUpload(props) {
         style={{ display: "none" }}
         ref={inputOpenImageRef}
         onChange={handleImageUpload}
+        accept="image/*, .doc, .docx, .hwp, .pdf, .txt, .ppt"
       />
     </>
   );
