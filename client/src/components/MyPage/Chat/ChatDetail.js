@@ -45,7 +45,6 @@ function ChatDetail(props) {
 
   const ScrollFunction = () => {
     let TargetDIv = document.querySelector("#ChatForContentDiv");
-    console.log("hello?", TargetDIv.scrollHeight);
     TargetDIv.scrollTo({
       top: `${TargetDIv.scrollHeight}`,
       left: 0,
