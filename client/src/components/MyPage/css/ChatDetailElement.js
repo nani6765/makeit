@@ -26,6 +26,55 @@ const ChatDiv = styled.div`
   }
 `;
 
+const ChatGNBDiv = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: auto;
+  grid-template-areas: "back profile delete";
+  margin-bottom: 1rem;
+  .back {
+    grid-area: back;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      margin-bottom: 0.5rem;
+    }
+    span {
+      font-size: 9px;
+      font-weight: bold;
+    }
+  }
+  .profile {
+    grid-area: profile;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin-left: 0.5rem;
+      margin-bottom: 0px;
+    }
+  }
+  .delete {
+    grid-area: delete;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    svg {
+      margin-bottom: 0.5rem;
+    }
+    span {
+      font-size: 9px;
+      font-weight: bold;
+      color: #7163f7;
+    }
+  }
+`;
+
 const ChatContentDiv = styled.div`
   background: #f7f9fe;
   border-radius: 11px;
@@ -160,6 +209,7 @@ const UploadDiv = styled.div`
 `;
 export {
   ChatDiv,
+  ChatGNBDiv,
   ChatContentDiv,
   ChatContentDate,
   ChatForContentDiv,
