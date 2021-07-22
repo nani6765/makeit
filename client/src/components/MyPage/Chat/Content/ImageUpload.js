@@ -3,6 +3,9 @@ import { firebase } from "../../../../firebase.js";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import mime from "mime-types";
 
+import moment from "moment";
+import "moment/locale/ko";
+
 function ImageUpload(props) {
   const [Percentage, setPercentage] = useState(0);
 
@@ -10,11 +13,14 @@ function ImageUpload(props) {
   const storageRef = firebase.storage().ref();
   let MessageRef = firebase.database().ref("chats");
 
+  moment.locale("ko");
+
   const handleOpenImageRef = () => {
     inputOpenImageRef.current.click();
   };
 
   const handleImageUpload = (e) => {
+    const Date = moment().format("YYYY[년] MM[월] DD[일]");
     const file = e.target.files[0];
 
     if (!file) return;
@@ -22,6 +28,7 @@ function ImageUpload(props) {
     const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
+    console.log("파일", file)
     try {
       //파일 저장
       let uploadTask = storageRef.child(filePath).put(file, metadata);
@@ -44,9 +51,25 @@ function ImageUpload(props) {
           //파일 메시지 전송
 
           //스토리지에서 이미지 url
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log("downloadURL", downloadURL);
-          });
+          uploadTask.snapshot.ref.getDownloadURL()
+                    .then(downloadURL => {
+                        let message = {
+                            timestamp: firebase.database.ServerValue.TIMESTAMP,   
+                            username: props.user.userData.displayName,        
+                            profile_picture: props.user.userData.photoURL,
+                            uid: props.user.userData.uid,
+                            src: downloadURL,
+                            comment: file.name,
+                        }
+
+                        if(file.type.includes("image")) {
+                            message.type = "image";
+                        } else {
+                            message.type = "file";
+                        }
+
+                        MessageRef.child(`${props.ChatRoomId}/${Date}`).push().set(message);
+                    })
         }
       );
     } catch (error) {

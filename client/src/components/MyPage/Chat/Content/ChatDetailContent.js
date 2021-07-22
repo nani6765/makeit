@@ -10,7 +10,14 @@ function ChatDetailContent(props) {
         {moment(props.comment.timestamp).format("h[:]mm a")}
       </p>
       <div className="content">
-        <p>{props.comment.comment}</p>
+        {props.comment.type === "text"
+        ? <p>{props.comment.comment}</p>
+        : (
+          props.comment.type === "image"
+          ? <img src={props.comment.src} />
+          : <a href={props.comment.src}>{props.comment.comment}</a>
+        )
+        }
       </div>
     </>
   );
