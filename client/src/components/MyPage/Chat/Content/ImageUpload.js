@@ -63,7 +63,9 @@ function ImageUpload(props) {
           now={Percentage}
         />
       )}
-      <button onClick={handleOpenImageRef}>사진 업로드</button>
+      <button className="file" onClick={handleOpenImageRef}>
+        <i className="bi bi-upload"></i>
+      </button>
       <input
         type="file"
         style={{ display: "none" }}

@@ -15,14 +15,15 @@ import {
   ChatContentDate,
   ChatMeContentGrid,
   ChatYouContentGrid,
+  UploadDiv,
 } from "../css/ChatDetailElement.js";
+
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 
 function ChatDetail(props) {
   const [Comments, setComments] = useState([]);
-  const [SendComment, setSendComment] = useState("");
   const [ChatRoomId, setChatRoomId] = useState("");
 
   const user = useSelector((state) => state.user);
@@ -48,19 +49,6 @@ function ChatDetail(props) {
       comments.push(DataSnapshot.val());
       setComments([...comments]);
     });
-  };
-
-  const CreateMessage = (ChatRoomId) => {
-    const Date = moment().format("YYYY[년] MM[월] DD[일]");
-    let message = {
-      timestamp: firebase.database.ServerValue.TIMESTAMP,
-      username: user.userData.displayName,
-      profile_picture: user.userData.photoURL,
-      uid: user.userData.uid,
-      type: "message",
-      comment: SendComment,
-    };
-    MessageRef.child(`${ChatRoomId}/${Date}`).push().set(message);
   };
 
   return (
@@ -93,17 +81,11 @@ function ChatDetail(props) {
           })}
         </ChatForContentDiv>
         {ChatRoomId === "" ? null : (
-          <div>
-            <ChatUpload
-              ChatRoomId={ChatRoomId}
-              user={user}
-              CreateMessage={CreateMessage}
-              SendComment={SendComment}
-              setSendComment={setSendComment}
-            />
+          <UploadDiv>
+            <ChatUpload ChatRoomId={ChatRoomId} user={user} />
 
             <ImageUpload ChatRoomId={ChatRoomId} user={user} />
-          </div>
+          </UploadDiv>
         )}
       </ChatContentDiv>
     </>

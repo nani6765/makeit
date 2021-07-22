@@ -29,7 +29,6 @@ const ChatDiv = styled.div`
 const ChatContentDiv = styled.div`
   background: #f7f9fe;
   border-radius: 11px;
-  padding: 5px;
 `;
 
 const ChatContentDate = styled.p`
@@ -39,8 +38,8 @@ const ChatContentDate = styled.p`
 
 const ChatForContentDiv = styled.div`
   max-height: 70vh;
-  overflow: none;
-  overflow-y: scroll;
+  overflow-y: auto;
+  padding: 5px;
 `;
 
 const ChatMeContentGrid = css`
@@ -101,6 +100,64 @@ const ChatYouContentGrid = css`
   }
 `;
 
+const UploadDiv = styled.div`
+  background-color: #f6f2ff;
+  border-radius: 0px 0px 15px 15px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "file form";
+  grid-gap: 0.5rem;
+  padding: 5px;
+  .file {
+    grid-area: file;
+    height: 30px;
+    background-color: transparent !important;
+    border: none;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    i {
+      color: #7163f7;
+      font-weight: 900;
+    }
+  }
+  .form {
+    grid-area: form;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas: "text btn";
+    grid-gap: 0.5rem;
+    .text {
+      grid-area: text;
+      resize: none;
+      border: none;
+      overflow: hidden;
+      &:active,
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+    .btn {
+      grid-area: btn;
+      display: flex;
+      flex-direction: column;
+      padding: 0px;
+      border: none;
+      background-color: transparent !important;
+      align-items: center;
+      color: #7163f7;
+      font-weight: 900;
+      font-size: 12px;
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+`;
 export {
   ChatDiv,
   ChatContentDiv,
@@ -108,4 +165,5 @@ export {
   ChatForContentDiv,
   ChatMeContentGrid,
   ChatYouContentGrid,
+  UploadDiv,
 };
