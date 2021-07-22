@@ -12,7 +12,7 @@ function ChatDetailContent(props) {
       </p>
       <div className="content">
         {props.comment.type === "message"
-        ? <p>{props.comment.comment}</p>
+        ? <pre>{props.comment.comment}</pre>
         : (
           props.comment.type === "image"
           ? <img src={props.comment.src} style={{maxWidth:"100%", height:"auto"}} />

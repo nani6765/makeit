@@ -28,20 +28,21 @@ function FileUpload(props) {
     const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
-    console.log("파일", file)
+    console.log("파일 업로드");
+
     try {
+      console.log("파일 업로드 시작");
       //파일 저장
       let uploadTask = storageRef.child(filePath).put(file, metadata);
 
       //퍼센티지
       uploadTask.on(
         "state_changed",
-        (UploadTaskSnapshot) => {
-          const percentage =
-            Math.round(
-              UploadTaskSnapshot.bytesTransferred /
-                UploadTaskSnapshot.totalBytes
-            ) * 100;
+        UploadTaskSnapshot => {
+          console.log("task", UploadTaskSnapshot.bytesTransferred);
+          const percentage = Math.round(
+                        (UploadTaskSnapshot.bytesTransferred / UploadTaskSnapshot.totalBytes) * 100
+                    )
           setPercentage(percentage);
         },
         (err) => {
@@ -84,8 +85,10 @@ function FileUpload(props) {
           variant="warning"
           label={`${Percentage}%`}
           now={Percentage}
+          id="progress"
         />
       )}
+
       <button className="file" onClick={handleOpenImageRef}>
         <i className="bi bi-upload"></i>
       </button>
@@ -94,7 +97,10 @@ function FileUpload(props) {
         type="file"
         style={{ display: "none" }}
         ref={inputOpenImageRef}
-        onChange={handleImageUpload}
+        onChange={(e) => {
+          handleImageUpload(e);
+          console.log("file", e);
+        }}
       />
     </>
   );

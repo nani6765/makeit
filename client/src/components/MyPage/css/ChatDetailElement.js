@@ -87,6 +87,7 @@ const ChatContentDate = styled.p`
 
 const ChatForContentDiv = styled.div`
   max-height: 70vh;
+  height: 70vh;
   overflow-y: auto;
   padding: 5px;
 `;
@@ -110,7 +111,7 @@ const ChatMeContentGrid = css`
   }
   .content {
     text-align: right;
-    p {
+    pre {
       display: inline-block;
       background: #ffffff;
       border-radius: 30px;
@@ -141,7 +142,7 @@ const ChatYouContentGrid = css`
   .content {
     grid-area: content;
     text-align: left;
-    p {
+    pre {
       display: inline-block;
       background: #ffffff;
       border-radius: 30px;
@@ -156,10 +157,15 @@ const UploadDiv = styled.div`
   border-radius: 0px 0px 15px 15px;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: "file form";
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+  "progress progress"
+  "file form";
   grid-gap: 0.5rem;
   padding: 5px;
+  #progress {
+    grid-area : progress;
+  }
   .file {
     grid-area: file;
     height: 30px;

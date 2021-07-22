@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { withRouter, useHistory } from "react-router-dom"
 import { ChatGNBDiv } from "../css/ChatDetailElement.js";
 import Avatar from "react-avatar";
 import DeleteIcon from "../css/DeleteIcon.svg";
 import { firebase } from "../../../firebase.js";
 
 function ChatGNB(props) {
+  let history = useHistory();
   let InfoRef = firebase.database().ref("users");
 
   const [OtherInfo, setOtherInfo] = useState({});
@@ -13,11 +15,11 @@ function ChatGNB(props) {
     InfoRef.child(props.OthersUid).once('value', (DataSnapshot) => {
       setOtherInfo(DataSnapshot.val());
     })
-  }, [])
+  }, []);
 
   return (
     <ChatGNBDiv>
-      <div className="back">
+      <div className="back" onClick = {() => history.goBack()}>
         <svg
           width="11"
           height="15"
@@ -63,4 +65,4 @@ function ChatGNB(props) {
   );
 }
 
-export default ChatGNB;
+export default withRouter(ChatGNB);

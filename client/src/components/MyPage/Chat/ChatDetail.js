@@ -45,12 +45,13 @@ function ChatDetail(props) {
 
   const ScrollFunction = () => {
     let TargetDIv = document.querySelector("#ChatForContentDiv");
-    console.log("hello?", TargetDIv.scrollHeight);
+    console.log("scroll Height", TargetDIv.scrollHeight, ", Start", TargetDIv.scrollTop);
     TargetDIv.scrollTo({
       top: `${TargetDIv.scrollHeight}`,
       left: 0,
       behavior: "smooth",
     });
+    console.log("scroll Height", TargetDIv.scrollHeight, ", End", TargetDIv.scrollTop);
   };
 
   const LoadMessages = (ChatRoomId) => {
@@ -64,7 +65,6 @@ function ChatDetail(props) {
     MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
-      console.log(comments[0].values)
       setComments([...comments]);
       ScrollFunction();
     });
