@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import React, { useState } from "react";
-<<<<<<< HEAD
-=======
-import React, { useState, useEffect } from "react";
->>>>>>> 4cc7f7a1acb7d527d92fb8c6f2866a2c1f6b8f99
 import { firebase } from "../../../../firebase.js";
 import { useSelector } from "react-redux";
 
@@ -18,17 +13,17 @@ function ChatUpload(props) {
 
   moment.locale("ko");
   let MessageRef = firebase.database().ref("chats");
-  
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!/\S/.test(SendComment)) {
       return;
     }
     setSendCommentLoading(true);
+    console.log(SendComment);
     CreateMessage(props.ChatRoomId);
     setSendComment("");
     setSendCommentLoading(false);
-=======
 
 function ChatUpload(props) {
   const [Loading, setLoading] = useState(false);
@@ -39,15 +34,7 @@ function ChatUpload(props) {
     props.CreateMessage(props.ChatRoomId, "text");
     props.setSendComment("");
     setLoading(false);
->>>>>>> kimdoyoen-develop
   };
-
-  
-  const handleKeyDown = (event) => {
-    if (event.ctrlKey && event.keyCode === 13) {
-      submitHandler(event);
-    }
-  }
 
   const CreateMessage = (ChatRoomId) => {
     const Date = moment().format("YYYY[년] MM[월] DD[일]");
@@ -66,25 +53,19 @@ function ChatUpload(props) {
     <>
       <form onSubmit={submitHandler} className="form">
         <textarea
-<<<<<<< HEAD
           value={SendComment}
           onChange={(e) => setSendComment(e.currentTarget.value)}
           rows="1"
           cols="20"
           className="text"
-          onKeyDown={handleKeyDown}     
+          wrap="soft"
         ></textarea>
         <button className="btn" type="submit" disabled={SendCommentLoading}>
           <i className="bi bi-envelope-open"></i>
           <span>보내기</span>
-=======
-          value={props.SendComment}
-          onChange={(e) => props.setSendComment(e.currentTarget.value)}
-          rows="3"
-        ></textarea>
+          </button>
         <button type="submit" disabled={Loading}>
           전송
->>>>>>> kimdoyoen-develop
         </button>
       </form>
     </>
