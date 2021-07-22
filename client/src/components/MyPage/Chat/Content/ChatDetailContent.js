@@ -22,7 +22,7 @@ function ChatDetailContent(props) {
       </p>
       <div className="content">
         {props.comment.type === "message" ? (
-          <pre>{props.comment.comment}</pre>
+          <p>{props.comment.comment}</p>
         ) : props.comment.type === "image" ? (
           <img
             src={props.comment.src}
