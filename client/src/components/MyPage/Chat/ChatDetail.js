@@ -43,23 +43,36 @@ function ChatDetail(props) {
     }
   }, [ChatRoomId]);
 
+  const ScrollFunction = () => {
+    let TargetDIv = document.querySelector("#ChatForContentDiv");
+    console.log("hello?", TargetDIv.scrollHeight);
+    TargetDIv.scrollTo({
+      top: `${TargetDIv.scrollHeight}`,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
   const LoadMessages = (ChatRoomId) => {
     MessageRef.child(ChatRoomId).once("child_added", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
       setComments([...comments]);
+      ScrollFunction();
     });
+
     MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
       let comments = [];
       comments.push(DataSnapshot.val());
       setComments([...comments]);
+      ScrollFunction();
     });
   };
 
   return (
     <>
       <ChatContentDiv>
-        <ChatForContentDiv>
+        <ChatForContentDiv id="ChatForContentDiv">
           {Comments.map((commentGroup, idx) => {
             return Object.values(commentGroup).map((comment, idx) => {
               return (
