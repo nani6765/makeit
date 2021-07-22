@@ -12,7 +12,6 @@ function FileUpload(props) {
   const inputOpenImageRef = useRef();
   const storageRef = firebase.storage().ref();
   let MessageRef = firebase.database().ref("chats");
-  moment.locale("ko");
 
   moment.locale("ko");
 
@@ -26,16 +25,11 @@ function FileUpload(props) {
 
     if (!file) return;
 
-    const Date = moment().format("YYYY[년] MM[월] DD[일]");
-    const filePath = `/chats/${props.ChatRoomId}/${Date}/${file.name}`;
+    const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
-<<<<<<< HEAD:client/src/components/MyPage/Chat/Content/ImageUpload.js
-    console.log("파일", file);
-=======
     console.log("파일 업로드");
 
->>>>>>> 4cc7f7a1acb7d527d92fb8c6f2866a2c1f6b8f99:client/src/components/MyPage/Chat/Content/FileUpload.js
     try {
       console.log("파일 업로드 시작");
       //파일 저장
@@ -55,33 +49,28 @@ function FileUpload(props) {
           console.log(err);
         },
         () => {
-          //파일을 메시지로 전송
-          //스토리지에서 이미지 url 가져오기
-          uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-            let message = {
-              timestamp: firebase.database.ServerValue.TIMESTAMP,
-              username: props.user.userData.displayName,
-              profile_picture: props.user.userData.photoURL,
-              uid: props.user.userData.uid,
-              src: downloadURL,
-<<<<<<< HEAD
-              comment: file.name,
-=======
->>>>>>> kimdoyoen-develop
-            };
+          //파일 메시지 전송
 
-            if (file.type.includes("image")) {
-              message.type = "image";
-            } else {
-              message.type = "file";
-            }
+          //스토리지에서 이미지 url
+          uploadTask.snapshot.ref.getDownloadURL()
+                    .then(downloadURL => {
+                        let message = {
+                            timestamp: firebase.database.ServerValue.TIMESTAMP,   
+                            username: props.user.userData.displayName,        
+                            profile_picture: props.user.userData.photoURL,
+                            uid: props.user.userData.uid,
+                            src: downloadURL,
+                            comment: file.name,
+                        }
 
-<<<<<<< HEAD
-            MessageRef.child(`${props.ChatRoomId}/${Date}`).push().set(message);
-=======
-            MessageRef.child(props.ChatRoomId).push().set(message);
->>>>>>> kimdoyoen-develop
-          });
+                        if(file.type.includes("image")) {
+                            message.type = "image";
+                        } else {
+                            message.type = "file";
+                        }
+
+                        MessageRef.child(`${props.ChatRoomId}/${Date}`).push().set(message);
+                    })
         }
       );
     } catch (error) {
@@ -104,14 +93,6 @@ function FileUpload(props) {
         <i className="bi bi-upload"></i>
       </button>
       <input
-<<<<<<< HEAD:client/src/components/MyPage/Chat/Content/ImageUpload.js
-        accept="image/*, .doc, .docx, .hwp, .pdf, .txt, .zip"
-        type="file"
-        style={{ display: "none" }}
-        ref={inputOpenImageRef}
-        onChange={handleImageUpload}
-        accept="image/*, .doc, .docx, .hwp, .pdf, .txt, .ppt"
-=======
         accept = 'image/*, .doc, .docx, .hwp, .pdf, .ppt, .pptx, .txt'
         type="file"
         style={{ display: "none" }}
@@ -120,7 +101,6 @@ function FileUpload(props) {
           handleImageUpload(e);
           console.log("file", e);
         }}
->>>>>>> 4cc7f7a1acb7d527d92fb8c6f2866a2c1f6b8f99:client/src/components/MyPage/Chat/Content/FileUpload.js
       />
     </>
   );

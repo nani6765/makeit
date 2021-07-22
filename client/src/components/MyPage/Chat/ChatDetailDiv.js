@@ -11,7 +11,7 @@ import { ChatDiv } from "../css/ChatDetailElement.js";
 function ChatDetailDiv(props) {
   const [CheckUser, setCheckUser] = useState(false);
   const [ChatRoomId, setChatRoomId] = useState("");
-  const [OtherUid, setOtherUid] = useState("");
+  const [OthersUid, setOthersUid] = useState("");
   const user = useSelector((state) => state.user);
   let history = useHistory();
 
@@ -26,9 +26,9 @@ function ChatDetailDiv(props) {
         setCheckUser(true);
         setChatRoomId(response.data.chatInfo.chatRoomId);
         if (response.data.chatInfo.users[0] === user.userData.uid) {
-          setOtherUid(response.data.chatInfo.users[1]);
+          setOthersUid(response.data.chatInfo.users[1]);
         } else {
-          setOtherUid(response.data.chatInfo.users[0]);
+          setOthersUid(response.data.chatInfo.users[0]);
         }
       } else {
         alert("유효하지 않은 사용자입니다.");
@@ -40,9 +40,9 @@ function ChatDetailDiv(props) {
   return (
     <>
       <ChatDiv>
-        {CheckUser && ChatRoomId != "" && OtherUid != "" ? (
+        {CheckUser && ChatRoomId != "" && OthersUid != "" ? (
           <>
-            <ChatGNB OtherUid={OtherUid} />
+            <ChatGNB OthersUid={OthersUid} />
             <ChatDetail ChatRoomId={ChatRoomId} />
           </>
         ) : null}

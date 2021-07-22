@@ -78,7 +78,6 @@ const ChatGNBDiv = styled.div`
 const ChatContentDiv = styled.div`
   background: #f7f9fe;
   border-radius: 11px;
-  padding: 5px;
 `;
 
 const ChatContentDate = styled.p`
@@ -88,16 +87,9 @@ const ChatContentDate = styled.p`
 
 const ChatForContentDiv = styled.div`
   max-height: 70vh;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
   height: 70vh;
->>>>>>> 4cc7f7a1acb7d527d92fb8c6f2866a2c1f6b8f99
   overflow-y: auto;
   padding: 5px;
-=======
-  overflow-y: scroll;
->>>>>>> kimdoyoen-develop
 `;
 
 const ChatMeContentGrid = css`
@@ -131,11 +123,7 @@ const ChatMeContentGrid = css`
 
 const ChatYouContentGrid = css`
   max-width: 70%;
-<<<<<<< HEAD
   margin-right: 30%;
-=======
-  margin-left: 30%;
->>>>>>> kimdoyoen-develop
   display: grid;
   grid-template-columns: auto auto 1fr;
   grid-template-rows: auto;
@@ -143,10 +131,7 @@ const ChatYouContentGrid = css`
   grid-gap: 1rem;
   margin-bottom: 1rem;
   .date {
-<<<<<<< HEAD
     grid-area: date;
-=======
->>>>>>> kimdoyoen-develop
     display: flex;
     justify-content: flex-start;
     align-items: flex-end;
@@ -155,10 +140,7 @@ const ChatYouContentGrid = css`
     font-size: 10px;
   }
   .content {
-<<<<<<< HEAD
     grid-area: content;
-=======
->>>>>>> kimdoyoen-develop
     text-align: left;
     pre {
       display: inline-block;
@@ -170,7 +152,6 @@ const ChatYouContentGrid = css`
   }
 `;
 
-<<<<<<< HEAD
 const UploadDiv = styled.div`
   background-color: #f6f2ff;
   border-radius: 0px 0px 15px 15px;
@@ -237,17 +218,10 @@ const UploadDiv = styled.div`
 export {
   ChatDiv,
   ChatGNBDiv,
-=======
-export {
-  ChatDiv,
->>>>>>> kimdoyoen-develop
   ChatContentDiv,
   ChatContentDate,
   ChatForContentDiv,
   ChatMeContentGrid,
   ChatYouContentGrid,
-<<<<<<< HEAD
   UploadDiv,
-=======
->>>>>>> kimdoyoen-develop
 };
