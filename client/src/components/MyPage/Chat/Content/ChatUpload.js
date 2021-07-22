@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { firebase } from "../../../../firebase.js";
 import { useSelector } from "react-redux";
+import TextareaAutosize from "react-textarea-autosize";
 
 import moment from "moment";
 import "moment/locale/ko";
@@ -13,7 +14,7 @@ function ChatUpload(props) {
 
   moment.locale("ko");
   let MessageRef = firebase.database().ref("chats");
-  
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (!/\S/.test(SendComment)) {
@@ -25,12 +26,11 @@ function ChatUpload(props) {
     setSendCommentLoading(false);
   };
 
-  
   const handleKeyDown = (event) => {
     if (!event.shiftKey && event.keyCode === 13) {
       submitHandler(event);
     }
-  }
+  };
 
   const CreateMessage = (ChatRoomId) => {
     const Date = moment().format("YYYY[년] MM[월] DD[일]");
@@ -48,14 +48,14 @@ function ChatUpload(props) {
   return (
     <>
       <form onSubmit={submitHandler} className="form">
-        <textarea
+        <TextareaAutosize
           value={SendComment}
           onChange={(e) => setSendComment(e.currentTarget.value)}
           rows="1"
           cols="20"
           className="text"
-          onKeyDown={handleKeyDown}     
-        ></textarea>
+          onKeyDown={handleKeyDown}
+        />
         <button className="btn" type="submit" disabled={SendCommentLoading}>
           <i className="bi bi-envelope-open"></i>
           <span>보내기</span>

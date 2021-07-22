@@ -111,12 +111,16 @@ const ChatMeContentGrid = css`
   }
   .content {
     text-align: right;
-    pre {
+    p {
       display: inline-block;
       background: #ffffff;
       border-radius: 30px;
       padding: 10px 15px 10px 15px;
       margin-bottom: 0px;
+      white-space: pre-line;
+      line-break: anywhere;
+      word-break: keep-all;
+      text-align: left;
     }
   }
 `;
@@ -142,12 +146,17 @@ const ChatYouContentGrid = css`
   .content {
     grid-area: content;
     text-align: left;
-    pre {
+    margin-left: 1rem;
+    p {
       display: inline-block;
       background: #ffffff;
       border-radius: 30px;
       padding: 10px 15px 10px 15px;
       margin-bottom: 0px;
+      white-space: pre-line;
+      line-break: anywhere;
+      word-break: keep-all;
+      text-align: left;
     }
   }
 `;
@@ -158,13 +167,13 @@ const UploadDiv = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto auto;
-  grid-template-areas: 
-  "progress progress"
-  "file form";
+  grid-template-areas:
+    "progress progress"
+    "file form";
   grid-gap: 0.5rem;
   padding: 5px;
   #progress {
-    grid-area : progress;
+    grid-area: progress;
   }
   .file {
     grid-area: file;
@@ -190,7 +199,7 @@ const UploadDiv = styled.div`
       grid-area: text;
       resize: none;
       border: none;
-      overflow: hidden;
+      overflow: auto;
       &:active,
       &:focus {
         border: none;

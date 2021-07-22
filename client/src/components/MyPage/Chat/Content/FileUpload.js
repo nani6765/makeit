@@ -97,10 +97,7 @@ function FileUpload(props) {
         type="file"
         style={{ display: "none" }}
         ref={inputOpenImageRef}
-        onChange={(e) => {
-          handleImageUpload(e);
-          console.log("file", e);
-        }}
+        onChange={(e) => handleImageUpload(e)}
       />
     </>
   );

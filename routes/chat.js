@@ -11,6 +11,7 @@ router.post("/create", (req, res) => {
     req.body.me > req.body.you
       ? `${req.body.me}${req.body.you}`
       : `${req.body.you}${req.body.me}`;
+
   Chat.findOne({ chatRoomId: chatRoomId })
     .exec()
     .then((chatInfo) => {
@@ -22,13 +23,20 @@ router.post("/create", (req, res) => {
             temp.url = counter.chatNum;
             const newChat = new Chat(temp);
             newChat.save().then(() => {
-              Chat.findOne({ chatRoomId: chatRoomId })
+              Counter.findOneAndUpdate(
+                { name: "counter" },
+                { $inc: { chatNum: 1 } }
+              )
                 .exec()
-                .then((chatInfo) => {
-                  return res.status(200).send({
-                    success: true,
-                    resultUrl: chatInfo.url,
-                  });
+                .then(() => {
+                  Chat.findOne({ chatRoomId: chatRoomId })
+                    .exec()
+                    .then((chatInfo) => {
+                      return res.status(200).send({
+                        success: true,
+                        resultUrl: chatInfo.url,
+                      });
+                    });
                 });
             });
           });
