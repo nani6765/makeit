@@ -8,6 +8,7 @@ import "moment/locale/ko";
 
 function FileUpload(props) {
   const [Percentage, setPercentage] = useState(0);
+  const [UploadLoading, setUploadLoading] = useState(false);
 
   const inputOpenImageRef = useRef();
   const storageRef = firebase.storage().ref();
@@ -20,6 +21,8 @@ function FileUpload(props) {
   };
 
   const handleImageUpload = (e) => {
+    setUploadLoading(true);
+
     const Date = moment().format("YYYY[년] MM[월] DD[일]");
     const file = e.target.files[0];
 
@@ -73,8 +76,12 @@ function FileUpload(props) {
                     })
         }
       );
+      e.target.value="";
+      setUploadLoading(false);
     } catch (error) {
       alert("error!");
+      e.target.value="";
+      setUploadLoading(false);
     }
   };
 
@@ -89,7 +96,7 @@ function FileUpload(props) {
         />
       )}
 
-      <button className="file" onClick={handleOpenImageRef}>
+      <button className="file" onClick={handleOpenImageRef} disabled={UploadLoading}>
         <i className="bi bi-upload"></i>
       </button>
       <input
@@ -97,6 +104,7 @@ function FileUpload(props) {
         type="file"
         style={{ display: "none" }}
         ref={inputOpenImageRef}
+        id="fileInput"
         onChange={(e) => handleImageUpload(e)}
       />
     </>
