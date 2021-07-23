@@ -10,6 +10,7 @@ function ChatGNB(props) {
   let InfoRef = firebase.database().ref("users");
 
   const [OtherInfo, setOtherInfo] = useState({});
+  const [DeleteFlag, setDeleteFlag] = useState(false);
 
   useEffect(() => {
     InfoRef.child(props.OthersUid).once('value', (DataSnapshot) => {
@@ -18,6 +19,7 @@ function ChatGNB(props) {
   }, []);
 
   return (
+    <>
     <ChatGNBDiv>
       <div className="back" onClick = {() => history.goBack()}>
         <svg
@@ -53,7 +55,7 @@ function ChatGNB(props) {
         />
         <p>{OtherInfo.name}</p>
       </div>
-      <div className="delete">
+      <div className="delete" onClick={setDeleteFlag(true)}>
         <img
           src={DeleteIcon}
           alt=""
@@ -62,6 +64,7 @@ function ChatGNB(props) {
         <span>나가기</span>
       </div>
     </ChatGNBDiv>
+  </>
   );
 }
 
