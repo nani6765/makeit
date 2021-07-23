@@ -123,6 +123,11 @@ const ChatMeContentGrid = css`
       text-align: left;
     }
   }
+  ${mq[1]} {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0px;
+  }
 `;
 
 const ChatYouContentGrid = css`
@@ -158,6 +163,10 @@ const ChatYouContentGrid = css`
       word-break: keep-all;
       text-align: left;
     }
+  }
+  ${mq[1]} {
+    width: 100%;
+    max-width: 100%;
   }
 `;
 
