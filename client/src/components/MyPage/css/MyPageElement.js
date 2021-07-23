@@ -58,11 +58,13 @@ const MyPageMainDiv = styled.div`
         align-self: center;
         font-weight: bold;
         font-size: 24px;
+        margin-bottom: 0px;
       }
       .email {
         grid-area: email;
         text-align: center;
         align-self: flex-end;
+        margin-bottom: 0px;
       }
       .next {
         grid-area: next;
