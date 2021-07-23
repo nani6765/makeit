@@ -25,11 +25,13 @@ import { jsx, css } from "@emotion/react";
 function ChatDetail(props) {
   const [Comments, setComments] = useState([]);
   const [ChatRoomId, setChatRoomId] = useState("");
+  const [ScorllHChange, setScorllHChange] = useState(false)
 
   const user = useSelector((state) => state.user);
   moment.locale("ko");
 
   let MessageRef = firebase.database().ref("chats");
+  const Date = moment().format("YYYY[년] MM[월] DD[일]");
 
   //ChatRoomId 부모에게서 받아오기
   useEffect(() => {
@@ -43,6 +45,13 @@ function ChatDetail(props) {
     }
   }, [ChatRoomId]);
 
+  useEffect(() => {
+    if(ScorllHChange) {
+      ScrollFunction()
+      setScorllHChange(false);
+    }
+  }, [ScorllHChange]);
+
   const ScrollFunction = () => {
     let TargetDIv = document.querySelector("#ChatForContentDiv");
     TargetDIv.scrollTo({
@@ -53,30 +62,26 @@ function ChatDetail(props) {
   };
 
   const LoadMessages = (ChatRoomId) => {
-    MessageRef.child(ChatRoomId).once("child_added", (DataSnapshot) => {
-      let comments = [];
-      comments.push(DataSnapshot.val());
-      setComments([...comments]);
-      ScrollFunction();
-    });
-
-    MessageRef.child(ChatRoomId).on("child_changed", (DataSnapshot) => {
-      let comments = [];
-      comments.push(DataSnapshot.val());
-      setComments([...comments]);
-      ScrollFunction();
+    let comments = [];
+    setComments(comments);
+     MessageRef.child(ChatRoomId).on("value", (DataSnapshot) => {
+      setComments(...Comments, DataSnapshot.val());
+      setScorllHChange(true)
     });
   };
 
   return (
     <>
       <ChatContentDiv>
-        <ChatForContentDiv id="ChatForContentDiv">
-          {Comments.map((commentGroup, idx) => {
-            return Object.values(commentGroup).map((comment, idx) => {
-              return (
-                <React.Fragment key={idx}>
-                  {idx === 0 && (
+        
+      <ChatForContentDiv id="ChatForContentDiv">
+        { Comments
+          ? (
+            Object.values(Comments).map((commentGroup, idx) => {
+            return Object.values(commentGroup).map((comment, i) => {
+              return(   
+              <React.Fragment key={idx}>
+                  {i === 0 && (
                     <ChatContentDate>
                       {moment(comment.timestamp).format(
                         "YYYY[년] MM[월] DD[일]"
@@ -90,12 +95,15 @@ function ChatDetail(props) {
                         : ChatYouContentGrid
                     }
                   >
-                    <ChatDetailContent comment={comment} />
+                    <ChatDetailContent comment={comment} setScorllHChange={setScorllHChange}/>
                   </div>
                 </React.Fragment>
-              );
-            });
-          })}
+                )
+                  })
+                })  
+          ) : null
+          }
+          
         </ChatForContentDiv>
         {ChatRoomId === "" ? null : (
           <UploadDiv>
@@ -103,7 +111,8 @@ function ChatDetail(props) {
 
             <FileUpload ChatRoomId={ChatRoomId} user={user} />
           </UploadDiv>
-        )}
+        )}      
+              
       </ChatContentDiv>
     </>
   );

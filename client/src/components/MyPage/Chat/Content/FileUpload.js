@@ -28,7 +28,7 @@ function FileUpload(props) {
 
     if (!file) return;
 
-    const filePath = `/chats/${props.ChatRoomId}/${file.name}`;
+    const filePath = `/chats/${props.ChatRoomId}/${moment()}${file.name}`;
     const metadata = { contentType: mime.lookup(file.name) };
 
     console.log("파일 업로드");

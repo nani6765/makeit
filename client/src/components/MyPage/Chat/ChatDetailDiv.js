@@ -42,7 +42,7 @@ function ChatDetailDiv(props) {
       <ChatDiv>
         {CheckUser && ChatRoomId != "" && OthersUid != "" ? (
           <>
-            <ChatGNB OthersUid={OthersUid} />
+            <ChatGNB OthersUid={OthersUid} ChatRoomId={ChatRoomId} />
             <ChatDetail ChatRoomId={ChatRoomId} />
           </>
         ) : null}
