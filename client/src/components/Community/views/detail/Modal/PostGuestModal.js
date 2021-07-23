@@ -16,7 +16,7 @@ function PostGuestModal(props) {
 
     let body = {
       me: user.userData.uid,
-      you: props.rerepleInfo.auther.uid,
+      you: props.postInfo.auther.uid,
     };
     axios.post("/api/chat/create", body).then((response) => {
       console.log(response.data);
