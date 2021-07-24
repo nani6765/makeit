@@ -73,4 +73,15 @@ router.post("/userCheck", (req, res) => {
     });
 });
 
+router.post("/delete", (req, res) => {
+  Chat.deleteOne({ chatRoomId : req.body.chatRoomId })
+  .exec()
+  .then((result) => {
+    return res.status(200).send({ success: true });
+  }).catch((err) => {  
+      console.log("err", err);
+      if (err) return res.status(400).json({ success: false, err });
+  })
+});
+
 module.exports = router;

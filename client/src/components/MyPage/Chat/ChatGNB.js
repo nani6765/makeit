@@ -4,12 +4,15 @@ import { ChatGNBDiv } from "../css/ChatDetailElement.js";
 import Avatar from "react-avatar";
 import DeleteIcon from "../css/DeleteIcon.svg";
 import { firebase } from "../../../firebase.js";
+import DeleteModal from "./DeleteModal.js";
+import axios from "axios";
 
 function ChatGNB(props) {
   let history = useHistory();
   let InfoRef = firebase.database().ref("users");
 
   const [OtherInfo, setOtherInfo] = useState({});
+  const [DeleteFlag, setDeleteFlag] = useState(false);
 
   useEffect(() => {
     InfoRef.child(props.OthersUid).once('value', (DataSnapshot) => {
@@ -18,6 +21,7 @@ function ChatGNB(props) {
   }, []);
 
   return (
+    <>
     <ChatGNBDiv>
       <div className="back" onClick = {() => history.goBack()}>
         <svg
@@ -53,7 +57,7 @@ function ChatGNB(props) {
         />
         <p>{OtherInfo.name}</p>
       </div>
-      <div className="delete">
+      <div className="delete" onClick={() => {setDeleteFlag(true)}}>
         <img
           src={DeleteIcon}
           alt=""
@@ -62,6 +66,8 @@ function ChatGNB(props) {
         <span>나가기</span>
       </div>
     </ChatGNBDiv>
+    { DeleteFlag ? <DeleteModal setDeleteFlag={setDeleteFlag} ChatRoomId={props.ChatRoomId} /> : null }
+  </>
   );
 }
 
