@@ -6,56 +6,126 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const EditProfileGrid = styled.div`
-  width: 60%;
-  margin: 0 auto;
-  padding: 5vh 5vw 5vh 5vw;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
-  background: #ffffff;
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
-  border-radius: 15px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto auto;
-  grid-gap: 1rem;
-  grid-template-areas:
-    ". title back"
-    "editProfileDiv editProfileDiv editProfileDiv"
-    "eidtNickNameDiv eidtNickNameDiv eidtNickNameDiv"
-    ". btnDiv .";
-  .title {
-    grid-area: title;
-    font-weight: bold;
-    width: 100%;
-    margin-bottom: 0px;
-    text-align: center;
-  }
-  .back {
-    grid-area: back;
-    cursor: pointer;
-    text-align: right;
-  }
+const EditProfileDiv = styled.div`
   .editProfileDiv {
-    grid-area: editProfileDiv;
-    border-top: 2px solid black;
-    .editProfile {
-      display: flex;
-      flex-wrap: columns;
-      justyfi-content: center;
-      align-items: center;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    .avatarSelect {
+      text-align: center;
+      input {
+        display: none;
+      }
+      label {
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        i {
+          border: 1px solid #d4d4d4;
+          border-radius: 50%;
+          display: inline-block;
+          padding: 6px;
+          position: absolute;
+          top: 50px;
+          right: -5px;
+          background-color: white;
+          font-size: 20px;
+          font-weight: bold;
+          color: black;
+          display: block;
+        }
+      }
+      button {
+        display: block;
+        background-color: #f0f0f0;
+        border: 1px solid #d4d4d4;
+        border-radius: 50px;
+        color: #454345;
+        font-weight: 600;
+        padding: 5px 10px 5px 10px;
+      }
     }
   }
-  .eidtNickNameDiv {
-    grid-area: eidtNickNameDiv;
-    .eidtNickName {
+  form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    label {
+      text-align: left;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 25px;
+      color: #454345;
+    }
+    input {
+      background: #ffffff;
+      border: 1px solid #d5d5d5;
+      box-sizing: border-box;
+      border-radius: 7px;
+      padding: 0.5rem;
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+    .FormbtnDiv {
+      text-align: center;
+      margin-top: 1rem;
+      button {
+        background: #935ea5;
+        border-radius: 10px;
+        padding: 5px 10px 5px 10px;
+        color: white;
+        font-weight: bold;
+        &:hover,
+        &:focus {
+          background: #702c8a;
+        }
+      }
     }
   }
-  .btnDiv {
-    grid-area: btnDiv;
+`;
+
+const EditProfile = styled.div`
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  .background {
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
-    text-align: center;
+    height: 100%;
+    z-index: 50;
+  }
+  .ModalDiv {
+    z-index: 51;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    width: 70%;
+    height: 80%;
+    background: #ffffff;
+    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+      0px 9px 30px rgba(163, 1, 79, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    .cropperDiv {
+      position: relative;
+      width: 80%;
+      height: 500px;
+      max-height: 500px;
+    }
     button {
       background: #935ea5;
       border-radius: 10px;
@@ -69,11 +139,4 @@ const EditProfileGrid = styled.div`
     }
   }
 `;
-
-const PCOnly = styled.span`
-  display: block;
-  ${mq[1]} {
-    display: none;
-  }
-`;
-export { EditProfileGrid, PCOnly };
+export { EditProfileDiv, EditProfile };

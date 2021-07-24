@@ -74,6 +74,7 @@ const MyPageMainDiv = styled.div`
         span {
           font-size: 32px;
           cursor: pointer;
+          color: black;
         }
       }
     }
@@ -128,13 +129,19 @@ const MyPageMainDiv = styled.div`
 
 const MyPageSubTitle = styled.div`
   width: 100%;
-  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 2px solid black;
   margin-bottom: 5vh;
   p {
     font-weight: bold;
     font-size: 24px;
     line-height: 36px;
+  }
+  span {
+    font-size: 20px;
+    cursor: pointer;
   }
 `;
 

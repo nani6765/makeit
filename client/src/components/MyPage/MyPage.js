@@ -1,65 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { MyPageMainDiv, MyPageSubTitle } from "./css/MyPageElement.js";
 
-import { MyPageMainDiv, MyPageSubTitle, PCOnly } from "./css/MyPageElement.js";
-import EditProfile from "./MyPageContent/EditProfile.js";
-import Avatar from "react-avatar";
+import BasicMyPage from "./MyPageContent/Taps/BasicMyPage.js";
+import EditProfile from "./MyPageContent/Taps/EditProfile.js";
 
-function MyPage(props) {
+function MyPage() {
   const user = useSelector((state) => state.user);
+  const [Taps, setTaps] = useState("내정보 관리");
 
-  useEffect(() => {
-    console.log(user.userData);
-  }, []);
+  const SwitchTaps = () => {
+    switch (Taps) {
+      case "내정보 관리":
+        return <BasicMyPage setTaps={setTaps} />;
+      case "프로필 관리":
+        return <EditProfile setTaps={setTaps} />;
+      default:
+        return <BasicMyPage setTaps={setTaps} />;
+    }
+  };
 
   return (
     <>
       <MyPageMainDiv>
         <p className="title">마이페이지</p>
         <MyPageSubTitle>
-          <p>내정보 관리</p>
+          <p>{Taps}</p>
+          {Taps != "내정보 관리" && (
+            <span
+              onClick={() => {
+                setTaps("내정보 관리");
+              }}
+            >
+              X
+            </span>
+          )}
         </MyPageSubTitle>
-
-        <div className="profile">
-          <h1>프로필</h1>
-          <p>
-            <PCOnly>
-              자신의 색깔을 나타낼 수 있는 프로필 사진을 등록해주세요!
-            </PCOnly>
-          </p>
-          <div className="profileContainer">
-            <Avatar
-              src={user.userData.photoURL}
-              size="50"
-              round={true}
-              style={{ border: "1px solid #c6c6c6" }}
-              className="img"
-            />
-            <p className="name">{user.userData.displayName}</p>
-            <p className="email">{user.userData.email}</p>
-            <div className="next">
-              <span>＞</span>
-            </div>
-          </div>
-          <h1>상태메세지</h1>
-          <p>
-            <PCOnly>
-              상태 메세지에 관심사, 소속, 직업 등을 적어 자신을 표현해보세요!
-            </PCOnly>
-          </p>
-          <div></div>
-        </div>
-
-        <div className="btnDiv">
-          <div className="topLeft">활동이력</div>
-          <div className="topRight">알림센터/쪽지함</div>
-          <div className="bottomLeft">문의하기/신고하기</div>
-          <div className="bottomRight">환경설정</div>
-        </div>
+        {SwitchTaps()}
       </MyPageMainDiv>
-      <EditProfile />
     </>
   );
 }
 
-export default MyPage;
+export default withRouter(MyPage);
