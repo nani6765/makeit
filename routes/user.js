@@ -22,7 +22,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/editProfile", setUpload("makeit/user"), (req, res, next) => {
+router.post("/editProfile", setUpload(`makeit/user/`), (req, res, next) => {
   return res.json({
     success: true,
     key: res.req.file.key,

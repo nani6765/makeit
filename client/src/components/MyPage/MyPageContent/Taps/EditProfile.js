@@ -52,9 +52,11 @@ function EditProfile(props) {
             }, "image/png");
           }).then((result) => {
             setPhotoURL(result);
+            console.log(result);
           });
         };
         const updateURL = getPromise(croppedImage);
+
         setCanvasData(croppedImage);
       } catch (e) {
         console.error(e);
