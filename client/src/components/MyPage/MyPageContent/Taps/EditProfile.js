@@ -14,6 +14,7 @@ function EditProfile(props) {
   const [DisplayName, setDisplayName] = useState(user.userData.displayName);
   const [PhotoURL, setPhotoURL] = useState(user.userData.photoURL);
   const [ModalFlag, setModalFlag] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
 
   //유저가 선택한 이미지
   const [imageSrc, setImageSrc] = React.useState(null);
@@ -81,9 +82,50 @@ function EditProfile(props) {
     });
   }
 
+  function SubmitExit() {
+    history.push("/MyPage");            
+    setisLoading(false);
+    setDisplayName(user.userData.displayName);
+    setPhotoURL(user.userData.photoURL);
+    setImageSrc(null);
+    setCroppedAreaPixelsResult(null);
+    setCanvasData(null);
+  }
+
   const submitFunc = useCallback(async (e) => {
     e.preventDefault();
     try {
+      setisLoading(true);
+
+      if(CanvasData === null) {
+        var currentUser = firebase.auth().currentUser;
+
+        try {
+          await currentUser.updateProfile({  
+            displayName: DisplayName,          
+            photoURL: PhotoURL,          
+          });
+          await firebase.database().ref("users").child(user.userData.uid).set({
+            name: DisplayName,
+            image: PhotoURL,
+          });
+          let body = {
+            uid: user.userData.uid,
+            displayName: DisplayName,
+            photoURL: PhotoURL,          
+          }
+          
+          axios.post("/api/user/uploadProfile", body).then((response) => {
+            if(response.data.success) {
+              SubmitExit();
+            }
+          });  
+          setisLoading(false);
+        } catch (error) {
+          alert(error);
+          setisLoading(false);      
+        }
+      } else {
       const ImgDataURL = CanvasData.toDataURL("image/jpg");
 
       var blobData = dataURItoBlob(ImgDataURL);
@@ -94,24 +136,43 @@ function EditProfile(props) {
           "content-type": "multipart.form-data",
         },
       };
+      formData.append("file", blobData, user.userData.uid + ".png");
 
       var currentUser = firebase.auth().currentUser;
-
-      formData.append("file", blobData, user.userData.uid + ".png");
       axios.post("/api/user/editProfile", formData, config).then(async (response) => {
         if (response.data.success) {
-          try {          
-            await currentUser.updateProfile({            
+          try {
+            await currentUser.updateProfile({  
+              displayName: DisplayName,          
               photoURL: response.data.filePath,          
-            });          
-            history.push("/MyPage");      
+            });
+            await firebase.database().ref("users").child(user.userData.uid).set({
+              name: DisplayName,
+              image: response.data.filePath,
+            });
+            let body = {
+              uid: user.userData.uid,
+              displayName: DisplayName,
+              photoURL: response.data.filePath,          
+            }
+            
+            axios.post("/api/user/uploadProfile", body).then((response) => {
+              if(response.data.success) {
+                SubmitExit();
+              }
+            });
+            setisLoading(false);      
+
           } catch (error) {
             alert(error);
+            setisLoading(false);      
           }
         }
       });
+    }
     } catch (e) {
       alert(e);
+      setisLoading(false);      
     }
   });
 
@@ -144,7 +205,7 @@ function EditProfile(props) {
                 />
                 <i className="bi bi-camera"></i>
               </label>
-              <button type="button">기본 이미지로 변경</button>
+              <button type="button" onClick={()=> setPhotoURL("https://kr.object.ncloudstorage.com/makeit/user/profile.png")}>기본 이미지로 변경</button>
             </div>
           </>
         )}
@@ -159,7 +220,7 @@ function EditProfile(props) {
           required
         />
         <div className="FormbtnDiv">
-          <button type="submit">수정사항 저장</button>
+          <button type="submit" disabled={isLoading}>수정사항 저장</button>
         </div>
       </form>
     </EditProfileDiv>
