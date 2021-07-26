@@ -2,4 +2,3 @@ node_modules/
 config/dev.js
 client/node_modules/
 client/src/firebase.js
-client/src/config/dev.js

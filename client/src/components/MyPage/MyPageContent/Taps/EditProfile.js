@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
-
+import { withRouter, useHistory } from "react-router-dom";
 import CropperModal from "../Func/CropperModal.js";
 import Avatar from "react-avatar";
 import { EditProfileDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
 import axios from "axios";
-//import S3 from "../Func/UploadS3.js";
+import { firebase } from "../../../../firebase.js";
 
 function EditProfile(props) {
   const user = useSelector((state) => state.user);
@@ -20,6 +20,8 @@ function EditProfile(props) {
 
   //canvas Data
   const [CanvasData, setCanvasData] = useState(null);
+
+  let history = useHistory();
 
   function readFile(file) {
     return new Promise((resolve) => {
@@ -59,7 +61,7 @@ function EditProfile(props) {
 
         setCanvasData(croppedImage);
       } catch (e) {
-        console.error(e);
+        alert(e);
       }
     }
   }, [imageSrc, croppedAreaPixelsResult]);
@@ -70,25 +72,22 @@ function EditProfile(props) {
     for (var i = 0; i < binary.length; i++) {
       array.push(binary.charCodeAt(i));
     }
-    return new Blob([new Uint8Array(array)], {
-      type: "image/jpeg",
+
+    var byteArray = new Uint8Array(array);
+    var byteArrays = [];
+    byteArrays.push(byteArray);
+
+    return new Blob(byteArrays, {
+      type: "image/png",
     });
   }
 
   const submitFunc = useCallback(async (e) => {
     e.preventDefault();
     try {
-      const ImgDataURL = CanvasData.toDataURL("image/png");
-      //console.log("ImgDataURL", ImgDataURL);
+      const ImgDataURL = CanvasData.toDataURL("image/jpg");
+
       var blobData = dataURItoBlob(ImgDataURL);
-      console.log("blobData", blobData);
-      /*
-      var params = { Key: fileName, ContentType: file.type, Body: blobData };
-      bucket.upload(params, function (err, data) {
-        console.log(data);
-        console.log(err ? "ERROR!" : "UPLOADED.");
-      });
-      */
 
       let formData = new FormData();
       const config = {
@@ -96,14 +95,26 @@ function EditProfile(props) {
           "content-type": "multipart.form-data",
         },
       };
-      formData.append("file", blobData);
-      axios.post("/api/user/editProfile", formData, config).then((response) => {
-        if (response.data.success) {
-          console.log(response.data);
-        }
-      });
+
+      var currentUser = firebase.auth().currentUser;
+
+      formData.append("file", blobData, user.userData.uid + ".png");
+      axios
+        .post("/api/user/editProfile", formData, config)
+        .then(async (response) => {
+          if (response.data.success) {
+            try {
+              await currentUser.updateProfile({
+                photoURL: response.data.filePath,
+              });
+              history.push("/MyPage");
+            } catch (error) {
+              alert(error);
+            }
+          }
+        });
     } catch (e) {
-      console.log(e);
+      alert(e);
     }
   });
 
@@ -158,4 +169,4 @@ function EditProfile(props) {
   );
 }
 
-export default EditProfile;
+export default withRouter(EditProfile);
