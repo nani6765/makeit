@@ -1,6 +1,7 @@
 var router = require("express").Router();
 const { User } = require("../model/User.js");
 const { Counter } = require("../model/Counter.js");
+const setUpload = require("../module/multer/upload.js");
 
 router.post("/register", (req, res) => {
   let temp = req.body;
@@ -18,6 +19,15 @@ router.post("/register", (req, res) => {
         });
       });
     });
+  });
+});
+
+router.post("/editProfile", setUpload("makeit/user"), (req, res, next) => {
+  return res.json({
+    success: true,
+    key: res.req.file.key,
+    filePath: res.req.file.location,
+    fileName: res.req.file.originalname,
   });
 });
 

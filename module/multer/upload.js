@@ -26,6 +26,7 @@ function setUpload(bucket) {
         let extension = path.extname(file.originalname);
         cb(null, Date.now().toString() + extension);
       },
+      ContentType: "image/jpeg",
     }),
   }).single("file");
   return upload;

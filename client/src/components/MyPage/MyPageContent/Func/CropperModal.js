@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
 import { EditProfile } from "../../css/MyPageContentElement.js";
-import { getCroppedImg } from "./CanvasUtils.js";
 
 function CropperModal(props) {
   //cropping
@@ -9,10 +8,8 @@ function CropperModal(props) {
   const [zoom, setZoom] = useState(1);
   //cropping Result
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  //cropped Image
-  const [croppedImage, setCroppedImage] = useState(null);
 
-  const backgroundClidk = () => {
+  const backgroundClick = () => {
     props.setImageSrc(null);
     props.setModalFlag(false);
   };
@@ -21,29 +18,17 @@ function CropperModal(props) {
     setCroppedAreaPixels(croppedAreaPixels);
   }, []);
 
-  const showCroppedImage = useCallback(async () => {
-    try {
-      const croppedImage = await getCroppedImg(
-        props.imageSrc,
-        croppedAreaPixels
-      );
-      console.log("donee", { croppedImage });
-      setCroppedImage(croppedImage);
-    } catch (e) {
-      console.error(e);
-    }
-  }, [props.imageSrc, croppedAreaPixels]);
-
-  const onClose = useCallback(() => {
-    setCroppedImage(null);
-  }, []);
+  const CroppedImageFunc = () => {
+    props.setCroppedAreaPixelsResult(croppedAreaPixels);
+    props.setModalFlag(false);
+  };
 
   return (
     <EditProfile>
       <div
         className="background"
         onClick={() => {
-          backgroundClidk();
+          backgroundClick();
         }}
       ></div>
       <div className="ModalDiv">
@@ -60,7 +45,9 @@ function CropperModal(props) {
             onZoomChange={setZoom}
           />
         </div>
-        <button type="button">이미지 선택</button>
+        <button type="button" onClick={() => CroppedImageFunc()}>
+          이미지 선택
+        </button>
       </div>
     </EditProfile>
   );
