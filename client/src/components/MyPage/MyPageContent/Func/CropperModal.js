@@ -49,6 +49,7 @@ function CropperModal(props) {
           이미지 선택
         </button>
       </div>
+      
     </EditProfile>
   );
 }
