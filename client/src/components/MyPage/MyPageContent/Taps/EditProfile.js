@@ -5,8 +5,8 @@ import CropperModal from "../Func/CropperModal.js";
 import Avatar from "react-avatar";
 import { EditProfileDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
-import S3 from "../Func/UploadS3.js";
 import axios from "axios";
+//import S3 from "../Func/UploadS3.js";
 
 function EditProfile(props) {
   const user = useSelector((state) => state.user);
@@ -68,7 +68,7 @@ function EditProfile(props) {
     for (var i = 0; i < binary.length; i++) {
       array.push(binary.charCodeAt(i));
     }
-    return new Blob([new Uint8Array(array)], "fileName", {
+    return new Blob([new Uint8Array(array)], {
       type: "image/jpeg",
     });
   }
@@ -77,8 +77,17 @@ function EditProfile(props) {
     e.preventDefault();
     try {
       const ImgDataURL = CanvasData.toDataURL("image/png");
+      //console.log("ImgDataURL", ImgDataURL);
       var blobData = dataURItoBlob(ImgDataURL);
-      console.log(ImgDataURL, blobData);
+      console.log("blobData", blobData);
+      /*
+      var params = { Key: fileName, ContentType: file.type, Body: blobData };
+      bucket.upload(params, function (err, data) {
+        console.log(data);
+        console.log(err ? "ERROR!" : "UPLOADED.");
+      });
+      */
+
       let formData = new FormData();
       const config = {
         header: {
