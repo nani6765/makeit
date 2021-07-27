@@ -441,13 +441,13 @@ router.post("/rerepleSubmit", (req, res) => {
   User.findOne({ uid: temp.uid })
     .exec()
     .then((userInfo) => {
-      rereple.auther = userInfo.uid;
+      rereple.auther = userInfo._id;
       rereple.content = temp.content;
       rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
       const rerepleObj = new CommunityRereple(rereple);
       rerepleObj.save().then((doc) => {
         CommunityReple.findOneAndUpdate(
-          { _id: temp.repleInfo.uid },
+          { _id: temp.repleInfo._id },
           {
             $inc: { rerepleNum: 1 },
             $push: { rerepleArray: doc._id },

@@ -31,7 +31,7 @@ function AlarmCenter(props) {
                             })
 
                             //채팅방 정보 가져오기
-                        });
+                        });                   
                     }
                 });
                 
@@ -47,7 +47,10 @@ function AlarmCenter(props) {
                 uid: user.userData.uid,
             }
             axios.post("/api/alarm/getAlarm", body).then((response) => {
-                console.log("response", response);
+                if(response.data.success) {
+                    let temp = [...response.data.alarms];
+                    setAlarmList(temp);
+                }
             });
         }
     }, [props.AlarmType])

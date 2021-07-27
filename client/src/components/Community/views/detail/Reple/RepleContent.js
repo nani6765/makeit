@@ -26,6 +26,10 @@ function RepleContent(props) {
   });
 
   useEffect(() => {
+    console.log("Reple", Reple)
+  }, []);
+
+  useEffect(() => {
     if (Reple.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
