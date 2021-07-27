@@ -44,11 +44,10 @@ function AlarmCenter(props) {
             });*/
         } else {
             let body = {
-                uid: user.userData._id,
+                uid: user.userData.uid,
             }
-            console.log(user.userData);
-            axios.post("/api/alarm/", body).then((response) => {
-                
+            axios.post("/api/alarm/getAlarm", body).then((response) => {
+                console.log("response", response);
             });
         }
     }, [props.AlarmType])
