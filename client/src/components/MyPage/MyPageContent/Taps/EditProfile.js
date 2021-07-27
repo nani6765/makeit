@@ -84,7 +84,7 @@ function EditProfile(props) {
   }
 
   function SubmitExit() {
-    history.push("/MyPage");            
+    history.push("/MyPage");
     setisLoading(false);
     setDisplayName(user.userData.displayName);
     setPhotoURL(user.userData.photoURL);
@@ -98,13 +98,13 @@ function EditProfile(props) {
     try {
       setisLoading(true);
 
-      if(CanvasData === null) {
+      if (CanvasData === null) {
         var currentUser = firebase.auth().currentUser;
 
         try {
-          await currentUser.updateProfile({  
-            displayName: DisplayName,          
-            photoURL: PhotoURL,          
+          await currentUser.updateProfile({
+            displayName: DisplayName,
+            photoURL: PhotoURL,
           });
           await firebase.database().ref("users").child(user.userData.uid).set({
             name: DisplayName,
@@ -113,86 +113,72 @@ function EditProfile(props) {
           let body = {
             uid: user.userData.uid,
             displayName: DisplayName,
-            photoURL: PhotoURL,          
-          }
-          
+            photoURL: PhotoURL,
+          };
+
           axios.post("/api/user/uploadProfile", body).then((response) => {
-            if(response.data.success) {
+            if (response.data.success) {
               SubmitExit();
             }
-          });  
+          });
           setisLoading(false);
         } catch (error) {
           alert(error);
-          setisLoading(false);      
+          setisLoading(false);
         }
       } else {
-      const ImgDataURL = CanvasData.toDataURL("image/jpg");
+        const ImgDataURL = CanvasData.toDataURL("image/jpg");
 
-      var blobData = dataURItoBlob(ImgDataURL);
+        var blobData = dataURItoBlob(ImgDataURL);
 
-      let formData = new FormData();
-      const config = {
-        header: {
-          "content-type": "multipart.form-data",
-        },
-      };
-      formData.append("file", blobData, user.userData.uid + ".png");
+        let formData = new FormData();
+        const config = {
+          header: {
+            "content-type": "multipart.form-data",
+          },
+        };
+        formData.append("file", blobData, user.userData.uid + ".png");
 
-      var currentUser = firebase.auth().currentUser;
-<<<<<<< HEAD
+        var currentUser = firebase.auth().currentUser;
+        axios
+          .post("/api/user/editProfile", formData, config)
+          .then(async (response) => {
+            if (response.data.success) {
+              try {
+                await currentUser.updateProfile({
+                  displayName: DisplayName,
+                  photoURL: response.data.filePath,
+                });
+                await firebase
+                  .database()
+                  .ref("users")
+                  .child(user.userData.uid)
+                  .set({
+                    name: DisplayName,
+                    image: response.data.filePath,
+                  });
+                let body = {
+                  uid: user.userData.uid,
+                  displayName: DisplayName,
+                  photoURL: response.data.filePath,
+                };
 
-      formData.append("file", blobData, user.userData.uid + ".png");
-      axios
-        .post("/api/user/editProfile", formData, config)
-        .then(async (response) => {
-          if (response.data.success) {
-            try {
-              await currentUser.updateProfile({
-                photoURL: response.data.filePath,
-              });
-              history.push("/MyPage");
-            } catch (error) {
-              alert(error);
-            }
-          }
-        });
-=======
-      axios.post("/api/user/editProfile", formData, config).then(async (response) => {
-        if (response.data.success) {
-          try {
-            await currentUser.updateProfile({  
-              displayName: DisplayName,          
-              photoURL: response.data.filePath,          
-            });
-            await firebase.database().ref("users").child(user.userData.uid).set({
-              name: DisplayName,
-              image: response.data.filePath,
-            });
-            let body = {
-              uid: user.userData.uid,
-              displayName: DisplayName,
-              photoURL: response.data.filePath,          
-            }
-            
-            axios.post("/api/user/uploadProfile", body).then((response) => {
-              if(response.data.success) {
-                SubmitExit();
+                axios.post("/api/user/uploadProfile", body).then((response) => {
+                  if (response.data.success) {
+                    SubmitExit();
+                  }
+                });
+                setisLoading(false);
+              } catch (error) {
+                alert(error);
+                setisLoading(false);
               }
-            });
-            setisLoading(false);      
-
-          } catch (error) {
-            alert(error);
-            setisLoading(false);      
-          }
-        }
-      });
-    }
->>>>>>> kimdoyoen-develop
+            }
+          });
+      }
     } catch (e) {
       alert(e);
-      setisLoading(false);      
+      setisLoading(false);
     }
   });
 
@@ -225,7 +211,16 @@ function EditProfile(props) {
                 />
                 <i className="bi bi-camera"></i>
               </label>
-              <button type="button" onClick={()=> setPhotoURL("https://kr.object.ncloudstorage.com/makeit/user/profile.png")}>기본 이미지로 변경</button>
+              <button
+                type="button"
+                onClick={() =>
+                  setPhotoURL(
+                    "https://kr.object.ncloudstorage.com/makeit/user/profile.png"
+                  )
+                }
+              >
+                기본 이미지로 변경
+              </button>
             </div>
           </>
         )}
@@ -240,7 +235,9 @@ function EditProfile(props) {
           required
         />
         <div className="FormbtnDiv">
-          <button type="submit" disabled={isLoading}>수정사항 저장</button>
+          <button type="submit" disabled={isLoading}>
+            수정사항 저장
+          </button>
         </div>
       </form>
     </EditProfileDiv>
