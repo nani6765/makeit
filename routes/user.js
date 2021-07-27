@@ -31,4 +31,16 @@ router.post("/editProfile", setUpload(`makeit/user/`), (req, res, next) => {
   });
 });
 
+router.post("/uploadProfile", (req, res) => {
+  let temp = {
+    photoURL: req.body.photoURL,
+    displayName: req.body.displayName,
+  }
+  User.findOneAndUpdate({uid: req.body.uid}, {$set: temp}).exec()
+  .then((err) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).send({ success: true });
+  });
+})
+
 module.exports = router;

@@ -143,6 +143,17 @@ const MyPageSubTitle = styled.div`
     font-size: 20px;
     cursor: pointer;
   }
+  div {
+    display: flex;
+    p {
+      margin-right: 15px;
+      color: #DADADA;
+      cursor: pointer;
+    }
+    .active {
+      color: black;
+    }
+  }
 `;
 
 const PCOnly = styled.span`
