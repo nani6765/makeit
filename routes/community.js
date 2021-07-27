@@ -333,7 +333,7 @@ router.post("/repleSubmit", (req, res) => {
         { $inc: { repleNum: 1 } }
       ).exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
-        if(result.auther != temp.uid) {
+        if (result.auther != temp.uid) {
           let alarmtemp = {
             uid: result.auther,
             url: temp.postNum,
@@ -407,16 +407,16 @@ router.post("/repleLike", (req, res) => {
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
-        let alarmtemp = {
-          uid: result.auther,
-          url: result.postNum,
-          type: "likeToReple",
-        };
-        const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });      
-          return res.status(200).send({ success: true });
-        });
+      let alarmtemp = {
+        uid: result.auther,
+        url: result.postNum,
+        type: "likeToReple",
+      };
+      const alarm = new Alarm(alarmtemp);
+      alarm.save((err) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).send({ success: true });
+      });
     });
   }
 });
@@ -434,8 +434,6 @@ router.post("/rerepleGetAuther", (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-/*
 router.post("/rerepleSubmit", (req, res) => {
   let temp = req.body;
   let rereple = {};
@@ -448,119 +446,7 @@ router.post("/rerepleSubmit", (req, res) => {
       rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
       const rerepleObj = new CommunityRereple(rereple);
       rerepleObj.save((doc) => {
-        CommunityReple.findOneAndUpdate(
-          { _id: temp.repleInfo._id },
-          {
-            $inc: { rerepleNum: 1 },
-            $push: { rerepleArray: doc._id },
-          }
-        );
-      });
-    })
-    .exec()
-    .then(() => {
-      Community.findOneAndUpdate(
-        { postNum: temp.postNum },
-        { $inc: { repleNum: 1 } }
-      );
-    })
-    .exec()
-    .then((result) => {
-      let alarmtemp = {
-        uid: result.auther,
-        url: temp.postNum,
-        type: "rerepleToPost",
-      };
-      if (temp.uid != result.auther) {
-        const alarm = new Alarm(alarmtemp);
-        alarm.save();
-      }
-      if (temp.uid != temp.repleInfo._id) {
-        alarmtemp.uid = temp.repleInfo._id;
-        alarmtemp.type = "rerepleToreple";
-        const replealarm = new Alarm(alarmtemp);
-        replealarm.save(() => {
-          return res.status(200).send({ success: true });
-        });
-      }
-      return res.status(200).send({ success: true });
-    })
-    .catch((err) => {
-      console.log("err", err);
-      if (err) return res.status(400).json({ success: false, err });
-    });
-});
-*/
-
-router.post("/rerepleSubmit", (req, res) => {
-  let temp = req.body;
-  let rereple = {};
-  rereple.postNum = temp.postNum;
-  User.findOne({ uid: temp.uid })
-    .exec()
-    .then((userInfo) => {
-      rereple.auther = userInfo._id;
-      rereple.content = temp.content;
-      rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-      const rerepleObj = new CommunityRereple(rereple);
-      rerepleObj.save((doc) => {
-        CommunityReple.findOneAndUpdate(
-          { _id: temp.repleInfo._id },
-          {
-            $inc: { rerepleNum: 1 },
-            $push: { rerepleArray: doc._id },
-          }
-        ).exec();
-      });
-    })
-    .then(() => {
-      Community.findOneAndUpdate(
-        { postNum: req.body.postNum },
-        { $inc: { repleNum: 1 } }
-      )
-        .exec()
-        .then((result) => {
-          let alarmtemp = {
-            uid: result.auther,
-            url: temp.postNum,
-            type: "rerepleToPost",
-          };
-          if (req.body.uid != result.auther) {
-            const alarm = new Alarm(alarmtemp);
-            alarm.save();
-          }
-          if (req.body.uid != req.body.repleInfo._id) {
-            alarmtemp.uid = req.body.repleInfo._id;
-            alarmtemp.type = "rerepleToreple";
-            const replealarm = new Alarm(alarmtemp);
-            replealarm.save(() => {
-              return res.status(200).send({ success: true });
-            });
-          }
-          return res.status(200).send({ success: true });
-        });
-    })
-    .catch((err) => {
-      console.log("err", err);
-      if (err) return res.status(400).json({ success: false, err });
-    });
-});
-=======
->>>>>>> kimdoyoen-develop
-
-router.post("/rerepleSubmit", (req, res) => {
-  let temp = req.body;
-  let rereple = {};
-  rereple.postNum = temp.postNum;
-  User.findOne({ uid: temp.uid })
-    .exec()
-    .then((userInfo) => {
-      rereple.auther = userInfo._id;
-      rereple.content = temp.content;
-      rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-      const rerepleObj = new CommunityRereple(rereple);
-      rerepleObj.save((doc) => {
-        console.log("rerepleInfo", doc)
+        console.log("rerepleInfo", doc);
         CommunityReple.findOneAndUpdate(
           { _id: temp.repleInfo._id },
           {
@@ -662,16 +548,16 @@ router.post("/rerepleLike", (req, res) => {
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     ).exec((err, result) => {
       if (err) return res.status(400).json({ success: false, err });
-        let alarmtemp = {
-          uid: result.auther,
-          url: result.postNum,
-          type: "likeToReple",
-        };
-        const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });      
-          return res.status(200).send({ success: true });
-        });
+      let alarmtemp = {
+        uid: result.auther,
+        url: result.postNum,
+        type: "likeToReple",
+      };
+      const alarm = new Alarm(alarmtemp);
+      alarm.save((err) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).send({ success: true });
+      });
     });
   }
 });
