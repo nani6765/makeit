@@ -11,11 +11,6 @@ function realTime() {
 
 const alarmSchema = mongoose.Schema(
   {
-    auther: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
     uid: {
         type: String,
     },
@@ -26,14 +21,15 @@ const alarmSchema = mongoose.Schema(
       type: String,
       default: realTime(),
     },
-    /*
+    type: {
+      type: String,
+    },
     isCheck: {
       type: Boolean,
       default: false,
     },
-    */
   },
-  { collection: "alarmInfo" }
+  {  timestamps: true, collection: "alarmInfo" }
 );
 
 const Alarm = mongoose.model("Alarm", alarmSchema);

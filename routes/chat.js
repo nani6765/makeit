@@ -84,4 +84,19 @@ router.post("/delete", (req, res) => {
   })
 });
 
+router.post("/getChatList", (req, res) => {
+  Chat.find({ users: req.body.uid })
+    .exec()
+    .then((chatInfo) => {
+      return res.status(200).send({
+        success: true,
+        chatInfo: chatInfo,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false, err });
+    });
+});
+
 module.exports = router;
