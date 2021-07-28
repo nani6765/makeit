@@ -556,7 +556,7 @@ router.post("/rerepleLike", (req, res) => {
         let alarmtemp = {
           uid: result.auther.uid,
           url: result.postNum,
-          type: "likeToReple",
+          type: "likeToRereple",
         };
         const alarm = new Alarm(alarmtemp);
         alarm.save((err) => {
