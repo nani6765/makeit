@@ -5,14 +5,13 @@ require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
 function realTime() {
-  console.log("???", moment().format("YY-MM-DD[ ]HH:mm"));
   return moment().format("YY-MM-DD[ ]HH:mm");
 }
 
 const alarmSchema = mongoose.Schema(
   {
     uid: {
-        type: String,
+      type: String,
     },
     url: {
       type: String,
@@ -29,7 +28,7 @@ const alarmSchema = mongoose.Schema(
       default: false,
     },
   },
-  {  timestamps: true, collection: "alarmInfo" }
+  { timestamps: true, collection: "alarmInfo" }
 );
 
 const Alarm = mongoose.model("Alarm", alarmSchema);

@@ -59,7 +59,6 @@ router.post("/userCheck", (req, res) => {
     .exec()
     .then((chatInfo) => {
       if (chatInfo === null) {
-        console.log("check");
         return res.status(200).json({ success: false });
       }
       return res.status(200).send({
@@ -74,14 +73,15 @@ router.post("/userCheck", (req, res) => {
 });
 
 router.post("/delete", (req, res) => {
-  Chat.deleteOne({ chatRoomId : req.body.chatRoomId })
-  .exec()
-  .then((result) => {
-    return res.status(200).send({ success: true });
-  }).catch((err) => {  
+  Chat.deleteOne({ chatRoomId: req.body.chatRoomId })
+    .exec()
+    .then((result) => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
       console.log("err", err);
       if (err) return res.status(400).json({ success: false, err });
-  })
+    });
 });
 
 router.post("/getChatList", (req, res) => {

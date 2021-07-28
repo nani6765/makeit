@@ -299,19 +299,21 @@ router.post("/like", (req, res) => {
     Community.findOneAndUpdate(
       { postNum: postNum },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
-    ).populate("auther").exec((err, result) => {
-      if (err) return res.status(400).json({ success: false, err });
-      let alarmtemp = {
-        uid: result.auther.uid,
-        url: postNum,
-        type: "likeToPost",
-      };
-      const alarm = new Alarm(alarmtemp);
-      alarm.save((err) => {
+    )
+      .populate("auther")
+      .exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).send({ success: true });
+        let alarmtemp = {
+          uid: result.auther.uid,
+          url: postNum,
+          type: "likeToPost",
+        };
+        const alarm = new Alarm(alarmtemp);
+        alarm.save((err) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).send({ success: true });
+        });
       });
-    });
   }
 });
 
@@ -331,22 +333,23 @@ router.post("/repleSubmit", (req, res) => {
       Community.findOneAndUpdate(
         { postNum: temp.postNum },
         { $inc: { repleNum: 1 } }
-      ).populate("auther").exec((err, result) => {
-        console.log(result.auther);
-        if (err) return res.status(400).json({ success: false, err });
-        if (result.auther.uid != temp.uid) {
-          let alarmtemp = {
-            uid: result.auther.uid,
-            url: temp.postNum,
-            type: "repleToPost",
-          };
-          const alarm = new Alarm(alarmtemp);
-          alarm.save((err) => {
-            if (err) return res.status(400).json({ success: false, err });
-          });
-        }
-        return res.status(200).send({ success: true });
-      });
+      )
+        .populate("auther")
+        .exec((err, result) => {
+          if (err) return res.status(400).json({ success: false, err });
+          if (result.auther.uid != temp.uid) {
+            let alarmtemp = {
+              uid: result.auther.uid,
+              url: temp.postNum,
+              type: "repleToPost",
+            };
+            const alarm = new Alarm(alarmtemp);
+            alarm.save((err) => {
+              if (err) return res.status(400).json({ success: false, err });
+            });
+          }
+          return res.status(200).send({ success: true });
+        });
     });
   });
 });
@@ -405,19 +408,21 @@ router.post("/repleLike", (req, res) => {
     CommunityReple.findOneAndUpdate(
       { _id: repleId },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
-    ).populate("auther").exec((err, result) => {
-      if (err) return res.status(400).json({ success: false, err });
-      let alarmtemp = {
-        uid: result.auther.uid,
-        url: result.postNum,
-        type: "likeToReple",
-      };
-      const alarm = new Alarm(alarmtemp);
-      alarm.save((err) => {
+    )
+      .populate("auther")
+      .exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).send({ success: true });
+        let alarmtemp = {
+          uid: result.auther.uid,
+          url: result.postNum,
+          type: "likeToReple",
+        };
+        const alarm = new Alarm(alarmtemp);
+        alarm.save((err) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).send({ success: true });
+        });
       });
-    });
   }
 });
 
@@ -544,19 +549,21 @@ router.post("/rerepleLike", (req, res) => {
     CommunityRereple.findOneAndUpdate(
       { _id: rerepleId },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
-    ).populate("auther").exec((err, result) => {
-      if (err) return res.status(400).json({ success: false, err });
-      let alarmtemp = {
-        uid: result.auther.uid,
-        url: result.postNum,
-        type: "likeToReple",
-      };
-      const alarm = new Alarm(alarmtemp);
-      alarm.save((err) => {
+    )
+      .populate("auther")
+      .exec((err, result) => {
         if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).send({ success: true });
+        let alarmtemp = {
+          uid: result.auther.uid,
+          url: result.postNum,
+          type: "likeToReple",
+        };
+        const alarm = new Alarm(alarmtemp);
+        alarm.save((err) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).send({ success: true });
+        });
       });
-    });
   }
 });
 
