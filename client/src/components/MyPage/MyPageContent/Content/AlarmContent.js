@@ -10,8 +10,20 @@ function AlarmContent(props) {
 
   return (
     <AlarmContentDiv>
-      <Chat />
-      <p>내 {props.ContentType}에</p>
+      <div className="Icon">
+        <Chat />
+      </div>
+      <div className="Content">
+        <p>
+          내 {props.ContentType}에{" "}
+          {props.AlarmType === "댓글" ? (
+            <React.Fragment>{props.AlarmType}이 달렸어요</React.Fragment>
+          ) : (
+            <React.Fragment>{props.AlarmType}을 받았어요</React.Fragment>
+          )}
+        </p>
+        <p className="date">{props.alarm.realTime}</p>
+      </div>
     </AlarmContentDiv>
   );
 }
