@@ -2,7 +2,9 @@ var router = require("express").Router();
 const { Alarm } = require("../model/Alarm.js");
 
 router.post("/getAlarm", (req, res) => {
-  Alarm.find({ uid: req.body.uid })
+  let sort = {};
+  sort.createdAt = -1;
+  Alarm.find({ uid: req.body.uid }).sort(sort)
     .exec()
     .then((response) => {
       return res.status(200).send({

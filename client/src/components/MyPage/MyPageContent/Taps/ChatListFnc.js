@@ -1,7 +1,12 @@
 import React from "react";
 
-function ChatListFnc() {
-  return <div>test</div>;
+function ChatListFnc(props) {
+  return (
+  <div>
+    <p>{props.ChatList.OthersInfo}</p>  
+
+  </div>
+  )
 }
 
 export default ChatListFnc;

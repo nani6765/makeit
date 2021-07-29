@@ -23,6 +23,9 @@ const alarmSchema = mongoose.Schema(
     type: {
       type: String,
     },
+    category: {
+      type:String,
+    },
     isCheck: {
       type: Boolean,
       default: false,

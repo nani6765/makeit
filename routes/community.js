@@ -307,6 +307,7 @@ router.post("/like", (req, res) => {
           uid: result.auther.uid,
           url: postNum,
           type: "likeToPost",
+          category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
         alarm.save((err) => {
@@ -342,6 +343,7 @@ router.post("/repleSubmit", (req, res) => {
               uid: result.auther.uid,
               url: temp.postNum,
               type: "repleToPost",
+              category: "community/post",
             };
             const alarm = new Alarm(alarmtemp);
             alarm.save((err) => {
@@ -416,11 +418,12 @@ router.post("/repleLike", (req, res) => {
           uid: result.auther.uid,
           url: result.postNum,
           type: "likeToReple",
+          category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });
-          return res.status(200).send({ success: true });
+        alarm.save((err) => {          
+          if (err) return res.status(400).json({ success: false, err });        
+          return res.status(200).send({ success: true });  
         });
       });
   }
@@ -472,8 +475,9 @@ router.post("/rerepleSubmit", (req, res) => {
             uid: result.auther.uid,
             url: temp.postNum,
             type: "rerepleToPost",
+            category: "community/post",
           };
-          if (req.body.uid != result.auther) {
+          if (req.body.uid != result.auther.uid) {
             const alarm = new Alarm(alarmtemp);
             alarm.save();
           }
@@ -483,7 +487,7 @@ router.post("/rerepleSubmit", (req, res) => {
             const replealarm = new Alarm(alarmtemp);
             replealarm.save();
           }
-          return res.status(200).send({ success: true });
+          return res.status(200).send({ success: true }); 
         });
     })
     .catch((err) => {
@@ -557,11 +561,12 @@ router.post("/rerepleLike", (req, res) => {
           uid: result.auther.uid,
           url: result.postNum,
           type: "likeToRereple",
+          category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });
-          return res.status(200).send({ success: true });
+        alarm.save((err) => {        
+          if (err) return res.status(400).json({ success: false, err });          
+          return res.status(200).send({ success: true });        
         });
       });
   }
