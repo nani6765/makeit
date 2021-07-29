@@ -25,7 +25,7 @@ import { jsx, css } from "@emotion/react";
 function ChatDetail(props) {
   const [Comments, setComments] = useState([]);
   const [ChatRoomId, setChatRoomId] = useState("");
-  const [ScorllHChange, setScorllHChange] = useState(false)
+  const [ScorllHChange, setScorllHChange] = useState(false);
 
   const user = useSelector((state) => state.user);
   moment.locale("ko");
@@ -46,8 +46,8 @@ function ChatDetail(props) {
   }, [ChatRoomId]);
 
   useEffect(() => {
-    if(ScorllHChange) {
-      ScrollFunction()
+    if (ScorllHChange) {
+      ScrollFunction();
       setScorllHChange(false);
     }
   }, [ScorllHChange]);
@@ -64,55 +64,61 @@ function ChatDetail(props) {
   const LoadMessages = (ChatRoomId) => {
     let comments = [];
     setComments(comments);
-     MessageRef.child(ChatRoomId).on("value", (DataSnapshot) => {
+    MessageRef.child(ChatRoomId).on("value", (DataSnapshot) => {
       setComments(...Comments, DataSnapshot.val());
-      setScorllHChange(true)
+      setScorllHChange(true);
     });
   };
 
   return (
     <>
       <ChatContentDiv>
-        
-      <ChatForContentDiv id="ChatForContentDiv">
-        { Comments
-          ? (
-            Object.values(Comments).map((commentGroup, idx) => {
-            return Object.values(commentGroup).map((comment, i) => {
-              return(   
-              <React.Fragment key={idx}>
-                  {i === 0 && (
-                    <ChatContentDate>
-                      {moment(comment.timestamp).format(
-                        "YYYY[년] MM[월] DD[일]"
+        <ChatForContentDiv id="ChatForContentDiv">
+          {Comments
+            ? Object.values(Comments).map((commentGroup, idx) => {
+                return Object.values(commentGroup).map((comment, i) => {
+                  return (
+                    <React.Fragment key={`${idx}/${i}`}>
+                      {i === 0 && (
+                        <ChatContentDate>
+                          {moment(comment.timestamp).format(
+                            "YYYY[년] MM[월] DD[일]"
+                          )}
+                        </ChatContentDate>
                       )}
-                    </ChatContentDate>
-                  )}
-                  <div
-                    css={
-                      user.userData.uid === comment.uid
-                        ? ChatMeContentGrid
-                        : ChatYouContentGrid
-                    }
-                  >
-                    <ChatDetailContent comment={comment} setScorllHChange={setScorllHChange}/>
-                  </div>
-                </React.Fragment>
-                )
-                  })
-                })  
-          ) : null
-          }
-          
+                      <div
+                        css={
+                          user.userData.uid === comment.uid
+                            ? ChatMeContentGrid
+                            : ChatYouContentGrid
+                        }
+                      >
+                        <ChatDetailContent
+                          comment={comment}
+                          setScorllHChange={setScorllHChange}
+                        />
+                      </div>
+                    </React.Fragment>
+                  );
+                });
+              })
+            : null}
         </ChatForContentDiv>
         {ChatRoomId === "" ? null : (
           <UploadDiv>
-            <ChatUpload ChatRoomId={ChatRoomId} user={user} />
+            <ChatUpload
+              ChatRoomId={ChatRoomId}
+              user={user}
+              OthersUid={props.OthersUid}
+            />
 
-            <FileUpload ChatRoomId={ChatRoomId} user={user} />
+            <FileUpload
+              ChatRoomId={ChatRoomId}
+              user={user}
+              OthersUid={props.OthersUid}
+            />
           </UploadDiv>
-        )}      
-              
+        )}
       </ChatContentDiv>
     </>
   );

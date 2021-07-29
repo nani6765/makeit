@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { firebase } from "../../../../firebase.js";
 import { useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
+import { useHistory } from "react-router-dom";
 
 import moment from "moment";
 import "moment/locale/ko";
 
 function ChatUpload(props) {
-  const user = useSelector((state) => state.user);
-
   const [SendComment, setSendComment] = useState("");
   const [SendCommentLoading, setSendCommentLoading] = useState(false);
+  const [OtherInfo, setOtherInfo] = useState();
+
+  let history = useHistory();
+  const user = useSelector((state) => state.user);
 
   moment.locale("ko");
   let MessageRef = firebase.database().ref("chats");
+  let UserRef = firebase.database().ref("users");
+
+  useEffect(() => {
+    UserRef.child(props.OthersUid).once("value", (DataSnapshot) => {
+      setOtherInfo(DataSnapshot.val());
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("OtherInfo", OtherInfo);
+  }, [OtherInfo]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -22,6 +36,7 @@ function ChatUpload(props) {
     }
     setSendCommentLoading(true);
     CreateMessage(props.ChatRoomId);
+    CreateAlarm(props.ChatRoomId);
     setSendComment("");
     setSendCommentLoading(false);
   };
@@ -43,6 +58,29 @@ function ChatUpload(props) {
       comment: SendComment,
     };
     MessageRef.child(`${ChatRoomId}/${Date}`).push().set(message);
+  };
+
+  const CreateAlarm = (ChatRoomId) => {
+    let messageForMe = {
+      type: "message",
+      comment: SendComment,
+      url: history.location.pathname,
+      otherName: OtherInfo.name,
+      otherImage: OtherInfo.image,
+      isCheck: true,
+    };
+
+    let messageForYou = {
+      type: "message",
+      comment: SendComment,
+      url: history.location.pathname,
+      otherName: user.userData.displayName,
+      otherImage: user.userData.photoURL,
+      isCheck: false,
+    };
+
+    UserRef.child(`${user.userData.uid}/chats/${ChatRoomId}`).set(messageForMe);
+    UserRef.child(`${props.OthersUid}/chats/${ChatRoomId}`).set(messageForYou);
   };
 
   return (

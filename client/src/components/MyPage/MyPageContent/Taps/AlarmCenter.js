@@ -12,49 +12,22 @@ function AlarmCenter(props) {
   const [ChatList, setChatList] = useState([]);
   const [AlarmList, setAlarmList] = useState([]);
   const [Loading, setLoading] = useState(null);
-  let ChatRef = firebase.database().ref("chats");
-  let UserRef = firebase.database().ref("users");
+
+  let UserRef = firebase.database().ref(`users/${user.userData.uid}/`);
+
+  useEffect(() => {
+    let temp = [];
+    setChatList([...temp]);
+  }, []);
 
   useEffect(() => {
     setLoading(false);
     if (props.AlarmType === "쪽지함") {
-      try {
-        let body = {
-          uid: user.userData.uid,
-        };
-        axios.post("/api/chat/getChatList", body).then((response) => {
-          if (response.data.success) {
-            let temp = [...response.data.chatInfo];
-            setChatList(temp);
-            if (ChatList.length > 0) {
-              let newChatList = [];
-              ChatList.map((alarm, idx) => {
-                //상대방 정보 가져오기
-                let OthersInfo = {
-                  uid: alarm.chatRoomId.replace(user.userData.uid, ""),
-                };
-                UserRef.child(OthersInfo.uid).once("value", (DataSnapShot) => {
-                  OthersInfo.image = DataSnapShot.val().image;
-                });
-                let newChat = {
-                  chatRoomId: alarm.chatRoomId,
-                  url: alarm.url,
-                  OthersInfo: OthersInfo,
-                };
-                newChatList.push(newChat);
-                //채팅방 정보 가져오기
-              });
-              setChatList(newChatList);
-            }
-          }
-        });
-      } catch (error) {
-        alert(error);
-      }
-      /*
-      ChatRef.orderByChild(user.userData.uid).on("value", (DataSnapShot) => {
-          console.log("DataSnapShot", DataSnapShot.val().key);
-        });*/
+      let temp = [];
+      setChatList(...temp);
+      UserRef.child("chats").on("value", (DataSnapshot) => {
+        setChatList(DataSnapshot.val());
+      });
     } else {
       let body = {
         uid: user.userData.uid,
