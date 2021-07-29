@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import AlarmContent from "../Content/AlarmContent.js";
 
 function AlarmListFnc(props) {
   useEffect(() => {
@@ -7,6 +8,7 @@ function AlarmListFnc(props) {
 
   function SwitchCard(alarm) {
     let key = alarm.type;
+    let AlarmType, PostType;
     switch (key) {
       case "repleToPost":
         return (
