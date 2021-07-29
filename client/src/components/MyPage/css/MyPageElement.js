@@ -124,6 +124,7 @@ const MyPageMainDiv = styled.div`
 
   ${mq[1]} {
     width: 90%;
+    padding: 30px;
   }
 `;
 
@@ -138,16 +139,22 @@ const MyPageSubTitle = styled.div`
     font-weight: bold;
     font-size: 24px;
     line-height: 36px;
+    ${mq[1]} {
+      font-size: 18px;
+    }
   }
   span {
     font-size: 20px;
     cursor: pointer;
+    ${mq[1]} {
+      font-size: 14px;
+    }
   }
   div {
     display: flex;
     p {
       margin-right: 15px;
-      color: #DADADA;
+      color: #dadada;
       cursor: pointer;
     }
     .active {
