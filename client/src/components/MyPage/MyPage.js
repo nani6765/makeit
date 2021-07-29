@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { MyPageMainDiv, MyPageSubTitle } from "./css/MyPageElement.js";
 
@@ -8,7 +7,6 @@ import EditProfile from "./MyPageContent/Taps/EditProfile.js";
 import AlarmCenter from "./MyPageContent/Taps/AlarmCenter.js";
 
 function MyPage() {
-  const user = useSelector((state) => state.user);
   const [Taps, setTaps] = useState("내정보");
   const [AlarmType, setAlarmType] = useState("알림센터");
 

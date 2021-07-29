@@ -421,9 +421,9 @@ router.post("/repleLike", (req, res) => {
           category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {          
-          if (err) return res.status(400).json({ success: false, err });        
-          return res.status(200).send({ success: true });  
+        alarm.save((err) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).send({ success: true });
         });
       });
   }
@@ -487,7 +487,7 @@ router.post("/rerepleSubmit", (req, res) => {
             const replealarm = new Alarm(alarmtemp);
             replealarm.save();
           }
-          return res.status(200).send({ success: true }); 
+          return res.status(200).send({ success: true });
         });
     })
     .catch((err) => {
@@ -564,9 +564,9 @@ router.post("/rerepleLike", (req, res) => {
           category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {        
-          if (err) return res.status(400).json({ success: false, err });          
-          return res.status(200).send({ success: true });        
+        alarm.save((err) => {
+          if (err) return res.status(400).json({ success: false, err });
+          return res.status(200).send({ success: true });
         });
       });
   }

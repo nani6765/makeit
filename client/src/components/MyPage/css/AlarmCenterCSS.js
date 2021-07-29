@@ -7,7 +7,7 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const AlarmContentDiv = styled.div`
-  background: #ffffff;
+  background: #f6f2ff;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
   border-radius: 110.5px;
@@ -57,15 +57,20 @@ const AlarmContentDiv = styled.div`
       }
     }
   }
-`;
-
-const NoLinkCSS = css`
-  color: black;
-  text-decoration-line: none;
-  &:hover{
-    text-decoration-line: none;
-    color: black;
+  &.check {
+    background: #fff;
   }
 `;
 
-export { AlarmContentDiv, NoLinkCSS };
+const AlarmListDiv = styled.div`
+  max-height: 70vh;
+  padding: 10px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* IE and Edge */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+`;
+
+export { AlarmContentDiv, AlarmListDiv };

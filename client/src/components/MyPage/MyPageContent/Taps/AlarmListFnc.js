@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import AlarmContent from "../Content/AlarmContent.js";
 
+import { AlarmListDiv } from "../../css/AlarmCenterCSS.js";
+import axios from "axios";
+
 function AlarmListFnc(props) {
+  const user = useSelector((state) => state.user);
+  const [allChecked, setallChecked] = useState(false);
+
   function SwitchCard(alarm) {
     let key = alarm.type;
     let alarmType, contentType;
@@ -41,15 +48,42 @@ function AlarmListFnc(props) {
         AlarmType={alarmType}
         ContentType={contentType}
         alarm={alarm}
+        allChecked={allChecked}
       />
     );
   }
 
+  const AllCheck = () => {
+    let body = {};
+    body.uid = user.userData.uid;
+    axios.post("api/alarm/allCheck", body).then((response) => {
+      if (response.data.success) {
+        setallChecked(true);
+      } else {
+        alert("error");
+      }
+    });
+  };
+
   return (
     <>
-      {props.AlarmList.map((alarm, idx) => {
-        return <React.Fragment key={idx}>{SwitchCard(alarm)}</React.Fragment>;
-      })}
+      <p
+        style={{
+          marginTop: "-5vh",
+          textAlign: "right",
+          cursor: "pointer",
+          padding: "20px",
+          fontWeight: "bold",
+        }}
+        onClick={() => AllCheck()}
+      >
+        모두 읽기
+      </p>
+      <AlarmListDiv>
+        {props.AlarmList.map((alarm, idx) => {
+          return <React.Fragment key={idx}>{SwitchCard(alarm)}</React.Fragment>;
+        })}
+      </AlarmListDiv>
     </>
   );
 }

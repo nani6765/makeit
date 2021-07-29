@@ -26,25 +26,25 @@ function AlarmCenter(props) {
           if (response.data.success) {
             let temp = [...response.data.chatInfo];
             setChatList(temp);
-            if(ChatList.length > 0) {
-                let newChatList = [];
-                ChatList.map((alarm, idx) => {
-                    //상대방 정보 가져오기
-                    let OthersInfo = {
-                        uid: alarm.chatRoomId.replace(user.userData.uid, ""),
-                    };
-                    UserRef.child(OthersInfo.uid).once("value", (DataSnapShot) => {
-                        OthersInfo.image = DataSnapShot.val().image;
-                    });
-                    let newChat = {
-                        chatRoomId: alarm.chatRoomId,
-                        url: alarm.url,
-                        OthersInfo: OthersInfo,
-                    }
-                    newChatList.push(newChat);
-                    //채팅방 정보 가져오기
+            if (ChatList.length > 0) {
+              let newChatList = [];
+              ChatList.map((alarm, idx) => {
+                //상대방 정보 가져오기
+                let OthersInfo = {
+                  uid: alarm.chatRoomId.replace(user.userData.uid, ""),
+                };
+                UserRef.child(OthersInfo.uid).once("value", (DataSnapShot) => {
+                  OthersInfo.image = DataSnapShot.val().image;
                 });
-                setChatList(newChatList);
+                let newChat = {
+                  chatRoomId: alarm.chatRoomId,
+                  url: alarm.url,
+                  OthersInfo: OthersInfo,
+                };
+                newChatList.push(newChat);
+                //채팅방 정보 가져오기
+              });
+              setChatList(newChatList);
             }
           }
         });
@@ -68,10 +68,6 @@ function AlarmCenter(props) {
     }
     setLoading(true);
   }, [props.AlarmType]);
-
-  useEffect(() => {
-    console.log(AlarmList);
-  }, [AlarmList]);
 
   return (
     <>
