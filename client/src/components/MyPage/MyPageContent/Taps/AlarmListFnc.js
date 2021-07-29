@@ -2,55 +2,53 @@ import React, { useState, useEffect } from "react";
 import AlarmContent from "../Content/AlarmContent.js";
 
 function AlarmListFnc(props) {
-  useEffect(() => {
-    console.log(props);
-  });
-
   function SwitchCard(alarm) {
     let key = alarm.type;
-    let AlarmType, PostType;
+    let alarmType, contentType;
     switch (key) {
       case "repleToPost":
-        return (
-          <>
-            <p>repleToPost</p>
-          </>
-        );
+        alarmType = "댓글";
+        contentType = "게시글";
+        break;
 
       case "rerepleToReple":
-        return (
-          <>
-            <p>rerepleToReple</p>
-          </>
-        );
+        alarmType = "대댓글";
+        contentType = "댓글";
+        break;
+
+      case "rerepleToPost":
+        alarmType = "대댓글";
+        contentType = "게시글";
+        break;
 
       case "likeToPost":
-        return (
-          <>
-            <p>likeToPostc</p>
-          </>
-        );
+        alarmType = "공감";
+        contentType = "게시글";
+        break;
 
       case "likeToReple":
-        return (
-          <>
-            <p>likeToReple</p>
-          </>
-        );
+        alarmType = "공감";
+        contentType = "댓글";
+        break;
 
       case "likeToRereple":
-        return (
-          <>
-            <p>likeToRereple</p>
-          </>
-        );
+        alarmType = "공감";
+        contentType = "대댓글";
+        break;
     }
+    return (
+      <AlarmContent
+        AlarmType={alarmType}
+        ContentType={contentType}
+        alarm={alarm}
+      />
+    );
   }
 
   return (
     <>
       {props.AlarmList.map((alarm, idx) => {
-        return SwitchCard(alarm);
+        return <React.Fragment key={idx}>{SwitchCard(alarm)}</React.Fragment>;
       })}
     </>
   );
