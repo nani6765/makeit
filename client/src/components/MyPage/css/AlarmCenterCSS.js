@@ -59,6 +59,13 @@ const AlarmContentDiv = styled.div`
   }
 `;
 
-const ChatContent = styled.div``;
+const NoLinkCSS = css`
+  color: black;
+  text-decoration-line: none;
+  &:hover{
+    text-decoration-line: none;
+    color: black;
+  }
+`;
 
-export { AlarmContentDiv, ChatContent };
+export { AlarmContentDiv, NoLinkCSS };

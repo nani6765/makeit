@@ -70,8 +70,8 @@ function AlarmCenter(props) {
   }, [props.AlarmType]);
 
   useEffect(() => {
-    console.log(ChatList);
-  }, [ChatList]);
+    console.log(AlarmList);
+  }, [AlarmList]);
 
   return (
     <>
