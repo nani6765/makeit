@@ -68,6 +68,7 @@ function ChatUpload(props) {
       otherName: OtherInfo.name,
       otherImage: OtherInfo.image,
       isCheck: true,
+      timestamp: firebase.database.ServerValue.TIMESTAMP,
     };
 
     let messageForYou = {
@@ -77,6 +78,7 @@ function ChatUpload(props) {
       otherName: user.userData.displayName,
       otherImage: user.userData.photoURL,
       isCheck: false,
+      timestamp: firebase.database.ServerValue.TIMESTAMP,
     };
 
     UserRef.child(`${user.userData.uid}/chats/${ChatRoomId}`).set(messageForMe);

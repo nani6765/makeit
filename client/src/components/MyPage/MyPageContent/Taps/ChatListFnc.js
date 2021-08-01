@@ -1,14 +1,20 @@
 import React from "react";
-
+import ChatContent from "../Content/ChatContent.js";
+import { AlarmListDiv } from "../../css/AlarmCenterCSS.js";
 function ChatListFnc(props) {
   return (
-    <React.Fragment>
+    <AlarmListDiv>
       {props.ChatList &&
         Object.values(props.ChatList).map((chatInfo, idx) => {
-          console.log(chatInfo);
-          return <p key={idx}>{chatInfo.comment}</p>;
+          return (
+            <ChatContent
+              key={idx}
+              chatInfo={chatInfo}
+              chatRoomId={Object.keys(props.ChatList)[idx]}
+            />
+          );
         })}
-    </React.Fragment>
+    </AlarmListDiv>
   );
 }
 
