@@ -15,6 +15,10 @@ const AlarmListDiv = styled.div`
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
+  ${mq[1]} {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 `;
 
 const AlarmContentDiv = styled.div`
@@ -115,6 +119,10 @@ const ChatContentDiv = styled.div`
   }
   &.check {
     background: #fff;
+  }
+  ${mq[1]} {
+    box-shadow: 0px 1px 5px rgba(178, 3, 108, 0.03),
+      0px 9px 30px rgba(163, 1, 79, 0.05);
   }
 `;
 

@@ -6,6 +6,8 @@ import BasicMyPage from "./MyPageContent/Taps/BasicMyPage.js";
 import EditProfile from "./MyPageContent/Taps/EditProfile.js";
 import AlarmCenter from "./MyPageContent/Taps/AlarmCenter.js";
 
+import MobileFooter from "../HeaderAndFooter/Footer/MobileFooter.js";
+
 function MyPage() {
   const [Taps, setTaps] = useState("내정보");
   const [AlarmType, setAlarmType] = useState("알림센터");
@@ -33,7 +35,7 @@ function MyPage() {
       case "프로필":
         return (
           <React.Fragment>
-            <p>프로필 관리</p>;
+            <p>프로필 관리</p>
             <span
               onClick={() => {
                 setTaps("내정보");
@@ -83,6 +85,7 @@ function MyPage() {
         <MyPageSubTitle>{SwitchTapHeader()}</MyPageSubTitle>
         {SwitchTaps()}
       </MyPageMainDiv>
+      <MobileFooter />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MobileFooterDiv } from "../css/FooterElement.js";
 import { Link } from "react-router-dom";
 import {
@@ -10,12 +10,15 @@ import {
 } from "./FooterMobileBottom.js";
 
 function MobileFooter(props) {
-  const [path, setpath] = useState(props.path);
+  const [Path, setPath] = useState(props.Path);
+  useEffect(() => {
+    console.log("MobileFooter", Path);
+  }, []);
 
   return (
     <MobileFooterDiv>
       <ul>
-        <li className={path === "/" ? "active" : null}>
+        <li className={Path === "home" ? "active" : null}>
           <Link to="/">
             <FooterMobileBottom1 />
           </Link>
@@ -35,7 +38,7 @@ function MobileFooter(props) {
             <FooterMobileBottom4 />
           </Link>
         </li>
-        <li className={path === "/community" ? "active" : null}>
+        <li className={Path === "community" ? "active" : null}>
           <Link to="/community">
             <FooterMobileBottom5 />
           </Link>

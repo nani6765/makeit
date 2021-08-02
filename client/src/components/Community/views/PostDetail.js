@@ -5,6 +5,7 @@ import RepleList from "./detail/Reple/RepleList.js";
 import RepleUpload from "./detail/Reple/RepleUpload.js";
 import { RepleBtnDiv } from "../css/CommunityDetailElement.js";
 
+import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 function PostDetail(props) {
   const [postInfo, setpostInfo] = useState({ _id: null });
   const [Reples, setReples] = useState([]);
@@ -69,7 +70,6 @@ function PostDetail(props) {
   return (
     <>
       {postInfo._id != null ? <PostDetailContent postInfo={postInfo} /> : null}
-
       {TotalSize > 0 ? (
         <>
           <RepleBtnDiv>
@@ -89,8 +89,8 @@ function PostDetail(props) {
           ) : null}
         </>
       ) : null}
-
       {postInfo._id != null ? <RepleUpload postInfo={postInfo} /> : null}
+      <MobileFooter Path="community" />
     </>
   );
 }

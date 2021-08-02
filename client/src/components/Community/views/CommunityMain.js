@@ -4,6 +4,7 @@ import PostList from "./main/PostList.js";
 import CommunityFNB from "./main/FNB/CommunityFNB.js";
 import axios from "axios";
 
+import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 function CommunityMain(props) {
   const [AxiosCheck, setAxiosCheck] = useState(false);
   const [PostArray, setPostArray] = useState([]); //글 목록
@@ -98,6 +99,7 @@ function CommunityMain(props) {
           />
         </>
       ) : null}
+      <MobileFooter Path="community" />
     </>
   );
 }

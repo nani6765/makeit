@@ -20,6 +20,7 @@ const FNBSearchDiv = styled.div`
   margin-bottom: 30px;
   input {
     border: none;
+    width: 100%;
     &:focus {
       outline: none;
     }
