@@ -59,7 +59,6 @@ function EditProfile(props) {
           });
         };
         const updateURL = getPromise(croppedImage);
-
         setCanvasData(croppedImage);
       } catch (e) {
         alert(e);
@@ -91,13 +90,14 @@ function EditProfile(props) {
     setImageSrc(null);
     setCroppedAreaPixelsResult(null);
     setCanvasData(null);
+    console.log("test");
+    history.go(0);
   }
 
   const submitFunc = useCallback(async (e) => {
     e.preventDefault();
     try {
       setisLoading(true);
-
       if (CanvasData === null) {
         var currentUser = firebase.auth().currentUser;
 
@@ -106,10 +106,15 @@ function EditProfile(props) {
             displayName: DisplayName,
             photoURL: PhotoURL,
           });
-          await firebase.database().ref("users").child(user.userData.uid).set({
-            name: DisplayName,
-            image: PhotoURL,
-          });
+          //set...?
+          await firebase
+            .database()
+            .ref("users")
+            .child(user.userData.uid)
+            .update({
+              name: DisplayName,
+              image: PhotoURL,
+            });
           let body = {
             uid: user.userData.uid,
             displayName: DisplayName,
@@ -225,7 +230,12 @@ function EditProfile(props) {
           </>
         )}
       </div>
-      <form onSubmit={(e) => submitFunc(e)}>
+      <form
+        onSubmit={(e) => {
+          console.log(e);
+          submitFunc(e);
+        }}
+      >
         <label htmlFor="nickname">닉네임 변경</label>
         <input
           type="text"

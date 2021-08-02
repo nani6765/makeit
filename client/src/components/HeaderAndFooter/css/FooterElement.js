@@ -108,6 +108,7 @@ const MobileFooterDiv = styled.div`
       justify-content: space-between;
       padding-top: 15px;
       padding-bottom: 15px;
+      list-style: none;
       li {
         width: auto;
         margin-left: 0px;

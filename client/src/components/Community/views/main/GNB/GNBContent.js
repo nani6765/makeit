@@ -72,7 +72,7 @@ const SubCategoryDiv = styled.div`
           margin-left: 0px;
           margin-right: 0px;
         }
-        &:first-child {
+        &:first-of-type(1) {
           margin-left: 0px;
         }
       }

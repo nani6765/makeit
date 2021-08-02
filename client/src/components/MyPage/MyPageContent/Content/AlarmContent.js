@@ -22,7 +22,8 @@ function AlarmContent(props) {
   return (
     <AlarmContentDiv
       className={props.alarm.isCheck || props.allChecked ? "check" : null}
-      onClick={() => {
+      onClick={(e) => {
+        e.currentTarget.style.pointerEvents = "none";
         IsCheck(props.alarm);
       }}
     >
