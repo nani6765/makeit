@@ -81,6 +81,9 @@ const FormDivCSS = css`
     border: none;
     color: white;
     padding: 10px;
+    &:disabled{
+      opacity: .5;
+    }
   }
 `;
 

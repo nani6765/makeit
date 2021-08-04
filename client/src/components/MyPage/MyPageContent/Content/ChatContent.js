@@ -33,6 +33,7 @@ function ChatContent(props) {
         */
         history.push(`${props.chatInfo.url}`);
       }}
+      className={props.chatInfo.isCheck ? "check" : null}
     >
       <div className="profile">
         <Avatar

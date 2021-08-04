@@ -158,7 +158,7 @@ function EditProfile(props) {
                   .database()
                   .ref("users")
                   .child(user.userData.uid)
-                  .set({
+                  .update({
                     name: DisplayName,
                     image: response.data.filePath,
                   });
