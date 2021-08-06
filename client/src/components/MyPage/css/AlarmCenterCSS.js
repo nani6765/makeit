@@ -33,6 +33,7 @@ const AlarmContentDiv = styled.div`
   grid-template-rows: auto;
   grid-template-areas: "Icon Content .";
   grid-gap: 1rem;
+  cursor: pointer;
   .Icon {
     grid-area: Icon;
     display: flex;
@@ -98,6 +99,7 @@ const ChatContentDiv = styled.div`
     gap: 1rem;
     p {
       font-weight: bold;
+      margin-bottom: 0px;
     }
   }
   .content {
@@ -106,6 +108,9 @@ const ChatContentDiv = styled.div`
     align-items: center;
     justify-content: center;
     text-align: left;
+    p {
+      margin-bottom: 0px;
+    }
   }
   .date {
     grid-area: date;
@@ -116,6 +121,7 @@ const ChatContentDiv = styled.div`
     marin-bottom: 0px;
     color: rgb(217, 217, 217);
     font-size: 10px;
+    margin-bottom: 0px;
   }
   &.check {
     background: #fff;

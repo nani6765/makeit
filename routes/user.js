@@ -45,8 +45,18 @@ router.post("/uploadProfile", (req, res) => {
   })
 })
 
-router.post("/sendEmail", async (req, res) => {
+router.post("/checkEmail", (req, res) => {
+  let email = req.body.email;
+  User.findOne({email:email})
+  .exec()
+  .then((doc)=> {
+    return res.status(200).send({ success: true });
+  }).catch((err) => {
+    if (err) return res.json({ success: false, err });
+  });
+})
 
+router.post("/sendEmail", (req, res) => {
   if(sendEmail(req.body.email, req.body.key, req.body.name)){
     return res.status(200).send({ success: true });
   } else {

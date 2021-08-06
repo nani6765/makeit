@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import user from "./user_reducer";
-import chatRoom from "./chatRoom_reducer.js";
+import alarm from "./alarm_reducer";
 
 const rootReducer = combineReducers({
   user,
-  chatRoom,
+  alarm,
 });
 
 export default rootReducer;

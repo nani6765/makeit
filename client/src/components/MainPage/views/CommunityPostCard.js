@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
 import { CardImg } from "../css/MainPageCommunity.js";
 
 function CommunityPostCard(props) {
-  useEffect(() => {
-    console.log(props.post);
-  }, []);
 
   let timeGap;
   function conculateUploadTime() {

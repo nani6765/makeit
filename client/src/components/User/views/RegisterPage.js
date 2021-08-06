@@ -12,15 +12,21 @@ import axios from "axios";
 
 
 function RegisterPage() {
+  //회원정보
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+
+  //이메일 인증
   const [Key, setKey] = useState("");
   const [InputKey, setInputKey] = useState("");
-  const [EmailCheck, setEmailCheck] = useState(false);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [EmailCheck, setEmailCheck] = useState(true); //이메일 중복 확인용
+  const [EmailCheckVerification, setEmailCheckVerification] = useState(false); //이메일 인증 완료 여부
+  
+  //회원가입 완료
   const [ErrorFormSubmit, setErrorFormSubmit] = useState("");
   const [Loading, setLoading] = useState(false);
 
@@ -48,24 +54,49 @@ function RegisterPage() {
       return false;
   };
     
-  const StartTimer = () => {
+  const StartTimer = async() => {
     if(!(Email && Name)){
       return alert("이메일과 이름을 모두 입력해주십시오.");
     }
     if(!verifyEmail(Email)){
       return alert("이메일 주소가 잘못되었습니다.");
     }
-    /*
-    if(){
-      return alert("이미 회원가입 된 이메일입니다.");
-    }
-    */
-    
-    EmailVerification();
-    setMinutes(parseInt(3));
-    setTimeout(() => {
-      setKey("");
-    }, 180000);
+    var EmailCheckFunc = new Promise((resolve, reject) => {
+      let body = {
+        email: Email,
+      }
+      try {
+        axios.post("api/user/checkEmail", body).then((response) => {
+          if(!response.data.success) reject(response.data.success);
+          if(!response.data.doc){
+            //이매일이 없는 경우
+            setEmailCheck(false);
+            resolve(false);
+          } else {
+            //이메일이 있는 경우
+            setEmailCheck(true);
+            resolve(true);
+          }
+      })
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    EmailCheckFunc.then((val) => {
+      if(val){
+        return alert("이미 가입된 이메일입니다.");
+      } else {
+        EmailVerification();
+        setMinutes(parseInt(3));
+        setTimeout(() => {
+          setKey("");
+        }, 180000);   
+      }
+    })
+    .catch((reason) => {
+            console.log(reason);
+    });
   }
 
   useEffect(() => {
@@ -90,7 +121,7 @@ function RegisterPage() {
     if (Password !== ConfirmPassword) {
       return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
     }
-    if(!EmailCheck){
+    if(!EmailCheckVerification){
        return alert("이메일 인증을 완료해 주세요.");
     }
 
@@ -133,6 +164,7 @@ function RegisterPage() {
       });
      
       setLoading(false);
+      //회원가입 완료 페이지 만들고 push
       history.push("/");
 
     } catch (error) {
@@ -175,13 +207,13 @@ function RegisterPage() {
               value={Email}
               onChange={(e) => setEmail(e.currentTarget.value)}
               required
-              disabled = {EmailCheck ? true : false }
+              disabled = {EmailCheckVerification ? true : false }
             />
             {
-              !EmailCheck && <button type="button" onClick={() => StartTimer()} disabled={Key ? true : false}>이메일 인증</button>
+              !EmailCheckVerification && <button type="button" onClick={() => StartTimer()} disabled={Key ? true : false}>이메일 인증</button>
             }
             
-            {Key && !EmailCheck ? 
+            {Key && !EmailCheckVerification ? 
             (
               <>
               <div style={{textAlign: "left", width: "100%"}}>
@@ -189,7 +221,7 @@ function RegisterPage() {
                 <input type="verification" value={InputKey} onChange={(e) => setInputKey(e.currentTarget.value)}/>
                 <button type="button" onClick={() => {
                   if(Key === InputKey) {
-                    setEmailCheck(true);
+                    setEmailCheckVerification(true);
                     alert("이메일 인증이 완료되었습니다.");
                   }
                 }} >인증 완료</button>
