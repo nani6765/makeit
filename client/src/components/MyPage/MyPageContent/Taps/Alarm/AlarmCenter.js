@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { firebase } from "../../../../firebase.js";
+import { firebase } from "../../../../../firebase.js"
 
 import AlarmListFnc from "./AlarmListFnc.js";
 import ChatListFnc from "./ChatListFnc.js";

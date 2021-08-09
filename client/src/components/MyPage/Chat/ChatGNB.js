@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 import { ChatGNBDiv } from "../css/ChatDetailElement.js";
+import { useSelector } from "react-redux";
+
 import Avatar from "react-avatar";
 import DeleteIcon from "../css/DeleteIcon.svg";
 import { firebase } from "../../../firebase.js";
 import DeleteModal from "./DeleteModal.js";
 
 function ChatGNB(props) {
+  const user = useSelector((state) => state.user);
   let history = useHistory();
   let InfoRef = firebase.database().ref("users");
+  let UserRef = firebase.database().ref(`users/${user.userData.uid}/chats/${props.ChatRoomId}`);
 
   const [OtherInfo, setOtherInfo] = useState({});
   const [DeleteFlag, setDeleteFlag] = useState(false);
@@ -18,6 +22,14 @@ function ChatGNB(props) {
       setOtherInfo(DataSnapshot.val());
     });
   }, []);
+
+    useEffect(() => {
+    return () => {
+      UserRef.update({
+          isCheck: true,
+        });
+    }
+  }, [])
 
   return (
     <>

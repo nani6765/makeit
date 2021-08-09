@@ -43,7 +43,7 @@ function BasicMyPage(props) {
       </div>
 
       <div className="btnDiv">
-        <div className="topLeft">활동이력</div>
+        <div className="topLeft"  onClick={() => { props.setTaps("활동이력");}}>활동이력</div>
         <div className="topRight" onClick={() => { props.setTaps("알림");}}>알림센터/쪽지함</div>
         <div className="bottomLeft">문의하기/신고하기</div>
         <div className="bottomRight">환경설정</div>

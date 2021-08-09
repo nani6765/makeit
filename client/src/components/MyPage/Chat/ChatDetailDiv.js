@@ -37,6 +37,8 @@ function ChatDetailDiv(props) {
     });
   }, []);
 
+
+
   return (
     <>
       <ChatDiv>

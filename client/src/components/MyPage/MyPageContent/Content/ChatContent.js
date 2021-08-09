@@ -19,10 +19,6 @@ function ChatContent(props) {
   let history = useHistory();
   const user = useSelector((state) => state.user);
   const alarm = useSelector((state) => state.alarm);
-
-      useEffect(() => {
-        console.log("alarm.AlarmCheckFin : ", alarm.AlarmCheckFin)
-    }, [alarm.AlarmCheckFin])
     
   moment.locale("ko");
   return (
