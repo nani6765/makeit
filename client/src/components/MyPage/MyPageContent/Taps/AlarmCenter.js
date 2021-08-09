@@ -16,11 +16,6 @@ function AlarmCenter(props) {
   let UserRef = firebase.database().ref(`users/${user.userData.uid}/`);
 
   useEffect(() => {
-    console.log("ChatList", ChatList);
-    console.log("AlarmList", AlarmList);
-  }, [ChatList, AlarmList]);
-
-  useEffect(() => {
     let temp = [];
     setChatList([...temp]);
   }, []);
@@ -30,9 +25,7 @@ function AlarmCenter(props) {
     if (props.AlarmType === "쪽지함") {
       let temp = [];
       setChatList(...temp);
-      //console.log("UserRef", UserRef);
       UserRef.child("chats").on("value", (DataSnapshot) => {
-        //console.log("DataSnapshot", DataSnapshot.val());
         setChatList(DataSnapshot.val());
       });
     } else {

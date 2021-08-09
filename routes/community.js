@@ -460,7 +460,21 @@ router.post("/rerepleSubmit", (req, res) => {
             $inc: { rerepleNum: 1 },
             $push: { rerepleArray: doc._id },
           }
-        ).exec();
+        )
+        .populate("auther")
+        .exec()
+        .then((result) => {
+          if(result.auther.uid != req.body.uid) {
+            let alarmtemp = {
+              uid: result.auther.uid,
+              url: temp.postNum,
+              type: "rerepleToReple",
+              category: "community/post",
+            };
+            const replealarm = new Alarm(alarmtemp);
+            replealarm.save();
+        }
+        })
       });
     })
     .then(() => {
@@ -480,12 +494,6 @@ router.post("/rerepleSubmit", (req, res) => {
           if (req.body.uid != result.auther.uid) {
             const alarm = new Alarm(alarmtemp);
             alarm.save();
-          }
-          if (req.body.uid != req.body.repleInfo.uid) {
-            alarmtemp.uid = req.body.repleInfo.uid;
-            alarmtemp.type = "rerepleToreple";
-            const replealarm = new Alarm(alarmtemp);
-            replealarm.save();
           }
           return res.status(200).send({ success: true });
         });

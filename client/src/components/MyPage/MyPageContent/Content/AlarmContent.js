@@ -1,6 +1,9 @@
 import React from "react";
 import { withRouter, useHistory } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { setAlarmFalse } from "../../../../redux/_actions/alarm_action.js";
+
 import { AlarmContentDiv } from "../../css/AlarmCenterCSS.js";
 import { ReactComponent as Comment } from "../../css/comment.svg";
 import { ReactComponent as Like } from "../../css/like.svg";
@@ -9,6 +12,7 @@ import axios from "axios";
 
 function AlarmContent(props) {
   let histort = useHistory();
+  let dispatch = useDispatch();
 
   function IsCheck(alarm) {
     let body = { _id: alarm._id };
@@ -24,6 +28,7 @@ function AlarmContent(props) {
       className={props.alarm.isCheck || props.allChecked ? "check" : null}
       onClick={(e) => {
         e.currentTarget.style.pointerEvents = "none";
+        dispatch(setAlarmFalse());
         IsCheck(props.alarm);
       }}
     >

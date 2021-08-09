@@ -3,10 +3,19 @@ const config = require("../config/key.js");
 
 const title = "MakeIT 이메일 인증메일입니다.";
 const txt = (name, Key) => {
+<<<<<<< HEAD
   return `
       <div style="width: 100%; height: auto;">
         <div style="width: 100%; border-bottom: 2px solid #702c8a; display: flex; justify-content: center;">
           <img src=${process.env.PUBLIC_URL + "/Img/logo.png"} alt="MainLogo" />
+=======
+    return (
+        `
+        <div style="width:100%; background-color:lightgrey; padding: 1rem 0px 1rem 0px;">
+        <div style="width: 100%; height: auto;  max-width:640px; margin:0 auto;  background-color:white;">
+        <div style="width: 100%; border-bottom: 2px solid #702c8a; display: flex; justify-content: center;">
+          <img src="https://kr.object.ncloudstorage.com/makeit/admin/logo.png" alt="MainLogo" />
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036
         </div>
         <div style="padding-top: 3rem; width: 90%; margin: 0 auto;">
           <div style="text-align: left;">
@@ -15,12 +24,21 @@ const txt = (name, Key) => {
           </div>
           <div style="border-top: 1px solid #000000; border-bottom: 1px solid #000000">
             <div style="margin-top: 3rem; margin-bottom: 3rem">
+<<<<<<< HEAD
               <p>
                 안녕하세요, <span style="font-weight:bold">${name}님 !</span>
               </p>
               <p>MAKE IT 가입을 위한 인증번호입니다.</p>
             </div>
             <p>아래 인증 번호를 확인하여 이메일 주소 인증을 완료해주세요.</p>
+=======
+              <p style="word-break: keep-all;">
+                안녕하세요, <span style="font-weight:bold">${name}님 !</span>
+              </p>
+              <p style="word-break: keep-all;">MAKE IT 가입을 위한 인증번호입니다.</p>
+            </div>
+            <p style="word-break: keep-all;">아래 인증 번호를 확인하여 이메일 주소 인증을 완료해주세요.</p>
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036
             <div style="width: auto;height: auto;padding: 20px 10px 20px 10px;border: 1.5px solid #a95ddd;border-radius: 10px;display: grid;grid-template-columns: 1fr 3fr;grid-template-rows: auto; grid-template-areas:'left right';">
               <div style="grid-area:left; text-align: center; border-right: 1px solid black; line-height: 2rem;">
                 <h3 style="margin: 0px;">인증번호</h3>
@@ -30,7 +48,11 @@ const txt = (name, Key) => {
               </div>
             </div>
             <div style="margin-top:3rem; margin-bottom:3rem; width:auto; height:auto; padding: 30px 20px 30px 20px; background: #ececec; text-align: left;">
+<<<<<<< HEAD
               <span style="color:#8e8e8e">
+=======
+              <span style="color:#8e8e8e word-break: keep-all;">
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036
                 본 메일은 가입하신 이메일 주소로 발송되었으며, 발신 전용이므로
                 회신이 되지 않습니다. 문의사항은 홈페이지 고객센터를
                 이용해주시기 바랍니다.
@@ -39,7 +61,11 @@ const txt = (name, Key) => {
           </div>
           <div style="margin-top: 1rem; margin-bottom: 1rem; display: grid; grid-template-columns: 1fr 4fr; grid-template-rows: auto; grid-template-areas:'fleft fright'; grid-gap: 1rem;">
             <div style="grid-area: fleft; display: flex; align-content: center; justify-content: center;">
+<<<<<<< HEAD
               <img src=${process.env.PUBLIC_URL + "/Img/comLogo.png"} />
+=======
+              <img src="https://kr.object.ncloudstorage.com/makeit/admin/logowithtext.png" style="width:100%; height:60%;"/>
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036
             </div>
             <div style="grid-area: fright;">
               <span style="color: #8e8e8e; word-break: keep-all;">
@@ -56,10 +82,18 @@ const txt = (name, Key) => {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
       `;
 };
 
 function sendEmail(toEmail, key, name) {
+=======
+        </div>
+      `
+    );}
+
+async function sendEmail(toEmail, key, name) {
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036
   let transporter = nodemailer.createTransport({
     host: config.smtpServerURL, //SMTP 서버 주소 port: 587,
     port: config.port,
@@ -74,6 +108,7 @@ function sendEmail(toEmail, key, name) {
     from: config.authUser, //보내는 사람 주소
     to: toEmail, //받는 사람 주소
     subject: title, //제목
+<<<<<<< HEAD
     html: txt(key, name), //본문
   };
 
@@ -87,8 +122,26 @@ function sendEmail(toEmail, key, name) {
       //전송 완료
       console.log("Finish sending email : " + info.response);
       transporter.close();
+=======
+    html: txt(name, key), //본문
+  };
+
+  //전송 시작!
+  await transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      //에러
+      console.log(error);
+      return false;
+    } else {
+      transporter.close();
+      return true;
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036
     }
   });
 }
 
+<<<<<<< HEAD
 module.exports = sendEmail;
+=======
+module.exports = sendEmail;
+>>>>>>> 4e9033f6529693d8899903ad81bafa3a44a5d036

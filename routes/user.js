@@ -2,6 +2,7 @@ var router = require("express").Router();
 const { User } = require("../model/User.js");
 const { Counter } = require("../model/Counter.js");
 const setUpload = require("../module/multer/upload.js");
+const sendEmail = require("../module/email.js");
 
 router.post("/register", (req, res) => {
   let temp = req.body;
@@ -37,10 +38,30 @@ router.post("/uploadProfile", (req, res) => {
     displayName: req.body.displayName,
   }
   User.findOneAndUpdate({uid: req.body.uid}, {$set: temp}).exec()
-  .then((err) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).send({ success: true });
+  .then(() => {
+    return res.status(200).send({ success: true });
+  }).catch((err) => {
+    return res.status(400).json({ success: false, err });
+  })
+})
+
+router.post("/checkEmail", (req, res) => {
+  let email = req.body.email;
+  User.findOne({email:email})
+  .exec()
+  .then((doc)=> {
+    return res.status(200).send({ success: true });
+  }).catch((err) => {
+    if (err) return res.json({ success: false, err });
   });
+})
+
+router.post("/sendEmail", (req, res) => {
+  if(sendEmail(req.body.email, req.body.key, req.body.name)){
+    return res.status(200).send({ success: true });
+  } else {
+    return res.status(400).json({ success: false, err });
+  }
 })
 
 module.exports = router;

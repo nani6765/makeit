@@ -27,6 +27,7 @@ function LoginPage(props) {
         .auth()
         .signInWithEmailAndPassword(body.email, body.password);
 
+      /*
       var user = firebase.auth().currentUser;
 
       if(user.emailVerified == false) {
@@ -37,7 +38,7 @@ function LoginPage(props) {
         }).catch((error) => {
           console.log("logout error");
         })
-      }
+      }*/
       setLoading(false);
       history.push("/");
     } catch (error) {

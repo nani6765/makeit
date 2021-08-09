@@ -15,8 +15,13 @@ function MyPageModal(props) {
   return (
     <ModalDiv style={{ top: "25px", right: "20px" }}>
       <div>
-        <Link
-          to="/MyPage"
+        <Link to={{
+            pathname: `/MyPage`,
+            state: {
+                Taps:"내정보",
+                AlarmType:"알림센터",
+            }
+          }}
           onClick={() => props.setmyPageHambucControl(false)}
           style={{ color: "black", textDecoration: "none" }}
         >
