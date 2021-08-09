@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { withRouter, useLocation } from "react-router-dom";
 import { MyPageMainDiv, MyPageSubTitle } from "./css/MyPageElement.js";
 
 import BasicMyPage from "./MyPageContent/Taps/BasicMyPage.js";
@@ -8,9 +8,19 @@ import AlarmCenter from "./MyPageContent/Taps/AlarmCenter.js";
 
 import MobileFooter from "../HeaderAndFooter/Footer/MobileFooter.js";
 
-function MyPage() {
+function MyPage(props) {
+  const location = useLocation();
+
   const [Taps, setTaps] = useState("내정보");
   const [AlarmType, setAlarmType] = useState("알림센터");
+
+  useEffect(() => {
+    if(location.state) {
+      setTaps(location.state.Taps);
+      setAlarmType(location.state.AlarmType);
+    }
+  }, [location.state])
+
 
   const SwitchTaps = () => {
     switch (Taps) {

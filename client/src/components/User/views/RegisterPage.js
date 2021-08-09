@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
-import { firebase, actionCodeSettings } from "../../../firebase.js";
+import { firebase } from "../../../firebase.js";
+import shortId from "shortid";
+
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
@@ -8,20 +10,119 @@ import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import axios from "axios";
 
+
 function RegisterPage() {
+  //회원정보
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+
+  //이메일 인증
+  const [Key, setKey] = useState("");
+  const [InputKey, setInputKey] = useState("");
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  const [EmailCheck, setEmailCheck] = useState(true); //이메일 중복 확인용
+  const [EmailCheckVerification, setEmailCheckVerification] = useState(false); //이메일 인증 완료 여부
+  
+  //회원가입 완료
   const [ErrorFormSubmit, setErrorFormSubmit] = useState("");
   const [Loading, setLoading] = useState(false);
 
   let history = useHistory();
 
+  const EmailVerification = () => {
+    let temp = shortId.generate();
+    let body = {
+      email: Email,
+      key: temp,
+      name: Name,
+    };
+    setKey(temp);
+    axios.post("api/user/sendEmail", body).then((response) => {
+      if(response.data.success)
+        alert("이메일이 전송되었습니다.");
+    })
+  }
+
+  const verifyEmail = (email) => { 
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; 
+    if (email.match(regExp) != null)
+      return true;
+    else
+      return false;
+  };
+    
+  const StartTimer = async() => {
+    if(!(Email && Name)){
+      return alert("이메일과 이름을 모두 입력해주십시오.");
+    }
+    if(!verifyEmail(Email)){
+      return alert("이메일 주소가 잘못되었습니다.");
+    }
+    var EmailCheckFunc = new Promise((resolve, reject) => {
+      let body = {
+        email: Email,
+      }
+      try {
+        axios.post("api/user/checkEmail", body).then((response) => {
+          if(!response.data.success) reject(response.data.success);
+          if(!response.data.doc){
+            //이매일이 없는 경우
+            setEmailCheck(false);
+            resolve(false);
+          } else {
+            //이메일이 있는 경우
+            setEmailCheck(true);
+            resolve(true);
+          }
+      })
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    EmailCheckFunc.then((val) => {
+      if(val){
+        return alert("이미 가입된 이메일입니다.");
+      } else {
+        EmailVerification();
+        setMinutes(parseInt(3));
+        setTimeout(() => {
+          setKey("");
+        }, 180000);   
+      }
+    })
+    .catch((reason) => {
+            console.log(reason);
+    });
+  }
+
+  useEffect(() => {
+  const countdown = setInterval(() => {
+    if (parseInt(seconds) > 0) {
+      setSeconds(parseInt(seconds) - 1);
+    }
+    if (parseInt(seconds) === 0) {
+      if (parseInt(minutes) === 0) {
+          clearInterval(countdown);
+      } else {
+        setMinutes(parseInt(minutes) - 1);
+        setSeconds(59);
+      }
+    }
+  }, 1000);
+  return () => clearInterval(countdown);
+}, [minutes, seconds]);
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (Password !== ConfirmPassword) {
       return alert("비밀번호와 비밀번호 확인은 같아야 합니다.");
+    }
+    if(!EmailCheckVerification){
+       return alert("이메일 인증을 완료해 주세요.");
     }
 
     let body = {
@@ -61,36 +162,19 @@ function RegisterPage() {
         name: createdUser.user.displayName,
         image: createdUser.user.photoURL,
       });
-
-      var currentUser = firebase.auth().currentUser;
-      currentUser
-        .sendEmailVerification({ url: "http://localhost:3000" })
-        .then(function () {
-          console.log("이메일이 전송됨");
-        })
-        .catch("email not sent");
-
-      if (currentUser.emailVerified == false) {
-        alert("이메일 인증을 완료해야합니다.");
-        firebase
-          .auth()
-          .signOut()
-          .then(() => {
-            setLoading(false);
-            history.push("/");
-          })
-          .catch((error) => {
-            console.log("logout error");
-          });
-      }
+     
       setLoading(false);
+      //회원가입 완료 페이지 만들고 push
       history.push("/");
+
     } catch (error) {
+
       console.log(error);
       setErrorFormSubmit(error.message);
-      setLoading(false);
+     
       setTimeout(() => {
         setErrorFormSubmit("");
+        setLoading(false);
       }, 5000);
     }
   };
@@ -108,13 +192,7 @@ function RegisterPage() {
             </p>
           </div>
           <form css={FormDivCSS} onSubmit={onSubmitHandler}>
-            <label>이메일</label>
-            <input
-              type="email"
-              value={Email}
-              onChange={(e) => setEmail(e.currentTarget.value)}
-              required
-            />
+
             <label>이름</label>
             <input
               type="text"
@@ -122,6 +200,35 @@ function RegisterPage() {
               onChange={(e) => setName(e.currentTarget.value)}
               required
             />
+            
+            <label>이메일</label>
+            <input
+              type="email"
+              value={Email}
+              onChange={(e) => setEmail(e.currentTarget.value)}
+              required
+              disabled = {EmailCheckVerification ? true : false }
+            />
+            {
+              !EmailCheckVerification && <button type="button" onClick={() => StartTimer()} disabled={Key ? true : false}>이메일 인증</button>
+            }
+            
+            {Key && !EmailCheckVerification ? 
+            (
+              <>
+              <div style={{textAlign: "left", width: "100%"}}>
+                <p>인증번호<span style={{color: "red", marginLeft: "1rem"}}>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</span></p><br/>
+                <input type="verification" value={InputKey} onChange={(e) => setInputKey(e.currentTarget.value)}/>
+                <button type="button" onClick={() => {
+                  if(Key === InputKey) {
+                    setEmailCheckVerification(true);
+                    alert("이메일 인증이 완료되었습니다.");
+                  }
+                }} >인증 완료</button>
+              </div>
+              </>
+            ) : null }
+
             <label>비밀번호</label>
             <input
               type="password"
@@ -129,6 +236,7 @@ function RegisterPage() {
               onChange={(e) => setPassword(e.currentTarget.value)}
               required
             />
+
             <label>비밀번호확인</label>
             <input
               type="password"
@@ -136,6 +244,7 @@ function RegisterPage() {
               onChange={(e) => setConfirmPassword(e.currentTarget.value)}
               required
             />
+            
             <br />
             {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
             <button type="submit" disabled={Loading}>

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Avatar from "react-avatar";
 import { HeaderLoginDiv } from "../../css/HeaderElement.js";
 import MyPageModal from "./MyPageModal.js";
-import AlarmModal from "./AlarmModal.js";
+import HeaderBell from "./HeaderBell.js";
 
 function HeaderLoginArea(props) {
   const user = useSelector((state) => state.user);
@@ -23,11 +23,7 @@ function HeaderLoginArea(props) {
       {user.userData ? (
         <>
           <div className="hambuc" ref={alarmInnerRef}>
-            <i
-              className="bell bi bi-bell"
-              onClick={() => props.setalarmHambucControl(true)}
-            ></i>
-            {props.alarmHambucControl ? <AlarmModal /> : null}
+            <HeaderBell setalarmHambucControl = {props.setalarmHambucControl} alarmHambucControl = {props.alarmHambucControl} setalarmHambucControl={props.setalarmHambucControl}/>
           </div>
           <div className="hambuc" ref={myPageInnerRef}>
             <Avatar

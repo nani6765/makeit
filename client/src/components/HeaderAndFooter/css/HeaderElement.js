@@ -262,8 +262,8 @@ const ModalDiv = styled.div`
   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
   position: absolute;
-  right: 10px;
-  top: 20px;
+  right: 13px;
+  top: 22px;
   min-width: 150px;
   min-height: 70px;
   z-index: 10;
@@ -272,6 +272,9 @@ const ModalDiv = styled.div`
   justify-content: space-between;
   align-content: center;
   div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     button {
       width: 100%;
       margin: 0;
@@ -279,6 +282,26 @@ const ModalDiv = styled.div`
       border: none;
       text-aling: center;
       background-color: rgba(255, 255, 255, 1);
+    }
+    .new{
+      &:hover, &:focus{
+        text-decoration-line: none;
+      }
+      &::after{
+        content:"new";
+        color: #fff!important;
+        margin-left: .25rem!important;
+        border-radius: 50rem!important;
+        background-color: #dc3545!important;
+        display: inline-block;
+        padding: .25em .4em;
+        font-size: 75%;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+      }
     }
     .logout {
       margin-top: 10px;
