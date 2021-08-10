@@ -4,7 +4,8 @@ import { MyPageMainDiv, MyPageSubTitle } from "./css/MyPageElement.js";
 
 import BasicMyPage from "./MyPageContent/Taps/BasicMyPage.js";
 import EditProfile from "./MyPageContent/Taps/EditProfile.js";
-import AlarmCenter from "./MyPageContent/Taps/AlarmCenter.js";
+import AlarmCenter from "./MyPageContent/Taps/Alarm/AlarmCenter.js";
+import ActivityLog from "./MyPageContent/Taps/Logs/ActivityLog.js";
 
 import MobileFooter from "../HeaderAndFooter/Footer/MobileFooter.js";
 
@@ -32,6 +33,8 @@ function MyPage(props) {
         return (
           <AlarmCenter AlarmType={AlarmType} setAlarmType={setAlarmType} />
         );
+        case "활동이력":
+          return <ActivityLog setTaps={setTaps} />;
       default:
         return <BasicMyPage setTaps={setTaps} />;
     }
@@ -73,6 +76,21 @@ function MyPage(props) {
                 쪽지함
               </p>
             </div>
+            <span
+              onClick={() => {
+                setTaps("내정보");
+              }}
+            >
+              X
+            </span>
+          </React.Fragment>
+        );
+
+        
+      case "활동이력":
+        return (
+          <React.Fragment>
+            <p>활동이력</p>
             <span
               onClick={() => {
                 setTaps("내정보");

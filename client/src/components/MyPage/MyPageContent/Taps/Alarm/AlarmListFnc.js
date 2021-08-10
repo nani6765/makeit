@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import AlarmContent from "../Content/AlarmContent.js";
+import AlarmContent from "../../Content/AlarmContent.js";
 
-import { AlarmListDiv } from "../../css/AlarmCenterCSS.js";
+import { AlarmListDiv } from "../../../css/AlarmCenterCSS.js";
 import axios from "axios";
 
 function AlarmListFnc(props) {
