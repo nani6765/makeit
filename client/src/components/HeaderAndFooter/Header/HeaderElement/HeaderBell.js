@@ -41,10 +41,6 @@ function HeaderBell(props) {
     })
 
     useEffect(() => {
-        console.log("alarm.AlarmCheckFin : ", alarm.AlarmCheckFin)
-    }, [alarm.AlarmCheckFin])
-
-    useEffect(() => {
         if (!alarm.AlarmCheckFin){
             AlarmChecked();
         } else {

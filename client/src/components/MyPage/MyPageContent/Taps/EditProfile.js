@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router-dom";
 import CropperModal from "../Func/CropperModal.js";
 import Avatar from "react-avatar";
-import { EditProfileDiv } from "../../css/MyPageContentElement.js";
+import { EditProfileDiv, LoadingDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
 import axios from "axios";
 import { firebase } from "../../../../firebase.js";
@@ -173,7 +173,7 @@ function EditProfile(props) {
                     SubmitExit();
                   }
                 });
-                setisLoading(false);
+              setisLoading(false);
               } catch (error) {
                 alert(error);
                 setisLoading(false);
@@ -187,7 +187,27 @@ function EditProfile(props) {
     }
   });
 
+  useEffect(() => {
+    if(isLoading){
+     document.addEventListener('scroll', function() {
+      window.scrollTo(0, 0);
+     }, false);
+    }
+  }, [isLoading])
+
   return (
+    <>
+    {isLoading ? 
+        (
+        <LoadingDiv>
+          <div className="spinner-border text-light" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        </LoadingDiv>
+        )
+        :
+      null
+    }
     <EditProfileDiv>
       <div className="editProfileDiv">
         {imageSrc && ModalFlag ? (
@@ -251,6 +271,7 @@ function EditProfile(props) {
         </div>
       </form>
     </EditProfileDiv>
+    </>
   );
 }
 

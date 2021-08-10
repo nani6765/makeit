@@ -139,4 +139,21 @@ const EditProfile = styled.div`
     }
   }
 `;
-export { EditProfileDiv, EditProfile };
+
+const LoadingDiv = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  opacity: .5;
+  top: 0;
+  left: 0;
+  z-index: 51;
+  scroll: none;
+`
+
+export { EditProfileDiv, EditProfile, LoadingDiv };
