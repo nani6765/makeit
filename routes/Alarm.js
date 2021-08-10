@@ -6,6 +6,8 @@ router.post("/getAlarm", (req, res) => {
   sort.createdAt = -1;
   Alarm.find({ uid: req.body.uid })
     .sort(sort)
+    .skip(req.body.skip)
+    .limit(req.body.limit)
     .exec()
     .then((response) => {
       return res.status(200).send({
