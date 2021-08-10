@@ -17,6 +17,7 @@
     "lodash": "^4.17.21",
     "md5": "^2.3.0",
     "moment": "^2.29.1",
+    "nanoid": "^3.1.23",
     "react": "^17.0.2",
     "react-autosize-textarea": "^7.1.0",
     "react-avatar": "^3.10.0",
@@ -37,7 +38,7 @@
     "redux": "^4.1.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "shortid": "2.2.16",
+    "shortid": "^2.2.16",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
