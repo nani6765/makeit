@@ -471,6 +471,24 @@ router.post("/rerepleSubmit", (req, res) => {
   let temp = req.body;
   let rereple = {};
   rereple.postNum = temp.postNum;
+
+/*
+  rereple.auther = temp.uid;
+  rereple.content = temp.content;
+  rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+  const rerepleObj = new CommunityRereple(rereple);
+  rerepleObj.save().then((doc) => {
+    CommunityReple.findOneAndUpdate(
+      {_id: temp.repleInfo._id},
+      {
+        $incd: {},
+      }
+      )
+  })*/
+
+
+
+
   User.findOne({ uid: temp.uid })
     .exec()
     .then((userInfo) => {
