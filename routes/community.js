@@ -217,6 +217,31 @@ router.post("/image/delete", (req, res) => {
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
+  Counter.findeOne({ name: "counter" })
+    .exec()
+    .then((counter) => {
+      temp.postNum = counter.coPostNum;
+      User.findOne({ uid: req.body.uid })
+        .exec()
+        .then((userInfo) => {
+          temp.auther = userInfo._id;
+          temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+          const communityPost = new Community(temp);
+          communityPost.save();
+        });
+      counter
+        .updateOne({ $inc: { coPostNum: 1 } })
+        .exec()
+        .then(() => {
+          return res.status(200).send({
+            success: true,
+          });
+        });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+  /*
   Counter.findOne({ name: "counter" }, (err, counter) => {
     if (err) return res.status(400).json({ success: false, err });
     temp.postNum = counter.coPostNum;
@@ -238,6 +263,7 @@ router.post("/postSubmit", (req, res) => {
       });
     });
   });
+  */
 });
 
 router.post("/postDelete", (req, res) => {
@@ -245,7 +271,6 @@ router.post("/postDelete", (req, res) => {
   for (let i = 0; i < temp.imageLength; i++) {
     setDelete("makeit/community", temp.images[i].key);
   }
-
   CommunityRereple.deleteMany({ postNum: temp.postNum })
     .exec()
     .then(() => {
@@ -461,20 +486,20 @@ router.post("/rerepleSubmit", (req, res) => {
             $push: { rerepleArray: doc._id },
           }
         )
-        .populate("auther")
-        .exec()
-        .then((result) => {
-          if(result.auther.uid != req.body.uid) {
-            let alarmtemp = {
-              uid: result.auther.uid,
-              url: temp.postNum,
-              type: "rerepleToReple",
-              category: "community/post",
-            };
-            const replealarm = new Alarm(alarmtemp);
-            replealarm.save();
-        }
-        })
+          .populate("auther")
+          .exec()
+          .then((result) => {
+            if (result.auther.uid != req.body.uid) {
+              let alarmtemp = {
+                uid: result.auther.uid,
+                url: temp.postNum,
+                type: "rerepleToReple",
+                category: "community/post",
+              };
+              const replealarm = new Alarm(alarmtemp);
+              replealarm.save();
+            }
+          });
       });
     })
     .then(() => {
