@@ -605,13 +605,11 @@ router.post("/rerepleLike", (req, res) => {
   }
 });
 
-
-
 //////////////////////////////////
 //           mypagelog          //
 //////////////////////////////////
 
-function PureTime(time){
+function PureTime(time) {
   return time.replaceAll("-", "").replace(":", "").replace(" ", "");
 }
 
@@ -620,30 +618,40 @@ router.post("/getMyLog", (req, res) => {
   let myReple = [];
   let myRereple = [];
   let logList = [];
-  User.findOne({uid: req.body.uid})
-  .exec()
-  .then((response) => {
-    Community.find({$or: [{auther: response._id}, {likeArray: req.body.uid}]})
+  User.findOne({ uid: req.body.uid })
     .exec()
-    .then((result) => {
-        logList = [...result];
-        CommunityReple.find({$or: [{auther: response._id}, {likeArray: req.body.uid}]})
+    .then((response) => {
+      Community.find({
+        $or: [{ auther: response._id }, { likeArray: req.body.uid }],
+      })
         .exec()
-        .then((result) => {         
-          logList=[...logList, ...result];
-          CommunityRereple.find({$or: [{auther: response._id}, {likeArray: req.body.uid}]})
-          .exec()
-          .then((result) => {
-            logList = [...logList, ...result];
-            
-            logList.sort((a, b) => PureTime(b.realTime) - PureTime(a.realTime));
-            return res.status(200).send({ success: true, logList: logList });
+        .then((result) => {
+          logList = [...result];
+          CommunityReple.find({
+            $or: [{ auther: response._id }, { likeArray: req.body.uid }],
           })
-        })
+            .exec()
+            .then((result) => {
+              logList = [...logList, ...result];
+              CommunityRereple.find({
+                $or: [{ auther: response._id }, { likeArray: req.body.uid }],
+              })
+                .exec()
+                .then((result) => {
+                  logList = [...logList, ...result];
+
+                  logList.sort(
+                    (a, b) => PureTime(b.realTime) - PureTime(a.realTime)
+                  );
+                  return res
+                    .status(200)
+                    .send({ success: true, logList: logList });
+                });
+            });
+        });
     })
-  })
-  .catch((err) => {
-    return res.status(400).json({ success: false, err });
-  });
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
+    });
 });
 module.exports = router;
