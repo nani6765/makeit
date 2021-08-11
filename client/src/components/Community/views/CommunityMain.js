@@ -19,10 +19,6 @@ function CommunityMain(props) {
   const [FiltersObject, setFiltersObject] = useState([]);
 
   useEffect(() => {
-    console.log("unmount??");
-  })
-
-  useEffect(() => {
     if (props.location.state === undefined) {
       setMainCategoryContent("게시판");
     } else {

@@ -179,24 +179,27 @@ router.post("/postDetail/reple", (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 5;
   let sort = {};
   sort.createdAt = 1;
-  CommunityReple.find(filter).exec((err, totalReple) => {
-    if (err) return res.status(400).json({ success: false, err });
-    CommunityReple.find(filter)
-      .populate("auther")
-      .populate("rerepleArray")
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .exec((err, repleInfo) => {
-        if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).json({
-          success: true,
-          repleInfo,
-          repleSize: repleInfo.length,
-          totalSize: totalReple.length,
+  CommunityReple.find(filter)
+    .exec()
+    .then((totalReple) => {
+      CommunityReple.find(filter)
+        .populate("rerepleArray")
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then((repleInfo) => {
+          return res.status(200).json({
+            success: true,
+            repleInfo,
+            repleSize: repleInfo.length,
+            totalSize: totalReple.length,
+          });
         });
-      });
-  });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
+    });
 });
 
 router.post("/image", setUpload("makeit/community"), (req, res, next) => {
@@ -217,7 +220,7 @@ router.post("/image/delete", (req, res) => {
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
-  Counter.findeOne({ name: "counter" })
+  Counter.findOne({ name: "counter" })
     .exec()
     .then((counter) => {
       temp.postNum = counter.coPostNum;
@@ -241,29 +244,6 @@ router.post("/postSubmit", (req, res) => {
     .catch((err) => {
       return res.json({ success: false, err });
     });
-  /*
-  Counter.findOne({ name: "counter" }, (err, counter) => {
-    if (err) return res.status(400).json({ success: false, err });
-    temp.postNum = counter.coPostNum;
-    User.findOne({ uid: req.body.uid }, (err, userInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      temp.auther = userInfo._id;
-      temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-      const communityPost = new Community(temp);
-      communityPost.save((err, doc) => {
-        if (err) {
-          return res.status(400).json({ success: false, err });
-        }
-        counter.updateOne({ $inc: { coPostNum: 1 } }, (err) => {
-          if (err) return res.json({ success: false, err });
-          return res.status(200).send({
-            success: true,
-          });
-        });
-      });
-    });
-  });
-  */
 });
 
 router.post("/postDelete", (req, res) => {
@@ -307,11 +287,9 @@ router.post("/like", (req, res) => {
   let key = req.body.likeFlag;
   let user = req.body.userId;
   let temp = {};
-  //  temp.$inc = {likeNum: 1};
   temp.$push = { likeArray: user };
 
   if (key) {
-    //likeArray에서 userId 삭제
     Community.findOneAndUpdate(
       { postNum: postNum },
       { $inc: { likeNum: -1 }, $pull: { likeArray: user } }
@@ -320,14 +298,13 @@ router.post("/like", (req, res) => {
       return res.status(200).send({ success: true });
     });
   } else {
-    //userId 삽입
     Community.findOneAndUpdate(
       { postNum: postNum },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     )
       .populate("auther")
-      .exec((err, result) => {
-        if (err) return res.status(400).json({ success: false, err });
+      .exec()
+      .then((result) => {
         let alarmtemp = {
           uid: result.auther.uid,
           url: postNum,
@@ -335,10 +312,12 @@ router.post("/like", (req, res) => {
           category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });
+        alarm.save(() => {
           return res.status(200).send({ success: true });
         });
+      })
+      .catch((err) => {
+        return res.status(400).json({ success: false, err });
       });
   }
 });
@@ -349,21 +328,20 @@ router.post("/like", (req, res) => {
 
 router.post("/repleSubmit", (req, res) => {
   let temp = req.body;
-  User.findOne({ uid: temp.uid }).exec((err, userInfo) => {
-    if (err) return res.status(400).json({ success: false, err });
-    temp.auther = userInfo._id;
-    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-    const communityReple = new CommunityReple(temp);
-    communityReple.save((err, doc) => {
-      if (err) return res.status(400).json({ success: false, err });
-      Community.findOneAndUpdate(
-        { postNum: temp.postNum },
-        { $inc: { repleNum: 1 } }
-      )
-        .populate("auther")
-        .exec((err, result) => {
-          if (err) return res.status(400).json({ success: false, err });
-          if (result.auther.uid != temp.uid) {
+  User.findOne({ uid: temp.uid })
+    .exec()
+    .then((userInfo) => {
+      temp.auther = userInfo._id;
+      temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+      const communityReple = new CommunityReple(temp);
+      communityReple.save(() => {
+        Community.findOneAndUpdate(
+          { postNum: temp.postNum },
+          { $inc: { repleNum: 1 } }
+        )
+          .populate("auther")
+          .exec()
+          .then((result) => {
             let alarmtemp = {
               uid: result.auther.uid,
               url: temp.postNum,
@@ -371,14 +349,15 @@ router.post("/repleSubmit", (req, res) => {
               category: "community/post",
             };
             const alarm = new Alarm(alarmtemp);
-            alarm.save((err) => {
-              if (err) return res.status(400).json({ success: false, err });
+            alarm.save(() => {
+              return res.status(200).send({ success: true });
             });
-          }
-          return res.status(200).send({ success: true });
-        });
+          });
+      });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
     });
-  });
 });
 
 router.post("/repleDelete", (req, res) => {
@@ -437,8 +416,8 @@ router.post("/repleLike", (req, res) => {
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     )
       .populate("auther")
-      .exec((err, result) => {
-        if (err) return res.status(400).json({ success: false, err });
+      .exec()
+      .then((result) => {
         let alarmtemp = {
           uid: result.auther.uid,
           url: result.postNum,
@@ -446,10 +425,12 @@ router.post("/repleLike", (req, res) => {
           category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });
+        alarm.save(() => {
           return res.status(200).send({ success: true });
         });
+      })
+      .catch((err) => {
+        return res.status(400).json({ success: false, err });
       });
   }
 });
@@ -588,8 +569,8 @@ router.post("/rerepleLike", (req, res) => {
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     )
       .populate("auther")
-      .exec((err, result) => {
-        if (err) return res.status(400).json({ success: false, err });
+      .exec()
+      .then((result) => {
         let alarmtemp = {
           uid: result.auther.uid,
           url: result.postNum,
@@ -597,61 +578,14 @@ router.post("/rerepleLike", (req, res) => {
           category: "community/post",
         };
         const alarm = new Alarm(alarmtemp);
-        alarm.save((err) => {
-          if (err) return res.status(400).json({ success: false, err });
+        alarm.save(() => {
           return res.status(200).send({ success: true });
         });
+      })
+      .catch((err) => {
+        return res.status(400).send({ success: false, err });
       });
   }
 });
 
-//////////////////////////////////
-//           mypagelog          //
-//////////////////////////////////
-
-function PureTime(time) {
-  return time.replaceAll("-", "").replace(":", "").replace(" ", "");
-}
-
-router.post("/getMyLog", (req, res) => {
-  let mypost = [];
-  let myReple = [];
-  let myRereple = [];
-  let logList = [];
-  User.findOne({ uid: req.body.uid })
-    .exec()
-    .then((response) => {
-      Community.find({
-        $or: [{ auther: response._id }, { likeArray: req.body.uid }],
-      })
-        .exec()
-        .then((result) => {
-          logList = [...result];
-          CommunityReple.find({
-            $or: [{ auther: response._id }, { likeArray: req.body.uid }],
-          })
-            .exec()
-            .then((result) => {
-              logList = [...logList, ...result];
-              CommunityRereple.find({
-                $or: [{ auther: response._id }, { likeArray: req.body.uid }],
-              })
-                .exec()
-                .then((result) => {
-                  logList = [...logList, ...result];
-
-                  logList.sort(
-                    (a, b) => PureTime(b.realTime) - PureTime(a.realTime)
-                  );
-                  return res
-                    .status(200)
-                    .send({ success: true, logList: logList });
-                });
-            });
-        });
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, err });
-    });
-});
 module.exports = router;
