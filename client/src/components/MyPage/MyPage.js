@@ -14,6 +14,8 @@ function MyPage(props) {
 
   const [Taps, setTaps] = useState("내정보");
   const [AlarmType, setAlarmType] = useState("알림센터");
+  const [LogList, setLogList] = useState([]);
+  const [Limit, setLimit] = useState(0)
 
   useEffect(() => {
     if(location.state) {
@@ -33,8 +35,8 @@ function MyPage(props) {
         return (
           <AlarmCenter AlarmType={AlarmType} setAlarmType={setAlarmType} />
         );
-        case "활동이력":
-          return <ActivityLog setTaps={setTaps} />;
+      case "활동이력":
+        return <ActivityLog setTaps={setTaps} />;
       default:
         return <BasicMyPage setTaps={setTaps} />;
     }

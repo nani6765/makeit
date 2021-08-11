@@ -12,9 +12,25 @@ function AlarmCenter(props) {
   const [ChatList, setChatList] = useState([]);
   const [AlarmList, setAlarmList] = useState([]);
   const [Loading, setLoading] = useState(null);
+  const [AlarmSkip, setAlarmSkip] = useState(0);
 
   let UserRef = firebase.database().ref(`users/${user.userData.uid}/`);
 
+  const GetAlarmList = (limit) => {
+      let body = {
+        uid: user.userData.uid,
+        skip : AlarmSkip,
+        limit: limit,
+      };
+      axios.post("/api/alarm/getAlarm", body).then((response) => {
+        if (response.data.success) {
+          let temp = [...AlarmList, ...response.data.alarms];
+          setAlarmList(temp);
+          setAlarmSkip(Math.min(AlarmSkip + limit, temp.length));
+        }
+      });
+  }
+  
   useEffect(() => {
     let temp = [];
     setChatList([...temp]);
@@ -29,15 +45,7 @@ function AlarmCenter(props) {
         setChatList(DataSnapshot.val());
       });
     } else {
-      let body = {
-        uid: user.userData.uid,
-      };
-      axios.post("/api/alarm/getAlarm", body).then((response) => {
-        if (response.data.success) {
-          let temp = [...response.data.alarms];
-          setAlarmList(temp);
-        }
-      });
+      GetAlarmList(10);
     }
     setLoading(true);
   }, [props.AlarmType]);
@@ -48,7 +56,7 @@ function AlarmCenter(props) {
         props.AlarmType === "쪽지함" ? (
           <ChatListFnc ChatList={ChatList} />
         ) : (
-          <AlarmListFnc AlarmList={AlarmList} />
+          <AlarmListFnc AlarmList={AlarmList} GetAlarmList={GetAlarmList}/>
         )
       ) : null}
     </>
