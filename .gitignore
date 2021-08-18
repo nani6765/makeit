@@ -2,3 +2,4 @@ node_modules/
 client/node_modules/
 client/src/firebase.js
 config/dev.js
+jaewon.json
