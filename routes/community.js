@@ -25,6 +25,11 @@ router.post("/", (req, res) => {
   if (category.subCategory === "전체") {
     delete category.subCategory;
   }
+  let term = [
+    { title: { $regex: req.body.term } },
+    { content: { $regex: req.body.term } },
+  ]
+
 
   //최신순&&인기순 정렬
   let sort = {};
@@ -41,114 +46,30 @@ router.post("/", (req, res) => {
   let limit = 5;
   let skipTemp = parseInt(req.body.PageIdx);
   let skip = (skipTemp - 1) * 5;
-
-  //필터가 있을시
-  if (filter.length > 0) {
-    //검색어가 있을 시
-    if (req.body.term) {
+  
+  Community.find(category)
+    .find({ $or: filter })
+    .find({ $or: term })
+    .exec()
+    .then((postList) => {
+      let totalIdx = postList.length;
       Community.find(category)
-        .find({ $or: filter })
-        .find({
-          $or: [
-            { title: { $regex: req.body.term } },
-            { content: { $regex: req.body.term } },
-          ],
-        })
-        .exec((err, postList) => {
-          let totalIdx = postList.length;
-          if (err) return res.status(400).json({ success: false, err });
-          Community.find(category)
-            .find({ $or: filter })
-            .find({
-              $or: [
-                { title: { $regex: req.body.term } },
-                { content: { $regex: req.body.term } },
-              ],
-            })
-            .populate("auther")
-            .sort(sort)
-            .skip(skip)
-            .limit(limit)
-            .exec((err, postInfo) => {
-              if (err) return res.status(400).json({ success: false, err });
-              return res
-                .status(200)
-                .json({ success: true, postInfo, totalIdx, searchFlag: true });
-            });
-        });
-    }
-    //검색어가 없을 시
-    else {
-      Community.find(category)
-        .find({ $or: filter })
-        .exec((err, postList) => {
-          let totalIdx = postList.length;
-          if (err) return res.status(400).json({ success: false, err });
-          Community.find(category)
-            .find({ $or: filter })
-            .populate("auther")
-            .sort(sort)
-            .skip(skip)
-            .limit(limit)
-            .exec((err, postInfo) => {
-              if (err) return res.status(400).json({ success: false, err });
-              return res
-                .status(200)
-                .json({ success: true, postInfo, totalIdx });
-            });
-        });
-    }
-  }
-  //필터가 없을시
-  else {
-    //검색어가 있을 시
-    if (req.body.term) {
-      Community.find(category)
-        .find({
-          $or: [
-            { title: { $regex: req.body.term } },
-            { content: { $regex: req.body.term } },
-          ],
-        })
-        .exec((err, postList) => {
-          let totalIdx = postList.length;
-          if (err) return res.status(400).json({ success: false, err });
-          Community.find(category)
-            .find({
-              $or: [
-                { title: { $regex: req.body.term } },
-                { content: { $regex: req.body.term } },
-              ],
-            })
-            .populate("auther")
-            .sort(sort)
-            .skip(skip)
-            .limit(limit)
-            .exec((err, postInfo) => {
-              if (err) return res.status(400).json({ success: false, err });
-              return res
-                .status(200)
-                .json({ success: true, postInfo, totalIdx, searchFlag: true });
-            });
-        });
-    }
-    //검색어가 없을 시
-    else {
-      Community.find(category).exec((err, postList) => {
-        let totalIdx = postList.length;
-        if (err) return res.status(400).json({ success: false, err });
-        Community.find(category)
-          .populate("auther")
-          .sort(sort)
-          .skip(skip)
-          .limit(limit)
-          .exec((err, postInfo) => {
-            if (err) return res.status(400).json({ success: false, err });
-            return res.status(200).json({ success: true, postInfo, totalIdx });
-          });
+      .find({ $or: filter })
+      .find({ $or: term })
+      .populate("auther")
+      .sort(sort)
+      .skip(skip)
+      .limit(limit)
+      .exec()
+      .then((postInfo) => {
+        return res
+          .status(200)
+          .json({ success: true, postInfo, totalIdx, searchFlag: true });
       });
-    }
-  }
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
+    })
 });
 
 router.post("/length", (req, res) => {
@@ -183,6 +104,7 @@ router.post("/postDetail/reple", (req, res) => {
     .exec()
     .then((totalReple) => {
       CommunityReple.find(filter)
+        .populate("auther")
         .populate("rerepleArray")
         .sort(sort)
         .skip(skip)
@@ -226,7 +148,7 @@ router.post("/postSubmit", (req, res) => {
       temp.postNum = counter.coPostNum;
       User.findOne({ uid: req.body.uid })
         .exec()
-        .then((userInfo) => {
+        .then((userInfo) => { 
           temp.auther = userInfo._id;
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const communityPost = new Community(temp);
@@ -302,11 +224,10 @@ router.post("/like", (req, res) => {
       { postNum: postNum },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     )
-      .populate("auther")
       .exec()
       .then((result) => {
         let alarmtemp = {
-          uid: result.auther.uid,
+          uid: result.uid,
           url: postNum,
           type: "likeToPost",
           category: "community/post",
@@ -339,19 +260,22 @@ router.post("/repleSubmit", (req, res) => {
           { postNum: temp.postNum },
           { $inc: { repleNum: 1 } }
         )
-          .populate("auther")
           .exec()
           .then((result) => {
-            let alarmtemp = {
-              uid: result.auther.uid,
-              url: temp.postNum,
-              type: "repleToPost",
-              category: "community/post",
-            };
-            const alarm = new Alarm(alarmtemp);
-            alarm.save(() => {
-              return res.status(200).send({ success: true });
-            });
+            if (req.body.uid != result.uid) {
+              let alarmtemp = {
+                uid: result.uid,
+                url: temp.postNum,
+                type: "repleToPost",
+                category: "community/post",
+              };
+              const alarm = new Alarm(alarmtemp);
+              alarm.save(() => {
+                return res.status(200).send({ success: true });
+              });
+            } else {
+                return res.status(200).send({ success: true });
+              }
           });
       });
     })
@@ -415,11 +339,10 @@ router.post("/repleLike", (req, res) => {
       { _id: repleId },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     )
-      .populate("auther")
       .exec()
       .then((result) => {
         let alarmtemp = {
-          uid: result.auther.uid,
+          uid: result.uid,
           url: result.postNum,
           type: "likeToReple",
           category: "community/post",
@@ -467,12 +390,11 @@ router.post("/rerepleSubmit", (req, res) => {
             $push: { rerepleArray: doc._id },
           }
         )
-          .populate("auther")
           .exec()
           .then((result) => {
-            if (result.auther.uid != req.body.uid) {
+            if (result.uid != req.body.uid) {
               let alarmtemp = {
-                uid: result.auther.uid,
+                uid: result.uid,
                 url: temp.postNum,
                 type: "rerepleToReple",
                 category: "community/post",
@@ -488,16 +410,15 @@ router.post("/rerepleSubmit", (req, res) => {
         { postNum: req.body.postNum },
         { $inc: { repleNum: 1 } }
       )
-        .populate("auther")
         .exec()
         .then((result) => {
           let alarmtemp = {
-            uid: result.auther.uid,
+            uid: result.uid,
             url: temp.postNum,
             type: "rerepleToPost",
             category: "community/post",
           };
-          if (req.body.uid != result.auther.uid) {
+          if (req.body.uid != result.uid) {
             const alarm = new Alarm(alarmtemp);
             alarm.save();
           }
@@ -568,11 +489,10 @@ router.post("/rerepleLike", (req, res) => {
       { _id: rerepleId },
       { $inc: { likeNum: 1 }, $push: { likeArray: user } }
     )
-      .populate("auther")
       .exec()
       .then((result) => {
         let alarmtemp = {
-          uid: result.auther.uid,
+          uid: result.uid,
           url: result.postNum,
           type: "likeToRereple",
           category: "community/post",
