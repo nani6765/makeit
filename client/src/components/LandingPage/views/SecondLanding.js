@@ -4,6 +4,7 @@ import { SecondDiv } from "../css/LandigPageElement.js";
 function SecondLanding() {
   return (
     <SecondDiv>
+      {/*
       <div>
         <h1>
           결혼식, 여행, 공식행사? <br />
@@ -18,6 +19,7 @@ function SecondLanding() {
           특이 요청사항까지 반영하여 나만의 영상 제작이 가능해집니다.
         </p>
       </div>
+      */}
     </SecondDiv>
   );
 }

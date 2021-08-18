@@ -1,4 +1,4 @@
-/** @jsxRuntime classic */
+  /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
@@ -9,51 +9,13 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const FirstDiv = styled.div`
   width: 100%;
   height: 830px;
-  background-image: url("/Img/landingPage/1.png");
+  background-image: url("/Img/landingPage/landing1.png");
   background-size: cover;
-  div {
-    margin-left: 5vw;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    h1 {
-      color: white;
-      font-weight: bold;
-      font-size: 60px;
-      span {
-        color: yellow;
-      }
-    }
-    p {
-      margin-top: 32px;
-      color: white;
-      font-size: 32px;
-    }
-  }
-  ${mq[1]} {
-    height: 500px;
-    div {
-      width: auto;
-      margin-left: 10px;
-      h1 {
-        font-size: 20px;
-        span {
-          margin-right: 10px;
-        }
-      }
-      p {
-        font-size: 12px;
-      }
-    }
-  }
 `;
 const SecondDiv = styled.div`
   width: 100%;
   height: 830px;
-  background-image: url("/Img/landingPage/2.png");
+  background-image: url("/Img/landingPage/landing2.png");
   background-size: cover;
   div {
     margin-left: 5vw;
@@ -100,7 +62,7 @@ const SecondDiv = styled.div`
 const ThirdDiv = styled.div`
   width: 100%;
   height: 830px;
-  background-image: url("/Img/landingPage/3.png");
+  background-image: url("/Img/landingPage/landing3.png");
   background-size: cover;
   div {
     margin-left: 5vw;
@@ -152,7 +114,7 @@ const ThirdDiv = styled.div`
 const FourthDiv = styled.div`
   width: 100%;
   height: 830px;
-  background-image: url("/Img/landingPage/4.png");
+  background-image: url("/Img/landingPage/landing4.png");
   background-size: cover;
   div {
     margin-left: 5vw;
@@ -205,7 +167,7 @@ const FourthDiv = styled.div`
 const FifthDiv = styled.div`
   width: 100%;
   height: 830px;
-  background-image: url("/Img/landingPage/5.png");
+  background-image: url("/Img/landingPage/landing5.png");
   background-size: cover;
   div {
     margin-left: 5vw;
@@ -257,7 +219,7 @@ const FifthDiv = styled.div`
 const SixthDiv = styled.div`
   width: 100%;
   height: 830px;
-  background-image: url("/Img/landingPage/6.png");
+  background-image: url("/Img/landingPage/landing6.png");
   background-size: cover;
   div {
     margin-left: 5vw;

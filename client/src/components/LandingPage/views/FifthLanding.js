@@ -4,6 +4,7 @@ import { FifthDiv } from "../css/LandigPageElement.js";
 function FifthLanding() {
   return (
     <FifthDiv>
+      {/*
       <div>
         <h1>
           <span>03</span>프로젝트 관리를 보다 효율적으로
@@ -14,7 +15,7 @@ function FifthLanding() {
           <br />
           제작에 오로지 집중할 수 있는 환경이 제공됩니다.
         </p>
-      </div>
+      </div>*/}
     </FifthDiv>
   );
 }
