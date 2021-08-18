@@ -53,7 +53,6 @@ router.post("/isChecked", (req, res) => {
   Alarm.find({uid: req.body.uid, isCheck: false})
   .exec()
   .then((response) => {
-    console.log(response);
       return res.status(200).send({
         success: true,
         isCheck: response.length ? true : false,

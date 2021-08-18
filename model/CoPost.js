@@ -17,6 +17,9 @@ const coPostSchema = mongoose.Schema(
       ref: "User",
       required: true,
     },
+    uid: {
+      type: String,
+    },
     email: {
       type: String,
     },
@@ -83,6 +86,9 @@ const coRepleSchema = mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    uid: {
+      type: String,
+    },
     postNum: {
       type: Number,
     },
@@ -132,6 +138,9 @@ const coRerepleSchema = mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    uid: {
+      type: String,
     },
     content: {
       type: String,
