@@ -33,12 +33,14 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.1",
     "react-simple-image-viewer": "0.0.8",
+    "react-slick": "0.28.1",
     "react-text-ellipsis": "^1.6.0",
     "react-textarea-autosize": "^8.3.3",
     "redux": "^4.1.0",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "shortid": "^2.2.16",
+    "slick-carousel": "1.8.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
