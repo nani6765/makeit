@@ -25,6 +25,26 @@ const FirstDiv = styled.div`
   height: calc(100vh - 80px);
   background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing1.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    .Title {
+      font-size: 4.5rem;
+      margin-bottom: 1.75rem;
+      font-weight: bold;
+      span {
+        color: #fff445;
+      }
+    }
+    .SubTitle {
+      font-size: 2.25rem;
+    }
+  }
+
   ${mq[1]} {
     height: calc(100vh - 60px);
   }
@@ -34,8 +54,17 @@ const SecondDiv = styled.div`
   height: calc(100vh - 80px);
   background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing2.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${mq[1]} {
     height: calc(100vh - 60px);
+  }
+  .content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -44,6 +73,34 @@ const ThirdDiv = styled.div`
   height: calc(100vh - 80px);
   background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing3.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    .Title {
+      font-size: 4.5rem;
+      margin-bottom: 1.75rem;
+      font-weight: bold;
+      line-height: 6rem;
+      margin-bottom: 0px;
+    }
+    hr {
+      border: 1px solid #fff445;
+      background-color: #fff445;
+      width: 80px;
+      margin: 0;
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .SubTitle {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      font-weight: 300;
+    }
+  }
   ${mq[1]} {
     height: calc(100vh - 60px);
   }
@@ -53,6 +110,37 @@ const FourthDiv = styled.div`
   height: calc(100vh - 80px);
   background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing4.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    width: auto;
+    color: #412280;
+    margin-left: 30rem;
+    .Title {
+      width: auto;
+      font-size: 4.5rem;
+      margin-bottom: 1.75rem;
+      font-weight: bold;
+      line-height: 6rem;
+      margin-bottom: 0px;
+    }
+    .SubTitle {
+      width: auto;
+      font-size: 2rem;
+      line-height: 2.5rem;
+      font-weight: 300;
+    }
+
+    hr {
+      border: 1px solid #412280;
+      background-color: #412280;
+      width: 80px;
+      margin: 0;
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+  }
   ${mq[1]} {
     height: calc(100vh - 60px);
   }
@@ -63,6 +151,34 @@ const FifthDiv = styled.div`
   height: calc(100vh - 80px);
   background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing5.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    .Title {
+      font-size: 4.5rem;
+      margin-bottom: 1.75rem;
+      font-weight: bold;
+      line-height: 6rem;
+      margin-bottom: 0px;
+    }
+    hr {
+      border: 1px solid #fff445;
+      background-color: #fff445;
+      width: 80px;
+      margin: 0;
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .SubTitle {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      font-weight: 300;
+    }
+  }
   ${mq[1]} {
     height: calc(100vh - 60px);
   }
@@ -73,6 +189,20 @@ const SixthDiv = styled.div`
   height: calc(100vh - 80px);
   background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing6.png");
   background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    width: auto;
+    color: #412280;
+    text-align: center;
+    .Title {
+      font-size: 4.5rem;
+      margin-bottom: 1.75rem;
+      line-height: 6rem;
+      font-weight: bold;
+    }
+  }
   ${mq[1]} {
     height: calc(100vh - 60px);
   }
