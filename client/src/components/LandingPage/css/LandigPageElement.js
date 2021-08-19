@@ -78,4 +78,13 @@ const SixthDiv = styled.div`
   }
 `;
 
-export { FirstDiv, SecondDiv, ThirdDiv, FourthDiv, FifthDiv, SixthDiv };
+export {
+  PCOnly,
+  PCExcept,
+  FirstDiv,
+  SecondDiv,
+  ThirdDiv,
+  FourthDiv,
+  FifthDiv,
+  SixthDiv,
+};
