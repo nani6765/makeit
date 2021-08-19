@@ -36,6 +36,7 @@ function HeaderBell(props) {
 
     const ChatCheckd = new Promise((resolve, reject) => {
         UserRef.child(`${user.userData.uid}/chats`).orderByChild('isCheck').equalTo(false).on('value', (snapshot) => {
+            console.log("snapshot", snapshot);
             resolve(snapshot.val());
         })
     })

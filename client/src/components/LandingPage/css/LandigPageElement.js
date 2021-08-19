@@ -6,6 +6,21 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
+const PCOnly = styled.div`
+  display : block;
+  ${mq[0]}{
+    display: none;
+  }
+`;
+
+const PCExcept = styled.div`
+  display : none;
+  ${mq[0]}{
+    display: block;
+  }
+`;
+
+
 const FirstDiv = styled.div`
   width: 100%;
   height: 100vh;
@@ -46,4 +61,4 @@ const SixthDiv = styled.div`
   background-size: cover;
 `;
 
-export { FirstDiv, SecondDiv, ThirdDiv, FourthDiv, FifthDiv, SixthDiv };
+export { PCOnly, PCExcept, FirstDiv, SecondDiv, ThirdDiv, FourthDiv, FifthDiv, SixthDiv };
