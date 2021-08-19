@@ -1,57 +1,32 @@
 {
   "files": {
     "main.css": "/static/css/main.1c285555.chunk.css",
-<<<<<<< HEAD
-    "main.js": "/static/js/main.256b140a.chunk.js",
-    "main.js.map": "/static/js/main.256b140a.chunk.js.map",
+    "main.js": "/static/js/main.5b91be89.chunk.js",
+    "main.js.map": "/static/js/main.5b91be89.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.031087f7.js",
     "runtime-main.js.map": "/static/js/runtime-main.031087f7.js.map",
     "static/css/2.19627560.chunk.css": "/static/css/2.19627560.chunk.css",
-    "static/js/2.9d78a28e.chunk.js": "/static/js/2.9d78a28e.chunk.js",
-    "static/js/2.9d78a28e.chunk.js.map": "/static/js/2.9d78a28e.chunk.js.map",
-=======
-    "main.js": "/static/js/main.649a5102.chunk.js",
-    "main.js.map": "/static/js/main.649a5102.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.031087f7.js",
-    "runtime-main.js.map": "/static/js/runtime-main.031087f7.js.map",
-    "static/css/2.19627560.chunk.css": "/static/css/2.19627560.chunk.css",
-    "static/js/2.008778ce.chunk.js": "/static/js/2.008778ce.chunk.js",
-    "static/js/2.008778ce.chunk.js.map": "/static/js/2.008778ce.chunk.js.map",
->>>>>>> 80d68d080cc1d46f22623b47e1574298ddf411df
+    "static/js/2.9a1e753b.chunk.js": "/static/js/2.9a1e753b.chunk.js",
+    "static/js/2.9a1e753b.chunk.js.map": "/static/js/2.9a1e753b.chunk.js.map",
     "static/js/3.235c7214.chunk.js": "/static/js/3.235c7214.chunk.js",
     "static/js/3.235c7214.chunk.js.map": "/static/js/3.235c7214.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.19627560.chunk.css.map": "/static/css/2.19627560.chunk.css.map",
     "static/css/main.1c285555.chunk.css.map": "/static/css/main.1c285555.chunk.css.map",
-<<<<<<< HEAD
-    "static/js/2.9d78a28e.chunk.js.LICENSE.txt": "/static/js/2.9d78a28e.chunk.js.LICENSE.txt",
+    "static/js/2.9a1e753b.chunk.js.LICENSE.txt": "/static/js/2.9a1e753b.chunk.js.LICENSE.txt",
     "static/media/Bell.7b6ec945.svg": "/static/media/Bell.7b6ec945.svg",
     "static/media/Bell_pin.936616c4.svg": "/static/media/Bell_pin.936616c4.svg",
     "static/media/DeleteIcon.5cf7f465.svg": "/static/media/DeleteIcon.5cf7f465.svg",
     "static/media/comment.7b55ccf5.svg": "/static/media/comment.7b55ccf5.svg",
     "static/media/like.69973a04.svg": "/static/media/like.69973a04.svg",
-=======
-    "static/js/2.008778ce.chunk.js.LICENSE.txt": "/static/js/2.008778ce.chunk.js.LICENSE.txt",
-    "static/media/Bell.1875c869.svg": "/static/media/Bell.1875c869.svg",
-    "static/media/Bell_pin.3f64e12e.svg": "/static/media/Bell_pin.3f64e12e.svg",
-    "static/media/DeleteIcon.5cf7f465.svg": "/static/media/DeleteIcon.5cf7f465.svg",
-    "static/media/comment.7b55ccf5.svg": "/static/media/comment.7b55ccf5.svg",
-    "static/media/like.a31d7bdb.svg": "/static/media/like.a31d7bdb.svg",
->>>>>>> 80d68d080cc1d46f22623b47e1574298ddf411df
     "static/media/sample.11c47648.png": "/static/media/sample.11c47648.png",
     "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.031087f7.js",
     "static/css/2.19627560.chunk.css",
-<<<<<<< HEAD
-    "static/js/2.9d78a28e.chunk.js",
+    "static/js/2.9a1e753b.chunk.js",
     "static/css/main.1c285555.chunk.css",
-    "static/js/main.256b140a.chunk.js"
-=======
-    "static/js/2.008778ce.chunk.js",
-    "static/css/main.1c285555.chunk.css",
-    "static/js/main.649a5102.chunk.js"
->>>>>>> 80d68d080cc1d46f22623b47e1574298ddf411df
+    "static/js/main.5b91be89.chunk.js"
   ]
 }
