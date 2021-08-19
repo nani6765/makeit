@@ -7,15 +7,14 @@ import ThirdLanding from "./views/ThirdLanding.js";
 import FourthLanding from "./views/FourthLanding.js";
 import FifthLanding from "./views/FifthLanding.js";
 import SixthLanding from "./views/SixthLanding.js";
-import { last } from "lodash";
+
+import { PCOnly, PCExcept } from "./css/LandigPageElement.js";
 
 function LandingPage() {
   const sliderRef = useRef();
 
   var NextKeys = {39: 1, 40: 1};
   var PrevKeys = {37: 1, 38: 1};
-
-  var lastY = 0;
  
   var settings = {
     dots: false,
@@ -56,26 +55,6 @@ function LandingPage() {
     }
     return false;
   }
-
-  useEffect(() => {
-    console.log(lastY);
-  }, [lastY]);
-
- function touchEvent(e) {
-    let y = parseInt(e.touches[0].pageY);
-   console.log("y ", y, " lastY ", lastY);
-   
-    if (Math.abs(y - lastY) > 5) {
-        if (y > lastY) {
-          gotoNext(); 
-        } else {
-          gotoPrev();
-        }
-      return false;
-    }
-    lastY = y;
-     return false;
-  };
   
   // call this to Disable
   function disableScroll() {
@@ -87,10 +66,6 @@ function LandingPage() {
     window.addEventListener('keydown', (e) => {
       keyEvent(e);
     }, false);
-
-    window.addEventListener('touchmove', (e) => {
-      touchEvent(e);
-    },  { passive: false }); // mobile
   }
 
   useEffect(() => {
@@ -98,14 +73,26 @@ function LandingPage() {
   }, [])
 
   return (
-    <Slider {...settings} ref={sliderRef}>
-      <FirstLanding/>
-      <SecondLanding/>
-      <ThirdLanding />
-      <FourthLanding />
-      <FifthLanding />
-      <SixthLanding />
-    </Slider>
+    <>
+    <PCOnly>
+      <Slider {...settings} ref={sliderRef}>
+        <FirstLanding/>
+        <SecondLanding/>
+        <ThirdLanding />
+        <FourthLanding />
+        <FifthLanding />
+        <SixthLanding />
+      </Slider>
+    </PCOnly>
+    <PCExcept>
+       <FirstLanding/>
+        <SecondLanding/>
+        <ThirdLanding />
+        <FourthLanding />
+        <FifthLanding />
+        <SixthLanding />
+    </PCExcept>
+    </>
   );
 }
 
