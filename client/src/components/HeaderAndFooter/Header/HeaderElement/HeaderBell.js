@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlarmTrue } from "../../../../redux/_actions/alarm_action.js";
 import { firebase } from "../../../../firebase.js";
@@ -9,73 +9,75 @@ import { ReactComponent as PinBell } from "../../css/Bell_pin.svg";
 import AlarmModal from "./AlarmModal.js";
 
 function HeaderBell(props) {
-    const user = useSelector((state) => state.user);
-    const alarm = useSelector((state) => state.alarm);
-    let dispatch = useDispatch();
-    const UserRef = firebase.database().ref("users");
+  const user = useSelector((state) => state.user);
+  const alarm = useSelector((state) => state.alarm);
+  let dispatch = useDispatch();
+  const UserRef = firebase.database().ref("users");
 
-    const [AlarmCheck, setAlarmCheck] = useState(false);
-    const [ChatCheck, setChatCheck] = useState(false);
-    const [ChatCheckFin, setChatCheckFin] = useState(false);
+  const [AlarmCheck, setAlarmCheck] = useState(false);
+  const [ChatCheck, setChatCheck] = useState(false);
+  const [ChatCheckFin, setChatCheckFin] = useState(false);
 
-    const AlarmChecked = async () => {
-        let body = {
-            uid: user.userData.uid,
+  const AlarmChecked = async () => {
+    let body = {
+      uid: user.userData.uid,
+    };
+    try {
+      await axios.post("/api/alarm/isChecked", body).then((response) => {
+        if (response.data.success) {
+          setAlarmCheck(response.data.isCheck);
+          dispatch(setAlarmTrue());
         }
-        try {
-            await axios.post("/api/alarm/isChecked", body).then((response)=> {
-            if(response.data.success) {
-                setAlarmCheck(response.data.isCheck);
-                dispatch(setAlarmTrue());
-            }
-        })
-        } catch (error) {
-            console.log(error);
-        }
+      });
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const ChatCheckd = new Promise((resolve, reject) => {
-        UserRef.child(`${user.userData.uid}/chats`).orderByChild('isCheck').equalTo(false).on('value', (snapshot) => {
-            console.log("snapshot", snapshot);
-            resolve(snapshot.val());
-        })
-    })
+  const ChatCheckd = new Promise((resolve, reject) => {
+    UserRef.child(`${user.userData.uid}/chats`)
+      .orderByChild("isCheck")
+      .equalTo(false)
+      .on("value", (snapshot) => {
+        resolve(snapshot.val());
+      });
+  });
 
-    useEffect(() => {
-        if (!alarm.AlarmCheckFin){
-            AlarmChecked();
+  useEffect(() => {
+    if (!alarm.AlarmCheckFin) {
+      AlarmChecked();
+    } else {
+      ChatCheckd.then((val) => {
+        if (val === null) {
+          setChatCheck(false);
         } else {
-            ChatCheckd.then((val) => {
-                if(val === null) {
-                    setChatCheck(false);
-                } else {
-                    setChatCheck(true);
-                }
-                setChatCheckFin(true);
-            })
+          setChatCheck(true);
         }
-    }, [alarm.AlarmCheckFin])
+        setChatCheckFin(true);
+      });
+    }
+  }, [alarm.AlarmCheckFin]);
 
-
-    return (
+  return (
+    <>
+      {ChatCheckFin ? (
         <>
-        {
-            ChatCheckFin
-            ? (
-                <>
-                {
-                    AlarmCheck || ChatCheck
-                    ? <PinBell onClick={() => props.setalarmHambucControl(true)} />
-                    : <Bell onClick={() => props.setalarmHambucControl(true)} />
-                }
-                    {props.alarmHambucControl && <AlarmModal AlarmCheck={AlarmCheck} ChatCheck={ChatCheck} setalarmHambucControl={props.setalarmHambucControl}/> }
-                </>
-            )
-            : null
-        }
-             
+          {AlarmCheck || ChatCheck ? (
+            <PinBell onClick={() => props.setalarmHambucControl(true)} />
+          ) : (
+            <Bell onClick={() => props.setalarmHambucControl(true)} />
+          )}
+          {props.alarmHambucControl && (
+            <AlarmModal
+              AlarmCheck={AlarmCheck}
+              ChatCheck={ChatCheck}
+              setalarmHambucControl={props.setalarmHambucControl}
+            />
+          )}
         </>
-    )
+      ) : null}
+    </>
+  );
 }
 
-export default HeaderBell
+export default HeaderBell;
