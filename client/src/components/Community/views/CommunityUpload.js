@@ -1,56 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { UploadDiv } from "../css/CommunityElement.js";
-import UploadForm from "./upload/UploadForm.js";
-import { LabelDiv, UploadLavelDiv } from "./main/GNB/GNBContent.js";
-import { withRouter } from "react-router-dom";
-import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
-function CommunityUpload(props) {
-  const [category, setcategory] = useState("");
+import React from 'react'
 
-  useEffect(() => {
-    if (props.location.params === undefined) {
-      props.history.push("/community");
-    } else {
-      setcategory(props.location.params.category);
-    }
-  }, []);
-
-  function BackHandler() {
-    props.history.push({
-      pathname: "/community",
-      state: { category: category },
-    });
-  }
-
-  return (
-    <>
-      <LabelDiv
-        style={{
-          backgroundColor: "#FAF6F6",
-          paddingTop: "15px",
-          paddingBottom: "15px",
-        }}
-      >
-        <UploadLavelDiv>
-          <p>
-            <span
-              onClick={() => BackHandler()}
-              style={{ marginRight: "10px", cursor: "pointer" }}
-            >
-              &lt;
-            </span>
-            {category}
-          </p>
-        </UploadLavelDiv>
-      </LabelDiv>
-
-      <UploadDiv>
-        <UploadForm category={category} />
-      </UploadDiv>
-
-      <MobileFooter Path="community" />
-    </>
-  );
+function CommunityUpload() {
+    return (
+        <div>
+            
+        </div>
+    )
 }
 
-export default withRouter(CommunityUpload);
+export default CommunityUpload

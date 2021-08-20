@@ -25,11 +25,6 @@ router.post("/", (req, res) => {
   if (category.subCategory === "전체") {
     delete category.subCategory;
   }
-  let term = [
-    { title: { $regex: req.body.term } },
-    { content: { $regex: req.body.term } },
-  ]
-
 
   //최신순&&인기순 정렬
   let sort = {};
@@ -46,30 +41,114 @@ router.post("/", (req, res) => {
   let limit = 5;
   let skipTemp = parseInt(req.body.PageIdx);
   let skip = (skipTemp - 1) * 5;
-  
-  Community.find(category)
-    .find({ $or: filter })
-    .find({ $or: term })
-    .exec()
-    .then((postList) => {
-      let totalIdx = postList.length;
+
+  //필터가 있을시
+  if (filter.length > 0) {
+    //검색어가 있을 시
+    if (req.body.term) {
       Community.find(category)
-      .find({ $or: filter })
-      .find({ $or: term })
-      .populate("auther")
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .exec()
-      .then((postInfo) => {
-        return res
-          .status(200)
-          .json({ success: true, postInfo, totalIdx, searchFlag: true });
+        .find({ $or: filter })
+        .find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+          ],
+        })
+        .exec((err, postList) => {
+          let totalIdx = postList.length;
+          if (err) return res.status(400).json({ success: false, err });
+          Community.find(category)
+            .find({ $or: filter })
+            .find({
+              $or: [
+                { title: { $regex: req.body.term } },
+                { content: { $regex: req.body.term } },
+              ],
+            })
+            .populate("auther")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec((err, postInfo) => {
+              if (err) return res.status(400).json({ success: false, err });
+              return res
+                .status(200)
+                .json({ success: true, postInfo, totalIdx, searchFlag: true });
+            });
+        });
+    }
+    //검색어가 없을 시
+    else {
+      Community.find(category)
+        .find({ $or: filter })
+        .exec((err, postList) => {
+          let totalIdx = postList.length;
+          if (err) return res.status(400).json({ success: false, err });
+          Community.find(category)
+            .find({ $or: filter })
+            .populate("auther")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec((err, postInfo) => {
+              if (err) return res.status(400).json({ success: false, err });
+              return res
+                .status(200)
+                .json({ success: true, postInfo, totalIdx });
+            });
+        });
+    }
+  }
+  //필터가 없을시
+  else {
+    //검색어가 있을 시
+    if (req.body.term) {
+      Community.find(category)
+        .find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+          ],
+        })
+        .exec((err, postList) => {
+          let totalIdx = postList.length;
+          if (err) return res.status(400).json({ success: false, err });
+          Community.find(category)
+            .find({
+              $or: [
+                { title: { $regex: req.body.term } },
+                { content: { $regex: req.body.term } },
+              ],
+            })
+            .populate("auther")
+            .sort(sort)
+            .skip(skip)
+            .limit(limit)
+            .exec((err, postInfo) => {
+              if (err) return res.status(400).json({ success: false, err });
+              return res
+                .status(200)
+                .json({ success: true, postInfo, totalIdx, searchFlag: true });
+            });
+        });
+    }
+    //검색어가 없을 시
+    else {
+      Community.find(category).exec((err, postList) => {
+        let totalIdx = postList.length;
+        if (err) return res.status(400).json({ success: false, err });
+        Community.find(category)
+          .populate("auther")
+          .sort(sort)
+          .skip(skip)
+          .limit(limit)
+          .exec((err, postInfo) => {
+            if (err) return res.status(400).json({ success: false, err });
+            return res.status(200).json({ success: true, postInfo, totalIdx });
+          });
       });
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, err });
-    })
+    }
+  }
 });
 
 router.post("/length", (req, res) => {

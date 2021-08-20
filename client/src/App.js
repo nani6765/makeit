@@ -21,12 +21,14 @@ import RegisterPage from "./components/User/views/RegisterPage.js";
 import MyPage from "./components/MyPage/MyPage.js";
 import ChatDetailDiv from "./components/MyPage/Chat/ChatDetailDiv.js";
 
+import CommunityList from "./components/Community/views/CommunityList.js";
 //Comminity
-import CommunityMain from "./components/Community/views/CommunityMain.js";
-import CommunityPostDetail from "./components/Community/views/PostDetail.js";
-import CommunityUpload from "./components/Community/views/CommunityUpload.js";
-import CommunityUpdate from "./components/Community/views/CommunityUpdate.js";
-
+/*
+import CommunityMain from "./components/TempCommunity/views/CommunityMain.js";
+import CommunityPostDetail from "./components/TempCommunity/views/PostDetail.js";
+import CommunityUpload from "./components/TempCommunity/views/CommunityUpload.js";
+import CommunityUpdate from "./components/TempCommunity/views/CommunityUpdate.js";
+*/
 function App() {
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -53,18 +55,25 @@ function App() {
           <Route exact path="/landingPage" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
-          <Route exact path="/community" component={CommunityMain} />
-          <Route
-            exact
-            path="/community/post/:postId"
-            component={CommunityPostDetail}
-          />
-          <Route exact path="/community/upload" component={CommunityUpload} />
-          <Route
-            exact
-            path="/community/update/:postId"
-            component={CommunityUpdate}
-          />
+
+
+          <Route exact path="/community" component={CommunityList} />
+          {
+            /*
+            <Route exact path="/community" component={CommunityMain} />
+            <Route
+              exact
+              path="/community/post/:postId"
+              component={CommunityPostDetail}
+            />
+            <Route exact path="/community/upload" component={CommunityUpload} />
+            <Route
+              exact
+              path="/community/update/:postId"
+              component={CommunityUpdate}
+            />
+            */
+          }
           <Route exact path="/myPage" component={MyPage} />
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
         </Switch>
