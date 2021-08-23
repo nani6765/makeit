@@ -7,7 +7,7 @@ import axios from "axios";
 //import RepleModal from "../Modal/RepleModal.js";
 //import RepleGuestModal from "../Modal/RepleGuestModal.js";
 import RepleEditForm from "../Upload/RepleEditForm.js";
-import RerepleUpload from "../Rereple/RerepleUpload.js";
+import RerepleUpload from "../Upload/RerepleUpload.js";
 import RerepleDiv from "./Rereple/RerepleDiv.js";
 
 import { RepleContentGrid } from "../../../css/CommunityRepleCSS.js";

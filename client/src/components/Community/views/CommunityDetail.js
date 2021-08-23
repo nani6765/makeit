@@ -7,7 +7,7 @@ import RepleUpload from "./content/Upload/RepleUpload.js";
 
 import { RepleBtnDiv } from "../css/CommunutyDetailCSS.js";
 
-function CommunityDetail() {
+function CommunityDetail(props) {
   const [postInfo, setpostInfo] = useState({ _id: null });
   const [Reples, setReples] = useState([]);
   const [TotalSize, setTotalSize] = useState(0);

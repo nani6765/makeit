@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 
-import RerepleEditForm from "./RerepleEditForm.js";
+import RerepleEditForm from "../../Upload/RepleEditForm.js";
 //import RerepleModal from "../Modal/RerepleModal.js";
 //import RerepleGuestModal from "../Modal/RerepleGuestModla.js";
 

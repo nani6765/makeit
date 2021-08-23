@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import RerepleDiv from "../Rereple/RerepleDiv.js";
+import RerepleDiv from "./Rereple/RerepleDiv.js";
 
 import { RepleContentGrid } from "../../../css/CommunityRepleCSS.js";
 import Avatar from "react-avatar";

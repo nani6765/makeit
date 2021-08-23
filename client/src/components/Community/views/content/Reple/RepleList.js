@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import RepleContent from "./RepleContent.js.js";
-import DeletedRepleDetail from "./DeletedRepleDetail.js.js";
+import RepleContent from "./RepleContent.js";
+import DeletedRepleDetail from "./DeletedRepleDetail.js";
 
 import { RepleDiv } from "../../../css/CommunityRepleCSS.js";
 
