@@ -11,27 +11,59 @@ function CommunityList() {
   const [GNB, setGNB] = useState("전체게시판");
   const [SortPost, setSortPost] = useState("new");
   const [PostList, setPostList] = useState([]);
+  const [PostIdx, setPostIdx] = useState(0);
 
-  useEffect(() => {
+  const getPostList = (skip) => {
     let body = {
       GNB: {
         category: GNB,
       },
       sortPost: SortPost,
+      //skip: skip,
+      //limit: 2,
     };
 
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
-        setPostList([...response.data.postInfo]);
+        let temp;
+        if(PostIdx)
+          temp = [...PostList, ...response.data.postInfo];
+        else
+          temp = [...response.data.postInfo];
+        setPostList(temp);
       } else {
         alert("error");
       }
     });
-  }, [GNB, SortPost]);
+  }
 
   useEffect(() => {
-    console.log(PostList);
-  }, [PostList]);
+    getPostList(0);
+  }, [GNB, SortPost]);
+
+  
+  /*
+  // 무한 스크롤ㄹㄹㄹㄹ
+  const ScrollFunction = () => {
+    let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    let clientHeight = document.documentElement.clientHeight;
+    // console.log("scrollHeight ", scrollHeight)
+    // console.log("scrollTop ", scrollTop)
+    // console.log("clientHeight ", clientHeight)
+    if(scrollTop + clientHeight >= scrollHeight) {
+      setPostIdx(PostIdx + 2);
+    }
+  };
+
+  useEffect(() => {
+    console.log(PostIdx);
+    getPostList(PostIdx);
+  }, [PostIdx]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', ScrollFunction, true);
+  }, []);*/
 
   return (
     <>
