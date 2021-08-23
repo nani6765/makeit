@@ -12,7 +12,7 @@ function PostListArea(props) {
   }, [props.PostList]);
 
   return (
-    <>
+    <div style={{ gridArea: "content" }}>
       {posts.map((post, idx) => {
         return (
           <Link
@@ -52,7 +52,7 @@ function PostListArea(props) {
           </Link>
         );
       })}
-    </>
+    </div>
   );
 }
 

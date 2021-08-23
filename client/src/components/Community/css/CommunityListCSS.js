@@ -258,4 +258,38 @@ const PostCard = styled.div`
     }
   }
 `;
-export { CommunityHeader, CommunityBody, BodyHeaderDiv, PostCard };
+
+const BodyFooterDiv = styled.div`
+  position: fixed;
+  right: 0px;
+  top: 50%;
+  width: 15%;
+  display: flex;
+  justify-content: center;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: flex-end;
+    justify-content: center;
+    i {
+      padding: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: black;
+      border: 1px solid black;
+      border-radius: 50%;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+  }
+`;
+
+export {
+  CommunityHeader,
+  CommunityBody,
+  BodyHeaderDiv,
+  PostCard,
+  BodyFooterDiv,
+};

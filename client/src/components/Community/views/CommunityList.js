@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import GNBArea from "./content/List/GNBArea";
 import BodyHeader from "./content/List/BodyHeader";
 import PostListArea from "./content/List/PostListArea";
+import BodyFooter from "./content/List/BodyFooter";
 
 import axios from "axios";
 
@@ -44,6 +45,7 @@ function CommunityList() {
       <CommunityBody>
         <BodyHeader GNB={GNB} SortPost={SortPost} setSortPost={setSortPost} />
         <PostListArea PostList={PostList} />
+        <BodyFooter />
       </CommunityBody>
     </>
   );
