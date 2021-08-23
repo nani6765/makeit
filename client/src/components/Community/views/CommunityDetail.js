@@ -3,7 +3,7 @@ import axios from "axios";
 
 import PostDetailContent from "./content/Detail/PostDetailContent.js";
 import RepleList from "./content/Reple/RepleList.js";
-import RepleUpload from "./content/Reple/RepleUpload.js";
+import RepleUpload from "./content/Upload/RepleUpload.js";
 
 import { RepleBtnDiv } from "../css/CommunutyDetailCSS.js";
 
@@ -96,7 +96,6 @@ function CommunityDetail() {
           </>
         ) : null}
         {postInfo._id != null ? <RepleUpload postInfo={postInfo} /> : null}
-        <MobileFooter Path="community" />
       </>
     </>
   );

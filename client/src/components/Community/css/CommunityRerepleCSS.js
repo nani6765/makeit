@@ -6,15 +6,18 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const RepleContentGrid = styled.div`
-  width: 100%;
-  background: #ffffff;
+const RerepleContentGrid = styled.div`
+  width: 95%;
+  margin-left: 5%;
+  background: #FBF7FB;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
   border-radius: 15px;
   padding: 30px;
   margin-top: 20px;
   margin-bottom: 20px;
+  position: relative;
+
   .content {
     width: 100%;
     display: grid;
@@ -24,7 +27,7 @@ const RepleContentGrid = styled.div`
       "avatar author author hambuc"
       "avatar date date ."
       "desc desc desc desc"
-      "like like like like";
+      ". . like like";
     .avatar {
       grid-area: avatar;
       display: flex;
@@ -59,41 +62,37 @@ const RepleContentGrid = styled.div`
       margin-bottom: 1rem;
       font-size: 15px;
       text-align: left;
-
-      .edit {
-        input {
-          width: 100%;
+      input{
+         width: 100%;
           background: #ffffff;
           border: 1.5px solid #dfdfdf;
           box-sizing: border-box;
           border-radius: 7px;
-          padding: 15px;
+          padding: 10px;
+           margin-bottom:10px;
           &:focus {
             outline: none;
           }
+      }
+      div{
+        width: 100%;
+        text-align: right;
+        button{
+          border-radius: 10px;
+          padding: 5px 10px 5px 10px;
         }
-        div {
-          width: 100%;
-          text-align: right;
-          margin-top: 15px;
-          button {
-            border-radius: 10px;
-            text-align: center;
-            padding: 5px 15px 5px 15px;
-
-            &.cancel {
-              background: #ffffff;
-              border: 1px solid #935ea5;
-              color: #000000;
-              margin-right: 15px;
-            }
-            &.submit {
-              background: #935ea5;
-              border: 1px solid #935ea5;
-              font-weight: bold;
-              color: #ffffff;
-            }
-          }
+        .cancel{
+          background: #FFFFFF;
+          border: 1px solid #935EA5;
+          box-sizing: border-box;
+          
+          color: black;
+          margin-right: 10px;
+        }
+        .submit{
+          background: #935EA5;
+          border: 1px solid #935EA5;
+          color: white;
         }
       }
     }
@@ -118,14 +117,20 @@ const RepleContentGrid = styled.div`
         }
     }
   }
-`;
-
-const RepleDiv = styled.div`
-  width: 70%;
-  margin: 0 auto;
-  ${mq[1]} {
-    width: 90%;
+  /*
+  &:before{
+    content: "↳";
+    position: absolute;
+    left: -35px;
+    top: -5px;
+    font-size: 24px;
+    color: #D0D5E4;
+    ${mq[0]} {
+      display: none;
+    }
   }
+  */
 `;
 
-export { RepleContentGrid, RepleDiv };
+const Empty = styled.div``;
+export { RerepleContentGrid, Empty };

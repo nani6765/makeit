@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import RepleContent from "./RepleContent.js.js";
 import DeletedRepleDetail from "./DeletedRepleDetail.js.js";
 
-import { RepleDiv } from "../../../css/CommunityDetailElement.js";
+import { RepleDiv } from "../../../css/CommunityRepleCSS.js";
 
 function RepleList(props) {
   const [repleList, setrepleList] = useState(props.repleInfo);

@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+
 import RerepleDiv from "../Rereple/RerepleDiv.js";
-import { RepleContentGrid } from "../../../css/CommunityDetailElement.js";
+
+import { RepleContentGrid } from "../../../css/CommunityRepleCSS.js";
 import Avatar from "react-avatar";
 
 function DeletedRepleDetail(props) {

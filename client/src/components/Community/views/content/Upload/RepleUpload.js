@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { RepleUploadDiv } from "../../../css/CommunityUploadCSS.js";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
 import axios from "axios";
+
+import { RepleUploadDiv } from "../../../css/CommunityUploadCSS.js";
 
 function RepleUpload(props) {
   const [content, setContent] = useState("");

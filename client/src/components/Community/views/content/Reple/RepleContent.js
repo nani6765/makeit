@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 
 import axios from "axios";
 
-import RepleModal from "../Modal/RepleModal.js";
-import RepleGuestModal from "../Modal/RepleGuestModal.js";
-import RepleEditForm from "./RepleEditForm.js";
+//import RepleModal from "../Modal/RepleModal.js";
+//import RepleGuestModal from "../Modal/RepleGuestModal.js";
+import RepleEditForm from "../Upload/RepleEditForm.js";
 import RerepleUpload from "../Rereple/RerepleUpload.js";
-import RerepleDiv from "../Rereple/RerepleDiv.js";
+import RerepleDiv from "./Rereple/RerepleDiv.js";
 
-import { RepleContentGrid } from "../../../css/CommunityDetailElement.js";
+import { RepleContentGrid } from "../../../css/CommunityRepleCSS.js";
 import Avatar from "react-avatar";
 
 function RepleContent(props) {
@@ -89,7 +89,8 @@ function RepleContent(props) {
                   className="bi bi-three-dots"
                   onClick={() => sethambucControl(true)}
                 ></i>
-                {hambucControl ? (
+                {/*
+                hambucControl ? (
                   user.userData.uid === Reple.auther.uid ? (
                     <RepleModal
                       repleInfo={Reple}
@@ -102,7 +103,8 @@ function RepleContent(props) {
                       repleInfo={Reple}
                     />
                   ) : null
-                ) : null}
+                ) : null
+                  */}
               </div>
             </>
           ) : null}

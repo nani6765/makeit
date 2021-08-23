@@ -4,11 +4,12 @@ import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 
 import PostImages from "./PostImages.js";
-import { DetailDiv } from "../../../css/CommunityDetailElement.js";
+import { DetailDiv } from "../../../css/CommunutyDetailCSS.js";
 import Avatar from "react-avatar";
+/*
 import PostModal from "../Modal/PostModal";
 import PostGuestModal from "../Modal/PostGuestModal";
-
+*/
 function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);
   const [hambucControl, sethambucControl] = useState(false);
@@ -78,7 +79,8 @@ function PostDetailContent(props) {
                 className="bi bi-three-dots"
                 onClick={() => sethambucControl(true)}
               ></i>
-              {hambucControl ? (
+              {/*
+              hambucControl ? (
                 user.userData.uid === postInfo.auther.uid ? (
                   <PostModal postInfo={postInfo} />
                 ) : (
@@ -87,7 +89,8 @@ function PostDetailContent(props) {
                     postInfo={postInfo}
                   />
                 )
-              ) : null}
+              ) : null
+            */}
             </div>
           ) : null}
           <p className="date">{postInfo.realTime}</p>
