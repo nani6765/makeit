@@ -14,7 +14,7 @@ function CommunityDetail(props) {
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(5);
 
-  useEffect((props) => {
+  useEffect(() => {
     let body = {
       postNum: props.match.params.postId,
     };

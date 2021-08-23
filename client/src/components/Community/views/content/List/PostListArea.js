@@ -56,4 +56,4 @@ function PostListArea(props) {
   );
 }
 
-export default PostListArea;
+export default withRouter(PostListArea);
