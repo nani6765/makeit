@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router";
 import { useSelector } from "react-redux";
-
 import axios from "axios";
 
-//import RepleModal from "../Modal/RepleModal.js";
-//import RepleGuestModal from "../Modal/RepleGuestModal.js";
+import UserModal from "../Modal/UserModal.js";
+import GuestModal from "../Modal/GuestModal.js";
 import RepleEditForm from "../Upload/RepleEditForm.js";
 import RerepleUpload from "../Upload/RerepleUpload.js";
 import RerepleDiv from "./Rereple/RerepleDiv.js";
-
 import { RepleContentGrid } from "../../../css/CommunityRepleCSS.js";
 import Avatar from "react-avatar";
 
@@ -89,22 +87,21 @@ function RepleContent(props) {
                   className="bi bi-three-dots"
                   onClick={() => sethambucControl(true)}
                 ></i>
-                {/*
-                hambucControl ? (
-                  user.userData.uid === Reple.auther.uid ? (
-                    <RepleModal
+                {hambucControl &&
+                  (user.userData.uid === Reple.auther.uid ? (
+                    <UserModal
                       repleInfo={Reple}
                       setUpdateCheck={setUpdateCheck}
                       setrerepleUpload={setrerepleUpload}
+                      type="reple"
                     />
-                  ) : user.userData ? (
-                    <RepleGuestModal
+                  ) : (
+                    <GuestModal
                       setrerepleUpload={setrerepleUpload}
                       repleInfo={Reple}
+                      type="reple"
                     />
-                  ) : null
-                ) : null
-                  */}
+                  ))}
               </div>
             </>
           ) : null}

@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 
+import UserModal from "../../Modal/UserModal.js";
+import GuestModal from "../../Modal/GuestModal.js";
 import RerepleEditForm from "../../Upload/RepleEditForm.js";
-//import RerepleModal from "../Modal/RerepleModal.js";
-//import RerepleGuestModal from "../Modal/RerepleGuestModla.js";
 
 import Avatar from "react-avatar";
 import { RerepleContentGrid } from "../../../../css/CommunityRerepleCSS.js";
@@ -114,20 +114,17 @@ function RerepleContent(props) {
               className="bi bi-three-dots"
               onClick={() => sethambucControl(true)}
             ></i>
-
-            {/*
-            hambucControl ? (
-              user.userData.uid === rereple.auther.uid ? (
-                <RerepleModal
-                  setUpdateCheck={setUpdateCheck}
+            {hambucControl &&
+              (user.userData.uid === rereple.auther.uid ? (
+                <UserModal
                   reple={reple}
                   rereple={rereple}
+                  setUpdateCheck={setUpdateCheck}
+                  type="rereple"
                 />
-              ) : user.userData ? (
-                <RerepleGuestModal rereple={rereple} />
-              ) : null
-            ) : null
-              */}
+              ) : (
+                <GuestModal rereple={rereple} type="rereple" />
+              ))}
           </div>
         ) : null}
       </div>
