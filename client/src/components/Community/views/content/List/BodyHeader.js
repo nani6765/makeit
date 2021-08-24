@@ -1,6 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { BodyHeaderDiv } from "../../../css/CommunityListCSS.js";
 import { ReactComponent as PenIcon } from "../../../css/img/Pen.svg";
+
 function BodyHeader(props) {
   return (
     <BodyHeaderDiv>
@@ -28,10 +30,17 @@ function BodyHeader(props) {
           </span>
         </p>
       </div>
-      <button>
-        글쓰기
-        <PenIcon />
-      </button>
+      <Link
+        to={{
+          pathname: "/community/upload/",
+          params: { category: props.GNB },
+        }}
+      >
+        <button>
+          글쓰기
+          <PenIcon />
+        </button>
+      </Link>
     </BodyHeaderDiv>
   );
 }

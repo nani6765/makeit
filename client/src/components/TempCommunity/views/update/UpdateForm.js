@@ -12,6 +12,7 @@ import {
   CancelBtn,
   DropZoneDiv,
 } from "../../css/CommunityElement.js";
+
 import axios from "axios";
 import FileUploadArea from "../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../utils/FileShowArea.js";
@@ -48,7 +49,7 @@ function UpdateForm(props) {
       return alert("제목과 내용을 입력해주세요.");
     }
 
-    console.log(FilterElement)
+    console.log(FilterElement);
 
     const body = {
       id: props.PostInfo._id,
@@ -72,29 +73,36 @@ function UpdateForm(props) {
     });
   };
 
-
-  
   const SwitchSubCategory = () => {
     switch (props.PostInfo.category) {
       case "게시판":
-        return <PostBoardFilter SubCategory = {props.PostInfo.subCategory} setSubCategory={setSubCategory} />;
+        return (
+          <PostBoardFilter
+            SubCategory={props.PostInfo.subCategory}
+            setSubCategory={setSubCategory}
+          />
+        );
       case "파트너찾기":
         return <></>;
       case "배우찾기":
         return (
-          
           <FindingActorUploadFilter
             FilterElement={FilterElement}
             setFilterElement={setFilterElement}
             setFilterCheck={setFilterCheck}
             FilterCheck={FilterCheck}
-            GenderFilter = {[...props.PostInfo.filters[0].gender]}
-            TypeFilter = {[...props.PostInfo.filters[0].type]}
-            ClassficationFilter = {[...props.PostInfo.filters[0].classfication]}
+            GenderFilter={[...props.PostInfo.filters[0].gender]}
+            TypeFilter={[...props.PostInfo.filters[0].type]}
+            ClassficationFilter={[...props.PostInfo.filters[0].classfication]}
           />
         );
       case "로케이션":
-        return <LocationFilter SubCategory = {props.PostInfo.subCategory} setSubCategory={setSubCategory} />;
+        return (
+          <LocationFilter
+            SubCategory={props.PostInfo.subCategory}
+            setSubCategory={setSubCategory}
+          />
+        );
       case "건의함":
         return <></>;
     }
@@ -110,9 +118,7 @@ function UpdateForm(props) {
           value={Title}
           onChange={(e) => setTitle(e.currentTarget.value)}
         />
-        <div className="filterDiv">
-          {SwitchSubCategory()}
-        </div>
+        <div className="filterDiv">{SwitchSubCategory()}</div>
         <textarea
           name="content"
           className="content"

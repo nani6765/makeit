@@ -6,6 +6,18 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
+const PostUploadDiv = styled.div`
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 5vh;
+  padding-bottom: 10vh;
+  ${mq[1]} {
+    width: 90%;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+`;
+
 const RepleUploadDiv = styled.div`
   width: 70%;
   margin: 0 auto;
@@ -143,4 +155,4 @@ const RerepleUploadDiv = styled.div`
     padding: 10px;
   }
 `;
-export { RepleUploadDiv, RerepleUploadDiv };
+export { PostUploadDiv, RepleUploadDiv, RerepleUploadDiv };
