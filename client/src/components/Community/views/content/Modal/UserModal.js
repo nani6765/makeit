@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 
 import DeleteModal from "./DeleteModal.js";
@@ -13,12 +13,6 @@ function UserModal(props) {
   const [PostInfo, setPostInfo] = useState(props.postInfo || "");
   const [RepleInfo, setRepleInfo] = useState(props.repleInfo || "");
   const [RerepleInfo, setRerepleInfo] = useState(props.rerepleInfo || "");
-
-  useEffect(() => {
-    console.log("PostInfo : ", PostInfo);
-    console.log("RepleInfo : ", RepleInfo);
-    console.log("RerepleInfo : ", RerepleInfo);
-  }, []);
 
   function EditHandler() {
     if (props.type === "post") {
