@@ -22,7 +22,7 @@ function CommunityList() {
       if (response.data.success) {
         let temp = [...PostList, ...response.data.postInfo];
         setPostList(temp);
-        setPostSkip(Math.min(PostSkip + limit, temp.length));
+        setPostSkip(Math.min(PostSkip + PostLimit, temp.length));
       } else {
         alert("error");
       }
@@ -30,15 +30,17 @@ function CommunityList() {
   };
 
   const loadMoreHanlder = () => {
-    let skip = PostSkip + skip;
+    let skip = PostLimit + PostSkip;
     let body = {
-      postNum: props.match.params.postId,
+      GNB: {
+        category: GNB,
+      },
       skip: skip,
-      limit: Limit,
+      limit: PostLimit,
       loadMore: skip,
     };
-    getReples(body);
-    setSkip(skip);
+    getPostList(body);
+    setPostLimit(skip);
   };
 
   useEffect(() => {
