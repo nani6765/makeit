@@ -33,7 +33,6 @@ function BodyHeader(props) {
       <Link
         to={{
           pathname: "/community/upload/",
-          params: { category: props.GNB },
         }}
       >
         <button>

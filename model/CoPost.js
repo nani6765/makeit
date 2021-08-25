@@ -67,12 +67,6 @@ const coPostSchema = mongoose.Schema(
       type: String,
       default: 0,
     },
-    subCategory: {
-      type: String,
-    },
-    filters: {
-      type: Array,
-    },
   },
   {
     timestamps: true,

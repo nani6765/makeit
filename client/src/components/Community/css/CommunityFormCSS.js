@@ -29,7 +29,7 @@ const FormDiv = styled.div`
       outline: none;
     }
   }
-  .filterDiv {
+  .CategoryDiv {
     border-radius: 15px 15px 0px 0px;
     margin-top: 30px;
     background: #ede7f6;

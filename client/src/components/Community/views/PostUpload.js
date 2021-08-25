@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import PostUploadFrom from "./content/Upload/PostUploadForm.js";
@@ -8,12 +9,11 @@ import { PostUploadDiv } from "../css/CommunityUploadCSS.js";
 
 function PostUpload(props) {
   const [category, setcategory] = useState("");
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    if (props.location.params === undefined) {
-      props.history.push("/community");
-    } else {
-      setcategory(props.location.params.category);
+    if (user.userData === null) {
+      props.history.push("/login");
     }
   }, []);
 
@@ -27,7 +27,7 @@ function PostUpload(props) {
   return (
     <>
       <PostUploadDiv>
-        <PostUploadFrom category={category} />
+        <PostUploadFrom />
       </PostUploadDiv>
 
       <MobileFooter />

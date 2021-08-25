@@ -23,26 +23,24 @@ function CommunityList() {
       //skip: skip,
       //limit: 2,
     };
-
+    console.log("body : ", body);
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
         let temp;
-        if(PostIdx)
-          temp = [...PostList, ...response.data.postInfo];
-        else
-          temp = [...response.data.postInfo];
+        if (PostIdx) temp = [...PostList, ...response.data.postInfo];
+        else temp = [...response.data.postInfo];
         setPostList(temp);
       } else {
         alert("error");
       }
     });
-  }
+  };
 
   useEffect(() => {
+    console.log("??");
     getPostList(0);
   }, [GNB, SortPost]);
 
-  
   /*
   // 무한 스크롤ㄹㄹㄹㄹ
   const ScrollFunction = () => {

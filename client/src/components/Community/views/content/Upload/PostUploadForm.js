@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
+import Select from "react-select";
 import axios from "axios";
 
 import FileUploadArea from "./Func/FileUploadArea.js";
@@ -21,20 +22,30 @@ function PostUploadForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
-
+  const [Category, setCategory] = useState("");
   const user = useSelector((state) => state.user);
+
+  const options = [
+    { value: "자유게시판", label: "자유게시판" },
+    { value: "질문게시판", label: "질문게시판" },
+    { value: "홍보게시판", label: "홍보게시판" },
+    { value: "건의함", label: "건의함" },
+  ];
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (!Title || !Content) {
       return alert("제목과 내용을 입력해주세요.");
     }
+    if (Category === "") {
+      return alert("카테고리를 설정해주세요.");
+    }
     const body = {
       uid: user.userData.uid,
       title: Title,
       content: Content,
       images: Image,
-      category: props.category,
+      category: Category,
     };
 
     axios.post("/api/community/postSubmit", body).then((response) => {
@@ -60,7 +71,15 @@ function PostUploadForm(props) {
         onChange={(e) => setTitle(e.currentTarget.value)}
       />
 
-      <div className="filterDiv">{props.category}</div>
+      <div className="CategoryDiv">
+        <Select
+          options={options}
+          placeholder="카테고리"
+          blurInputOnSelect="true"
+          menuShouldBlockScroll="true"
+          onChange={(e) => setCategory(e.value)}
+        />
+      </div>
 
       <textarea
         name="content"
