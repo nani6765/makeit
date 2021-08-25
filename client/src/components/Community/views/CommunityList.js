@@ -12,37 +12,62 @@ function CommunityList() {
   const [GNB, setGNB] = useState("전체게시판");
   const [SortPost, setSortPost] = useState("new");
   const [PostList, setPostList] = useState([]);
-  const [PostIdx, setPostIdx] = useState(0);
 
-  const getPostList = (skip) => {
-    let body = {
-      GNB: {
-        category: GNB,
-      },
-      sortPost: SortPost,
-      //skip: skip,
-      //limit: 2,
-    };
+  const [PostSkip, setPostSkip] = useState(0);
+  const [PostLimit, setPostLimit] = useState(5);
+
+  const getPostList = (body) => {
     console.log("body : ", body);
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
-        let temp;
-        if (PostIdx) temp = [...PostList, ...response.data.postInfo];
-        else temp = [...response.data.postInfo];
+        let temp = [...PostList, ...response.data.postInfo];
         setPostList(temp);
+        setPostSkip(Math.min(PostSkip + limit, temp.length));
       } else {
         alert("error");
       }
     });
   };
 
+  const loadMoreHanlder = () => {
+    let skip = PostSkip + skip;
+    let body = {
+      postNum: props.match.params.postId,
+      skip: skip,
+      limit: Limit,
+      loadMore: skip,
+    };
+    getReples(body);
+    setSkip(skip);
+  };
+
   useEffect(() => {
-    console.log("??");
-    getPostList(0);
+    let body = {
+      GNB: {
+        category: GNB,
+      },
+      sortPost: SortPost,
+      skip: PostSkip,
+      limit: PostLimit,
+    };
+    getPostList(body);
   }, [GNB, SortPost]);
 
+  const ScrollFunction = () => {
+    let TargetDiv = document.querySelector("#PostList");
+    if (
+      Math.ceil(TargetDiv.scrollTop) + Math.ceil(TargetDiv.clientHeight) >=
+      TargetDiv.scrollHeight
+    ) {
+      loadMoreHanlder();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", ScrollFunction, true);
+  }, []);
+
   /*
-  // 무한 스크롤ㄹㄹㄹㄹ
   const ScrollFunction = () => {
     let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);

@@ -28,7 +28,7 @@ const CommunityHeader = styled.div`
 
   .GNBDiv {
     position: relative;
-    z-index: 10;
+    z-index: 5;
 
     display: flex;
     align-items: center;
