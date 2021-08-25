@@ -34,7 +34,7 @@ function GuestModal(props) {
     console.log(props);
     let body = {
       me: user.userData.uid,
-      you: [OtherUid],
+      you: OtherUid(),
     };
     axios.post("/api/chat/create", body).then((response) => {
       console.log(response.data);
