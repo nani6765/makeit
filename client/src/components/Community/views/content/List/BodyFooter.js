@@ -1,12 +1,13 @@
 import React from "react";
 import { BodyFooterDiv } from "../../../css/CommunityListCSS.js";
+import ScrollToTop from "react-scroll-up";
+
 function BodyFooter() {
   return (
     <BodyFooterDiv>
-      <div>
-        <i className="bi bi-arrow-up"></i>
-        <i className="bi bi-pencil"></i>
-      </div>
+      <ScrollToTop showUnder={160}>
+        <span>UP</span>
+      </ScrollToTop>
     </BodyFooterDiv>
   );
 }
