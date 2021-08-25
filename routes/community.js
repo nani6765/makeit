@@ -34,10 +34,14 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
+  console.log(sort);
   Community.find(category)
     .populate("auther")
     .sort(sort)
+    .skip(req.body.skip)
+    .limit(req.body.limit)
     .exec((err, postInfo) => {
+      console.log(postInfo)
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, postInfo });
     });
