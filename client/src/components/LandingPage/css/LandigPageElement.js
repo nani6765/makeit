@@ -23,7 +23,7 @@ const PCExcept = styled.div`
 const FirstDiv = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing1.png");
+  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_1_bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -52,7 +52,7 @@ const FirstDiv = styled.div`
 const SecondDiv = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing2.png");
+  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_2_bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -71,7 +71,7 @@ const SecondDiv = styled.div`
 const ThirdDiv = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing3.png");
+  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_3_bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -108,7 +108,7 @@ const ThirdDiv = styled.div`
 const FourthDiv = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing4.png");
+  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_4_bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -149,7 +149,7 @@ const FourthDiv = styled.div`
 const FifthDiv = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing5.png");
+  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_5_bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -187,7 +187,7 @@ const FifthDiv = styled.div`
 const SixthDiv = styled.div`
   width: 100%;
   height: calc(100vh - 80px);
-  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing6.png");
+  background-image: url("https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_6_bg.png");
   background-size: cover;
   display: flex;
   justify-content: center;

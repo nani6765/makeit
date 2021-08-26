@@ -6,7 +6,7 @@ function SecondLanding() {
     <SecondDiv>
       <div className="content">
         <img
-          src="/img/Landing/Content2.png"
+          src="https://kr.object.ncloudstorage.com/makeit/admin/LandingPage/Landing_2_Content.png"
           alt="Content2"
           className="img-fluid"
         />
