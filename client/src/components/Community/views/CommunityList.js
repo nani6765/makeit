@@ -7,6 +7,7 @@ import BodyFooter from "./content/List/BodyFooter";
 import axios from "axios";
 
 import { CommunityHeader, CommunityBody } from "../css/CommunityListCSS";
+import { template } from "lodash";
 
 function CommunityList() {
   const [GNB, setGNB] = useState("전체게시판");
@@ -14,36 +15,10 @@ function CommunityList() {
   const [PostList, setPostList] = useState([]);
 
   const [PostSkip, setPostSkip] = useState(0);
-  const [PostLimit, setPostLimit] = useState(5);
+  const [PostEnd, setPostEnd] = useState(false);
+  const [PostLimit, setPostLimit] = useState(10);
 
-  const getPostList = (body) => {
-    console.log("body : ", body);
-    axios.post("/api/community/", body).then((response) => {
-      if (response.data.success) {
-        let temp = [...PostList, ...response.data.postInfo];
-        setPostList(temp);
-        setPostSkip(Math.min(PostSkip + PostLimit, temp.length));
-      } else {
-        alert("error");
-      }
-    });
-  };
-
-  const loadMoreHanlder = () => {
-    let skip = PostLimit + PostSkip;
-    let body = {
-      GNB: {
-        category: GNB,
-      },
-      skip: skip,
-      limit: PostLimit,
-      loadMore: skip,
-    };
-    getPostList(body);
-    setPostLimit(skip);
-  };
-
-  useEffect(() => {
+  const getPostList = () => {
     let body = {
       GNB: {
         category: GNB,
@@ -52,24 +27,29 @@ function CommunityList() {
       skip: PostSkip,
       limit: PostLimit,
     };
-    getPostList(body);
-  }, [GNB, SortPost]);
-
-  const ScrollFunction = () => {
-    let TargetDiv = document.querySelector("#PostList");
-    if (
-      Math.ceil(TargetDiv.scrollTop) + Math.ceil(TargetDiv.clientHeight) >=
-      TargetDiv.scrollHeight
-    ) {
-      loadMoreHanlder();
-    }
+    axios.post("/api/community/", body).then((response) => {
+      if (response.data.success) {
+        let temp = [...PostList, ...response.data.postInfo];
+        setPostList(temp);
+        if(PostSkip + PostLimit > temp.length) {
+          setPostEnd(true);
+        }
+      } else {
+        alert("error");
+      }
+    });
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", ScrollFunction, true);
-  }, []);
+    setPostEnd(false);
+    setPostList([]);
+    if(PostSkip) {
+      setPostSkip(0);
+    } else {
+      getPostList();
+    }
+  }, [GNB, SortPost]);
 
-  /*
   const ScrollFunction = () => {
     let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
@@ -78,18 +58,22 @@ function CommunityList() {
     // console.log("scrollTop ", scrollTop)
     // console.log("clientHeight ", clientHeight)
     if(scrollTop + clientHeight >= scrollHeight) {
-      setPostIdx(PostIdx + 2);
+      setPostSkip(PostSkip => PostSkip + PostLimit);
     }
   };
 
   useEffect(() => {
-    console.log(PostIdx);
-    getPostList(PostIdx);
-  }, [PostIdx]);
+    console.log(PostSkip, PostEnd);
+    if(!PostEnd) {
+      getPostList();
+    } else if(PostList.length != PostSkip) {
+      setPostSkip(PostList.length);
+    }
+  }, [PostSkip]);
 
   useEffect(() => {
     window.addEventListener('scroll', ScrollFunction, true);
-  }, []);*/
+  }, []);
 
   return (
     <>
