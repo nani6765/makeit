@@ -56,13 +56,6 @@ function LandingPage() {
 
   // call this to Disable
   function disableScroll() {
-    window.addEventListener(
-      "wheel",
-      (e) => {
-        wheelEvent(e);
-      },
-      { passive: false }
-    ); // modern desktop
 
     window.addEventListener(
       "keydown",
@@ -74,8 +67,31 @@ function LandingPage() {
   }
 
   useEffect(() => {
-    disableScroll();
-  }, []);
+    window.addEventListener(
+      "wheel",
+      wheelEvent,
+      { passive : false }
+    ); // modern desktop
+
+    
+    window.addEventListener(
+      "keydown",
+      keyEvent,
+      false
+    );
+
+    return () => {
+      console.log('hi?')
+
+      window.removeEventListener("wheel", wheelEvent, { passive : false });
+      
+      window.removeEventListener(
+        "keydown",
+        keyEvent,
+        false
+      );
+    }
+  });
 
   return (
     <>

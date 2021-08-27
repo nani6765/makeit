@@ -7,6 +7,7 @@ import BodyFooter from "./content/List/BodyFooter";
 import axios from "axios";
 
 import { CommunityHeader, CommunityBody } from "../css/CommunityListCSS";
+import { getEventListener } from "events";
 
 function CommunityList() {
   const [GNB, setGNB] = useState("전체게시판");
@@ -55,7 +56,7 @@ function CommunityList() {
       getPostList();
     }
   }, [PostSkip, PostList])
-
+  
   return (
     <>
       <CommunityHeader>
