@@ -6,15 +6,13 @@ function HeaderNavArea() {
   return (
     <HeaderNav>
       <ul>
-        {
-          /*
+        {/*
           <li>
             <Link to="/landingPage">프로젝트</Link>
           </li>
-          */
-        }
+          */}
         <li>
-          <Link to="/landingPage">영상의뢰</Link>
+          <Link to="/landingPage">영상제작</Link>
         </li>
         <li>
           <Link to="/landingPage">영상참여</Link>
