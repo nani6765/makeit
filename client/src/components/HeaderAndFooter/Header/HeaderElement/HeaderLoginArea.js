@@ -18,6 +18,10 @@ function HeaderLoginArea(props) {
     props.setmyPageHambucControl(false);
   });
 
+  useEffect(() => {
+    console.log(user.userData);
+  }, [])
+
   return (
     <HeaderLoginDiv>
       {user.userData ? (

@@ -9,7 +9,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const MakingDiv = styled.div`
   width: 70%;
   margin: 0 auto;
-  padding-top: 10vh;
+  padding-top: 2vh;
   padding-bottom: 10vh;
   ${mq[1]} {
     width: 90%;
@@ -37,4 +37,18 @@ const MenuItem = styled.li`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem };
+const DescriptionDiv = styled.div`
+  background: #C4C4C4;
+  width: 100%;
+  height: auto;
+  left: 0px;
+  text-align: center;
+  line-height: 200%;
+  padding: 30px;
+  font-size: 20px;
+  ${mq[1]} {
+    font-size: 12px;
+  }
+`;
+
+export { MakingDiv, MenuList, MenuItem, DescriptionDiv };
