@@ -29,6 +29,7 @@ import PostEdit from "./components/Community/views/PostEdit.js";
 
 //MakingMedia
 import MakingMedia from "./components/MakingMedia/MakingMedia.js";
+import FindingProducerUplopad from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerUpload.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -70,6 +71,11 @@ function App() {
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
 
           <Route exact path="/Making" component={MakingMedia} />
+          <Route
+            exact
+            path="/Making/ProducerUpload"
+            component={FindingProducerUplopad}
+          />
         </Switch>
         <Footer />
       </>
