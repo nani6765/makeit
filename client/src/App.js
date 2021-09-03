@@ -27,6 +27,9 @@ import CommunityDetail from "./components/Community/views/CommunityDetail.js";
 import PostUpload from "./components/Community/views/PostUpload.js";
 import PostEdit from "./components/Community/views/PostEdit.js";
 
+//MakingMedia
+import MakingMedia from "./components/MakingMedia/MakingMedia.js";
+
 function App() {
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -62,8 +65,11 @@ function App() {
           />
           <Route exact path="/community/upload" component={PostUpload} />
           <Route exact path="/community/update/:postId" component={PostEdit} />
+
           <Route exact path="/myPage" component={MyPage} />
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
+
+          <Route exact path="/Making" component={MakingMedia} />
         </Switch>
         <Footer />
       </>
