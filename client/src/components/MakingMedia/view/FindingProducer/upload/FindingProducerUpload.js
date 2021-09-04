@@ -1,14 +1,27 @@
 import React, { useState } from "react";
+import Detail from "./content/Detail.js";
 import {
   UploadForm,
   UploadHead,
   ContentDiv,
   LeftContent,
 } from "./css/FPUploadCSS.js";
+
 function FindingProducerUpload() {
   const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
 
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
+  const [Category, setCategory] = useState("");
+
+  const setRightContent = () => {
+    switch (CurrentProcess) {
+      case "상세설명":
+        return <Detail Category={Category} setCategory={setCategory} />;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -44,26 +57,7 @@ function FindingProducerUpload() {
               </ul>
             </div>
           </LeftContent>
-          <div className="rightContent">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nisi
-            repudiandae deleniti aspernatur distinctio nobis mollitia laboriosam
-            sequi. Atque, veniam. Perferendis ducimus ut mollitia aliquid
-            consequatur deserunt placeat blanditiis consequuntur! Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit. Commodi reprehenderit
-            voluptas dolor a non magni consequatur corrupti aspernatur,
-            doloribus veniam, necessitatibus id dolorum ipsa ab et earum.
-            Debitis, tempore nisi. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Tempore ea, animi temporibus debitis iusto
-            deleniti similique fugit voluptatem dicta! Iure consequuntur
-            laudantium ducimus fugit veniam illum molestiae minus eos vitae?
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-            vitae atque nam numquam, maxime fugiat culpa earum aspernatur rem
-            aperiam qui excepturi iusto aliquam magni ut beatae totam odio nisi!
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Accusantium voluptatibus quia recusandae? Voluptas, vel quos.
-            Assumenda, eius tempora fugit deleniti inventore suscipit, culpa
-            vitae reprehenderit voluptatem hic, id harum? A.
-          </div>
+          <div className="rightContent">{setRightContent()}</div>
         </ContentDiv>
       </UploadForm>
     </>
