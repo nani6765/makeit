@@ -103,6 +103,30 @@ const LeftContent = styled.div`
   }
 `;
 
+const FooterBtnDiv = styled.div`
+  width: 100%;
+  text-align: right;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  button {
+    border-radius: 10px;
+    padding: 5px 10px 5px 10px;
+    font-weight: bold;
+    min-width: 100px;
+  }
+  .save {
+    background: #ffffff;
+    border: 1px solid #dedede;
+    color: #935ea5;
+    margin-right: 1rem;
+  }
+  .next {
+    background: #935ea5;
+    border: 1px solid #935ea5;
+    color: white;
+  }
+`;
+
 const DetailDiv = styled.div`
   .categoryDiv {
     background: #ffffff;
@@ -236,4 +260,11 @@ const DetailDiv = styled.div`
   }
 `;
 
-export { UploadForm, UploadHead, ContentDiv, LeftContent, DetailDiv };
+export {
+  UploadForm,
+  UploadHead,
+  ContentDiv,
+  LeftContent,
+  FooterBtnDiv,
+  DetailDiv,
+};

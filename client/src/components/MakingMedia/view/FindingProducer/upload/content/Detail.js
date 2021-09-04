@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DetailDiv } from "../css/FPUploadCSS.js";
+import { DetailDiv, FooterBtnDiv } from "../css/FPUploadCSS.js";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 function Detail(props) {
   const CategoryContent = [
@@ -14,23 +14,21 @@ function Detail(props) {
     "기타",
   ];
 
-  const [WorkTypeArr, setWorkTypeArr] = useState([]);
   const [WorkType, setWorkType] = useState("");
-  const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
   const [VideoPurpose, setVideoPurpose] = useState("");
 
   const WorkKeyDown = (e) => {
     if (e.key === "Enter") {
-      let temp = [...WorkTypeArr, WorkType];
-      setWorkTypeArr(temp);
+      let temp = [...props.WorkTypeArr, WorkType];
+      props.setWorkTypeArr(temp);
       setWorkType("");
     }
   };
 
   const VideoKeyDown = (e) => {
     if (e.key === "Enter") {
-      let temp = [...VideoPurposeArr, VideoPurpose];
-      setVideoPurposeArr(temp);
+      let temp = [...props.VideoPurposeArr, VideoPurpose];
+      props.setVideoPurposeArr(temp);
       setVideoPurpose("");
     }
   };
@@ -61,6 +59,8 @@ function Detail(props) {
           <textarea
             name="content"
             className="content"
+            value={props.Description}
+            onChange={(e) => props.setDescription(e.currentTarget.value)}
             placeholder={
               "메이킷은 누구나 참여할 수 있는 의뢰환경을 만들기 위해 이용규칙을 제정하여 운영하고 있습니다.\n위반 시 게시물이 삭제되고 서비스 이용이 일정 기간 제한될 수 있습니다.\n\n아래는 이 게시판에 해당하는 핵심 내용에 대한 요약 사항이며, 게시물 작성 시 전 커뮤니티 이용 규칙 전문을 반드시 확인하시기 바랍니다.\n\n정치 사회 관련 행위 금지\n과도한 홍보 및 판매 관련 행위 금지\n그 밖에 규칙 위반     "
             }
@@ -68,7 +68,7 @@ function Detail(props) {
         </div>
         <div>
           <span>작업유형</span>
-          {WorkTypeArr.map((text, idx) => {
+          {props.WorkTypeArr.map((text, idx) => {
             return <p key={idx}>{text}</p>;
           })}
           <input
@@ -80,7 +80,7 @@ function Detail(props) {
         </div>
         <div>
           <span>영상목적</span>
-          {VideoPurposeArr.map((text, idx) => {
+          {props.VideoPurposeArr.map((text, idx) => {
             return <p key={idx}>{text}</p>;
           })}
           <input
@@ -91,6 +91,15 @@ function Detail(props) {
           />
         </div>
       </div>
+      <FooterBtnDiv>
+        <button className="save">임시저장</button>
+        <button
+          className="next"
+          onClick={() => props.setCurrentProcess("포트폴리오")}
+        >
+          다음
+        </button>
+      </FooterBtnDiv>
     </DetailDiv>
   );
 }

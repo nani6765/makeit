@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Detail from "./content/Detail.js";
+import Portfolio from "./content/Portfolio.js";
 import {
   UploadForm,
   UploadHead,
@@ -9,14 +10,37 @@ import {
 
 function FindingProducerUpload() {
   const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
-
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
+
+  //상세설명
   const [Category, setCategory] = useState("");
+  const [Description, setDescription] = useState("");
+  const [WorkTypeArr, setWorkTypeArr] = useState([]);
+  const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
+
+  //포트폴리오
+  //가격설정
+  //수정환불안내
 
   const setRightContent = () => {
     switch (CurrentProcess) {
       case "상세설명":
-        return <Detail Category={Category} setCategory={setCategory} />;
+        return (
+          <Detail
+            setCurrentProcess={setCurrentProcess}
+            Category={Category}
+            setCategory={setCategory}
+            Description={Description}
+            setDescription={setDescription}
+            WorkTypeArr={WorkTypeArr}
+            setWorkTypeArr={setWorkTypeArr}
+            VideoPurposeArr={VideoPurposeArr}
+            setVideoPurposeArr={setVideoPurposeArr}
+          />
+        );
+
+      case "포트폴리오":
+        return <Portfolio />;
 
       default:
         break;
