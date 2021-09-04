@@ -37,4 +37,35 @@ const MenuItem = styled.li`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem };
+const ProducerListDiv = styled.div`
+  position: relative;
+  margin-top: 30px;
+  width: 70%;
+  height: auto;
+  padding: auto 0px;
+  left: 30%;
+  div {
+    height: 4vh;
+    align-items: center;
+    .category {
+      float:left;
+      height: 100%;
+      color: #A7A5A8;
+      font-size: 15px;
+      line-height: 100%;
+    }
+    #sort {
+      float: right;
+      #dropdown-basic {
+        border: 1.5px solid #EAEAEA;
+        background: #fff;
+        color: black;
+        border-radius: 16px;
+        padding: 0px;
+        margin: 0px;
+      }
+    }
+  }
+`;
+
+export { MakingDiv, MenuList, MenuItem, ProducerListDiv };

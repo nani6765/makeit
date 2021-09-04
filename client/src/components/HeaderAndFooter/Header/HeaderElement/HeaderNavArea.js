@@ -12,7 +12,7 @@ function HeaderNavArea() {
           </li>
           */}
         <li>
-          <Link to="/landingPage">영상제작</Link>
+          <Link to="/Making">영상제작</Link>
         </li>
         <li>
           <Link to="/landingPage">영상참여</Link>
