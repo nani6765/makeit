@@ -1,5 +1,8 @@
 import React, { useState } from "react";
-import { DetailDiv, FooterBtnDiv } from "../css/FPUploadCSS.js";
+import ContentHeadingArea from "../utils/ContentHeadingArea.js";
+import FooterBtnArea from "../utils/FooterBtnArea.js";
+
+import { DetailDiv } from "../css/FPUploadCSS.js";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 function Detail(props) {
   const CategoryContent = [
@@ -51,10 +54,7 @@ function Detail(props) {
         </DropdownButton>
       </div>
       <div className="descriptionDiv">
-        <div className="heading">
-          <h1>상세설명</h1>
-          <hr />
-        </div>
+        <ContentHeadingArea HeadingTitle="상세설명" />
         <div className="body">
           <textarea
             name="content"
@@ -91,15 +91,10 @@ function Detail(props) {
           />
         </div>
       </div>
-      <FooterBtnDiv>
-        <button className="save">임시저장</button>
-        <button
-          className="next"
-          onClick={() => props.setCurrentProcess("포트폴리오")}
-        >
-          다음
-        </button>
-      </FooterBtnDiv>
+      <FooterBtnArea
+        setCurrentProcess={props.setCurrentProcess}
+        NextStep="포트폴리오"
+      />
     </DetailDiv>
   );
 }

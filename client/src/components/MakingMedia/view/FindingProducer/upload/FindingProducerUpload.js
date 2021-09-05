@@ -13,6 +13,7 @@ function FindingProducerUpload() {
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
 
   //상세설명
+  const [OneLineIntroduce, setOneLineIntroduce] = useState("");
   const [Category, setCategory] = useState("");
   const [Description, setDescription] = useState("");
   const [WorkTypeArr, setWorkTypeArr] = useState([]);
@@ -40,7 +41,7 @@ function FindingProducerUpload() {
         );
 
       case "포트폴리오":
-        return <Portfolio />;
+        return <Portfolio setCurrentProcess={setCurrentProcess} />;
 
       default:
         break;
@@ -58,11 +59,15 @@ function FindingProducerUpload() {
         </div>
       </UploadHead>
       <UploadForm>
-        <input
-          type="text"
-          className="OneLineIntroduce"
-          placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
-        />
+        {CurrentProcess === "상세설명" && (
+          <input
+            type="text"
+            className="OneLineIntroduce"
+            placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
+            value={OneLineIntroduce}
+            onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
+          />
+        )}
         <ContentDiv>
           <LeftContent>
             <div>

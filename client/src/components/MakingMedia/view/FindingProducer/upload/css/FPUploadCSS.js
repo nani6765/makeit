@@ -103,6 +103,18 @@ const LeftContent = styled.div`
   }
 `;
 
+const ContentHeading = styled.div`
+  h1 {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 1rem;
+  }
+  hr {
+    margin-top: 0.5rem;
+    margin-botton: 0.5rem;
+  }
+`;
+
 const FooterBtnDiv = styled.div`
   width: 100%;
   text-align: right;
@@ -167,17 +179,6 @@ const DetailDiv = styled.div`
       0px 9px 30px rgba(163, 1, 79, 0.05);
     border-radius: 15px;
     padding: 20px;
-    .heading {
-      h1 {
-        font-weight: bold;
-        font-size: 18px;
-        margin-right: 1rem;
-      }
-      hr {
-        margin-top: 0.5rem;
-        margin-botton: 0.5rem;
-      }
-    }
     .body {
       width: 100%;
       display: flex;
@@ -260,11 +261,56 @@ const DetailDiv = styled.div`
   }
 `;
 
+const ProtFolioDiv = styled.div`
+  width: 100%;
+  height: auto;
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  p {
+    margin-bottom: 0px;
+  }
+  span {
+    margin-left: 1rem;
+    font-weight: bold;
+    .curentLength {
+      margin-left: 0rem;
+      color: red;
+    }
+  }
+  .notice {
+    background: #faf5f5;
+    border: 1px solid rgba(163, 136, 240, 0.44);
+    box-sizing: border-box;
+    border-radius: 12px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    h3 {
+      font-weight: 500;
+      font-size: 25px;
+      line-height: 34px;
+      color: #935ea5;
+      margin-bottom: 0px;
+    }
+    ul {
+      margin-bottom: 0px;
+      font-size: 12px;
+    }
+  }
+`;
+
 export {
   UploadForm,
   UploadHead,
   ContentDiv,
   LeftContent,
+  ContentHeading,
   FooterBtnDiv,
   DetailDiv,
+  ProtFolioDiv,
 };
