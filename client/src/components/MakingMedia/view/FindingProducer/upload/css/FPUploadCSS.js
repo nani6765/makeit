@@ -304,6 +304,35 @@ const ProtFolioDiv = styled.div`
   }
 `;
 
+const YoutubeDiv = styled.div`
+  .content {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    .background {
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 100%;
+      z-index: 50;
+    }
+    .searchDiv {
+      background: #ffffff;
+      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+      border-radius: 11px;
+      z-index: 51;
+      position: fixed;
+      width: 50%;
+      padding: 20px;
+    }
+  }
+`;
+
 export {
   UploadForm,
   UploadHead,
@@ -313,4 +342,5 @@ export {
   FooterBtnDiv,
   DetailDiv,
   ProtFolioDiv,
+  YoutubeDiv,
 };

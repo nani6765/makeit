@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router-dom";
 import axios from "axios";
 
-import FileUploadArea from "../../../utils/FileUploadArea.js";
-import FileShowArea from "../../../utils/FileShowArea.js";
+import FileUploadArea from "../../../../utils/FileUploadArea.js";
+import FileShowArea from "../../../../utils/FileShowArea.js";
 
 /** @jsxRuntime classic */
 /** @jsx jsx */
