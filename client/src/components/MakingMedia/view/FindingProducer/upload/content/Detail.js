@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
 
-import { DetailDiv } from "../css/FPUploadCSS.js";
+import { DetailDiv } from "../css/FPContentCSS.js";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 function Detail(props) {
   const CategoryContent = [
