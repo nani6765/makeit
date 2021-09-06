@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import ProducerList from "./ProducerList.js";
 import { ProducerListDiv } from "../../css/FindingProducerCSS.js";
 import Dropdown from 'react-bootstrap/Dropdown'
 function FindingProducer() {
@@ -22,7 +22,7 @@ function FindingProducer() {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        lorelemdmdksk
+        <ProducerList />
       </ProducerListDiv>
     </>
   );

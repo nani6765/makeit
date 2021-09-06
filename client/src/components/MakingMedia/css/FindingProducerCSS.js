@@ -68,4 +68,13 @@ const ProducerListDiv = styled.div`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem, ProducerListDiv };
+const ProducerDiv = styled.div`
+  width: 30%;
+  background: #FFFFFF;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  box-sizing: border-box;
+  border-radius: 22px;
+`;
+
+export { MakingDiv, MenuList, MenuItem, ProducerListDiv, ProducerDiv };
