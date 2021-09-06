@@ -17,11 +17,10 @@ function YoutubeModal(props) {
     setSearchResultArr([...response.data.items]);
   };
 
-  /*
   useEffect(() => {
     console.log(SearchResultArr);
   }, [SearchResultArr]);
-  */
+
   const ShowVideos = () => {};
 
   return (
@@ -33,23 +32,31 @@ function YoutubeModal(props) {
         ></div>
         <div className="searchDiv">
           <form onSubmit={SubmitHandler}>
-            <input
-              type="text"
-              value={SearchTerm || ""}
-              onChange={(e) => setSearchTerm(e.currentTarget.value)}
-            />
-            <button type="submit">검색</button>
+            <p className="searchNotice">유튜브 URL, 제목을 검색해주세요.</p>
+            <div className="inputDiv">
+              <input
+                type="text"
+                value={SearchTerm || ""}
+                onChange={(e) => setSearchTerm(e.currentTarget.value)}
+              />
+              <button type="submit">검색</button>
+            </div>
           </form>
-        </div>
-        <div>
-          {SearchResultArr[0] &&
-            SearchResultArr.map((Video, idx) => {
-              return (
-                <div key={idx}>
-                  <img src={Video.snippet.thumbnails.high.url} alt="" />
-                </div>
-              );
-            })}
+          <ul className="resultList">
+            {SearchResultArr[0] &&
+              SearchResultArr.map((Video, idx) => {
+                return (
+                  <li key={idx}>
+                    <input type="checkbox" />
+                    <img src={Video.snippet.thumbnails.high.url} alt="" />
+                    <div>
+                      <p className="title">{Video.snippet.title}</p>
+                      <p className="channel">{Video.snippet.channelTitle}</p>
+                    </div>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
       </div>
     </YoutubeDiv>

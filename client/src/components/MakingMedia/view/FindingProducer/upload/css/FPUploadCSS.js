@@ -329,6 +329,64 @@ const YoutubeDiv = styled.div`
       position: fixed;
       width: 50%;
       padding: 20px;
+      .searchNotice {
+        color: red;
+        font-size: 10px;
+        opacity: 0.8;
+        margin-bottom: 0.5rem;
+      }
+      .inputDiv {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 8fr 2fr;
+        grid-template-rows: auto;
+        grid-template-areas: "input btn";
+        input {
+          grid-area: "input";
+          &:focus,
+          &:active {
+            outline: none;
+          }
+        }
+        button {
+          grid-area: "btn";
+          background: #935ea5;
+          color: white;
+          font-weight: bold;
+          border: 1px solid #935ea5;
+        }
+      }
+      .resultList {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding: 0px;
+        li {
+          margin-bottom: 1rem;
+          display: flex;
+          align-content: center;
+          align-items: center;
+          img {
+            width: 60px;
+            height: 60px;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+          }
+          &:nth-last-of-type(1) {
+            margin-bottom: 0px;
+          }
+          p {
+            word-break: keep-all;
+            font-size: 12px;
+            &.channel {
+              color: #c6c6c6;
+              font-size: 10px;
+            }
+          }
+        }
+      }
     }
   }
 `;
