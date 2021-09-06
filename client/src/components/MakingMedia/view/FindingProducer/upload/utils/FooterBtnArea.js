@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterBtnDiv } from "../css/FPUploadCSS.js";
+import { FooterBtnDiv } from "../css/FPUtilsCSS";
 
 function FooterBtnArea(props) {
   return (

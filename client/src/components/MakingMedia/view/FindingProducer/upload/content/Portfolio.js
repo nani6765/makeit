@@ -1,31 +1,30 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
 import FileUploadArea from "../../../../../utils/FileUploadArea.js";
 import FileShowArea from "../../../../../utils/FileShowArea.js";
 import YoutubeModal from "../utils/YoutubeModal.js";
-import { ProtFolioDiv } from "../css/FPUploadCSS.js";
+
+import { ProtFolioDiv } from "../css/FPContentCSS";
+import { remove } from "lodash";
 
 function Portfolio(props) {
-  const [ThumbnailArr, setThumbnailArr] = useState([]);
   const [ThumbnailArrLength, setThumbnailArrLength] = useState(0);
-  const [DetailImgArr, setDetailImgArr] = useState([]);
   const [DetailImgArrLength, setDetailImgArrLength] = useState(0);
-  const [ModalFlag, setModalFlag] = useState(false);
-  const [VideoArr, setVideoArr] = useState([]);
   const [VideoArrLength, setVideoArrLength] = useState(0);
+  const [ModalFlag, setModalFlag] = useState(false);
 
   useEffect(() => {
-    setThumbnailArrLength(ThumbnailArr.length);
-  }, [ThumbnailArr]);
+    setThumbnailArrLength(props.ThumbnailArr.length);
+  }, [props.ThumbnailArr]);
 
   useEffect(() => {
-    setDetailImgArrLength(DetailImgArr.length);
-  }, [DetailImgArr]);
+    setDetailImgArrLength(props.DetailImgArr.length);
+  }, [props.DetailImgArr]);
 
   useEffect(() => {
-    setVideoArrLength(VideoArr.length);
-  }, [VideoArr]);
+    setVideoArrLength(props.VideoArr.length);
+  }, [props.VideoArr]);
 
   return (
     <ProtFolioDiv>
@@ -36,9 +35,15 @@ function Portfolio(props) {
           <span className="curentLength">{ThumbnailArrLength}</span>/1
         </span>
       </p>
-      <FileUploadArea Images={ThumbnailArr} setImages={setThumbnailArr} />
-      {ThumbnailArr[0] ? (
-        <FileShowArea Images={ThumbnailArr} setImages={setThumbnailArr} />
+      <FileUploadArea
+        Images={props.ThumbnailArr}
+        setImages={props.setThumbnailArr}
+      />
+      {props.ThumbnailArr[0] ? (
+        <FileShowArea
+          Images={props.ThumbnailArr}
+          setImages={props.setThumbnailArr}
+        />
       ) : null}
 
       <p>
@@ -47,9 +52,15 @@ function Portfolio(props) {
           <span className="curentLength">{DetailImgArrLength}</span>/9
         </span>
       </p>
-      <FileUploadArea Images={DetailImgArr} setImages={setDetailImgArr} />
-      {DetailImgArr[0] ? (
-        <FileShowArea Images={DetailImgArr} setImages={setDetailImgArr} />
+      <FileUploadArea
+        Images={props.DetailImgArr}
+        setImages={props.setDetailImgArr}
+      />
+      {props.DetailImgArr[0] ? (
+        <FileShowArea
+          Images={props.DetailImgArr}
+          setImages={props.setDetailImgArr}
+        />
       ) : null}
 
       <div className="notice">
@@ -69,27 +80,51 @@ function Portfolio(props) {
           </li>
         </ul>
       </div>
-      <p>
-        동영상등록(3개이상)
-        <span>
-          <span className="curentLength">{VideoArrLength}</span>/6
-        </span>
-        <input
+
+      <div className="videoSearch">
+        <p>
+          동영상등록(3개이상)
+          <span>
+            <span className="curentLength">{VideoArrLength}</span>/5
+          </span>
+        </p>
+        <button
           type="button"
-          value="검색"
-          style={{
-            marginLeft: "1rem",
-            borderRadius: "14px",
-            border: "1px solid #935ea5",
-            padding: "5px 10px 5px 10px",
-            backgroundColor: "#935ea5",
-            color: "white",
-            fontWeight: "bold",
-          }}
+          className="search"
           onClick={() => setModalFlag(true)}
+        >
+          검색
+        </button>
+      </div>
+
+      {ModalFlag && (
+        <YoutubeModal
+          setModalFlag={setModalFlag}
+          VideoArr={props.VideoArr}
+          setVideoArr={props.setVideoArr}
         />
-      </p>
-      {ModalFlag && <YoutubeModal setModalFlag={setModalFlag} />}
+      )}
+
+      {props.VideoArr[0] && (
+        <ul className="showSelectedVideo">
+          {props.VideoArr.map((Video, idx) => {
+            return (
+              <li key={idx}>
+                <div className="deleteArea">
+                  <p>삭제</p>
+                  <input type="checkbox" />
+                </div>
+
+                <img src={Video.snippet.thumbnails.high.url} alt="" />
+                <div>
+                  <p className="title">{Video.snippet.title}</p>
+                  <p className="channel">{Video.snippet.channelTitle}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
       <FooterBtnArea
         setCurrentProcess={props.setCurrentProcess}
         NextStep="가격설정"

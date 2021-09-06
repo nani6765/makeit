@@ -6,7 +6,7 @@ import {
   UploadHead,
   ContentDiv,
   LeftContent,
-} from "./css/FPUploadCSS.js";
+} from "./css/FPCSS.js";
 
 function FindingProducerUpload() {
   const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
@@ -20,6 +20,10 @@ function FindingProducerUpload() {
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
   //포트폴리오
+  const [ThumbnailArr, setThumbnailArr] = useState([]);
+  const [DetailImgArr, setDetailImgArr] = useState([]);
+  const [VideoArr, setVideoArr] = useState([]);
+
   //가격설정
   //수정환불안내
 
@@ -41,7 +45,17 @@ function FindingProducerUpload() {
         );
 
       case "포트폴리오":
-        return <Portfolio setCurrentProcess={setCurrentProcess} />;
+        return (
+          <Portfolio
+            setCurrentProcess={setCurrentProcess}
+            ThumbnailArr={ThumbnailArr}
+            setThumbnailArr={setThumbnailArr}
+            DetailImgArr={DetailImgArr}
+            setDetailImgArr={setDetailImgArr}
+            VideoArr={VideoArr}
+            setVideoArr={setVideoArr}
+          />
+        );
 
       default:
         break;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { YoutubeDiv } from "../css/FPUploadCSS.js";
+import { YoutubeDiv } from "../css/FPUtilsCSS.js";
 import YOUTUBE_API from "../../../../../../config/youtubeAPI.js";
 
 function YoutubeModal(props) {
@@ -17,11 +17,33 @@ function YoutubeModal(props) {
     setSearchResultArr([...response.data.items]);
   };
 
+  function InputCheckHandler(e, snippet) {
+    let temp = [...props.VideoArr];
+    if (e.target.checked) {
+      temp.push(snippet);
+      props.setVideoArr([...temp]);
+    } else {
+      let removed = [];
+      if (temp.length === 1) {
+        props.setVideoArr([...removed]);
+      } else {
+        let idx = temp.findIndex(
+          (obj) => obj.id.videoId === snippet.id.videoId
+        );
+        removed = temp.splice(idx, 1);
+        console.log("removed", removed);
+        props.setVideoArr([...removed]);
+      }
+    }
+  }
+
   useEffect(() => {
     console.log(SearchResultArr);
   }, [SearchResultArr]);
 
-  const ShowVideos = () => {};
+  useEffect(() => {
+    console.log("VideoArr", props.VideoArr);
+  }, [props.VideoArr]);
 
   return (
     <YoutubeDiv>
@@ -47,7 +69,14 @@ function YoutubeModal(props) {
               SearchResultArr.map((Video, idx) => {
                 return (
                   <li key={idx}>
-                    <input type="checkbox" />
+                    <div>
+                      <input
+                        type="checkbox"
+                        onChange={(e) => InputCheckHandler(e, Video)}
+                        disabled={props.VideoArr.length >= 5 ? true : false}
+                      />
+                    </div>
+
                     <img src={Video.snippet.thumbnails.high.url} alt="" />
                     <div>
                       <p className="title">{Video.snippet.title}</p>
