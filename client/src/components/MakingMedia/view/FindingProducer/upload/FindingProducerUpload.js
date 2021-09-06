@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 import Detail from "./content/Detail.js";
 import Portfolio from "./content/Portfolio.js";
+import Price from "./content/Price.js";
+
 import {
   UploadForm,
   UploadHead,
@@ -57,11 +60,17 @@ function FindingProducerUpload() {
           />
         );
 
+      case "가격설정":
+        return <Price />;
+
       default:
         break;
     }
   };
 
+  useEffect(() => {
+    console.log("CurrentProcess : ", CurrentProcess);
+  }, [CurrentProcess]);
   return (
     <>
       <UploadHead>

@@ -230,4 +230,26 @@ const ProtFolioDiv = styled.div`
   }
 `;
 
-export { DetailDiv, ProtFolioDiv };
+const PriceDiv = styled.div`
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  .InputDiv {
+    display: inline-flex;
+    margin-top: 1rem;
+    input {
+      margin-left: 0px;
+      margin-right: 1rem;
+      position: relative;
+      display: inline;
+    }
+  }
+`;
+
+export { DetailDiv, ProtFolioDiv, PriceDiv };
