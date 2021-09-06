@@ -44,37 +44,112 @@ const ProducerListDiv = styled.div`
   height: auto;
   padding: auto 0px;
   left: 30%;
-  div {
+  .GNB {
     height: 4vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-content: center;
     align-items: center;
     .category {
-      float:left;
-      height: 100%;
       color: #A7A5A8;
       font-size: 15px;
-      line-height: 100%;
     }
     #sort {
-      float: right;
       #dropdown-basic {
+        padding: 3px 15px;
+        margin: 0px;
         border: 1.5px solid #EAEAEA;
         background: #fff;
         color: black;
         border-radius: 16px;
-        padding: 0px;
-        margin: 0px;
+
+        font-size: 15px;
       }
     }
   }
 `;
 
-const ProducerDiv = styled.div`
-  width: 30%;
-  background: #FFFFFF;
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
-  box-sizing: border-box;
-  border-radius: 22px;
+const ProducerListContainer = styled.div`
+  display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 50px;
+	grid-template-areas:
+  "1 2 3"
+  "4 5 6"
+  "7 8 9"
+  "10 11 12";
+
+  margin-top: 10px;
+
+  .producercard {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 25vh;
+    padding: 15px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+      0px 9px 30px rgba(163, 1, 79, 0.05);
+    box-sizing: border-box;
+    border-radius: 22px;
+
+    .thumbnail {
+      margin-top: 10px;
+      width: 100%;
+      height: 45%;
+      border-radius: 15px;
+    }
+    .info {
+      margin-top: 15px;
+      color: #A7A5A8;
+      align-items: center;
+      i {
+        color: #FF5151;
+        margin-left: 5px;
+      }
+    }
+    .title {
+      display: block;
+      position: relative;
+      height: 60px;
+      margin-top: 5px;
+      font-size:18px;
+      line-height: 30px;
+      font-weight: 600;
+      word-break: keep-all;
+      overflow: hidden;
+    }
+    .priceAndGrade {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      .price {
+        text-align: right;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .grade {
+        margin-top: 5px;
+        color: #CCD2E3;
+        i {
+          color: #FFE459;
+          margin-right: 5px;
+        }
+      }
+    }
+    ${mq[1]} {
+      margin-bottom: 30px;
+    }
+  }
+  ${mq[1]} {
+    display: block;
+    width: 100%;
+  }
 `;
 
-export { MakingDiv, MenuList, MenuItem, ProducerListDiv, ProducerDiv };
+export { MakingDiv, MenuList, MenuItem, ProducerListDiv, ProducerListContainer };

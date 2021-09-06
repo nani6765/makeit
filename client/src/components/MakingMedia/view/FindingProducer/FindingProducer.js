@@ -9,14 +9,14 @@ function FindingProducer() {
   return (
     <>
       <ProducerListDiv>
-        <div>
-          <p class="category">홈 &gt; {SubCategory}</p>
+        <div className="GNB">
+          <p className="category">홈 &gt; {SubCategory}</p>
           <Dropdown id="sort">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {Sort}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
+            <Dropdown.Menu id="dropdown-menu">
               <Dropdown.Item>인기순</Dropdown.Item>
               <Dropdown.Item>최신순</Dropdown.Item>
             </Dropdown.Menu>

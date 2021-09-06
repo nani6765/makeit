@@ -5,6 +5,7 @@ import YOUTUBE_API from "../../../../../../config/youtubeAPI.js";
 function YoutubeModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
+  const [CheckFlag, setCheckFlag] = useState([false, false, false, false, false])
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -15,13 +16,17 @@ function YoutubeModal(props) {
       },
     });
     setSearchResultArr([...response.data.items]);
+    setCheckFlag([false, false, false, false, false]);
   };
 
-  function InputCheckHandler(e, snippet) {
+  function InputCheckHandler(e, snippet, flagIdx) {
     let temp = [...props.VideoArr];
+    let flagTemp = [...CheckFlag];
     if (e.target.checked) {
       temp.push(snippet);
       props.setVideoArr([...temp]);
+      flagTemp[flagIdx] = true;
+      setCheckFlag([...flagTemp]);
     } else {
       let removed = [];
       if (temp.length === 1) {
@@ -34,6 +39,8 @@ function YoutubeModal(props) {
         console.log("removed", removed);
         props.setVideoArr([...removed]);
       }
+      flagTemp[flagIdx] = false;
+      setCheckFlag([...flagTemp]);
     }
   }
 
@@ -67,12 +74,14 @@ function YoutubeModal(props) {
           <ul className="resultList">
             {SearchResultArr[0] &&
               SearchResultArr.map((Video, idx) => {
+                let flag= false;
                 return (
                   <li key={idx}>
                     <div>
                       <input
                         type="checkbox"
-                        onChange={(e) => InputCheckHandler(e, Video)}
+                        checked={CheckFlag[idx]}
+                        onChange={(e) => InputCheckHandler(e, Video, idx)}
                         disabled={props.VideoArr.length >= 5 ? true : false}
                       />
                     </div>
