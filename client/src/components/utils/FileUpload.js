@@ -4,7 +4,7 @@ import {
   DropZoneDiv,
   DropZoneContent,
   ImageArea,
-} from "./FileUploadContent.js";
+} from "./css/FileUploadContent.js";
 import axios from "axios";
 
 /** @jsxRuntime classic */

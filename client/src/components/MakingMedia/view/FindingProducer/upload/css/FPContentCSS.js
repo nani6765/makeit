@@ -136,6 +136,7 @@ const ProtFolioDiv = styled.div`
     0px 9px 30px rgba(163, 1, 79, 0.05);
   border-radius: 15px;
   padding: 20px;
+  margin-bottom: 1rem;
   p {
     margin-bottom: 0px;
   }
@@ -230,4 +231,111 @@ const ProtFolioDiv = styled.div`
   }
 `;
 
-export { DetailDiv, ProtFolioDiv };
+const PriceDiv = styled.div`
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  .InputDiv {
+    display: inline-flex;
+    margin-top: 1rem;
+    input {
+      margin-left: 0px;
+      margin-right: 1rem;
+      position: relative;
+      display: inline;
+    }
+  }
+`;
+
+const ConfirmDiv = styled.div`
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  margin-bottom: 1rem;
+  .confirm {
+    textarea {
+      min-height: 200px;
+      border-radius: 8px;
+      border: 1px solid #d8d8d8;
+      padding: 10px;
+      width: 100%;
+      resize: none;
+      &:focus {
+        outline: none;
+      }
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: grey;
+        border-radius: 15px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: #c6c6c6;
+        border-radius: 15px;
+        box-shadow: inset 0px 0px 5px white;
+      }
+      ${mq[0]} {
+        min-height: 200px;
+        &::placeholder {
+          padding-top: 100px;
+        }
+      }
+      ${mq[1]} {
+        min-height: 150px;
+        &::placeholder {
+          padding-top: 15px;
+        }
+      }
+    }
+  }
+  .cancel {
+    margin-top: 1rem;
+    .content {
+      text-align: center;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #d8d8d8;
+      padding: 20px;
+      p {
+        word-break: keep-all;
+        margin-bottom: 0px;
+        -ms-user-select: none;
+        -moz-user-select: -moz-none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+        i {
+          margin-left: 0.5rem;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .FAQ {
+    margin-top: 1rem;
+    .btnArea {
+      text-align: center;
+      button {
+        background: #f8f5fb;
+        border: 1px solid #d8d8d8;
+        border-radius: 8px;
+        padding: 5px 10px 5px 10px;
+      }
+    }
+  }
+`;
+
+export { DetailDiv, ProtFolioDiv, PriceDiv, ConfirmDiv };

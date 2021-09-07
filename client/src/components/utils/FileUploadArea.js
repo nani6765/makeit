@@ -1,6 +1,6 @@
 import React from "react";
 import Dropzone from "react-dropzone";
-import { DropZoneContent } from "./FileUploadContent.js";
+import { DropZoneContent } from "./css/FileUploadContent.js";
 import axios from "axios";
 
 /** @jsxRuntime classic */

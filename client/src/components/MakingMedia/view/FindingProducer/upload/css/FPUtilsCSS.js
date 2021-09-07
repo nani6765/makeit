@@ -21,8 +21,8 @@ const ContentHeading = styled.div`
 const FooterBtnDiv = styled.div`
   width: 100%;
   text-align: right;
-  margin-top: 5vh;
-  margin-bottom: 5vh;
+  margin-top: 3vh;
+  margin-bottom: 2vh;
   button {
     border-radius: 10px;
     padding: 5px 10px 5px 10px;
@@ -129,4 +129,43 @@ const YoutubeDiv = styled.div`
   }
 `;
 
-export { ContentHeading, FooterBtnDiv, YoutubeDiv };
+const FAQDiv = styled.div`
+  display: flex;
+  padding: 10px;
+  .content {
+    display: grid;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "qSpan qInput"
+      "aSpan aInput";
+    margin-bottom: 1rem;
+    grid-gap: 1rem;
+    padding: 20px;
+    border-radius: 14px;
+    background-color: #f8f5fb;
+    span {
+      font-weight: bold;
+    }
+    input {
+      background: #ffffff;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+      padding: 5px 10px 5px 10px;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  i {
+    color: red;
+    cursor: pointer;
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+`;
+
+export { ContentHeading, FooterBtnDiv, YoutubeDiv, FAQDiv };

@@ -6,7 +6,6 @@ import FileShowArea from "../../../../../utils/FileShowArea.js";
 import YoutubeModal from "../utils/YoutubeModal.js";
 
 import { ProtFolioDiv } from "../css/FPContentCSS";
-import { remove } from "lodash";
 
 function Portfolio(props) {
   const [ThumbnailArrLength, setThumbnailArrLength] = useState(0);

@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageArea } from "./FileUploadContent.js";
+import { ImageArea } from "./css/FileUploadContent.js";
 import axios from "axios";
 /** @jsxRuntime classic */
 /** @jsx jsx */
