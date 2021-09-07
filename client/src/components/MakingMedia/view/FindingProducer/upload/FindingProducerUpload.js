@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Detail from "./content/Detail.js";
 import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
+import Confirm from "./content/Confirm.js";
 
 import {
   UploadForm,
@@ -29,6 +30,11 @@ function FindingProducerUpload() {
 
   //가격설정
   //수정환불안내
+  const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
+
+  useEffect(() => {
+    console.log(FAQList);
+  }, [FAQList]);
 
   const setRightContent = () => {
     switch (CurrentProcess) {
@@ -61,10 +67,25 @@ function FindingProducerUpload() {
         );
 
       case "가격설정":
-        return <Price />;
+        return <Price setCurrentProcess={setCurrentProcess} />;
+
+      case "수정/환불안내":
+        return <Confirm FAQList={FAQList} setFAQList={setFAQList} />;
 
       default:
-        break;
+        return (
+          <Detail
+            setCurrentProcess={setCurrentProcess}
+            Category={Category}
+            setCategory={setCategory}
+            Description={Description}
+            setDescription={setDescription}
+            WorkTypeArr={WorkTypeArr}
+            setWorkTypeArr={setWorkTypeArr}
+            VideoPurposeArr={VideoPurposeArr}
+            setVideoPurposeArr={setVideoPurposeArr}
+          />
+        );
     }
   };
 

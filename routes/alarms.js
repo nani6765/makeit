@@ -50,17 +50,20 @@ router.post("/allCheck", (req, res) => {
 });
 
 router.post("/isChecked", (req, res) => {
-  Alarm.find({uid: req.body.uid, isCheck: false})
-  .exec()
-  .then((response) => {
+  console.log("isChecked");
+
+  Alarm.find({ uid: req.body.uid, isCheck: false })
+    .exec()
+    .then((response) => {
       return res.status(200).send({
         success: true,
         isCheck: response.length ? true : false,
       });
-  }).catch((err) => {
-    console.log(err);
-    return res.status(400).json({ success: false, err });
-  })
-})
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false, err });
+    });
+});
 
 module.exports = router;
