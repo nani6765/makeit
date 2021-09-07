@@ -38,12 +38,12 @@ const MenuItem = styled.li`
 `;
 
 const ProducerListDiv = styled.div`
-  position: relative;
+  display: inline-block;
   margin-top: 30px;
+  margin-left: 20px;
   width: 70%;
   height: auto;
   padding: auto 0px;
-  left: 30%;
   .GNB {
     height: 4vh;
     display: flex;
@@ -74,7 +74,7 @@ const ProducerListContainer = styled.div`
   display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr 1fr;
-  gap: 50px;
+  gap: 5%;
 	grid-template-areas:
   "1 2 3"
   "4 5 6"
@@ -88,7 +88,7 @@ const ProducerListContainer = styled.div`
     flex-direction: column;
 
     width: 100%;
-    height: 25vh;
+    height: 100%;
     padding: 15px;
 
     background: #FFFFFF;
@@ -115,7 +115,8 @@ const ProducerListContainer = styled.div`
     .title {
       display: block;
       position: relative;
-      height: 60px;
+      height: auto;
+      max-height: 60px;
       margin-top: 5px;
       font-size:18px;
       line-height: 30px;
@@ -145,6 +146,18 @@ const ProducerListContainer = styled.div`
     ${mq[1]} {
       margin-bottom: 30px;
     }
+  }
+  ${mq[0]} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "1 2"
+    "3 4"
+    "5 6"
+    "7 8"
+    "9 10"
+    "11 12";
   }
   ${mq[1]} {
     display: block;

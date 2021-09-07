@@ -8,6 +8,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const MakingDiv = styled.div`
   width: 70%;
+  height: auto;
   margin: 0 auto;
   padding-top: 2vh;
   padding-bottom: 10vh;
@@ -51,4 +52,39 @@ const DescriptionDiv = styled.div`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem, DescriptionDiv };
+const StickyBarDiv = styled.div`
+  display: inline-block;
+  position: sticky;
+  top: 100px;
+  left: 30px;
+  width: 25%;
+  padding : 20px;
+  margin-top: 20px;
+  
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+
+  text-align: center;
+
+  .category {
+    height: 40px;
+    color: #702C8A;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .subCategory {
+    margin-top: 10px;
+    p {
+      height: 35px;
+    }
+    p.active {
+      font-weight: bold;
+    }
+  }
+  
+`;
+
+export { MakingDiv, MenuList, MenuItem, DescriptionDiv, StickyBarDiv };

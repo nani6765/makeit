@@ -23,10 +23,12 @@ function HeaderBell(props) {
       uid: user.userData.uid,
     };
     try {
-      await axios.get("/api/alarm/isChecked", body).then((response) => {
+      await axios.post("/api/alarm/isChecked", body).then((response) => {
         if (response.data.success) {
           setAlarmCheck(response.data.isCheck);
           dispatch(setAlarmTrue());
+        } else {
+          console.log(response.data.error);
         }
       });
     } catch (error) {
@@ -45,6 +47,7 @@ function HeaderBell(props) {
 
   useEffect(() => {
     if (!alarm.AlarmCheckFin) {
+     
       AlarmChecked();
     } else {
       ChatCheckd.then((val) => {
