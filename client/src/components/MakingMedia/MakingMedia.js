@@ -9,7 +9,7 @@ function MakingMedia() {
   const setContent = () => {
     switch (Menu) {
       case "영상 제작자 탐색":
-        return <FindingProducer />;
+        return <FindingProducer Menu={Menu}/>;
 
       default:
         break;

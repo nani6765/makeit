@@ -27,6 +27,8 @@ function HeaderBell(props) {
         if (response.data.success) {
           setAlarmCheck(response.data.isCheck);
           dispatch(setAlarmTrue());
+        } else {
+          console.log(response.data.error);
         }
       });
     } catch (error) {
@@ -45,6 +47,7 @@ function HeaderBell(props) {
 
   useEffect(() => {
     if (!alarm.AlarmCheckFin) {
+     
       AlarmChecked();
     } else {
       ChatCheckd.then((val) => {

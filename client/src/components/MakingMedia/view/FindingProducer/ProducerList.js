@@ -207,7 +207,7 @@ function ProducerList() {
                 <div className="priceAndGrade">
                     <p className="price">300,000원</p>
                     <p className="grade">
-                        <i class="bi bi-star"></i>
+                        <i className="bi bi-star"></i>
                         3.0 | 3개의 평가
                     </p>
                 </div>
@@ -230,7 +230,7 @@ function ProducerList() {
                 <div className="priceAndGrade">
                     <p className="price">300,000원</p>
                     <p className="grade">
-                        <i class="bi bi-star"></i>
+                        <i className="bi bi-star"></i>
                         3.0 | 3개의 평가
                     </p>
                 </div>
@@ -253,7 +253,7 @@ function ProducerList() {
                 <div className="priceAndGrade">
                     <p className="price">300,000원</p>
                     <p className="grade">
-                        <i class="bi bi-star"></i>
+                        <i className="bi bi-star"></i>
                         3.0 | 3개의 평가
                     </p>
                 </div>
@@ -276,7 +276,7 @@ function ProducerList() {
                 <div className="priceAndGrade">
                     <p className="price">300,000원</p>
                     <p className="grade">
-                        <i class="bi bi-star"></i>
+                        <i className="bi bi-star"></i>
                         3.0 | 3개의 평가
                     </p>
                 </div>
