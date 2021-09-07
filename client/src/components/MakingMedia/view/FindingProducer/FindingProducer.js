@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import ProducerList from "./ProducerList.js";
 import { ProducerListDiv } from "../../css/FindingProducerCSS.js";
 import Dropdown from 'react-bootstrap/Dropdown'
 function FindingProducer() {
@@ -9,20 +9,20 @@ function FindingProducer() {
   return (
     <>
       <ProducerListDiv>
-        <div>
-          <p class="category">홈 &gt; {SubCategory}</p>
+        <div className="GNB">
+          <p className="category">홈 &gt; {SubCategory}</p>
           <Dropdown id="sort">
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {Sort}
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
+            <Dropdown.Menu id="dropdown-menu">
               <Dropdown.Item>인기순</Dropdown.Item>
               <Dropdown.Item>최신순</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        lorelemdmdksk
+        <ProducerList />
       </ProducerListDiv>
     </>
   );
