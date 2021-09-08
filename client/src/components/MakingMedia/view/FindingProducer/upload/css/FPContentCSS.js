@@ -246,15 +246,47 @@ const PriceDiv = styled.div`
   height: auto;
   padding: 20px;
   display: flex;
+  margin-bottom: 1rem;
   flex-direction: column;
-  .InputDiv {
-    display: inline-flex;
-    margin-top: 1rem;
-    input {
-      margin-left: 0px;
+  .inputArea {
+    display: flex;
+    margin-bottom: 1rem;
+    align-content: center;
+    align-items: center;
+    label {
+      margin-right: 0.5rem;
+    }
+    button {
+      background-color: #ffffff;
+      color: black;
+      font-weight: bold;
+      border: 1.5px solid #eaeaea;
+      border-radius: 16px;
       margin-right: 1rem;
-      position: relative;
-      display: inline;
+      &.btn-primary:not(:disabled):not(.disabled):active:focus,
+      &.btn-primary.dropdown-toggle:focus,
+      &.btn-primary.dropdown-toggle {
+        background-color: #ffffff;
+        color: black;
+        font-weight: bold;
+        border: 1.5px solid #eaeaea;
+        border-radius: 16px;
+        box-shadow: none;
+      }
+    }
+    input {
+      &[type="radio"] {
+        margin-right: 0.5rem;
+      }
+      &[name="priceInput"] {
+        padding: 5px;
+        border-radius: 14px;
+        border: 1px solid #c6c6c6;
+      }
+    }
+    a:focus,
+    a:active {
+      background-color: white;
     }
   }
 `;
