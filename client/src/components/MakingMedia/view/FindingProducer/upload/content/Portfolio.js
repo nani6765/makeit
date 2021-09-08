@@ -12,6 +12,7 @@ function Portfolio(props) {
   const [DetailImgArrLength, setDetailImgArrLength] = useState(0);
   const [VideoArrLength, setVideoArrLength] = useState(0);
   const [ModalFlag, setModalFlag] = useState(false);
+  const [CheckFlag, setCheckFlag] = useState([]);
 
   useEffect(() => {
     setThumbnailArrLength(props.ThumbnailArr.length);
@@ -24,6 +25,21 @@ function Portfolio(props) {
   useEffect(() => {
     setVideoArrLength(props.VideoArr.length);
   }, [props.VideoArr]);
+
+  useEffect(() => {
+    let temp = [];
+    for (let i = 0; i < VideoArrLength; i++) {
+      temp.push(false);
+    }
+    setCheckFlag([...temp]);
+  }, [VideoArrLength]);
+
+  const DeleteHandler = (idx) => {
+    let temp = [...props.VideoArr];
+    let removed = [];
+    removed = temp.splice(idx, 1);
+    props.setVideoArr([...temp]);
+  };
 
   return (
     <ProtFolioDiv>
@@ -111,7 +127,13 @@ function Portfolio(props) {
               <li key={idx}>
                 <div className="deleteArea">
                   <p>삭제</p>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={CheckFlag[idx]}
+                    onClick={() => {
+                      DeleteHandler(idx);
+                    }}
+                  />
                 </div>
 
                 <img src={Video.snippet.thumbnails.high.url} alt="" />

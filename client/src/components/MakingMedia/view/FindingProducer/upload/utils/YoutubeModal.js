@@ -5,7 +5,13 @@ import YOUTUBE_API from "../../../../../../config/youtubeAPI.js";
 function YoutubeModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
-  const [CheckFlag, setCheckFlag] = useState([false, false, false, false, false])
+  const [CheckFlag, setCheckFlag] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -29,16 +35,9 @@ function YoutubeModal(props) {
       setCheckFlag([...flagTemp]);
     } else {
       let removed = [];
-      if (temp.length === 1) {
-        props.setVideoArr([...removed]);
-      } else {
-        let idx = temp.findIndex(
-          (obj) => obj.id.videoId === snippet.id.videoId
-        );
-        removed = temp.splice(idx, 1);
-        console.log("removed", removed);
-        props.setVideoArr([...removed]);
-      }
+      let idx = temp.findIndex((obj) => obj.id.videoId === snippet.id.videoId);
+      removed = temp.splice(idx, 1);
+      props.setVideoArr([...temp]);
       flagTemp[flagIdx] = false;
       setCheckFlag([...flagTemp]);
     }
@@ -74,7 +73,7 @@ function YoutubeModal(props) {
           <ul className="resultList">
             {SearchResultArr[0] &&
               SearchResultArr.map((Video, idx) => {
-                let flag= false;
+                let flag = false;
                 return (
                   <li key={idx}>
                     <div>
