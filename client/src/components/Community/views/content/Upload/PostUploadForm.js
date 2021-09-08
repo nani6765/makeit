@@ -93,7 +93,9 @@ function PostUploadForm(props) {
 
       <DropZoneDiv>
         <FileUploadArea Images={Image} setImages={setImage} />
-        {Image[0] ? <FileShowArea Images={Image} setImages={setImage} /> : null}
+        {Image[0] ? (
+          <FileShowArea Images={Image} setImages={setImage} type="community" />
+        ) : null}
       </DropZoneDiv>
 
       <BtnDiv>

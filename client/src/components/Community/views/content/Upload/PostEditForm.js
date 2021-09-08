@@ -90,7 +90,9 @@ function PostEditForm() {
 
       <DropZoneDiv>
         <FileUploadArea Images={Image} setImages={setImage} />
-        {Check ? <FileShowArea Images={Image} setImages={setImage} /> : null}
+        {Check ? (
+          <FileShowArea Images={Image} setImages={setImage} type="community" />
+        ) : null}
       </DropZoneDiv>
 
       <BtnDiv>
