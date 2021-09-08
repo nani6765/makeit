@@ -8,7 +8,7 @@ function realTime() {
   return moment().format("YY-MM-DD[ ]HH:mm");
 }
 
-const ProPost = mongoose.Schema(
+const ProPostSchema = mongoose.Schema(
   {
     //쓰니정보
     auther: {
@@ -104,7 +104,7 @@ const ProPost = mongoose.Schema(
   }
 );
 
-const TempProPost = mongoose.Schema(
+const TempProPostSchema = mongoose.Schema(
   {
     //쓰니정보
     auther: {
@@ -180,7 +180,8 @@ const TempProPost = mongoose.Schema(
 );
 
 
-const ProReview = mongoose.Schema(
+//아직 다 안함
+const ProReviewSchema = mongoose.Schema(
   {
     auther: {
       type: Schema.Types.ObjectId,
@@ -206,31 +207,15 @@ const ProReview = mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    rerepleNum: {
-      type: Number,
-      default: 0,
-    },
-    likeArray: {
-      type: Array,
-    },
-    isDeleted: {
-      type: Boolean,
-      default: false,
-    },
-    rerepleArray: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "coRerepleSchema",
-      },
-    ],
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
     //timestamps: true,
-    collection: "coReples",
+    collection: "proReview",
   }
 );
 
-const ProPost = mongoose.model("ProPost", ProPost);
-const TempProPost = mongoose.model("TempProPost", TempProPost);
-module.exports = { ProPost, TempProPost };
+const ProPost = mongoose.model("ProPostSchema", ProPostSchema);
+const TempProPost = mongoose.model("TempProPostSchema", TempProPostSchema);
+const ProReview = mongoose.model("ProReviewSchema", ProReviewSchema);
+module.exports = { ProPost, TempProPost, ProReview };

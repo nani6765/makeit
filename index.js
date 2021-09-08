@@ -15,6 +15,7 @@ app.use("/api/user", require("./routes/user.js"));
 app.use("/api/community", require("./routes/community.js"));
 app.use("/api/chat", require("./routes/chat.js"));
 app.use("/api/alarm", require("./routes/alarms.js"));
+app.use("/api/making", require("./routes/making.js"));
 
 const port = process.env.PORT || 5000;
 

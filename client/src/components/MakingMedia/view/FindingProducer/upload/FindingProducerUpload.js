@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Detail from "./content/Detail.js";
 import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
 import Confirm from "./content/Confirm.js";
+
+import axios from 'axios';
 
 import {
   UploadForm,
@@ -13,6 +16,8 @@ import {
 } from "./css/FPCSS.js";
 
 function FindingProducerUpload() {
+  const user = useSelector((state) => state.user);
+
   const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
 
@@ -38,6 +43,32 @@ function FindingProducerUpload() {
   useEffect(() => {
     console.log(FAQList);
   }, [FAQList]);
+  
+  const TempSaveHandler = () => {
+    let body = {
+      uid: user.userData.uid,
+      email: user.userData.email,
+      oneLineIntroduce: OneLineIntroduce,
+      category: Category,
+      description: Description,
+      workTypeArr: WorkTypeArr,
+      videoPurposeArr: VideoPurposeArr,
+      thumbnailArr: ThumbnailArr,
+      detailImgArr: DetailImgArr,
+      videoArr: VideoArr,
+      priceInfo: PriceInfo,
+      editandReprogress: EditandReprogress,
+      FAQList: FAQList,
+    }
+    axios.post("/api/making/producer/tempSaving", body).then((response, err) => {
+      if(response.data.success) {
+        alert("임시 저장이 완료되었습니다.");
+      }
+      else {
+        alert("??", err)
+      }
+    })
+  }
 
   const setRightContent = () => {
     switch (CurrentProcess) {
@@ -54,6 +85,7 @@ function FindingProducerUpload() {
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
             setVideoPurposeArr={setVideoPurposeArr}
+            TempSaveHandler={TempSaveHandler}
           />
         );
 
@@ -96,6 +128,7 @@ function FindingProducerUpload() {
   useEffect(() => {
     console.log("CurrentProcess : ", CurrentProcess);
   }, [CurrentProcess]);
+
   return (
     <>
       <UploadHead>
