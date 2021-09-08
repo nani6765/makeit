@@ -38,33 +38,45 @@ const MenuItem = styled.li`
 `;
 
 const ProducerListDiv = styled.div`
-  display: inline-block;
-  margin-top: 30px;
-  margin-left: 20px;
-  width: 70%;
+  width: 100%;
   height: auto;
-  padding: auto 0px;
-  .GNB {
-    height: 4vh;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  grid-template-rows: auto;
+  grid-template-areas: "left right";
+  grid-gap: 1rem;
+  .left {
+    grid-area: left;
+  }
+  .right {
+    grid-area: right;
     display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-content: center;
-    align-items: center;
-    .category {
-      color: #A7A5A8;
-      font-size: 15px;
-    }
-    #sort {
-      #dropdown-basic {
-        padding: 3px 15px;
-        margin: 0px;
-        border: 1.5px solid #EAEAEA;
-        background: #fff;
-        color: black;
-        border-radius: 16px;
-
-        font-size: 15px;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    over-flow: none;
+    .GNB {
+      display: flex;
+      align-content: center;
+      justify-content: space-between;
+      align-items: center;
+      #sort {
+        button {
+          background-color: #ffffff;
+          color: black;
+          font-weight: bold;
+          border: 1.5px solid #eaeaea;
+          border-radius: 16px;
+          &:foucs {
+            outline: none;
+            box-shadow: none;
+          }
+          &.btn-primary:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
       }
     }
   }
@@ -72,14 +84,14 @@ const ProducerListDiv = styled.div`
 
 const ProducerListContainer = styled.div`
   display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 5%;
-	grid-template-areas:
-  "1 2 3"
-  "4 5 6"
-  "7 8 9"
-  "10 11 12";
+  grid-template-areas:
+    "1 2 3"
+    "4 5 6"
+    "7 8 9"
+    "10 11 12";
 
   margin-top: 10px;
 
@@ -91,7 +103,7 @@ const ProducerListContainer = styled.div`
     height: 100%;
     padding: 15px;
 
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
       0px 9px 30px rgba(163, 1, 79, 0.05);
     box-sizing: border-box;
@@ -105,10 +117,10 @@ const ProducerListContainer = styled.div`
     }
     .info {
       margin-top: 15px;
-      color: #A7A5A8;
+      color: #a7a5a8;
       align-items: center;
       i {
-        color: #FF5151;
+        color: #ff5151;
         margin-left: 5px;
       }
     }
@@ -118,7 +130,7 @@ const ProducerListContainer = styled.div`
       height: auto;
       max-height: 60px;
       margin-top: 5px;
-      font-size:18px;
+      font-size: 18px;
       line-height: 30px;
       font-weight: 600;
       word-break: keep-all;
@@ -136,9 +148,9 @@ const ProducerListContainer = styled.div`
       }
       .grade {
         margin-top: 5px;
-        color: #CCD2E3;
+        color: #ccd2e3;
         i {
-          color: #FFE459;
+          color: #ffe459;
           margin-right: 5px;
         }
       }
@@ -152,12 +164,12 @@ const ProducerListContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas:
-    "1 2"
-    "3 4"
-    "5 6"
-    "7 8"
-    "9 10"
-    "11 12";
+      "1 2"
+      "3 4"
+      "5 6"
+      "7 8"
+      "9 10"
+      "11 12";
   }
   ${mq[1]} {
     display: block;
@@ -165,4 +177,10 @@ const ProducerListContainer = styled.div`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem, ProducerListDiv, ProducerListContainer };
+export {
+  MakingDiv,
+  MenuList,
+  MenuItem,
+  ProducerListDiv,
+  ProducerListContainer,
+};

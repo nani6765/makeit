@@ -39,7 +39,7 @@ const MenuItem = styled.li`
 `;
 
 const DescriptionDiv = styled.div`
-  background: #C4C4C4;
+  background: #c4c4c4;
   width: 100%;
   height: auto;
   left: 0px;
@@ -53,28 +53,23 @@ const DescriptionDiv = styled.div`
 `;
 
 const StickyBarDiv = styled.div`
-  display: inline-block;
   position: sticky;
   top: 100px;
-  left: 30px;
-  width: 25%;
-  padding : 20px;
+  left: 0px;
+  width: 100%;
+  padding: 20px;
   margin-top: 20px;
-  
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
-
   text-align: center;
-
   .category {
     height: 40px;
-    color: #702C8A;
+    color: #702c8a;
     font-size: 20px;
     font-weight: bold;
   }
-
   .subCategory {
     margin-top: 10px;
     p {
@@ -84,7 +79,6 @@ const StickyBarDiv = styled.div`
       font-weight: bold;
     }
   }
-  
 `;
 
 export { MakingDiv, MenuList, MenuItem, DescriptionDiv, StickyBarDiv };
