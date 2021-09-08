@@ -148,6 +148,12 @@ const ProtFolioDiv = styled.div`
       color: red;
     }
   }
+  .upload {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
   .notice {
     background: #faf5f5;
     border: 1px solid rgba(163, 136, 240, 0.44);

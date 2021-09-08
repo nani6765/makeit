@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageArea } from "./css/FileUploadContent.js";
+import { CommunityImageArea, PUThumbnail } from "./css/FileUploadContent.js";
 import axios from "axios";
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -23,17 +23,23 @@ function FileShow(props) {
       });
   };
 
+  const CSSSelector = () => {
+    switch (props.type) {
+      case "Community":
+        return CommunityImageArea;
+      case "PUThumbnail":
+        return PUThumbnail;
+      default:
+        return CommunityImageArea;
+    }
+  };
   return (
-    <div css={ImageArea}>
+    <div css={CSSSelector}>
       {props.Images.map((image, idx) => (
-        <figure key={idx}>
-          <img
-            src={image.path}
-            alt={image.key}
-            style={{ marginLeft: "10px" }}
-          />
-          <figcaption onClick={() => deleteHandler(image)}>X</figcaption>
-        </figure>
+        <div key={idx}>
+          <img src={image.path} alt={image.key} />
+          <span onClick={() => deleteHandler(image)}>삭제</span>
+        </div>
       ))}
     </div>
   );

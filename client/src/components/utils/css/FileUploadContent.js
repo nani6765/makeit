@@ -1,7 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import styled from "@emotion/styled";
+import styled from "@emotion/styled/macro";
 
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
@@ -20,74 +20,40 @@ const DropZoneContent = css`
   font-size: 26px;
 `;
 
-const ImageArea = css`
-  display: flex;
+const CommunityImageArea = css`
   width: 100%;
-  max-width: 900px;
-  height: 310px;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  align-self: center;
-  figure {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    position: relative;
-    margin-right: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  div {
+    width: 25%;
+    margin: 20px;
     img {
-      max-width: 300px;
+      margin: 0px;
       width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-      margin-left: 10px;
+      height: 100%;
     }
-    figcaption {
-      background-color: black;
-      padding: 10px;
-      border-radius: 100%;
-      color: white;
-      position: absolute;
-      top: 5%;
-      right: 5%;
+    span {
+      color: red;
       cursor: pointer;
-    }
-  }
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: grey;
-    border-radius: 15px;
-    background-clip: padding-box;
-    border: 2px solid transparent;
-  }
-  &::-webkit-scrollbar-track {
-    display: none;
-  }
-  ${mq[0]} {
-    width: 80%;
-    margin-left: 10px;
-    flex-direction: column;
-    height: auto;
-    figure {
-      position: relative;
-      margin-right: 0px;
-      img {
-        height: 100%;
-        margin: 0px;
-      }
-      figcaption {
-        background-color: black;
-        padding: 10px;
-        border-radius: 100%;
-        color: white;
-        position: absolute;
-        top: 5%;
-        right: 5%;
-        cursor: pointer;
-      }
+      font-size: 10px;
+      font-weight: bold;
     }
   }
 `;
 
-export { DropZoneDiv, DropZoneContent, ImageArea };
+const PUThumbnail = css`
+  width: 100%;
+  div {
+    margin: 10px;
+    width: 100%;
+    img {
+      width: 100%;
+    }
+    span {
+      display: none;
+    }
+  }
+`;
+
+export { DropZoneDiv, DropZoneContent, CommunityImageArea, PUThumbnail };

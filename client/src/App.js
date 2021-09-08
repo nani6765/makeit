@@ -30,7 +30,6 @@ import PostEdit from "./components/Community/views/PostEdit.js";
 //MakingMedia
 import MakingMedia from "./components/MakingMedia/MakingMedia.js";
 import FindingProducerUplopad from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerUpload.js";
-import ProducerDetail from "./components/MakingMedia/view/FindingProducer/ProducerDetail.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -77,7 +76,6 @@ function App() {
             path="/Making/ProducerUpload"
             component={FindingProducerUplopad}
           />
-          <Route exact path="/Making/ProducerDetail" component={ProducerDetail} />
         </Switch>
         <Footer />
       </>

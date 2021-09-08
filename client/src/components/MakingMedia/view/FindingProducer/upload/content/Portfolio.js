@@ -62,33 +62,39 @@ function Portfolio(props) {
           <span className="curentLength">{ThumbnailArrLength}</span>/1
         </span>
       </p>
-      <FileUploadArea
-        Images={props.ThumbnailArr}
-        setImages={props.setThumbnailArr}
-      />
-      {props.ThumbnailArr[0] ? (
-        <FileShowArea
+      <div className="upload">
+        <FileUploadArea
           Images={props.ThumbnailArr}
           setImages={props.setThumbnailArr}
         />
-      ) : null}
+        {props.ThumbnailArr[0] ? (
+          <FileShowArea
+            Images={props.ThumbnailArr}
+            setImages={props.setThumbnailArr}
+            type="PUThumbnail"
+          />
+        ) : null}
+      </div>
 
-      <p>
+      <p style={{ marginTop: "1rem" }}>
         상세이미지등록(선택)
         <span>
           <span className="curentLength">{DetailImgArrLength}</span>/9
         </span>
       </p>
-      <FileUploadArea
-        Images={props.DetailImgArr}
-        setImages={props.setDetailImgArr}
-      />
-      {props.DetailImgArr[0] ? (
-        <FileShowArea
+
+      <div className="upload">
+        <FileUploadArea
           Images={props.DetailImgArr}
           setImages={props.setDetailImgArr}
         />
-      ) : null}
+        {props.DetailImgArr[0] ? (
+          <FileShowArea
+            Images={props.DetailImgArr}
+            setImages={props.setDetailImgArr}
+          />
+        ) : null}
+      </div>
 
       <div className="notice">
         <h3>Tip!</h3>
