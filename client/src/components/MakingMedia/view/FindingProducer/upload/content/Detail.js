@@ -36,11 +36,27 @@ function Detail(props) {
     }
   };
 
+  const CheckEmptyContent = () => {
+    if(!props.OneLineIntroduce) {
+      alert("한줄 소개를 입력하세요.");
+      return false;
+    }
+    if(props.Category === "카테고리") {
+      alert("카테고리를 선택하세요.");
+      return false;
+    }
+    if(!props.Description) {
+      alert("상세 설명을 입력하세요.")
+      return false;
+    }
+    return true;
+  }
+
   return (
     <DetailDiv>
       <div className="categoryDiv">
         <span>카테고리</span>
-        <DropdownButton title={props.Category ? props.Category : "카테고리"}>
+        <DropdownButton title={props.Category}>
           {CategoryContent.map((category, idx) => {
             return (
               <Dropdown.Item
@@ -94,6 +110,7 @@ function Detail(props) {
       <FooterBtnArea
         setCurrentProcess={props.setCurrentProcess}
         NextStep="포트폴리오"
+        CheckEmptyContent={CheckEmptyContent}
       />
     </DetailDiv>
   );

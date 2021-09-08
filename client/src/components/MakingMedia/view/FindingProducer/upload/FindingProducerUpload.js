@@ -18,7 +18,7 @@ function FindingProducerUpload() {
 
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
-  const [Category, setCategory] = useState("");
+  const [Category, setCategory] = useState("카테고리");
   const [Description, setDescription] = useState("");
   const [WorkTypeArr, setWorkTypeArr] = useState([]);
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
@@ -29,7 +29,10 @@ function FindingProducerUpload() {
   const [VideoArr, setVideoArr] = useState([]);
 
   //가격설정
+  const [PriceInfo, setPriceInfo] = useState("가격선택");
+
   //수정환불안내
+  const [EditandReprogress, setEditandReprogress] = useState("");
   const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
 
   useEffect(() => {
@@ -41,6 +44,7 @@ function FindingProducerUpload() {
       case "상세설명":
         return (
           <Detail
+            OneLineIntroduce={OneLineIntroduce}
             setCurrentProcess={setCurrentProcess}
             Category={Category}
             setCategory={setCategory}
@@ -67,10 +71,10 @@ function FindingProducerUpload() {
         );
 
       case "가격설정":
-        return <Price setCurrentProcess={setCurrentProcess} />;
+        return <Price setCurrentProcess={setCurrentProcess} PriceInfo={PriceInfo} setPriceInfo={setPriceInfo}/>;
 
       case "수정/환불안내":
-        return <Confirm FAQList={FAQList} setFAQList={setFAQList} />;
+        return <Confirm EditandReprogress={EditandReprogress} setEditandReprogress={setEditandReprogress} FAQList={FAQList} setFAQList={setFAQList} />;
 
       default:
         return (

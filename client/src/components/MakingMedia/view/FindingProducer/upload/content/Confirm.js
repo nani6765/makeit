@@ -17,7 +17,7 @@ function Confirm(props) {
     <ConfirmDiv>
       <div className="confirm">
         <ContentHeadingArea HeadingTitle="수정 및 재진행" />
-        <textarea name="" id="" cols="30" rows="10"></textarea>
+        <textarea name="" id="" cols="30" rows="10" value={props.EditandReprogress} onChange={(e) => props.setEditandReprogress(e.currentTarget.value)}></textarea>
       </div>
       <div className="cancel">
         <ContentHeadingArea HeadingTitle="취소 및 환불 규정" />
