@@ -55,7 +55,7 @@ const ProducerListDiv = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    over-flow: none;
+
     .GNB {
       display: flex;
       align-content: center;
@@ -177,7 +177,6 @@ const ProducerListContainer = styled.div`
   }
 `;
 
-<<<<<<< HEAD
 export {
   MakingDiv,
   MenuList,
@@ -185,35 +184,3 @@ export {
   ProducerListDiv,
   ProducerListContainer,
 };
-=======
-const ProducerDetailDiv = styled.div`
-  width: 70%;
-  height: auto;
-  margin: 0 auto;
-  padding-top: 2vh;
-  padding-bottom: 10vh;
-  ${mq[1]} {
-    width: 90%;
-  }
-  .category {
-    color: #A7A5A8;
-    font-size: 13px;
-  }
-  .mainInfo {
-    background: #FFFFFF;
-    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-      0px 9px 30px rgba(163, 1, 79, 0.05);
-    box-sizing: border-box;
-    border-radius: 22px;
-    .likeshare {
-      color: #CCD2E3;
-      font-size: 13px;
-      .like i {
-        color: #FF5151;
-      }
-    }
-  }
-`;
-
-export { MakingDiv, MenuList, MenuItem, ProducerListDiv, ProducerListContainer, ProducerDetailDiv };
->>>>>>> 94eaa629a1505676601fa67e59a9e5250dc87c63
