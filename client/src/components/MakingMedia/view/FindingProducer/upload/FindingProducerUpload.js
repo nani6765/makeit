@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Detail from "./content/Detail.js";
 import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
 import Confirm from "./content/Confirm.js";
+
+import axios from "axios";
 
 import {
   UploadForm,
@@ -13,8 +16,16 @@ import {
 } from "./css/FPCSS.js";
 
 function FindingProducerUpload() {
-  const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
+  const user = useSelector((state) => state.user);
+
+  const UploadProcess = [
+    { idx: 0, value: "상세설명" },
+    { idx: 1, value: "포트폴리오" },
+    { idx: 2, value: "가격설정" },
+    { idx: 3, value: "수정/환불안내" },
+  ];
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
+  const [CureentIdx, setCureentIdx] = useState(0);
 
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
@@ -36,8 +47,21 @@ function FindingProducerUpload() {
   const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
 
   useEffect(() => {
-    console.log(FAQList);
-  }, [FAQList]);
+    switch (CurrentProcess) {
+      case "상세설명":
+        setCureentIdx(0);
+        break;
+      case "포트폴리오":
+        setCureentIdx(1);
+        break;
+      case "가격설정":
+        setCureentIdx(2);
+        break;
+      case "수정/환불안내":
+        setCureentIdx(3);
+        break;
+    }
+  }, [CurrentProcess]);
 
   const setRightContent = () => {
     switch (CurrentProcess) {
@@ -54,6 +78,7 @@ function FindingProducerUpload() {
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
             setVideoPurposeArr={setVideoPurposeArr}
+            TempSaveHandler={TempSaveHandler}
           />
         );
 
@@ -71,10 +96,23 @@ function FindingProducerUpload() {
         );
 
       case "가격설정":
-        return <Price setCurrentProcess={setCurrentProcess} PriceInfo={PriceInfo} setPriceInfo={setPriceInfo}/>;
+        return (
+          <Price
+            setCurrentProcess={setCurrentProcess}
+            PriceInfo={PriceInfo}
+            setPriceInfo={setPriceInfo}
+          />
+        );
 
       case "수정/환불안내":
-        return <Confirm EditandReprogress={EditandReprogress} setEditandReprogress={setEditandReprogress} FAQList={FAQList} setFAQList={setFAQList} />;
+        return (
+          <Confirm
+            EditandReprogress={EditandReprogress}
+            setEditandReprogress={setEditandReprogress}
+            FAQList={FAQList}
+            setFAQList={setFAQList}
+          />
+        );
 
       default:
         return (
@@ -93,9 +131,29 @@ function FindingProducerUpload() {
     }
   };
 
-  useEffect(() => {
-    console.log("CurrentProcess : ", CurrentProcess);
-  }, [CurrentProcess]);
+  const TempSaveHandler = () => {
+    let body = {
+      uid: user.userData.uid,
+      email: user.userData.email,
+      oneLineIntroduce: OneLineIntroduce,
+      category: Category,
+      description: Description,
+      workTypeArr: WorkTypeArr,
+      videoPurposeArr: VideoPurposeArr,
+      thumbnailArr: ThumbnailArr,
+      detailImgArr: DetailImgArr,
+      videoArr: VideoArr,
+      priceInfo: PriceInfo,
+      editandReprogress: EditandReprogress,
+      FAQList: FAQList,
+    };
+    axios.post("/api/making/producer/tempSaving", body).then((response) => {
+      if (response.data.succer) {
+        alert("임시 저장이 완료되었습니다.");
+      }
+    });
+  };
+
   return (
     <>
       <UploadHead>
@@ -125,9 +183,11 @@ function FindingProducerUpload() {
                   return (
                     <li
                       key={idx}
-                      className={CurrentProcess === process ? "active" : null}
+                      className={
+                        CurrentProcess === process.value ? "active" : null
+                      }
                     >
-                      {idx + 1}){process}
+                      {idx + 1}){process.value}
                     </li>
                   );
                 })}
