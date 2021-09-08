@@ -6,7 +6,11 @@ import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
 import Confirm from "./content/Confirm.js";
 
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import axios from "axios";
+>>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
 
 import {
   UploadForm,
@@ -18,8 +22,18 @@ import {
 function FindingProducerUpload() {
   const user = useSelector((state) => state.user);
 
+<<<<<<< HEAD
   const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
+=======
+  const UploadProcess = [
+    { idx: 0, value: "상세설명" },
+    { idx: 1, value: "포트폴리오" },
+    { idx: 2, value: "가격설정" },
+    { idx: 3, value: "수정/환불안내" },
+  ];
+>>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
+  const [CureentIdx, setCureentIdx] = useState(0);
 
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
@@ -103,10 +117,23 @@ function FindingProducerUpload() {
         );
 
       case "가격설정":
-        return <Price setCurrentProcess={setCurrentProcess} PriceInfo={PriceInfo} setPriceInfo={setPriceInfo}/>;
+        return (
+          <Price
+            setCurrentProcess={setCurrentProcess}
+            PriceInfo={PriceInfo}
+            setPriceInfo={setPriceInfo}
+          />
+        );
 
       case "수정/환불안내":
-        return <Confirm EditandReprogress={EditandReprogress} setEditandReprogress={setEditandReprogress} FAQList={FAQList} setFAQList={setFAQList} />;
+        return (
+          <Confirm
+            EditandReprogress={EditandReprogress}
+            setEditandReprogress={setEditandReprogress}
+            FAQList={FAQList}
+            setFAQList={setFAQList}
+          />
+        );
 
       default:
         return (
@@ -125,9 +152,34 @@ function FindingProducerUpload() {
     }
   };
 
+<<<<<<< HEAD
   useEffect(() => {
     console.log("CurrentProcess : ", CurrentProcess);
   }, [CurrentProcess]);
+=======
+  const TempSaveHandler = () => {
+    let body = {
+      uid: user.userData.uid,
+      email: user.userData.email,
+      oneLineIntroduce: OneLineIntroduce,
+      category: Category,
+      description: Description,
+      workTypeArr: WorkTypeArr,
+      videoPurposeArr: VideoPurposeArr,
+      thumbnailArr: ThumbnailArr,
+      detailImgArr: DetailImgArr,
+      videoArr: VideoArr,
+      priceInfo: PriceInfo,
+      editandReprogress: EditandReprogress,
+      FAQList: FAQList,
+    };
+    axios.post("/api/making/producer/tempSaving", body).then((response) => {
+      if (response.data.succer) {
+        alert("임시 저장이 완료되었습니다.");
+      }
+    });
+  };
+>>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
 
   return (
     <>
@@ -158,9 +210,11 @@ function FindingProducerUpload() {
                   return (
                     <li
                       key={idx}
-                      className={CurrentProcess === process ? "active" : null}
+                      className={
+                        CurrentProcess === process.value ? "active" : null
+                      }
                     >
-                      {idx + 1}){process}
+                      {idx + 1}){process.value}
                     </li>
                   );
                 })}

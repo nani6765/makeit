@@ -37,20 +37,20 @@ function Detail(props) {
   };
 
   const CheckEmptyContent = () => {
-    if(!props.OneLineIntroduce) {
+    if (!props.OneLineIntroduce) {
       alert("한줄 소개를 입력하세요.");
       return false;
     }
-    if(props.Category === "카테고리") {
+    if (props.Category === "카테고리") {
       alert("카테고리를 선택하세요.");
       return false;
     }
-    if(!props.Description) {
-      alert("상세 설명을 입력하세요.")
+    if (!props.Description) {
+      alert("상세 설명을 입력하세요.");
       return false;
     }
     return true;
-  }
+  };
 
   return (
     <DetailDiv>

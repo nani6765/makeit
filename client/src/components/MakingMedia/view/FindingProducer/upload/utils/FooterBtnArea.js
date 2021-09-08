@@ -3,10 +3,10 @@ import { FooterBtnDiv } from "../css/FPUtilsCSS";
 
 function FooterBtnArea(props) {
   const nextHandler = () => {
-    if(props.CheckEmptyContent()) {
+    if (props.CheckEmptyContent()) {
       props.setCurrentProcess(props.NextStep);
     }
-  }
+  };
   return (
     <FooterBtnDiv>
       <button className="save" onClick={() => props.TempSaveHandler()}>임시저장</button>
