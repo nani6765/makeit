@@ -81,6 +81,7 @@ function YoutubeModal(props) {
                         type="checkbox"
                         checked={CheckFlag[idx]}
                         onChange={(e) => InputCheckHandler(e, Video, idx)}
+                        value={''}
                         disabled={props.VideoArr.length >= 5 ? true : false}
                       />
                     </div>
