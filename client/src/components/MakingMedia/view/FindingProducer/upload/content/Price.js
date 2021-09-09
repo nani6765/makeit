@@ -7,8 +7,6 @@ import { DropdownButton, Dropdown } from "react-bootstrap";
 import { PriceDiv } from "../css/FPContentCSS.js";
 
 function Price(props) {
-  const [InputFlag, setInputFlag] = useState(false);
-  const [PriceInput, setPriceInput] = useState("");
 
   const PriceArr = [
     "직접 입력",
@@ -20,22 +18,15 @@ function Price(props) {
     "500만원 이상",
   ];
 
-  useEffect(() => {
-    if (props.PriceInfo === "직접 입력") {
-      setInputFlag(true);
-    }
-  }, [props.PriceInfo]);
-
   const CheckEmptyContent = () => {
     if (props.PriceInfo === "가격선택") {
       alert("가격을 선택하세요.");
       return false;
     }
-    if (props.PriceInfo === "직접 입력" && !PriceInput) {
+    if (props.PriceInfo === props.PriceDirectInput) {
       alert("가격을 입력하세요.");
       return false;
     }
-    props.setPriceInfo(PriceInput);
     return true;
   };
 
@@ -48,7 +39,10 @@ function Price(props) {
             type="radio"
             name="price"
             value="가격선택"
-            defaultChecked={true}
+            checked={props.PriceInfo !== "가격문의" ? true : false}
+            onChange={() => {
+              props.setPriceInfo("가격선택");
+            }}
           />
           가격선택
         </label>
@@ -69,8 +63,8 @@ function Price(props) {
         {props.PriceInfo === "직접 입력" && (
           <input
             name="priceInput"
-            placeholder={props.PriceInfo}
-            onChange={(e) => setPriceInput(e.currentTarget.value)}
+            placeholder={props.PriceDirectInput}
+            onChange={(e) => props.setPriceDirectInput(e.currentTarget.value)}
           />
         )}
       </div>
@@ -80,7 +74,8 @@ function Price(props) {
             type="radio"
             name="price"
             value="가격문의"
-            onClick={() => props.setPriceInfo("가격문의")}
+            onChange={() => props.setPriceInfo("가격문의")}
+            checked={props.PriceInfo === "가격문의" ? true : false}
           />
           가격문의
         </label>
@@ -90,6 +85,7 @@ function Price(props) {
         setCurrentProcess={props.setCurrentProcess}
         NextStep="수정/환불안내"
         CheckEmptyContent={CheckEmptyContent}
+        TempSaveHandler={props.TempSaveHandler}
       />
     </PriceDiv>
   );
