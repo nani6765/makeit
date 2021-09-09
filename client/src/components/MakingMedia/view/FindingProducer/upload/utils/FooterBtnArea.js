@@ -9,8 +9,11 @@ function FooterBtnArea(props) {
   };
   return (
     <FooterBtnDiv>
-      <button className="save">임시저장</button>
-      <button className="next" onClick={() => nextHandler()}>
+      <button className="save" onClick={() => props.TempSaveHandler()}>임시저장</button>
+      <button
+        className="next"
+        onClick={() => nextHandler()}
+      >
         다음
       </button>
     </FooterBtnDiv>

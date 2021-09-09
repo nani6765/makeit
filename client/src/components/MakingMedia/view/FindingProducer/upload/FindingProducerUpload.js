@@ -6,7 +6,11 @@ import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
 import Confirm from "./content/Confirm.js";
 
+<<<<<<< HEAD
+import axios from 'axios';
+=======
 import axios from "axios";
+>>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
 
 import {
   UploadForm,
@@ -18,12 +22,16 @@ import {
 function FindingProducerUpload() {
   const user = useSelector((state) => state.user);
 
+<<<<<<< HEAD
+  const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
+=======
   const UploadProcess = [
     { idx: 0, value: "상세설명" },
     { idx: 1, value: "포트폴리오" },
     { idx: 2, value: "가격설정" },
     { idx: 3, value: "수정/환불안내" },
   ];
+>>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
   const [CureentIdx, setCureentIdx] = useState(0);
 
@@ -47,21 +55,34 @@ function FindingProducerUpload() {
   const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
 
   useEffect(() => {
-    switch (CurrentProcess) {
-      case "상세설명":
-        setCureentIdx(0);
-        break;
-      case "포트폴리오":
-        setCureentIdx(1);
-        break;
-      case "가격설정":
-        setCureentIdx(2);
-        break;
-      case "수정/환불안내":
-        setCureentIdx(3);
-        break;
+    console.log(FAQList);
+  }, [FAQList]);
+  
+  const TempSaveHandler = () => {
+    let body = {
+      uid: user.userData.uid,
+      email: user.userData.email,
+      oneLineIntroduce: OneLineIntroduce,
+      category: Category,
+      description: Description,
+      workTypeArr: WorkTypeArr,
+      videoPurposeArr: VideoPurposeArr,
+      thumbnailArr: ThumbnailArr,
+      detailImgArr: DetailImgArr,
+      videoArr: VideoArr,
+      priceInfo: PriceInfo,
+      editandReprogress: EditandReprogress,
+      FAQList: FAQList,
     }
-  }, [CurrentProcess]);
+    axios.post("/api/making/producer/tempSaving", body).then((response, err) => {
+      if(response.data.success) {
+        alert("임시 저장이 완료되었습니다.");
+      }
+      else {
+        alert("??", err)
+      }
+    })
+  }
 
   const setRightContent = () => {
     switch (CurrentProcess) {
@@ -131,6 +152,11 @@ function FindingProducerUpload() {
     }
   };
 
+<<<<<<< HEAD
+  useEffect(() => {
+    console.log("CurrentProcess : ", CurrentProcess);
+  }, [CurrentProcess]);
+=======
   const TempSaveHandler = () => {
     let body = {
       uid: user.userData.uid,
@@ -153,6 +179,7 @@ function FindingProducerUpload() {
       }
     });
   };
+>>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
 
   return (
     <>
