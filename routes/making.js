@@ -11,10 +11,9 @@ moment.tz.setDefault("Asia/Seoul");
 router.post("/producer", (req, res) => {
   let category = {
     category: req.body.category,
-    subCategory: req.body.subCategory,
   }
-  if(category.subCategory === "전체") {
-    delete category.subCategory;
+  if(category.category === "전체") {
+    delete category.category;
   }
 
   //최신순&&인기순 정렬
@@ -42,13 +41,12 @@ router.post("/producer", (req, res) => {
 router.post("/producer/postLength", (req, res) => {
   let category = {
     category: req.body.category,
-    subCategory: req.body.subCategory,
   }
-  if(category.subCategory === "전체") {
-    delete category.subCategory;
+  if(category.category === "전체") {
+    delete category.category;
   }
 
-    ProPost.find({category : category})
+    ProPost.find(category)
     .exec()
     .then((posts) => {
       return res.status(200).send({ success: true, len: posts.length });

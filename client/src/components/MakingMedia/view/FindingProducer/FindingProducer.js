@@ -26,8 +26,7 @@ function FindingProducer(props) {
 
   const getPageLen = () => {
     let body = {
-      category: "영상제작자탐색",
-      subCategory: SubCategory,
+      category: SubCategory,
     }
 
     axios.post("/api/making/producer/postLength", body).then((response) => {

@@ -29,7 +29,7 @@ const ProPostSchema = mongoose.Schema(
     oneLineIntroduce: {
       type: String,
     },
-    subCategory: {
+    category: {
       type: String,
     },
     description: {
@@ -76,9 +76,6 @@ const ProPostSchema = mongoose.Schema(
     },
 
     //post속성
-    category: {
-      type: String,
-    },
     realTime: {
       type: String,
       default: realTime(),

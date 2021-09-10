@@ -9,8 +9,7 @@ function ProducerList(props) {
     const loadPostList = async () => {
         try {
             let body = {
-                category: "영상제작자탐색",
-                subCategory : props.SubCategory,
+                category: props.SubCategory,
                 sort: props.Sort,
                 skip: props.Skip,
             }
