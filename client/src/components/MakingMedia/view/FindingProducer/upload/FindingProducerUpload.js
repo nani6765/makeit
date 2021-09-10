@@ -123,7 +123,8 @@ function FindingProducerUpload(props) {
       uid: user.userData.uid,
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
-      category: Category,
+      category: "영상제작자탐색",
+      subCategory: Category,
       description: Description,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
@@ -131,9 +132,11 @@ function FindingProducerUpload(props) {
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
-      priceDirectInput: PriceDirectInput,
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
+    }
+    if(PriceInfo==='직접 입력') {
+      body.priceInfo = PriceDirectInput;
     }
     axios.post("/api/making/producer/proPostSubmit", body).then((response, err) => {
       if(response.data.success) {

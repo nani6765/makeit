@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProducerList from "./ProducerList.js";
 import StickyBar from "./StickyBar.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { ProducerListDiv } from "../../css/FindingProducerCSS.js";
 
+import axios from 'axios';
+
 function FindingProducer(props) {
   const [SubCategory, setSubCategory] = useState("전체");
   const [Sort, setSort] = useState("인기순");
+  const [Skip, setSkip] = useState(0);
+  const [PageLen, setPageLen] = useState(0);
   const [SubCategoryList, setSubCategoryList] = useState([
     "전체",
     "일반 영상",
@@ -19,6 +23,24 @@ function FindingProducer(props) {
     "편집/자막",
     "기타",
   ]);
+
+  const getPageLen = () => {
+    let body = {
+      category: "영상제작자탐색",
+      subCategory: SubCategory,
+    }
+
+    axios.post("/api/making/producer/postLength", body).then((response) => {
+      if(response.data.success) {
+        setPageLen(response.data.len / 12);
+      }
+    })
+  }
+
+  useEffect(() => {
+    console.log("getPageLen")
+    getPageLen();
+  }, [SubCategory]);
 
   return (
     <ProducerListDiv>
@@ -46,7 +68,7 @@ function FindingProducer(props) {
           </Dropdown>
         </div>
 
-        <ProducerList />
+        <ProducerList SubCategory={SubCategory} Sort={Sort} Skip={Skip} user={props.user}/>
       </div>
     </ProducerListDiv>
   );
