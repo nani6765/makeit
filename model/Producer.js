@@ -62,6 +62,9 @@ const ProPostSchema = mongoose.Schema(
     priceInfo: {
       type: String,
     },
+    priceType: {
+      type: String,
+    },
 
     //수정환불안내
     editandReprogress: {
@@ -89,7 +92,8 @@ const ProPostSchema = mongoose.Schema(
       unique: true,
     },
     grade: {
-      type: Number,
+      type: Number, 
+      default: 0,
     },
     gradeArrayNum: {
       type: Number,
@@ -156,6 +160,9 @@ const TempProPostSchema = mongoose.Schema(
 
     //가격 설정
     priceInfo: {
+      type: String,
+    },
+    priceDirectInput: {
       type: String,
     },
 
