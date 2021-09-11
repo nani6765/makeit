@@ -8,6 +8,55 @@ var moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
+router.post("/producer", (req, res) => {
+  let category = {
+    category: req.body.category,
+  }
+  if(category.category === "전체") {
+    delete category.category;
+  }
+
+  //최신순&&인기순 정렬
+  let sort = {};
+  if (req.body.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.likeNum = -1;
+  }
+  
+  ProPost.find(category)
+  .populate("auther")
+  .sort(sort)
+  .skip(req.body.skip)
+  .limit(12)
+  .exec()
+  .then((posts) => {
+    return res.status(200).send({ success: true, posts: posts });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  });
+});
+
+router.post("/producer/postLength", (req, res) => {
+  let category = {
+    category: req.body.category,
+  }
+  if(category.category === "전체") {
+    delete category.category;
+  }
+
+    ProPost.find(category)
+    .exec()
+    .then((posts) => {
+      return res.status(200).send({ success: true, len: posts.length });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+})
+
+
 router.post("/producer/youtube", (req, res) => {
   console.log(req.body);
   router.get("https://www.googleapis.com/youtube/v3/search");

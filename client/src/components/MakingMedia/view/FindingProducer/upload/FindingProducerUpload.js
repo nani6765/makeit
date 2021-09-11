@@ -131,9 +131,11 @@ function FindingProducerUpload(props) {
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
-      priceDirectInput: PriceDirectInput,
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
+    }
+    if(PriceInfo==='직접 입력') {
+      body.priceInfo = PriceDirectInput;
     }
     axios.post("/api/making/producer/proPostSubmit", body).then((response, err) => {
       if(response.data.success) {
