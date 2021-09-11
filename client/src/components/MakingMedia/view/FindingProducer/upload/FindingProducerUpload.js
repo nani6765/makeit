@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import Detail from "./content/Detail.js";
 import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
 import Confirm from "./content/Confirm.js";
 
-<<<<<<< HEAD
 import axios from 'axios';
-=======
-import axios from "axios";
->>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
 
 import {
   UploadForm,
@@ -19,19 +16,15 @@ import {
   LeftContent,
 } from "./css/FPCSS.js";
 
-function FindingProducerUpload() {
+function FindingProducerUpload(props) {
   const user = useSelector((state) => state.user);
 
-<<<<<<< HEAD
-  const UploadProcess = ["상세설명", "포트폴리오", "가격설정", "수정/환불안내"];
-=======
   const UploadProcess = [
     { idx: 0, value: "상세설명" },
     { idx: 1, value: "포트폴리오" },
     { idx: 2, value: "가격설정" },
     { idx: 3, value: "수정/환불안내" },
   ];
->>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
   const [CureentIdx, setCureentIdx] = useState(0);
 
@@ -49,6 +42,7 @@ function FindingProducerUpload() {
 
   //가격설정
   const [PriceInfo, setPriceInfo] = useState("가격선택");
+  const [PriceDirectInput, setPriceDirectInput] = useState("직접 입력");
 
   //수정환불안내
   const [EditandReprogress, setEditandReprogress] = useState("");
@@ -57,6 +51,44 @@ function FindingProducerUpload() {
   useEffect(() => {
     console.log(FAQList);
   }, [FAQList]);
+
+  const LoadTempPost = async () => {
+    try {
+      await axios.post("/api/making/producer/loadTempPost", {uid: user.userData.uid}).then((response) => {
+          console.log(response.data);
+        if(response.data.success && response.data.tempPost) {
+          console.log(response.data);
+          //datail
+          setOneLineIntroduce(response.data.tempPost.oneLineIntroduce);
+          setCategory(response.data.tempPost.category);
+          setDescription(response.data.tempPost.description);
+          setWorkTypeArr(response.data.tempPost.workTypeArr);
+          setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
+
+
+          //Portfolio
+          setThumbnailArr(response.data.tempPost.thumbnailArr);
+          setDetailImgArr(response.data.tempPost.detailImgArr);
+          setVideoArr(response.data.tempPost.videoArr);
+
+          //price
+          setPriceInfo(response.data.tempPost.priceInfo);
+          setPriceDirectInput(response.data.tempPost.priceDirectInput);
+
+          //confirm
+          setEditandReprogress(response.data.tempPost.editandReprogress);
+          setFAQList(response.data.tempPost.FAQList);
+        }
+      })
+    } catch (error) {
+      alert("임시저장 불러오기 실패");
+      console.log("임시저장 error", error);
+    }
+  }
+
+  useEffect(() => {
+    LoadTempPost();
+  }, [])
   
   const TempSaveHandler = () => {
     let body = {
@@ -71,6 +103,7 @@ function FindingProducerUpload() {
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
+      priceDirectInput: PriceDirectInput,
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
     }
@@ -79,7 +112,39 @@ function FindingProducerUpload() {
         alert("임시 저장이 완료되었습니다.");
       }
       else {
-        alert("??", err)
+        alert("임시 저장이 실패했습니다.");
+        console.log("임시저장 error", err);
+      }
+    })
+  }  
+
+  const SubmitHandler = () => {
+    let body = {
+      uid: user.userData.uid,
+      email: user.userData.email,
+      oneLineIntroduce: OneLineIntroduce,
+      category: Category,
+      description: Description,
+      workTypeArr: WorkTypeArr,
+      videoPurposeArr: VideoPurposeArr,
+      thumbnailArr: ThumbnailArr,
+      detailImgArr: DetailImgArr,
+      videoArr: VideoArr,
+      priceInfo: PriceInfo,
+      priceDirectInput: PriceDirectInput,
+      editandReprogress: EditandReprogress,
+      FAQList: FAQList,
+    }
+    axios.post("/api/making/producer/proPostSubmit", body).then((response, err) => {
+      if(response.data.success) {
+        alert("제작자 게시가 완료되었습니다.");
+        props.history.push({
+          pathname: "/making",
+        });
+      }
+      else {
+        alert("제작자 게시에 실패했습니다.");
+        console.log("prosubmit error", err);
       }
     })
   }
@@ -113,6 +178,7 @@ function FindingProducerUpload() {
             setDetailImgArr={setDetailImgArr}
             VideoArr={VideoArr}
             setVideoArr={setVideoArr}
+            TempSaveHandler={TempSaveHandler}
           />
         );
 
@@ -122,6 +188,9 @@ function FindingProducerUpload() {
             setCurrentProcess={setCurrentProcess}
             PriceInfo={PriceInfo}
             setPriceInfo={setPriceInfo}
+            TempSaveHandler={TempSaveHandler}
+            PriceDirectInput={PriceDirectInput}
+            setPriceDirectInput={setPriceDirectInput}
           />
         );
 
@@ -132,6 +201,9 @@ function FindingProducerUpload() {
             setEditandReprogress={setEditandReprogress}
             FAQList={FAQList}
             setFAQList={setFAQList}
+            TempSaveHandler={TempSaveHandler}
+            SubmitHandler={SubmitHandler}
+            setCurrentProcess={setCurrentProcess}
           />
         );
 
@@ -147,39 +219,11 @@ function FindingProducerUpload() {
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
             setVideoPurposeArr={setVideoPurposeArr}
+            TempSaveHandler={TempSaveHandler}
           />
         );
     }
   };
-
-<<<<<<< HEAD
-  useEffect(() => {
-    console.log("CurrentProcess : ", CurrentProcess);
-  }, [CurrentProcess]);
-=======
-  const TempSaveHandler = () => {
-    let body = {
-      uid: user.userData.uid,
-      email: user.userData.email,
-      oneLineIntroduce: OneLineIntroduce,
-      category: Category,
-      description: Description,
-      workTypeArr: WorkTypeArr,
-      videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: ThumbnailArr,
-      detailImgArr: DetailImgArr,
-      videoArr: VideoArr,
-      priceInfo: PriceInfo,
-      editandReprogress: EditandReprogress,
-      FAQList: FAQList,
-    };
-    axios.post("/api/making/producer/tempSaving", body).then((response) => {
-      if (response.data.succer) {
-        alert("임시 저장이 완료되었습니다.");
-      }
-    });
-  };
->>>>>>> 6380a39388bc8b85475cdd7627b761da49a7776d
 
   return (
     <>
@@ -228,4 +272,4 @@ function FindingProducerUpload() {
   );
 }
 
-export default FindingProducerUpload;
+export default withRouter(FindingProducerUpload);

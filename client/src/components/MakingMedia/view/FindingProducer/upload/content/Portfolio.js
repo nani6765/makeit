@@ -168,6 +168,7 @@ function Portfolio(props) {
         setCurrentProcess={props.setCurrentProcess}
         NextStep="가격설정"
         CheckEmptyContent={CheckEmptyContent}
+        TempSaveHandler={props.TempSaveHandler}
       />
     </ProtFolioDiv>
   );

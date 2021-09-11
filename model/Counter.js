@@ -13,6 +13,9 @@ const counter = mongoose.Schema(
     chatNum: {
       type: Number,
     },
+    proPostNum: {
+      type: Number,
+    },
   },
   { collection: "counter" }
 );
