@@ -25,7 +25,6 @@ function FindingProducerUpload() {
     { idx: 3, value: "수정/환불안내" },
   ];
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
-  const [CureentIdx, setCureentIdx] = useState(0);
 
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
@@ -45,23 +44,6 @@ function FindingProducerUpload() {
   //수정환불안내
   const [EditandReprogress, setEditandReprogress] = useState("");
   const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
-
-  useEffect(() => {
-    switch (CurrentProcess) {
-      case "상세설명":
-        setCureentIdx(0);
-        break;
-      case "포트폴리오":
-        setCureentIdx(1);
-        break;
-      case "가격설정":
-        setCureentIdx(2);
-        break;
-      case "수정/환불안내":
-        setCureentIdx(3);
-        break;
-    }
-  }, [CurrentProcess]);
 
   const setRightContent = () => {
     switch (CurrentProcess) {
