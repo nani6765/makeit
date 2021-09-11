@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import HeaderGNB from "./view/common/HeaderGNB";
 import FindingProducer from "./view/FindingProducer/FindingProducer.js";
 import { MakingDiv, DescriptionDiv } from "./css/CommonCSS.js";
 
 function MakingMedia() {
+  const user = useSelector((state) => state.user);
+
   const [Menu, setMenu] = useState("영상 제작자 탐색");
 
   const setContent = () => {
     switch (Menu) {
       case "영상 제작자 탐색":
-        return <FindingProducer Menu={Menu}/>;
+        return <FindingProducer Menu={Menu} user={user}/>;
 
       default:
         break;

@@ -22,7 +22,6 @@ function YoutubeModal(props) {
       },
     });
     setSearchResultArr([...response.data.items]);
-    setCheckFlag([false, false, false, false, false]);
   };
 
   function InputCheckHandler(e, snippet, flagIdx) {
@@ -44,7 +43,15 @@ function YoutubeModal(props) {
   }
 
   useEffect(() => {
-    console.log(SearchResultArr);
+    let temp = [false, false, false, false, false];
+    console.log("search result", SearchResultArr);
+    console.log("video List", props.VideoArr);
+    SearchResultArr.map((video, idx) => {
+      if(props.VideoArr.findIndex((obj) => obj.id.videoId === video.id.videoId) != -1) {
+        temp[idx]=true;
+      }
+    })
+    setCheckFlag([...temp]);
   }, [SearchResultArr]);
 
   useEffect(() => {
@@ -81,7 +88,7 @@ function YoutubeModal(props) {
                         type="checkbox"
                         checked={CheckFlag[idx]}
                         onChange={(e) => InputCheckHandler(e, Video, idx)}
-                        value={''}
+                        value={''|| ""}
                         disabled={props.VideoArr.length >= 5 ? true : false}
                       />
                     </div>

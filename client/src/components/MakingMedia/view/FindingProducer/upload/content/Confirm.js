@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
+import FooterBtnArea from "../utils/FooterBtnArea.js";
 import CommonRule from "../../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
 import FAQ from "../utils/FAQ.js";
 import { ConfirmDiv } from "../css/FPContentCSS.js";
@@ -11,6 +12,14 @@ function Confirm(props) {
     let temp = [...props.FAQList];
     temp.push({ q: "", a: "" });
     props.setFAQList([...temp]);
+  };
+
+  const CheckEmptyContent = () => {
+    if (!props.EditandReprogress) {
+      alert("수정 및 재진행 절차를 입력하세요.");
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -57,6 +66,14 @@ function Confirm(props) {
           <button onClick={AddFAQ}>질문 및 답변 추가</button>
         </div>
       </div>
+      <FooterBtnArea
+        setCurrentProcess={props.setCurrentProcess}
+        NextStep="완료"
+        CheckEmptyContent={CheckEmptyContent}
+        TempSaveHandler={props.TempSaveHandler}
+        SubmitHandler={props.SubmitHandler}
+        setCurrentProcess={props.setCurrentProcess}
+      />
     </ConfirmDiv>
   );
 }

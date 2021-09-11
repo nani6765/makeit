@@ -111,6 +111,7 @@ function Detail(props) {
         setCurrentProcess={props.setCurrentProcess}
         NextStep="포트폴리오"
         CheckEmptyContent={CheckEmptyContent}
+        TempSaveHandler={props.TempSaveHandler}
       />
     </DetailDiv>
   );

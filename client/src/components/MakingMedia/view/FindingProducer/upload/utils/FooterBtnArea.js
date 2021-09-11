@@ -9,10 +9,26 @@ function FooterBtnArea(props) {
   };
   return (
     <FooterBtnDiv>
-      <button className="save">임시저장</button>
-      <button className="next" onClick={() => nextHandler()}>
+      <button className="save" onClick={() => props.TempSaveHandler()}>임시저장</button>
+      {props.NextStep === "완료" ? (
+        <button
+          className="next"
+          onClick={() => {
+            if(props.CheckEmptyContent()) {
+              props.SubmitHandler();
+            }
+          }}
+        >
+          완료
+        </button>
+      ) : (
+      <button
+        className="next"
+        onClick={() => nextHandler()}
+      >
         다음
       </button>
+      )}
     </FooterBtnDiv>
   );
 }
