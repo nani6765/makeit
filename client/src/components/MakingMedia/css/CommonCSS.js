@@ -73,7 +73,14 @@ const StickyBarDiv = styled.div`
   .subCategory {
     margin-top: 10px;
     p {
-      height: 35px;
+      height: auto;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 15px;
+      margin-bottom: 1.5rem;
+      &:nth-last-child(1) {
+        margin-bottom: 0px;
+      }
     }
     p.active {
       font-weight: bold;

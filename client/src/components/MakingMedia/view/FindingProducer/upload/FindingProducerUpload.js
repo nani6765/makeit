@@ -7,7 +7,7 @@ import Portfolio from "./content/Portfolio.js";
 import Price from "./content/Price.js";
 import Confirm from "./content/Confirm.js";
 
-import axios from 'axios';
+import axios from "axios";
 
 import {
   UploadForm,
@@ -54,42 +54,43 @@ function FindingProducerUpload(props) {
 
   const LoadTempPost = async () => {
     try {
-      await axios.post("/api/making/producer/loadTempPost", {uid: user.userData.uid}).then((response) => {
+      await axios
+        .post("/api/making/producer/loadTempPost", { uid: user.userData.uid })
+        .then((response) => {
           console.log(response.data);
-        if(response.data.success && response.data.tempPost) {
-          console.log(response.data);
-          //datail
-          setOneLineIntroduce(response.data.tempPost.oneLineIntroduce);
-          setCategory(response.data.tempPost.category);
-          setDescription(response.data.tempPost.description);
-          setWorkTypeArr(response.data.tempPost.workTypeArr);
-          setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
+          if (response.data.success && response.data.tempPost) {
+            console.log(response.data);
+            //datail
+            setOneLineIntroduce(response.data.tempPost.oneLineIntroduce);
+            setCategory(response.data.tempPost.category);
+            setDescription(response.data.tempPost.description);
+            setWorkTypeArr(response.data.tempPost.workTypeArr);
+            setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
 
+            //Portfolio
+            setThumbnailArr(response.data.tempPost.thumbnailArr);
+            setDetailImgArr(response.data.tempPost.detailImgArr);
+            setVideoArr(response.data.tempPost.videoArr);
 
-          //Portfolio
-          setThumbnailArr(response.data.tempPost.thumbnailArr);
-          setDetailImgArr(response.data.tempPost.detailImgArr);
-          setVideoArr(response.data.tempPost.videoArr);
+            //price
+            setPriceInfo(response.data.tempPost.priceInfo);
+            setPriceDirectInput(response.data.tempPost.priceDirectInput);
 
-          //price
-          setPriceInfo(response.data.tempPost.priceInfo);
-          setPriceDirectInput(response.data.tempPost.priceDirectInput);
-
-          //confirm
-          setEditandReprogress(response.data.tempPost.editandReprogress);
-          setFAQList(response.data.tempPost.FAQList);
-        }
-      })
+            //confirm
+            setEditandReprogress(response.data.tempPost.editandReprogress);
+            setFAQList(response.data.tempPost.FAQList);
+          }
+        });
     } catch (error) {
       alert("임시저장 불러오기 실패");
       console.log("임시저장 error", error);
     }
-  }
+  };
 
   useEffect(() => {
     LoadTempPost();
-  }, [])
-  
+  }, []);
+
   const TempSaveHandler = () => {
     let body = {
       uid: user.userData.uid,
@@ -106,17 +107,18 @@ function FindingProducerUpload(props) {
       priceDirectInput: PriceDirectInput,
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
-    }
-    axios.post("/api/making/producer/tempSaving", body).then((response, err) => {
-      if(response.data.success) {
-        alert("임시 저장이 완료되었습니다.");
-      }
-      else {
-        alert("임시 저장이 실패했습니다.");
-        console.log("임시저장 error", err);
-      }
-    })
-  }  
+    };
+    axios
+      .post("/api/making/producer/tempSaving", body)
+      .then((response, err) => {
+        if (response.data.success) {
+          alert("임시 저장이 완료되었습니다.");
+        } else {
+          alert("임시 저장이 실패했습니다.");
+          console.log("임시저장 error", err);
+        }
+      });
+  };
 
   const SubmitHandler = () => {
     let body = {
@@ -131,25 +133,24 @@ function FindingProducerUpload(props) {
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
+      priceDirectInput: PriceDirectInput,
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
-    }
-    if(PriceInfo==='직접 입력') {
-      body.priceInfo = PriceDirectInput;
-    }
-    axios.post("/api/making/producer/proPostSubmit", body).then((response, err) => {
-      if(response.data.success) {
-        alert("제작자 게시가 완료되었습니다.");
-        props.history.push({
-          pathname: "/making",
-        });
-      }
-      else {
-        alert("제작자 게시에 실패했습니다.");
-        console.log("prosubmit error", err);
-      }
-    })
-  }
+    };
+    axios
+      .post("/api/making/producer/proPostSubmit", body)
+      .then((response, err) => {
+        if (response.data.success) {
+          alert("제작자 게시가 완료되었습니다.");
+          props.history.push({
+            pathname: "/making",
+          });
+        } else {
+          alert("제작자 게시에 실패했습니다.");
+          console.log("prosubmit error", err);
+        }
+      });
+  };
 
   const setRightContent = () => {
     switch (CurrentProcess) {

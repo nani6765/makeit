@@ -69,4 +69,4 @@ function ProducerList(props) {
     )
 }
 
-export default ProducerList
+export default ProducerList;
