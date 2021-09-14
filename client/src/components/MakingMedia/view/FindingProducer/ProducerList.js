@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 import { ProducerListContainer } from "../../css/FindingProducerCSS.js";
@@ -35,7 +36,13 @@ function ProducerList(props) {
             {
                 PostList.map((post, idx) => {
                     return (
-                        <div className="producercard" key={idx}>
+                        <Link to={{
+                            pathname: `/making/produerPost/${post.url}`,
+                            state: {
+                                post: post,
+                            }
+                        }} key={idx} className="producercard">
+                        <div>
                             <img src={post.thumbnailArr[0].path} className="thumbnail" />
                             <div className="info">
                                 <span className="producerName">{post.auther.displayName}</span>
@@ -54,6 +61,7 @@ function ProducerList(props) {
                                 </p>
                             </div>
                         </div>
+                        </Link>
                     )
                 })
             }

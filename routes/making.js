@@ -30,12 +30,14 @@ router.post("/producer", (req, res) => {
   .skip(req.body.skip)
   .limit(12)
   .exec()
-  .then((posts) => {
+  .then((posts) => { 
     return res.status(200).send({ success: true, posts: posts });
   })
   .catch((err) => {
+    console.log("error", err);
     return res.json({ success: false, err });
   });
+
 });
 
 router.post("/producer/postLength", (req, res) => {
@@ -54,7 +56,7 @@ router.post("/producer/postLength", (req, res) => {
     .catch((err) => {
       return res.json({ success: false, err });
     });
-})
+});
 
 
 router.post("/producer/youtube", (req, res) => {
