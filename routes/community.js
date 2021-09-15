@@ -33,8 +33,7 @@ router.post("/", (req, res) => {
   } else {
     sort.likeNum = -1;
   }
-
-  console.log(req.body);
+  
   Community.find(category)
     .populate("auther")
     .sort(sort)

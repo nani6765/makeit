@@ -19,8 +19,10 @@ const MakingDiv = styled.div`
 
 const MenuList = styled.ul`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  list-style: none;
+  padding: 0px;
 `;
 
 const MenuItem = styled.li`

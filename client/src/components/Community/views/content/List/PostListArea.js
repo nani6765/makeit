@@ -27,11 +27,14 @@ function PostListArea(props) {
   
   useEffect(() => {
     window.addEventListener('scroll', ScrollFunction, true);
-    
     return () => {
       window.removeEventListener('scroll', ScrollFunction, true);
     }
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   return (

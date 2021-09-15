@@ -30,7 +30,7 @@ router.post("/producer", (req, res) => {
   .skip(req.body.skip)
   .limit(12)
   .exec()
-  .then((posts) => { 
+  .then((posts) => {
     return res.status(200).send({ success: true, posts: posts });
   })
   .catch((err) => {

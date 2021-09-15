@@ -11,6 +11,20 @@ const MakingDiv = styled.div`
   margin: 0 auto;
   padding-top: 10vh;
   padding-bottom: 10vh;
+  .path {
+    margin-top: 30px;
+    color: #A7A5A8;
+    p {
+      float: left;
+    }
+    .editBtn {
+      float: right;
+      background: #FAF5F5;
+      border: 1px solid #D4D4D4;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+  }
   ${mq[1]} {
     width: 90%;
   }
@@ -20,6 +34,7 @@ const MenuList = styled.ul`
   display: flex;
   justify-content: space-around;
   align-items: center;
+  list-style: none;
 `;
 
 const MenuItem = styled.li`
@@ -207,10 +222,35 @@ const ProducerListContainer = styled.div`
   }
 `;
 
+const ProducerTitleDiv = styled.div`
+  width: 100%;
+  height: 30%;
+  
+  padding: 50px;
+  margin-top: 20px;
+
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  box-sizing: border-box;
+  border-radius: 22px;
+
+  .TitleImg {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    img {
+      height: 250px;    
+      border-radius: 22px;
+    }
+  }
+`;
+
 export {
   MakingDiv,
   MenuList,
   MenuItem,
   ProducerListDiv,
   ProducerListContainer,
+  ProducerTitleDiv,
 };
