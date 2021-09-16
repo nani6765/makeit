@@ -135,4 +135,43 @@ router.post("/producer/proPostSubmit", (req, res) => {
   })
 })
 
+router.post("/producer/getPostDetail", (req, res) => {
+  ProPost.findOne({url: req.body.url})
+  .populate("auther")
+  .exec()
+  .then((post) => {
+    return res.status(200).send({ success: true, post: post });
+  })
+  .catch((err) => {
+    console.log("producer getPostDetail Error", err);
+    return res.json({ success: false, err });
+  })
+})
+
+router.post("/producer/producerLike", (req, res) => {
+  if (req.body.key) {
+    ProPost.findOneAndUpdate({url: req.body.url}, {$pull: {likeArray: req.body.uid}})
+    .exec()
+    .then((post) => {
+      return res.status(200).send({ success: true, post: post });
+    })
+    .catch((err) => {
+      console.log("producer Like Error", err);
+      return res.json({ success: false, err });
+    })
+  }
+  else {
+    console.log("push?")
+    ProPost.findOneAndUpdate({url: req.body.url}, {$push: {likeArray: req.body.uid}})
+    .exec()
+    .then((post) => {
+      return res.status(200).send({ success: true, post: post });
+    })
+    .catch((err) => {
+      console.log("producer Like Error", err);
+      return res.json({ success: false, err });
+    })
+  }
+});
+
 module.exports = router;
