@@ -40,7 +40,6 @@ function FindingProducer(props) {
   }
 
   useEffect(() => {
-    console.log("getPageLen");
     getPageLen();
   }, [SubCategory]);
 
@@ -53,10 +52,6 @@ function FindingProducer(props) {
     }
     setPageIdxArr(temp);
   }, [parseInt(Skip/120)]);
-
-  useEffect(() => {
-    console.log("PageIdxArr", PageIdxArr, "pageLen", PageLen);
-  }, [PageIdxArr])
 
   return (
     <ProducerListDiv>
