@@ -34,9 +34,7 @@ function ProducerList(props) {
     return (
         <ProducerListContainer>
             {
-                props.user && 
                 PostList.map((post, idx) => {
-                    console.log(post);
                     return (
                         <Link to={"/making/produerPost/"+post.url} key={idx} className="producercard">      
                         <div>
@@ -44,9 +42,12 @@ function ProducerList(props) {
                             <div className="info">
                                 <span className="producerName">{post.auther.displayName}</span>
                                 {
-                                    post.likeArray.indexOf(props.user.uid) === -1
-                                    ? <i className="bi bi-heart"></i>
-                                    : <i className="bi bi-heart-fill"></i>
+                                     props.user 
+                                     ? (
+                                        post.likeArray.indexOf(props.user.uid) === -1
+                                        ? <i className="bi bi-heart"></i>
+                                        : <i className="bi bi-heart-fill"></i>
+                                     ) : <i className="bi bi-heart"></i>
                                 }
                             </div>
                             <p className="title">{post.oneLineIntroduce}</p>
