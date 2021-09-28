@@ -92,14 +92,12 @@ const ProPostSchema = mongoose.Schema(
       unique: true,
     },
     grade: {
-      type: Number, 
+      type: Number,
       default: 0,
     },
     gradeArrayNum: {
       type: Number,
-    },
-    gradeArray: {
-      type: Array,
+      default: 0,
     },
   },
   {
@@ -108,6 +106,7 @@ const ProPostSchema = mongoose.Schema(
   }
 );
 
+//임시저장
 const TempProPostSchema = mongoose.Schema(
   {
     //쓰니정보
@@ -186,7 +185,6 @@ const TempProPostSchema = mongoose.Schema(
   }
 );
 
-
 //아직 다 안함
 const ProReviewSchema = mongoose.Schema(
   {
@@ -209,10 +207,6 @@ const ProReviewSchema = mongoose.Schema(
     realTime: {
       type: String,
       default: realTime(),
-    },
-    edit: {
-      type: Boolean,
-      default: false,
     },
   },
   {

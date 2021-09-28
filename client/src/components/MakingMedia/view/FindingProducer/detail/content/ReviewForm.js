@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { ReviewUploadDiv } from "../../../../css/FindingProducerDetailCSS.js";
+import axios from "axios";
 
 function ReviewForm(props) {
   const [Review, setReview] = useState("");
   const [Star, setStar] = useState(new Array(5).fill(null));
   const [StarValue, setStarValue] = useState(0);
+  const user = useSelector((state) => state.user);
 
   const setReviewFunc = (e) => {
     console.log("Test", e.currentTarget.value.length);
@@ -15,7 +18,27 @@ function ReviewForm(props) {
     }
   };
 
-  const SubmitHandler = (e) => {};
+  useEffect(() => {
+    console.log("user : ", user);
+  }, []);
+
+  const SubmitHandler = (e) => {
+    e.preventDefault();
+    let body = {
+      uid: user.userData.uid,
+      url: props.PostURL,
+      grade: StarValue,
+      content: Review,
+    };
+    axios.post("/api/making/producer/review/upload", body).then((response) => {
+      if (response.data.success) {
+        alert("리뷰가 등록되었습니다.");
+        return window.location.reload();
+      } else {
+        return alert(response.data.message);
+      }
+    });
+  };
 
   return (
     <ReviewUploadDiv>
