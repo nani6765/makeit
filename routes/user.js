@@ -11,23 +11,26 @@ const sendEmail = require("../module/email.js");
 
 router.post("/register", (req, res) => {
   let temp = req.body;
-  Counter.findOne({ name: "counter" }).exec()
-  .then((counter) => {
-    temp.unserNum = counter.userNum;
-    const NewUser = new User(temp);
-    NewUser.save((userInfo) => {
-      counter.updateOne({ $inc: { userNum: 1 } }).exec()
-      .then((result) => {
-        return res.status(200).send({
-          success: true,
-          userInfo: userInfo._id,
-        });
+  Counter.findOne({ name: "counter" })
+    .exec()
+    .then((counter) => {
+      temp.unserNum = counter.userNum;
+      const NewUser = new User(temp);
+      NewUser.save((userInfo) => {
+        counter
+          .updateOne({ $inc: { userNum: 1 } })
+          .exec()
+          .then((result) => {
+            return res.status(200).send({
+              success: true,
+              userInfo: userInfo._id,
+            });
+          });
       });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
     });
-  })
-  .catch((err) => {
-    return res.status(400).json({ success: false, err });
-  })
 });
 
 router.post("/editProfile", setUpload(`makeit/user/`), (req, res, next) => {
@@ -106,9 +109,7 @@ router.post("/getMyLog", (req, res) => {
               logList.sort(
                 (a, b) => PureTime(b.realTime) - PureTime(a.realTime)
               );
-              return res
-                .status(200)
-                .send({ success: true, logList: logList });
+              return res.status(200).send({ success: true, logList: logList });
             });
         });
     })
