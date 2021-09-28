@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import HeaderGNB from '../../common/HeaderGNB.js';
 import { ProducerTitleDiv } from "../../../css/FindingProducerCSS.js";
@@ -17,7 +18,6 @@ function ProducerTitleDetail(props) {
     };
 
     const likeHandler = (key) => {
-        console.log("key?", key, props.PostInfo.likeArray.includes("aa"));
         if (props.PostInfo.uid === props.user.uid) {
             alert("자신의 프로덕션에는 찜하기를 할 수 없습니다.");
             return;
@@ -39,9 +39,6 @@ function ProducerTitleDetail(props) {
         });
     }
 
-    useEffect(() => {
-        console.log(props.PostInfo);
-    }, [])
     return (
         <>
         {//<HeaderGNB Menu="영상 제작자 탐색"></HeaderGNB>
@@ -52,7 +49,10 @@ function ProducerTitleDetail(props) {
                 {
                     props.user
                     ? (
-                        props.PostInfo.uid === props.user.uid && <button className="editBtn">수정하기</button>
+                        props.PostInfo.uid === props.user.uid &&
+                        <Link to={{pathname: "/making/ProducerEdit", state: {post: props.PostInfo}}}>  
+                             <button className="editBtn">수정하기</button>
+                        </Link>
                     ) : null
                 }
             </div>
@@ -85,15 +85,11 @@ function ProducerTitleDetail(props) {
                     </span>
                 </div>
                 <div className="title">{props.PostInfo.oneLineIntroduce}</div>
-                <div className="price">{props.PostInfo.priceInfo}</div>
+                <div className="price">{props.PostInfo.priceInfo === "직접 입력" ? props.PostInfo.priceDirectInput : props.PostInfo.priceInfo}</div>
                 <div className="review">
-                    {
-                        props.user && props.PostInfo.gradeArray.includes(props.user.uid)
-                        ? <i className="bi bi-star-fill"></i>
-                        : <i className="bi bi-star"></i>
-                    }
+                    <i className="bi bi-star-fill"></i>
                     <span>
-                        {props.PostInfo.grade} | {props.PostInfo.gradeArray.length}개의 평가
+                        {props.PostInfo.grade/props.PostInfo.gradeArrayNum} | {props.PostInfo.gradeArrayNum}개의 평가
                     </span>
                 </div>
             </div>

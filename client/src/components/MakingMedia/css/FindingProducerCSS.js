@@ -268,7 +268,9 @@ const ProducerTitleDiv = styled.div`
   }
   .titleInfo {
     margin-left: 20px;
+    width: 50%;
     .like {
+      margin-bottom: 10px;
       color: #CCD2E3;
       span {
         margin-right: 10px;
@@ -294,6 +296,7 @@ const ProducerTitleDiv = styled.div`
       overflow: hidden;
     }
     .price {
+      width: 100%;
       margin-top: 20px;
       font-size: 20px;
       text-align: right;

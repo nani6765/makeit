@@ -32,10 +32,6 @@ function ProducerDetail(props) {
         getPostDetail();
     }, []);
 
-    useEffect(() => {
-        console.log(PostInfo);
-    }, [PostInfo])
-
     return (
         <MakingDiv>
         {
