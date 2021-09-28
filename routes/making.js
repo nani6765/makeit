@@ -135,6 +135,20 @@ router.post("/producer/proPostSubmit", (req, res) => {
   })
 })
 
+router.post("/producer/proPostEdit", (req, res) => {
+  let temp = req.body;
+ 
+  temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+  ProPost.findOneAndUpdate({uid: temp.uid}, temp)
+  .exec()
+  .then((response) => {
+    return res.status(200).send({ success: true });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  })
+})
+
 router.post("/producer/getPostDetail", (req, res) => {
   ProPost.findOne({url: req.body.url})
   .populate("auther")

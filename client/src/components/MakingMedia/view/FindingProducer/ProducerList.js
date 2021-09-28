@@ -36,7 +36,7 @@ function ProducerList(props) {
             {
                 PostList.map((post, idx) => {
                     return (
-                        <Link to={"/making/produerPost/"+post.url} key={idx} className="producercard">      
+                        <Link to={"/making/producerPost/"+post.url} key={idx} className="producercard">      
                         <div>
                             <img src={post.thumbnailArr[0].path} className="thumbnail" />
                             <div className="info">

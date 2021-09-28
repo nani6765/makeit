@@ -62,7 +62,7 @@ const ProPostSchema = mongoose.Schema(
     priceInfo: {
       type: String,
     },
-    priceType: {
+    priceDirectInput: {
       type: String,
     },
 
@@ -97,9 +97,7 @@ const ProPostSchema = mongoose.Schema(
     },
     gradeArrayNum: {
       type: Number,
-    },
-    gradeArray: {
-      type: Array,
+      default: 0,
     },
   },
   {

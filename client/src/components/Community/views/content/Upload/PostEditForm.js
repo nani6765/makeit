@@ -17,7 +17,7 @@ import {
   DropZoneDiv,
 } from "../../css/CommunityElement.js";
 
-function PostEditForm() {
+function PostEditForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
