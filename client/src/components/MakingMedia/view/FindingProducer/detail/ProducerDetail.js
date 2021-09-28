@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector } from "react-redux";
 
 import ProducerTitleDetail from './ProducerTitleDetail.js';
+import ProducerContentDetail from './ProducerContentDetail.js';
 import { MakingDiv } from "../../../css/FindingProducerCSS.js";
 
 import axios from 'axios';
@@ -37,9 +38,15 @@ function ProducerDetail(props) {
 
     return (
         <MakingDiv>
-            {
-                PostInfo.url !== undefined && <ProducerTitleDetail PostInfo={PostInfo} setPostInfo={setPostInfo} user={user}/>
-            }
+        {
+            PostInfo.url !== undefined && (
+                <>
+                <ProducerTitleDetail PostInfo={PostInfo} setPostInfo={setPostInfo} user={user} />
+                <div className="content">
+                    <ProducerContentDetail PostInfo={PostInfo} />
+                </div>
+                </>
+        )}
         </MakingDiv>
     )
 }

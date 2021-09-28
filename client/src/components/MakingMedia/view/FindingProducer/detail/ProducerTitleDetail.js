@@ -6,7 +6,7 @@ import { ProducerTitleDiv } from "../../../css/FindingProducerCSS.js";
 import axios from 'axios';
 
 function ProducerTitleDetail(props) {
-    var settings = {
+   var settings = {
         dots: true,
         infinite: true,
         speed: 500,
@@ -44,13 +44,16 @@ function ProducerTitleDetail(props) {
     }, [])
     return (
         <>
-        <HeaderGNB Menu="영상 제작자 탐색"></HeaderGNB>
+        {//<HeaderGNB Menu="영상 제작자 탐색"></HeaderGNB>
+        }
         <div>
             <div className="path">
                 <span>홈 &gt; 영상제작 &gt; 제작자 탐색 &gt; {props.PostInfo.category}</span>
                 {
-                    props.PostInfo.uid === props.user.uid &&
-                    <button className="editBtn">수정하기</button>
+                    props.user
+                    ? (
+                        props.PostInfo.uid === props.user.uid && <button className="editBtn">수정하기</button>
+                    ) : null
                 }
             </div>
         </div>
@@ -67,10 +70,10 @@ function ProducerTitleDetail(props) {
             </Slider>
             <div className="titleInfo">
                 <div className="like">
-                    <span onClick={() => likeHandler(props.PostInfo.likeArray.includes(props.user.uid))}>
+                    <span onClick={() => props.user ? likeHandler(props.PostInfo.likeArray.includes(props.user.uid)) : null}>
                         찜하기
                         {
-                            props.PostInfo.likeArray.includes(props.user.uid)
+                            props.user && props.PostInfo.likeArray.includes(props.user.uid)
                             ? <i className="bi bi-heart-fill"></i>
                             : <i className="bi bi-heart"></i>
                         }
@@ -85,7 +88,7 @@ function ProducerTitleDetail(props) {
                 <div className="price">{props.PostInfo.priceInfo}</div>
                 <div className="review">
                     {
-                        props.PostInfo.gradeArray.includes(props.user.uid)
+                        props.user && props.PostInfo.gradeArray.includes(props.user.uid)
                         ? <i className="bi bi-star-fill"></i>
                         : <i className="bi bi-star"></i>
                     }
