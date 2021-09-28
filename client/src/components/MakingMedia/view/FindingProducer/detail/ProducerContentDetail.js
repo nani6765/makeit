@@ -1,5 +1,7 @@
 import React from 'react'
-import Rule from "../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js"
+import ReviewForm from "./content/ReviewForm.js";
+import Rule from "../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
+
 function ProducerContentDetail(props) {
     return (
         <div style={{filter: "drop-shadow(5px 3px 4px rgba(0, 0, 0, 0.25))"}}>
@@ -85,10 +87,14 @@ function ProducerContentDetail(props) {
                         }
                     </div>
                     )}
+                    <div id="review" style={{marginBottom: "10%"}}>
+                      <p style={{borderBottom: "1px solid #CACACA", paddingBottom: "10px", marginBottom: "20px", fontWeight:"bold", fontSize:"20px"}}>서비스 평가</p>
+                      <ReviewForm PostURL={props.PostInfo.url} />
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+          </div>
+  );
 }
 
-export default ProducerContentDetail
+export default ProducerContentDetail;
