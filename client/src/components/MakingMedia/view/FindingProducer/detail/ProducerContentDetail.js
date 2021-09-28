@@ -14,7 +14,7 @@ function ProducerContentDetail(props) {
             </ul>
             <div style={{background: "#DEC3F8", padding: "10px", position: "relative", zIndex: "5"}}>
                 <div style={{background: "white", padding: "30px", borderRadius: "10px"}}>
-                    <div id="detail" style={{marginBottom: "10%"}}>
+                    <div id="detail" style={{paddingTop: "5%"}}>
                         <p style={{borderBottom: "1px solid #CACACA", paddingBottom: "10px", marginBottom: "20px", fontWeight:"bold", fontSize:"20px"}}>상세 설명</p>
                         <div>
                         {
@@ -55,19 +55,19 @@ function ProducerContentDetail(props) {
                             </div>
                         </div>
                     </div>
-                    <div id="price" style={{marginBottom: "10%"}}>
+                    <div id="price" style={{paddingTop: "10%"}}>
                         <p style={{borderBottom: "1px solid #CACACA", paddingBottom: "10px", marginBottom: "20px", fontWeight:"bold", fontSize:"20px"}}>가격 정책</p>
                         <div>
                             {props.PostInfo.priceInfo}
                         </div>
                     </div>
-                    <div id="edit" style={{marginBottom: "10%"}}>
+                    <div id="edit" style={{paddingTop: "10%"}}>
                         <p style={{borderBottom: "1px solid #CACACA", paddingBottom: "10px", marginBottom: "20px", fontWeight:"bold", fontSize:"20px"}}>수정/환불 안내</p>
                         <Rule/>
                     </div>
                     {
                     props.PostInfo.FAQList.length > 0 && (
-                    <div id="faq" style={{marginBottom: "10%"}}>
+                    <div id="faq" style={{paddingTop: "10%"}}>
                         <p style={{borderBottom: "1px solid #CACACA", paddingBottom: "10px", marginBottom: "20px", fontWeight:"bold", fontSize:"20px"}}>FAQ</p>
                         {
                             props.PostInfo.FAQList.map((faq, idx) => {
@@ -87,13 +87,13 @@ function ProducerContentDetail(props) {
                         }
                     </div>
                     )}
-                    <div id="review" style={{marginBottom: "10%"}}>
+                    <div id="review" style={{padding: "10% 0"}}>
                       <p style={{borderBottom: "1px solid #CACACA", paddingBottom: "10px", marginBottom: "20px", fontWeight:"bold", fontSize:"20px"}}>서비스 평가</p>
                       <ReviewForm PostURL={props.PostInfo.url} />
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
   );
 }
 

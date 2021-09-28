@@ -89,7 +89,7 @@ function ProducerTitleDetail(props) {
                 <div className="review">
                     <i className="bi bi-star-fill"></i>
                     <span>
-                        {props.PostInfo.grade/props.PostInfo.gradeArrayNum} | {props.PostInfo.gradeArrayNum}개의 평가
+                        {props.PostInfo.grade ? (props.PostInfo.grade/props.PostInfo.gradeArrayNum).toFixed(1) : props.PostInfo.grade} | {props.PostInfo.gradeArrayNum}개의 평가
                     </span>
                 </div>
             </div>
