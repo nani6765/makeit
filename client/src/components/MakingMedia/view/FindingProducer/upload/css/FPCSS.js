@@ -12,6 +12,9 @@ const UploadForm = styled.div`
   ${mq[1]} {
     width: 90%;
   }
+  .path {
+    color: #A7A5A8;
+  }
   .OneLineIntroduce {
     width: 100%;
     background: #ffffff;
