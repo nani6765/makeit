@@ -2,10 +2,9 @@ var router = require("express").Router();
 
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
-const { ProPost, TempProPost, ProReview } = require("../model/Producer.js");
+const { ProPost, TempProPost, ProReview } = require("../model/making.js");
 
 var moment = require("moment");
-const { response } = require("express");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
@@ -133,17 +132,17 @@ router.post("/producer/proPostSubmit", (req, res) => {
 
 router.post("/producer/proPostEdit", (req, res) => {
   let temp = req.body;
- 
+
   temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-  ProPost.findOneAndUpdate({uid: temp.uid}, temp)
-  .exec()
-  .then((response) => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  })
-})
+  ProPost.findOneAndUpdate({ uid: temp.uid }, temp)
+    .exec()
+    .then((response) => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
 
 router.post("/producer/getPostDetail", (req, res) => {
   ProPost.findOne({ url: req.body.url })

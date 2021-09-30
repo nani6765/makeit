@@ -13,14 +13,14 @@ const MakingDiv = styled.div`
   padding-bottom: 10vh;
   .path {
     margin-top: 30px;
-    color: #A7A5A8;
+    color: #a7a5a8;
     p {
       float: left;
     }
     .editBtn {
       float: right;
-      background: #FAF5F5;
-      border: 1px solid #D4D4D4;
+      background: #faf5f5;
+      border: 1px solid #d4d4d4;
       box-sizing: border-box;
       border-radius: 5px;
     }
@@ -100,7 +100,7 @@ const ProducerListDiv = styled.div`
       font-size: 15px;
       font-weight: bold;
       padding: 7px 10px;
-      background: #935EA5;
+      background: #935ea5;
       border: none;
       border-radius: 10px;
       svg {
@@ -126,7 +126,6 @@ const ProducerListDiv = styled.div`
           display: inline-block;
           padding: 0px 5px;
           border-right: 1.5px solid black;
-          
         }
         li.active {
           font-weight: bold;
@@ -222,100 +221,10 @@ const ProducerListContainer = styled.div`
   }
 `;
 
-const ProducerTitleDiv = styled.div`
-  width: 100%;
-  height: 30%;
-  
-  padding: 30px;
-  margin-top: 20px;
-
-  display: flex;
-
-  background: #ffffff;
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
-  box-sizing: border-box;
-  border-radius: 22px;
-
-  .TitleImg {
-    width: 50%;
-    height: 100%;
-    img {
-      height: 250px;    
-      border-radius: 22px;
-    }
-  }
-  .slick-prev {
-    height: 60px;
-    left: 10px;
-    z-index: 1;
-  }
-  .slick-next {
-    height: 60px;
-    right: 20px;
-  }
-  .slick-next:before, .slick-prev:before {
-    opacity: 1;
-    color: #702C8A;
-    font-weight: 800;
-    font-size: 60px;
-  }
-  .slick-prev:before {
-    content: "〈";
-  }
-  .slick-next:before {
-    content: "〉";
-  }
-  .titleInfo {
-    margin-left: 20px;
-    width: 50%;
-    .like {
-      margin-bottom: 10px;
-      color: #CCD2E3;
-      span {
-        margin-right: 10px;
-        i {
-          margin-left: 5px;
-          color: #FF5151;
-        }
-        .share {
-          color: #9E9E9E;
-          background: #D8D8D8;
-          padding: 0px 3px 0px 2px;
-          border-radius: 50%;
-          box-sizing: border-box;
-          text-align: center;
-        }
-      }
-    }
-    .title {
-      font-size: 30px;
-      font-weight: 500;
-      line-height: 35px;
-      height: 140px;
-      overflow: hidden;
-    }
-    .price {
-      width: 100%;
-      margin-top: 20px;
-      font-size: 20px;
-      text-align: right;
-    }
-    .review {
-      color: #FFE459;
-      span {
-        margin-left: 10px;
-        color: #CCD2E3;
-      }
-    }
-  }
-`;
-
 export {
   MakingDiv,
   MenuList,
   MenuItem,
   ProducerListDiv,
   ProducerListContainer,
-  ProducerTitleDiv,
 };

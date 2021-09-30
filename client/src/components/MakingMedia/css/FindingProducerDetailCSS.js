@@ -6,6 +6,230 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
+const DetailDiv = styled.div`
+  width: 70%;
+  margin: 0 auto;
+  padding-top: 10vh;
+  padding-bottom: 10vh;
+  .path {
+    margin-top: 30px;
+    color: #a7a5a8;
+    p {
+      float: left;
+    }
+    .editBtn {
+      float: right;
+      background: #faf5f5;
+      border: 1px solid #d4d4d4;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+  }
+  ${mq[1]} {
+    width: 90%;
+  }
+`;
+
+const ProducerTitleDiv = styled.div`
+  width: 100%;
+  height: 30%;
+
+  padding: 30px;
+  margin-top: 20px;
+
+  display: flex;
+
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  box-sizing: border-box;
+  border-radius: 22px;
+
+  .TitleImg {
+    width: 50%;
+    height: 100%;
+    img {
+      height: 250px;
+      border-radius: 22px;
+    }
+  }
+  .slick-prev {
+    height: 60px;
+    left: 10px;
+    z-index: 1;
+  }
+  .slick-next {
+    height: 60px;
+    right: 20px;
+  }
+  .slick-next:before,
+  .slick-prev:before {
+    opacity: 1;
+    color: #702c8a;
+    font-weight: 800;
+    font-size: 60px;
+  }
+  .slick-prev:before {
+    content: "〈";
+  }
+  .slick-next:before {
+    content: "〉";
+  }
+  .titleInfo {
+    margin-left: 20px;
+    width: 50%;
+    .like {
+      margin-bottom: 10px;
+      color: #ccd2e3;
+      span {
+        margin-right: 10px;
+        i {
+          margin-left: 5px;
+          color: #ff5151;
+        }
+        .share {
+          color: #9e9e9e;
+          background: #d8d8d8;
+          padding: 0px 3px 0px 2px;
+          border-radius: 50%;
+          box-sizing: border-box;
+          text-align: center;
+        }
+      }
+    }
+    .title {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 35px;
+      height: 140px;
+      overflow: hidden;
+    }
+    .price {
+      width: 100%;
+      margin-top: 20px;
+      font-size: 20px;
+      text-align: right;
+    }
+    .review {
+      color: #ffe459;
+      span {
+        margin-left: 10px;
+        color: #ccd2e3;
+      }
+    }
+  }
+`;
+
+const ContentGNBUL = styled.ul`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: 50px;
+  list-style: none;
+  padding: 0px;
+  margin-bottom: 0px;
+  a {
+    width: 100%;
+    padding: 10px 0px;
+    border: none;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+    background: #f7efff;
+    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+      0px 9px 30px rgba(163, 1, 79, 0.05);
+    position: relative;
+    margin-right: 10px;
+    z-index: 1;
+    color: #757575;
+    &:nth-of-type(1) {
+      background: #dec3f8;
+      font-weight: bold;
+      color: black;
+    }
+    &:nth-last-of-type(1) {
+      margin-right: 0px;
+    }
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+  }
+`;
+
+const DetaulContentSubTitle = styled.p`
+  border-bottom: 1px solid #cacaca;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 20px;
+`;
+
+const DetailFilterDiv = styled.div`
+  filter: drop-shadow(5px 3px 4px rgba(0, 0, 0, 0.25));
+  width: 100%;
+  height: auto;
+  .bgOutter {
+    background: #dec3f8;
+    padding: 10px;
+    position: relative;
+    zindex: 5;
+    .bgInner {
+      background: white;
+      padding: 30px;
+      borderradius: 10px;
+    }
+  }
+`;
+
+const DetailExplanationDiv = styled.div`
+  padding-top: 1rem;
+  div {
+    margin-bottom: 20px;
+    p {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    div {
+      text-align: center;
+    }
+    &.workType,
+    &.videoPurpose {
+      span {
+        background: #f7efff;
+        border-radius: 16px;
+        padding: 0px 10px;
+        margin-right: 10px;
+      }
+    }
+  }
+`;
+
+const PriceRuleDiv = styled.div`
+  padding-top: 1rem;
+`;
+
+const FAQDiv = styled.div`
+  padding-top: 1rem;
+  div {
+    display: flex;
+    align-items: center;
+    p {
+      &.heading {
+        width: 5vw;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      &.content {
+        width: 95vw;
+        border: 1px solid #cacaca;
+        border-radius: 8px;
+        text-align: center;
+        padding: 5px;
+      }
+    }
+  }
+`;
+
 const ReviewUploadDiv = styled.div`
   width: 100%;
   height: auto;
@@ -77,19 +301,14 @@ const ReviewUploadDiv = styled.div`
   }
 `;
 
-const MenuItem = styled.li`
-  background: #ffffff;
-  border: 1px solid #d5d5d5;
-  box-sizing: border-box;
-  border-radius: 22px;
-  color: #702c8a;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px 20px 10px 20px;
-  cursor: pointer;
-  &.active {
-    background: #faf5f5;
-  }
-`;
-
-export { ReviewUploadDiv, MenuItem };
+export {
+  DetailDiv,
+  ProducerTitleDiv,
+  DetailFilterDiv,
+  ContentGNBUL,
+  DetaulContentSubTitle,
+  DetailExplanationDiv,
+  PriceRuleDiv,
+  FAQDiv,
+  ReviewUploadDiv,
+};
