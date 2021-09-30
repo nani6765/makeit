@@ -10,8 +10,8 @@ function FAQ(props) {
       <DetaulContentSubTitle>FAQ</DetaulContentSubTitle>
       {props.FAQList.map((faq, idx) => {
         return (
-          <>
-            <div style={{ display: "flex", alignItems: "center" }}>
+          <div key={idx}>
+            <div>
               <p className="heading">Q.</p>
               <p className="content">{faq.q}</p>
             </div>
@@ -19,7 +19,7 @@ function FAQ(props) {
               <p className="heading">A.</p>
               <p className="content">{faq.a}</p>
             </div>
-          </>
+          </div>
         );
       })}
     </FAQDiv>

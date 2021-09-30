@@ -11,7 +11,7 @@ import DetailExplanation from "./content/DetailExplanation.js";
 import PortFolio from "./content/PortFolio.js";
 import PriceRule from "./content/PriceRule.js";
 import FAQ from "./content/FAQ.js";
-import Review from "./content/Review.js";
+import ReviewArea from "./content/review/ReviewArea.js";
 
 function ProducerContentDetail(props) {
   return (
@@ -37,7 +37,7 @@ function ProducerContentDetail(props) {
               <FAQ FAQList={props.PostInfo.FAQList} />
             )}
 
-            <Review PostURL={props.PostInfo.url} />
+            <ReviewArea PostURL={props.PostInfo.url} />
           </div>
         </div>
       </DetailFilterDiv>

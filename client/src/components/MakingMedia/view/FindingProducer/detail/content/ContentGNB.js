@@ -6,7 +6,6 @@ function ContentGNB() {
       <a href="#detail">
         <li>상세 설명</li>
       </a>
-
       <a href="#price">
         <li>가격정책</li>
       </a>

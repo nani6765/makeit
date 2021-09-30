@@ -185,7 +185,6 @@ const TempProPostSchema = mongoose.Schema(
   }
 );
 
-//아직 다 안함
 const ProReviewSchema = mongoose.Schema(
   {
     auther: {

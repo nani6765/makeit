@@ -165,14 +165,13 @@ const DetaulContentSubTitle = styled.p`
 `;
 
 const DetailFilterDiv = styled.div`
-  filter: drop-shadow(5px 3px 4px rgba(0, 0, 0, 0.25));
   width: 100%;
   height: auto;
   .bgOutter {
     background: #dec3f8;
     padding: 10px;
     position: relative;
-    zindex: 5;
+    z-index: 5;
     .bgInner {
       background: white;
       padding: 30px;
@@ -279,6 +278,7 @@ const ReviewUploadDiv = styled.div`
       align-content: center;
       align-items: center;
       justify-content: space-between;
+      margin-top: 0.5rem;
       div {
         p {
           margin-bottom: 0px;
@@ -301,6 +301,239 @@ const ReviewUploadDiv = styled.div`
   }
 `;
 
+const ReviewDiv = styled.div`
+  width: 100%;
+  height: auto;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  grid-template-rows: 25px 25px 1fr auto;
+  grid-template-areas:
+    "avatar author hambuc"
+    "avatar review ."
+    ". desc ."
+    ". info .";
+  position: relative;
+  .avatar {
+    grid-area: avatar;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .author {
+    grid-area: author;
+    p {
+      margin-bottom: 0px;
+      font-weight: bold;
+    }
+  }
+  .hambuc {
+    grid-area: hambuc;
+    color: #c4c4c4;
+    position: relative;
+    text-align: center;
+    i {
+      cursor: pointer;
+    }
+  }
+  .review {
+    grid-area: review;
+    i {
+      color: #ffe459;
+      &:nth-last-of-type(1) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  .desc {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    grid-area: desc;
+    textarea {
+      resize: none;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px 8px 0px 0px;
+      border: none;
+      border-left: 1px solid #d8d8d8;
+      border-top: 1px solid #d8d8d8;
+      border-right: 1px solid #d8d8d8;
+      padding: 5px;
+      padding-bottom: 10px;
+      margin-bottom: 0px;
+      overflow: hidden;
+      background-color: white;
+      &:focus {
+        outline: none;
+      }
+    }
+    .maxLength {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      text-align: right;
+      margin-block-start: 0px;
+      border-radius: 0px 0px 8px 8px;
+      background-color: white;
+      border: none;
+      border-left: 1px solid #d8d8d8;
+      border-bottom: 1px solid #d8d8d8;
+      border-right: 1px solid #d8d8d8;
+      padding-right: 10px;
+      color: #d8d8d8;
+      font-size: 10px;
+    }
+  }
+  .info {
+    grid-area: info;
+    .btnDiv {
+      width: 100%;
+      text-align: right;
+      margin-top: 15px;
+      button {
+        border-radius: 10px;
+        text-align: center;
+        padding: 5px 15px 5px 15px;
+
+        &.cancel {
+          background: #ffffff;
+          border: 1px solid #935ea5;
+          color: #000000;
+          margin-right: 15px;
+        }
+        &.submit {
+          background: #935ea5;
+          border: 1px solid #935ea5;
+          font-weight: bold;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+`;
+
+const ModalDiv = styled.div`
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  min-width: 150px;
+  min-height: 70px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  div {
+    button {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-aling: center;
+      background-color: rgba(255, 255, 255, 1);
+    }
+    .edit {
+      i {
+        margin-right: 1rem;
+      }
+    }
+    .delete {
+      margin-top: 10px;
+      display: inline;
+      color: #d70000;
+      i {
+        margin-right: 1rem;
+      }
+    }
+  }
+`;
+
+const DeleteModalDiv = styled.div`
+  .content {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    .background {
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 100%;
+      z-index: 50;
+    }
+    .gridDiv {
+      background: #ffffff;
+      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+      border-radius: 11px;
+      display: grid;
+      grid-template-columns: 1fr 8fr 1fr;
+      grid-gap: 5px;
+      grid-template-rows: auto auto auto;
+      padding: 20px;
+      grid-template-areas:
+        ". title delete"
+        ". desc ."
+        ". buttonDiv .";
+      z-index: 51;
+      position: fixed;
+      .title {
+        grid-area: title;
+        text-align: center;
+        color: #000000;
+        font-weight: bold;
+      }
+      .delete {
+        grid-area: delete;
+        text-align: center;
+        color: #000000;
+        padding: 5px;
+        cursor: pointer;
+      }
+      .desc {
+        grid-area: desc;
+        color: #000000;
+        line-height: 25px;
+      }
+      .buttonDiv {
+        margin-top: 20px;
+        grid-area: buttonDiv;
+        text-align: center;
+        button {
+          box-sizing: border-box;
+          border-radius: 16px;
+          padding: 5px 10px 5px 10px;
+          width: auto;
+          &.cancel {
+            background: #ffffff;
+            border: 1.5px solid #000000;
+            color: black;
+            margin-right: 20px;
+          }
+          &.delete {
+            background: #d70000;
+            border: 1.5px solid #d70000;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+`;
+
 export {
   DetailDiv,
   ProducerTitleDiv,
@@ -311,4 +544,7 @@ export {
   PriceRuleDiv,
   FAQDiv,
   ReviewUploadDiv,
+  ReviewDiv,
+  ModalDiv,
+  DeleteModalDiv,
 };
