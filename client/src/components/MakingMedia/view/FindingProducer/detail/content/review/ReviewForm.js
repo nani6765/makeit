@@ -24,6 +24,9 @@ function ReviewForm(props) {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
+    if (Review === "") {
+      return alert("리뷰 내용을 채워주세요!");
+    }
     let body = {
       uid: user.userData.uid,
       url: props.PostURL,

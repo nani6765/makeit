@@ -248,4 +248,45 @@ router.post("/producer/review/upload", (req, res) => {
     });
 });
 
+router.post("/producer/review/update", (req, res) => {
+  let temp = req.body;
+  ProPost.findOneAndUpdate(
+    { url: temp.url },
+    { $inc: { grade: -temp.originGrade, grade: temp.grade } }
+  )
+    .exec()
+    .then((doc) => {
+      ProReview.findOneAndUpdate(
+        { url: temp.url, uid: temp.uid },
+        { $set: { grade: temp.grade, content: temp.content } }
+      )
+        .exec()
+        .then((doc) => {
+          return res.status(200).send({ success: true });
+        });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
+router.post("/producer/review/delete", (req, res) => {
+  let temp = req.body;
+  ProPost.findOneAndUpdate(
+    { url: temp.url },
+    { $inc: { gradeArrayNum: -1, grade: -temp.grade } }
+  )
+    .exec()
+    .then((doc) => {
+      ProReview.findOneAndDelete({ url: temp.url, uid: temp.uid })
+        .exec()
+        .then((doc) => {
+          return res.status(200).send({ success: true });
+        });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
 module.exports = router;

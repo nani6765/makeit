@@ -43,6 +43,31 @@ function Review(props) {
     }
   };
 
+  const EditSubmit = (e) => {
+    e.preventDefault();
+    if (EditReview === "") {
+      return alert("리뷰 내용을 채워주세요!");
+    }
+
+    let body = {
+      url: props.PostURL,
+      uid: user.userData.uid,
+      originGrade: props.Review.grade,
+      grade: EditStarValue,
+      content: EditReview,
+    };
+
+    console.log(body);
+    axios.post("/api/making/producer/review/update", body).then((response) => {
+      if (response.data.success) {
+        alert("리뷰 수정이 완료되었습니다.");
+        window.location.reload();
+      } else {
+        console.log(response.data.err);
+      }
+    });
+  };
+
   return (
     <ReviewDiv>
       <div className="avatar">
@@ -62,7 +87,9 @@ function Review(props) {
             className="bi bi-three-dots"
             onClick={() => sethambucControl(true)}
           ></i>
-          {hambucControl && <ReviewModal setEditFlag={setEditFlag} />}
+          {hambucControl && (
+            <ReviewModal setEditFlag={setEditFlag} Review={props.Review} />
+          )}
         </div>
       )}
 
@@ -97,7 +124,7 @@ function Review(props) {
               value={EditReview}
               onChange={(e) => setReviewFunc(e)}
             ></textarea>
-            <div className="maxLength">{Review.length}/300</div>
+            <div className="maxLength">{EditReview.length}/300</div>
           </>
         ) : (
           props.Review.content
@@ -109,7 +136,9 @@ function Review(props) {
             <button className="cancel" onClick={() => setEditFlag(false)}>
               취소
             </button>
-            <button className="submit">확인</button>
+            <button className="submit" onClick={(e) => EditSubmit(e)}>
+              확인
+            </button>
           </div>
         ) : null}
       </div>

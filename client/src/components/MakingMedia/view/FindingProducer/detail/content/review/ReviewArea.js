@@ -22,7 +22,7 @@ function ReviewArea(props) {
       {ReviewList[0] &&
         ReviewList.map((review, idx) => {
           console.log(idx, " : ", review);
-          return <Review key={idx} Review={review} />;
+          return <Review key={idx} Review={review} PostURL={props.PostURL} />;
         })}
     </div>
   );
