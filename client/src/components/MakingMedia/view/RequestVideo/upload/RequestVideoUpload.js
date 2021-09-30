@@ -9,7 +9,6 @@ import {
 } from "./css/RequestUploadCSS.js";
 
 import axios from 'axios';
-import { ContentDiv } from '../../FindingProducer/upload/css/FPCSS.js';
 
 function RequestVideoUpload(props) {
     const user = useSelector((state) => state.user);
@@ -52,7 +51,7 @@ function RequestVideoUpload(props) {
             category: Category,
             minPrice: MinPrice,
             maxPrice: MaxPrice,
-            deadline: toString(Deadline),
+            deadline: Deadline.toLocaleDateString(),
             filmType: FilmType,
             uniqueness: Uniqueness,
             content: Content,
@@ -64,7 +63,7 @@ function RequestVideoUpload(props) {
             return;
         }
         if(MaxPrice<MinPrice || MinPrice < 0 || MaxPrice=== 0) {
-            alert("측정 예산을 올바르게 입력해주세요!");
+            alert("측정 예산을 올바르게 입력해주세요!", MaxPrice, MinPrice);
             return;
         }
         if(!Content) { 

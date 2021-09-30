@@ -279,7 +279,7 @@ const RequestPostSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "proPost",
+    collection: "reqPost",
   }
 );
 

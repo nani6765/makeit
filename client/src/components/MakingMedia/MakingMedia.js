@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import HeaderGNB from "./view/common/HeaderGNB";
 import FindingProducer from "./view/FindingProducer/FindingProducer.js";
+import RequestVideo from "./view/RequestVideo/RequestVideo.js";
 import { MakingDiv, DescriptionDiv } from "./css/CommonCSS.js";
 
 function MakingMedia() {
@@ -17,6 +18,9 @@ function MakingMedia() {
       case "영상 제작자 탐색":
         return <FindingProducer Menu={Menu} user={user} />;
 
+      case "영상 의뢰하기":
+        return <RequestVideo Menu={Menu} user={user} />;
+        
       default:
         break;
     }

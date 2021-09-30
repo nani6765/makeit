@@ -26,6 +26,7 @@ function RequestFilter(props) {
                 <Select
                 className="categoryList"
                 options={options}
+                defaultValue={options[0]}
                 placeholder="카테고리"
                 blurInputOnSelect="true"
                 menuShouldBlockScroll="true"

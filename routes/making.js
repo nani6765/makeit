@@ -5,7 +5,6 @@ const { User } = require("../model/User.js");
 const { ProPost, TempProPost, ProReview, RequestPost } = require("../model/Making.js");
 
 var moment = require("moment");
-const { response } = require("express");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
@@ -133,17 +132,17 @@ router.post("/producer/proPostSubmit", (req, res) => {
 
 router.post("/producer/proPostEdit", (req, res) => {
   let temp = req.body;
- 
+
   temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-  ProPost.findOneAndUpdate({uid: temp.uid}, temp)
-  .exec()
-  .then((response) => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  })
-})
+  ProPost.findOneAndUpdate({ uid: temp.uid }, temp)
+    .exec()
+    .then((response) => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
 
 router.post("/producer/getPostDetail", (req, res) => {
   ProPost.findOne({ url: req.body.url })
@@ -224,6 +223,54 @@ router.post("/producer/review/upload", (req, res) => {
 
 
 // RequestVideo
+router.post("/requestVideo", (req, res) => {
+  let category = {
+    category: req.body.category,
+  };
+  if (category.category === "전체") {
+    delete category.category;
+  }
+
+  //최신순&&인기순 정렬
+  let sort = {};
+  if (req.body.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.likeNum = -1;
+  }
+
+  RequestPost.find(category)
+  .populate("auther")
+  .sort(sort)
+  .skip(req.body.skip)
+  .limit(10)
+  .exec()
+  .then((post) => {
+    return res.status(200).send({ success: true, post: post });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  });
+})
+
+router.post("/requestVideo/postLength", (req, res) => {
+  let category = {
+    category: req.body.category,
+  };
+  if (category.category === "전체") {
+    delete category.category;
+  }
+
+  RequestPost.find(category)
+    .exec()
+    .then((posts) => {
+      return res.status(200).send({ success: true, len: posts.length });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
 
 router.post("/requestVideo/reqPostSubmit", (req, res) => {
   let temp = req.body;
