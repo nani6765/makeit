@@ -2,7 +2,7 @@ var router = require("express").Router();
 
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
-const { ProPost, TempProPost, ProReview } = require("../model/Producer.js");
+const { ProPost, TempProPost, ProReview, RequestPost } = require("../model/Making.js");
 
 var moment = require("moment");
 const { response } = require("express");
@@ -218,6 +218,34 @@ router.post("/producer/review/upload", (req, res) => {
     .catch((err) => {
       return res.json({ success: false, err });
     });
+});
+
+
+
+
+// RequestVideo
+
+router.post("/requestVideo/reqPostSubmit", (req, res) => {
+  let temp = req.body;
+
+  User.findOne({uid: temp.uid})
+  .exec()
+  .then((user) => {
+    temp.auther = user._id;
+    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+    Counter.findOneAndUpdate({name: "counter"}, {$inc : {reqPostNum: 1}})
+    .exec()
+    .then((cnt) => {
+      temp.url = cnt.reqPostNum;
+      const post = new RequestPost(temp);
+      post.save(() => {
+        return res.status(200).send({ success: true });
+      });
+    })
+  })
+  .catch((err) => {
+    console.log("reqPostSubmit Error: ", err);
+  });
 });
 
 module.exports = router;

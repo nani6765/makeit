@@ -73,11 +73,11 @@ function ProducerContentDetail(props) {
                             props.PostInfo.FAQList.map((faq, idx) => {
                                 return (
                                     <>
-                                    <div style={{display: "flex", alignItems: "center"}}>
+                                    <div style={{display: "flex", alignItems: "center", marginBottom: "10px"}}>
                                         <p style={{width: "5vw", fontWeight: "bold", fontSize: "20px"}}>Q.</p>
                                         <p style={{width: "95vw", border: "1px solid #CACACA", borderRadius: "8px", textAlign: "center", padding: "5px"}}>{faq.q}</p>
                                     </div>
-                                    <div style={{display: "flex", alignItems: "center"}}>
+                                    <div style={{display: "flex", alignItems: "center", marginBottom: "10px"}}>
                                         <p style={{width: "5vw", fontWeight: "bold", fontSize: "20px"}}>A.</p>
                                         <p style={{width: "95vw", border: "1px solid #CACACA", borderRadius: "8px", textAlign: "center", padding: "5px"}}>{faq.a}</p>
                                     </div>
