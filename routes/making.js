@@ -191,6 +191,35 @@ router.post("/producer/producerLike", (req, res) => {
 /////////////////////////////
 //         review          //
 /////////////////////////////
+router.post("/producer/review", (req, res) => {
+  let url = req.body.url;
+  ProReview.find({ url: url })
+    .exec()
+    .then((doc) => {
+      console.log(doc);
+      if (doc === null) {
+        return res.status(200).send({ review: [] });
+      } else {
+        return res.status(200).send({ review: doc });
+      }
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
+router.post("/producer/getUser", (req, res) => {
+  let uid = req.body.uid;
+  User.find({ uid: uid })
+    .exec()
+    .then((doc) => {
+      return res.status(200).send({ user: doc });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
 router.post("/producer/review/upload", (req, res) => {
   let temp = req.body;
   ProReview.findOne({ uid: temp.uid })

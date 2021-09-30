@@ -301,6 +301,162 @@ const ReviewUploadDiv = styled.div`
   }
 `;
 
+const ReviewDiv = styled.div`
+  width: 100%;
+  height: auto;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  grid-template-rows: 25px 25px 1fr auto;
+  grid-template-areas:
+    "avatar author hambuc"
+    "avatar review ."
+    ". desc ."
+    ". info .";
+  .avatar {
+    grid-area: avatar;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .author {
+    grid-area: author;
+    p {
+      margin-bottom: 0px;
+      font-weight: bold;
+    }
+  }
+  .hambuc {
+    grid-area: hambuc;
+    color: #c4c4c4;
+    position: relative;
+    text-align: center;
+    i {
+      cursor: pointer;
+    }
+  }
+  .review {
+    grid-area: review;
+    i {
+      color: #ffe459;
+      &:nth-last-of-type(1) {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  .desc {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    grid-area: desc;
+    textarea {
+      resize: none;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px 8px 0px 0px;
+      border: none;
+      border-left: 1px solid #d8d8d8;
+      border-top: 1px solid #d8d8d8;
+      border-right: 1px solid #d8d8d8;
+      padding: 5px;
+      padding-bottom: 10px;
+      margin-bottom: 0px;
+      overflow: hidden;
+      background-color: white;
+      &:focus {
+        outline: none;
+      }
+    }
+    .maxLength {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      text-align: right;
+      margin-block-start: 0px;
+      border-radius: 0px 0px 8px 8px;
+      background-color: white;
+      border: none;
+      border-left: 1px solid #d8d8d8;
+      border-bottom: 1px solid #d8d8d8;
+      border-right: 1px solid #d8d8d8;
+      padding-right: 10px;
+      color: #d8d8d8;
+      font-size: 10px;
+    }
+  }
+  .info {
+    grid-area: info;
+    .btnDiv {
+      width: 100%;
+      text-align: right;
+      margin-top: 15px;
+      button {
+        border-radius: 10px;
+        text-align: center;
+        padding: 5px 15px 5px 15px;
+
+        &.cancel {
+          background: #ffffff;
+          border: 1px solid #935ea5;
+          color: #000000;
+          margin-right: 15px;
+        }
+        &.submit {
+          background: #935ea5;
+          border: 1px solid #935ea5;
+          font-weight: bold;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+`;
+
+const ModalDiv = styled.div`
+  padding: 10px;
+  background: #ffffff;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+  border-radius: 11px;
+  position: absolute;
+  right: 10px;
+  top: 20px;
+  min-width: 150px;
+  min-height: 70px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  div {
+    button {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      border: none;
+      text-aling: center;
+      background-color: rgba(255, 255, 255, 1);
+    }
+    .edit {
+      i {
+        margin-right: 1rem;
+      }
+    }
+    .delete {
+      margin-top: 10px;
+      display: inline;
+      color: #d70000;
+      i {
+        margin-right: 1rem;
+      }
+    }
+  }
+`;
+
 export {
   DetailDiv,
   ProducerTitleDiv,
@@ -311,4 +467,6 @@ export {
   PriceRuleDiv,
   FAQDiv,
   ReviewUploadDiv,
+  ReviewDiv,
+  ModalDiv,
 };

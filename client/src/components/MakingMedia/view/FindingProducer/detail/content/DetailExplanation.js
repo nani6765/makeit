@@ -12,7 +12,7 @@ function DetailExplanation(props) {
         <div className="workType">
           <p>작업 유형</p>
           {props.WorkTypeArr.map((work, idx) => {
-            return <span>{work}</span>;
+            return <span key={idx}>{work}</span>;
           })}
         </div>
       )}
@@ -21,7 +21,7 @@ function DetailExplanation(props) {
         <div className="videoPurpose">
           <p>영상 목적</p>
           {props.VideoPurposeArr.map((purpose, idx) => {
-            return <span>{purpose}</span>;
+            return <span key={idx}>{purpose}</span>;
           })}
         </div>
       )}
