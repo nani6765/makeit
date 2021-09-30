@@ -55,7 +55,7 @@ function ProducerList(props) {
                                 <p className="price">{post.priceInfo}</p>
                                 <p className="grade">
                                     <i className="bi bi-star"></i>
-                                    {post.grade} | {post.gradeArray.length}개의 평가
+                                    {post.grade ? (post.grade/post.gradeArrayNum).toFixed(1) : post.grade} | {post.gradeArrayNum}개의 평가
                                 </p>
                             </div>
                         </div>
