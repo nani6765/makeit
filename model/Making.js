@@ -215,7 +215,77 @@ const ProReviewSchema = mongoose.Schema(
   }
 );
 
+const RequestPostSchema = mongoose.Schema(
+  {
+    //쓰니정보
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+
+    //글정보
+    //상세 설명
+    oneLineIntroduce: {
+      type: String,
+    },
+    category: {
+      type: String,
+    },
+    minPrice: {
+      type: Number,
+    },
+    maxPrice: {
+      type: Number,
+    },
+    deadline: {
+      type: String,
+    },
+    FilmType: {
+      type: String,
+    },
+    Uniqueness: {
+      type: String,
+    },
+    content: {
+      type: String,
+    },
+    workTypeArr: {
+      type: Array,
+      default: [],
+    },
+    videoPurposeArr: {
+      type: Array,
+      default: [],
+    },
+
+
+    //post속성
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
+    url: {
+      type: Number,
+      unique: true,
+    },
+  },
+  {
+    timestamps: true,
+    collection: "reqPost",
+  }
+);
+
+
+
 const ProPost = mongoose.model("ProPostSchema", ProPostSchema);
 const TempProPost = mongoose.model("TempProPostSchema", TempProPostSchema);
 const ProReview = mongoose.model("ProReviewSchema", ProReviewSchema);
-module.exports = { ProPost, TempProPost, ProReview };
+const RequestPost = mongoose.model("RequestPostSchema", RequestPostSchema);
+module.exports = { ProPost, TempProPost, ProReview, RequestPost };

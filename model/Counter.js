@@ -16,6 +16,9 @@ const counter = mongoose.Schema(
     proPostNum: {
       type: Number,
     },
+    reqPostNum: {
+      type: Number,
+    }
   },
   { collection: "counter" }
 );

@@ -11,12 +11,8 @@ function StickyBar(props) {
             <div className="subCategory">
                 {
                     props.SubCategoryList.map((sub, idx) => {
-                        let classN = "";
-                        if(sub === props.SubCategory) {
-                            classN = "active";
-                        }
                         return (
-                            <p className={classN} key={idx} onClick={() => props.setSubCategory(sub)}>{sub}</p>
+                            <p className={sub===props.SubCategory ? "active" : null} key={idx} onClick={() => props.setSubCategory(sub)}>{sub}</p>
                         );
                     })
                 }

@@ -2,7 +2,7 @@ var router = require("express").Router();
 
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
-const { ProPost, TempProPost, ProReview } = require("../model/making.js");
+const { ProPost, TempProPost, ProReview, RequestPost } = require("../model/Making.js");
 
 var moment = require("moment");
 require("moment-timezone");
@@ -287,6 +287,82 @@ router.post("/producer/review/delete", (req, res) => {
     .catch((err) => {
       return res.json({ success: false, err });
     });
+});
+
+
+
+
+// RequestVideo
+router.post("/requestVideo", (req, res) => {
+  let category = {
+    category: req.body.category,
+  };
+  if (category.category === "전체") {
+    delete category.category;
+  }
+
+  //최신순&&인기순 정렬
+  let sort = {};
+  if (req.body.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.likeNum = -1;
+  }
+
+  RequestPost.find(category)
+  .populate("auther")
+  .sort(sort)
+  .skip(req.body.skip)
+  .limit(10)
+  .exec()
+  .then((post) => {
+    return res.status(200).send({ success: true, post: post });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  });
+})
+
+router.post("/requestVideo/postLength", (req, res) => {
+  let category = {
+    category: req.body.category,
+  };
+  if (category.category === "전체") {
+    delete category.category;
+  }
+
+  RequestPost.find(category)
+    .exec()
+    .then((posts) => {
+      return res.status(200).send({ success: true, len: posts.length });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
+
+router.post("/requestVideo/reqPostSubmit", (req, res) => {
+  let temp = req.body;
+
+  User.findOne({uid: temp.uid})
+  .exec()
+  .then((user) => {
+    temp.auther = user._id;
+    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+    Counter.findOneAndUpdate({name: "counter"}, {$inc : {reqPostNum: 1}})
+    .exec()
+    .then((cnt) => {
+      temp.url = cnt.reqPostNum;
+      const post = new RequestPost(temp);
+      post.save(() => {
+        return res.status(200).send({ success: true });
+      });
+    })
+  })
+  .catch((err) => {
+    console.log("reqPostSubmit Error: ", err);
+  });
 });
 
 module.exports = router;

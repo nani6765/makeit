@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProducerList from "./ProducerList.js";
-import StickyBar from "./StickyBar.js";
+import StickyBar from "../common/StickyBar.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { ProducerListDiv } from "../../css/FindingProducerCSS.js";
 import { ReactComponent as PenIcon } from "../../css/Img/Pen.svg";
@@ -65,7 +65,7 @@ function FindingProducer(props) {
       </div>
       <div className="right">
         <div className="GNB">
-          <p className="category">홈 &gt; {SubCategory}</p>
+          <p className="category">홈 &gt; 영상제작 &gt; 제작자 탐색 &gt; {SubCategory}</p>
           <Dropdown id="sort">
             <Dropdown.Toggle id="dropdown-basic">{Sort}</Dropdown.Toggle>
             <Dropdown.Menu id="dropdown-menu">

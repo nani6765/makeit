@@ -75,7 +75,10 @@ const ProducerListDiv = styled.div`
       display: flex;
       align-content: center;
       justify-content: space-between;
-      align-items: center;
+      align-items: center;;
+      .category {
+          color: #A7A5A8;
+      }
       #sort {
         button {
           background-color: #ffffff;

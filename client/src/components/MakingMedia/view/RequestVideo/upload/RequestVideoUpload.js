@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
+import { useSelector } from "react-redux";
 import { withRouter } from 'react-router-dom';
-import Select from "react-select";
-import DatePicker from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker.css';
-
+import RequestFilter from './view/RequestFilter.js';
 import {
     UploadHead,
     UploadForm,
     UploadContent
 } from "./css/RequestUploadCSS.js";
 
+import axios from 'axios';
+
 function RequestVideoUpload(props) {
+    const user = useSelector((state) => state.user);
+
     const [OneLineIntroduce, setOneLineIntroduce] = useState("");
     const [Category, setCategory] = useState("일반 영상");
     const [MinPrice, setMinPrice] = useState(0);
@@ -25,19 +27,6 @@ function RequestVideoUpload(props) {
     const [WorkType, setWorkType] = useState("");
     const [VideoPurpose, setVideoPurpose] = useState("");
 
-    const options = [
-      { value: "일반 영상", label: "일반 영상" },
-      { value: "유튜브 제작", label: "유튜브 제작" },
-      { value: "특수영상", label: "특수영상" },
-      { value: "광고/홍보 영상", label: "광고/홍보 영상" },
-      { value: "온라인 생중계", label: "온라인 생중계" },
-      { value: "애니메이션", label: "애니메이션" },
-      { value: "촬영", label: "촬영" },
-      { value: "편집/자막", label: "편집/자막" },
-      { value: "기타", label: "기타" },
-    ];
-    const radioOptions = ["직접 촬영", "업체 촬영", "협의"];
-    
     const WorkKeyDown = (e) => {
         if (e.key === "Enter" && WorkType !== "") {
         let temp = [...WorkTypeArr, WorkType];
@@ -55,7 +44,41 @@ function RequestVideoUpload(props) {
     };
 
     const submitHandler = ()=> {
-       
+        let body = {
+            uid: user.userData.uid,
+            email: user.userData.email,
+            oneLineIntroduce: OneLineIntroduce,
+            category: Category,
+            minPrice: MinPrice,
+            maxPrice: MaxPrice,
+            deadline: Deadline.toLocaleDateString(),
+            filmType: FilmType,
+            uniqueness: Uniqueness,
+            content: Content,
+            workTypeArr: WorkTypeArr,
+            videoPurposeArr: VideoPurposeArr,
+        }
+        if(!OneLineIntroduce) {
+            alert("한줄 소개를 작성해주세요!");
+            return;
+        }
+        if(MaxPrice<MinPrice || MinPrice < 0 || MaxPrice=== 0) {
+            alert("측정 예산을 올바르게 입력해주세요!", MaxPrice, MinPrice);
+            return;
+        }
+        if(!Content) { 
+            alert("의뢰 내용을 입력해주세요!");
+            return;
+        }
+
+        axios.post("/api/making/requestVideo/reqPostSubmit", body).then((response) => {
+            if(response.data.success) {
+                alert("의뢰 게시가 완료되었습니다.");
+                props.history.push("/making");
+            } else {
+                alert("의뢰 게시가 실패하였습니다.");
+            }
+        });
     }
 
     return (
@@ -80,72 +103,26 @@ function RequestVideoUpload(props) {
                 onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
             />
             <UploadContent>
-                <div className="filter">
-                    <label className="categorylabel">카테고리</label>
-                    <div className="category">
-                        <Select
-                        className="categoryList"
-                        options={options}
-                        placeholder="카테고리"
-                        blurInputOnSelect="true"
-                        menuShouldBlockScroll="true"
-                        onChange={(e) => setCategory(e.value)}
-                        />
-                    </div>
-                    <label className="pricelabel">측정 예산</label>
-                    <div className="price">
-                        <input
-                            name="minPrice"
-                            type="number"
-                            min="0"
-                            onChange={(e) => setMinPrice(e.currentTarget.value)}
-                        />
-                        <p>원 ~ </p>
-                        <input
-                            name="maxPrice"
-                            type="number"
-                            onChange={(e) => setMaxPrice(e.currentTarget.value)}
-                        />
-                        <p>원</p>
-                    </div>
-                    <label className="deadlinelabel">마감 기한</label>
-                    <div className="deadline">
-                        <DatePicker className="date" selected={Deadline} onChange={(date) => setDeadline(date)} minDate={new Date()}/>
-                    </div>
-                    <label className="filmTypelabel">촬영 여부</label>
-                    <div className="filmType">
-                        <div className="setFilmType">
-                        {
-                            radioOptions.map((option, idx) => {
-                                return (
-                                    <label key={idx}>
-                                    <input
-                                        type="radio"
-                                        name="flimType"
-                                        value={option}
-                                        checked={ FilmType === option ? true : false}
-                                        onChange={() => {
-                                        setFilmType(option);
-                                        }}
-                                    />
-                                    {option}
-                                    </label>
-                                )
-                            })
-                        }
-                        </div>
-                    </div>
-                    <label className="Uniquenesslabel">특이사항</label>
-                    <div className="Uniqueness">
-                        <input type="text" value={Uniqueness} onChange={(e) => setUniqueness(e.currentTarget.value)} />
-                    </div>
-                </div>
+                <RequestFilter
+                    Category={Category}
+                    setCategory={setCategory}
+                    MinPrice={MinPrice}
+                    setMinPrice={setMinPrice}
+                    MaxPrice={MaxPrice}
+                    setMaxPrice={setMaxPrice}
+                    Deadline={Deadline}
+                    setDeadline={setDeadline}
+                    FilmType={FilmType}
+                    setFilmType={setFilmType}
+                    Uniqueness={Uniqueness}
+                    setUniqueness={setUniqueness}
+                 />
                 <div className="body">
                     <textarea
                         name="content"
                         className="content"
                         value={Content}
-                        onChange={(e) => props.setContent(e.currentTarget.value)}
+                        onChange={(e) => setContent(e.currentTarget.value)}
                         placeholder={
                         "메이킷은 누구나 참여할 수 있는 의뢰환경을 만들기 위해 이용규칙을 제정하여 운영하고 있습니다.\n위반 시 게시물이 삭제되고 서비스 이용이 일정 기간 제한될 수 있습니다.\n\n아래는 이 게시판에 해당하는 핵심 내용에 대한 요약 사항이며, 게시물 작성 시 전 커뮤니티 이용 규칙 전문을 반드시 확인하시기 바랍니다.\n\n정치 사회 관련 행위 금지\n과도한 홍보 및 판매 관련 행위 금지\n그 밖에 규칙 위반     "
                         }
