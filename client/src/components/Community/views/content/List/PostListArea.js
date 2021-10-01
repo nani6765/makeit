@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
 import { PostCard } from "../../../css/CommunityListCSS.js";
+import axios from "axios";
 
 function PostListArea(props) {
   const [posts, setposts] = useState([]);
@@ -35,7 +36,6 @@ function PostListArea(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
 
   return (
     <div style={{ gridArea: "content" }} id="PostList" onScroll={ScrollFunction}>

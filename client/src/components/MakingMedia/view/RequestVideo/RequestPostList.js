@@ -63,6 +63,21 @@ function RequestPostList(props) {
                                             </div>
                                         </div>
                                     }
+                                    {
+                                        post.videoPurposeArr.length > 0 &&
+                                        <div>
+                                            <p>영상 목적</p>
+                                            <div>
+                                            {
+                                                post.videoPurposeArr.map((purpose, idx)=> {
+                                                    return (
+                                                        <span className="tag">{purpose}</span>
+                                                    )
+                                                })
+                                            }
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </Link>
                         </RequestPostCard>

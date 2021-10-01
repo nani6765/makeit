@@ -35,6 +35,7 @@ import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
 //RequestVideo
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
+import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -95,6 +96,11 @@ function App() {
             exact
             path="/Making/RequestUpload"
             component={RequestVideoUpload}
+          />
+          <Route
+            exact
+            path="/Making/RequestPost/:url"
+            component={RequestDetail}
           />
 
         </Switch>

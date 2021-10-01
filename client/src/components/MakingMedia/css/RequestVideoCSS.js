@@ -97,7 +97,7 @@ grid-gap: 1rem;
 
 const RequestPostCard = styled.div`
     padding: 20px;
-    margin: 20px;
+    margin: 30px 0;
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
@@ -129,21 +129,21 @@ const RequestPostCard = styled.div`
             width: 50%;
             color: #A5A5A5;
             font-size: 14px;
+            overflow: hidden;
             p {
                 display: inline-block;
-                width: 30%;
+                padding-right: 1rem;
                 margin-bottom: 0px;
                 border-right: 1px solid #A5A5A5;
             }
             div {
-                width: 70%;
-                span {
-                    margin-left: 1rem;
-                    background: #f7efff;
-                    border-radius: 16px;
-                    padding: 1px 10px;
-                    color: rgba(117, 117, 117, 1);
-                }
+              span {
+                  margin-left: 1rem;
+                  background: #f7efff;
+                  border-radius: 16px;
+                  padding: 1px 10px;
+                  color: rgba(117, 117, 117, 1);
+              }
             }
         }
     }
