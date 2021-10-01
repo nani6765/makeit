@@ -80,7 +80,7 @@ const StickyBarDiv = styled.div`
       font-size: 15px;
       line-height: 15px;
       margin-bottom: 1.5rem;
-      &:nth-last-child(1) {
+      &:nth-last-of-type(1) {
         margin-bottom: 0px;
       }
     }

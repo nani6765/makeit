@@ -10,7 +10,7 @@ function FAQ(props) {
       <DetaulContentSubTitle>FAQ</DetaulContentSubTitle>
       {props.FAQList.map((faq, idx) => {
         return (
-          <div key={idx}>
+          <div className="faq" key={idx}>
             <div>
               <p className="heading">Q.</p>
               <p className="content">{faq.q}</p>
