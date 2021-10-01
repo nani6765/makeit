@@ -7,18 +7,18 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const RequestListDiv = styled.div`
-width: 100%;
-height: auto;
-margin-top: 30px;
-display: grid;
-grid-template-columns: 2fr 8fr;
-grid-template-rows: auto;
-grid-template-areas: "left right";
-grid-gap: 1rem;
-.left {
-  grid-area: left;
-}
-.right {
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  grid-template-rows: auto;
+  grid-template-areas: "left right";
+  grid-gap: 1rem;
+  .left {
+    grid-area: left;
+  }
+  .right {
     grid-area: right;
     display: flex;
     flex-direction: column;
@@ -31,7 +31,7 @@ grid-gap: 1rem;
       justify-content: space-between;
       align-items: center;
       .category {
-          color: #A7A5A8;
+        color: #a7a5a8;
       }
       #sort {
         button {
@@ -92,61 +92,99 @@ grid-gap: 1rem;
         }
       }
     }
-}
+  }
+`;
+
+const LinkCSS = css`
+  color: black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const RequestPostCard = styled.div`
-    padding: 20px;
-    margin: 30px 0;
-    background: #ffffff;
-    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+  padding: 20px;
+  margin: 20px;
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
-    box-sizing: border-box;
-    border-radius: 15px;
-    a {
-      color: black;
-      text-decoration: none;
-      &hover: text-decoration: none;
-    }
-    .postInfo {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      .profile {
-        span {
-          margin-left: 1rem;
-          font-weight: bold;
-        }
+  box-sizing: border-box;
+  border-radius: 15px;
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 50px 1fr 1fr 50px;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-areas:
+    "profile author date date"
+    ". title title title"
+    "type type purpose purpose";
+  margin-bottom: 1rem;
+  color: black;
+  text-decoration: none;
+
+  .profile {
+    grid-area: profile;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .author {
+    grid-area: author;
+    font-weight: bold;
+    display: flex;
+    align-content: center;
+    align-items: center;
+  }
+  .date {
+    grid-area: date;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .title {
+    grid-area: title;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag {
+    display: flex;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    p {
+      color: #a5a5a5;
+      font-size: 14px;
+      position: relative;
+      &::after {
+        content: "|";
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
       }
     }
-    .title {
-        padding: 20px;
-        margin-left: 1rem;
+    &.type {
+      grid-area: type;
     }
-    .typeList {
-        div {
-            display: inline-block;
-            width: 50%;
-            color: #A5A5A5;
-            font-size: 14px;
-            overflow: hidden;
-            p {
-                display: inline-block;
-                padding-right: 1rem;
-                margin-bottom: 0px;
-                border-right: 1px solid #A5A5A5;
-            }
-            div {
-              span {
-                  margin-left: 1rem;
-                  background: #f7efff;
-                  border-radius: 16px;
-                  padding: 1px 10px;
-                  color: rgba(117, 117, 117, 1);
-              }
-            }
-        }
+    &.purpose {
+      grid-area: purpose;
     }
+    span {
+      background: #f7efff;
+      border-radius: 16px;
+      width: auto;
+      height: auto;
+      font-size: 12px;
+      padding: 5px 8px 5px 8px;
+      color: #757575;
+      margin-right: 0.5rem;
+    }
+  }
 `;
 
-export { RequestListDiv, RequestPostCard };
+export { RequestListDiv, LinkCSS, RequestPostCard };

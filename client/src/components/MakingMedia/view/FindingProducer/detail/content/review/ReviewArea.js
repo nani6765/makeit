@@ -16,7 +16,7 @@ function ReviewArea(props) {
   }, []);
 
   return (
-    <div id="review">
+    <div id="review" style={{ marginTop: "1rem" }}>
       <DetaulContentSubTitle>서비스 평가</DetaulContentSubTitle>
       <ReviewForm PostURL={props.Url} />
       {ReviewList[0] &&

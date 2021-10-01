@@ -209,21 +209,35 @@ const PriceRuleDiv = styled.div`
 
 const FAQDiv = styled.div`
   padding-top: 1rem;
-  div {
+  .faq {
     display: flex;
-    align-items: center;
-    p {
-      &.heading {
-        width: 5vw;
-        font-weight: bold;
-        font-size: 20px;
-      }
-      &.content {
-        width: 95vw;
-        border: 1px solid #cacaca;
-        border-radius: 8px;
-        text-align: center;
-        padding: 5px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    div {
+      width: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto;
+      grid-template-areas: "heading content";
+      grid-gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      p {
+        &.heading {
+          grid-area: heading;
+          width: auto;
+          font-weight: bold;
+          font-size: 20px;
+        }
+        &.content {
+          grid-area: content;
+          width: 100%;
+          border: 1px solid #cacaca;
+          border-radius: 8px;
+          text-align: center;
+          padding: 5px;
+        }
       }
     }
   }

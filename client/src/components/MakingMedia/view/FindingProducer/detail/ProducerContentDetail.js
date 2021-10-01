@@ -28,7 +28,7 @@ function ProducerContentDetail(props) {
             <PortFolio />
             <PriceRule PriceInfo={props.PostInfo.priceInfo} />
 
-            <div id="edit" style={{ paddingTop: "10%" }}>
+            <div id="edit" style={{ paddingTop: "1rem" }}>
               <DetaulContentSubTitle>수정/환불 안내</DetaulContentSubTitle>
               <Rule />
             </div>
