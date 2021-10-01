@@ -29,12 +29,11 @@ import PostEdit from "./components/Community/views/PostEdit.js";
 
 //MakingMedia
 import MakingMedia from "./components/MakingMedia/MakingMedia.js";
-//FindingProducer
 import FindingProducerUplopad from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerUpload.js";
 import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail/ProducerDetail.js";
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
-//RequestVideo
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
+import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/view/ShareVideoUpload.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -96,7 +95,11 @@ function App() {
             path="/Making/RequestUpload"
             component={RequestVideoUpload}
           />
-
+          <Route
+            exact
+            path="/Making/ShareUpload"
+            component={ShareVideoUpload}
+          />
         </Switch>
         <Footer />
       </>

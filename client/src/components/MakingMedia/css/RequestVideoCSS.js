@@ -168,6 +168,12 @@ const RequestPostCard = styled.div`
         margin-right: 0.5rem;
       }
     }
+    &.type {
+      grid-area: type;
+    }
+    &.purpose {
+      grid-area: purpose;
+    }
     span {
       background: #f7efff;
       border-radius: 16px;
@@ -177,12 +183,6 @@ const RequestPostCard = styled.div`
       padding: 5px 8px 5px 8px;
       color: #757575;
       margin-right: 0.5rem;
-    }
-    &.type {
-      grid-area: type;
-    }
-    &.pusrpose {
-      grid-area: purpose;
     }
   }
 `;
