@@ -291,8 +291,10 @@ router.post("/producer/review/delete", (req, res) => {
 
 
 
+/////////////////////////////////////////
+///////////// RequestVideo //////////////
+/////////////////////////////////////////
 
-// RequestVideo
 router.post("/requestVideo", (req, res) => {
   let category = {
     category: req.body.category,
@@ -306,7 +308,7 @@ router.post("/requestVideo", (req, res) => {
   if (req.body.sort === "최신순") {
     sort.createdAt = -1;
   } else {
-    sort.likeNum = -1;
+    sort.view = -1;
   }
 
   RequestPost.find(category)
@@ -321,7 +323,7 @@ router.post("/requestVideo", (req, res) => {
   .catch((err) => {
     return res.json({ success: false, err });
   });
-})
+});
 
 router.post("/requestVideo/postLength", (req, res) => {
   let category = {
@@ -340,6 +342,7 @@ router.post("/requestVideo/postLength", (req, res) => {
       return res.json({ success: false, err });
     });
 });
+
 
 
 router.post("/requestVideo/reqPostSubmit", (req, res) => {
@@ -363,6 +366,33 @@ router.post("/requestVideo/reqPostSubmit", (req, res) => {
   .catch((err) => {
     console.log("reqPostSubmit Error: ", err);
   });
+});
+
+router.post("/requestVideo/getPostDetail", (req, res) => {
+  RequestPost.findOneAndUpdate({ url: req.body.url }, {$inc: {view: 1}})
+    .populate("auther")
+    .exec()
+    .then((post) => {
+      return res.status(200).send({ success: true, post: post });
+    })
+    .catch((err) => {
+      console.log("requestVideo getPostDetail Error", err);
+      return res.json({ success: false, err });
+    });
+});
+
+router.post("/requestVideo/deletePost", (req, res) => {
+  let temp = req.body;
+  if(temp.type === "post") {
+    RequestPost.findByIdAndDelete({_id: temp._id})
+    .exec()
+    .then((doc) => { 
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+  }
 });
 
 module.exports = router;
