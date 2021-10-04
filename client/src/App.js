@@ -33,6 +33,7 @@ import FindingProducerUplopad from "./components/MakingMedia/view/FindingProduce
 import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail/ProducerDetail.js";
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
+import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
 import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/view/ShareVideoUpload.js";
 
 function App() {
@@ -95,6 +96,12 @@ function App() {
             path="/Making/RequestUpload"
             component={RequestVideoUpload}
           />
+          <Route
+            exact
+            path="/Making/RequestPost/:url"
+            component={RequestDetail}
+          />
+
           <Route
             exact
             path="/Making/ShareUpload"

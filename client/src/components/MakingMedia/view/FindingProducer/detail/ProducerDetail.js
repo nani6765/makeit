@@ -39,7 +39,6 @@ function ProducerDetail(props) {
         <>
           <ProducerTitleDetail
             PostInfo={PostInfo}
-            setPostInfo={setPostInfo}
             user={user}
           />
           <div className="content">

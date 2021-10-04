@@ -275,6 +275,10 @@ const RequestPostSchema = mongoose.Schema(
       type: Number,
       unique: true,
     },
+    view: {
+      type: Number,
+      default: 0,
+    }
   },
   {
     timestamps: true,
