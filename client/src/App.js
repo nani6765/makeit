@@ -33,7 +33,7 @@ import FindingProducerUplopad from "./components/MakingMedia/view/FindingProduce
 import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail/ProducerDetail.js";
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
-import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/view/ShareVideoUpload.js";
+import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 
 function App() {
   let dispatch = useDispatch();
