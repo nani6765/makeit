@@ -9,12 +9,8 @@ import Confirm from "./content/Confirm.js";
 
 import axios from "axios";
 
-import {
-  UploadForm,
-  UploadHead,
-  ContentDiv,
-  LeftContent,
-} from "./css/FPCSS.js";
+import { UploadForm, UploadHead } from "../../../css/CommonUploadCSS.js";
+import { ContentDiv, LeftContent } from "./css/FPCSS.js";
 
 function FindingProducerEdit(props) {
   const user = useSelector((state) => state.user);
@@ -68,7 +64,7 @@ function FindingProducerEdit(props) {
     // 수정환불 안내
     setEditandReprogress(props.location.state.post.editandReprogress);
     setFAQList([...props.location.state.post.FAQList]);
-  }, [])
+  }, []);
 
   /* 임시저장이 필요한가?
   const TempSaveHandler = () => {

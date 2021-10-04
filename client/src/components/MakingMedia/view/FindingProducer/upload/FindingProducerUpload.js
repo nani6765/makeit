@@ -9,12 +9,8 @@ import Confirm from "./content/Confirm.js";
 
 import axios from "axios";
 
-import {
-  UploadForm,
-  UploadHead,
-  ContentDiv,
-  LeftContent,
-} from "./css/FPCSS.js";
+import { UploadForm, UploadHead } from "../../../css/CommonUploadCSS.js";
+import { ContentDiv, LeftContent } from "./css/FPCSS.js";
 
 function FindingProducerUpload(props) {
   const user = useSelector((state) => state.user);

@@ -2,28 +2,20 @@ import React from "react";
 import StickyBar from "../common/StickyBar.js";
 import { Link } from "react-router-dom";
 
-import { ProducerListDiv } from "../../css/FindingProducerCSS.js";
+import { ShareVideoDiv } from "../../css/ShareVideoCSS.js";
 import { ReactComponent as PenIcon } from "../../css/Img/Pen.svg";
 
 function ShareVideo(props) {
   return (
-    <ProducerListDiv>
-      <div className="left">
-        <StickyBar
-          Menu={props.Menu}
-          setSubCategory={props.setSubCategory}
-          SubCategoryList={props.SubCategoryList}
-        />
-      </div>
-      <div className="right">
-        <Link to="/Making/ShareUpload">
-          <button className="postBtn">
-            게시하기
-            <PenIcon />
-          </button>
-        </Link>
-        <div className="FNB">
-          {/*
+    <ShareVideoDiv>
+      <Link to="/Making/ShareUpload">
+        <button className="postBtn">
+          게시하기
+          <PenIcon />
+        </button>
+      </Link>
+      <div className="FNB">
+        {/*
             <div className="pagination">
             {PageIdxArr[0] !== 1 ? (
               <button onClick={() => setSkip((parseInt(Skip / 120) - 1) * 120)}>
@@ -52,9 +44,8 @@ function ShareVideo(props) {
             )}
           </div>
           */}
-        </div>
       </div>
-    </ProducerListDiv>
+    </ShareVideoDiv>
   );
 }
 
