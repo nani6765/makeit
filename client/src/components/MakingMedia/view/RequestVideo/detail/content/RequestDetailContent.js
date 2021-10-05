@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Avatar from "react-avatar";
 import PostModal from "./Modal/PostModal.js";
+import RequestDetailFilter from './RequestDetailFilter.js';
 import { DetailContentDiv } from "../css/RVCSS.js";
 
 function RequestDatailContent(props) {
@@ -9,6 +10,11 @@ function RequestDatailContent(props) {
     const innerRef = useOuterClick((e) => {
         setModalFlag(false);
       });
+
+    useEffect(() => {
+        console.log("??", props.PostInfo.content);
+    }, []);
+
     return (
         <DetailContentDiv>
             <p className="path">홈 &gt; 영상제작 &gt; 의뢰하기 &gt; {props.PostInfo.category}</p>
@@ -42,6 +48,8 @@ function RequestDatailContent(props) {
                         )
                     ) : null
                 }
+                <RequestDetailFilter PostInfo={props.PostInfo}/>
+                <div className="content">{props.PostInfo.content}</div>
             </div>
         </DetailContentDiv>
     )

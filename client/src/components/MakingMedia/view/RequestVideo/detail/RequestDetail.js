@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 
-import RequestDatailContent from './content/RequestDatailContent.js';
+import RequestDetailContent from './content/RequestDetailContent.js';
+import Quotation from './content/Quotation.js';
+import NoQuotation from './content/NoQuotation.js';
 import { DetailDiv } from './css/RVCSS.js';
 
 import axios from "axios";
@@ -28,8 +30,11 @@ function RequestDetail(props) {
         <DetailDiv>
             {
                 PostInfo.url !== undefined && (
-                    <RequestDatailContent PostInfo={PostInfo} user={user}/>
+                    <RequestDetailContent PostInfo={PostInfo} user={user}/>
                 )
+            }
+            {
+                <NoQuotation />
             }
         </DetailDiv>
     )
