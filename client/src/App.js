@@ -35,7 +35,6 @@ import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/u
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
 import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
-import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/view/ShareVideoUpload.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -102,7 +101,6 @@ function App() {
             path="/Making/RequestPost/:url"
             component={RequestDetail}
           />
-
           <Route
             exact
             path="/Making/ShareUpload"

@@ -18,7 +18,10 @@ const counter = mongoose.Schema(
     },
     reqPostNum: {
       type: Number,
-    }
+    },
+    shareVideoNum: {
+      type: Number,
+    },
   },
   { collection: "counter" }
 );
