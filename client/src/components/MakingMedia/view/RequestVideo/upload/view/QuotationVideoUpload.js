@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import YoutubeModal from '../../../FindingProducer/upload/utils/YoutubeModal.js';
+import React, { useState } from 'react';
+import YoutubeModal from './YoutubeModal.js';
 import { VideoUploadDiv } from "../css/QuotationUploadCSS.js";
 
 function QuotationVideoUpload(props) {
     const [ModalFlag, setModalFlag] = useState(false);
-    const [CheckFlag, setCheckFlag] = useState([]);
+
+    const DeleteHandler = (idx) => {
+        console.log(idx);
+        let temp = [...props.VideoArr];
+        temp.splice(idx, 1);
+        props.setVideoArr([...temp]);
+    }
 
     return (
         <VideoUploadDiv>
             <p className="reference">참고 자료</p>
-            {/*
             <div className="videoSearch">
                 <p>
                 동영상등록(3개이상)
@@ -43,9 +48,9 @@ function QuotationVideoUpload(props) {
                         <p>삭제</p>
                         <input
                             type="checkbox"
-                            checked={CheckFlag[idx]}
+                            checked={false}
                             onClick={() => {
-                            DeleteHandler(idx);
+                                DeleteHandler(idx);
                             }}
                         />
                         </div>
@@ -60,7 +65,6 @@ function QuotationVideoUpload(props) {
                 })}
                 </ul>
             )}
-            */}
         </VideoUploadDiv>
     )
 }
