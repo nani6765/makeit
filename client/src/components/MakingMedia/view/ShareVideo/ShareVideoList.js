@@ -39,7 +39,7 @@ function ShareVideoList(props) {
       {PostList.map((post, idx) => {
         return (
           <Link
-            to={"/making/shareVideo/" + post.url}
+            to={"/Making/shareVideo/" + post.url}
             key={idx}
             style={{ width: "30%" }}
             css={LinkCSS}

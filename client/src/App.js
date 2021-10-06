@@ -33,8 +33,9 @@ import FindingProducerUplopad from "./components/MakingMedia/view/FindingProduce
 import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail/ProducerDetail.js";
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
-import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
+import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
+import ShareVideoDetail from "./components/MakingMedia/view/ShareVideo/detail/ShareVideoDetail.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -105,6 +106,11 @@ function App() {
             exact
             path="/Making/ShareUpload"
             component={ShareVideoUpload}
+          />
+          <Route
+            exact
+            path="/Making/ShareVideo/:url"
+            component={ShareVideoDetail}
           />
         </Switch>
         <Footer />
