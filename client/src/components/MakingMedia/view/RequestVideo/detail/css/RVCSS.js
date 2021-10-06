@@ -55,6 +55,7 @@ const DetailContentDiv = styled.div`
       margin: 50px 0;
       padding: 10px;
       white-space: pre;
+      line-height: 1.5rem;
     }
   }
 `;
@@ -186,6 +187,7 @@ const DetailFilterDiv = styled.div`
     font-weight: bold;
     width: 10%;
     text-align: center;
+    margin-bottom: 10px;
   }
   .filterContent {
     display: inline-block;
@@ -194,6 +196,7 @@ const DetailFilterDiv = styled.div`
     text-align: center;
     border: 1px solid #D8D8D8;
     border-radius: 8px;
+    margin-bottom: 10px;
   }
   .line {
     width: 90%;
@@ -253,6 +256,7 @@ const NoQuotationDiv = styled.div`
     padding: 30px;
     p {
       color: #6F6767;
+      margin-bottom: 20px;
     }
     button {
       background: #935EA5;
@@ -264,4 +268,12 @@ const NoQuotationDiv = styled.div`
   }
 `;
 
-export { DetailDiv, DetailContentDiv, ModalDiv, DeleteModalDiv, DetailFilterDiv, NoQuotationDiv };
+const LinkCSS = css`
+  color: black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+export { DetailDiv, DetailContentDiv, ModalDiv, DeleteModalDiv, DetailFilterDiv, NoQuotationDiv, LinkCSS };
