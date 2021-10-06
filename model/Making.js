@@ -247,10 +247,10 @@ const RequestPostSchema = mongoose.Schema(
     deadline: {
       type: String,
     },
-    FilmType: {
+    filmType: {
       type: String,
     },
-    Uniqueness: {
+    uniqueness: {
       type: String,
     },
     content: {
