@@ -23,7 +23,8 @@ const DetailContentDiv = styled.div`
   }
   .container {
     width: 100%;
-    padding: 20px;
+    padding: 20px 30px;
+    margin: 0px;
     background: #fff;
     border-radius: 18px;
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
@@ -49,6 +50,11 @@ const DetailContentDiv = styled.div`
       i {
         cursor: pointer;
       }
+    }
+    .content {
+      margin: 50px 0;
+      padding: 10px;
+      white-space: pre;
     }
   }
 `;
@@ -169,4 +175,93 @@ const DeleteModalDiv = styled.div`
   }
 `;
 
-export { DetailDiv, DetailContentDiv, ModalDiv, DeleteModalDiv };
+const DetailFilterDiv = styled.div`
+  background: #EDE7F6;
+  padding: 20px;
+  margin-top: 15px;
+  border-radius: 18px;
+  .filterTitle {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    width: 10%;
+    text-align: center;
+  }
+  .filterContent {
+    display: inline-block;
+    padding: 0.5rem;
+    background: #fff;
+    text-align: center;
+    border: 1px solid #D8D8D8;
+    border-radius: 8px;
+  }
+  .line {
+    width: 90%;
+  }
+  .halfLine {
+    width: 37.5%;
+    margin-right: 2.5%;
+  }
+  .bold {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .price {
+    display: inline-block;
+    width: 40%;
+    div {
+      width: 35%;
+      margin: 0px 2.5%;
+    }
+    p {
+      display: inline-block;
+      width: 10%;
+      text-align: center;
+    }
+  }
+  .checkbox {
+    display: inline-block;
+    width: 40%;
+    div {
+      display: inline-block;
+      width: 1.2rem;
+      height: 1.2rem;
+      background: rgba(179, 82, 255, 0.12);
+      border: 2px solid rgba(179, 82, 255, 0.24);
+      border-radius: 4px;
+      margin-left: 2.5%;
+    }
+    .checked {
+      background: #9B51E0;
+    }
+    p {
+      display: inline-block;
+    }
+  }
+`;
+
+const NoQuotationDiv = styled.div`
+  margin-top: 50px;
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    p {
+      color: #6F6767;
+    }
+    button {
+      background: #935EA5;
+      color: #fff;
+      border-radius: 10px;
+      border: none;
+      padding: 10px 15px;
+    }
+  }
+`;
+
+export { DetailDiv, DetailContentDiv, ModalDiv, DeleteModalDiv, DetailFilterDiv, NoQuotationDiv };
