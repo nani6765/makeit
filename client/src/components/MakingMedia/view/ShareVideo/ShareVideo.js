@@ -1,19 +1,43 @@
-import React from "react";
-import StickyBar from "../common/StickyBar.js";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+import ShareVideoList from "./ShareVideoList.js";
+
 import { ShareVideoDiv } from "../../css/ShareVideoCSS.js";
+import Dropdown from "react-bootstrap/Dropdown";
 import { ReactComponent as PenIcon } from "../../css/Img/Pen.svg";
 
 function ShareVideo(props) {
+  const [Sort, setSort] = useState("최신순");
+  const [Skip, setSkip] = useState(0);
+
   return (
     <ShareVideoDiv>
-      <Link to="/Making/ShareUpload">
-        <button className="postBtn">
-          게시하기
-          <PenIcon />
-        </button>
-      </Link>
+      <div className="headding">
+        <Dropdown id="sort">
+          <Dropdown.Toggle id="dropdown-basic">{Sort}</Dropdown.Toggle>
+          <Dropdown.Menu id="dropdown-menu">
+            <Dropdown.Item onClick={() => setSort("인기순")}>
+              인기순
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setSort("최신순")}>
+              최신순
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Link to="/Making/ShareUpload">
+          <button className="postBtn">
+            게시하기
+            <PenIcon />
+          </button>
+        </Link>
+      </div>
+
+      <div className="list">
+        <ShareVideoList Sort={Sort} Skip={Skip} />
+      </div>
+
       <div className="FNB">
         {/*
             <div className="pagination">

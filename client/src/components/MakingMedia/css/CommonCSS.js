@@ -90,4 +90,12 @@ const StickyBarDiv = styled.div`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem, DescriptionDiv, StickyBarDiv };
+const LinkCSS = css`
+  color: black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+export { MakingDiv, MenuList, MenuItem, DescriptionDiv, StickyBarDiv, LinkCSS };

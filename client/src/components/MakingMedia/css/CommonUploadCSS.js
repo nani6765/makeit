@@ -158,7 +158,7 @@ const UploadContent = styled.div`
           outline: none;
         }
       }
-      p {
+      p:not(.reference) {
         display: inline-block;
         background: #f7efff;
         border-radius: 16px;

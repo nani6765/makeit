@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import YoutubeModal from "./utils/YoutubeModal.js";
-import FileUploadArea from "../../../../utils/FileUploadArea.js";
-import FileShowArea from "../../../../utils/FileShowArea.js";
+import axios from "axios";
 
 import { UploadHead, UploadForm } from "../../../css/CommonUploadCSS.js";
 import ShareVideoContentDiv from "./css/ShareVideoUploadCSS.js";
@@ -12,29 +11,38 @@ function ShareVideoUpload(props) {
   const user = useSelector((state) => state.user);
 
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
+  const [Content, setContent] = useState("");
   const [Thumbnail, setThumbnail] = useState("");
   const [VideoURL, setVideoURL] = useState("");
   const [ModalFlag, setModalFlag] = useState(false);
 
-  const [WorkType, setWorkType] = useState("");
-  const [VideoPurpose, setVideoPurpose] = useState("");
-  const [WorkTypeArr, setWorkTypeArr] = useState([]);
-  const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
-
-  const WorkKeyDown = (e) => {
-    if (e.key === "Enter") {
-      let temp = [...WorkTypeArr, WorkType];
-      setWorkTypeArr([...temp]);
-      setWorkType("");
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (OneLineIntroduce === "") {
+      return alert("한 줄 소개를 작성해주세요!");
     }
-  };
-
-  const VideoKeyDown = (e) => {
-    if (e.key === "Enter") {
-      let temp = [...VideoPurposeArr, VideoPurpose];
-      setVideoPurposeArr([...temp]);
-      setVideoPurpose("");
+    if (Content === "") {
+      return alert("본문을 작성해주세요!");
     }
+    if (!(VideoURL && Thumbnail)) {
+      return alert("영상을 선택해주세요!");
+    }
+
+    let body = {
+      uid: user.userData.uid,
+      oneLineIntroduce: OneLineIntroduce,
+      thumbnailUrl: Thumbnail,
+      videoUrl: VideoURL,
+    };
+    console.log(body);
+    axios.post("/api/making/shareVideo/submit", body).then((response) => {
+      if (response.data.success) {
+        alert("의뢰 게시가 완료되었습니다.");
+        props.history.push("/making");
+      } else {
+        alert("의뢰 게시가 실패하였습니다.");
+      }
+    });
   };
 
   return (
@@ -91,33 +99,10 @@ function ShareVideoUpload(props) {
             )}
           </div>
           <div className="contentArea">
-            <textarea />
-            <div className="tagArea">
-              <div>
-                <span>작업유형</span>
-                {WorkTypeArr.map((text, idx) => {
-                  return <p key={idx}>{text}</p>;
-                })}
-                <input
-                  type="text"
-                  value={WorkType}
-                  onChange={(e) => setWorkType(e.currentTarget.value)}
-                  onKeyPress={WorkKeyDown}
-                />
-              </div>
-              <div>
-                <span>영상목적</span>
-                {VideoPurposeArr.map((text, idx) => {
-                  return <p key={idx}>{text}</p>;
-                })}
-                <input
-                  type="text"
-                  value={VideoPurpose}
-                  onChange={(e) => setVideoPurpose(e.currentTarget.value)}
-                  onKeyPress={VideoKeyDown}
-                />
-              </div>
-            </div>
+            <textarea
+              value={Content}
+              onChange={(e) => setContent(e.currentTarget.value)}
+            />
           </div>
         </ShareVideoContentDiv>
         <div className="BtnDiv">
@@ -127,7 +112,9 @@ function ShareVideoUpload(props) {
           >
             취소
           </button>
-          <button className="submit">완료</button>
+          <button className="submit" onClick={(e) => submitHandler(e)}>
+            완료
+          </button>
         </div>
       </UploadForm>
     </>

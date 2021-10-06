@@ -2,7 +2,13 @@ var router = require("express").Router();
 
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
-const { ProPost, TempProPost, ProReview, RequestPost } = require("../model/Making.js");
+const {
+  ProPost,
+  TempProPost,
+  ProReview,
+  RequestPost,
+  ShareVideo,
+} = require("../model/Making.js");
 
 var moment = require("moment");
 require("moment-timezone");
@@ -289,8 +295,6 @@ router.post("/producer/review/delete", (req, res) => {
     });
 });
 
-
-
 /////////////////////////////////////////
 ///////////// RequestVideo //////////////
 /////////////////////////////////////////
@@ -312,17 +316,17 @@ router.post("/requestVideo", (req, res) => {
   }
 
   RequestPost.find(category)
-  .populate("auther")
-  .sort(sort)
-  .skip(req.body.skip)
-  .limit(10)
-  .exec()
-  .then((post) => {
-    return res.status(200).send({ success: true, post: post });
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  });
+    .populate("auther")
+    .sort(sort)
+    .skip(req.body.skip)
+    .limit(10)
+    .exec()
+    .then((post) => {
+      return res.status(200).send({ success: true, post: post });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
 });
 
 router.post("/requestVideo/postLength", (req, res) => {
@@ -343,33 +347,31 @@ router.post("/requestVideo/postLength", (req, res) => {
     });
 });
 
-
-
 router.post("/requestVideo/reqPostSubmit", (req, res) => {
   let temp = req.body;
 
-  User.findOne({uid: temp.uid})
-  .exec()
-  .then((user) => {
-    temp.auther = user._id;
-    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-    Counter.findOneAndUpdate({name: "counter"}, {$inc : {reqPostNum: 1}})
+  User.findOne({ uid: temp.uid })
     .exec()
-    .then((cnt) => {
-      temp.url = cnt.reqPostNum;
-      const post = new RequestPost(temp);
-      post.save(() => {
-        return res.status(200).send({ success: true });
-      });
+    .then((user) => {
+      temp.auther = user._id;
+      temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+      Counter.findOneAndUpdate({ name: "counter" }, { $inc: { reqPostNum: 1 } })
+        .exec()
+        .then((cnt) => {
+          temp.url = cnt.reqPostNum;
+          const post = new RequestPost(temp);
+          post.save(() => {
+            return res.status(200).send({ success: true });
+          });
+        });
     })
-  })
-  .catch((err) => {
-    console.log("reqPostSubmit Error: ", err);
-  });
+    .catch((err) => {
+      console.log("reqPostSubmit Error: ", err);
+    });
 });
 
 router.post("/requestVideo/getPostDetail", (req, res) => {
-  RequestPost.findOneAndUpdate({ url: req.body.url }, {$inc: {view: 1}})
+  RequestPost.findOneAndUpdate({ url: req.body.url }, { $inc: { view: 1 } })
     .populate("auther")
     .exec()
     .then((post) => {
@@ -383,16 +385,68 @@ router.post("/requestVideo/getPostDetail", (req, res) => {
 
 router.post("/requestVideo/deletePost", (req, res) => {
   let temp = req.body;
-  if(temp.type === "post") {
-    RequestPost.findByIdAndDelete({_id: temp._id})
+  if (temp.type === "post") {
+    RequestPost.findByIdAndDelete({ _id: temp._id })
+      .exec()
+      .then((doc) => {
+        return res.status(200).send({ success: true });
+      })
+      .catch((err) => {
+        return res.json({ success: false, err });
+      });
+  }
+});
+
+///////////////////////////////////////
+///////////// ShareVideo //////////////
+///////////////////////////////////////
+
+router.post("/shareVideo", (req, res) => {
+  //최신순&&인기순 정렬
+  let sort = {};
+  if (req.body.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.view = -1;
+  }
+
+  ShareVideo.find()
+    .populate("auther")
+    .sort(sort)
+    .skip(req.body.skip)
+    .limit(10)
     .exec()
-    .then((doc) => { 
-      return res.status(200).send({ success: true });
+    .then((post) => {
+      return res.status(200).send({ success: true, post: post });
     })
     .catch((err) => {
       return res.json({ success: false, err });
     });
-  }
+});
+
+router.post("/shareVideo/submit", (req, res) => {
+  let temp = req.body;
+  User.findOne({ uid: temp.uid })
+    .exec()
+    .then((userinfo) => {
+      temp.auther = userinfo._id;
+      temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+      Counter.findOneAndUpdate(
+        { name: "counter" },
+        { $inc: { shareVideoNum: 1 } }
+      )
+        .exec()
+        .then((cnt) => {
+          temp.url = cnt.shareVideoNum;
+          const post = new ShareVideo(temp);
+          post.save(() => {
+            return res.status(200).send({ success: true });
+          });
+        });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
 });
 
 module.exports = router;

@@ -95,14 +95,6 @@ const RequestListDiv = styled.div`
   }
 `;
 
-const LinkCSS = css`
-  color: black;
-  text-decoration: none;
-  &:hover {
-    text-decoration: none;
-  }
-`;
-
 const RequestPostCard = styled.div`
   padding: 20px;
   margin: 20px;
@@ -187,4 +179,4 @@ const RequestPostCard = styled.div`
   }
 `;
 
-export { RequestListDiv, LinkCSS, RequestPostCard };
+export { RequestListDiv, RequestPostCard };

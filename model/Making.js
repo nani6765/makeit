@@ -265,7 +265,6 @@ const RequestPostSchema = mongoose.Schema(
       default: [],
     },
 
-
     //post속성
     realTime: {
       type: String,
@@ -278,11 +277,68 @@ const RequestPostSchema = mongoose.Schema(
     view: {
       type: Number,
       default: 0,
-    }
+    },
   },
   {
     timestamps: true,
     collection: "reqPost",
+  }
+);
+
+const ShareVideoSchema = mongoose.Schema(
+  {
+  //쓰니정보
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+
+    //글정보
+    //상세 설명
+    oneLineIntroduce: {
+    type: String,
+    },
+    content: {
+      type: String,
+    },
+    thumbnailUrl: {
+      type: String,
+    },
+    videoUrl: {
+      type: String,
+    },
+    
+    //post속성
+    url: {
+      type: Number,
+      unique: true,
+    },
+    likeNum: {
+      type: Number,
+      default: 0,
+    },
+    likeArray: {
+      type: Array,
+    },
+    repleNum: {
+      type: Number,
+      default: 0,
+    },
+    view: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    timestamps: true,
+    collection: "shareVideo",
   }
 );
 
@@ -347,4 +403,5 @@ const ProPost = mongoose.model("ProPostSchema", ProPostSchema);
 const TempProPost = mongoose.model("TempProPostSchema", TempProPostSchema);
 const ProReview = mongoose.model("ProReviewSchema", ProReviewSchema);
 const RequestPost = mongoose.model("RequestPostSchema", RequestPostSchema);
-module.exports = { ProPost, TempProPost, ProReview, RequestPost };
+const ShareVideo = mongoose.model("ShareVideoSchema", ShareVideoSchema);
+module.exports = { ProPost, TempProPost, ProReview, RequestPost, ShareVideo };

@@ -109,35 +109,6 @@ const ShareVideoContentDiv = styled.div`
         }
       }
     }
-    .tagArea {
-      span {
-        font-weight: bold;
-        border-right: 1px solid black;
-        padding-right: 1rem;
-        margin-right: 1rem;
-      }
-      margin-top: 1rem;
-      input {
-        padding: 5px;
-        border-radius: 16px;
-        max-width: 100px;
-        border: 1px solid rgba(117, 117, 117, 1);
-        margin-bottom: 5px;
-        &:focus,
-        &:active {
-          outline: none;
-        }
-      }
-      p {
-        display: inline-block;
-        background: #f7efff;
-        border-radius: 16px;
-        padding: 5px 10px 5px 10px;
-        margin-right: 1rem;
-        color: rgba(117, 117, 117, 1);
-        margin-bottom: 5px;
-      }
-    }
   }
 `;
 
