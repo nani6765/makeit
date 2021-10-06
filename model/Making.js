@@ -287,7 +287,7 @@ const RequestPostSchema = mongoose.Schema(
 
 const ShareVideoSchema = mongoose.Schema(
   {
-    //쓰니정보
+  //쓰니정보
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -296,8 +296,14 @@ const ShareVideoSchema = mongoose.Schema(
     uid: {
       type: String,
     },
-    oneLineIntroduce: {
+    email: {
       type: String,
+    },
+
+    //글정보
+    //상세 설명
+    oneLineIntroduce: {
+    type: String,
     },
     content: {
       type: String,
@@ -308,10 +314,8 @@ const ShareVideoSchema = mongoose.Schema(
     videoUrl: {
       type: String,
     },
-    realTime: {
-      type: String,
-      default: realTime(),
-    },
+    
+    //post속성
     url: {
       type: Number,
       unique: true,
@@ -337,6 +341,63 @@ const ShareVideoSchema = mongoose.Schema(
     collection: "shareVideo",
   }
 );
+
+const QuotationSchema = mongoose.Schema(
+  {
+    //쓰니정보
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+
+    //글정보
+    //상세 설명
+    oneLineIntroduce: {
+      type: String,
+    },
+    price: {
+      type: Number,
+    },
+    deadline: {
+      type: String,
+    },
+    //포폴은 아직 구현 x 임시로 string 타입
+    portpolio: {
+      type: String,
+    },
+    content: {
+      type: String,
+    },
+    videoArr: {
+      type: Array,
+      default: [],
+    },
+
+
+    //post속성
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
+    url: { //의뢰 url
+      type: Number,
+      unique: true,
+    },
+  },
+  {
+    timestamps: true,
+    collection: "quotation",
+  }
+);
+
+
 
 const ProPost = mongoose.model("ProPostSchema", ProPostSchema);
 const TempProPost = mongoose.model("TempProPostSchema", TempProPostSchema);

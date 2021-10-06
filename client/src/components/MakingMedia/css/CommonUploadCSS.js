@@ -13,6 +13,7 @@ const UploadHead = styled.div`
   div {
     width: 70%;
     margin: 0 auto;
+    padding: 10px 0;
     h1 {
       font-weight: bold;
       font-size: 32px;
@@ -31,8 +32,7 @@ const UploadHead = styled.div`
 
 const UploadForm = styled.div`
   width: 70%;
-  margin: 0 auto;
-  margin-bottom: 10%;
+  margin: 30px auto 10% auto;
   ${mq[1]} {
     width: 90%;
   }
@@ -158,7 +158,7 @@ const UploadContent = styled.div`
           outline: none;
         }
       }
-      p {
+      p:not(.reference) {
         display: inline-block;
         background: #f7efff;
         border-radius: 16px;

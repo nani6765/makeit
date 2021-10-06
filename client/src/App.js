@@ -29,11 +29,15 @@ import PostEdit from "./components/Community/views/PostEdit.js";
 
 //MakingMedia
 import MakingMedia from "./components/MakingMedia/MakingMedia.js";
+
 import FindingProducerUplopad from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerUpload.js";
 import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail/ProducerDetail.js";
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
+
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
 import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
+import QuotationUpload from "./components/MakingMedia/view/RequestVideo/upload/QuotationUpload.js";
+
 import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 import ShareVideoDetail from "./components/MakingMedia/view/ShareVideo/detail/ShareVideoDetail.js";
 
@@ -102,6 +106,12 @@ function App() {
             path="/Making/RequestPost/:url"
             component={RequestDetail}
           />
+          <Route
+            exact
+            path="/Making/QuotationUpload"
+            component={QuotationUpload}
+          />
+
           <Route
             exact
             path="/Making/ShareUpload"
