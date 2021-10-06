@@ -33,6 +33,7 @@ function ShareVideoUpload(props) {
       oneLineIntroduce: OneLineIntroduce,
       thumbnailUrl: Thumbnail,
       videoUrl: VideoURL,
+      content: Content,
     };
     console.log(body);
     axios.post("/api/making/shareVideo/submit", body).then((response) => {

@@ -449,4 +449,18 @@ router.post("/shareVideo/submit", (req, res) => {
     });
 });
 
+router.post("/shareVideo/getPostDetail", (req, res) => {
+  ShareVideo.findOneAndUpdate({ url: req.body.url }, { $inc: { view: 1 } })
+    .populate("auther")
+    .exec()
+    .then((post) => {
+      console.log(post);
+      return res.status(200).send({ success: true, post: post });
+    })
+    .catch((err) => {
+      console.log("requestVideo getPostDetail Error", err);
+      return res.json({ success: false, err });
+    });
+});
+
 module.exports = router;
