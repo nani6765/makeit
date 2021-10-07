@@ -26,7 +26,7 @@ function QuotationFilter(props) {
             <label className="priceLabel">예상 금액</label>
             <div className="price">
                 약
-                <input type="number" min="0" onChange={(e) => props.setPrice(e.currentTarget.value)} />
+                <input type="number" min="0" value={props.Price} onChange={(e) => props.setPrice(e.currentTarget.value)} />
                 원
             </div>
             <label className="portfolioLabel">포트폴리오 선택</label>
