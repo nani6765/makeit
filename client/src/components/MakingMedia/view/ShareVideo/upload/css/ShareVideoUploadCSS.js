@@ -8,57 +8,6 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const ShareVideoContentDiv = styled.div`
   margin-bottom: 1rem;
-  .videoArea {
-    width: 50%;
-    .heading {
-      width: 100%;
-      display: flex;
-      align-content: center;
-      justify-content: space-between;
-      align-items: center;
-      p {
-        margin-bottom: 0px;
-        span {
-          margin-left: 1rem;
-          .curentLength {
-            margin-left: 0rem;
-            color: red;
-          }
-        }
-      }
-      button {
-        background: #935ea5;
-        border-radius: 10px;
-        color: white;
-        border: none;
-        padding: 5px;
-      }
-    }
-    .upload {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      width: 100%;
-      height: 200px;
-      background: #f0f0f0;
-      border: 1px solid #b9b9b9;
-      box-sizing: border-box;
-      border-radius: 15px;
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      i {
-        color: #6b6c6c;
-      }
-    }
-    .thumbnail {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-      width: 100%;
-      height: 200px;
-    }
-  }
   .contentArea {
     width: 100%;
     height: auto;
@@ -112,4 +61,56 @@ const ShareVideoContentDiv = styled.div`
   }
 `;
 
-export default ShareVideoContentDiv;
+const PublicArea = styled.div`
+  width: 50%;
+  .heading {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      margin-bottom: 0px;
+      span {
+        margin-left: 1rem;
+        .curentLength {
+          margin-left: 0rem;
+          color: red;
+        }
+      }
+    }
+    button {
+      background: #935ea5;
+      border-radius: 10px;
+      color: white;
+      border: none;
+      padding: 5px;
+    }
+  }
+  .upload {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 200px;
+    background: #f0f0f0;
+    border: 1px solid #b9b9b9;
+    box-sizing: border-box;
+    border-radius: 15px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    i {
+      color: #6b6c6c;
+    }
+  }
+  .thumbnail {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    height: 200px;
+  }
+`;
+
+export { ShareVideoContentDiv, PublicArea };

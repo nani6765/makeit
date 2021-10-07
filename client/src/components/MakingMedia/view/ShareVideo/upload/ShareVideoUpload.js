@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
-import YoutubeModal from "./utils/YoutubeModal.js";
+
 import axios from "axios";
 
+import PublicUpload from "./view/PublicUpload.js";
+
 import { UploadHead, UploadForm } from "../../../css/CommonUploadCSS.js";
-import ShareVideoContentDiv from "./css/ShareVideoUploadCSS.js";
+import { ShareVideoContentDiv } from "./css/ShareVideoUploadCSS.js";
 
 function ShareVideoUpload(props) {
   const user = useSelector((state) => state.user);
@@ -14,7 +16,6 @@ function ShareVideoUpload(props) {
   const [Content, setContent] = useState("");
   const [Thumbnail, setThumbnail] = useState("");
   const [VideoURL, setVideoURL] = useState("");
-  const [ModalFlag, setModalFlag] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -68,37 +69,11 @@ function ShareVideoUpload(props) {
           onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
         />
         <ShareVideoContentDiv>
-          <div className="videoArea">
-            <div className="heading">
-              <p>
-                동영상등록(필수)
-                <span>
-                  <span className="curentLength">{Thumbnail ? "1" : "0"}</span>
-                  /1
-                </span>
-              </p>
-              <button onClick={() => setModalFlag(true)}>검색</button>
-            </div>
-            {Thumbnail ? (
-              <img
-                className="thumbnail"
-                src={Thumbnail}
-                onClick={() => setModalFlag(true)}
-              />
-            ) : (
-              <div className="upload" onClick={() => setModalFlag(true)}>
-                <i className="bi bi-upload"></i>
-              </div>
-            )}
-
-            {ModalFlag && (
-              <YoutubeModal
-                setModalFlag={setModalFlag}
-                setThumbnail={setThumbnail}
-                setVideoURL={setVideoURL}
-              />
-            )}
-          </div>
+          <PublicUpload
+            Thumbnail={Thumbnail}
+            setThumbnail={setThumbnail}
+            setVideoURL={setVideoURL}
+          />
           <div className="contentArea">
             <textarea
               value={Content}
