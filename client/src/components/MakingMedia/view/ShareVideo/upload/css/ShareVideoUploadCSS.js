@@ -8,6 +8,13 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const ShareVideoContentDiv = styled.div`
   margin-bottom: 1rem;
+  .setShareOpt {
+    display: flex;
+    input {
+      margin-left: 1rem;
+      margin-right: 0.5rem;
+    }
+  }
   .contentArea {
     width: 100%;
     height: auto;
@@ -91,7 +98,7 @@ const PublicArea = styled.div`
     margin-top: 1rem;
     margin-bottom: 1rem;
     width: 100%;
-    height: 200px;
+    height: 300px;
     background: #f0f0f0;
     border: 1px solid #b9b9b9;
     box-sizing: border-box;
@@ -113,4 +120,65 @@ const PublicArea = styled.div`
   }
 `;
 
-export { ShareVideoContentDiv, PublicArea };
+const PrivateArea = styled.div`
+  display: grid;
+  grid-tempalte-rows: auto auto auto;
+  grid-template-columns: 2fr 8fr;
+  grid-template-areas:
+    " urlLabel urlInput "
+    " imgLabel imgUpload "
+    " . imgShow ";
+  grid-gap: 1rem;
+  .urlLabel {
+    grid-area: urlLabel;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 0px;
+  }
+  .urlInput {
+    display: flex;
+    align-items: center;
+    grid-area: urlInput;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0px 1px 5px rgba(178, 3, 108, 0.03),
+      0px 4px 15px rgba(163, 1, 79, 0.05);
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      text-align: center;
+    }
+  }
+  .imgLabel {
+    grid-area: imgLabel;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 0px;
+    span {
+      font-size: 10px;
+    }
+  }
+  .imgUpload {
+    grid-area: imgUpload;
+  }
+  .imgShow {
+    grid-area: imgShow;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    margin-bottom: 1rem;
+  }
+`;
+
+export { ShareVideoContentDiv, PublicArea, PrivateArea };

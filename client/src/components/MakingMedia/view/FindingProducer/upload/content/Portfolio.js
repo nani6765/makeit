@@ -40,18 +40,18 @@ function Portfolio(props) {
     removed = temp.splice(idx, 1);
     props.setVideoArr([...temp]);
   };
-  
+
   const CheckEmptyContent = () => {
-    if(!props.ThumbnailArr.length) {
+    if (!props.ThumbnailArr.length) {
       alert("썸네일을 등록하세요.");
       return false;
     }
-    if(props.VideoArr.length < 3) {
-      alert("동영상을 3개 이상 등록하세요.")
+    if (props.VideoArr.length < 3) {
+      alert("동영상을 3개 이상 등록하세요.");
       return false;
     }
     return true;
-  }
+  };
 
   return (
     <ProtFolioDiv>
@@ -66,6 +66,7 @@ function Portfolio(props) {
         <FileUploadArea
           Images={props.ThumbnailArr}
           setImages={props.setThumbnailArr}
+          type="thumbnail"
         />
         {props.ThumbnailArr[0] ? (
           <FileShowArea

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 import axios from "axios";
 
 import PublicUpload from "./view/PublicUpload.js";
+import PrivateUpload from "./view/PrivateUpload.js";
 
 import { UploadHead, UploadForm } from "../../../css/CommonUploadCSS.js";
 import { ShareVideoContentDiv } from "./css/ShareVideoUploadCSS.js";
@@ -16,6 +17,21 @@ function ShareVideoUpload(props) {
   const [Content, setContent] = useState("");
   const [Thumbnail, setThumbnail] = useState("");
   const [VideoURL, setVideoURL] = useState("");
+  const [ShareOpts, setShareOpts] = useState("공개");
+
+  const radioOptions = ["공개", "일부공개"];
+
+  useEffect(() => {
+    setThumbnail("");
+    setVideoURL("");
+  }, [ShareOpts]);
+
+  const setURL = (originURL) => {
+    var regExp =
+      /^https?\:\/\/(?:www\.youtube(?:\-nocookie)?\.com\/|m\.youtube\.com\/|youtube\.com\/)?(?:ytscreeningroom\?vi?=|youtu\.be\/|vi?\/|user\/.+\/u\/\w{1,2}\/|embed\/|watch\?(?:.*\&)?vi?=|\&vi?=|\?(?:.*\&)?vi?=)([^#\&\?\n\/<>"']*)/i;
+    var match = originURL.match(regExp);
+    return match && match[1].length == 11 ? match[1] : false;
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -25,18 +41,34 @@ function ShareVideoUpload(props) {
     if (Content === "") {
       return alert("본문을 작성해주세요!");
     }
-    if (!(VideoURL && Thumbnail)) {
-      return alert("영상을 선택해주세요!");
+    if (ShareOpts === "일부공개") {
+      if (!setURL(VideoURL)) {
+        return alert("영상 URL을 확인해주세요!");
+      }
+      if (Thumbnail === "") {
+        return alert("썸네일을 선택해주세요!");
+      }
+    } else {
+      if (!VideoURL) {
+        return alert("영상을 선택해주세요!");
+      }
     }
 
+    console.log("Thumbnail : ", Thumbnail);
     let body = {
       uid: user.userData.uid,
       oneLineIntroduce: OneLineIntroduce,
-      thumbnailUrl: Thumbnail,
-      videoUrl: VideoURL,
       content: Content,
     };
-    console.log(body);
+
+    if (ShareOpts === "공개") {
+      body.thumbnailUrl = Thumbnail;
+      body.videoUrl = VideoURL;
+    } else {
+      body.thumbnailUrl = Thumbnail[0].path;
+      body.videoUrl = setURL(VideoURL);
+    }
+
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
         alert("의뢰 게시가 완료되었습니다.");
@@ -68,12 +100,41 @@ function ShareVideoUpload(props) {
           value={OneLineIntroduce}
           onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
         />
+
         <ShareVideoContentDiv>
-          <PublicUpload
-            Thumbnail={Thumbnail}
-            setThumbnail={setThumbnail}
-            setVideoURL={setVideoURL}
-          />
+          <div className="setShareOpt">
+            <label className="filmTypelabel">등록 영상 공개 범위</label>
+            {radioOptions.map((option, idx) => {
+              return (
+                <label key={idx}>
+                  <input
+                    type="radio"
+                    value={option}
+                    checked={ShareOpts === option ? true : false}
+                    onChange={() => {
+                      setShareOpts(option);
+                    }}
+                  />
+                  {option}
+                </label>
+              );
+            })}
+          </div>
+
+          {ShareOpts === "공개" ? (
+            <PublicUpload
+              Thumbnail={Thumbnail}
+              setThumbnail={setThumbnail}
+              setVideoURL={setVideoURL}
+            />
+          ) : (
+            <PrivateUpload
+              Thumbnail={Thumbnail}
+              setThumbnail={setThumbnail}
+              VideoURL={VideoURL}
+              setVideoURL={setVideoURL}
+            />
+          )}
           <div className="contentArea">
             <textarea
               value={Content}

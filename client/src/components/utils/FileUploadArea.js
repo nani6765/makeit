@@ -18,10 +18,16 @@ function FileUploadArea(props) {
     axios.post("/api/community/image", formData, config).then((response) => {
       if (response.data.success) {
         //console.log(response.data);
-        props.setImages([
-          ...props.Images,
-          { path: response.data.filePath, key: response.data.key },
-        ]);
+        if (props.type === "thumbnail") {
+          props.setImages([
+            { path: response.data.filePath, key: response.data.key },
+          ]);
+        } else {
+          props.setImages([
+            ...props.Images,
+            { path: response.data.filePath, key: response.data.key },
+          ]);
+        }
       } else {
         alert("파일을 저장하는 데 실패하였습니다.");
       }
