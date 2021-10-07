@@ -264,6 +264,9 @@ const RequestPostSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    isPublic: {
+      type: Boolean,
+    },
 
     //post속성
     realTime: {
