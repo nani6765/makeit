@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { withRouter } from 'react-router-dom';
 
@@ -49,19 +49,33 @@ function QuotationUpload(props) {
       }
 
       let body = {
-        uid: user.uid,
-        email: user.email,
+        uid: user.userData.uid,
+        email: user.userData.email,
         oneLineIntroduce: OneLineIntroduce,
         deadline: Deadline,
         price: Price,
         content: Content,
         videoArr: VideoArr,
         isPublic: IsPublic,
+        url: props.location.state.url,
       }
-      axios.post("/making/requestVideo/quotationUpload", body).then((response) => {
 
+      axios.post("/api/making/requestVideo/quotationSubmit", body).then((response) => {
+        if(response.data.success) {
+          alert("견적 등록이 완료되었습니다.");
+          props.history.goBack();
+        } else {
+          alert("견적 등록이 실패하였습니다.");
+        }
       });
     }
+
+    useEffect(() => {
+      console.log(props.location);
+      if(props.location.state === undefined) {
+        props.history.push("/making");
+      }
+    }, []);
 
     return (
         <>
@@ -104,7 +118,7 @@ function QuotationUpload(props) {
             </div>
             <div className="btnDiv">
               <button className="cancel" onClick={() => {props.history.goBack()}}>취소</button>
-              <button className="submit" onClick={submitHanlder}>완료</button>
+              <button className="submit" onClick={() => {submitHanlder()}}>완료</button>
             </div>
           </GNBDiv>
         </UploadForm>

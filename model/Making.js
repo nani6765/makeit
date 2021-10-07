@@ -288,6 +288,63 @@ const RequestPostSchema = mongoose.Schema(
   }
 );
 
+const QuotationSchema = mongoose.Schema(
+  {
+    //쓰니정보
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+
+    //글정보
+    //상세 설명
+    oneLineIntroduce: {
+      type: String,
+    },
+    price: {
+      type: Number,
+    },
+    deadline: {
+      type: String,
+    },
+    //포폴은 아직 구현 x 임시로 string 타입
+    portpolio: {
+      type: String,
+    },
+    content: {
+      type: String,
+    },
+    videoArr: {
+      type: Array,
+      default: [],
+    },
+    isPublic: {
+      type: Boolean,
+    },
+
+    //post속성
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
+    url: { //의뢰 url
+      type: Number,
+    },
+  },
+  {
+    timestamps: true,
+    collection: "quotation",
+  }
+);
+
+
 const ShareVideoSchema = mongoose.Schema(
   {
   //쓰니정보
@@ -345,66 +402,12 @@ const ShareVideoSchema = mongoose.Schema(
   }
 );
 
-const QuotationSchema = mongoose.Schema(
-  {
-    //쓰니정보
-    auther: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    uid: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-
-    //글정보
-    //상세 설명
-    oneLineIntroduce: {
-      type: String,
-    },
-    price: {
-      type: Number,
-    },
-    deadline: {
-      type: String,
-    },
-    //포폴은 아직 구현 x 임시로 string 타입
-    portpolio: {
-      type: String,
-    },
-    content: {
-      type: String,
-    },
-    videoArr: {
-      type: Array,
-      default: [],
-    },
-
-
-    //post속성
-    realTime: {
-      type: String,
-      default: realTime(),
-    },
-    url: { //의뢰 url
-      type: Number,
-      unique: true,
-    },
-  },
-  {
-    timestamps: true,
-    collection: "quotation",
-  }
-);
-
 
 
 const ProPost = mongoose.model("ProPostSchema", ProPostSchema);
 const TempProPost = mongoose.model("TempProPostSchema", TempProPostSchema);
 const ProReview = mongoose.model("ProReviewSchema", ProReviewSchema);
 const RequestPost = mongoose.model("RequestPostSchema", RequestPostSchema);
+const Quotation = mongoose.model("QuotationSchema", QuotationSchema);
 const ShareVideo = mongoose.model("ShareVideoSchema", ShareVideoSchema);
-module.exports = { ProPost, TempProPost, ProReview, RequestPost, ShareVideo };
+module.exports = { ProPost, TempProPost, ProReview, RequestPost, Quotation, ShareVideo };

@@ -11,10 +11,6 @@ function RequestDatailContent(props) {
         setModalFlag(false);
       });
 
-    useEffect(() => {
-        console.log("??", props.PostInfo.content);
-    }, []);
-
     return (
         <DetailContentDiv>
             <p className="path">홈 &gt; 영상제작 &gt; 의뢰하기 &gt; {props.PostInfo.category}</p>
