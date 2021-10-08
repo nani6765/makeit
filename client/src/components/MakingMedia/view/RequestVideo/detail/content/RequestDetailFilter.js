@@ -33,8 +33,13 @@ function RequestDetailFilter(props) {
                      })
                 }
             </div>
-            <p className="filterTitle">• 특이사항</p>
-            <div className="filterContent line">{props.PostInfo.uniqueness}</div>
+            {
+                props.PostInfo.uniqueness && (
+                <>
+                <p className="filterTitle">• 특이사항</p>
+                <div className="filterContent line">{props.PostInfo.uniqueness}</div>
+                </>
+            )}
         </DetailFilterDiv>
     )
 }

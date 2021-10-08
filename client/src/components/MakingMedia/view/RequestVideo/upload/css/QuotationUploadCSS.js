@@ -49,7 +49,8 @@ const FilterDiv = styled.div`
         grid-area: price;
         line-height: 70px;
         input {
-            margin: 15px 5px;
+            width: 80%;
+            margin: 15px 2%;
             height: 40px;
             border: 1px solid #D8D8D8;
             border-radius: 8px;

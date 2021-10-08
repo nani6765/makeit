@@ -7,6 +7,7 @@ const {
   TempProPost,
   ProReview,
   RequestPost,
+  Quotation,
   ShareVideo,
 } = require("../model/Making.js");
 
@@ -295,6 +296,7 @@ router.post("/producer/review/delete", (req, res) => {
     });
 });
 
+
 /////////////////////////////////////////
 ///////////// RequestVideo //////////////
 /////////////////////////////////////////
@@ -395,6 +397,39 @@ router.post("/requestVideo/deletePost", (req, res) => {
         return res.json({ success: false, err });
       });
   }
+});
+
+router.post("/requestVideo/quotationSubmit", (req, res) => {
+  let temp = req.body;
+
+  User.findOne({ uid: temp.uid })
+    .exec()
+    .then((user) => {
+      temp.auther = user._id;
+      temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+      const newQuotation = new Quotation(temp);
+      newQuotation.save((result) => {
+        return res.status(200).send({ success: true });
+      });
+    })
+    .catch((err) => {
+      console.log("quotationUpload Error: ", err);
+      return res.json({ success: false, err });
+    });
+});
+
+router.post("/requestVideo/getQuotation", (req, res) => {
+  let temp = req.body;
+
+  Quotation.find({url: temp.url})
+  .populate("auther")
+  .exec()
+  .then((result) => {
+    return res.status(200).send({ success: true, quotation: result });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  });
 });
 
 ///////////////////////////////////////

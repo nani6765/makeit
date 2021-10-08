@@ -9,7 +9,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const DetailDiv = styled.div`
   width: 70%;
   margin: 0 auto;
-  padding-top: 10vh;
+  padding-top: 5vh;
   padding-bottom: 10vh;
   ${mq[1]} {
     width: 90%;
@@ -17,14 +17,14 @@ const DetailDiv = styled.div`
 `;
 
 const DetailContentDiv = styled.div`
+  width: 100%;
   .path {
-    margin-top: 30px;
     color: #a7a5a8;
   }
   .container {
     width: 100%;
     padding: 20px 30px;
-    margin: 0px;
+    margin: 10px;
     background: #fff;
     border-radius: 18px;
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
@@ -243,37 +243,5 @@ const DetailFilterDiv = styled.div`
   }
 `;
 
-const NoQuotationDiv = styled.div`
-  margin-top: 50px;
-  .title {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    p {
-      color: #6F6767;
-      margin-bottom: 20px;
-    }
-    button {
-      background: #935EA5;
-      color: #fff;
-      border-radius: 10px;
-      border: none;
-      padding: 10px 15px;
-    }
-  }
-`;
 
-const LinkCSS = css`
-  color: black;
-  text-decoration: none;
-  &:hover {
-    text-decoration: none;
-  }
-`;
-
-export { DetailDiv, DetailContentDiv, ModalDiv, DeleteModalDiv, DetailFilterDiv, NoQuotationDiv, LinkCSS };
+export { DetailDiv, DetailContentDiv, ModalDiv, DeleteModalDiv, DetailFilterDiv };
