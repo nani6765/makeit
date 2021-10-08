@@ -13,6 +13,7 @@ function YoutubeModal(props) {
     const response = await YOUTUBE_API.get("/search", {
       params: {
         q: SearchTerm,
+        maxResults: 6,
       },
     });
     setSearchResultArr([...response.data.items]);

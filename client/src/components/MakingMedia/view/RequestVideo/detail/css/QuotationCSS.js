@@ -14,13 +14,13 @@ const QuotationDiv = styled.div`
   }
   .slick-prev {
   height: 60px;
-  left: 10px;
+  left: 0px;
   z-index: 1;
   background: none;
   }
   .slick-next {
   height: 60px;
-  right: 20px;
+  right: 0px;
   background: none;
   }
   .slick-next:before,
@@ -60,10 +60,15 @@ const QuotationInfo = styled.div`
   padding: 30px 0px;
   .quotationList {
     width: 100%;
-    padding: 0 60px;
+    padding: 0px 30px;
+    .slick-list {
+      padding-bottom: 30px;
+    }
   }
   .btnDiv {
+    display: flex;
     margin-top: 40px;
+    justify-content: center;
     button {
       background: #935EA5;
       color: #fff;
@@ -85,11 +90,11 @@ const LinkCSS = css`
 const InfoDiv = styled.div`
     display: inline-block;
     width: 30%;
-    padding: 0 10px;
+    padding: 10px;
     .container {
-      padding: 10px;
+      padding: 20px;
       background: #fff;
-      box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03), 0px 9px 30px rgba(163, 1, 79, 0.05);
+      box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03), 0px 9px 10px rgba(163, 1, 79, 0.05);
       border-radius: 15px;
       p {
         margin-top: 20px;
@@ -99,12 +104,85 @@ const InfoDiv = styled.div`
           margin-left: 1rem;
           color: #FF5151;
         }
+        ${mq[0]} {
+          margin-top: 10px;
+          font-size: 13px;
+        }
       }
-      .title {
-        
+      .quotationTitle {
+        color: black;
+        min-height: 50px;
+        font-size: 17px;
+        line-height: 25px;
+        ${mq[0]} {
+          font-size: 15px;
+          min-height: 75px;
+        }
+      }
+      .filter {
+        margin: 20px 0px;
+        border-top: 1px solid #A7A5A8;
+        p {
+          margin: 0px;
+          padding: 10px 0px;
+          border-bottom: 1px solid #A7A5A8;
+        }
       }
     }
-
+    .active {
+      background: #FAF5F5;
+    }
 `;
 
-export { QuotationDiv, LinkCSS, NoQuotationDiv, QuotationInfo, InfoDiv };
+const QuotationDetailDiv = styled.div`
+  border : 15px solid #EDE7F6;
+  border-radius: 54px;
+  margin: 0 30px;
+  padding: 40px 30px;
+  .detailTitle {
+    font-size: 20px;
+    text-align: center;
+  }
+  .filter {
+    margin: 30px 0px;
+    border-top: 1px solid #A7A5A8;
+    div {
+      border-bottom: 1px solid #A7A5A8;
+      width: 100%;
+      span {
+        width: 15%;
+        font-weight: bold;
+      }
+      p {
+        display: inline-block;
+        margin-left: 10%;
+        margin-bottom: 0;
+        padding: 10px 0px;
+      }
+      .portfolio {
+        width: 70%;
+        text-align: center;
+      }
+    }
+  }
+  .content {
+    margin: 60px 0;
+    white-space: pre;
+    line-height: 30px;
+  }
+  .reference {
+    p {
+      padding-bottom: 10px;
+      font-weight: bold;
+      border-bottom: 1px solid #CACACA;
+    }
+    .slick-slide {
+      padding: 10px;
+    }
+    iframe {
+      border-radius: 18px;
+    }
+  }
+`;
+
+export { QuotationDiv, LinkCSS, NoQuotationDiv, QuotationInfo, InfoDiv, QuotationDetailDiv };
