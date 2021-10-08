@@ -2,42 +2,51 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Avatar from "react-avatar";
 import Slider from "react-slick";
-import { QuotationDiv, LinkCSS, InfoDiv } from "../css/QuotationCSS.js";
+import { QuotationDiv, LinkCSS, QuotationInfo, InfoDiv } from "../css/QuotationCSS.js";
 
 function Quotation(props) {
     var settings = {
       dots: false,
-      infinite: false,
+      infinite: true,
       speed: 500,
       easing: "ease-in-out",
-      slidesToShow: 1,
+      slidesToShow: 3,
       slidesToScroll: 1,
     };
 
     return (
         <QuotationDiv>
             <p className="title">업체 견적</p>
-            <Slider {...settings}>
-                {/*
+            <QuotationInfo>
+                <Slider {...settings} className="quotationList">
+                {
                     props.QuotationArr.map((quotation, idx) => {
                         return (
                             <InfoDiv key={idx}>
-                                <Avatar
-                                    src={quotation.auther.photoURL}
-                                    size="45"
-                                    round={true}
-                                    style={{ border: "1px solid #c6c6c6" }}
-                                />
+                                <div className='container'>
+                                    <Avatar
+                                        src={quotation.auther.photoURL}
+                                        size="70"
+                                        round={true}
+                                        style={{ border: "1px solid #c6c6c6" }}
+                                    />
+                                    <p>
+                                        {quotation.auther.displayName}
+                                        <i className="bi bi-heart"></i>
+                                    </p>
+                                    <p className="title">{quotation.oneLineIntroduce}</p>
+                                </div>
                             </InfoDiv>
                         )
                     })
-                */}
-            </Slider>
-            <div>
-                <Link to={{pathname:"/making/quotationUpload", state: {url: props.url}}} css={LinkCSS}>
-                    <button>우리도 견적 등록하기</button>
-                </Link>
-            </div>
+                }
+                </Slider>
+                <div className="btnDiv">
+                    <Link to={{pathname:"/making/quotationUpload", state: {url: props.url}}} css={LinkCSS}>
+                        <button>우리도 견적 등록하기</button>
+                    </Link>
+                </div>
+            </QuotationInfo>
         </QuotationDiv>
     )
 }

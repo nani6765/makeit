@@ -36,7 +36,9 @@ const QuotationDiv = styled.div`
   .slick-next:before {
   content: "〉";
   }
-  div {
+`;
+
+const NoQuotationDiv = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,6 +47,23 @@ const QuotationDiv = styled.div`
       color: #6F6767;
       margin-bottom: 20px;
     }
+    button {
+      background: #935EA5;
+      color: #fff;
+      border-radius: 10px;
+      border: none;
+      padding: 10px 15px;
+    }
+`;
+
+const QuotationInfo = styled.div`
+  padding: 30px 0px;
+  .quotationList {
+    width: 100%;
+    padding: 0 60px;
+  }
+  .btnDiv {
+    margin-top: 40px;
     button {
       background: #935EA5;
       color: #fff;
@@ -64,10 +83,28 @@ const LinkCSS = css`
 `;
 
 const InfoDiv = styled.div`
+    display: inline-block;
     width: 30%;
-    background: #FFFFFF;
-    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03), 0px 9px 30px rgba(163, 1, 79, 0.05);
-    border-radius: 15px;
+    padding: 0 10px;
+    .container {
+      padding: 10px;
+      background: #fff;
+      box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03), 0px 9px 30px rgba(163, 1, 79, 0.05);
+      border-radius: 15px;
+      p {
+        margin-top: 20px;
+        color: #A7A5A8;
+        font-size: 15px;
+        i {
+          margin-left: 1rem;
+          color: #FF5151;
+        }
+      }
+      .title {
+        
+      }
+    }
+
 `;
 
-export { QuotationDiv, LinkCSS, InfoDiv };
+export { QuotationDiv, LinkCSS, NoQuotationDiv, QuotationInfo, InfoDiv };
