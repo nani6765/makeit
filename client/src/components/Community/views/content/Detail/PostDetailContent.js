@@ -8,7 +8,7 @@ import UserModal from "../../../../utils/view/Modal/UserModal.js";
 import GuestModal from "../../../../utils/view/Modal/GuestModal.js";
 import PostImages from "./PostImages.js";
 
-import { DetailDiv } from "../../../css/CommunutyDetailCSS.js";
+import DetailDiv from "../../../css/CommunutyDetailCSS.js";
 
 function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);

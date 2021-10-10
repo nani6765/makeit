@@ -9,6 +9,7 @@ const {
   RequestPost,
   Quotation,
   ShareVideo,
+  ShareVideoReple,
 } = require("../model/Making.js");
 
 var moment = require("moment");
@@ -65,7 +66,6 @@ router.post("/producer/postLength", (req, res) => {
 });
 
 router.post("/producer/youtube", (req, res) => {
-  console.log(req.body);
   router.get("https://www.googleapis.com/youtube/v3/search");
 });
 
@@ -179,7 +179,6 @@ router.post("/producer/producerLike", (req, res) => {
         return res.json({ success: false, err });
       });
   } else {
-    console.log("push?");
     ProPost.findOneAndUpdate(
       { url: req.body.url },
       { $push: { likeArray: req.body.uid } }
@@ -203,7 +202,6 @@ router.post("/producer/review", (req, res) => {
   ProReview.find({ url: url })
     .exec()
     .then((doc) => {
-      console.log(doc);
       if (doc === null) {
         return res.status(200).send({ review: [] });
       } else {
@@ -241,7 +239,6 @@ router.post("/producer/review/upload", (req, res) => {
           .then((doc) => {
             const proReview = new ProReview(temp);
             proReview.save().then((doc) => {
-              console.log(doc);
               return res.status(200).send({ success: true });
             });
           });
@@ -295,7 +292,6 @@ router.post("/producer/review/delete", (req, res) => {
       return res.json({ success: false, err });
     });
 });
-
 
 /////////////////////////////////////////
 ///////////// RequestVideo //////////////
@@ -421,15 +417,15 @@ router.post("/requestVideo/quotationSubmit", (req, res) => {
 router.post("/requestVideo/getQuotation", (req, res) => {
   let temp = req.body;
 
-  Quotation.find({url: temp.url})
-  .populate("auther")
-  .exec()
-  .then((result) => {
-    return res.status(200).send({ success: true, quotation: result });
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  });
+  Quotation.find({ url: temp.url })
+    .populate("auther")
+    .exec()
+    .then((result) => {
+      return res.status(200).send({ success: true, quotation: result });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
 });
 
 ///////////////////////////////////////
@@ -489,12 +485,42 @@ router.post("/shareVideo/getPostDetail", (req, res) => {
     .populate("auther")
     .exec()
     .then((post) => {
-      console.log(post);
       return res.status(200).send({ success: true, post: post });
     })
     .catch((err) => {
       console.log("requestVideo getPostDetail Error", err);
       return res.json({ success: false, err });
+    });
+});
+
+router.post("/shareVideo/reple", (req, res) => {
+  let filter = {};
+  filter.postNum = req.body.postNum;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let limit = req.body.limit ? parseInt(req.body.limit) : 5;
+  let sort = {};
+  sort.createdAt = 1;
+  ShareVideoReple.find(filter)
+    .exec()
+    .then((totalReple) => {
+      ShareVideoReple.find(filter)
+        .populate("auther")
+        .populate("rerepleArray")
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then((repleInfo) => {
+          return res.status(200).json({
+            success: true,
+            repleInfo,
+            repleSize: repleInfo.length,
+            totalSize: totalReple.length,
+          });
+        });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
     });
 });
 

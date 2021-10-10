@@ -341,7 +341,7 @@ const QuotationSchema = mongoose.Schema(
     likeArray: {
       type: Array,
       default: [],
-    }
+    },
   },
   {
     timestamps: true,
@@ -447,7 +447,7 @@ const ShareVideoRepleSchema = mongoose.Schema(
     rerepleArray: [
       {
         type: Schema.Types.ObjectId,
-        ref: "shareVideoRere",
+        ref: "ShareVideoRerepleSchema",
       },
     ],
   },

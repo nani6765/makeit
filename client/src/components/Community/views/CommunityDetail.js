@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import PostDetailContent from "./content/Detail/PostDetailContent.js";
-import { RepleBtnDiv } from "../css/CommunutyDetailCSS.js";
+import { RepleBtnDiv } from "../../utils/view/Reple/RepleCSS.js";
 
 import RepleList from "../../utils/view/Reple/RepleList.js";
 import RepleUpload from "../../utils/view/Reple/Form/RepleUpload.js";
@@ -36,6 +36,7 @@ function CommunityDetail(props) {
       postNum: props.match.params.postId,
       skip: Skip,
       limit: Limit,
+      type: "Community",
     };
     getReples(body);
   }, []);
@@ -47,13 +48,14 @@ function CommunityDetail(props) {
       skip: skip,
       limit: Limit,
       loadMore: true,
+      type: "Community",
     };
     getReples(body);
     setSkip(skip);
   };
 
   const getReples = (body) => {
-    axios.post("/api/community/postDetail/reple", body).then((response) => {
+    axios.post("/api/util/getReple", body).then((response) => {
       if (response.data.success) {
         if (body.loadMore === true) {
           let temp = [...Reples, ...response.data.repleInfo];
@@ -70,36 +72,30 @@ function CommunityDetail(props) {
 
   return (
     <>
-      <>
-        {postInfo._id != null ? (
-          <PostDetailContent postInfo={postInfo} />
-        ) : null}
-        {TotalSize > 0 ? (
-          <>
+      {postInfo._id != null ? <PostDetailContent postInfo={postInfo} /> : null}
+      {TotalSize > 0 ? (
+        <>
+          <RepleBtnDiv>
+            <button className="Total">{TotalSize}개의 댓글이 있습니다.</button>
+          </RepleBtnDiv>
+          <RepleList
+            repleInfo={Reples}
+            loadMoreHanlder={loadMoreHanlder}
+            postInfo={postInfo}
+            type="Community"
+          />
+          {TotalSize > Reples.length ? (
             <RepleBtnDiv>
-              <button className="Total">
-                {TotalSize}개의 댓글이 있습니다.
+              <button className="left" onClick={loadMoreHanlder}>
+                댓글 더보기({parseInt(TotalSize - Reples.length)})
               </button>
             </RepleBtnDiv>
-            <RepleList
-              repleInfo={Reples}
-              loadMoreHanlder={loadMoreHanlder}
-              postInfo={postInfo}
-              type="Community"
-            />
-            {TotalSize > Reples.length ? (
-              <RepleBtnDiv>
-                <button className="left" onClick={loadMoreHanlder}>
-                  댓글 더보기({parseInt(TotalSize - Reples.length)})
-                </button>
-              </RepleBtnDiv>
-            ) : null}
-          </>
-        ) : null}
-        {postInfo._id != null ? (
-          <RepleUpload postInfo={postInfo} type="Community" />
-        ) : null}
-      </>
+          ) : null}
+        </>
+      ) : null}
+      {postInfo._id != null ? (
+        <RepleUpload postInfo={postInfo} type="Community" />
+      ) : null}
     </>
   );
 }

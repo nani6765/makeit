@@ -106,28 +106,4 @@ const DetailDiv = styled.div`
   }
 `;
 
-const RepleBtnDiv = styled.div`
-  width: 100%;
-  text-align: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  button {
-    background: #faf5f5;
-    border: 1px solid #d5d5d5;
-    box-sizing: border-box;
-    border-radius: 22px;
-    padding: 5px 25px 5px 25px;
-  }
-  .total {
-    color: black;
-    i {
-      margin-right: 5px;
-    }
-  }
-  .left {
-    font-weight: 600;
-    color: #702c8a;
-  }
-`;
-
-export { DetailDiv, RepleBtnDiv };
+export default DetailDiv;

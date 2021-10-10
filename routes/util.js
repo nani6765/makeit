@@ -134,6 +134,39 @@ router.post("/like", (req, res) => {
 //          reple          //
 /////////////////////////////
 
+router.post("/getReple", (req, res) => {
+  let RepleModel = SelectRepleModel(req.body.type);
+
+  let filter = {};
+  filter.postNum = req.body.postNum;
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let limit = req.body.limit ? parseInt(req.body.limit) : 5;
+  let sort = {};
+  sort.createdAt = 1;
+  RepleModel.find(filter)
+    .exec()
+    .then((totalReple) => {
+      RepleModel.find(filter)
+        .populate("auther")
+        .populate("rerepleArray")
+        .sort(sort)
+        .skip(skip)
+        .limit(limit)
+        .exec()
+        .then((repleInfo) => {
+          return res.status(200).json({
+            success: true,
+            repleInfo,
+            repleSize: repleInfo.length,
+            totalSize: totalReple.length,
+          });
+        });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
+    });
+});
+
 router.post("/repleSubmit", (req, res) => {
   let reple = {
     uid: req.body.uid,

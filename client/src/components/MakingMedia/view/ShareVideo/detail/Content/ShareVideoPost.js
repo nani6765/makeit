@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
-import ShareVideoRepleArea from "./ShareVideoRepleArea.js";
 
 import Avatar from "react-avatar";
 import YouTube from "react-youtube";
@@ -107,7 +106,6 @@ function ShareVideoPost(props) {
           추천({props.PostInfo.likeNum})
         </div>
       </DetailDiv>
-      <ShareVideoRepleArea PostInfo={props.PostInfo} />
     </>
   );
 }
