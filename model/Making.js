@@ -239,10 +239,10 @@ const RequestPostSchema = mongoose.Schema(
       type: String,
     },
     minPrice: {
-      type: Number,
+      type: String,
     },
     maxPrice: {
-      type: Number,
+      type: String,
     },
     deadline: {
       type: String,
@@ -309,7 +309,7 @@ const QuotationSchema = mongoose.Schema(
       type: String,
     },
     price: {
-      type: Number,
+      type: String,
     },
     deadline: {
       type: String,
@@ -337,6 +337,10 @@ const QuotationSchema = mongoose.Schema(
     url: { //의뢰 url
       type: Number,
     },
+    likeArray: {
+      type: Array,
+      default: [],
+    }
   },
   {
     timestamps: true,

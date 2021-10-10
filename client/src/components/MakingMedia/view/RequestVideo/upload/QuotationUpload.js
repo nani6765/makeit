@@ -53,7 +53,7 @@ function QuotationUpload(props) {
         email: user.userData.email,
         oneLineIntroduce: OneLineIntroduce,
         deadline: Deadline,
-        price: Price,
+        price: Price.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
         content: Content,
         videoArr: VideoArr,
         isPublic: IsPublic,
@@ -71,10 +71,15 @@ function QuotationUpload(props) {
     }
 
     useEffect(() => {
-      console.log(props.location);
       if(props.location.state === undefined) {
         props.history.push("/making");
       }
+
+      if(!user.userData) {
+        alert("회원만 글을 작성할 수 있습니다.");
+        props.history.goBack();
+      }
+
     }, []);
 
     return (
@@ -91,10 +96,11 @@ function QuotationUpload(props) {
           <div className="path">홈 &gt; 영상제작 &gt; 의뢰하기 &gt; 작성하기</div>
           <input
           type="text"
+          maxLength="30"
           className="OneLineIntroduce"
           placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
           value={OneLineIntroduce}
-          onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
+          onChange={(e) => { if(e.currentTarget.value.length <= 30) setOneLineIntroduce(e.currentTarget.value)}}
           />
           <UploadContent>
               <QuotationFilter Deadline={Deadline} setDeadline={setDeadline} Price={Price} setPrice={setPrice} PortFolio={PortFolio} setPortFolio={setPortFolio} />
