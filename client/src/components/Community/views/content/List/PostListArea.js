@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
 import { PostCard } from "../../../css/CommunityListCSS.js";
-import axios from "axios";
 
 function PostListArea(props) {
   const [posts, setposts] = useState([]);
@@ -14,23 +13,29 @@ function PostListArea(props) {
 
   const ScrollFunction = (e) => {
     e.preventDefault();
-    let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-    let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    let scrollHeight = Math.max(
+      document.documentElement.scrollHeight,
+      document.body.scrollHeight
+    );
+    let scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop
+    );
     let clientHeight = document.documentElement.clientHeight;
     // console.log("scrollHeight ", scrollHeight)
     // console.log("scrollTop ", scrollTop)
     // console.log("clientHeight ", clientHeight)
-    if(scrollTop + clientHeight >= scrollHeight) {
+    if (scrollTop + clientHeight >= scrollHeight) {
       props.getPostList();
       //setPostSkip(PostSkip => PostSkip + PostLimit);
     }
   };
-  
+
   useEffect(() => {
-    window.addEventListener('scroll', ScrollFunction, true);
+    window.addEventListener("scroll", ScrollFunction, true);
     return () => {
-      window.removeEventListener('scroll', ScrollFunction, true);
-    }
+      window.removeEventListener("scroll", ScrollFunction, true);
+    };
   });
 
   useEffect(() => {
@@ -38,7 +43,11 @@ function PostListArea(props) {
   }, []);
 
   return (
-    <div style={{ gridArea: "content" }} id="PostList" onScroll={ScrollFunction}>
+    <div
+      style={{ gridArea: "content" }}
+      id="PostList"
+      onScroll={ScrollFunction}
+    >
       {posts.map((post, idx) => {
         return (
           <Link

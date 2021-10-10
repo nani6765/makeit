@@ -85,6 +85,7 @@ function CommunityDetail(props) {
               repleInfo={Reples}
               loadMoreHanlder={loadMoreHanlder}
               postInfo={postInfo}
+              type="Community"
             />
             {TotalSize > Reples.length ? (
               <RepleBtnDiv>
@@ -95,7 +96,9 @@ function CommunityDetail(props) {
             ) : null}
           </>
         ) : null}
-        {postInfo._id != null ? <RepleUpload postInfo={postInfo} /> : null}
+        {postInfo._id != null ? (
+          <RepleUpload postInfo={postInfo} type="Community" />
+        ) : null}
       </>
     </>
   );

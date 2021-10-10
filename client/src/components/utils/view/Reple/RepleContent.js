@@ -33,6 +33,10 @@ function RepleContent(props) {
     }
   }, [likeFlag]);
 
+  useEffect(() => {
+    console.log("RepleContent");
+  }, []);
+
   function LikeHandler() {
     if (Reple.auther.uid === user.userData.uid) {
       return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
@@ -48,9 +52,10 @@ function RepleContent(props) {
       repleId: Reple._id,
       likeFlag: likeFlag,
       userId: user.userData.uid,
+      type: props.type,
     };
 
-    axios.post("/api/community/repleLike", body).then((response) => {
+    axios.post("/api/util/repleLike", body).then((response) => {
       if (response.data.success) {
         target.style.disable = "false";
         window.location.reload();
@@ -107,7 +112,11 @@ function RepleContent(props) {
           <p className="date">{Reple.realTime}</p>
           {UpdateCheck ? (
             <div className="desc">
-              <RepleEditForm setUpdateCheck={setUpdateCheck} Reple={Reple} />
+              <RepleEditForm
+                setUpdateCheck={setUpdateCheck}
+                Reple={Reple}
+                type={props.type}
+              />
             </div>
           ) : (
             <p className="desc">{Reple.content}</p>
@@ -131,17 +140,25 @@ function RepleContent(props) {
         </div>
       </RepleContentGrid>
 
-      {rerepleUpload ? (
-        <RerepleUpload Reple={Reple} setrerepleUpload={setrerepleUpload} />
-      ) : null}
+      {rerepleUpload && (
+        <RerepleUpload
+          Reple={Reple}
+          setrerepleUpload={setrerepleUpload}
+          type={props.type}
+        />
+      )}
 
-      {Reple.rerepleNum === 0
-        ? null
-        : Reple.rerepleArray.map((rereple, idx) => {
-            return (
-              <RerepleDiv rerepleInfo={rereple} repleInfo={Reple} key={idx} />
-            );
-          })}
+      {Reple.rerepleNum !== 0 &&
+        Reple.rerepleArray.map((rereple, idx) => {
+          return (
+            <RerepleDiv
+              rerepleInfo={rereple}
+              repleInfo={Reple}
+              key={idx}
+              type={props.type}
+            />
+          );
+        })}
     </>
   );
 }

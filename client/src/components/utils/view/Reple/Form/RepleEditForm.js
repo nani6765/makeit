@@ -13,9 +13,10 @@ function RepleEditForm(props) {
     const body = {
       id: props.Reple._id,
       content: content,
+      type: props.type,
     };
 
-    axios.post("/api/community/repleUpdate", body).then((response) => {
+    axios.post("/api/util/repleUpdate", body).then((response) => {
       if (response.data.success) {
         alert("댓글 수정 성공");
         window.location.reload();

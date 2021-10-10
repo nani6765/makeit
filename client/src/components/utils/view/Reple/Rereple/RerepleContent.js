@@ -14,10 +14,6 @@ function RerepleContent(props) {
   const [reple, setreple] = useState(props.repleInfo);
   const [rereple, setrereple] = useState(props.rerepleInfo);
 
-  useEffect(() => {
-    console.log(reple, rereple);
-  }, []);
-
   const [hambucControl, sethambucControl] = useState(false);
   const [UpdateCheck, setUpdateCheck] = useState(false);
   const [likeFlag, setlikeFlag] = useState(false);
@@ -52,9 +48,10 @@ function RerepleContent(props) {
       likeFlag: likeFlag,
       userId: user.userData.uid,
       rerepleId: rereple._id,
+      type: props.type,
     };
 
-    axios.post("/api/community/rerepleLike", body).then((response) => {
+    axios.post("/api/util/rerepleLike", body).then((response) => {
       if (response.data.success) {
         target.style.disable = "false";
         window.location.reload();
@@ -83,6 +80,7 @@ function RerepleContent(props) {
             rereple={rereple}
             setUpdateCheck={setUpdateCheck}
             replePid={reple.replePid}
+            type={props.type}
           />
         ) : (
           <p className="desc">{rereple.content}</p>

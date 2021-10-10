@@ -31,7 +31,12 @@ function DeletedRepleDetail(props) {
         ? null
         : Reple.rerepleArray.map((rereple, idx) => {
             return (
-              <RerepleDiv rerepleInfo={rereple} repleInfo={Reple} key={idx} />
+              <RerepleDiv
+                rerepleInfo={rereple}
+                repleInfo={Reple}
+                key={idx}
+                type={props.type}
+              />
             );
           })}
     </>

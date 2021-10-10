@@ -7,24 +7,29 @@ function RerepleDiv(props) {
   const [RerepleInfo, setRerepleInfo] = useState({});
 
   useEffect(() => {
-    axios
-      .post("/api/community/rerepleGetAuther", {
-        _id: props.rerepleInfo._id,
-      })
-      .then((response) => {
-        if (response.data.success) {
-          setRerepleInfo({ ...response.data.rerepleInfo });
-          setAuthorCheck(true);
-        } else {
-          setAuthorCheck(false);
-        }
-      });
+    let body = {
+      type: props.type,
+      id: props.rerepleInfo._id,
+    };
+
+    axios.post("/api/util/rerepleGetAuther", body).then((response) => {
+      if (response.data.success) {
+        setRerepleInfo({ ...response.data.rerepleInfo });
+        setAuthorCheck(true);
+      } else {
+        setAuthorCheck(false);
+      }
+    });
   }, []);
 
   return (
     <>
       {AuthorCheck ? (
-        <RerepleContent rerepleInfo={RerepleInfo} repleInfo={props.repleInfo} />
+        <RerepleContent
+          rerepleInfo={RerepleInfo}
+          repleInfo={props.repleInfo}
+          type={props.type}
+        />
       ) : null}
     </>
   );

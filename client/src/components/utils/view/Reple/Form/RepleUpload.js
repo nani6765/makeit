@@ -24,9 +24,10 @@ function RepleUpload(props) {
       uid: user.userData.uid,
       postNum: props.postInfo.postNum,
       content: content,
+      type: props.type,
     };
 
-    axios.post("/api/community/repleSubmit", body).then((response) => {
+    axios.post("/api/util/repleSubmit", body).then((response) => {
       if (response.data.success) {
         alert("댓글 등록 성공");
         window.location.reload();

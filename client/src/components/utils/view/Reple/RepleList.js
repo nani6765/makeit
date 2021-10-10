@@ -7,6 +7,7 @@ import { RepleDiv } from "./RepleCSS.js";
 
 function RepleList(props) {
   const [repleList, setrepleList] = useState(props.repleInfo);
+
   useEffect(() => {
     setrepleList(props.repleInfo);
   }, [props.repleInfo]);
@@ -15,9 +16,14 @@ function RepleList(props) {
     <RepleDiv>
       {repleList.map((reple, idx) => {
         return reple.isDeleted ? (
-          <DeletedRepleDetail reple={reple} />
+          <DeletedRepleDetail reple={reple} type={props.type} />
         ) : (
-          <RepleContent key={idx} reple={reple} postInfo={props.postInfo} />
+          <RepleContent
+            key={idx}
+            reple={reple}
+            postInfo={props.postInfo}
+            type={props.type}
+          />
         );
       })}
     </RepleDiv>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -8,6 +8,10 @@ import { RerepleUploadDiv } from "../RepleCSS.js";
 function RerepleUpload(props) {
   const [content, setContent] = useState("");
   const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    console.log("??", props);
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -19,10 +23,11 @@ function RerepleUpload(props) {
       repleInfo: props.Reple,
       content: content,
       postNum: props.Reple.postNum,
+      type: props.type,
     };
     console.log("rereple", body);
 
-    axios.post("/api/community/rerepleSubmit", body).then((response) => {
+    axios.post("/api/util/rerepleSubmit", body).then((response) => {
       if (response.data.success) {
         alert("대댓글 등록 성공");
         window.location.reload();
