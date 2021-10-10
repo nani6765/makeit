@@ -6,7 +6,7 @@ import Avatar from "react-avatar";
 import { EditProfileDiv, LoadingDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
 import axios from "axios";
-import { firebase } from "../../../../firebase.js";
+import firebase from "../../../../config/firebase";
 
 function EditProfile(props) {
   const user = useSelector((state) => state.user);
@@ -173,7 +173,7 @@ function EditProfile(props) {
                     SubmitExit();
                   }
                 });
-              setisLoading(false);
+                setisLoading(false);
               } catch (error) {
                 alert(error);
                 setisLoading(false);
@@ -188,89 +188,89 @@ function EditProfile(props) {
   });
 
   useEffect(() => {
-    if(isLoading){
-     document.addEventListener('scroll', function() {
-      window.scrollTo(0, 0);
-     }, false);
+    if (isLoading) {
+      document.addEventListener(
+        "scroll",
+        function () {
+          window.scrollTo(0, 0);
+        },
+        false
+      );
     }
-  }, [isLoading])
+  }, [isLoading]);
 
   return (
     <>
-    {isLoading ? 
-        (
+      {isLoading ? (
         <LoadingDiv>
           <div className="spinner-border text-light" role="status">
             <span className="sr-only">Loading...</span>
           </div>
         </LoadingDiv>
-        )
-        :
-      null
-    }
-    <EditProfileDiv>
-      <div className="editProfileDiv">
-        {imageSrc && ModalFlag ? (
-          <CropperModal
-            imageSrc={imageSrc}
-            setImageSrc={setImageSrc}
-            setModalFlag={setModalFlag}
-            setCroppedAreaPixelsResult={setCroppedAreaPixelsResult}
-          />
-        ) : (
-          <>
-            <div className="avatarSelect">
-              <input
-                type="file"
-                id="userAvartar"
-                onChange={onFileChange}
-                accept="image/*"
-              />
-              <label htmlFor="userAvartar">
-                <Avatar
-                  src={PhotoURL}
-                  size="80"
-                  round={true}
-                  style={{ border: "1px solid #c6c6c6" }}
-                  className="img"
+      ) : null}
+      <EditProfileDiv>
+        <div className="editProfileDiv">
+          {imageSrc && ModalFlag ? (
+            <CropperModal
+              imageSrc={imageSrc}
+              setImageSrc={setImageSrc}
+              setModalFlag={setModalFlag}
+              setCroppedAreaPixelsResult={setCroppedAreaPixelsResult}
+            />
+          ) : (
+            <>
+              <div className="avatarSelect">
+                <input
+                  type="file"
+                  id="userAvartar"
+                  onChange={onFileChange}
+                  accept="image/*"
                 />
-                <i className="bi bi-camera"></i>
-              </label>
-              <button
-                type="button"
-                onClick={() =>
-                  setPhotoURL(
-                    "https://kr.object.ncloudstorage.com/makeit/user/profile.png"
-                  )
-                }
-              >
-                기본 이미지로 변경
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-      <form
-        onSubmit={(e) => {
-          console.log(e);
-          submitFunc(e);
-        }}
-      >
-        <label htmlFor="nickname">닉네임 변경</label>
-        <input
-          type="text"
-          id="nickname"
-          value={DisplayName}
-          onChange={(e) => setDisplayName(e.currentTarget.value)}
-          required
-        />
-        <div className="FormbtnDiv">
-          <button type="submit" disabled={isLoading}>
-            수정사항 저장
-          </button>
+                <label htmlFor="userAvartar">
+                  <Avatar
+                    src={PhotoURL}
+                    size="80"
+                    round={true}
+                    style={{ border: "1px solid #c6c6c6" }}
+                    className="img"
+                  />
+                  <i className="bi bi-camera"></i>
+                </label>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setPhotoURL(
+                      "https://kr.object.ncloudstorage.com/makeit/user/profile.png"
+                    )
+                  }
+                >
+                  기본 이미지로 변경
+                </button>
+              </div>
+            </>
+          )}
         </div>
-      </form>
-    </EditProfileDiv>
+        <form
+          onSubmit={(e) => {
+            console.log(e);
+            submitFunc(e);
+          }}
+        >
+          <label htmlFor="nickname">닉네임 변경</label>
+          <input
+            type="text"
+            id="nickname"
+            value={DisplayName}
+            onChange={(e) => setDisplayName(e.currentTarget.value)}
+            required
+          />
+          <div className="FormbtnDiv">
+            <button type="submit" disabled={isLoading}>
+              수정사항 저장
+            </button>
+          </div>
+        </form>
+      </EditProfileDiv>
     </>
   );
 }

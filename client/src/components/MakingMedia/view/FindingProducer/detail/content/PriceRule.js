@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  DetaulContentSubTitle,
-  PriceRuleDiv,
-} from "../../../../css/FindingProducerDetailCSS";
+import { DetaulContentSubTitle, PriceRuleDiv } from "../../../../css/FPDCSS.js";
 
 function PriceRule(props) {
   return (

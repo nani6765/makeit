@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { DeleteModalDiv } from "../../../../../../css/FindingProducerDetailCSS.js";
+import { DeleteModalDiv } from "../../../../../../css/FPDCSS.js";
 
 function ReviewDeleteModal(props) {
   const RemoveHandler = () => {

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { firebase } from "../../../firebase.js";
+import React, { useState, useEffect } from "react";
+import firebase from "../../../config/firebase.js";
 import { useSelector } from "react-redux";
 
 import ChatUpload from "./Content/ChatUpload.js";

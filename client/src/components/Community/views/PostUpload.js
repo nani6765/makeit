@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import PostUploadFrom from "./content/Upload/PostUploadForm.js";
 
-import { PostUploadDiv } from "../css/CommunityUploadCSS.js";
+import { PostUploadDiv } from "../css/CommunityFormCSS.js";
 
 function PostUpload(props) {
   const [category, setcategory] = useState("");

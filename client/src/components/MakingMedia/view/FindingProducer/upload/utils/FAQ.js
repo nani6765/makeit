@@ -1,5 +1,5 @@
 import React from "react";
-import { FAQDiv } from "../css/FPUtilsCSS.js";
+import { FAQDiv } from "../../../../css/FPUCSS.js";
 function FAQ(props) {
   const ChangeQuestion = (e) => {
     let temp = [...props.FAQList];

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { firebase } from "../../../../firebase.js";
+import firebase from "../../../../config/firebase";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 

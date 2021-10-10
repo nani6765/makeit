@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { firebase } from "../../../../../firebase.js"
+import firebase from "../../../../../config/firebase.js";
 
 import AlarmListFnc from "./AlarmListFnc.js";
 import ChatListFnc from "./ChatListFnc.js";
@@ -17,20 +17,20 @@ function AlarmCenter(props) {
   let UserRef = firebase.database().ref(`users/${user.userData.uid}/`);
 
   const GetAlarmList = (limit) => {
-      let body = {
-        uid: user.userData.uid,
-        skip : AlarmSkip,
-        limit: limit,
-      };
-      axios.post("/api/alarm/getAlarm", body).then((response) => {
-        if (response.data.success) {
-          let temp = [...AlarmList, ...response.data.alarms];
-          setAlarmList(temp);
-          setAlarmSkip(Math.min(AlarmSkip + limit, temp.length));
-        }
-      });
-  }
-  
+    let body = {
+      uid: user.userData.uid,
+      skip: AlarmSkip,
+      limit: limit,
+    };
+    axios.post("/api/alarm/getAlarm", body).then((response) => {
+      if (response.data.success) {
+        let temp = [...AlarmList, ...response.data.alarms];
+        setAlarmList(temp);
+        setAlarmSkip(Math.min(AlarmSkip + limit, temp.length));
+      }
+    });
+  };
+
   useEffect(() => {
     let temp = [];
     setChatList([...temp]);
@@ -56,7 +56,7 @@ function AlarmCenter(props) {
         props.AlarmType === "쪽지함" ? (
           <ChatListFnc ChatList={ChatList} />
         ) : (
-          <AlarmListFnc AlarmList={AlarmList} GetAlarmList={GetAlarmList}/>
+          <AlarmListFnc AlarmList={AlarmList} GetAlarmList={GetAlarmList} />
         )
       ) : null}
     </>

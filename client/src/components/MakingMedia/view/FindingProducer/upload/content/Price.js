@@ -4,10 +4,9 @@ import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 
-import { PriceDiv } from "../css/FPContentCSS.js";
+import { PriceDiv } from "../../../../css/FPUCSS.js";
 
 function Price(props) {
-
   const PriceArr = [
     "직접 입력",
     "30만원 미만",

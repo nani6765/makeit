@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
-import FileUploadArea from "../../../../../utils/FileUploadArea.js";
-import FileShowArea from "../../../../../utils/FileShowArea.js";
-import YoutubeModal from "../utils/YoutubeModal.js";
 
-import { ProtFolioDiv } from "../css/FPContentCSS";
+import FileUploadArea from "../../../../../utils/view/Files/FileShowArea.js";
+import FileShowArea from "../../../../../utils/view/Files/FileUploadArea.js";
+import YoutubeModal from "../../../../../utils/view/Modal/YoutubeModal.js";
+
+import { ProtFolioDiv } from "../../../../css/FPUCSS.js";
 
 function Portfolio(props) {
   const [ThumbnailArrLength, setThumbnailArrLength] = useState(0);

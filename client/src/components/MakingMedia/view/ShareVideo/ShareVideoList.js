@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { ShareVideoCard } from "../../css/ShareVideoCSS.js";
+
+import { ShareVideoCard } from "../../css/SVCSS.js";
 import { LinkCSS } from "../../css/CommonCSS";
-import { ReactComponent as CGIcon } from "./css/CommentGray.svg";
-import { ReactComponent as CYIcon } from "./css/CommentYellow.svg";
-import { ReactComponent as LGIcon } from "./css/LikeGrey.svg";
-import { ReactComponent as LPIcon } from "./css/LikePurple.svg";
+import { ReactComponent as CGIcon } from "../../css/Img/CommentGray.svg";
+import { ReactComponent as CYIcon } from "../../css/Img/CommentYellow.svg";
+import { ReactComponent as LGIcon } from "../../css/Img/LikeGrey.svg";
+import { ReactComponent as LPIcon } from "../../css/Img/LikePurple.svg";
 
 /** @jsxRuntime classic */
 /** @jsx jsx */

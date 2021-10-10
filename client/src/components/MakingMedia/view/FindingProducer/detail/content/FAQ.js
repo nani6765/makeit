@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  FAQDiv,
-  DetaulContentSubTitle,
-} from "../../../../css/FindingProducerDetailCSS.js";
+import { FAQDiv, DetaulContentSubTitle } from "../../../../css/FPDCSS.js";
 
 function FAQ(props) {
   return (

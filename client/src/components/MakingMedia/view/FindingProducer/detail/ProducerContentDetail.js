@@ -1,10 +1,7 @@
 import React from "react";
-import Rule from "../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
+import Rule from "../../../../utils/Rule/MakingMedia/FindingProducer/CommonRule.js";
 
-import {
-  DetailFilterDiv,
-  DetaulContentSubTitle,
-} from "../../../css/FindingProducerDetailCSS.js";
+import { DetailFilterDiv, DetaulContentSubTitle } from "../../../css/FPDCSS.js";
 
 import ContentGNB from "./content/ContentGNB.js";
 import DetailExplanation from "./content/DetailExplanation.js";

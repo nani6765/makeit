@@ -1,5 +1,5 @@
 import React from "react";
-import { FooterBtnDiv } from "../css/FPUtilsCSS";
+import { FooterBtnDiv } from "../../../../css/FPUCSS.js";
 
 function FooterBtnArea(props) {
   const nextHandler = () => {
@@ -9,12 +9,14 @@ function FooterBtnArea(props) {
   };
   return (
     <FooterBtnDiv>
-      <button className="save" onClick={() => props.TempSaveHandler()}>임시저장</button>
+      <button className="save" onClick={() => props.TempSaveHandler()}>
+        임시저장
+      </button>
       {props.NextStep === "완료" ? (
         <button
           className="next"
           onClick={() => {
-            if(props.CheckEmptyContent()) {
+            if (props.CheckEmptyContent()) {
               props.SubmitHandler();
             }
           }}
@@ -22,12 +24,9 @@ function FooterBtnArea(props) {
           완료
         </button>
       ) : (
-      <button
-        className="next"
-        onClick={() => nextHandler()}
-      >
-        다음
-      </button>
+        <button className="next" onClick={() => nextHandler()}>
+          다음
+        </button>
       )}
     </FooterBtnDiv>
   );

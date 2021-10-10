@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
-import CommonRule from "../../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
+import CommonRule from "../../../../../utils/Rule/MakingMedia/FindingProducer/CommonRule.js";
 import FAQ from "../utils/FAQ.js";
-import { ConfirmDiv } from "../css/FPContentCSS.js";
+import { ConfirmDiv } from "../../../../css/FPUCSS.js";
 
 function Confirm(props) {
   const [RuleFlag, setRuleFlag] = useState(false);
@@ -26,7 +26,14 @@ function Confirm(props) {
     <ConfirmDiv>
       <div className="confirm">
         <ContentHeadingArea HeadingTitle="수정 및 재진행" />
-        <textarea name="" id="" cols="30" rows="10" value={props.EditandReprogress} onChange={(e) => props.setEditandReprogress(e.currentTarget.value)}></textarea>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          value={props.EditandReprogress}
+          onChange={(e) => props.setEditandReprogress(e.currentTarget.value)}
+        ></textarea>
       </div>
       <div className="cancel">
         <ContentHeadingArea HeadingTitle="취소 및 환불 규정" />

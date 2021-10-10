@@ -1,5 +1,5 @@
 import React from "react";
-import { firebase } from "../../../../firebase.js";
+import firebase from "../../../../config/firebase.js";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import { ModalDiv } from "../../css/HeaderElement.js";
 
@@ -15,12 +15,13 @@ function MyPageModal(props) {
   return (
     <ModalDiv style={{ top: "25px", right: "20px" }}>
       <div>
-        <Link to={{
+        <Link
+          to={{
             pathname: `/MyPage`,
             state: {
-                Taps:"내정보",
-                AlarmType:"알림센터",
-            }
+              Taps: "내정보",
+              AlarmType: "알림센터",
+            },
           }}
           onClick={() => props.setmyPageHambucControl(false)}
           style={{ color: "black", textDecoration: "none" }}

@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
+import Avatar from "react-avatar";
 import axios from "axios";
 
-import UserModal from "../Modal/UserModal.js";
-import GuestModal from "../Modal/GuestModal.js";
-
+import UserModal from "../../../../utils/view/Modal/UserModal.js";
+import GuestModal from "../../../../utils/view/Modal/GuestModal.js";
 import PostImages from "./PostImages.js";
+
 import { DetailDiv } from "../../../css/CommunutyDetailCSS.js";
-import Avatar from "react-avatar";
 
 function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);

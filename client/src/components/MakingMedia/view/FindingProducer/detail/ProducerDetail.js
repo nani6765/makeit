@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import ProducerTitleDetail from "./ProducerTitleDetail.js";
 import ProducerContentDetail from "./ProducerContentDetail.js";
-import { DetailDiv } from "../../../css/FindingProducerDetailCSS.js";
+import { DetailDiv } from "../../../css/FPDCSS.js";
 
 import axios from "axios";
 
@@ -37,10 +37,7 @@ function ProducerDetail(props) {
     <DetailDiv>
       {PostInfo.url !== undefined && (
         <>
-          <ProducerTitleDetail
-            PostInfo={PostInfo}
-            user={user}
-          />
+          <ProducerTitleDetail PostInfo={PostInfo} user={user} />
           <div className="content">
             <ProducerContentDetail PostInfo={PostInfo} />
           </div>

@@ -4,8 +4,8 @@ import { withRouter } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 
-import FileUploadArea from "../../../../utils/FileUploadArea.js";
-import FileShowArea from "../../../../utils/FileShowArea.js";
+import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
+import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
 
 /** @jsxRuntime classic */
 /** @jsx jsx */

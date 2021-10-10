@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import PostDetailContent from "./content/Detail/PostDetailContent.js";
-import RepleList from "./content/Reple/RepleList.js";
-import RepleUpload from "./content/Upload/RepleUpload.js";
-
 import { RepleBtnDiv } from "../css/CommunutyDetailCSS.js";
+
+import RepleList from "../../utils/view/Reple/RepleList.js";
+import RepleUpload from "../../utils/view/Reple/Form/RepleUpload.js";
 
 function CommunityDetail(props) {
   const [postInfo, setpostInfo] = useState({ _id: null });

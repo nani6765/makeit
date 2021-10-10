@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
+import ShareVideoRepleArea from "./ShareVideoRepleArea.js";
 
 import Avatar from "react-avatar";
 import YouTube from "react-youtube";
 import axios from "axios";
 
-import { DetailDiv } from "../css/ShareVideoDetailCSS.js";
-import { ReactComponent as LGIcon } from "../../css/LikeGrey.svg";
-import { ReactComponent as LPIcon } from "../../css/LikePurple.svg";
+import { DetailDiv } from "../../../../css/SVDCSS.js";
+import { ReactComponent as LGIcon } from "../../../../css/Img/LikeGrey.svg";
+import { ReactComponent as LPIcon } from "../../../../css/Img/LikePurple.svg";
 
 function ShareVideoPost(props) {
   const [likeFlag, setlikeFlag] = useState(false);
@@ -17,8 +18,12 @@ function ShareVideoPost(props) {
   let history = useHistory();
 
   useEffect(() => {
-    console.log(props);
-  }, [props]);
+    if (user.userData && props.PostInfo.likeArray.includes(user.userData.uid)) {
+      setlikeFlag(true);
+    } else {
+      setlikeFlag(false);
+    }
+  }, []);
 
   const PCOpts = {
     width: "100%",
@@ -31,7 +36,7 @@ function ShareVideoPost(props) {
   };
 
   const LikeHandler = () => {
-    if (props.postInfo.auther.uid === user.userData.uid) {
+    if (props.PostInfo.auther.uid === user.userData.uid) {
       return alert("본인 글에는 좋아요를 누를 수 없습니다!");
     }
     if (user.userData === null) {
@@ -42,7 +47,7 @@ function ShareVideoPost(props) {
     target.style.disable = "true";
 
     let body = {
-      postNum: props.postInfo.postNum,
+      postNum: props.PostInfo.postNum,
       likeFlag: likeFlag,
       userId: user.userData.uid,
       type: "ShareVideo",
@@ -59,40 +64,51 @@ function ShareVideoPost(props) {
     });
   };
   return (
-    <DetailDiv>
-      <div className="avatar">
-        <Avatar
-          src={props.PostInfo.auther.photoURL}
-          size="40"
-          round={true}
-          style={{ border: "1px solid #c6c6c6" }}
-        />
-      </div>
-      <div className="author">
-        <p>{props.PostInfo.auther.displayName}</p>
-      </div>
-      <div className="date">
-        <p>{props.PostInfo.realTime}</p>
-      </div>
-      <div className="title">
-        <p>{props.PostInfo.oneLineIntroduce}</p>
-      </div>
-      <div className="video">
-        <YouTube videoId={props.PostInfo.videoUrl} opts={PCOpts} id="PCView" />
-        <YouTube
-          videoId={props.PostInfo.videoUrl}
-          opts={MobOpts}
-          id="MobView"
-        />
-      </div>
-      <div className="desc">
-        <p>{props.PostInfo.oneLineIntroduce}</p>
-      </div>
-      <div className="like">
-        <LGIcon onClick={() => LikeHandler()} />
-        추천({props.PostInfo.likeNum})
-      </div>
-    </DetailDiv>
+    <>
+      <DetailDiv>
+        <div className="avatar">
+          <Avatar
+            src={props.PostInfo.auther.photoURL}
+            size="40"
+            round={true}
+            style={{ border: "1px solid #c6c6c6" }}
+          />
+        </div>
+        <div className="author">
+          <p>{props.PostInfo.auther.displayName}</p>
+        </div>
+        <div className="date">
+          <p>{props.PostInfo.realTime}</p>
+        </div>
+        <div className="title">
+          <p>{props.PostInfo.oneLineIntroduce}</p>
+        </div>
+        <div className="video">
+          <YouTube
+            videoId={props.PostInfo.videoUrl}
+            opts={PCOpts}
+            id="PCView"
+          />
+          <YouTube
+            videoId={props.PostInfo.videoUrl}
+            opts={MobOpts}
+            id="MobView"
+          />
+        </div>
+        <div className="desc">
+          <p>{props.PostInfo.oneLineIntroduce}</p>
+        </div>
+        <div className="like">
+          {likeFlag ? (
+            <LPIcon onClick={() => LikeHandler()} />
+          ) : (
+            <LGIcon onClick={() => LikeHandler()} />
+          )}
+          추천({props.PostInfo.likeNum})
+        </div>
+      </DetailDiv>
+      <ShareVideoRepleArea PostInfo={props.PostInfo} />
+    </>
   );
 }
 

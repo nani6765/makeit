@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { YoutubeDiv } from "../css/QuotationUploadCSS.js";
+import { YoutubeDiv } from "../../../../css/RVUCSS.js";
 import YOUTUBE_API from "../../../../../../config/youtubeAPI.js";
 
 function YoutubeModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
-  const [CheckFlag, setCheckFlag] = useState([false, false, false, false, false, false]);
+  const [CheckFlag, setCheckFlag] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -42,10 +49,14 @@ function YoutubeModal(props) {
     console.log("search result", SearchResultArr);
     console.log("video List", props.VideoArr);
     SearchResultArr.map((video, idx) => {
-      if(props.VideoArr.findIndex((obj) => obj.id.videoId === video.id.videoId) != -1) {
-        temp[idx]=true;
+      if (
+        props.VideoArr.findIndex(
+          (obj) => obj.id.videoId === video.id.videoId
+        ) != -1
+      ) {
+        temp[idx] = true;
       }
-    })
+    });
     setCheckFlag([...temp]);
   }, [SearchResultArr]);
 
@@ -83,7 +94,7 @@ function YoutubeModal(props) {
                         type="checkbox"
                         checked={CheckFlag[idx]}
                         onChange={(e) => InputCheckHandler(e, Video, idx)}
-                        value={''|| ""}
+                        value={"" || ""}
                         disabled={props.VideoArr.length >= 6 ? true : false}
                       />
                     </div>

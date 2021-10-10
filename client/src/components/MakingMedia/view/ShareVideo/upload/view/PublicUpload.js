@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { PublicArea } from "../css/ShareVideoUploadCSS.js";
-import YoutubeModal from "../utils/YoutubeModal.js";
+import { PublicArea } from "../../../../css/SVUCSS.js";
+import YoutubeModal from "../../../../../utils/view/Modal/YoutubeModal.js";
 
 function PublicUpload(props) {
   const [ModalFlag, setModalFlag] = useState(false);

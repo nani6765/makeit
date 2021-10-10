@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ModalDiv } from "../../../../../../css/FindingProducerDetailCSS.js";
+import { ModalDiv } from "../../../../../../css/FPDCSS.js";
 import ReviewDeleteModal from "./ReviewDeleteModal.js";
 
 function ReviewModal(props) {

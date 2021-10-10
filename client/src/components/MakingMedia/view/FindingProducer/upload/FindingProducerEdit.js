@@ -10,7 +10,7 @@ import Confirm from "./content/Confirm.js";
 import axios from "axios";
 
 import { UploadForm, UploadHead } from "../../../css/CommonUploadCSS.js";
-import { ContentDiv, LeftContent } from "./css/FPCSS.js";
+import { ContentDiv, LeftContent } from "../../../css/FPUCSS.js";
 
 function FindingProducerEdit(props) {
   const user = useSelector((state) => state.user);

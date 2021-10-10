@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Avatar from "react-avatar";
-import { RequestPostCard } from "../../css/RequestVideoCSS";
+import { RequestPostCard } from "../../css/RVCSS.js";
 import { LinkCSS } from "../../css/CommonCSS.js";
 
 /** @jsxRuntime classic */

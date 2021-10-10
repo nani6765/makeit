@@ -7,24 +7,6 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const Content = styled.div`
-  text-align: left;
-  word-break: keep-all;
-  ul {
-    list-style: none;
-    padding-left: 0px;
-    li {
-      &.title {
-        font-weight: bold;
-        margin-top: 1rem;
-      }
-    }
-    &.list {
-      padding-left: 1rem;
-    }
-  }
-`;
-
 function CommonRule() {
   return (
     <Content>
@@ -81,3 +63,21 @@ function CommonRule() {
 }
 
 export default CommonRule;
+
+const Content = styled.div`
+  text-align: left;
+  word-break: keep-all;
+  ul {
+    list-style: none;
+    padding-left: 0px;
+    li {
+      &.title {
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+    }
+    &.list {
+      padding-left: 1rem;
+    }
+  }
+`;

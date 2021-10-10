@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentHeading } from "../css/FPUtilsCSS.js";
+import { ContentHeading } from "../../../../css/FPUCSS.js";
 
 function ContentHeadingArea(props) {
   return (

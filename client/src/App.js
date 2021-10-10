@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "./redux/_actions/user_action.js";
-import { firebase } from "./firebase.js";
+import firebase from "./config/firebase.js";
 
 //Basic
 import Header from "./components/HeaderAndFooter/Header/Header.js";
 import Footer from "./components/HeaderAndFooter/Footer/Footer.js";
-import TopArea from "./components/utils/TopArea.js";
+import TopArea from "./components/utils/view/Area/TopArea.js";
 
 //Main
 import MainPage from "./components/MainPage/MainPage.js";

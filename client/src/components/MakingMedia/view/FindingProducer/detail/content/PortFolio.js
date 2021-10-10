@@ -1,5 +1,5 @@
 import React from "react";
-import { DetaulContentSubTitle } from "../../../../css/FindingProducerDetailCSS.js";
+import { DetaulContentSubTitle } from "../../../../css/FPDCSS.js";
 function PortFolio() {
   return (
     <div>

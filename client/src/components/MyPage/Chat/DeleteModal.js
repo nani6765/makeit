@@ -1,46 +1,47 @@
-import React from 'react'
-import { withRouter, useHistory } from 'react-router';
+import React from "react";
+import { withRouter, useHistory } from "react-router";
 import { DeleteModalDiv } from "../css/ChatDetailElement.js";
-import { firebase } from '../../../firebase.js';
+import firebase from "../../../config/firebase.js";
 import axios from "axios";
 
 function DeleteModal(props) {
-    let MessageRef = firebase.database().ref("chats");
-    const storageRef = firebase.storage().ref();
-    let history = useHistory();
+  let MessageRef = firebase.database().ref("chats");
+  const storageRef = firebase.storage().ref();
+  let history = useHistory();
 
-    function RemoveHandler() {
+  function RemoveHandler() {
+    let body = {
+      chatRoomId: props.ChatRoomId,
+    };
 
-        let body = {
-            chatRoomId: props.ChatRoomId
-        }
-        
-        axios.post("/api/chat/delete", body).then((response) => {
-            if (response.data.success) {
-                MessageRef.child(props.ChatRoomId).remove((error) => {
-                    if(error) {
-                        alert(error);
-                    } else {
-                        storageRef.child(`chats/${props.ChatRoomId}`).listAll().then((res) => {
-                            res.items.forEach((item) => {
-                                storageRef.child(item.fullPath).delete()
-                            })
-                            history.goBack();
-                        }).catch((err) => {
-                            if(err)                                        
-                            alert(err);                           
-                            history.goBack();                           
-                        })
-                    }
+    axios.post("/api/chat/delete", body).then((response) => {
+      if (response.data.success) {
+        MessageRef.child(props.ChatRoomId).remove((error) => {
+          if (error) {
+            alert(error);
+          } else {
+            storageRef
+              .child(`chats/${props.ChatRoomId}`)
+              .listAll()
+              .then((res) => {
+                res.items.forEach((item) => {
+                  storageRef.child(item.fullPath).delete();
                 });
-            } else {
-                alert("error");
-            }
+                history.goBack();
+              })
+              .catch((err) => {
+                if (err) alert(err);
+                history.goBack();
+              });
+          }
         });
-        
-    }
+      } else {
+        alert("error");
+      }
+    });
+  }
 
-    return (
+  return (
     <DeleteModalDiv>
       <div className="content">
         <div
@@ -48,9 +49,7 @@ function DeleteModal(props) {
           onClick={() => props.setDeleteFlag(false)}
         ></div>
         <div className="gridDiv">
-          <p className="title">
-              쪽지함 나가기
-          </p>
+          <p className="title">쪽지함 나가기</p>
           <span className="delete" onClick={() => props.setDeleteFlag(false)}>
             X
           </span>
@@ -78,7 +77,7 @@ function DeleteModal(props) {
         </div>
       </div>
     </DeleteModalDiv>
-    )
+  );
 }
 
-export default withRouter(DeleteModal)
+export default withRouter(DeleteModal);

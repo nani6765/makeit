@@ -1,5 +1,5 @@
 import React from "react";
-import { ContentGNBUL } from "../../../../css/FindingProducerDetailCSS.js";
+import { ContentGNBUL } from "../../../../css/FPDCSS.js";
 function ContentGNB() {
   return (
     <ContentGNBUL>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 import ReviewModal from "./modal/ReviewModal.js";
-import { ReviewDiv } from "../../../../../css/FindingProducerDetailCSS.js";
+import { ReviewDiv } from "../../../../../css/FPDCSS.js";
 
 function Review(props) {
   const user = useSelector((state) => state.user);

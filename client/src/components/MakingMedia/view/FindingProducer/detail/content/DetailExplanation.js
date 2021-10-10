@@ -2,7 +2,7 @@ import React from "react";
 import {
   DetailExplanationDiv,
   DetaulContentSubTitle,
-} from "../../../../css/FindingProducerDetailCSS.js";
+} from "../../../../css/FPDCSS.js";
 function DetailExplanation(props) {
   return (
     <DetailExplanationDiv id="detail">

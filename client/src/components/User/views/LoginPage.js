@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
-import { firebase } from "../../../firebase.js";
-
+import firebase from "../../../config/firebase.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";

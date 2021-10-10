@@ -3,7 +3,7 @@ import { useHistory, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlarmFalse } from "../../../../redux/_actions/alarm_action.js";
 
-import { firebase } from "../../../../firebase.js";
+import firebase from "../../../../config/firebase.js";
 
 import Avatar from "react-avatar";
 import TextEllipsis from "react-text-ellipsis";
@@ -19,7 +19,7 @@ function ChatContent(props) {
   let history = useHistory();
   const user = useSelector((state) => state.user);
   const alarm = useSelector((state) => state.alarm);
-    
+
   moment.locale("ko");
   return (
     <ChatContentDiv

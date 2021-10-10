@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { ReviewUploadDiv } from "../../../../../css/FindingProducerDetailCSS.js";
+import { ReviewUploadDiv } from "../../../../../css/FPDCSS.js";
 import axios from "axios";
 
 function ReviewForm(props) {

@@ -3,7 +3,7 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-import FilterDiv from "../css/RequestUploadCSS.js";
+import { RUFilterDiv } from "../../../../css/RVUCSS.js";
 
 function RequestFilter(props) {
   const options = [
@@ -20,7 +20,7 @@ function RequestFilter(props) {
   const radioOptions = ["직접 촬영", "업체 촬영", "협의"];
 
   return (
-    <FilterDiv>
+    <RUFilterDiv>
       <label className="categorylabel">카테고리</label>
       <div className="category">
         <Select
@@ -92,7 +92,7 @@ function RequestFilter(props) {
           적어주세요.
         </p>
       </div>
-    </FilterDiv>
+    </RUFilterDiv>
   );
 }
 

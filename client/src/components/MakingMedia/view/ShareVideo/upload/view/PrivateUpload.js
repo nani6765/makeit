@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { PrivateArea } from "../css/ShareVideoUploadCSS.js";
-import FileUploadArea from "../../../../../utils/FileUploadArea.js";
+import { PrivateArea } from "../../../../css/SVUCSS.js";
+
+import FileUploadArea from "../../../../../utils/view/Files/FileUploadArea.js";
 
 function PrivateUpload(props) {
   return (

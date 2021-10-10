@@ -3,7 +3,7 @@ import ReviewForm from "./ReviewForm.js";
 import Review from "./Review.js";
 import axios from "axios";
 
-import { DetaulContentSubTitle } from "../../../../../css/FindingProducerDetailCSS.js";
+import { DetaulContentSubTitle } from "../../../../../css/FPDCSS.js";
 
 function ReviewArea(props) {
   const [ReviewList, setReviewList] = useState([]);

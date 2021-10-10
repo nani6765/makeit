@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
 
-import { PostUploadDiv } from "../css/CommunityUploadCSS.js";
-import UpdateFrorm from "./content/Upload/RepleEditForm.js";
+import { PostUploadDiv } from "../css/CommunityFormCSS.js";
+
+import UpdateFrorm from "../../utils/view/Reple/Form/RepleEditForm.js";
 
 function PostEdit(props) {
   const [PostInfo, setPostInfo] = useState({ checkPosition: 0 });

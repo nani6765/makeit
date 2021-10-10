@@ -5,14 +5,16 @@ import { useSelector } from "react-redux";
 
 import Avatar from "react-avatar";
 import DeleteIcon from "../css/DeleteIcon.svg";
-import { firebase } from "../../../firebase.js";
+import firebase from "../../../config/firebase.js";
 import DeleteModal from "./DeleteModal.js";
 
 function ChatGNB(props) {
   const user = useSelector((state) => state.user);
   let history = useHistory();
   let InfoRef = firebase.database().ref("users");
-  let UserRef = firebase.database().ref(`users/${user.userData.uid}/chats/${props.ChatRoomId}`);
+  let UserRef = firebase
+    .database()
+    .ref(`users/${user.userData.uid}/chats/${props.ChatRoomId}`);
 
   const [OtherInfo, setOtherInfo] = useState({});
   const [DeleteFlag, setDeleteFlag] = useState(false);
@@ -23,13 +25,13 @@ function ChatGNB(props) {
     });
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     return () => {
       UserRef.update({
-          isCheck: true,
-        });
-    }
-  }, [])
+        isCheck: true,
+      });
+    };
+  }, []);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlarmTrue } from "../../../../redux/_actions/alarm_action.js";
-import { firebase } from "../../../../firebase.js";
+import firebase from "../../../../config/firebase.js";
 import axios from "axios";
 
 import { ReactComponent as Bell } from "../../css/Bell.svg";
@@ -47,7 +47,6 @@ function HeaderBell(props) {
 
   useEffect(() => {
     if (!alarm.AlarmCheckFin) {
-     
       AlarmChecked();
     } else {
       ChatCheckd.then((val) => {

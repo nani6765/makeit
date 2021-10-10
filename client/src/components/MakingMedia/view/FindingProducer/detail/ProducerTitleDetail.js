@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { ProducerTitleDiv } from "../../../css/FindingProducerDetailCSS.js";
+import { ProducerTitleDiv } from "../../../css/FPDCSS.js";
 
 import axios from "axios";
 

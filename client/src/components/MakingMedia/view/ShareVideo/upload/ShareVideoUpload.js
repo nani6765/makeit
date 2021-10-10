@@ -8,7 +8,7 @@ import PublicUpload from "./view/PublicUpload.js";
 import PrivateUpload from "./view/PrivateUpload.js";
 
 import { UploadHead, UploadForm } from "../../../css/CommonUploadCSS.js";
-import { ShareVideoContentDiv } from "./css/ShareVideoUploadCSS.js";
+import { ShareVideoContentDiv } from "../../../css/SVUCSS.js";
 
 function ShareVideoUpload(props) {
   const user = useSelector((state) => state.user);

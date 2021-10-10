@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import ShareVideoList from "./ShareVideoList.js";
 
-import { ShareVideoDiv } from "../../css/ShareVideoCSS.js";
+import { ShareVideoDiv } from "../../css/SVCSS.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { ReactComponent as PenIcon } from "../../css/Img/Pen.svg";
 
