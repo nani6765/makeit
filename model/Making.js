@@ -334,7 +334,8 @@ const QuotationSchema = mongoose.Schema(
       type: String,
       default: realTime(),
     },
-    url: { //의뢰 url
+    url: {
+      //의뢰 url
       type: Number,
     },
   },
@@ -344,10 +345,9 @@ const QuotationSchema = mongoose.Schema(
   }
 );
 
-
 const ShareVideoSchema = mongoose.Schema(
   {
-  //쓰니정보
+    //쓰니정보
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -363,7 +363,7 @@ const ShareVideoSchema = mongoose.Schema(
     //글정보
     //상세 설명
     oneLineIntroduce: {
-    type: String,
+      type: String,
     },
     content: {
       type: String,
@@ -374,7 +374,7 @@ const ShareVideoSchema = mongoose.Schema(
     videoUrl: {
       type: String,
     },
-    
+
     //post속성
     url: {
       type: Number,
@@ -402,7 +402,95 @@ const ShareVideoSchema = mongoose.Schema(
   }
 );
 
+const ShareVideoRepleSchema = mongoose.Schema(
+  {
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    uid: {
+      type: String,
+    },
+    postNum: {
+      type: Number,
+    },
+    content: {
+      type: String,
+    },
+    likeNum: {
+      type: Number,
+      default: 0,
+    },
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
+    edit: {
+      type: Boolean,
+      default: false,
+    },
+    rerepleNum: {
+      type: Number,
+      default: 0,
+    },
+    likeArray: {
+      type: Array,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    rerepleArray: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "shareVideoRere",
+      },
+    ],
+  },
+  {
+    //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
+    //timestamps: true,
+    collection: "shareVideoRe",
+  }
+);
 
+const ShareVideoRerepleSchema = mongoose.Schema(
+  {
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    content: {
+      type: String,
+    },
+    likeNum: {
+      type: Number,
+      default: 0,
+    },
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
+    edit: {
+      type: Boolean,
+      default: false,
+    },
+    likeArray: {
+      type: Array,
+    },
+    postNum: {
+      type: Number,
+    },
+  },
+  {
+    timestamps: true,
+    collection: "shareVideoRere",
+  }
+);
 
 const ProPost = mongoose.model("ProPostSchema", ProPostSchema);
 const TempProPost = mongoose.model("TempProPostSchema", TempProPostSchema);
@@ -410,4 +498,22 @@ const ProReview = mongoose.model("ProReviewSchema", ProReviewSchema);
 const RequestPost = mongoose.model("RequestPostSchema", RequestPostSchema);
 const Quotation = mongoose.model("QuotationSchema", QuotationSchema);
 const ShareVideo = mongoose.model("ShareVideoSchema", ShareVideoSchema);
-module.exports = { ProPost, TempProPost, ProReview, RequestPost, Quotation, ShareVideo };
+const ShareVideoReple = mongoose.model(
+  "ShareVideoRepleSchema",
+  ShareVideoRepleSchema
+);
+const ShareVideoRereple = mongoose.model(
+  "ShareVideoRerepleSchema",
+  ShareVideoRerepleSchema
+);
+
+module.exports = {
+  ProPost,
+  TempProPost,
+  ProReview,
+  RequestPost,
+  Quotation,
+  ShareVideo,
+  ShareVideoReple,
+  ShareVideoRereple,
+};

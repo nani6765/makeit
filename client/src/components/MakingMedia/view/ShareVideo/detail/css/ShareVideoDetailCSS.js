@@ -96,6 +96,7 @@ const DetailDiv = styled.div`
     align-items: center;
     svg {
       cursor: pointer;
+      margin-right: 1rem;
     }
   }
 `;
