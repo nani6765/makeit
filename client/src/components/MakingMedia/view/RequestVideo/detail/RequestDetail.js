@@ -45,22 +45,26 @@ function RequestDetail(props) {
   useEffect(() => {
     getPostDeatil();
     getQuotation();
+
   }, []);
 
   return (
+    <>
+    <img src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png" style={{width: "100%"}}/>
     <DetailDiv>
       {PostInfo.url !== undefined && (
         <>
         <RequestDetailContent PostInfo={PostInfo} user={user} />
         {
           QuotationArr.length > 0
-          ? <Quotation QuotationArr={QuotationArr} url={PostInfo.url}/>
+          ? <Quotation user={user} QuotationArr={QuotationArr} url={PostInfo.url} auther={PostInfo.auther.uid}/>
           : <NoQuotation url={PostInfo.url}/>
         }
         </>
       )}
       {}
     </DetailDiv>
+    </>
   );
 }
 

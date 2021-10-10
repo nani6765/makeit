@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import RequestFilter from "./view/RequestFilter.js";
@@ -49,8 +49,8 @@ function RequestVideoUpload(props) {
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
       category: Category,
-      minPrice: MinPrice,
-      maxPrice: MaxPrice,
+      minPrice: MinPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      maxPrice: MaxPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
       deadline: Deadline.toLocaleDateString(),
       filmType: FilmType,
       uniqueness: Uniqueness,
@@ -83,6 +83,13 @@ function RequestVideoUpload(props) {
       });
   };
 
+  useEffect(() => {
+    if(!user.userData) {
+      alert("회원만 글을 작성할 수 있습니다.");
+      props.history.goBack();
+    }
+  }, []);
+  
   return (
     <>
       <UploadHead>
