@@ -8,7 +8,7 @@ import { DeleteModalDiv } from "./ModalCSS.js";
 function DeleteModal(props) {
   function RemoveHandler() {
     //게시글 삭제
-    if (props.type === "post") {
+    if (props.modalType === "post") {
       let body = {
         postInfoId: props.PostInfo._id,
         postNum: props.PostInfo.postNum,
@@ -25,15 +25,16 @@ function DeleteModal(props) {
         }
       });
       //댓글 삭제
-    } else if (props.type === "Reple") {
+    } else if (props.modalType === "reple") {
       console.log("props", props.RepleInfo);
       let body = {
         postNum: props.RepleInfo.postNum,
         repleId: props.RepleInfo._id,
         rerepleNum: props.RepleInfo.rerepleNum,
+        type: props.type,
       };
-      console.log("body", body);
-      axios.post("/api/community/repleDelete", body).then((response) => {
+
+      axios.post("/api/util/repleDelete", body).then((response) => {
         if (response.data.success) {
           alert("댓글 삭제 성공");
           window.location.reload();
@@ -42,13 +43,14 @@ function DeleteModal(props) {
         }
       });
       //대댓글 삭제
-    } else {
+    } else if (props.modalType === "rereple") {
       let body = {
         repleId: props.reple._id,
         rerepleId: props.rereple._id,
+        type: props.type,
       };
-      console.log(body);
-      axios.post("/api/community/rerepleDelete", body).then((response) => {
+
+      axios.post("/api/util/rerepleDelete", body).then((response) => {
         if (response.data.success) {
           alert("댓글 삭제 성공");
           window.location.reload();

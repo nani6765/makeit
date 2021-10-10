@@ -11,7 +11,7 @@ function GuestModal(props) {
   let history = useHistory();
 
   const ModalStyle = () => {
-    if (props.type === "post") {
+    if (props.modalType === "post") {
       return null;
     } else if (props.type === "reple") {
       return { justifyContent: "space-around" };
@@ -21,7 +21,7 @@ function GuestModal(props) {
   };
 
   const OtherUid = () => {
-    if (props.type === "post") {
+    if (props.modalType === "post") {
       return props.postInfo.auther.uid;
     } else if (props.type === "reple") {
       return props.repleInfo.auther.uid;

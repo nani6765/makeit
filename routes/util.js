@@ -144,8 +144,6 @@ router.post("/repleSubmit", (req, res) => {
   let PostModel = SelectPostModel(req.body.type);
   let RepleModel = SelectRepleModel(req.body.type);
 
-  console.log(req.body.type);
-
   User.findOne({ uid: req.body.uid })
     .exec()
     .then((userInfo) => {
@@ -278,7 +276,7 @@ router.post("/repleLike", (req, res) => {
 
 router.post("/rerepleGetAuther", (req, res) => {
   let RerepleModel = SelectRerepleModel(req.body.type);
-  console.log(req.body);
+
   RerepleModel.findOne({ _id: req.body.id })
     .populate("auther")
     .exec((err, rerepleInfo) => {

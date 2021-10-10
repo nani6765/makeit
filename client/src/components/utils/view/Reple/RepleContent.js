@@ -96,13 +96,15 @@ function RepleContent(props) {
                       repleInfo={Reple}
                       setUpdateCheck={setUpdateCheck}
                       setrerepleUpload={setrerepleUpload}
-                      type="reple"
+                      modalType="reple"
+                      type={props.type}
                     />
                   ) : (
                     <GuestModal
                       setrerepleUpload={setrerepleUpload}
                       repleInfo={Reple}
-                      type="reple"
+                      modalType="reple"
+                      type={props.type}
                     />
                   ))}
               </div>

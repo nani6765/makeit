@@ -118,10 +118,15 @@ function RerepleContent(props) {
                   reple={reple}
                   rereple={rereple}
                   setUpdateCheck={setUpdateCheck}
-                  type="rereple"
+                  modalType="rereple"
+                  type={props.type}
                 />
               ) : (
-                <GuestModal rereple={rereple} type="rereple" />
+                <GuestModal
+                  rereple={rereple}
+                  modalType="rereple"
+                  type={props.type}
+                />
               ))}
           </div>
         ) : null}

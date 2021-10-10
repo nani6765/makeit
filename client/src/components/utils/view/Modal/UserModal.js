@@ -15,7 +15,7 @@ function UserModal(props) {
   const [RerepleInfo, setRerepleInfo] = useState(props.rerepleInfo || "");
 
   function EditHandler() {
-    if (props.type === "post") {
+    if (props.modalType === "post") {
       history.push({
         pathname: "/community/update/" + PostInfo.postNum,
         state: { postInfo: PostInfo },
@@ -26,20 +26,22 @@ function UserModal(props) {
   }
 
   function DeleteHandler() {
-    if (props.type === "post") {
+    if (props.modalType === "post") {
       return (
         <DeleteModal
           PostInfo={PostInfo}
           setModalFlag={setModalFlag}
-          type="post"
+          modalType="post"
+          type={props.type}
         />
       );
-    } else if (props.type === "reple") {
+    } else if (props.modalType === "reple") {
       return (
         <DeleteModal
           RepleInfo={RepleInfo}
           setModalFlag={setModalFlag}
-          type="Reple"
+          modalType="reple"
+          type={props.type}
         />
       );
     } else {
@@ -48,7 +50,8 @@ function UserModal(props) {
           reple={props.reple}
           rereple={props.rereple}
           setModalFlag={setModalFlag}
-          type="rereple"
+          modalType="rereple"
+          type={props.type}
         />
       );
     }
