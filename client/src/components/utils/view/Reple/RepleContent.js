@@ -33,10 +33,6 @@ function RepleContent(props) {
     }
   }, [likeFlag]);
 
-  useEffect(() => {
-    console.log("RepleContent");
-  }, []);
-
   function LikeHandler() {
     if (Reple.auther.uid === user.userData.uid) {
       return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");

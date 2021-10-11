@@ -10,7 +10,7 @@ const { Alarm } = require("../model/Alarm.js");
 
 const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
-const setRealTime = require("../module/multer/realTime.js");
+
 var moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");

@@ -1,5 +1,6 @@
 var router = require("express").Router();
 const { Community } = require("../model/CoPost.js");
+const { ShareVideo } = require("../model/Making.js");
 
 //MainPage
 router.post("/community", (req, res) => {
@@ -18,6 +19,17 @@ router.post("/community", (req, res) => {
     .exec((err, postInfo) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, postInfo });
+    });
+});
+
+router.post("/friendVideo", (req, res) => {
+  ShareVideo.find()
+    .populate("auther")
+    .sort(req.body.sort)
+    .limit(5)
+    .exec((err, Videos) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, Videos });
     });
 });
 

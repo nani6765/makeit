@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.1c285555.chunk.css",
-    "main.js": "/static/js/main.1ab2b180.chunk.js",
-    "main.js.map": "/static/js/main.1ab2b180.chunk.js.map",
+    "main.js": "/static/js/main.38bd795e.chunk.js",
+    "main.js.map": "/static/js/main.38bd795e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7bd86089.js",
     "runtime-main.js.map": "/static/js/runtime-main.7bd86089.js.map",
     "static/css/2.67353026.chunk.css": "/static/css/2.67353026.chunk.css",
-    "static/js/2.1c28d386.chunk.js": "/static/js/2.1c28d386.chunk.js",
-    "static/js/2.1c28d386.chunk.js.map": "/static/js/2.1c28d386.chunk.js.map",
+    "static/js/2.f563b6cf.chunk.js": "/static/js/2.f563b6cf.chunk.js",
+    "static/js/2.f563b6cf.chunk.js.map": "/static/js/2.f563b6cf.chunk.js.map",
     "static/js/3.566d503f.chunk.js": "/static/js/3.566d503f.chunk.js",
     "static/js/3.566d503f.chunk.js.map": "/static/js/3.566d503f.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.67353026.chunk.css.map": "/static/css/2.67353026.chunk.css.map",
     "static/css/main.1c285555.chunk.css.map": "/static/css/main.1c285555.chunk.css.map",
-    "static/js/2.1c28d386.chunk.js.LICENSE.txt": "/static/js/2.1c28d386.chunk.js.LICENSE.txt",
+    "static/js/2.f563b6cf.chunk.js.LICENSE.txt": "/static/js/2.f563b6cf.chunk.js.LICENSE.txt",
     "static/media/Bell.7b6ec945.svg": "/static/media/Bell.7b6ec945.svg",
     "static/media/Bell_pin.936616c4.svg": "/static/media/Bell_pin.936616c4.svg",
     "static/media/CommentGray.5ab4c6c0.svg": "/static/media/CommentGray.5ab4c6c0.svg",
@@ -26,7 +26,6 @@
     "static/media/Surprising.1471c633.svg": "/static/media/Surprising.1471c633.svg",
     "static/media/comment.7b55ccf5.svg": "/static/media/comment.7b55ccf5.svg",
     "static/media/like.69973a04.svg": "/static/media/like.69973a04.svg",
-    "static/media/sample.11c47648.png": "/static/media/sample.11c47648.png",
     "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf",
     "static/media/건의게시판.fa706cc4.svg": "/static/media/건의게시판.fa706cc4.svg",
     "static/media/자유게시판.3f13db38.svg": "/static/media/자유게시판.3f13db38.svg",
@@ -37,8 +36,8 @@
   "entrypoints": [
     "static/js/runtime-main.7bd86089.js",
     "static/css/2.67353026.chunk.css",
-    "static/js/2.1c28d386.chunk.js",
+    "static/js/2.f563b6cf.chunk.js",
     "static/css/main.1c285555.chunk.css",
-    "static/js/main.1ab2b180.chunk.js"
+    "static/js/main.38bd795e.chunk.js"
   ]
 }

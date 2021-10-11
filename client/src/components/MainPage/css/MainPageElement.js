@@ -146,6 +146,59 @@ function MainPageGridContent(parameter) {
   return MainPageGridContent;
 }
 
+const CardImg = styled.article`
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  margin-left: 10px;
+  maragin-right: 10px;
+  width: 500px;
+  min-width: 500px;
+  height: 281.25px;
+  min-height: 281.25px;
+  position: relative;
+  clear: both;
+  overflow: hidden;
+  z-index: 1;
+  filter: drop-shadow(0px 3px 6px rgba(75, 81, 91, 0.15)),
+    drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));
+  border-radius: 10px;
+  .thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+  ${mq[1]} {
+    width: 100%;
+    min-width: 80vw;
+    height: 281.25px;
+    min-height: 281.25px;
+    padding-left: 10px;
+    .thumbnail {
+      width: 100%;
+      height: 100%;
+    }
+  }
+`;
+
+const PlayButtonCSS = css`
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+  top: calc(50% - 50px);
+  top: -webkit-calc(50% - 50px);
+  top: -moz-calc(50% - 50px);
+  top: -o-calc(50% - 50px);
+  left: calc(50% - 50px);
+  left: -webkit-calc(50% - 50px);
+  left: -moz-calc(50% - 50px);
+  left: -o-calc(50% - 50px);
+  bottom: 0;
+  right: 0;
+  text-align: center;
+`;
+
 export {
   MainPageDiv,
   MainPageHading,
@@ -155,4 +208,6 @@ export {
   MainPageGridNext,
   MainPageGridPrevAndNext,
   MainPageGridContent,
+  CardImg,
+  PlayButtonCSS,
 };
