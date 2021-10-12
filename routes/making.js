@@ -457,6 +457,7 @@ router.post("/shareVideo", (req, res) => {
 
 router.post("/shareVideo/submit", (req, res) => {
   let temp = req.body;
+  temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
   User.findOne({ uid: temp.uid })
     .exec()
     .then((userinfo) => {

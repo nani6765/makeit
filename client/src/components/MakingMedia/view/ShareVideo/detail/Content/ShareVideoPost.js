@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
 
@@ -12,9 +12,14 @@ import { ReactComponent as LPIcon } from "../../../../css/Img/LikePurple.svg";
 
 function ShareVideoPost(props) {
   const [likeFlag, setlikeFlag] = useState(false);
+  const [hambucControl, sethambucControl] = useState(false);
 
   const user = useSelector((state) => state.user);
   let history = useHistory();
+
+  const innerRef = useOuterClick((e) => {
+    sethambucControl(false);
+  });
 
   useEffect(() => {
     if (user.userData && props.PostInfo.likeArray.includes(user.userData.uid)) {
@@ -62,6 +67,11 @@ function ShareVideoPost(props) {
       }
     });
   };
+
+  useEffect(() => {
+    console.log(props.PostInfo);
+  }, []);
+
   return (
     <>
       <DetailDiv>
@@ -79,6 +89,24 @@ function ShareVideoPost(props) {
         <div className="date">
           <p>{props.PostInfo.realTime}</p>
         </div>
+        {user.userData && (
+          <div
+            className="hambuc"
+            onClick={() => sethambucControl(true)}
+            ref={innerRef}
+          >
+            <i
+              className="bi bi-three-dots"
+              onClick={() => sethambucControl(true)}
+            ></i>
+            {hambucControl &&
+              (user.userData.uid === props.PostInfo.auther.uid ? (
+                <p>UserModal</p>
+              ) : (
+                <p>GuestModal</p>
+              ))}
+          </div>
+        )}
         <div className="title">
           <p>{props.PostInfo.oneLineIntroduce}</p>
         </div>
@@ -108,6 +136,27 @@ function ShareVideoPost(props) {
       </DetailDiv>
     </>
   );
+}
+
+function useOuterClick(callback) {
+  const callbackRef = useRef();
+  const innerRef = useRef();
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e) {
+      if (
+        innerRef.current &&
+        callbackRef.current &&
+        !innerRef.current.contains(e.target)
+      )
+        callbackRef.current(e);
+    }
+  }, []);
+  return innerRef;
 }
 
 export default withRouter(ShareVideoPost);

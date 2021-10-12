@@ -18,14 +18,14 @@ const DetailDiv = styled.div`
   padding: 30px;
   display: grid;
   grid-template-columns: 50px auto 1fr auto;
-  grid-template-rows: 50px auto 1fr auto auto;
+  grid-template-rows: 25px 25px auto 1fr auto auto;
   grid-template-areas:
-    "avatar author . date"
+    "avatar author . hambuc"
+    "avatar date . ."
     "title title title title"
     "video video video video"
     "desc desc desc desc"
     ". . . like";
-  grid-gap: 0.5rem;
   ${mq[1]} {
     width: 90%;
     padding: 20px;
@@ -41,8 +41,9 @@ const DetailDiv = styled.div`
     grid-area: author;
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin-left: 1rem;
     p {
       font-weight: bold;
       margin-bottom: 0px;
@@ -52,16 +53,27 @@ const DetailDiv = styled.div`
     grid-area: date;
     display: flex;
     align-content: center;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    margin-left: 1rem;
     p {
       margin-bottom: 0px;
     }
+  }
+  .hambuc {
+    grid-area: hambuc;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: #c4c4c4;
+    position: relative;
   }
   .title {
     grid-area: title;
     font-weight: bold;
     font-size: 24px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     p {
       margin-bottom: 0px;
     }
@@ -87,6 +99,8 @@ const DetailDiv = styled.div`
   .desc {
     margin-top: 1rem;
     grid-area: desc;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   .like {
     grid-area: like;

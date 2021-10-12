@@ -378,7 +378,10 @@ const ShareVideoSchema = mongoose.Schema(
     videoUrl: {
       type: String,
     },
-
+    realTime: {
+      type: String,
+      default: realTime(),
+    },
     //post속성
     url: {
       type: Number,

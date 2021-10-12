@@ -71,7 +71,7 @@ function PostDetailContent(props) {
             />
           </div>
           <p className="author">{postInfo.auther.displayName}</p>
-          {user.userData ? (
+          {user.userData && (
             <div
               className="hambuc"
               onClick={() => sethambucControl(true)}
@@ -92,7 +92,7 @@ function PostDetailContent(props) {
                   />
                 ))}
             </div>
-          ) : null}
+          )}
           <p className="date">{postInfo.realTime}</p>
           <p className="title">{postInfo.title}</p>
           <p className="desc">{postInfo.content}</p>
