@@ -14,9 +14,9 @@ function RequestDetailFilter(props) {
       <div className="filterContent halfLine">{props.PostInfo.category}</div>
       <p className="filterTitle">• 측정예산</p>
       <div className="price">
-        <div className="filterContent">{props.PostInfo.minPrice}</div>
+        <div className="filterContent">{props.PostInfo.minPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
         <p>원 ~</p>
-        <div className="filterContent">{props.PostInfo.maxPrice}</div>
+        <div className="filterContent">{props.PostInfo.maxPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
         <p>원</p>
       </div>
       <p className="filterTitle">• 마감기한</p>

@@ -35,6 +35,7 @@ import ProducerDetail from "./components/MakingMedia/view/FindingProducer/detail
 import FindingProducerEdit from "./components/MakingMedia/view/FindingProducer/upload/FindingProducerEdit.js";
 
 import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoUpload.js";
+import RequestVideoEdit from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoEdit.js";
 import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
 import QuotationUpload from "./components/MakingMedia/view/RequestVideo/upload/QuotationUpload.js";
 
@@ -100,6 +101,11 @@ function App() {
             exact
             path="/Making/RequestUpload"
             component={RequestVideoUpload}
+          />
+          <Route
+            exact
+            path="/Making/RequestEdit"
+            component={RequestVideoEdit}
           />
           <Route
             exact

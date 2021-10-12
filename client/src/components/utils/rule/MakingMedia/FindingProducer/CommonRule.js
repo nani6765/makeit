@@ -4,10 +4,25 @@ import React from "react";
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const breakpoints = [1200, 576];
-const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-function CommonRule() {
+function CommonRule() {  
+  const Content = styled.div`
+  text-align: left;
+  word-break: keep-all;
+  ul {
+    list-style: none;
+    padding-left: 0px;
+    li {
+      &.title {
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+    }
+    &.list {
+      padding-left: 1rem;
+    }
+  }
+  `;
   return (
     <Content>
       <ul>
@@ -62,22 +77,6 @@ function CommonRule() {
   );
 }
 
+
 export default CommonRule;
 
-const Content = styled.div`
-  text-align: left;
-  word-break: keep-all;
-  ul {
-    list-style: none;
-    padding-left: 0px;
-    li {
-      &.title {
-        font-weight: bold;
-        margin-top: 1rem;
-      }
-    }
-    &.list {
-      padding-left: 1rem;
-    }
-  }
-`;

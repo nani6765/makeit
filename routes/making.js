@@ -365,6 +365,22 @@ router.post("/requestVideo/reqPostSubmit", (req, res) => {
     })
     .catch((err) => {
       console.log("reqPostSubmit Error: ", err);
+      return res.json({ success: false, err });
+    });
+});
+
+router.post("/requestVideo/reqPostEdit", (req, res) => {
+  let temp = req.body;
+
+    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+    RequestPost.findOneAndUpdate({url: temp.url}, temp)
+    .exec()
+    .then((response) => {
+      return res.status(200).send({success: true});
+    })
+    .catch((err) => {
+      console.log("reqPostEdit Error: ", err);
+      return res.json({ success: false, err });
     });
 });
 
@@ -454,6 +470,17 @@ router.post("/shareVideo", (req, res) => {
       return res.json({ success: false, err });
     });
 });
+
+router.post("/shareVideo/getPageLen", (req, res) => {
+  ShareVideo.count({})
+  .exec()
+  .then((len) => {
+    return res.status(200).send({success: true, len: len});
+  })
+  .catch((err) => {
+    return res.status(400).json({ success: false, err });
+  });
+})
 
 router.post("/shareVideo/submit", (req, res) => {
   let temp = req.body;

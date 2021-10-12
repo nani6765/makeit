@@ -66,7 +66,7 @@ function FriendsVideo() {
       <MainPageDiv>
         <p css={MainPageHading}>
           프렌즈가 참여한 영상들
-          <Link to="/Making">더보기 &gt;</Link>
+          <Link to={{pathname:"/Making", state: {menu: "제작 영상 알리기"}}}>더보기 &gt;</Link>
         </p>
         <p css={MainPageSubHading}>
           프렌즈가 촬영, 제작, 배우로 참석한 영상이 올라오고 있어요.

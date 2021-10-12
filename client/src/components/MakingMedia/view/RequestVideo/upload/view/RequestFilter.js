@@ -26,8 +26,7 @@ function RequestFilter(props) {
         <Select
           className="categoryList"
           options={options}
-          defaultValue={options[0]}
-          placeholder="카테고리"
+          placeholder={props.Category}
           blurInputOnSelect="true"
           menuShouldBlockScroll="true"
           onChange={(e) => props.setCategory(e.value)}
@@ -39,6 +38,7 @@ function RequestFilter(props) {
           type="number"
           min="0"
           name="minPrice"
+          value={props.MinPrice}
           onChange={(e) => props.setMinPrice(e.currentTarget.value)}
         />
         <p>원 ~ </p>
@@ -46,6 +46,7 @@ function RequestFilter(props) {
           type="number"
           min={props.MinPrice}
           name="maxPrice"
+          value={props.MaxPrice}
           onChange={(e) => props.setMaxPrice(e.currentTarget.value)}
         />
         <p>원</p>

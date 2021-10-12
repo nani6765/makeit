@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
-import PostModal from "./Modal/PostModal.js";
 import RequestDetailFilter from "./RequestDetailFilter.js";
 import { DetailContentDiv } from "../../../../css/RVDCSS.js";
 
@@ -16,6 +16,13 @@ function RequestDatailContent(props) {
       <p className="path">
         홈 &gt; 영상제작 &gt; 의뢰하기 &gt; {props.PostInfo.category}
       </p>
+      {
+        props.PostInfo.uid === props.user.uid && (
+          <Link to={{pathname: "/making/requestEdit", state: {postInfo: props.PostInfo}}}>
+            <button>수정하기</button>
+          </Link>
+        )
+      }
       <div className="container">
         <div className="profile">
           <Avatar
@@ -38,9 +45,6 @@ function RequestDatailContent(props) {
                   className="bi bi-three-dots"
                   onClick={() => setModalFlag(!ModalFlag)}
                 ></i>
-                {ModalFlag && (
-                  <PostModal _id={props.PostInfo._id} type="post" />
-                )}
               </div>
             )
           : null}
