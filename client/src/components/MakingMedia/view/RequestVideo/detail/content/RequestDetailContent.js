@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import Avatar from "react-avatar";
 import RequestDetailFilter from "./RequestDetailFilter.js";
 import { DetailContentDiv } from "../../../../css/RVDCSS.js";
 
 function RequestDatailContent(props) {
   const [ModalFlag, setModalFlag] = useState(false);
+  const user = useSelector((state) => state.user.userData);
 
   const innerRef = useOuterClick((e) => {
     setModalFlag(false);
@@ -16,13 +19,20 @@ function RequestDatailContent(props) {
       <p className="path">
         홈 &gt; 영상제작 &gt; 의뢰하기 &gt; {props.PostInfo.category}
       </p>
-      {
-        props.PostInfo.uid === props.user.uid && (
-          <Link to={{pathname: "/making/requestEdit", state: {postInfo: props.PostInfo}}}>
-            <button>수정하기</button>
-          </Link>
-        )
-      }
+
+      {user != null
+        ? props.PostInfo.uid === user.uid && (
+            <Link
+              to={{
+                pathname: "/making/requestEdit",
+                state: { postInfo: props.PostInfo },
+              }}
+            >
+              <button>수정하기</button>
+            </Link>
+          )
+        : null}
+
       <div className="container">
         <div className="profile">
           <Avatar
@@ -38,8 +48,8 @@ function RequestDatailContent(props) {
             <p>{props.PostInfo.realTime}</p>
           </div>
         </div>
-        {props.user
-          ? props.user.uid === props.PostInfo.uid && (
+        {user
+          ? user.uid === props.PostInfo.uid && (
               <div className="hambuc" ref={innerRef}>
                 <i
                   className="bi bi-three-dots"
