@@ -1,5 +1,5 @@
 import React from "react";
-import Rule from "../../../../utils/Rule/MakingMedia/FindingProducer/CommonRule.js";
+import CommonRule from "../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js"
 
 import { DetailFilterDiv, DetaulContentSubTitle } from "../../../css/FPDCSS.js";
 
@@ -27,7 +27,7 @@ function ProducerContentDetail(props) {
 
             <div id="edit" style={{ paddingTop: "1rem" }}>
               <DetaulContentSubTitle>수정/환불 안내</DetaulContentSubTitle>
-              <Rule />
+              <CommonRule />
             </div>
 
             {props.PostInfo.FAQList.length > 0 && (

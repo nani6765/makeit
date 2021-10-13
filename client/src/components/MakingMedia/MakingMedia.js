@@ -6,7 +6,7 @@ import RequestVideo from "./view/RequestVideo/RequestVideo.js";
 import ShareVideo from "./view/ShareVideo/ShareVideo";
 import { MakingDiv, DescriptionDiv } from "./css/CommonCSS.js";
 
-function MakingMedia() {
+function MakingMedia(props) {
   const user = useSelector((state) => state.user.userData);
 
   const [Menu, setMenu] = useState("영상 제작자 탐색");
@@ -59,6 +59,12 @@ function MakingMedia() {
         break;
     }
   };
+
+  useEffect(() => {
+    if(props.history.location.state !== undefined) {
+      setMenu(props.history.location.state.menu);
+    }
+  }, []);
 
   return (
     <>

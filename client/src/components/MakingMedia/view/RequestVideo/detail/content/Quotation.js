@@ -34,6 +34,12 @@ function Quotation(props) {
       <QuotationInfo>
         <Slider {...settings} className="quotationList">
           {props.QuotationArr.map((quotation, idx) => {
+            if(quotation.isPublic) {
+              if (props.auther !== props.user.uid) {
+                console.log("ispulic", quotation.oneLineIntroduce);
+                return null;
+              }
+            }
             return (
               <InfoDiv
                 key={idx}

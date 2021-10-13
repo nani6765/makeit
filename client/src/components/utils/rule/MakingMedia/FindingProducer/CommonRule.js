@@ -77,4 +77,5 @@ function CommonRule() {
   );
 }
 
+
 export default CommonRule;

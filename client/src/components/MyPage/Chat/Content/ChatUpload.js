@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import firebase from "../../../../config/firebase.js";
+import firebase  from "../../../../config/firebase.js";
 import { useSelector } from "react-redux";
 import TextareaAutosize from "react-textarea-autosize";
 import { useHistory } from "react-router-dom";

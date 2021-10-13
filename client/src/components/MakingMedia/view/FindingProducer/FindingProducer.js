@@ -29,6 +29,7 @@ function FindingProducer(props) {
 
   useEffect(() => {
     getPageLen();
+    setSkip(0);
   }, [SubCategory]);
 
   useEffect(() => {
@@ -40,13 +41,17 @@ function FindingProducer(props) {
     setPageIdxArr(temp);
   }, [parseInt(Skip / 120)]);
 
+  useEffect(() => {
+    setSkip(0);
+  }, [Sort]);
+
   return (
     <ProducerListDiv>
       <div className="left">
         <StickyBar
           Menu={props.Menu}
           SubCategory={SubCategory}
-          setSubCategory={props.setSubCategory}
+          setSubCategory={setSubCategory}
           SubCategoryList={props.SubCategoryList}
         />
       </div>

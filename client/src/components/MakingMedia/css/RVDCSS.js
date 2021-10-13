@@ -64,6 +64,11 @@ const QuotationInfo = styled.div`
     .slick-list {
       padding-bottom: 30px;
     }
+    .slick-track {
+      margin: 0px;
+      min-width: 100%;
+      width: 100%;
+    }
   }
   .btnDiv {
     display: flex;

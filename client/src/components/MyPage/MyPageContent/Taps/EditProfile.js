@@ -6,7 +6,7 @@ import Avatar from "react-avatar";
 import { EditProfileDiv, LoadingDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
 import axios from "axios";
-import firebase from "../../../../config/firebase";
+import firebase from "../../../../config/firebase.js";
 
 function EditProfile(props) {
   const user = useSelector((state) => state.user);
