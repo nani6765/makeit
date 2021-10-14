@@ -17,6 +17,7 @@ const {
   ShareVideoRereple,
 } = require("../model/Making.js");
 
+const { Reple, Rereple } = require("../model/Reple.js");
 /*
 const { Counter } = require("../model/Counter.js");
 const { Chat } = require("../model/Chat.js");
@@ -74,7 +75,8 @@ const SelectRepleModel = (types) => {
   }
 };
 
-const SelectRerepleModel = (types) => {
+const SelectRerepleModel = (types, SecondType = "") => {
+  console.log(SecondType);
   switch (types) {
     case "Community":
       return CommunityRereple;
@@ -139,18 +141,16 @@ router.post("/like", (req, res) => {
 /////////////////////////////
 
 router.post("/getReple", (req, res) => {
-  let RepleModel = SelectRepleModel(req.body.type);
-
   let filter = {};
-  filter.postNum = req.body.postNum;
+  filter.postId = req.body.postId;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let limit = req.body.limit ? parseInt(req.body.limit) : 5;
   let sort = {};
   sort.createdAt = 1;
-  RepleModel.find(filter)
+  Reple.find(filter)
     .exec()
     .then((totalReple) => {
-      RepleModel.find(filter)
+      Reple.find(filter)
         .populate("auther")
         .populate("rerepleArray")
         .sort(sort)
@@ -174,22 +174,23 @@ router.post("/getReple", (req, res) => {
 router.post("/repleSubmit", (req, res) => {
   let reple = {
     uid: req.body.uid,
-    postNum: req.body.postNum,
+    postId: req.body.postId,
     content: req.body.content,
+    postNum: req.body.postNum,
   };
 
   let PostModel = SelectPostModel(req.body.type);
-  let RepleModel = SelectRepleModel(req.body.type);
+  //let RepleModel = SelectRepleModel(req.body.type, req.body.stype);
 
   User.findOne({ uid: req.body.uid })
     .exec()
     .then((userInfo) => {
       reple.auther = userInfo._id;
       reple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-      const Reple = new RepleModel(reple);
-      Reple.save(() => {
+      const NewReple = new Reple(reple);
+      NewReple.save(() => {
         PostModel.findOneAndUpdate(
-          { postNum: req.body.postNum },
+          { _id: req.body.postId },
           { $inc: { repleNum: 1 } }
         )
           .exec()
@@ -317,7 +318,6 @@ router.post("/rerepleGetAuther", (req, res) => {
   RerepleModel.findOne({ _id: req.body.id })
     .populate("auther")
     .exec((err, rerepleInfo) => {
-      console.log(rerepleInfo);
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).json({ success: true, rerepleInfo });
     });

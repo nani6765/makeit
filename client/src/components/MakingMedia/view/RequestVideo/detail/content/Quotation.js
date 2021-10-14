@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import Slider from "react-slick";
@@ -13,6 +15,7 @@ import {
 
 function Quotation(props) {
   const [QTIdx, setQTIdx] = useState(-1);
+  const user = useSelector((state) => state.user.userData);
 
   var settings = {
     dots: false,
@@ -34,10 +37,12 @@ function Quotation(props) {
       <QuotationInfo>
         <Slider {...settings} className="quotationList">
           {props.QuotationArr.map((quotation, idx) => {
-            if(quotation.isPublic) {
-              if (props.auther !== props.user.uid) {
-                console.log("ispulic", quotation.oneLineIntroduce);
-                return null;
+            if (quotation.isPublic) {
+              if (user != null) {
+                if (props.auther !== user.uid) {
+                  console.log("ispulic", quotation.oneLineIntroduce);
+                  return null;
+                }
               }
             }
             return (
@@ -113,19 +118,21 @@ function Quotation(props) {
             </div>
           </QuotationDetailDiv>
         )}
-        {props.user.uid !== props.auther && (
-          <div className="btnDiv">
-            <Link
-              to={{
-                pathname: "/making/quotationUpload",
-                state: { url: props.url },
-              }}
-              css={LinkCSS}
-            >
-              <button>우리도 견적 등록하기</button>
-            </Link>
-          </div>
-        )}
+        {user != null
+          ? user.uid !== props.auther && (
+              <div className="btnDiv">
+                <Link
+                  to={{
+                    pathname: "/making/quotationUpload",
+                    state: { url: props.url },
+                  }}
+                  css={LinkCSS}
+                >
+                  <button>우리도 견적 등록하기</button>
+                </Link>
+              </div>
+            )
+          : null}
       </QuotationInfo>
     </QuotationDiv>
   );

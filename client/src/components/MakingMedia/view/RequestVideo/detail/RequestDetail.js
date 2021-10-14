@@ -58,10 +58,9 @@ function RequestDetail(props) {
       <DetailDiv>
         {PostInfo.url !== undefined && (
           <>
-            <RequestDetailContent PostInfo={PostInfo} user={user} />
+            <RequestDetailContent PostInfo={PostInfo} />
             {QuotationArr.length > 0 ? (
               <Quotation
-                user={user}
                 QuotationArr={QuotationArr}
                 url={PostInfo.url}
                 auther={PostInfo.auther.uid}

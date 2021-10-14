@@ -14,7 +14,7 @@ function CommonRule() {
       li {
         &.title {
           font-weight: bold;
-          margin-top: 1rem;
+          margin-top: 1rem;65
         }
       }
       &.list {
@@ -76,6 +76,5 @@ function CommonRule() {
     </Content>
   );
 }
-
 
 export default CommonRule;

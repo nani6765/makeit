@@ -69,7 +69,7 @@ const coPostSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "coPosts",
+    collection: "community",
   }
 );
 

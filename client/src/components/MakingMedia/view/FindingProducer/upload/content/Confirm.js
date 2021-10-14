@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
-import CommonRule from "../../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
+import CommonRule from "../../../../../utils/Rule/MakingMedia/FindingProducer/CommonRule.js";
 import FAQ from "../utils/FAQ.js";
 import { ConfirmDiv } from "../../../../css/FPUCSS.js";
 
