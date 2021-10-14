@@ -28,7 +28,7 @@ function DeleteModal(props) {
     } else if (props.modalType === "reple") {
       console.log("props", props.RepleInfo);
       let body = {
-        postNum: props.RepleInfo.postNum,
+        postId: props.RepleInfo.postId,
         repleId: props.RepleInfo._id,
         rerepleNum: props.RepleInfo.rerepleNum,
         type: props.type,

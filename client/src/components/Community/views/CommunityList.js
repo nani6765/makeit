@@ -63,9 +63,9 @@ function CommunityList() {
           <img src="./Img/CommunityBanner.png" alt="" />
         </div>
         <GNBArea setGNB={setGNB} />
+        <BodyHeader GNB={GNB} SortPost={SortPost} setSortPost={setSortPost} />
       </CommunityHeader>
       <CommunityBody>
-        <BodyHeader GNB={GNB} SortPost={SortPost} setSortPost={setSortPost} />
         <PostListArea PostList={PostList} getPostList={getPostList} />
         <BodyFooter />
       </CommunityBody>

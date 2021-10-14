@@ -70,6 +70,9 @@ const RerepleSchema = mongoose.Schema(
     uid: {
       type: String,
     },
+    postId: {
+      type: Schema.Types.ObjectId,
+    },
     content: {
       type: String,
     },
@@ -87,9 +90,6 @@ const RerepleSchema = mongoose.Schema(
     },
     likeArray: {
       type: Array,
-    },
-    postNum: {
-      type: Number,
     },
   },
   {

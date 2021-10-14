@@ -7,7 +7,7 @@ function BodyHeader(props) {
   return (
     <BodyHeaderDiv>
       <div>
-        <h1>{props.GNB}</h1>
+        <p className="category">{props.GNB}</p>
         <p>
           <span
             className={props.SortPost === "new" ? "activate" : undefined}
@@ -18,7 +18,6 @@ function BodyHeader(props) {
           >
             최신순
           </span>
-          <span className="divider">|</span>
           <span
             className={props.SortPost === "hot" ? "activate" : undefined}
             onClick={() => {

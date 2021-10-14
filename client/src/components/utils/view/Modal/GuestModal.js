@@ -13,7 +13,7 @@ function GuestModal(props) {
   const ModalStyle = () => {
     if (props.modalType === "post") {
       return null;
-    } else if (props.type === "reple") {
+    } else if (props.modalType === "reple") {
       return { justifyContent: "space-around" };
     } else {
       return { minHeight: "50px", display: "flex", justifyContent: "center" };
@@ -23,7 +23,7 @@ function GuestModal(props) {
   const OtherUid = () => {
     if (props.modalType === "post") {
       return props.postInfo.auther.uid;
-    } else if (props.type === "reple") {
+    } else if (props.modalType === "reple") {
       return props.repleInfo.auther.uid;
     } else {
       return props.rerepleInfo.auther.uid;
@@ -54,7 +54,7 @@ function GuestModal(props) {
           쪽지 보내기
         </button>
       </div>
-      {props.type === "reple" && (
+      {props.modalType === "reple" && (
         <div>
           <button className="edit" onClick={() => props.setrerepleUpload(true)}>
             <i className="bi bi-chat-right"></i>대댓글 달기

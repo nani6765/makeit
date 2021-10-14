@@ -48,10 +48,10 @@ function RerepleContent(props) {
       likeFlag: likeFlag,
       userId: user.userData.uid,
       rerepleId: rereple._id,
-      type: props.type,
+      type: "Rereple",
     };
 
-    axios.post("/api/util/rerepleLike", body).then((response) => {
+    axios.post("/api/util/like", body).then((response) => {
       if (response.data.success) {
         target.style.disable = "false";
         window.location.reload();

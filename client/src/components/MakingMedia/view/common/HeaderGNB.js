@@ -1,12 +1,28 @@
 import React from "react";
+import { ReactComponent as FindingProducer } from "../../css/Img/제작자탐색.svg";
+import { ReactComponent as RequestVideo } from "../../css/Img/의뢰하기.svg";
+import { ReactComponent as ShareVideo } from "../../css/Img/영상알리기.svg";
+import { ReactComponent as MakeitPay } from "../../css/Img/메이킷페이.svg";
 import { MenuList, MenuItem } from "../../css/CommonCSS.js";
 
 function HeaderGNB(props) {
   const GNBList = [
-    "영상 제작자 탐색",
-    "영상 의뢰하기",
-    "제작 영상 알리기",
-    "메이킷 페이 안내",
+    {
+      label: "영상 제작자 탐색",
+      icon: <FindingProducer />
+    },
+    {
+      label: "영상 의뢰하기",
+      icon: <RequestVideo />
+    },
+    {
+      label: "제작 영상 알리기",
+      icon: <ShareVideo />
+    },
+    {
+      label: "메이킷 페이 안내",
+      icon: <MakeitPay />
+    },
   ];
 
   return (
@@ -16,10 +32,10 @@ function HeaderGNB(props) {
           return (
             <MenuItem
               key={idx}
-              className={GNB === props.Menu ? "active" : null}
-              onClick={() => props.setMenu(GNB)}
+              onClick={() => props.setMenu(GNB.label)}
             >
-              {GNB}
+              {GNB.icon}
+              <p>{GNB.label}</p>
             </MenuItem>
           );
         })}

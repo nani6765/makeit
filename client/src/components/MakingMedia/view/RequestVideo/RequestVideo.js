@@ -46,7 +46,7 @@ function RequestVideo(props) {
         <StickyBar
           Menu={props.Menu}
           SubCategory={SubCategory}
-          setSubCategory={props.setSubCategory}
+          setSubCategory={setSubCategory}
           SubCategoryList={props.SubCategoryList}
         />
       </div>

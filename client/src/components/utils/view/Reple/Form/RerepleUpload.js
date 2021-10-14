@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "react-avatar";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -9,10 +9,6 @@ function RerepleUpload(props) {
   const [content, setContent] = useState("");
   const user = useSelector((state) => state.user);
 
-  useEffect(() => {
-    console.log("??", props);
-  }, []);
-
   const submitHandler = (e) => {
     e.preventDefault();
     if (!content) {
@@ -20,12 +16,12 @@ function RerepleUpload(props) {
     }
     const body = {
       uid: user.userData.uid,
-      repleInfo: props.Reple,
+      repleId: props.Reple._id,
       content: content,
-      postNum: props.Reple.postNum,
+      postNum: props.Reple.PostNum,
+      postId: props.Reple.postId,
       type: props.type,
     };
-    console.log("rereple", body);
 
     axios.post("/api/util/rerepleSubmit", body).then((response) => {
       if (response.data.success) {
