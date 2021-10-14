@@ -8,72 +8,7 @@ function realTime() {
   return moment().format("YY-MM-DD[ ]HH:mm");
 }
 
-const coPostSchema = mongoose.Schema(
-  {
-    //쓰니정보
-    auther: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    uid: {
-      type: String,
-    },
-    email: {
-      type: String,
-    },
-    //글정보
-    title: {
-      type: String,
-    },
-    content: {
-      type: String,
-    },
-    images: {
-      type: Array,
-      default: [],
-    },
-    realTime: {
-      type: String,
-      default: realTime(),
-    },
-    edit: {
-      type: Boolean,
-      default: false,
-    },
-    //post속성
-    views: {
-      type: Number,
-      default: 0,
-    },
-    repleNum: {
-      type: Number,
-      default: 0,
-    },
-    likeNum: {
-      type: Number,
-      default: 0,
-    },
-    likeArray: {
-      type: Array,
-    },
-    postNum: {
-      type: Number,
-      //unique: true,
-    },
-    //필터
-    category: {
-      type: String,
-      default: 0,
-    },
-  },
-  {
-    timestamps: true,
-    collection: "community",
-  }
-);
-
-const coRepleSchema = mongoose.Schema(
+const RepleSchema = mongoose.Schema(
   {
     auther: {
       type: Schema.Types.ObjectId,
@@ -82,8 +17,8 @@ const coRepleSchema = mongoose.Schema(
     uid: {
       type: String,
     },
-    postNum: {
-      type: Number,
+    postId: {
+      type: Schema.Types.ObjectId,
     },
     content: {
       type: String,
@@ -114,18 +49,18 @@ const coRepleSchema = mongoose.Schema(
     rerepleArray: [
       {
         type: Schema.Types.ObjectId,
-        ref: "coRerepleSchema",
+        ref: "RerepleSchema",
       },
     ],
   },
   {
     //timestamps: { currentTime: () => Math.floor(Date.now() / 1000) },
     //timestamps: true,
-    collection: "coReples",
+    collection: "reple",
   }
 );
 
-const coRerepleSchema = mongoose.Schema(
+const RerepleSchema = mongoose.Schema(
   {
     auther: {
       type: Schema.Types.ObjectId,
@@ -159,11 +94,10 @@ const coRerepleSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "coRereples",
+    collection: "reReple",
   }
 );
 
-const Community = mongoose.model("coPostSchema", coPostSchema);
-const CommunityReple = mongoose.model("coRepleSchema", coRepleSchema);
-const CommunityRereple = mongoose.model("coRerepleSchema", coRerepleSchema);
-module.exports = { Community, CommunityReple, CommunityRereple };
+const Reple = mongoose.model("RepleSchema", RepleSchema);
+const Rereple = mongoose.model("RerepleSchema", RerepleSchema);
+module.exports = { Reple, Rereple };

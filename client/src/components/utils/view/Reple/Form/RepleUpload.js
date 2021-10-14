@@ -23,6 +23,7 @@ function RepleUpload(props) {
     const body = {
       uid: user.userData.uid,
       postNum: props.postInfo.postNum,
+      postId: props.postInfo._id,
       content: content,
       type: props.type,
     };

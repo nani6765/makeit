@@ -33,7 +33,7 @@ function CommunityDetail(props) {
 
   useEffect(() => {
     let body = {
-      postNum: props.match.params.postId,
+      postId: props.match.params.postId,
       skip: Skip,
       limit: Limit,
       type: "Community",
