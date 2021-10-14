@@ -15,7 +15,7 @@ const CommunityHeader = styled.div`
     position: relative;
     img {
       width: 100%;
-      height: 110%;
+      height: 100%;
       postition: absolute;
       top: 0;
       left: 0;
@@ -27,24 +27,16 @@ const CommunityHeader = styled.div`
   }
 
   .GNBDiv {
-    position: relative;
-    z-index: 5;
-
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 
-    width: 50%;
+    width: 70%;
     height: 120px;
 
     margin: 0 auto;
-    margin-top: 0.5vh;
-    padding: 3vh 5vw 3vh 5vw;
+    padding: 25px 0;
 
-    background: #f6f2ff;
-    border: none;
-    border-radius: 82px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
     div {
       cursor: pointer;
@@ -59,7 +51,7 @@ const CommunityHeader = styled.div`
         }
       }
       p {
-        color: black;
+        color: #702C8A;
         font-weight: bold;
         user-select: none;
         ${mq[1]} {
@@ -86,7 +78,6 @@ const CommunityHeader = styled.div`
       width: 90%;
       height: auto;
       padding: 2vh 3vw 2vh 3vw;
-      margin-top: -1vh;
     }
   }
 `;
@@ -104,33 +95,33 @@ const BodyHeaderDiv = styled.div`
   heght: auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   user-select: none;
+  background: #EDE7F6;
+  margin: 0px;
+  width: 100%;
+  padding: 15px 15%;
   div {
-    h1 {
-      font-size: 36px;
+    .category {
+      font-size: 24px;
       font-weight: bold;
       width: auto;
       display: inline;
       color: rgba(112, 44, 138, 1);
     }
     p {
-      margin-left: 10px;
-      font-size: 18px;
+      font-size: 16px;
       display: inline;
-      color: #c6c6c6;
+      color: #979393;
       span {
         cursor: pointer;
+        margin-left: 15px;
         &.activate {
-          font-weight: bold;
+          background: #935EA5;
           cursor: default;
-          color: black;
-        }
-        &.divider {
-          margin-left: 0.5rem;
-          margin-right: 0.5rem;
-          color: black;
-          font-weight: bold;
-          cursor: default;
+          color: white;
+          border-radius: 16px;
+          padding: 5px 10px;
         }
       }
     }

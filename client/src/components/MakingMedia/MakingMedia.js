@@ -4,7 +4,7 @@ import HeaderGNB from "./view/common/HeaderGNB";
 import FindingProducer from "./view/FindingProducer/FindingProducer.js";
 import RequestVideo from "./view/RequestVideo/RequestVideo.js";
 import ShareVideo from "./view/ShareVideo/ShareVideo";
-import { MakingDiv, DescriptionDiv } from "./css/CommonCSS.js";
+import { MakingDiv, MakingHeader } from "./css/CommonCSS.js";
 
 function MakingMedia(props) {
   const user = useSelector((state) => state.user.userData);
@@ -68,15 +68,17 @@ function MakingMedia(props) {
 
   return (
     <>
-      <DescriptionDiv>
-        영상 제작에 적합한 업체 혹은 프로를 찾아보거나,
-        <br />
-        영상을 의뢰해서 업체들과 프로에게 견적을 받아보세요!
-      </DescriptionDiv>
-      <MakingDiv>
-        <HeaderGNB Menu={Menu} setMenu={setMenu} />
-        {setContent()}
-      </MakingDiv>
+    <MakingHeader>
+      <img
+          src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
+          style={{ width: "100%" }}
+        />
+      <HeaderGNB Menu={Menu} setMenu={setMenu} />
+      <div className="category">{Menu}</div>
+    </MakingHeader>
+    <MakingDiv>
+      {setContent()}
+    </MakingDiv>
     </>
   );
 }

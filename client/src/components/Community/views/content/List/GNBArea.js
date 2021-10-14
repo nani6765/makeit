@@ -34,6 +34,7 @@ function GNBArea(props) {
     },
   ];
 
+  /*
   const Remark = useRef();
   useEffect(() => {
     console.log(Remark);
@@ -42,6 +43,7 @@ function GNBArea(props) {
     <!--Flat Icons : www.flaticon.com-->
     `;
   }, []);
+  */
   return (
     <div className="GNBDiv">
       {GNBList.map((category, idx) => {
@@ -52,7 +54,8 @@ function GNBArea(props) {
           </div>
         );
       })}
-      <div ref={Remark} />
+      {//<div ref={Remark} />
+      }
     </div>
   );
 }

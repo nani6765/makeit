@@ -44,10 +44,10 @@ const SelectLikeModel = (types) => {
   switch (types) {
     case "CoPost":
       return Community;
-    case "CoReple":
-      return CommunityReple;
-    case "CoRereple":
-      return CommunityRereple;
+    case "Reple":
+      return Reple;
+    case "Rereple":
+      return Rereple;
     case "ProPost":
       return ProPost;
     case "Quotation":
@@ -220,13 +220,12 @@ router.post("/repleSubmit", (req, res) => {
 });
 
 router.post("/repleUpdate", (req, res) => {
-  let RepleModel = SelectRepleModel(req.body.type);
 
   let temp = {};
   temp.content = req.body.content;
   temp.realTime = setRealTime();
   let key = req.body.id;
-  RepleModel.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
+  Reple.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
     (err, post) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).send({ success: true });
@@ -236,21 +235,20 @@ router.post("/repleUpdate", (req, res) => {
 
 router.post("/repleDelete", (req, res) => {
   let PostModel = SelectPostModel(req.body.type);
-  let RepleModel = SelectRepleModel(req.body.type);
 
   PostModel.findOneAndUpdate(
-    { postNum: req.body.postNum },
+    { _id: req.body.postId },
     { $inc: { repleNum: -1 } }
   )
     .exec()
     .then((result) => {
       if (req.body.rerepleNum) {
-        RepleModel.findOneAndUpdate(
+        Reple.findOneAndUpdate(
           { _id: req.body.repleId },
           { $set: { isDeleted: true } }
         ).exec();
       } else {
-        RepleModel.findOneAndDelete({ _id: req.body.repleId }).exec();
+        Reple.findOneAndDelete({ _id: req.body.repleId }).exec();
       }
       return res.status(200).send({ success: true });
     })
@@ -263,11 +261,9 @@ router.post("/repleDelete", (req, res) => {
 router.post("/repleLike", (req, res) => {
   let key = req.body.likeFlag;
 
-  let RepleModel = SelectRepleModel(req.body.type);
-
   if (key) {
     // 좋아요를 이미 누른 상태
-    RepleModel.findOneAndUpdate(
+    Reple.findOneAndUpdate(
       { _id: req.body.repleId },
       { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.userId } }
     )
@@ -280,7 +276,7 @@ router.post("/repleLike", (req, res) => {
         return res.status(400).json({ success: false, err });
       });
   } else {
-    RepleModel.findOneAndUpdate(
+    Reple.findOneAndUpdate(
       { _id: req.body.repleId },
       { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
     )
@@ -313,9 +309,8 @@ router.post("/repleLike", (req, res) => {
 ///////////////////////////////
 
 router.post("/rerepleGetAuther", (req, res) => {
-  let RerepleModel = SelectRerepleModel(req.body.type);
 
-  RerepleModel.findOne({ _id: req.body.id })
+  Rereple.findOne({ _id: req.body.id })
     .populate("auther")
     .exec((err, rerepleInfo) => {
       if (err) return res.status(400).json({ success: false, err });
@@ -325,22 +320,20 @@ router.post("/rerepleGetAuther", (req, res) => {
 
 router.post("/rerepleSubmit", (req, res) => {
   let PostModel = SelectPostModel(req.body.type);
-  let RepleModel = SelectRepleModel(req.body.type);
-  let RerepleModel = SelectRerepleModel(req.body.type);
 
   let temp = req.body;
   let rereple = {};
-  rereple.postNum = temp.postNum;
+  rereple.content = temp.content;
+  rereple.postId = temp.postId;
+  rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
   User.findOne({ uid: temp.uid })
     .exec()
     .then((userInfo) => {
       rereple.auther = userInfo._id;
-      rereple.content = temp.content;
-      rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-      const rerepleObj = new RerepleModel(rereple);
+      const rerepleObj = new Rereple(rereple);
       rerepleObj.save().then((doc) => {
-        RepleModel.findOneAndUpdate(
-          { _id: temp.repleInfo._id },
+        Reple.findOneAndUpdate(
+          { _id: temp.repleId },
           {
             $inc: { rerepleNum: 1 },
             $push: { rerepleArray: doc._id },
@@ -363,7 +356,7 @@ router.post("/rerepleSubmit", (req, res) => {
     })
     .then(() => {
       PostModel.findOneAndUpdate(
-        { postNum: req.body.postNum },
+        { _id: req.body.postId },
         { $inc: { repleNum: 1 } }
       )
         .exec()
@@ -388,14 +381,12 @@ router.post("/rerepleSubmit", (req, res) => {
 });
 
 router.post("/rerepleUpdate", (req, res) => {
-  let RerepleModel = SelectRerepleModel(req.body.type);
-
   let temp = {};
   temp.content = req.body.content;
   temp.realTime = setRealTime();
   let rerepleId = req.body.rerepleId;
 
-  RerepleModel.findByIdAndUpdate({ _id: rerepleId }, { $set: temp }).exec(
+  Rereple.findByIdAndUpdate({ _id: rerepleId }, { $set: temp }).exec(
     (err, result) => {
       if (err) return res.status(400).json({ success: false, err });
       return res.status(200).send({ success: true });
@@ -404,19 +395,17 @@ router.post("/rerepleUpdate", (req, res) => {
 });
 
 router.post("/rerepleDelete", (req, res) => {
-  let RepleModel = SelectRepleModel(req.body.type);
-  let RerepleModel = SelectRerepleModel(req.body.type);
 
-  RerepleModel.deleteOne({ _id: req.body.rerepleId })
+  Rereple.deleteOne({ _id: req.body.rerepleId })
     .exec()
-    .then(() => {
-      CommunityReple.findOneAndUpdate({
+    .then((rereple) => {
+      Reple.findOneAndUpdate({ postId: rereple.postId }, {
         $inc: { rerepleNum: -1 },
         $pull: { rerepleArray: req.body.rerepleId },
       })
         .exec()
         .then(() => {
-          return RepleModel.findOne({ _id: req.body.repleId }).exec();
+          return Reple.findOne({ _id: req.body.repleId }).exec();
         })
         .then((repleInfo) => {
           if (repleInfo.isDeleted && !repleInfo.rerepleNum) {
@@ -431,6 +420,7 @@ router.post("/rerepleDelete", (req, res) => {
     });
 });
 
+/*
 router.post("/rerepleLike", (req, res) => {
   let RerepleModel = SelectRerepleModel(req.body.type);
 
@@ -470,5 +460,6 @@ router.post("/rerepleLike", (req, res) => {
       });
   }
 });
+*/
 
 module.exports = router;

@@ -31,6 +31,7 @@ function RepleContent(props) {
     } else {
       setlikeFlag(false);
     }
+
   }, [likeFlag]);
 
   function LikeHandler() {
@@ -48,7 +49,7 @@ function RepleContent(props) {
       repleId: Reple._id,
       likeFlag: likeFlag,
       userId: user.userData.uid,
-      type: props.type,
+      type: "Reple",
     };
 
     axios.post("/api/util/repleLike", body).then((response) => {

@@ -6,11 +6,22 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
+const MakingHeader = styled.div`
+.category {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px 15%;
+  background: #EDE7F6;
+  color: #702C8A;
+  font-size: 24px;
+  font-weight: bold;
+}
+`;
+
 const MakingDiv = styled.div`
   width: 70%;
   height: auto;
   margin: 0 auto;
-  padding-top: 2vh;
   padding-bottom: 10vh;
   ${mq[1]} {
     width: 90%;
@@ -22,35 +33,43 @@ const MenuList = styled.ul`
   justify-content: space-between;
   align-items: center;
   list-style: none;
-  padding: 0px;
+  width: 70%;
+  padding-top: 15px;
+  margin: 0 auto;
+  height: 85px;
 `;
 
 const MenuItem = styled.li`
   background: #ffffff;
-  border: 1px solid #d5d5d5;
-  box-sizing: border-box;
-  border-radius: 22px;
   color: #702c8a;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px 20px 10px 20px;
   cursor: pointer;
-  &.active {
-    background: #faf5f5;
-  }
-`;
-
-const DescriptionDiv = styled.div`
-  background: #c4c4c4;
-  width: 100%;
-  height: auto;
-  left: 0px;
   text-align: center;
-  line-height: 200%;
-  padding: 30px;
-  font-size: 20px;
-  ${mq[1]} {
-    font-size: 12px;
+  svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    ${mq[1]} {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  p {
+    color: #702C8A;
+    font-weight: bold;
+    user-select: none;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+  }
+  &:hover {
+    svg {
+      width: 60px;
+      height: 60px;
+      ${mq[1]} {
+        width: 35px;
+        height: 35px;
+      }
+    }
   }
 `;
 
@@ -98,4 +117,4 @@ const LinkCSS = css`
   }
 `;
 
-export { MakingDiv, MenuList, MenuItem, DescriptionDiv, StickyBarDiv, LinkCSS };
+export { MakingHeader, MakingDiv, MenuList, MenuItem, StickyBarDiv, LinkCSS };
