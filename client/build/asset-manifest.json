@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.1c285555.chunk.css",
-    "main.js": "/static/js/main.0308be03.chunk.js",
-    "main.js.map": "/static/js/main.0308be03.chunk.js.map",
+    "main.js": "/static/js/main.f2b2c96c.chunk.js",
+    "main.js.map": "/static/js/main.f2b2c96c.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7bd86089.js",
     "runtime-main.js.map": "/static/js/runtime-main.7bd86089.js.map",
     "static/css/2.67353026.chunk.css": "/static/css/2.67353026.chunk.css",
@@ -27,17 +27,25 @@
     "static/media/comment.7b55ccf5.svg": "/static/media/comment.7b55ccf5.svg",
     "static/media/like.69973a04.svg": "/static/media/like.69973a04.svg",
     "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf",
-    "static/media/건의게시판.fa706cc4.svg": "/static/media/건의게시판.fa706cc4.svg",
-    "static/media/자유게시판.3f13db38.svg": "/static/media/자유게시판.3f13db38.svg",
-    "static/media/전체게시판.afdc97d5.svg": "/static/media/전체게시판.afdc97d5.svg",
-    "static/media/질문게시판.3df6d9a8.svg": "/static/media/질문게시판.3df6d9a8.svg",
-    "static/media/홍보게시판.6598e92b.svg": "/static/media/홍보게시판.6598e92b.svg"
+    "static/media/건의게시판.9edfa144.svg": "/static/media/건의게시판.9edfa144.svg",
+    "static/media/로케이션.712920c2.svg": "/static/media/로케이션.712920c2.svg",
+    "static/media/메이킷페이.9ba5077a.svg": "/static/media/메이킷페이.9ba5077a.svg",
+    "static/media/배우찾기.0b83a467.svg": "/static/media/배우찾기.0b83a467.svg",
+    "static/media/영상알리기.809e56c9.svg": "/static/media/영상알리기.809e56c9.svg",
+    "static/media/의뢰하기.9a092912.svg": "/static/media/의뢰하기.9a092912.svg",
+    "static/media/자유게시판.717c4888.svg": "/static/media/자유게시판.717c4888.svg",
+    "static/media/전체게시판.f68c75b8.svg": "/static/media/전체게시판.f68c75b8.svg",
+    "static/media/제작자탐색.4d538de3.svg": "/static/media/제작자탐색.4d538de3.svg",
+    "static/media/질문게시판.8effe836.svg": "/static/media/질문게시판.8effe836.svg",
+    "static/media/파트너찾기.95eaa21d.svg": "/static/media/파트너찾기.95eaa21d.svg",
+    "static/media/프로알리기.70145664.svg": "/static/media/프로알리기.70145664.svg",
+    "static/media/홍보게시판.eb167d80.svg": "/static/media/홍보게시판.eb167d80.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.7bd86089.js",
     "static/css/2.67353026.chunk.css",
     "static/js/2.0dbd8470.chunk.js",
     "static/css/main.1c285555.chunk.css",
-    "static/js/main.0308be03.chunk.js"
+    "static/js/main.f2b2c96c.chunk.js"
   ]
 }

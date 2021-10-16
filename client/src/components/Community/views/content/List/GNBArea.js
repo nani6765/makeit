@@ -34,16 +34,6 @@ function GNBArea(props) {
     },
   ];
 
-  /*
-  const Remark = useRef();
-  useEffect(() => {
-    console.log(Remark);
-    Remark.current.innerHTML = `
-    <!--아이콘 제작자 : https://www.flaticon.com/kr/authors/flat-icons-->
-    <!--Flat Icons : www.flaticon.com-->
-    `;
-  }, []);
-  */
   return (
     <div className="GNBDiv">
       {GNBList.map((category, idx) => {
@@ -54,8 +44,6 @@ function GNBArea(props) {
           </div>
         );
       })}
-      {//<div ref={Remark} />
-      }
     </div>
   );
 }

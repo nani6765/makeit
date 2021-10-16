@@ -32,16 +32,14 @@ function CommunityDetail(props) {
   }, []);
 
   useEffect(() => {
-    if(postInfo._id) {
-      let body = {
-        postId: postInfo._id,
-        skip: Skip,
-        limit: Limit,
-        type: "Community",
-      };
-      getReples(body);
-    }
-  }, [postInfo]);
+    let body = {
+      postId: props.match.params.postId,
+      skip: Skip,
+      limit: Limit,
+      type: "Community",
+    };
+    getReples(body);
+  }, []);
 
   const loadMoreHanlder = () => {
     let skip = Skip + Limit;

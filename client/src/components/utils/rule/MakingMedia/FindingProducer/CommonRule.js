@@ -4,8 +4,7 @@ import React from "react";
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-function CommonRule() {
-  const Content = styled.div`
+const Content = styled.div`
     text-align: left;
     word-break: keep-all;
     ul {
@@ -23,6 +22,7 @@ function CommonRule() {
     }
   `;
 
+function CommonRule() {
   return (
     <Content>
       <ul>

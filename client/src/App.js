@@ -42,6 +42,9 @@ import QuotationUpload from "./components/MakingMedia/view/RequestVideo/upload/Q
 import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 import ShareVideoDetail from "./components/MakingMedia/view/ShareVideo/detail/ShareVideoDetail.js";
 
+//Participate
+import Participate from "./components/Participate/view/Participate.js";
+
 function App() {
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -81,40 +84,40 @@ function App() {
           <Route exact path="/myPage" component={MyPage} />
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
 
-          <Route exact path="/Making" component={MakingMedia} />
+          <Route exact path="/making" component={MakingMedia} />
           <Route
             exact
-            path="/Making/ProducerUpload"
+            path="/making/ProducerUpload"
             component={FindingProducerUplopad}
           />
           <Route
             exact
-            path="/Making/ProducerEdit"
+            path="/making/ProducerEdit"
             component={FindingProducerEdit}
           />
           <Route
             exact
-            path="/Making/ProducerPost/:url"
+            path="/making/ProducerPost/:url"
             component={ProducerDetail}
           />
           <Route
             exact
-            path="/Making/RequestUpload"
+            path="/making/RequestUpload"
             component={RequestVideoUpload}
           />
           <Route
             exact
-            path="/Making/RequestEdit"
+            path="/making/RequestEdit"
             component={RequestVideoEdit}
           />
           <Route
             exact
-            path="/Making/RequestPost/:url"
+            path="/making/RequestPost/:url"
             component={RequestDetail}
           />
           <Route
             exact
-            path="/Making/QuotationUpload"
+            path="/making/QuotationUpload"
             component={QuotationUpload}
           />
 
@@ -128,6 +131,7 @@ function App() {
             path="/Making/ShareVideo/:url"
             component={ShareVideoDetail}
           />
+          <Route exact path="/participate" component={Participate} />
         </Switch>
         <Footer />
       </>
