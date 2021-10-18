@@ -10,7 +10,7 @@ const UploadDiv = styled.div`
   width: 60%;
   margin: 0 auto;
   padding-top: 5vh;
-  padding-bottom: 10vh;
+  padding-bottom: 5vh;
   ${mq[1]} {
     width: 90%;
     padding-top: 5vh;
@@ -86,29 +86,30 @@ const UploadForm = styled.div`
         padding-top: 15px;
       }
     }
-    .btnDiv {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      width: 100%;
-      height: auto;
-      button {
-        margin-left: 20px;
-        padding: 5px 10px 5px 10px;
-        border-radius: 10px;
-      }
-      .cancel {
-        background: #ffffff;
-        color: #935ea5;
-        border: 1px solid #dedede;
-      }
-      .submit {
-        color: #ffffff;
-        box-sizing: border-box;
-        background: #935ea5;
-        border: 1px solid #935ea5;
-      }
+  }
+  .btnDiv {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    button {
+      margin-left: 20px;
+      padding: 5px 10px 5px 10px;
+      border-radius: 10px;
+    }
+    .cancel {
+      background: #ffffff;
+      color: #935ea5;
+      border: 1px solid #dedede;
+    }
+    .submit {
+      color: #ffffff;
+      box-sizing: border-box;
+      background: #935ea5;
+      border: 1px solid #935ea5;
     }
   }
 `;

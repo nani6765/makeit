@@ -5,6 +5,7 @@ function LoList() {
   return (
     <div>
       <LoFilter />
+      Lo
     </div>
   );
 }

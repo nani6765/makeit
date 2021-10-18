@@ -3,7 +3,7 @@ import UploadButton from "./UploadButton";
 function FAFilter() {
   return (
     <div>
-      <UploadButton />
+      <UploadButton category="FA" />
     </div>
   );
 }

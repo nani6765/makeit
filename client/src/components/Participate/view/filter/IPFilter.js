@@ -4,7 +4,7 @@ import UploadButton from "./UploadButton";
 function IPFilter() {
   return (
     <div>
-      <UploadButton />
+      <UploadButton category="IP" />
     </div>
   );
 }

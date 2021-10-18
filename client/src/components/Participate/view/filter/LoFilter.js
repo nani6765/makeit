@@ -4,7 +4,7 @@ import UploadButton from "./UploadButton";
 function LoFilter() {
   return (
     <div>
-      <UploadButton />
+      <UploadButton category="Lo" />
     </div>
   );
 }

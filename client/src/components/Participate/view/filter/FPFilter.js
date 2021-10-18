@@ -4,7 +4,7 @@ import UploadButton from "./UploadButton";
 function FPFilter() {
   return (
     <div>
-      <UploadButton />
+      <UploadButton category="FP" />
     </div>
   );
 }

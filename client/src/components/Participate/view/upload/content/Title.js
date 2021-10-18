@@ -7,8 +7,8 @@ function Title(props) {
         name="title"
         className="title"
         placeholder="제목을 입력하세요"
-        value={props.Title}
-        onChange={(e) => props.setTitle(e.currentTarget.value)}
+        value={props.title}
+        onChange={(e) => props.settitle(e.currentTarget.value)}
       />
     </>
   );

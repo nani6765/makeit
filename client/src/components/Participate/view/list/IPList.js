@@ -5,6 +5,7 @@ function IPList() {
   return (
     <div>
       <IPFilter />
+      IP
     </div>
   );
 }
