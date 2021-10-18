@@ -73,6 +73,7 @@ const coPostSchema = mongoose.Schema(
   }
 );
 
+/*
 const coRepleSchema = mongoose.Schema(
   {
     auther: {
@@ -162,8 +163,8 @@ const coRerepleSchema = mongoose.Schema(
     collection: "coRereples",
   }
 );
-
+*/
 const Community = mongoose.model("coPostSchema", coPostSchema);
-const CommunityReple = mongoose.model("coRepleSchema", coRepleSchema);
-const CommunityRereple = mongoose.model("coRerepleSchema", coRerepleSchema);
-module.exports = { Community, CommunityReple, CommunityRereple };
+//const CommunityReple = mongoose.model("coRepleSchema", coRepleSchema);
+//const CommunityRereple = mongoose.model("coRerepleSchema", coRerepleSchema);
+module.exports = { Community };
