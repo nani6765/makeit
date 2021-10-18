@@ -1,9 +1,6 @@
 var router = require("express").Router();
-const {
-  Community,
-  CommunityReple,
-  CommunityRereple,
-} = require("../model/CoPost.js");
+const { Community } = require("../model/CoPost.js");
+const { Reple, Rereple } = require("../model/Reple.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 const { Alarm } = require("../model/Alarm.js");
@@ -167,6 +164,7 @@ router.post("/postDelete", (req, res) => {
     });
 });
 
+/*
 router.post("/like", (req, res) => {
   let key = req.body.likeFlag;
 
@@ -212,5 +210,5 @@ router.post("/like", (req, res) => {
       });
   }
 });
-
+*/
 module.exports = router;

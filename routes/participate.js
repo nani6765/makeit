@@ -1,6 +1,6 @@
 var router = require("express").Router();
-const { Community } = require("../model/CoPost.js");
-const { Reple, Rereple } = require("../model/Reple.js");
+const { PartFA, PartFP, PartIP, PartLo } = require("../model/Participate.js");
+//const { Reple, Rereple } = require("../model/Reple.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 const { Alarm } = require("../model/Alarm.js");
@@ -12,10 +12,20 @@ var moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
-////////////////////////////
-//          POST          //
-////////////////////////////
+const SelectModel = (types) => {
+  switch (types) {
+    case "FA":
+      return PartFA;
+    case "FP":
+      return PartFP;
+    case "IP":
+      return PartIP;
+    case "Lo":
+      return PartLo;
+  }
+};
 
+/*
 router.post("/", (req, res) => {
   //카테고리 정렬
   let category = req.body.GNB;
@@ -92,23 +102,25 @@ router.post("/image", setUpload("makeit/community"), (req, res, next) => {
     fileName: res.req.file.originalname,
   });
 });
+*/
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
+  let PostModel = SelectModel();
   Counter.findOne({ name: "counter" })
     .exec()
     .then((counter) => {
-      temp.postNum = counter.coPostNum;
+      temp.postNum = counter.participateNum;
       User.findOne({ uid: req.body.uid })
         .exec()
         .then((userInfo) => {
           temp.auther = userInfo._id;
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-          const communityPost = new Community(temp);
-          communityPost.save();
+          const Post = new PostModel(temp);
+          Post.save();
         });
       counter
-        .updateOne({ $inc: { coPostNum: 1 } })
+        .updateOne({ $inc: { participateNum: 1 } })
         .exec()
         .then(() => {
           return res.status(200).send({
@@ -121,6 +133,7 @@ router.post("/postSubmit", (req, res) => {
     });
 });
 
+/*
 router.post("/postUpdate", (req, res) => {
   let temp = {};
   temp.title = req.body.title;
@@ -209,5 +222,5 @@ router.post("/like", (req, res) => {
       });
   }
 });
-
+*/
 module.exports = router;

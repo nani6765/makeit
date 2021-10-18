@@ -22,6 +22,9 @@ const counter = mongoose.Schema(
     shareVideoNum: {
       type: Number,
     },
+    participateNum: {
+      type: Number,
+    },
   },
   { collection: "counter" }
 );
