@@ -29,6 +29,7 @@ function RerepleDiv(props) {
           rerepleInfo={RerepleInfo}
           repleInfo={props.repleInfo}
           type={props.type}
+          postNum={props.postNum}
         />
       ) : null}
     </>

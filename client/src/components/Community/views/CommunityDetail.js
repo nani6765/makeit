@@ -32,19 +32,21 @@ function CommunityDetail(props) {
   }, []);
 
   useEffect(() => {
-    let body = {
-      postId: props.match.params.postId,
-      skip: Skip,
-      limit: Limit,
-      type: "Community",
-    };
-    getReples(body);
-  }, []);
+    if(postInfo._id) {
+      let body = {
+        postId: postInfo._id,
+        skip: Skip,
+        limit: Limit,
+        type: "Community",
+      };
+      getReples(body);
+    }
+  }, [postInfo]);
 
   const loadMoreHanlder = () => {
     let skip = Skip + Limit;
     let body = {
-      postNum: props.match.params.postId,
+      postId: postInfo._id,
       skip: skip,
       limit: Limit,
       loadMore: true,

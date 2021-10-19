@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
 
-import FileUploadArea from "../../../../../utils/view/Files/FileShowArea.js";
-import FileShowArea from "../../../../../utils/view/Files/FileUploadArea.js";
+import FileUploadArea from "../../../../../utils/view/Files/FileUploadArea.js";
+import FileShowArea from "../../../../../utils/view/Files/FileShowArea.js";
 import YoutubeModal from "../../../../../utils/view/Modal/YoutubeModal.js";
 
 import { ProtFolioDiv } from "../../../../css/FPUCSS.js";
@@ -16,8 +16,8 @@ function Portfolio(props) {
   const [CheckFlag, setCheckFlag] = useState([]);
 
   useEffect(() => {
-    setThumbnailArrLength(props.ThumbnailArr.length);
-  }, [props.ThumbnailArr]);
+    setThumbnailArrLength(props.Thumbnail.length);
+  }, [props.Thumbnail]);
 
   useEffect(() => {
     setDetailImgArrLength(props.DetailImgArr.length);
@@ -43,7 +43,7 @@ function Portfolio(props) {
   };
 
   const CheckEmptyContent = () => {
-    if (!props.ThumbnailArr.length) {
+    if (!props.Thumbnail.length) {
       alert("썸네일을 등록하세요.");
       return false;
     }
@@ -65,14 +65,14 @@ function Portfolio(props) {
       </p>
       <div className="upload">
         <FileUploadArea
-          Images={props.ThumbnailArr}
-          setImages={props.setThumbnailArr}
+          Images={props.Thumbnail}
+          setImages={props.setThumbnail}
           type="thumbnail"
         />
-        {props.ThumbnailArr[0] ? (
+        {props.Thumbnail[0] ? (
           <FileShowArea
-            Images={props.ThumbnailArr}
-            setImages={props.setThumbnailArr}
+            Images={props.Thumbnail}
+            setImages={props.setThumbnail}
             type="PUThumbnail"
           />
         ) : null}
@@ -137,6 +137,7 @@ function Portfolio(props) {
           setModalFlag={setModalFlag}
           VideoArr={props.VideoArr}
           setVideoArr={props.setVideoArr}
+          type="FP"
         />
       )}
 

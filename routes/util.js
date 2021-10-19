@@ -96,7 +96,7 @@ router.post("/like", (req, res) => {
   if (key) {
     // 좋아요를 이미 누른 상태
     Model.findOneAndUpdate(
-      { postNum: req.body.postNum },
+      { _id: req.body._id },
       { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.userId } }
     )
       .exec()
@@ -109,7 +109,7 @@ router.post("/like", (req, res) => {
       });
   } else {
     Model.findOneAndUpdate(
-      { postNum: req.body.postNum },
+      { _id: req.body._id },
       { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
     )
       .exec()
@@ -117,7 +117,7 @@ router.post("/like", (req, res) => {
         if (response.uid != req.body.userId) {
           let alarmTemp = {
             uid: response.uid,
-            url: req.body.postNum,
+            url: req.body.url,
             type: `likeTo${req.body.type}`,
             category: req.body.category,
           };
@@ -167,6 +167,7 @@ router.post("/getReple", (req, res) => {
         });
     })
     .catch((err) => {
+      console.log(err);
       return res.status(400).json({ success: false, err });
     });
 });
@@ -199,8 +200,8 @@ router.post("/repleSubmit", (req, res) => {
               let alarmTemp = {
                 uid: response.uid,
                 url: reple.postNum,
-                type: "repleToPost",
-                category: "community/post",
+                type: "repleTopost",
+                category: req.body.category,
               };
 
               const alarm = new Alarm(alarmTemp);
@@ -258,6 +259,8 @@ router.post("/repleDelete", (req, res) => {
     });
 });
 
+
+/*
 router.post("/repleLike", (req, res) => {
   let key = req.body.likeFlag;
 
@@ -303,6 +306,7 @@ router.post("/repleLike", (req, res) => {
       });
   }
 });
+*/
 
 ///////////////////////////////
 //          rereple          //
@@ -346,7 +350,7 @@ router.post("/rerepleSubmit", (req, res) => {
                 uid: result.uid,
                 url: temp.postNum,
                 type: "rerepleToReple",
-                category: "community/post",
+                category: req.body.category,
               };
               const replealarm = new Alarm(alarmtemp);
               replealarm.save();
@@ -355,6 +359,7 @@ router.post("/rerepleSubmit", (req, res) => {
       });
     })
     .then(() => {
+      console.log(req.body);
       PostModel.findOneAndUpdate(
         { _id: req.body.postId },
         { $inc: { repleNum: 1 } }
@@ -365,7 +370,7 @@ router.post("/rerepleSubmit", (req, res) => {
             uid: result.uid,
             url: temp.postNum,
             type: "rerepleToPost",
-            category: "community/post",
+            category: req.body.category,
           };
           if (req.body.uid != result.uid) {
             const alarm = new Alarm(alarmtemp);

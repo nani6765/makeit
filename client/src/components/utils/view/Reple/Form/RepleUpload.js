@@ -26,6 +26,7 @@ function RepleUpload(props) {
       postId: props.postInfo._id,
       content: content,
       type: props.type,
+      category: "community/post",
     };
 
     axios.post("/api/util/repleSubmit", body).then((response) => {

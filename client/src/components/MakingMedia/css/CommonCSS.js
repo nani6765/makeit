@@ -8,7 +8,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const MakingHeader = styled.div`
 .category {
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
   padding: 10px 15%;
   background: #EDE7F6;
@@ -36,7 +36,7 @@ const MenuList = styled.ul`
   width: 70%;
   padding-top: 15px;
   margin: 0 auto;
-  height: 85px;
+  height: 100px;
 `;
 
 const MenuItem = styled.li`

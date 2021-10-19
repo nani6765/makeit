@@ -23,8 +23,11 @@ function ProducerTitleDetail(props) {
     }
     let body = {
       uid: props.user.uid,
-      url: props.PostInfo.url,
+      _id: props.PostInfo.url,
       key: key,
+      url: props.PostInfo.url,
+      type: "ProPost",
+      category: "making/ProducerPost"
     };
 
     axios.post("/api/making/producer/producerLike", body).then((response) => {
