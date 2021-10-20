@@ -32,7 +32,7 @@ function FindingProducerUpload(props) {
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
   //포트폴리오
-  const [ThumbnailArr, setThumbnailArr] = useState([]);
+  const [Thumbnail, setThumbnail] = useState([]);
   const [DetailImgArr, setDetailImgArr] = useState([]);
   const [VideoArr, setVideoArr] = useState([]);
 
@@ -64,7 +64,7 @@ function FindingProducerUpload(props) {
             setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
 
             //Portfolio
-            setThumbnailArr(response.data.tempPost.thumbnailArr);
+            setThumbnail(response.data.tempPost.thumbnailArr);
             setDetailImgArr(response.data.tempPost.detailImgArr);
             setVideoArr(response.data.tempPost.videoArr);
 
@@ -96,7 +96,7 @@ function FindingProducerUpload(props) {
       description: Description,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: ThumbnailArr,
+      thumbnailArr: Thumbnail,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -125,7 +125,7 @@ function FindingProducerUpload(props) {
       description: Description,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: ThumbnailArr,
+      thumbnailArr: Thumbnail,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -171,8 +171,8 @@ function FindingProducerUpload(props) {
         return (
           <Portfolio
             setCurrentProcess={setCurrentProcess}
-            ThumbnailArr={ThumbnailArr}
-            setThumbnailArr={setThumbnailArr}
+            Thumbnail={Thumbnail}
+            setThumbnail={setThumbnail}
             DetailImgArr={DetailImgArr}
             setDetailImgArr={setDetailImgArr}
             VideoArr={VideoArr}

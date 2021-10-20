@@ -6,23 +6,62 @@ import { YoutubeDiv } from "./ModalCSS.js";
 function YoutubeModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
+  const [CheckFlag, setCheckFlag] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("SearchTerm : ", SearchTerm);
     const response = await YOUTUBE_API.get("/search", {
       params: {
         q: SearchTerm,
       },
     });
     setSearchResultArr([...response.data.items]);
+    
   };
 
   const ClickFunc = (obj) => {
-    props.setThumbnail(obj.snippet.thumbnails.high.url);
     props.setVideoURL(obj.id.videoId);
     props.setModalFlag(false);
+    props.setThumbnail(obj.snippet.thumbnails.high.url);
   };
+
+  function InputCheckHandler(e, snippet, flagIdx) {
+    let temp = [...props.VideoArr];
+    let flagTemp = [...CheckFlag];
+    if (e.target.checked) {
+      temp.push(snippet);
+      props.setVideoArr([...temp]);
+      flagTemp[flagIdx] = true;
+      setCheckFlag([...flagTemp]);
+    } else {
+      let removed = [];
+      let idx = temp.findIndex((obj) => obj.id.videoId === snippet.id.videoId);
+      removed = temp.splice(idx, 1);
+      props.setVideoArr([...temp]);
+      flagTemp[flagIdx] = false;
+      setCheckFlag([...flagTemp]);
+    }
+  }
+
+  useEffect(() => {
+    let temp = [false, false, false, false, false];
+    SearchResultArr.map((video, idx) => {
+      if (
+        props.VideoArr.findIndex(
+          (obj) => obj.id.videoId === video.id.videoId
+        ) != -1
+      ) {
+        temp[idx] = true;
+      }
+    });
+    setCheckFlag([...temp]);
+  }, [SearchResultArr]);
 
   return (
     <YoutubeDiv>
@@ -48,7 +87,22 @@ function YoutubeModal(props) {
               SearchResultArr.map((Video, idx) => {
                 return (
                   <li key={idx}>
-                    <span onClick={() => ClickFunc(Video)}>선택</span>
+                    {
+                      props.type==="FP"
+                      ? (
+                        <div>
+                          <input
+                            type="checkbox"
+                            checked={CheckFlag[idx]}
+                            onChange={(e) => InputCheckHandler(e, Video, idx)}
+                            value={"" || ""}
+                            disabled={props.VideoArr.length >= 5 ? true : false}
+                          />
+                        </div>
+                      ) : (
+                        <span onClick={() => ClickFunc(Video)}>선택</span>
+                      )
+                    }
                     <img src={Video.snippet.thumbnails.high.url} alt="" />
                     <div>
                       <p className="title">{Video.snippet.title}</p>

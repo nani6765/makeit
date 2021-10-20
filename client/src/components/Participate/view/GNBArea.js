@@ -4,6 +4,8 @@ import { ReactComponent as Location } from "../css/img/로케이션.svg";
 import { ReactComponent as FindingActor } from "../css/img/배우찾기.svg";
 import { ReactComponent as FindingPartner } from "../css/img/파트너찾기.svg";
 import { ReactComponent as InformPro } from "../css/img/프로알리기.svg";
+import FALogo from "../css/img/FALogo.js";
+
 
 function GNBArea(props) {
   const GNBList = [

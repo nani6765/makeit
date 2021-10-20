@@ -46,13 +46,15 @@ function RepleContent(props) {
     target.style.disable = "true";
 
     let body = {
-      repleId: Reple._id,
+      _id: Reple._id,
       likeFlag: likeFlag,
       userId: user.userData.uid,
+      url: props.postInfo.postNum,
       type: "Reple",
+      category: "community/post",
     };
 
-    axios.post("/api/util/repleLike", body).then((response) => {
+    axios.post("/api/util/like", body).then((response) => {
       if (response.data.success) {
         target.style.disable = "false";
         window.location.reload();
@@ -144,6 +146,7 @@ function RepleContent(props) {
           Reple={Reple}
           setrerepleUpload={setrerepleUpload}
           type={props.type}
+          postNum={props.postInfo.postNum}
         />
       )}
 
@@ -155,6 +158,7 @@ function RepleContent(props) {
               repleInfo={Reple}
               key={idx}
               type={props.type}
+              postNum={props.postInfo.postNum}
             />
           );
         })}

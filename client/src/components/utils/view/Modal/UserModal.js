@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 
 import DeleteModal from "./DeleteModal.js";
@@ -57,6 +57,10 @@ function UserModal(props) {
     }
   }
 
+  useEffect(() => {
+    console.log(props);
+  }, []);
+
   return (
     <ModalDiv>
       <div>
@@ -65,7 +69,7 @@ function UserModal(props) {
           수정
         </button>
       </div>
-      {props.type === "reple" && (
+      {props.modalType === "reple" && (
         <div style={{ marginTop: "10px" }}>
           <button className="edit" onClick={() => props.setrerepleUpload(true)}>
             <i className="bi bi-chat-right"></i>대댓글 달기

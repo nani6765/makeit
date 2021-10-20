@@ -24,9 +24,9 @@ function GuestModal(props) {
     if (props.modalType === "post") {
       return props.postInfo.auther.uid;
     } else if (props.modalType === "reple") {
-      return props.repleInfo.auther.uid;
+      return props.repleInfo.uid;
     } else {
-      return props.rerepleInfo.auther.uid;
+      return props.rerepleInfo.uid;
     }
   };
 

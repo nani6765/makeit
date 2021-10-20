@@ -18,9 +18,10 @@ function RerepleUpload(props) {
       uid: user.userData.uid,
       repleId: props.Reple._id,
       content: content,
-      postNum: props.Reple.PostNum,
+      postNum: props.postNum,
       postId: props.Reple.postId,
       type: props.type,
+      category: "community/post",
     };
 
     axios.post("/api/util/rerepleSubmit", body).then((response) => {

@@ -47,8 +47,10 @@ function RerepleContent(props) {
     let body = {
       likeFlag: likeFlag,
       userId: user.userData.uid,
-      rerepleId: rereple._id,
+      _id: rereple._id,
+      url: props.postNum,
       type: "Rereple",
+      category: "community/post"
     };
 
     axios.post("/api/util/like", body).then((response) => {
