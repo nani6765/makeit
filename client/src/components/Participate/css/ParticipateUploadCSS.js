@@ -144,7 +144,7 @@ const UploadFilter = styled.div`
   background: #ede7f6;
   border: none;
   height: auto;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
   display: flex;
@@ -152,13 +152,13 @@ const UploadFilter = styled.div`
   justify-content: space-around;
   .select {
     display: flex;
-    margin-bottom: 10px;
     .labelArea {
       width: 20%;
       display: flex;
       align-content: center;
       justify-content: space-evenly;
       align-items: flex-start;
+      user-select: none;
       span {
         font-weight: bold;
         margin: 0px;
@@ -170,6 +170,7 @@ const UploadFilter = styled.div`
       flex-wrap: wrap;
       div {
         width: auto;
+        margin-bottom: 10px;
         input {
           display: none;
         }
@@ -204,4 +205,26 @@ const UploadFilter = styled.div`
   }
 `;
 
-export { UploadHeader, UploadDiv, UploadForm, UploadFilter };
+const ThumbnailArea = styled.div`
+  width: 50%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  p {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    .curentLength {
+      color: red;
+      font-weight: bold;
+    }
+  }
+  .upload {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+`;
+
+export { UploadHeader, UploadDiv, UploadForm, UploadFilter, ThumbnailArea };
