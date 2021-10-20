@@ -1,9 +1,9 @@
 import React from "react";
 import UploadButton from "./UploadButton";
-function FAFilter() {
+function FAFilter(props) {
   return (
     <div>
-      <UploadButton category="FA" />
+      <UploadButton category="FA" user={props.user}/>
     </div>
   );
 }

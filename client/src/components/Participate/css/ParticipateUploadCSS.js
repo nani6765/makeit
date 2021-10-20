@@ -6,6 +6,30 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
+const UploadHeader = styled.div`
+  width: 100%;
+  height: auto;
+  background: #faf6f6;
+  div {
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px 0;
+    h1 {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 44px;
+      color: #702c8a;
+      span {
+        margin-right: 1.5rem;
+        cursor: pointer;
+      }
+    }
+    ${mq[1]} {
+      width: 90%;
+    }
+  }
+`;
+
 const UploadDiv = styled.div`
   width: 60%;
   margin: 0 auto;
@@ -123,6 +147,51 @@ const UploadFilter = styled.div`
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
   height: auto;
+  div {
+    margin: 0px;
+    height: 2rem;
+    p {
+      display: inline-block;
+      width: 15%;
+      font-weight: bold;
+      margin: 0px;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+    }
+    .datailFilter {
+      display: inline-block;
+      height: 2rem;
+      line-height: 2rem;
+      input {
+        display: none;
+      }
+      label {
+        margin: 0px;
+      }
+
+      input + label:before {
+        content: '';
+        display: inline-flex;
+        width: 1rem;
+        height: 1rem;
+        background: rgba(179, 82, 255, 0.12);
+        border: 2px solid rgba(179, 82, 255, 0.24);
+        border-radius: 4px;
+        margin: 0 0.5rem 0 1.5rem;
+        cursor: pointer;
+      }
+      input:checked + label:before {
+        content: "✓";
+        color: white;
+        background: #9b51e0;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        
+      }
+    }
+  }
 `;
 
-export { UploadDiv, UploadForm, UploadFilter };
+export { UploadHeader, UploadDiv, UploadForm, UploadFilter };

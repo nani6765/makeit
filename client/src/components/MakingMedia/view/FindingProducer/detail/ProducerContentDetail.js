@@ -1,5 +1,5 @@
 import React from "react";
-import CommonRule from "../../../../utils/Rule/MakingMedia/FindingProducer/CommonRule.js";
+import CommonRule from "../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
 import { DetailFilterDiv, DetaulContentSubTitle } from "../../../css/FPDCSS.js";
 
 import ContentGNB from "./content/ContentGNB.js";

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { PartHeader, PartBody } from "../css/ParticipateCSS.js";
 
 import GNBArea from "./GNBArea.js";
@@ -8,17 +9,19 @@ import IPList from "./list/IPList.js";
 import LoList from "./list/LoList.js";
 
 function Participate() {
+  const user = useSelector((state) => state.user.userData);
   const [GNB, setGNB] = useState("파트너찾기");
   const SetContent = () => {
+    // eslint-disable-next-line default-case
     switch (GNB) {
       case "파트너찾기":
-        return <FPList />;
+        return <FPList user={user}/>;
       case "배우찾기":
-        return <FAList />;
+        return <FAList user={user}/>;
       case "프로알리기":
-        return <IPList />;
+        return <IPList user={user}/>;
       case "로케이션":
-        return <LoList />;
+        return <LoList user={user}/>;
     }
   };
   return (

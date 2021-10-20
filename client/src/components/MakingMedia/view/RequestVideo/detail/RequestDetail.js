@@ -63,7 +63,7 @@ function RequestDetail(props) {
               <Quotation
                 QuotationArr={QuotationArr}
                 url={PostInfo.url}
-                auther={PostInfo.auther.uid}
+                auther={PostInfo.uid}
               />
             ) : (
               <NoQuotation url={PostInfo.url} />

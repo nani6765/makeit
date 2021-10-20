@@ -41,7 +41,7 @@ function PostDetailContent(props) {
     target.style.disable = "true";
 
     let body = {
-      postNum: postInfo.postNum,
+      _id: postInfo._id,
       likeFlag: likeFlag,
       userId: user.userData.uid,
       type: "CoPost",

@@ -28,10 +28,6 @@ const partFASchema = mongoose.Schema(
     content: {
       type: String,
     },
-    images: {
-      type: Array,
-      default: [],
-    },
     realTime: {
       type: String,
       default: realTime(),
@@ -61,6 +57,15 @@ const partFASchema = mongoose.Schema(
       //unique: true,
     },
     //filter
+    gender: {
+      type: Array,
+    },
+    filmType: {
+      type: Array,
+    },
+    classification: {
+      type: Array,
+    }
   },
   {
     timestamps: true,

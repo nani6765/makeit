@@ -1,10 +1,10 @@
 import React from "react";
 import FAFilter from "../filter/FAFilter";
 
-function FAList() {
+function FAList(props) {
   return (
     <div>
-      <FAFilter />
+      <FAFilter user={props.user}/>
       FA
     </div>
   );
