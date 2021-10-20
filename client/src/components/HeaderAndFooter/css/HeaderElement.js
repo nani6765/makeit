@@ -181,6 +181,7 @@ const HeaderLoginDiv = styled.div`
   .hambuc {
     grid-area: hambuc;
     display: flex;
+    cursor: pointer;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -283,18 +284,19 @@ const ModalDiv = styled.div`
       text-aling: center;
       background-color: rgba(255, 255, 255, 1);
     }
-    .new{
-      &:hover, &:focus{
+    .new {
+      &:hover,
+      &:focus {
         text-decoration-line: none;
       }
-      &::after{
-        content:"new";
-        color: #fff!important;
-        margin-left: .25rem!important;
-        border-radius: 50rem!important;
-        background-color: #dc3545!important;
+      &::after {
+        content: "new";
+        color: #fff !important;
+        margin-left: 0.25rem !important;
+        border-radius: 50rem !important;
+        background-color: #dc3545 !important;
         display: inline-block;
-        padding: .25em .4em;
+        padding: 0.25em 0.4em;
         font-size: 75%;
         font-weight: 700;
         line-height: 1;
