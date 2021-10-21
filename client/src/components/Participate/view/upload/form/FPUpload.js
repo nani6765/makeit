@@ -6,7 +6,7 @@ import Content from "../content/Content.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
 import BtnDiv from "../content/BtnDiv.js";
-import FPUploadFilter from "../content/FPUploadFilter.js";
+
 import {
   UploadHeader,
   UploadDiv,
@@ -14,13 +14,9 @@ import {
   UploadFilter,
 } from "../../../css/ParticipateUploadCSS.js";
 
-<<<<<<< HEAD
 import axios from "axios";
 
 function FPUpload(props) {
-=======
-function FPUpload() {
->>>>>>> e780a046818ab7fcf806f4f00f1f995b4734ade5
   const [FilmType, setFilmType] = useState([]);
   const [Classification, setClassification] = useState([]);
   const [title, settitle] = useState("");
@@ -88,16 +84,12 @@ function FPUpload() {
       <UploadForm>
         <Title title={title} settitle={settitle} />
         <UploadFilter>
-<<<<<<< HEAD
-          <FPUploadFilter FilmType={FilmType} setFilmType={setFilmType} Classification={Classification} setClassification={setClassification} />
-=======
           <FPUploadFilter
             FilmType={FilmType}
             setFilmType={setFilmType}
             Classification={Classification}
             setClassification={setClassification}
           />
->>>>>>> e780a046818ab7fcf806f4f00f1f995b4734ade5
         </UploadFilter>
         <Content content={content} setcontent={setcontent} />
         <FileUploadArea Images={Images} setImages={setImages} />
