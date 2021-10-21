@@ -106,6 +106,12 @@ router.post("/image", setUpload("makeit/community"), (req, res, next) => {
 });
 */
 
+router.post("/getPageLen", (req, res) => {
+  let PostModel = SelectModel(req.body.type);
+  let temp = req.body;
+  delete req.body.type;
+});
+
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
   let PostModel = SelectModel(req.body.type);

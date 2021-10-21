@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Title from "../content/Title.js";
-import FPUploadFilter from "../content/filter/FPUploadFilter.js";
+import FPUploadFilter from "../../filter/FPFilter.js";
 import Content from "../content/Content.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
@@ -11,8 +11,10 @@ import {
   UploadHeader,
   UploadDiv,
   UploadForm,
-  UploadFilter,
 } from "../../../css/ParticipateUploadCSS.js";
+import {
+  PartFilter
+} from "../../../css/ParticipateCSS.js";
 
 import axios from "axios";
 
@@ -83,14 +85,14 @@ function FPUpload(props) {
     <UploadDiv>
       <UploadForm>
         <Title title={title} settitle={settitle} />
-        <UploadFilter>
+        <PartFilter>
           <FPUploadFilter
             FilmType={FilmType}
             setFilmType={setFilmType}
             Classification={Classification}
             setClassification={setClassification}
           />
-        </UploadFilter>
+        </PartFilter>
         <Content content={content} setcontent={setcontent} />
         <FileUploadArea Images={Images} setImages={setImages} />
         {
