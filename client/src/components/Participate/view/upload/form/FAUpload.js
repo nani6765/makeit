@@ -16,7 +16,6 @@ import {
 import axios from 'axios';
 
 function FAUpload(props) {
-
   const [Gender, setGender] = useState([]);
   const [FilmType, setFilmType] = useState([]);
   const [Classification, setClassification] = useState([]);
@@ -26,23 +25,23 @@ function FAUpload(props) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(!title) {
+    if (!title) {
       alert("제목을 입력하세요.");
       return;
     }
-    if(!Gender.length) {
+    if (!Gender.length) {
       alert("성별을 선택하세요.");
       return;
     }
-    if(!FilmType.length) {
+    if (!FilmType.length) {
       alert("촬영 형태를 선택하세요.");
       return;
     }
-    if(!Classification.length) {
+    if (!Classification.length) {
       alert("분류를 선택하세요.");
       return;
     }
-    if(!content) {
+    if (!content) {
       alert("내용을 입력하세요.");
       return;
     }
@@ -55,7 +54,10 @@ function FAUpload(props) {
       gender: Gender,
       filmType: FilmType,
       classification: Classification,
+<<<<<<< HEAD
       type: "FA",
+=======
+>>>>>>> e780a046818ab7fcf806f4f00f1f995b4734ade5
     };
 
     axios.post("/api/participate/postSubmit", body).then((response) => {
@@ -72,13 +74,14 @@ function FAUpload(props) {
 
   return (
     <>
-    <UploadHeader>
-      <div>
+      <UploadHeader>
+        <div>
           <h1>
             <span onClick={() => props.history.goBack()}>&lt;</span>
             배우 찾기
           </h1>
         </div>
+<<<<<<< HEAD
     </UploadHeader>
     <UploadDiv>
       <UploadForm>
@@ -91,6 +94,26 @@ function FAUpload(props) {
         <BtnDiv submitHandler={submitHandler} />
       </UploadForm>
     </UploadDiv>
+=======
+      </UploadHeader>
+      <UploadDiv>
+        <UploadForm>
+          <Title title={title} settitle={settitle} />
+          <UploadFilter>
+            <FAUploadFilter
+              Gender={Gender}
+              setGender={setGender}
+              FilmType={FilmType}
+              setFilmType={setFilmType}
+              Classification={Classification}
+              setClassification={setClassification}
+            />
+          </UploadFilter>
+          <Content content={content} setcontent={setcontent} />
+          <BtnDiv submitHandler={submitHandler} />
+        </UploadForm>
+      </UploadDiv>
+>>>>>>> e780a046818ab7fcf806f4f00f1f995b4734ade5
     </>
   );
 }

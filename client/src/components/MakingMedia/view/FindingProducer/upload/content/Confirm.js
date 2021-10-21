@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
-import CommonRule from "../../../../../utils/rule/MakingMedia/FindingProducer/CommonRule.js";
+import FPRule from "../../../../../utils/Rule/FPRule.js";
 import FAQ from "../utils/FAQ.js";
 import { ConfirmDiv } from "../../../../css/FPUCSS.js";
 
@@ -46,7 +46,7 @@ function Confirm(props) {
                   className="bi bi-caret-up"
                   onClick={() => setRuleFlag(false)}
                 ></i>
-                <CommonRule />
+                <FPRule />
               </>
             ) : (
               <i

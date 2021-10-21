@@ -144,10 +144,12 @@ const UploadFilter = styled.div`
   border-radius: 15px 15px 0px 0px;
   margin-top: 30px;
   background: #ede7f6;
-  padding: 20px;
   border: none;
+  height: auto;
+  padding: 20px 20px 10px 20px;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
+<<<<<<< HEAD
   height: auto;
   div {
     margin: 0px;
@@ -172,31 +174,86 @@ const UploadFilter = styled.div`
         display: none;
       }
       label {
+=======
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  .select {
+    display: flex;
+    .labelArea {
+      width: 20%;
+      display: flex;
+      align-content: center;
+      justify-content: space-evenly;
+      align-items: flex-start;
+      user-select: none;
+      span {
+        font-weight: bold;
+>>>>>>> e780a046818ab7fcf806f4f00f1f995b4734ade5
         margin: 0px;
       }
-
-      input + label:before {
-        content: '';
-        display: inline-flex;
-        width: 1rem;
-        height: 1rem;
-        background: rgba(179, 82, 255, 0.12);
-        border: 2px solid rgba(179, 82, 255, 0.24);
-        border-radius: 4px;
-        margin: 0 0.5rem 0 1.5rem;
-        cursor: pointer;
+    }
+    .contentArea {
+      display: flex;
+      width: 80%;
+      flex-wrap: wrap;
+      div {
+        width: auto;
+        margin-bottom: 10px;
+        input {
+          display: none;
+        }
+        label {
+          margin: 0px;
+          user-select: none;
+        }
+        input + label:before {
+          content: "";
+          display: inline-flex;
+          width: 1rem;
+          height: 1rem;
+          background: rgba(179, 82, 255, 0.12);
+          border: 2px solid rgba(179, 82, 255, 0.24);
+          border-radius: 4px;
+          margin: 0 0.5rem 0 1.5rem;
+          cursor: pointer;
+        }
+        input:checked + label:before {
+          content: "✓";
+          color: white;
+          background: #9b51e0;
+          align-items: center;
+          align-content: center;
+          justify-content: center;
+        }
       }
-      input:checked + label:before {
-        content: "✓";
-        color: white;
-        background: #9b51e0;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        
-      }
+    }
+    &:nth-last-of-type(1) {
+      margin-bottom: 0px;
     }
   }
 `;
 
-export { UploadHeader, UploadDiv, UploadForm, UploadFilter };
+const ThumbnailArea = styled.div`
+  width: 50%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  p {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    .curentLength {
+      color: red;
+      font-weight: bold;
+    }
+  }
+  .upload {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-left: 10px;
+  }
+`;
+
+export { UploadHeader, UploadDiv, UploadForm, UploadFilter, ThumbnailArea };

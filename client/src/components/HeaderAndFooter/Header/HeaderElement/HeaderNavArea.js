@@ -15,7 +15,7 @@ function HeaderNavArea() {
           <Link to="/Making">영상제작</Link>
         </li>
         <li>
-          <Link to="/landingPage">영상참여</Link>
+          <Link to="/participate">영상참여</Link>
         </li>
         <li>
           <Link to="/landingPage">포트폴리오</Link>
