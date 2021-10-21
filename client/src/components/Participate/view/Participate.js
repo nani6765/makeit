@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { PartHeader, PartBody } from "../css/ParticipateCSS.js";
 
@@ -8,7 +8,7 @@ import FPList from "./list/FPList.js";
 import IPList from "./list/IPList.js";
 import LoList from "./list/LoList.js";
 
-function Participate() {
+function Participate(props) {
   const user = useSelector((state) => state.user.userData);
   const [GNB, setGNB] = useState("파트너찾기");
   const SetContent = () => {
@@ -24,6 +24,13 @@ function Participate() {
         return <LoList user={user}/>;
     }
   };
+
+  useEffect(() => {
+    if(props.history.location.state !== undefined) {
+      setGNB(props.history.location.state.category);
+    }
+  }, []);
+
   return (
     <>
       <PartHeader>

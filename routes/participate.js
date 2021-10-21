@@ -27,6 +27,8 @@ const SelectModel = (types) => {
 
 /*
 router.post("/", (req, res) => {
+  let temp = req.body;
+  let PostModel = SelectModel(req.body.type);
   //카테고리 정렬
   let category = req.body.GNB;
   if (category.category === "전체게시판") {
@@ -41,7 +43,7 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
-  Community.find(category)
+  PostModel.find(category)
     .populate("auther")
     .sort(sort)
     .skip(req.body.skip)
@@ -106,8 +108,8 @@ router.post("/image", setUpload("makeit/community"), (req, res, next) => {
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
-  let PostModel = SelectModel();
-  Counter.findOne({ name: "counter" })
+  let PostModel = SelectModel(req.body.type);
+  Counter.findOneAndUpdate({ name: "counter" }, {$inc: {participateNum : 1}})
     .exec()
     .then((counter) => {
       temp.postNum = counter.participateNum;
@@ -117,15 +119,12 @@ router.post("/postSubmit", (req, res) => {
           temp.auther = userInfo._id;
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const Post = new PostModel(temp);
-          Post.save();
-        });
-      counter
-        .updateOne({ $inc: { participateNum: 1 } })
-        .exec()
-        .then(() => {
-          return res.status(200).send({
-            success: true,
-          });
+          Post.save()
+          .then(()=> {  
+            return res.status(200).send({
+              success: true,
+            });
+          })
         });
     })
     .catch((err) => {

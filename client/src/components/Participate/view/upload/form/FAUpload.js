@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
-import FAUploadFilter from "../content/FAUploadFilter.js";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import FAUploadFilter from "../content/filter/FAUploadFilter.js";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
+import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 
 import {
   UploadHeader,
@@ -10,6 +12,8 @@ import {
   UploadForm,
   UploadFilter,
 } from "../../../css/ParticipateUploadCSS.js";
+
+import axios from 'axios';
 
 function FAUpload(props) {
 
@@ -50,8 +54,20 @@ function FAUpload(props) {
       content: content,
       gender: Gender,
       filmType: FilmType,
-      classification: Classification
+      classification: Classification,
+      type: "FA",
     };
+
+    axios.post("/api/participate/postSubmit", body).then((response) => {
+      if(response.data.success) {
+        alert("게시글 등록 성공");
+        props.history.push({pathname: "/participate", state: {category: "배우찾기"}});
+      }
+      else {
+        alert("게시글 등록 실패");
+        console.log(response.data.err);
+      }
+    })
   };
 
   return (
@@ -71,6 +87,7 @@ function FAUpload(props) {
           <FAUploadFilter Gender={Gender} setGender={setGender} FilmType={FilmType} setFilmType={setFilmType} Classification={Classification} setClassification={setClassification} />
         </UploadFilter>
         <Content content={content} setcontent={setcontent} />
+        <FileUploadArea />
         <BtnDiv submitHandler={submitHandler} />
       </UploadForm>
     </UploadDiv>
@@ -78,4 +95,4 @@ function FAUpload(props) {
   );
 }
 
-export default FAUpload;
+export default withRouter(FAUpload);

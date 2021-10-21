@@ -126,6 +126,12 @@ const partFPSchema = mongoose.Schema(
       //unique: true,
     },
     //filter
+    filmType: {
+      type: Array,
+    },
+    classification: {
+      type: Array,
+    }
   },
   {
     timestamps: true,
@@ -254,8 +260,8 @@ const partLoSchema = mongoose.Schema(
 );
 
 const PartFA = mongoose.model("PartFA", partFASchema);
-const PartFP = mongoose.model("PartFA", partFPSchema);
-const PartIP = mongoose.model("PartFA", partIPSchema);
-const PartLo = mongoose.model("PartFA", partLoSchema);
+const PartFP = mongoose.model("PartFP", partFPSchema);
+const PartIP = mongoose.model("PartIP", partIPSchema);
+const PartLo = mongoose.model("PartLo", partLoSchema);
 
 module.exports = { PartFA, PartFP, PartIP, PartLo };

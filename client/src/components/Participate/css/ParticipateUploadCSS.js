@@ -13,12 +13,13 @@ const UploadHeader = styled.div`
   div {
     width: 60%;
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 5px 0;
     h1 {
       font-weight: bold;
       font-size: 32px;
       line-height: 44px;
       color: #702c8a;
+      margin-bottom: 0px;
       span {
         margin-right: 1.5rem;
         cursor: pointer;
@@ -73,6 +74,7 @@ const UploadForm = styled.div`
       0px 9px 30px rgba(163, 1, 79, 0.05);
     border-radius: 0px 0px 15px 15px;
     resize: none;
+    margin-bottom: 10px;
     &:focus {
       outline: none;
     }
@@ -150,14 +152,17 @@ const UploadFilter = styled.div`
   div {
     margin: 0px;
     height: 2rem;
-    p {
-      display: inline-block;
+    .categoryName {
+      display: inline-flex;
       width: 15%;
-      font-weight: bold;
       margin: 0px;
       height: 2rem;
+      font-weight: bold;
       line-height: 2rem;
-      text-align: center;
+      justify-content: space-between;
+      p {
+        display: inline-block;
+      }
     }
     .datailFilter {
       display: inline-block;

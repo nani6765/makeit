@@ -40,7 +40,9 @@ function FAUploadFilter(props) {
     return (
         <>
             <div>
-                <p>성 별</p>
+                <div className="categoryName">
+                    <p>성</p><p>별</p>
+                </div>
                 <div className="datailFilter">
                     <input type="checkbox" id="male" value="남자" onClick = {(e) => {GenderFilterManager(e)}} />
                     <label for="male">남자</label>
@@ -51,7 +53,9 @@ function FAUploadFilter(props) {
                 </div>
             </div>
             <div>
-                <p>촬영 형태</p>
+                <div className="categoryName">
+                    <p>촬</p><p>영</p><p>형</p><p>태</p>
+                </div>
                 <div className="datailFilter">
                     <input type="checkbox" id="video" value="영상" onClick = {(e) => {FilmTypeFilterManager(e)}} />
                     <label for="video">영상</label>
@@ -62,7 +66,9 @@ function FAUploadFilter(props) {
                 </div>
             </div>
             <div>
-                <p>분 류</p>
+                <div className="categoryName">
+                    <p>분</p><p>류</p>
+                </div>
                 <div className="datailFilter">
                     <input type="checkbox" id="short" value="단편" onClick = {(e) => {ClassificationFilterManager(e)}} />
                     <label for="short">단편</label>
