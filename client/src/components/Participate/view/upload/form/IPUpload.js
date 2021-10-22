@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
-import IPUploadFilter from "../content/IPUploadFilter.js";
+import IPUploadFilter from "../content/filter/IPUploadFilter.js";
 
 import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 import {
   UploadDiv,
   UploadForm,
-  UploadFilter,
   ThumbnailArea,
 } from "../../../css/ParticipateUploadCSS.js";
+import {
+  PartFilter
+} from "../../../css/ParticipateCSS.js";
 
 function IPUpload() {
   const [Category, setCategory] = useState("");
@@ -50,9 +52,9 @@ function IPUpload() {
           </div>
         </ThumbnailArea>
 
-        <UploadFilter>
+        <PartFilter>
           <IPUploadFilter Category={Category} setCategory={setCategory} />
-        </UploadFilter>
+        </PartFilter>
         <Content content={content} setcontent={setcontent} />
         <BtnDiv submitHandler={submitHandler} />
       </UploadForm>

@@ -26,31 +26,6 @@ const SelectModel = (types) => {
 };
 
 /*
-router.post("/", (req, res) => {
-  //카테고리 정렬
-  let category = req.body.GNB;
-  if (category.category === "전체게시판") {
-    delete category.category;
-  }
-
-  //최신순&&인기순 정렬
-  let sort = {};
-  if (req.body.sortPost === "new") {
-    sort.createdAt = -1;
-  } else {
-    sort.likeNum = -1;
-  }
-
-  Community.find(category)
-    .populate("auther")
-    .sort(sort)
-    .skip(req.body.skip)
-    .limit(req.body.limit)
-    .exec((err, postInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).json({ success: true, postInfo });
-    });
-});
 
 router.post("/postDetail", (req, res) => {
   let filter = {};
@@ -103,11 +78,109 @@ router.post("/image", setUpload("makeit/community"), (req, res, next) => {
   });
 });
 */
+router.post("/", (req, res) => {
+  let temp = req.body;
+  let PostModel = SelectModel(req.body.type);
+  //카테고리 정렬
+  let category = {
+    type: temp.type,
+    $or: [],
+  };
+  // if (category.category === "전체게시판") {
+  //   delete category.category;
+  // }
+
+  if(temp.category) {
+    delete category.$or;
+    category.category = req.body.category;
+  }
+  if(temp.gender) {
+    for(let i=0; i<temp.gender.length; i++) {
+      category["$or"].push({gender: temp.gender[i]});
+    }
+  }
+  if(temp.filmType) {
+    for(let i=0; i<temp.filmType.length; i++) {
+      category["$or"].push({filmType: temp.filmType[i]});
+    }
+  }
+
+  if(temp.classification) {
+    for(let i=0; i<temp.classification.length; i++) {
+      category["$or"].push({classification: temp.classification[i]});
+    }
+  }
+  if(!category.$or.length)
+    delete category.$or;
+
+  //최신순&&인기순 정렬
+  let sort = {};
+  if (temp.sortPost === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.likeNum = -1;
+  }
+
+  PostModel.find(category)
+    .populate("auther")
+    .sort(sort)
+    .skip(req.body.skip)
+    .limit(req.body.limit)
+    .exec((err, post) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, post });
+    });
+});
+
+router.post("/getPageLen", (req, res) => {
+  let PostModel = SelectModel(req.body.type);
+  let temp = req.body;
+
+  let category = {
+    type: temp.type,
+    $or: [],
+  };
+
+  if(temp.category) {
+    delete category.$or;
+    category.category = temp.category;
+  }
+  if(temp.gender) {
+    for(let i=0; i<temp.gender.length; i++) {
+      category["$or"].push({gender: temp.gender[i]});
+    }
+  }
+  if(temp.filmType) {
+    for(let i=0; i<temp.filmType.length; i++) {
+      category["$or"].push({filmType: temp.filmType[i]});
+    }
+  }
+  if(temp.classification) {
+    for(let i=0; i<temp.classification.length; i++) {
+      category["$or"].push({classification: temp.classification[i]});
+    }
+  }
+  if(!category.$or.length)
+    delete category.$or;
+
+  PostModel.countDocuments(category)
+  .exec()
+  .then((cnt) => {
+    return res.status(200).send({
+      success: true,
+      len: cnt,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({ success: false, err });
+  })
+});
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
-  let PostModel = SelectModel();
-  Counter.findOne({ name: "counter" })
+  let PostModel = SelectModel(req.body.type);
+  Counter.findOneAndUpdate({ name: "counter" }, {$inc: {participateNum : 1}})
     .exec()
     .then((counter) => {
       temp.postNum = counter.participateNum;
@@ -117,15 +190,12 @@ router.post("/postSubmit", (req, res) => {
           temp.auther = userInfo._id;
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const Post = new PostModel(temp);
-          Post.save();
-        });
-      counter
-        .updateOne({ $inc: { participateNum: 1 } })
-        .exec()
-        .then(() => {
-          return res.status(200).send({
-            success: true,
-          });
+          Post.save()
+          .then(()=> {  
+            return res.status(200).send({
+              success: true,
+            });
+          })
         });
     })
     .catch((err) => {

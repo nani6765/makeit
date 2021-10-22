@@ -10,6 +10,10 @@ function realTime() {
 
 const partFASchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "FA",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -75,6 +79,10 @@ const partFASchema = mongoose.Schema(
 
 const partFPSchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "FP",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -126,6 +134,12 @@ const partFPSchema = mongoose.Schema(
       //unique: true,
     },
     //filter
+    filmType: {
+      type: Array,
+    },
+    classification: {
+      type: Array,
+    }
   },
   {
     timestamps: true,
@@ -135,6 +149,10 @@ const partFPSchema = mongoose.Schema(
 
 const partIPSchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "IP",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -195,6 +213,10 @@ const partIPSchema = mongoose.Schema(
 
 const partLoSchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "Lo",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -254,8 +276,8 @@ const partLoSchema = mongoose.Schema(
 );
 
 const PartFA = mongoose.model("PartFA", partFASchema);
-const PartFP = mongoose.model("PartFA", partFPSchema);
-const PartIP = mongoose.model("PartFA", partIPSchema);
-const PartLo = mongoose.model("PartFA", partLoSchema);
+const PartFP = mongoose.model("PartFP", partFPSchema);
+const PartIP = mongoose.model("PartIP", partIPSchema);
+const PartLo = mongoose.model("PartLo", partLoSchema);
 
 module.exports = { PartFA, PartFP, PartIP, PartLo };
