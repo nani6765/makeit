@@ -14,6 +14,39 @@ const MainPageDiv = styled.div`
   ${mq[1]} {
     width: 90%;
   }
+  .friendsVideoList {
+    width: 100%;
+    padding: 0px 30px;
+    .slick-track {
+      margin: 0px;
+      min-width: 100%;
+      width: 100%;
+    }
+  }
+  .slick-prev {
+    height: 60px;
+    left: -10px;
+    z-index: 1;
+    background: none;
+  }
+  .slick-next {
+    height: 60px;
+    right: 0px;
+    background: none;
+  }
+  .slick-next:before,
+  .slick-prev:before {
+    opacity: 1;
+    color: #702c8a;
+    font-weight: 800;
+    font-size: 60px;
+  }
+  .slick-prev:before {
+    content: "〈";
+  }
+  .slick-next:before {
+    content: "〉";
+  }
 `;
 
 const MainPageHading = css`
@@ -54,49 +87,6 @@ const MainPageSubHading = css`
   font-size: 16px;
   line-height: 22px;
   color: #b0abab;
-`;
-
-const MainPageGridDiv = styled.div`
-  display: grid;
-  padding-top: 3rem;
-  grid-template-columns: 50px 1fr 50px;
-  grid-template-rows: 100%;
-  grid-template-areas: "prev content next";
-  ${mq[0]} {
-    margin: 0 auto;
-    grid-template-columns: 1fr;
-    grid-template-rows: 80%;
-    grid-template-areas: "content";
-  }
-`;
-
-const MainPageGridPrev = styled.div`
-  grid-area: "prev";
-  ${mq[0]} {
-    display: none;
-  }
-`;
-
-const MainPageGridNext = styled.div`
-  grid-area: "next";
-  ${mq[0]} {
-    display: none;
-  }
-`;
-
-const MainPageGridPrevAndNext = css`
-  height: 100%;
-  font-size: 40px;
-  font-weight: bold;
-  text-align: center;
-  button {
-    height: inherit;
-    display: inline-flex;
-    align-items: center;
-    color: #816afe;
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-  }
 `;
 
 function MainPageGridContent(parameter) {
@@ -151,12 +141,7 @@ const CardImg = styled.article`
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  margin-left: 10px;
-  maragin-right: 10px;
-  width: 500px;
-  min-width: 500px;
-  height: 281.25px;
-  min-height: 281.25px;
+  margin: 0 10px;
   position: relative;
   clear: both;
   overflow: hidden;
@@ -203,10 +188,6 @@ export {
   MainPageDiv,
   MainPageHading,
   MainPageSubHading,
-  MainPageGridDiv,
-  MainPageGridPrev,
-  MainPageGridNext,
-  MainPageGridPrevAndNext,
   MainPageGridContent,
   CardImg,
   PlayButtonCSS,

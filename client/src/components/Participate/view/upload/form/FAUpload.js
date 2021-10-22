@@ -1,15 +1,21 @@
-import React, { useState, useEffect } from "react";
-import FAUploadFilter from "../content/FAUploadFilter.js";
+import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
+import FAUploadFilter from "../../filter/FAFilter.js";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
+import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 
 import {
   UploadHeader,
   UploadDiv,
   UploadForm,
-  UploadFilter,
 } from "../../../css/ParticipateUploadCSS.js";
+import {
+  PartFilter
+} from "../../../css/ParticipateCSS.js";
+
+import axios from 'axios';
 
 function FAUpload(props) {
   const [Gender, setGender] = useState([]);
@@ -50,7 +56,19 @@ function FAUpload(props) {
       gender: Gender,
       filmType: FilmType,
       classification: Classification,
+      type: "FA",
     };
+
+    axios.post("/api/participate/postSubmit", body).then((response) => {
+      if(response.data.success) {
+        alert("게시글 등록 성공");
+        props.history.push({pathname: "/participate", state: {category: "배우찾기"}});
+      }
+      else {
+        alert("게시글 등록 실패");
+        console.log(response.data.err);
+      }
+    })
   };
 
   return (
@@ -66,7 +84,7 @@ function FAUpload(props) {
       <UploadDiv>
         <UploadForm>
           <Title title={title} settitle={settitle} />
-          <UploadFilter>
+          <PartFilter>
             <FAUploadFilter
               Gender={Gender}
               setGender={setGender}
@@ -75,7 +93,7 @@ function FAUpload(props) {
               Classification={Classification}
               setClassification={setClassification}
             />
-          </UploadFilter>
+          </PartFilter>
           <Content content={content} setcontent={setcontent} />
           <BtnDiv submitHandler={submitHandler} />
         </UploadForm>
@@ -84,4 +102,4 @@ function FAUpload(props) {
   );
 }
 
-export default FAUpload;
+export default withRouter(FAUpload);

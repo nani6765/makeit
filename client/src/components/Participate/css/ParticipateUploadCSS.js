@@ -13,12 +13,13 @@ const UploadHeader = styled.div`
   div {
     width: 60%;
     margin: 0 auto;
-    padding: 10px 0;
+    padding: 5px 0;
     h1 {
       font-weight: bold;
       font-size: 32px;
       line-height: 44px;
       color: #702c8a;
+      margin-bottom: 0px;
       span {
         margin-right: 1.5rem;
         cursor: pointer;
@@ -73,6 +74,7 @@ const UploadForm = styled.div`
       0px 9px 30px rgba(163, 1, 79, 0.05);
     border-radius: 0px 0px 15px 15px;
     resize: none;
+    margin-bottom: 10px;
     &:focus {
       outline: none;
     }
@@ -138,73 +140,6 @@ const UploadForm = styled.div`
   }
 `;
 
-const UploadFilter = styled.div`
-  border-radius: 15px 15px 0px 0px;
-  margin-top: 30px;
-  background: #ede7f6;
-  border: none;
-  height: auto;
-  padding: 20px 20px 10px 20px;
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  .select {
-    display: flex;
-    .labelArea {
-      width: 20%;
-      display: flex;
-      align-content: center;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      user-select: none;
-      span {
-        font-weight: bold;
-        margin: 0px;
-      }
-    }
-    .contentArea {
-      display: flex;
-      width: 80%;
-      flex-wrap: wrap;
-      div {
-        width: auto;
-        margin-bottom: 10px;
-        input {
-          display: none;
-        }
-        label {
-          margin: 0px;
-          user-select: none;
-        }
-        input + label:before {
-          content: "";
-          display: inline-flex;
-          width: 1rem;
-          height: 1rem;
-          background: rgba(179, 82, 255, 0.12);
-          border: 2px solid rgba(179, 82, 255, 0.24);
-          border-radius: 4px;
-          margin: 0 0.5rem 0 1.5rem;
-          cursor: pointer;
-        }
-        input:checked + label:before {
-          content: "✓";
-          color: white;
-          background: #9b51e0;
-          align-items: center;
-          align-content: center;
-          justify-content: center;
-        }
-      }
-    }
-    &:nth-last-of-type(1) {
-      margin-bottom: 0px;
-    }
-  }
-`;
-
 const ThumbnailArea = styled.div`
   width: 50%;
   margin-top: 1rem;
@@ -227,4 +162,4 @@ const ThumbnailArea = styled.div`
   }
 `;
 
-export { UploadHeader, UploadDiv, UploadForm, UploadFilter, ThumbnailArea };
+export { UploadHeader, UploadDiv, UploadForm, ThumbnailArea };

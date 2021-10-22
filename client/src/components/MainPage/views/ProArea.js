@@ -8,34 +8,9 @@ import {
   MainPageDiv,
   MainPageHading,
   MainPageSubHading,
-  MainPageGridDiv,
-  MainPageGridPrev,
-  MainPageGridNext,
-  MainPageGridPrevAndNext,
-  MainPageGridContent,
 } from "../css/MainPageElement.js";
 
 function ProArea() {
-  var scrollAmount = 0;
-  function handlePrev() {
-    const target = document.querySelector(".proArea");
-    target.scrollTo({
-      top: 0,
-      left: (scrollAmount -= 510),
-      behavior: "smooth",
-    });
-  }
-
-  function handleNext() {
-    const target = document.querySelector(".proArea");
-    target.scrollTo({
-      top: 0,
-      left: (scrollAmount += 510),
-      behavior: "smooth",
-    });
-  }
-
-  let FVGridContent = MainPageGridContent(300);
   return (
     <>
       <MainPageDiv>
@@ -46,27 +21,6 @@ function ProArea() {
           지금 뜨고 있는 프로덕션, 프로님을 추천해드려요!
         </p>
 
-        <MainPageGridDiv>
-          <MainPageGridPrev css={MainPageGridPrevAndNext}>
-            <button onClick={() => handlePrev()}>&lt;</button>
-          </MainPageGridPrev>
-          <ScrollContainer
-            className="scroll-container proArea"
-            css={FVGridContent}
-          >
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-            <CardImg></CardImg>
-          </ScrollContainer>
-          <MainPageGridNext css={MainPageGridPrevAndNext}>
-            <button onClick={() => handleNext()}>&gt;</button>
-          </MainPageGridNext>
-        </MainPageGridDiv>
       </MainPageDiv>
     </>
   );
