@@ -86,6 +86,30 @@ const SelectRerepleModel = (types, SecondType = "") => {
 };
 
 /////////////////////////////
+//          Image          //
+/////////////////////////////
+
+router.post(
+  "/image/upload",
+  setUpload(`makeit/community`),
+  (req, res, next) => {
+    return res.json({
+      success: true,
+      key: res.req.file.key,
+      filePath: res.req.file.location,
+      fileName: res.req.file.originalname,
+    });
+  }
+);
+
+router.post("/image/delete", (req, res) => {
+  setDelete("makeit/community", req.body.key);
+  return res.json({
+    success: true,
+  });
+});
+
+/////////////////////////////
 //          like           //
 /////////////////////////////
 
@@ -221,17 +245,14 @@ router.post("/repleSubmit", (req, res) => {
 });
 
 router.post("/repleUpdate", (req, res) => {
-
   let temp = {};
   temp.content = req.body.content;
   temp.realTime = setRealTime();
   let key = req.body.id;
-  Reple.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
-    (err, post) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).send({ success: true });
-    }
-  );
+  Reple.findByIdAndUpdate({ _id: key }, { $set: temp }).exec((err, post) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).send({ success: true });
+  });
 });
 
 router.post("/repleDelete", (req, res) => {
@@ -258,7 +279,6 @@ router.post("/repleDelete", (req, res) => {
       if (err) return res.status(400).json({ success: false, err });
     });
 });
-
 
 /*
 router.post("/repleLike", (req, res) => {
@@ -313,7 +333,6 @@ router.post("/repleLike", (req, res) => {
 ///////////////////////////////
 
 router.post("/rerepleGetAuther", (req, res) => {
-
   Rereple.findOne({ _id: req.body.id })
     .populate("auther")
     .exec((err, rerepleInfo) => {
@@ -400,14 +419,16 @@ router.post("/rerepleUpdate", (req, res) => {
 });
 
 router.post("/rerepleDelete", (req, res) => {
-
   Rereple.deleteOne({ _id: req.body.rerepleId })
     .exec()
     .then((rereple) => {
-      Reple.findOneAndUpdate({ postId: rereple.postId }, {
-        $inc: { rerepleNum: -1 },
-        $pull: { rerepleArray: req.body.rerepleId },
-      })
+      Reple.findOneAndUpdate(
+        { postId: rereple.postId },
+        {
+          $inc: { rerepleNum: -1 },
+          $pull: { rerepleArray: req.body.rerepleId },
+        }
+      )
         .exec()
         .then(() => {
           return Reple.findOne({ _id: req.body.repleId }).exec();

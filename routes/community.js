@@ -5,7 +5,7 @@ const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 const { Alarm } = require("../model/Alarm.js");
 
-const setUpload = require("../module/multer/upload.js");
+//const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
 
 var moment = require("moment");
@@ -84,15 +84,6 @@ router.post("/postDetail/reple", (req, res) => {
     });
 });
 
-router.post("/image", setUpload("makeit/community"), (req, res, next) => {
-  return res.json({
-    success: true,
-    key: res.req.file.key,
-    filePath: res.req.file.location,
-    fileName: res.req.file.originalname,
-  });
-});
-
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
   Counter.findOne({ name: "counter" })
@@ -135,13 +126,6 @@ router.post("/postUpdate", (req, res) => {
       return res.status(200).send({ success: true });
     }
   );
-});
-
-router.post("/image/delete", (req, res) => {
-  setDelete("makeit/community", req.body.key);
-  return res.json({
-    success: true,
-  });
 });
 
 router.post("/postDelete", (req, res) => {
