@@ -17,19 +17,15 @@ const MainPageDiv = styled.div`
   .friendsVideoList {
     width: 100%;
     padding: 0px 30px;
-    .slick-list {
-    }
     .slick-track {
       margin: 0px;
       min-width: 100%;
       width: 100%;
     }
-    .slick-slide {
-    }
   }
   .slick-prev {
     height: 60px;
-    left: 0px;
+    left: -10px;
     z-index: 1;
     background: none;
   }
@@ -146,8 +142,6 @@ const CardImg = styled.article`
   user-select: none;
   cursor: pointer;
   margin: 0 10px;
-  height: 281.25px;
-  min-height: 281.25px;
   position: relative;
   clear: both;
   overflow: hidden;

@@ -3,7 +3,7 @@ import YOUTUBE_API from "../../../../config/youtubeAPI.js";
 
 import { YoutubeDiv } from "./ModalCSS.js";
 
-function YoutubeModal(props) {
+function YoutubeCheckModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
   const [CheckFlag, setCheckFlag] = useState([
@@ -48,7 +48,21 @@ function YoutubeModal(props) {
       setCheckFlag([...flagTemp]);
     }
   }
-  
+
+  useEffect(() => {
+    let temp = [false, false, false, false, false];
+    SearchResultArr.map((video, idx) => {
+      if (
+        props.VideoArr.findIndex(
+          (obj) => obj.id.videoId === video.id.videoId
+        ) != -1
+      ) {
+        temp[idx] = true;
+      }
+    });
+    setCheckFlag([...temp]);
+  }, [SearchResultArr]);
+
   return (
     <YoutubeDiv>
       <div className="content">
@@ -104,4 +118,4 @@ function YoutubeModal(props) {
   );
 }
 
-export default YoutubeModal;
+export default YoutubeCheckModal;

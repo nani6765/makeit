@@ -8,7 +8,7 @@ function PostList(props) {
     useEffect(() => {
         let body = {
             type: props.Type,
-            sort: props.Sort,
+            sortPost: props.Sort,
             skip: props.Skip,
             limit: 6,
         }
@@ -22,13 +22,17 @@ function PostList(props) {
             body.classification = props.Classification;
         }
 
-        axios.post("/participate", body).then((response) => {
+        axios.post("/api/participate", body).then((response) => {
             if(response.data.success) {
                 let temp = response.data.post;
                 setPosts(temp);
             }
         })
     }, [props.Sort, props.Skip, props.Gender, props.FilmType, props.Classification]);
+
+    useEffect(() => {
+        console.log(Posts);
+    }, [Posts]);
 
     return (
         <div>

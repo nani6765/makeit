@@ -24,7 +24,8 @@ function FriendsVideo() {
     infinite: true,
     speed: 500,
     easing: "ease-in-out",
-    slidesToShow: 2,
+    draggable: true,
+    slidesToShow: 3,
     slidesToScroll: 1,
   };
 

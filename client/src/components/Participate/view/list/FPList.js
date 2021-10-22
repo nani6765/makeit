@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FPFilter from "../filter/FPFilter";
 import PostList from "./content/PostList";
+import UploadButton from "../filter/UploadButton";
 
 import { PartFilter } from "../../css/ParticipateCSS.js";
 
@@ -17,10 +18,10 @@ function FPList(props) {
     let body = {
       type: "FP",
     }
-    if(FilmType) {
+    if(FilmType[0]) {
       body.filmType = FilmType;
     }
-    if(Classification) {
+    if(Classification[0]) {
       body.classification = Classification;
     }
 
@@ -28,6 +29,7 @@ function FPList(props) {
 
     axios.post("/api/participate/getPageLen", body).then((response) => {
       if(response.data.success) {
+        console.log(response.data.len);
         setPageLen(parseInt(response.data.len/6) + 1);
         setSkip(0);
       }
@@ -50,6 +52,7 @@ function FPList(props) {
         <FPFilter FilmType={FilmType} setFilmType={setFilmType} Classification={Classification} setClassification={setClassification}/>
       </PartFilter>
       <PostList Type="FP" Sort={props.Sort} Skip={Skip} FilmType={FilmType} Classification={Classification}/>
+      <UploadButton category="FP" />
     </div>
   );
 }

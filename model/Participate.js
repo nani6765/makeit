@@ -10,6 +10,10 @@ function realTime() {
 
 const partFASchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "FA",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -75,6 +79,10 @@ const partFASchema = mongoose.Schema(
 
 const partFPSchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "FP",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -141,6 +149,10 @@ const partFPSchema = mongoose.Schema(
 
 const partIPSchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "IP",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -201,6 +213,10 @@ const partIPSchema = mongoose.Schema(
 
 const partLoSchema = mongoose.Schema(
   {
+    type: {
+      type: String,
+      default: "Lo",
+    },
     auther: {
       type: Schema.Types.ObjectId,
       ref: "User",
