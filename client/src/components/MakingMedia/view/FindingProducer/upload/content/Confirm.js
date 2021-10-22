@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
-import FPRule from "../../../../../utils/rule/FPRule.js"
+import FPRule from "../../../../../utils/rule/FPRule.js";
 import FAQ from "../utils/FAQ.js";
 import { ConfirmDiv } from "../../../../css/FPUCSS.js";
 
