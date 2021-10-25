@@ -15,7 +15,7 @@ function FileUploadArea(props) {
     };
     formData.append("file", files[0]);
 
-    axios.post("/api/community/image", formData, config).then((response) => {
+    axios.post("/api/util/image/upload", formData, config).then((response) => {
       if (response.data.success) {
         //console.log(response.data);
         if (props.type === "thumbnail") {
