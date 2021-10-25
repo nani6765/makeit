@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
@@ -15,7 +16,9 @@ import {
   PartFilter
 } from "../../../css/ParticipateCSS.js";
 
-function IPUpload() {
+import axios from 'axios';
+
+function IPUpload(props) {
   const [Category, setCategory] = useState("");
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
@@ -23,6 +26,44 @@ function IPUpload() {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if(!Category) {
+      alert("카테고리를 선택하세요.");
+      return;
+    }
+    if(!Thumbnail[0]) {
+      alert("썸네일을 등록하세요.");
+      return;
+    }
+    if(!title) {
+      alert("제목을 입력하세요.");
+      return;
+    }
+    if(!content) {
+      alert("내용을 입력하세요.");
+      return;
+    }
+    
+    let body = {
+      uid: props.user.uid,
+      email: props.user.email,
+      title: title,
+      content: content,
+      thumbnail: Thumbnail,
+      subCategory: Category,
+      type: "IP",
+    }
+
+    axios.post("/api/participate/postSubmit", body).then((response) => {
+      if(response.data.success) {
+        alert("게시글 등록 성공");
+        props.history.push({pathname: "/participate", state: {category: "프로알리기"}}); 
+      }
+      else {
+        alert("게시글 등록 실패");
+        console.log(response.data.err);
+      }
+    })
   };
 
   return (
@@ -62,4 +103,4 @@ function IPUpload() {
   );
 }
 
-export default IPUpload;
+export default withRouter(IPUpload);

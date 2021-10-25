@@ -1,10 +1,11 @@
 import React from "react";
-import UploadButton from "./UploadButton";
 
-function LoFilter() {
+import StickyBar from "./StickyBar.js";
+
+function LoFilter(props) {
   return (
-    <div>
-      <UploadButton category="Lo" />
+    <div className="left">
+      <StickyBar category={props.category} SubCategory={props.SubCategory} setSubCategory={props.setSubCategory} SubCategoryList={props.SubCategoryList} />
     </div>
   );
 }

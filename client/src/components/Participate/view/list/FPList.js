@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import FPFilter from "../filter/FPFilter";
 import PostList from "./content/PostList";
 import UploadButton from "../filter/UploadButton";
+import Pagination from "./content/Pagination";
 
-import { PartFilter } from "../../css/ParticipateCSS.js";
+import { PartFilter, FNBDiv } from "../../css/ParticipateCSS.js";
 
 import axios from "axios";
 
@@ -25,8 +26,6 @@ function FPList(props) {
       body.classification = Classification;
     }
 
-    console.log("??");
-
     axios.post("/api/participate/getPageLen", body).then((response) => {
       if(response.data.success) {
         console.log(response.data.len);
@@ -47,13 +46,16 @@ function FPList(props) {
   }, [parseInt((Skip-1)/10), PageLen])
 
   return (
-    <div>
+    <>
       <PartFilter style={{"borderRadius":"15px"}}>
         <FPFilter FilmType={FilmType} setFilmType={setFilmType} Classification={Classification} setClassification={setClassification}/>
       </PartFilter>
-      <PostList Type="FP" Sort={props.Sort} Skip={Skip} FilmType={FilmType} Classification={Classification}/>
-      <UploadButton category="FP" />
-    </div>
+      <PostList type="FP" Sort={props.Sort} Skip={Skip} FilmType={FilmType} Classification={Classification}/>
+      <FNBDiv>   
+        <UploadButton category="FP" />
+        <Pagination PageIdxArr={PageIdxArr} Skip={Skip} setSkip={setSkip} PageLen={PageLen} />
+      </FNBDiv>
+    </>
   );
 }
 

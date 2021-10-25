@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import TextEllipsis from "react-text-ellipsis";
+import Avatar from "react-avatar";
 import axios from 'axios';
+
+import { PostCard, IPLoPostCard, LinkCSS } from "../../../css/ParticipateCSS.js";
+
+import { ReactComponent as CGIcon } from "../../../../MakingMedia/css/Img/CommentGray.svg";
+import { ReactComponent as CYIcon } from "../../../../MakingMedia/css/Img/CommentYellow.svg";
+import { ReactComponent as LGIcon } from "../../../../MakingMedia/css/Img/LikeGrey.svg";
+import { ReactComponent as LPIcon } from "../../../../MakingMedia/css/Img/LikePurple.svg";
 
 
 function PostList(props) {
@@ -7,11 +17,20 @@ function PostList(props) {
 
     useEffect(() => {
         let body = {
-            type: props.Type,
+            type: props.type,
             sortPost: props.Sort,
             skip: props.Skip,
             limit: 6,
         }
+
+        if(props.type === "IP" || props.type === "Lo") {
+            body.limit = 12;
+        }
+        
+        if(props.SubCategory) {
+            body.subCategory = props.SubCategory;
+        }
+
         if(props.Gender) {
             body.gender = props.Gender;
         }
@@ -28,16 +47,87 @@ function PostList(props) {
                 setPosts(temp);
             }
         })
-    }, [props.Sort, props.Skip, props.Gender, props.FilmType, props.Classification]);
+    }, [props.Sort, props.Skip, props.SubCategory, props.Gender, props.FilmType, props.Classification]);
 
     useEffect(() => {
         console.log(Posts);
     }, [Posts]);
 
     return (
-        <div>
-            
-        </div>
+        <>
+        {
+            props.type === "FP" || props.type === "FA"
+            ? (
+                Posts.map((post, idx) => {
+                return (
+                <Link
+                    to={"/participate/post/" + post.postNum}
+                    style={{ textDecorationLine: "none", color: "black" }}
+                    key={idx}
+                >
+                    <PostCard>
+                    <Avatar
+                        src={post.auther.photoURL}
+                        size="50"
+                        round={true}
+                        style={{ border: "1px solid #c6c6c6" }}
+                    />
+                    <p className="author">{post.auther.displayName}</p>
+                    <p className="view">조회수 {post.views}</p>
+                    <p className="date">{post.realTime}</p>
+                    <p className="title">{post.title}</p>
+                    <TextEllipsis lines={2} tag={"p"} tagClass={"desc"}>
+                        {post.content}
+                    </TextEllipsis>
+                    {post.images ? (
+                        post.images[0] && (
+                        <p className="image">
+                        <i className="bi bi-card-image"></i>
+                        첨부({post.images.length})
+                        </p>
+                    )) : null}
+                    <p className="like">
+                        <i className="bi bi-emoji-smile"></i>
+                        공감({post.likeNum})
+                    </p>
+                    <p className="reple">
+                        <i className="bi bi-chat-square-dots"></i>
+                        댓글({post.repleNum})
+                    </p>
+                    </PostCard>
+                </Link>
+                );
+            })
+            ) : (
+                Posts.map((post, idx) => {
+                return (
+                  <Link
+                    to={"/Making/shareVideo/" + post.url}
+                    key={idx}
+                    style={{ width: "30%", color:"black", textDecoration:"none", marginLeft: "15px" }}
+                    css={LinkCSS}
+                  >
+                    <IPLoPostCard>
+                      <img src={post.thumbnail[0].path} className="thumbnail" />
+                      <p className="author">{post.auther.displayName}</p>
+                      <p className="intro">{post.oneLineIntroduce}</p>
+                      <div className="like">
+                        <LGIcon />
+                        추천
+                        {post.likeNum != 0 && <span>({post.likeNum})</span>}
+                      </div>
+                      <div className="comment">
+                        {post.repleNum ? <CGIcon /> : <CYIcon />}
+                        의견
+                        {post.repleNum != 0 && <span>({post.repleNum})</span>}
+                      </div>
+                    </IPLoPostCard>
+                  </Link>
+                );
+              })
+            )
+        }
+        </>
     )
 }
 

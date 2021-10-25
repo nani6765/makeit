@@ -77,7 +77,7 @@ function RequestVideo(props) {
         <div className="FNB">
           <div className="pagination">
             {PageIdxArr[0] !== 1 ? (
-              <button onClick={() => setSkip((parseInt(Skip / 120) - 1) * 120)}>
+              <button onClick={() => setSkip((parseInt(Skip / 100) - 1) * 100)}>
                 &lt; 이전
               </button>
             ) : null}
@@ -87,20 +87,22 @@ function RequestVideo(props) {
                   <li
                     key={idx}
                     onClick={() =>
-                      setSkip(parseInt(Skip / 120) * 120 + 12 * idx)
+                      setSkip(parseInt(Skip / 100) * 100 + 10 * idx)
                     }
-                    className={Skip / 12 + 1 === page ? "active" : null}
+                    className={Skip / 10 + 1 === page ? "active" : null}
                   >
                     {page}
                   </li>
                 );
               })}
             </ul>
-            {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
-              <button onClick={() => setSkip((parseInt(Skip / 120) + 1) * 120)}>
-                다음 &gt;
-              </button>
-            )}
+            {
+                PageIdxArr[PageIdxArr.length - 1] < PageLen && (
+                  <button onClick={() => setSkip((parseInt(Skip / 100) + 1) * 100)}>
+                    다음 &gt;
+                  </button>
+                )
+            }
           </div>
         </div>
       </div>

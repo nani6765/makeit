@@ -171,9 +171,8 @@ const partIPSchema = mongoose.Schema(
     content: {
       type: String,
     },
-    images: {
+    thumbnail: {
       type: Array,
-      default: [],
     },
     realTime: {
       type: String,
@@ -204,6 +203,9 @@ const partIPSchema = mongoose.Schema(
       //unique: true,
     },
     //filter
+    subCategory: {
+      type: String,
+    }
   },
   {
     timestamps: true,
@@ -235,9 +237,8 @@ const partLoSchema = mongoose.Schema(
     content: {
       type: String,
     },
-    images: {
+    thumbnail: {
       type: Array,
-      default: [],
     },
     realTime: {
       type: String,
@@ -268,6 +269,9 @@ const partLoSchema = mongoose.Schema(
       //unique: true,
     },
     //filter
+    subCategory: {
+      type: String,
+    }
   },
   {
     timestamps: true,
