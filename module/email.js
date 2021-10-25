@@ -4,7 +4,7 @@ const config = require("../config/key.js");
 const title = "MakeIT 이메일 인증메일입니다.";
 const txt = (name, Key) => {
   return `
-        <div style="width:100%; background-color:lightgrey; padding: 1rem 0px 1rem 0px;">
+        <div style="width:100%; background-color:white; padding: 1rem 0px 1rem 0px;">
         <div style="width: 100%; height: auto;  max-width:640px; margin:0 auto;  background-color:white;">
         <div style="width: 100%; border-bottom: 2px solid #702c8a; display: flex; justify-content: center;">
           <img src="https://kr.object.ncloudstorage.com/makeit/admin/logo.png" alt="MainLogo" />
@@ -62,7 +62,6 @@ const txt = (name, Key) => {
 };
 
 async function sendEmail(toEmail, key, name) {
-  console.log("??");
   let transporter = nodemailer.createTransport({
     host: config.smtpServerURL, //SMTP 서버 주소 port: 587,
     port: config.port,
