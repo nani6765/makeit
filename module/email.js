@@ -62,6 +62,7 @@ const txt = (name, Key) => {
 };
 
 async function sendEmail(toEmail, key, name) {
+  console.log("??");
   let transporter = nodemailer.createTransport({
     host: config.smtpServerURL, //SMTP 서버 주소 port: 587,
     port: config.port,
