@@ -9,7 +9,7 @@ import { jsx, css } from "@emotion/react";
 function FileShow(props) {
   const deleteHandler = (image) => {
     axios
-      .post("/api/community/image/delete", {
+      .post("/api/util/image/delete", {
         key: image.key,
       })
       .then((response) => {
