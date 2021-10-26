@@ -52,7 +52,7 @@ function LoList(props) {
   return (
     <>
       <PartIPLoListDiv>
-        <LoFilter category="프로 알리기" SubCategory={SubCategory} setSubCategory={setSubCategory} SubCategoryList={SubCategoryList} />
+        <LoFilter category="로케이션" SubCategory={SubCategory} setSubCategory={setSubCategory} SubCategoryList={SubCategoryList} />
         <div className="right">
           <PostList type="Lo" SubCategory={SubCategory} Skip={Skip*12} Sort={props.Sort}/>
         </div>

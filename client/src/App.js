@@ -45,6 +45,7 @@ import ShareVideoDetail from "./components/MakingMedia/view/ShareVideo/detail/Sh
 //Participate
 import Participate from "./components/Participate/view/Participate.js";
 import ParticipateUpload from "./components/Participate/view/upload/ParticipateUpload.js";
+import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -137,6 +138,11 @@ function App() {
             exact
             path="/participate/upload"
             component={ParticipateUpload}
+          />
+          <Route
+            exact
+            path="/participate/post/:url"
+            component={PartDetail}
           />
         </Switch>
         <Footer />

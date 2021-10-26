@@ -31,7 +31,6 @@ function IPList(props) {
 
     axios.post("/api/participate/getPageLen", body).then((response) => {
       if(response.data.success) {
-        console.log(response.data.len);
         setPageLen(parseInt(response.data.len/12) + 1);
         setSkip(0);
       }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router";
 import axios from "axios";
@@ -26,7 +26,7 @@ function RepleUpload(props) {
       postId: props.postInfo._id,
       content: content,
       type: props.type,
-      category: "community/post",
+      category: props.category,
     };
 
     axios.post("/api/util/repleSubmit", body).then((response) => {

@@ -49,10 +49,6 @@ function PostList(props) {
         })
     }, [props.Sort, props.Skip, props.SubCategory, props.Gender, props.FilmType, props.Classification]);
 
-    useEffect(() => {
-        console.log(Posts);
-    }, [Posts]);
-
     return (
         <>
         {
@@ -102,7 +98,7 @@ function PostList(props) {
                 Posts.map((post, idx) => {
                 return (
                   <Link
-                    to={"/Making/shareVideo/" + post.url}
+                    to={"/participate/post/" + post.postNum}
                     key={idx}
                     style={{ width: "30%", color:"black", textDecoration:"none", marginLeft: "15px" }}
                     css={LinkCSS}
