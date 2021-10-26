@@ -183,5 +183,263 @@ const PartFilter = styled.div`
   }
 `;
 
+const PartIPLoListDiv = styled.div`
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 2fr 7fr;
+  grid-template-rows: auto;
+  grid-template-areas: "left right";
+  grid-gap: 1rem;
+  .left {
+    grid-area: left;
+  }
+  .right {
+    grid-area: right;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+  }
+`;
 
-export { PartHeader, PartBody, PartFilter };
+const PostCard = styled.div`
+  width: 100%;
+  height: auto;
+  min-height: 120px;
+  background: #ffffff;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 50px auto 1fr 80px 80px 80px;
+  grid-template-rows: 25px 25px auto auto auto;
+  grid-template-areas:
+    "avatar author author author . view"
+    "avatar date date date . ."
+    "title title title title title title"
+    "desc desc desc desc desc desc"
+    ". . . image like reple";
+  ${mq[1]} {
+    grid-template-columns: 50px auto 1fr 60px 60px 60px;
+  }
+  .avatar {
+    grid-area: avatar;
+  }
+  .author {
+    grid-area: author;
+    font-weight: 600;
+    margin-left: 10px;
+  }
+  .view {
+    text-align: right;
+    grid-area: view;
+    font-size: 14px;
+    color: 686868;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+  }
+  .date {
+    grid-area: date;
+    color: #5b4949;
+    margin-left: 10px;
+    font-size: 14px;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+  }
+  .title {
+    grid-area: title;
+    font-weight: 600;
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .desc {
+    grid-area: desc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .like {
+    grid-area: like;
+    font-size: 14px;
+    text-align: right;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+    i {
+      margin-right: 5px;
+    }
+  }
+  .reple {
+    grid-area: reple;
+    font-size: 14px;
+    text-align: right;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+    i {
+      margin-right: 5px;
+    }
+  }
+  .image {
+    grid-area: image;
+    font-size: 14px;
+    text-align: right;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+    i {
+      margin-right: 5px;
+    }
+  }
+`;
+
+const IPLoPostCard = styled.div`
+  background: #ffffff;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto auto auto;
+  grid-template-areas:
+    "thumbnail thumbnail"
+    "author author"
+    "intro intro"
+    "like comment";
+  grid-gap: 0.5rem;
+  margin-bottom: 1rem;
+  .thumbnail {
+    grid-area: thumbnail;
+    width: 100%;
+    height: 100%;
+    border-radius: 11px;
+  }
+  .author {
+    grid-area: author;
+    color: #a7a5a8;
+    font-size: 12px;
+  }
+  .intro {
+    grid-area: intro;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .like {
+    grid-area: like;
+    border-right: 1px solid rgba(204, 210, 227, 0.39);
+  }
+  .comment {
+    grid-area: comment;
+  }
+
+  .like,
+  .comment {
+    padding: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    border-top: 1px solid rgba(204, 210, 227, 0.39);
+  }
+`;
+
+const StickyBarDiv = styled.div`
+  position: sticky;
+  top: 100px;
+  left: 0px;
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  text-align: center;
+  .category {
+    height: 40px;
+    color: #702c8a;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .subCategory {
+    margin-top: 10px;
+    p {
+      height: auto;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 15px;
+      margin-bottom: 1.5rem;
+      &:nth-last-of-type(1) {
+        margin-bottom: 0px;
+      }
+    }
+    p.active {
+      font-weight: bold;
+    }
+  }
+`;
+
+const FNBDiv = styled.div`
+  margin-bottom: 20px;
+  .submitBtn {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      font-size: 15px;
+      font-weight: bold;
+      background: #935EA5;
+      color: #fff;
+      padding: 7px 10px;
+      border: none;
+      border-radius: 10px;
+      svg {
+        margin-left: 3px;
+      }
+    }
+  }
+  .FNB {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .pagination {
+      .active {
+        font-weight: bold;
+      }
+      ul {
+        li {
+          border-left: 1px solid black;
+          padding-left: 0.5rem;
+        }
+        li:first-child {
+          border: none;
+        }
+      }
+      button {
+        background: none;
+        border: none;
+      }
+    }
+  }
+`;
+
+const LinkCSS = css`
+  color: black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+`;
+
+export { PartHeader, PartBody, PartFilter, PartIPLoListDiv, PostCard, IPLoPostCard, StickyBarDiv, FNBDiv, LinkCSS };

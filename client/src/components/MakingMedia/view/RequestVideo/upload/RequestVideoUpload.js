@@ -76,7 +76,7 @@ function RequestVideoUpload(props) {
       .then((response) => {
         if (response.data.success) {
           alert("의뢰 게시가 완료되었습니다.");
-          props.history.push("/making");
+          props.history.push({pathname: "/making", state: {menu: "영상 의뢰하기"}});
         } else {
           alert("의뢰 게시가 실패하였습니다.");
         }

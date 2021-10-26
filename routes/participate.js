@@ -78,6 +78,7 @@ router.post("/image", setUpload("makeit/community"), (req, res, next) => {
   });
 });
 */
+
 router.post("/", (req, res) => {
   let temp = req.body;
   let PostModel = SelectModel(req.body.type);
@@ -86,11 +87,8 @@ router.post("/", (req, res) => {
     type: temp.type,
     $or: [],
   };
-  // if (category.category === "전체게시판") {
-  //   delete category.category;
-  // }
 
-  if(temp.category) {
+  if(temp.category && temp.category !== "전체") {
     delete category.$or;
     category.category = req.body.category;
   }
@@ -121,7 +119,10 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
-  PostModel.find(category)
+  //디비에 PartIP, PartLo 데이터가 하나도 없어서 그런가 find 오류남
+  //임시로 이렇게 해놓음
+  //수정 필요
+  PartFP.find(category)
     .populate("auther")
     .sort(sort)
     .skip(req.body.skip)
@@ -141,9 +142,9 @@ router.post("/getPageLen", (req, res) => {
     $or: [],
   };
 
-  if(temp.category) {
+  if(temp.category && temp.category !== "전체") {
     delete category.$or;
-    category.category = temp.category;
+    category.category = req.body.category;
   }
   if(temp.gender) {
     for(let i=0; i<temp.gender.length; i++) {
@@ -163,7 +164,11 @@ router.post("/getPageLen", (req, res) => {
   if(!category.$or.length)
     delete category.$or;
 
-  PostModel.countDocuments(category)
+
+  //디비에 PartIP, PartLo 데이터가 하나도 없어서 그런가 find 오류남
+  //임시로 이렇게 해놓음
+  //수정 필요
+  PartFP.countDocuments(category)
   .exec()
   .then((cnt) => {
     return res.status(200).send({
