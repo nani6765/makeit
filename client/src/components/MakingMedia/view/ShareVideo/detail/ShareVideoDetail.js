@@ -97,7 +97,7 @@ function ShareVideoDetail(props) {
         </>
       ) : null}
       {PostInfo._id != null ? (
-        <RepleUpload postInfo={PostInfo} type="ShareVideo" />
+        <RepleUpload postInfo={PostInfo} type="ShareVideo" category="/making/shareVideo"/>
       ) : null}
     </>
   );

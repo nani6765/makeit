@@ -3,7 +3,6 @@ const { PartFA, PartFP, PartIP, PartLo } = require("../model/Participate.js");
 //const { Reple, Rereple } = require("../model/Reple.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
-const { Alarm } = require("../model/Alarm.js");
 
 const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
@@ -119,10 +118,7 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
-  //디비에 PartIP, PartLo 데이터가 하나도 없어서 그런가 find 오류남
-  //임시로 이렇게 해놓음
-  //수정 필요
-  PartFP.find(category)
+  PostModel.find(category)
     .populate("auther")
     .sort(sort)
     .skip(req.body.skip)
@@ -164,11 +160,7 @@ router.post("/getPageLen", (req, res) => {
   if(!category.$or.length)
     delete category.$or;
 
-
-  //디비에 PartIP, PartLo 데이터가 하나도 없어서 그런가 find 오류남
-  //임시로 이렇게 해놓음
-  //수정 필요
-  PartFP.countDocuments(category)
+  PostModel.countDocuments(category)
   .exec()
   .then((cnt) => {
     return res.status(200).send({
@@ -180,6 +172,22 @@ router.post("/getPageLen", (req, res) => {
     console.log(err);
     return res.status(400).json({ success: false, err });
   })
+});
+
+router.post("/getPostDetail", (req, res) => {
+  PartFP.findOne({postNum: req.body.postNum})
+  .populate("auther")
+  .exec()
+  .then((post) => {
+    return res.status(200).send({
+      success: true,
+      post: post,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({ success: false, err });
+  });
 });
 
 router.post("/postSubmit", (req, res) => {

@@ -16,6 +16,7 @@ const {
   ShareVideoReple,
   ShareVideoRereple,
 } = require("../model/Making.js");
+const { PartFA, PartFP, PartIP, PartLo } = require("../model/Participate.js");
 
 const { Reple, Rereple } = require("../model/Reple.js");
 /*
@@ -54,6 +55,14 @@ const SelectLikeModel = (types) => {
       return Quotation;
     case "ShareVideo":
       return ShareVideo;
+    case "FA":
+      return PartFA;
+    case "FP":
+      return PartFP;
+    case "IP":
+      return PartIP;
+    case "Lo":
+      return PartLo;
   }
 };
 
@@ -63,6 +72,14 @@ const SelectPostModel = (types) => {
       return Community;
     case "ShareVideo":
       return ShareVideo;
+    case "FA":
+      return PartFA;
+    case "FP":
+      return PartFP;
+    case "IP":
+      return PartIP;
+    case "Lo":
+      return PartLo;
   }
 };
 
@@ -206,6 +223,7 @@ router.post("/repleSubmit", (req, res) => {
 
   let PostModel = SelectPostModel(req.body.type);
   //let RepleModel = SelectRepleModel(req.body.type, req.body.stype);
+  console.log()
 
   User.findOne({ uid: req.body.uid })
     .exec()

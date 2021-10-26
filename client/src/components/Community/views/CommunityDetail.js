@@ -96,7 +96,7 @@ function CommunityDetail(props) {
         </>
       ) : null}
       {postInfo._id != null ? (
-        <RepleUpload postInfo={postInfo} type="Community" />
+        <RepleUpload postInfo={postInfo} type="Community" category="/Community/post"/>
       ) : null}
     </>
   );
