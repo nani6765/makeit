@@ -4,7 +4,7 @@ import { withRouter, useHistory } from "react-router";
 
 import { PostUploadDiv } from "../css/CommunityFormCSS.js";
 
-import UpdateFrorm from "../../utils/view/Reple/Form/RepleEditForm.js";
+import UpdateFrorm from "./content/Upload/PostEditForm";
 
 function PostEdit(props) {
   const [PostInfo, setPostInfo] = useState({ checkPosition: 0 });

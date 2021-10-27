@@ -87,6 +87,7 @@ const MainPageSubHading = css`
   font-size: 16px;
   line-height: 22px;
   color: #b0abab;
+  margin-bottom: 1rem;
 `;
 
 function MainPageGridContent(parameter) {

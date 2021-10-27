@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Avatar from "react-avatar";
 
-import UserModal from "../Modal/UserModal";
-import GuestModal from "../Modal/GuestModal.js";
+import RepleModal from "../Modal/RepleModal.js";
 
 import RepleEditForm from "./Form/RepleEditForm.js";
 import RerepleUpload from "./Form/RerepleUpload.js";
@@ -31,7 +30,6 @@ function RepleContent(props) {
     } else {
       setlikeFlag(false);
     }
-
   }, [likeFlag]);
 
   function LikeHandler() {
@@ -91,18 +89,20 @@ function RepleContent(props) {
                 ></i>
                 {hambucControl &&
                   (user.userData.uid === Reple.auther.uid ? (
-                    <UserModal
+                    <RepleModal
                       repleInfo={Reple}
                       setUpdateCheck={setUpdateCheck}
                       setrerepleUpload={setrerepleUpload}
                       modalType="reple"
+                      isUser={true}
                       type={props.type}
                     />
                   ) : (
-                    <GuestModal
+                    <RepleModal
                       setrerepleUpload={setrerepleUpload}
                       repleInfo={Reple}
                       modalType="reple"
+                      isUser={false}
                       type={props.type}
                     />
                   ))}

@@ -9,14 +9,12 @@ function UserModal(props) {
   let history = useHistory();
 
   const [ModalFlag, setModalFlag] = useState(false);
-
   const [PostInfo, setPostInfo] = useState(props.postInfo || "");
   const [RepleInfo, setRepleInfo] = useState(props.repleInfo || "");
-  const [RerepleInfo, setRerepleInfo] = useState(props.rerepleInfo || "");
 
   function EditHandler() {
     if (props.modalType === "post") {
-      history.push({
+      return history.push({
         pathname: "/community/update/" + PostInfo.postNum,
         state: { postInfo: PostInfo },
       });
@@ -56,10 +54,6 @@ function UserModal(props) {
       );
     }
   }
-
-  useEffect(() => {
-    console.log(props);
-  }, []);
 
   return (
     <ModalDiv>

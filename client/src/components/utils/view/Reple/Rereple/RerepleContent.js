@@ -6,7 +6,8 @@ import Avatar from "react-avatar";
 
 import UserModal from "../../Modal/UserModal.js";
 import GuestModal from "../../Modal/GuestModal.js";
-import RerepleEditForm from "../Form/RepleEditForm.js";
+import RepleModal from "../../Modal/RepleModal.js";
+import RerepleEditForm from "../Form/RerepleEditForm.js";
 
 import { RerepleContentGrid } from "../RepleCSS.js";
 
@@ -35,7 +36,7 @@ function RerepleContent(props) {
 
   function LikeHandler() {
     if (rereple.auther.uid === user.userData.uid) {
-      return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
+      return alert("본인 대댓글에는 좋아요를 누를 수 없습니다!");
     }
     if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
@@ -50,7 +51,7 @@ function RerepleContent(props) {
       _id: rereple._id,
       url: props.postNum,
       type: "Rereple",
-      category: "community/post"
+      category: "community/post",
     };
 
     axios.post("/api/util/like", body).then((response) => {
@@ -116,18 +117,20 @@ function RerepleContent(props) {
             ></i>
             {hambucControl &&
               (user.userData.uid === rereple.auther.uid ? (
-                <UserModal
+                <RepleModal
                   reple={reple}
                   rereple={rereple}
                   setUpdateCheck={setUpdateCheck}
                   modalType="rereple"
+                  isUser={true}
                   type={props.type}
                 />
               ) : (
-                <GuestModal
+                <RepleModal
                   rereple={rereple}
                   modalType="rereple"
                   type={props.type}
+                  isUser={false}
                 />
               ))}
           </div>

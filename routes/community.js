@@ -118,7 +118,6 @@ router.post("/postUpdate", (req, res) => {
   temp.content = req.body.content;
   temp.images = req.body.images;
   temp.subCategory = req.body.subCategory;
-  temp.filters = req.body.filters;
   let key = req.body.id;
   Community.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
     (err, post) => {
