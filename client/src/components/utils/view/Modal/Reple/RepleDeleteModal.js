@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 
-import { DeleteModalDiv } from "./ModalCSS.js";
+import { DeleteModalDiv } from "../ModalCSS.js";
 
 function RepleDeleteModal(props) {
   useEffect(() => {

@@ -4,9 +4,8 @@ import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 import Avatar from "react-avatar";
 
-import UserModal from "../../Modal/UserModal.js";
-import GuestModal from "../../Modal/GuestModal.js";
-import RepleModal from "../../Modal/RepleModal.js";
+import RepleUserModal from "../../Modal/Reple/RepleUserModal.js";
+import RepleGusetModal from "../../Modal/Reple/RepleGusetModal";
 import RerepleEditForm from "../Form/RerepleEditForm.js";
 
 import { RerepleContentGrid } from "../RepleCSS.js";
@@ -117,20 +116,18 @@ function RerepleContent(props) {
             ></i>
             {hambucControl &&
               (user.userData.uid === rereple.auther.uid ? (
-                <RepleModal
+                <RepleUserModal
                   reple={reple}
                   rereple={rereple}
                   setUpdateCheck={setUpdateCheck}
                   modalType="rereple"
-                  isUser={true}
                   type={props.type}
                 />
               ) : (
-                <RepleModal
+                <RepleGusetModal
                   rereple={rereple}
                   modalType="rereple"
                   type={props.type}
-                  isUser={false}
                 />
               ))}
           </div>

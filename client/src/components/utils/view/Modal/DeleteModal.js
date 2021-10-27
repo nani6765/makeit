@@ -24,40 +24,6 @@ function DeleteModal(props) {
           alert("게시글 삭제 실패");
         }
       });
-      //댓글 삭제
-    } else if (props.modalType === "reple") {
-      console.log("props", props.RepleInfo);
-      let body = {
-        postId: props.RepleInfo.postId,
-        repleId: props.RepleInfo._id,
-        rerepleNum: props.RepleInfo.rerepleNum,
-        type: props.type,
-      };
-
-      axios.post("/api/util/repleDelete", body).then((response) => {
-        if (response.data.success) {
-          alert("댓글 삭제 성공");
-          window.location.reload();
-        } else {
-          alert("댓글 삭제 실패");
-        }
-      });
-      //대댓글 삭제
-    } else if (props.modalType === "rereple") {
-      let body = {
-        repleId: props.reple._id,
-        rerepleId: props.rereple._id,
-        type: props.type,
-      };
-
-      axios.post("/api/util/rerepleDelete", body).then((response) => {
-        if (response.data.success) {
-          alert("댓글 삭제 성공");
-          window.location.reload();
-        } else {
-          alert("댓글 삭제 실패");
-        }
-      });
     }
   }
 
@@ -69,14 +35,12 @@ function DeleteModal(props) {
           onClick={() => props.setModalFlag(false)}
         ></div>
         <div className="gridDiv">
-          <p className="title">
-            {props.type === "post" ? "게시물" : "댓글"} 삭제
-          </p>
+          <p className="title">개시글 삭제</p>
           <span className="delete" onClick={() => props.setModalFlag(false)}>
             X
           </span>
           <p className="desc">
-            해당 {props.type === "post" ? "게시물" : "댓글"}을 삭제하시겠습니까?
+            해당 게시글을 삭제하시겠습니까?
             <br />
             삭제된 내용은 복원할 수 없습니다.
           </p>

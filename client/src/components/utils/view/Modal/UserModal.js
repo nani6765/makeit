@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 
 import DeleteModal from "./DeleteModal.js";
@@ -10,7 +10,6 @@ function UserModal(props) {
 
   const [ModalFlag, setModalFlag] = useState(false);
   const [PostInfo, setPostInfo] = useState(props.postInfo || "");
-  const [RepleInfo, setRepleInfo] = useState(props.repleInfo || "");
 
   function EditHandler() {
     if (props.modalType === "post") {
@@ -18,8 +17,6 @@ function UserModal(props) {
         pathname: "/community/update/" + PostInfo.postNum,
         state: { postInfo: PostInfo },
       });
-    } else {
-      props.setUpdateCheck(true);
     }
   }
 
@@ -30,25 +27,6 @@ function UserModal(props) {
           PostInfo={PostInfo}
           setModalFlag={setModalFlag}
           modalType="post"
-          type={props.type}
-        />
-      );
-    } else if (props.modalType === "reple") {
-      return (
-        <DeleteModal
-          RepleInfo={RepleInfo}
-          setModalFlag={setModalFlag}
-          modalType="reple"
-          type={props.type}
-        />
-      );
-    } else {
-      return (
-        <DeleteModal
-          reple={props.reple}
-          rereple={props.rereple}
-          setModalFlag={setModalFlag}
-          modalType="rereple"
           type={props.type}
         />
       );
@@ -63,13 +41,6 @@ function UserModal(props) {
           수정
         </button>
       </div>
-      {props.modalType === "reple" && (
-        <div style={{ marginTop: "10px" }}>
-          <button className="edit" onClick={() => props.setrerepleUpload(true)}>
-            <i className="bi bi-chat-right"></i>대댓글 달기
-          </button>
-        </div>
-      )}
       <div>
         <button className="delete" onClick={() => setModalFlag(true)}>
           <i className="bi bi-trash"></i>삭제

@@ -1,24 +1,27 @@
 import React from "react";
-
 import { withRouter, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
-import { ModalDiv } from "./ModalCSS.js";
+import { ModalDiv } from "../ModalCSS.js";
 
-function GuestModal(props) {
+function RepleGuseModal(props) {
   const user = useSelector((state) => state.user);
   let history = useHistory();
 
   const ModalStyle = () => {
-    if (props.modalType === "post") {
-      return null;
+    if (props.modalType === "reple") {
+      return { justifyContent: "space-around" };
+    } else {
+      return { minHeight: "50px", display: "flex", justifyContent: "center" };
     }
   };
 
   const OtherUid = () => {
-    if (props.modalType === "post") {
-      return props.postInfo.auther.uid;
+    if (props.modalType === "reple") {
+      return props.repleInfo.uid;
+    } else {
+      return props.rerepleInfo.uid;
     }
   };
 
@@ -46,8 +49,15 @@ function GuestModal(props) {
           쪽지 보내기
         </button>
       </div>
+      {props.modalType === "reple" && (
+        <div>
+          <button className="edit" onClick={() => props.setrerepleUpload(true)}>
+            <i className="bi bi-chat-right"></i>대댓글 달기
+          </button>
+        </div>
+      )}
     </ModalDiv>
   );
 }
 
-export default withRouter(GuestModal);
+export default withRouter(RepleGuseModal);

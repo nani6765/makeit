@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Avatar from "react-avatar";
 
-import RepleModal from "../Modal/RepleModal.js";
+import RepleUserModal from "../Modal/Reple/RepleUserModal.js";
+import RepleGusetModal from "../Modal/Reple/RepleGusetModal.js";
 
 import RepleEditForm from "./Form/RepleEditForm.js";
 import RerepleUpload from "./Form/RerepleUpload.js";
@@ -89,20 +90,18 @@ function RepleContent(props) {
                 ></i>
                 {hambucControl &&
                   (user.userData.uid === Reple.auther.uid ? (
-                    <RepleModal
+                    <RepleUserModal
                       repleInfo={Reple}
                       setUpdateCheck={setUpdateCheck}
                       setrerepleUpload={setrerepleUpload}
                       modalType="reple"
-                      isUser={true}
                       type={props.type}
                     />
                   ) : (
-                    <RepleModal
+                    <RepleGusetModal
                       setrerepleUpload={setrerepleUpload}
                       repleInfo={Reple}
                       modalType="reple"
-                      isUser={false}
                       type={props.type}
                     />
                   ))}
