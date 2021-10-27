@@ -56,7 +56,7 @@ function IPList(props) {
       </div>
     </PartIPLoListDiv>
     <FNBDiv>   
-      <UploadButton category="IP" />
+      <UploadButton category="프로알리기" />
       <Pagination PageIdxArr={PageIdxArr} Skip={Skip} setSkip={setSkip} PageLen={PageLen} />
     </FNBDiv>
     </>

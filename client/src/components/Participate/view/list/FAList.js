@@ -55,7 +55,7 @@ function FAList(props) {
       </PartFilter>
       <PostList type="FA" Sort={props.Sort} Skip={Skip} Gender={Gender} FilmType={FilmType} Classification={Classification} />
       <FNBDiv>   
-        <UploadButton category="FA" />
+        <UploadButton category="배우찾기" />
         <Pagination PageIdxArr={PageIdxArr} Skip={Skip} setSkip={setSkip} PageLen={PageLen} />
       </FNBDiv>
     </>

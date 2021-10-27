@@ -71,8 +71,12 @@ const ShareVideoDiv = styled.div`
       }
       li {
         display: inline-block;
-        padding: 0px 5px;
+        padding: 0px 6px;
         border-right: 1.5px solid black;
+        p {
+          cursor: pointer;
+          margin: 0;
+        }
       }
       li.active {
         font-weight: bold;

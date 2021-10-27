@@ -20,6 +20,12 @@ function ShareVideoUpload(props) {
   const [ShareOpts, setShareOpts] = useState("공개");
 
   const radioOptions = ["공개", "일부공개"];
+  
+  useEffect(() => {
+    if(!user.userData) {
+      props.history.push({pathname: "/making", state: {menu: "제작 영상 알리기"}});
+    }
+  }, []);
 
   useEffect(() => {
     setThumbnail("");
@@ -72,7 +78,7 @@ function ShareVideoUpload(props) {
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
         alert("의뢰 게시가 완료되었습니다.");
-        props.history.push("/making");
+        props.history.push("/login");
       } else {
         alert("의뢰 게시가 실패하였습니다.");
       }

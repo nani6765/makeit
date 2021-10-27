@@ -38,7 +38,7 @@ function ShareVideo(props) {
       if (parseInt(Skip / 120) * 10 + i === PageLen) break;
     }
     setPageIdxArr(temp);
-  }, [parseInt(Skip/120)])
+  }, [PageLen, parseInt(Skip/120)])
 
   return (
     <ShareVideoDiv>
@@ -84,7 +84,7 @@ function ShareVideo(props) {
                     }
                     className={Skip / 12 + 1 === page ? "active" : null}
                   >
-                    {page}
+                    <p>{page}</p>
                   </li>
                 );
               })}

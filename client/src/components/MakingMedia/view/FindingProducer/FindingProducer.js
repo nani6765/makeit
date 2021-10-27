@@ -39,7 +39,7 @@ function FindingProducer(props) {
       if (parseInt(Skip / 120) * 10 + i === PageLen) break;
     }
     setPageIdxArr(temp);
-  }, [parseInt(Skip / 120)]);
+  }, [PageLen, parseInt(Skip / 120)]);
 
   useEffect(() => {
     setSkip(0);
@@ -103,7 +103,7 @@ function FindingProducer(props) {
                     }
                     className={Skip / 12 + 1 === page ? "active" : null}
                   >
-                    {page}
+                    <p>{page}</p>
                   </li>
                 );
               })}

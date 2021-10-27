@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import FAUpload from "./form/FAUpload.js";
@@ -10,18 +11,24 @@ function ParticipateUpload(props) {
   const user = useSelector((state) => state.user.userData);
   const setContent = () => {
     switch (props.location.state.category) {
-      case "FA":
+      case "배우찾기":
         return <FAUpload user={user} />;
-      case "FP":
+      case "파트너찾기":
         return <FPUpload user={user} />;
-      case "IP":
+      case "프로알리기":
         return <IPUpload user={user} />;
-      case "Lo":
+      case "로케이션":
         return <LoUpload user={user} />;
       default:
         return <FPUpload user={user} />;
     }
   };
+
+  useEffect(() => {
+    if(!user) {
+      props.history.push("/login");
+    }
+  }, [])
 
   return (
     <div>
@@ -32,4 +39,4 @@ function ParticipateUpload(props) {
     );
 }
 
-export default ParticipateUpload;
+export default withRouter(ParticipateUpload);

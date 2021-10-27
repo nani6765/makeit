@@ -58,7 +58,7 @@ function LoList(props) {
         </div>
       </PartIPLoListDiv>
       <FNBDiv>   
-        <UploadButton category="Lo" />
+        <UploadButton category="로케이션" />
         <Pagination PageIdxArr={PageIdxArr} Skip={Skip} setSkip={setSkip} PageLen={PageLen} />
       </FNBDiv>
     </>

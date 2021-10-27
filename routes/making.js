@@ -317,7 +317,7 @@ router.post("/requestVideo", (req, res) => {
     .populate("auther")
     .sort(sort)
     .skip(req.body.skip)
-    .limit(10)
+    .limit(6)
     .exec()
     .then((post) => {
       return res.status(200).send({ success: true, post: post });
@@ -472,7 +472,7 @@ router.post("/shareVideo", (req, res) => {
 });
 
 router.post("/shareVideo/getPageLen", (req, res) => {
-  ShareVideo.count({})
+  ShareVideo.countDocuments({})
   .exec()
   .then((len) => {
     return res.status(200).send({success: true, len: len});

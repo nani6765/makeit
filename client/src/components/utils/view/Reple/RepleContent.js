@@ -26,7 +26,8 @@ function RepleContent(props) {
   });
 
   useEffect(() => {
-    if (Reple.likeArray.includes(user.userData.uid)) {
+    
+    if (user.userData && Reple.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
       setlikeFlag(false);
@@ -34,12 +35,12 @@ function RepleContent(props) {
   }, [likeFlag]);
 
   function LikeHandler() {
-    if (Reple.auther.uid === user.userData.uid) {
-      return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
-    }
     if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
       return props.history.push("/login");
+    }
+    if (Reple.auther.uid === user.userData.uid) {
+      return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
     }
     let target = document.querySelector("#likeArea");
     target.style.disable = "true";

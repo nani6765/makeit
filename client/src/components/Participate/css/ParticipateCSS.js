@@ -421,6 +421,12 @@ const FNBDiv = styled.div`
         li {
           border-left: 1px solid black;
           padding-left: 0.5rem;
+          text-decoration: none;
+          list-style: none;
+          p {
+            cursor: pointer;
+            margin: 0;
+          }
         }
         li:first-child {
           border: none;
