@@ -8,11 +8,11 @@ import axios from "axios";
 
 import PostImages from "./PostImages.js";
 import { DetailDiv } from "../../css/ParticipateDetailCSS.js";
-import { ReactComponent as LGIcon } from "../../../MakingMedia/css/Img/LikeGrey.svg"
+import { ReactComponent as LGIcon } from "../../../MakingMedia/css/Img/LikeGrey.svg";
 import { ReactComponent as LPIcon } from "../../../MakingMedia/css/Img/LikePurple.svg";
 
 function ShareVideoPost(props) {
-  const user = useSelector((state) => state.user.userData);
+  const user = useSelector((state) => state.user);
 
   const [likeFlag, setlikeFlag] = useState(false);
   const [hambucControl, sethambucControl] = useState(false);
@@ -24,7 +24,7 @@ function ShareVideoPost(props) {
   });
 
   useEffect(() => {
-      console.log(props.user);
+    console.log(props.user);
     if (user.userData && props.PostInfo.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
@@ -123,12 +123,10 @@ function ShareVideoPost(props) {
           />
         </div>
         */}
-        {
-          props.PostInfo.images && <PostImages images={props.PostInfo.images} />
-        }
-        {
-          props.PostInfo.thumbnail && <PostImages images={props.PostInfo.thumbnail} />
-        }
+        {props.PostInfo.images && <PostImages images={props.PostInfo.images} />}
+        {props.PostInfo.thumbnail && (
+          <PostImages images={props.PostInfo.thumbnail} />
+        )}
         <div className="desc">
           <p>{props.PostInfo.content}</p>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FPRule from "../../../../utils/rule/FPRule.js";
 import { DetailFilterDiv, DetaulContentSubTitle } from "../../../css/FPDCSS.js";
 

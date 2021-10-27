@@ -80,6 +80,7 @@ const ProducerTitleDiv = styled.div`
     width: 50%;
     .like {
       margin-bottom: 10px;
+      user-select: none;
       color: #ccd2e3;
       span {
         margin-right: 10px;
@@ -112,6 +113,8 @@ const ProducerTitleDiv = styled.div`
     }
     .review {
       color: #ffe459;
+      user-select: none;
+      margin-top: 1rem;
       span {
         margin-left: 10px;
         color: #ccd2e3;

@@ -11,6 +11,7 @@ function ReviewArea(props) {
   useEffect(() => {
     let body = { url: props.PostURL };
     axios.post("/api/making/producer/review", body).then((response) => {
+      console.log(response);
       setReviewList([...response.data.review]);
     });
   }, []);
@@ -18,7 +19,7 @@ function ReviewArea(props) {
   return (
     <div id="review" style={{ marginTop: "1rem" }}>
       <DetaulContentSubTitle>서비스 평가</DetaulContentSubTitle>
-      <ReviewForm PostURL={props.Url} />
+      <ReviewForm PostURL={props.PostURL} />
       {ReviewList[0] &&
         ReviewList.map((review, idx) => {
           console.log(idx, " : ", review);

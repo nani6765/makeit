@@ -2,10 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import { ProducerTitleDiv } from "../../../css/FPDCSS.js";
-
 import axios from "axios";
 
+import { useSelector } from "react-redux";
+import { withRouter, useHistory } from "react-router";
+
 function ProducerTitleDetail(props) {
+  const user = useSelector((state) => state.user);
+  let history = useHistory();
+
   var settings = {
     dots: true,
     infinite: true,
@@ -14,6 +19,11 @@ function ProducerTitleDetail(props) {
     easing: "ease-in-out",
     slidesToShow: 1,
     slidesToScroll: 1,
+  };
+
+  const GuestLikeHandler = () => {
+    alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
+    return history.push("/login");
   };
 
   const likeHandler = (key) => {
@@ -27,7 +37,7 @@ function ProducerTitleDetail(props) {
       key: key,
       url: props.PostInfo.url,
       type: "ProPost",
-      category: "making/ProducerPost"
+      category: "making/ProducerPost",
     };
 
     axios.post("/api/making/producer/producerLike", body).then((response) => {
@@ -79,7 +89,7 @@ function ProducerTitleDetail(props) {
                   ? likeHandler(
                       props.PostInfo.likeArray.includes(props.user.uid)
                     )
-                  : null
+                  : GuestLikeHandler()
               }
             >
               찜하기
@@ -119,4 +129,4 @@ function ProducerTitleDetail(props) {
   );
 }
 
-export default ProducerTitleDetail;
+export default withRouter(ProducerTitleDetail);

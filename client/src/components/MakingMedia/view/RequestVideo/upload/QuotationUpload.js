@@ -79,7 +79,7 @@ function QuotationUpload(props) {
 
     if (!user.userData) {
       alert("회원만 글을 작성할 수 있습니다.");
-      props.history.goBack();
+      props.history.push("/login");
     }
   }, []);
 
