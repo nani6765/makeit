@@ -198,10 +198,11 @@ router.post("/producer/producerLike", (req, res) => {
 //         review          //
 /////////////////////////////
 router.post("/producer/review", (req, res) => {
-  let url = req.body.url;
+  let url = parseInt(req.body.url);
   ProReview.find({ url: url })
     .exec()
     .then((doc) => {
+      console.log(url, doc);
       if (doc === null) {
         return res.status(200).send({ review: [] });
       } else {
@@ -372,11 +373,11 @@ router.post("/requestVideo/reqPostSubmit", (req, res) => {
 router.post("/requestVideo/reqPostEdit", (req, res) => {
   let temp = req.body;
 
-    temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-    RequestPost.findOneAndUpdate({url: temp.url}, temp)
+  temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
+  RequestPost.findOneAndUpdate({ url: temp.url }, temp)
     .exec()
     .then((response) => {
-      return res.status(200).send({success: true});
+      return res.status(200).send({ success: true });
     })
     .catch((err) => {
       console.log("reqPostEdit Error: ", err);
