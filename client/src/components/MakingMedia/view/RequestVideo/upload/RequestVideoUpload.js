@@ -85,8 +85,7 @@ function RequestVideoUpload(props) {
 
   useEffect(() => {
     if(!user.userData) {
-      alert("회원만 글을 작성할 수 있습니다.");
-      props.history.goBack();
+      props.history.push("/login");
     }
   }, []);
   
@@ -95,7 +94,7 @@ function RequestVideoUpload(props) {
       <UploadHead>
         <div>
           <h1>
-            <span onClick={() => props.history.goBack()}>&lt;</span>
+            <span onClick={() => props.history.push({pathname: "/making", state: {menu: "영상 의뢰하기"}})}>&lt;</span>
             의뢰 작성하기
           </h1>
         </div>

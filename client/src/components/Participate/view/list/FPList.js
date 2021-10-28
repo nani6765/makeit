@@ -51,7 +51,7 @@ function FPList(props) {
       </PartFilter>
       <PostList type="FP" Sort={props.Sort} Skip={Skip} FilmType={FilmType} Classification={Classification}/>
       <FNBDiv>   
-        <UploadButton category="FP" />
+        <UploadButton category="파트너찾기" />
         <Pagination PageIdxArr={PageIdxArr} Skip={Skip} setSkip={setSkip} PageLen={PageLen} />
       </FNBDiv>
     </>

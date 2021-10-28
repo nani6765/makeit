@@ -22,7 +22,9 @@ function RequestVideo(props) {
 
     axios.post("/api/making/requestVideo/postLength", body).then((response) => {
       if (response.data.success) {
-        setPageLen(parseInt((response.data.len - 1) / 10) + 1);
+        console.log(response.data.len);
+        setPageLen(parseInt((response.data.len - 1) / 6) + 1);
+        setSkip(0);
       }
     });
   };
@@ -34,11 +36,16 @@ function RequestVideo(props) {
   useEffect(() => {
     let temp = [];
     for (let i = 1; i <= 10; i++) {
-      temp.push(parseInt(Skip / 100) * 10 + i);
-      if (parseInt(Skip / 100) * 10 + i === PageLen) break;
+      temp.push(parseInt(Skip / 60) * 10 + i);
+      if (parseInt(Skip / 60) * 10 + i === PageLen) break;
     }
     setPageIdxArr(temp);
-  }, [parseInt(Skip / 100)]);
+  }, [PageLen, parseInt(Skip / 60)]);
+
+  useEffect(() => {
+    console.log(PageIdxArr);
+    console.log("PageLen", PageLen);
+  }, [PageIdxArr]);
 
   return (
     <RequestListDiv>
@@ -77,7 +84,7 @@ function RequestVideo(props) {
         <div className="FNB">
           <div className="pagination">
             {PageIdxArr[0] !== 1 ? (
-              <button onClick={() => setSkip((parseInt(Skip / 100) - 1) * 100)}>
+              <button onClick={() => setSkip((parseInt(Skip / 60) - 1) * 60)}>
                 &lt; 이전
               </button>
             ) : null}
@@ -87,18 +94,21 @@ function RequestVideo(props) {
                   <li
                     key={idx}
                     onClick={() =>
-                      setSkip(parseInt(Skip / 100) * 100 + 10 * idx)
+                      setSkip(parseInt(Skip / 60) * 60 + 6 * idx)
                     }
-                    className={Skip / 10 + 1 === page ? "active" : null}
+                    className={Skip / 6 + 1 === page ? "active" : null}
                   >
-                    {page}
+                    <p>{page}</p>
                   </li>
                 );
               })}
             </ul>
             {
+              console.log(PageIdxArr[PageIdxArr.length -1], PageLen)
+            }
+            {
                 PageIdxArr[PageIdxArr.length - 1] < PageLen && (
-                  <button onClick={() => setSkip((parseInt(Skip / 100) + 1) * 100)}>
+                  <button onClick={() => setSkip((parseInt(Skip / 60) + 1) * 60)}>
                     다음 &gt;
                   </button>
                 )

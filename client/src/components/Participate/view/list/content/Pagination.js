@@ -15,7 +15,9 @@ function Pagination(props) {
             {
               props.PageIdxArr.map((page, idx) => {
                 return (
-                    <li key={idx} className={page===props.Skip + 1 ? "active" : null} onClick={() => props.setSkip(page)}>{page}</li>
+                    <li key={idx} className={page===props.Skip + 1 ? "active" : null} onClick={() => props.setSkip(page)}>
+                      <p>{page}</p>
+                    </li>
                 )
               })
             }

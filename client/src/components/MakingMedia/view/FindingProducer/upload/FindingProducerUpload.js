@@ -45,47 +45,47 @@ function FindingProducerUpload(props) {
   const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
 
   useEffect(() => {
-    console.log(FAQList);
-  }, [FAQList]);
+    if(!user.userData) {
+      props.history.push("/login");
+    }
+  }, [])
 
   const LoadTempPost = async () => {
     try {
-      await axios
-        .post("/api/making/producer/loadTempPost", { uid: user.userData.uid })
-        .then((response) => {
-          console.log(response.data);
-          if (response.data.success && response.data.tempPost) {
+      if(user.userData) {
+        await axios
+          .post("/api/making/producer/loadTempPost", { uid: user.userData.uid })
+          .then((response) => {
             console.log(response.data);
-            //datail
-            setOneLineIntroduce(response.data.tempPost.oneLineIntroduce);
-            setCategory(response.data.tempPost.category);
-            setDescription(response.data.tempPost.description);
-            setWorkTypeArr(response.data.tempPost.workTypeArr);
-            setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
+            if (response.data.success && response.data.tempPost) {
+              console.log(response.data);
+              //datail
+              setOneLineIntroduce(response.data.tempPost.oneLineIntroduce);
+              setCategory(response.data.tempPost.category);
+              setDescription(response.data.tempPost.description);
+              setWorkTypeArr(response.data.tempPost.workTypeArr);
+              setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
 
-            //Portfolio
-            setThumbnail(response.data.tempPost.thumbnailArr);
-            setDetailImgArr(response.data.tempPost.detailImgArr);
-            setVideoArr(response.data.tempPost.videoArr);
+              //Portfolio
+              setThumbnail(response.data.tempPost.thumbnailArr);
+              setDetailImgArr(response.data.tempPost.detailImgArr);
+              setVideoArr(response.data.tempPost.videoArr);
 
-            //price
-            setPriceInfo(response.data.tempPost.priceInfo);
-            setPriceDirectInput(response.data.tempPost.priceDirectInput);
+              //price
+              setPriceInfo(response.data.tempPost.priceInfo);
+              setPriceDirectInput(response.data.tempPost.priceDirectInput);
 
-            //confirm
-            setEditandReprogress(response.data.tempPost.editandReprogress);
-            setFAQList(response.data.tempPost.FAQList);
-          }
-        });
+              //confirm
+              setEditandReprogress(response.data.tempPost.editandReprogress);
+              setFAQList(response.data.tempPost.FAQList);
+            }
+          });
+      }
     } catch (error) {
       alert("임시저장 불러오기 실패");
       console.log("임시저장 error", error);
     }
   };
-
-  useEffect(() => {
-    LoadTempPost();
-  }, []);
 
   const TempSaveHandler = () => {
     let body = {
@@ -228,7 +228,7 @@ function FindingProducerUpload(props) {
     <>
       <UploadHead>
         <div>
-          <h1>
+          <h1 onClick={() => props.history.goBack()}>
             <span>&lt;</span>
             게시하기
           </h1>
