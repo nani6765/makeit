@@ -114,6 +114,7 @@ const DetailDiv = styled.div`
     margin-top: 30px;
     img {
       width: 300px;
+      cursor: pointer;
       ${mq[0]} {
         width: 100%;
       }

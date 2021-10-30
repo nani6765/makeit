@@ -96,6 +96,7 @@ const InfoDiv = styled.div`
   display: inline-block;
   width: 30%;
   padding: 10px;
+  cursor: pointer;
   .container {
     padding: 20px;
     background: #fff;

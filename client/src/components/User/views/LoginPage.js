@@ -54,6 +54,7 @@ function LoginPage(props) {
     text-align: right;
     color: #454345;
     font-size: 10px;
+    cursor: pointer;
   `;
 
   const GoRegister = css`
