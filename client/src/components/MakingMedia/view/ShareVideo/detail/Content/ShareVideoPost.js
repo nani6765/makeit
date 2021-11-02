@@ -51,6 +51,7 @@ function ShareVideoPost(props) {
     target.style.disable = "true";
 
     let body = {
+      _id: props.PostInfo._id,
       postNum: props.PostInfo.postNum,
       likeFlag: likeFlag,
       userId: user.userData.uid,
@@ -125,7 +126,7 @@ function ShareVideoPost(props) {
         <div className="desc">
           <p>{props.PostInfo.oneLineIntroduce}</p>
         </div>
-        <div className="like">
+        <div className="like" id="likeArea">
           {likeFlag ? (
             <LPIcon onClick={() => LikeHandler()} />
           ) : (

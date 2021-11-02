@@ -49,8 +49,8 @@ function RequestVideoUpload(props) {
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
       category: Category,
-      minPrice: MinPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-      maxPrice: MaxPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+      minPrice: MinPrice,
+      maxPrice: MaxPrice,
       deadline: Deadline.toLocaleDateString(),
       filmType: FilmType,
       uniqueness: Uniqueness,
@@ -87,6 +87,7 @@ function RequestVideoUpload(props) {
     if(!user.userData) {
       props.history.push("/login");
     }
+    window.scrollTo(0, 0);
   }, []);
   
   return (
@@ -106,7 +107,11 @@ function RequestVideoUpload(props) {
           className="OneLineIntroduce"
           placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
           value={OneLineIntroduce}
-          onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
+          onChange={(e) => {
+            if(e.currentTarget.value.length <= 30) {
+              setOneLineIntroduce(e.currentTarget.value)
+            }
+          }}
         />
         <UploadContent>
           <RequestFilter

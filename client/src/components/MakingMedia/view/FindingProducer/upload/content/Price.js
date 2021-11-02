@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
@@ -17,17 +17,9 @@ function Price(props) {
     "500만원 이상",
   ];
 
-  const CheckEmptyContent = () => {
-    if (props.PriceInfo === "가격선택") {
-      alert("가격을 선택하세요.");
-      return false;
-    }
-    if (props.PriceInfo === props.PriceDirectInput) {
-      alert("가격을 입력하세요.");
-      return false;
-    }
-    return true;
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <PriceDiv>
@@ -83,7 +75,7 @@ function Price(props) {
       <FooterBtnArea
         setCurrentProcess={props.setCurrentProcess}
         NextStep="수정/환불안내"
-        CheckEmptyContent={CheckEmptyContent}
+        CheckEmptyContent={props.CheckEmptyContent}
         TempSaveHandler={props.TempSaveHandler}
       />
     </PriceDiv>

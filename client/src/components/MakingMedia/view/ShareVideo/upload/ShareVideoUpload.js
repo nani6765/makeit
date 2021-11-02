@@ -25,6 +25,7 @@ function ShareVideoUpload(props) {
     if(!user.userData) {
       props.history.push("/login");
     }
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -104,7 +105,11 @@ function ShareVideoUpload(props) {
           className="OneLineIntroduce"
           placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
           value={OneLineIntroduce}
-          onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
+          onChange={(e) => {
+            if(e.currentTarget.value.length <= 30) {
+              setOneLineIntroduce(e.currentTarget.value)
+            }
+          }}
         />
 
         <ShareVideoContentDiv>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import Avatar from "react-avatar";
 import { RequestPostCard } from "../../css/RVCSS.js";
 import { LinkCSS } from "../../css/CommonCSS.js";
+import qs from 'qs';
 
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -12,6 +13,7 @@ import { jsx, css } from "@emotion/react";
 
 function RequestPostList(props) {
   const [PostList, setPostList] = useState([]);
+  let history = useHistory();
 
   useEffect(() => {
     let body = {
@@ -28,7 +30,37 @@ function RequestPostList(props) {
         console.log("get requestVideo Error", response.data.err);
       }
     });
-  }, [props.SubCategory, props.Sort, props.Skip]);
+  }, [props.SubCategory, props.Sort]);
+
+  
+  useEffect(() => {
+    let body = {
+      category: props.SubCategory,
+      sort: props.Sort,
+      skip: props.Skip,
+    };
+
+    axios.post("/api/making/requestVideo", body).then((response) => {
+      if (response.data.success) {
+        let temp = [...response.data.post];
+        setPostList(temp);
+        //history.push(`making?category=requestVideo&sort=${props.Sort}&skip=${props.Skip}`);
+      } else {
+        console.log("get requestVideo Error", response.data.err);
+      }
+    });
+  }, [props.Skip]);
+
+  /*
+  useEffect(() => {
+    if(history.location.search) {
+      const query = qs.parse(history.location.search, {
+        ignoreQueryPrefix: true
+      });
+      console.log(query);
+    }
+  }, [props.Skip]);
+  */
 
   return (
     <div>

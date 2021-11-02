@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
 import FPRule from "../../../../../utils/rule/FPRule.js";
@@ -14,13 +14,9 @@ function Confirm(props) {
     props.setFAQList([...temp]);
   };
 
-  const CheckEmptyContent = () => {
-    if (!props.EditandReprogress) {
-      alert("수정 및 재진행 절차를 입력하세요.");
-      return false;
-    }
-    return true;
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <ConfirmDiv>
@@ -76,7 +72,7 @@ function Confirm(props) {
       <FooterBtnArea
         setCurrentProcess={props.setCurrentProcess}
         NextStep="완료"
-        CheckEmptyContent={CheckEmptyContent}
+        CheckEmptyContent={props.CheckEmptyContent}
         TempSaveHandler={props.TempSaveHandler}
         SubmitHandler={props.SubmitHandler}
         setCurrentProcess={props.setCurrentProcess}

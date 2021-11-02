@@ -11,6 +11,8 @@ import axios from "axios";
 
 import { UploadForm, UploadHead } from "../../../css/CommonUploadCSS.js";
 import { ContentDiv, LeftContent } from "../../../css/FPUCSS.js";
+import Switch from "react-bootstrap/esm/Switch";
+import e from "cors";
 
 function FindingProducerUpload(props) {
   const user = useSelector((state) => state.user);
@@ -48,6 +50,8 @@ function FindingProducerUpload(props) {
     if(!user.userData) {
       props.history.push("/login");
     }
+    window.scrollTo(0, 0);
+    LoadTempPost();
   }, [])
 
   const LoadTempPost = async () => {
@@ -86,6 +90,81 @@ function FindingProducerUpload(props) {
       console.log("임시저장 error", error);
     }
   };
+
+  const DetailCheckEmptyContent = () => {
+    if (!OneLineIntroduce) {
+      alert("한줄 소개를 입력하세요.");
+      return false;
+    }
+    if (Category === "카테고리") {
+      alert("카테고리를 선택하세요.");
+      return false;
+    }
+    if (!Description) {
+      alert("상세 설명을 입력하세요.");
+      return false;
+    }
+    return true;
+  };
+  
+  const PortfolioCheckEmptyContent = () => {
+    if (!Thumbnail.length) {
+      alert("썸네일을 등록하세요.");
+      return false;
+    }
+    if (VideoArr.length < 3) {
+      alert("동영상을 3개 이상 등록하세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const PriceCheckEmptyContent = () => {
+    if (PriceInfo === "가격선택") {
+      alert("가격을 선택하세요.");
+      return false;
+    }
+    if (PriceInfo === PriceDirectInput) {
+      alert("가격을 입력하세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const ConfirmCheckEmptyContent = () => {
+    if (!EditandReprogress) {
+      alert("수정 및 재진행 절차를 입력하세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const NextHandler = (process) => {
+    switch(process.value) {
+      case "포트폴리오":
+        if(!DetailCheckEmptyContent())
+          return;
+        break;
+      case "가격설정":
+        if(!DetailCheckEmptyContent())
+          return;
+        if(!PortfolioCheckEmptyContent())
+            return;
+        break;
+      case "수정/환불안내":
+        if(!DetailCheckEmptyContent())
+          return;
+        if(!PortfolioCheckEmptyContent())
+            return;
+        if(!PriceCheckEmptyContent())
+            return;
+        break;
+      
+      default:
+        break;
+    }
+    setCurrentProcess(process.value);
+  }
 
   const TempSaveHandler = () => {
     let body = {
@@ -164,6 +243,7 @@ function FindingProducerUpload(props) {
             VideoPurposeArr={VideoPurposeArr}
             setVideoPurposeArr={setVideoPurposeArr}
             TempSaveHandler={TempSaveHandler}
+            CheckEmptyContent={DetailCheckEmptyContent}
           />
         );
 
@@ -178,6 +258,7 @@ function FindingProducerUpload(props) {
             VideoArr={VideoArr}
             setVideoArr={setVideoArr}
             TempSaveHandler={TempSaveHandler}
+            CheckEmptyContent={PortfolioCheckEmptyContent}
           />
         );
 
@@ -190,6 +271,7 @@ function FindingProducerUpload(props) {
             TempSaveHandler={TempSaveHandler}
             PriceDirectInput={PriceDirectInput}
             setPriceDirectInput={setPriceDirectInput}
+            CheckEmptyContent={PriceCheckEmptyContent}
           />
         );
 
@@ -203,6 +285,7 @@ function FindingProducerUpload(props) {
             TempSaveHandler={TempSaveHandler}
             SubmitHandler={SubmitHandler}
             setCurrentProcess={setCurrentProcess}
+            CheckEmptyContent={ConfirmCheckEmptyContent}
           />
         );
 
@@ -241,7 +324,11 @@ function FindingProducerUpload(props) {
             className="OneLineIntroduce"
             placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
             value={OneLineIntroduce}
-            onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
+            onChange={(e) => {
+              if(e.currentTarget.value.length <= 30) {
+                setOneLineIntroduce(e.currentTarget.value)
+              }
+            }}
           />
         )}
         <ContentDiv>
@@ -256,6 +343,7 @@ function FindingProducerUpload(props) {
                       className={
                         CurrentProcess === process.value ? "active" : null
                       }
+                      onClick={() => {NextHandler(process)}}
                     >
                       {idx + 1}){process.value}
                     </li>

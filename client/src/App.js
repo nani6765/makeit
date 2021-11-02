@@ -47,6 +47,8 @@ import Participate from "./components/Participate/view/Participate.js";
 import ParticipateUpload from "./components/Participate/view/upload/ParticipateUpload.js";
 import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 
+import Test from "./components/Test.js";
+
 function App() {
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -86,7 +88,8 @@ function App() {
           <Route exact path="/myPage" component={MyPage} />
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
 
-          <Route exact path="/making" component={MakingMedia} />
+        
+
           <Route
             exact
             path="/making/ProducerUpload"
@@ -133,6 +136,8 @@ function App() {
             path="/Making/ShareVideo/:url"
             component={ShareVideoDetail}
           />
+          <Route path="/making" component={MakingMedia} />
+
           <Route exact path="/participate" component={Participate} />
           <Route
             exact
@@ -144,6 +149,7 @@ function App() {
             path="/participate/post/:url"
             component={PartDetail}
           />
+          <Route path="/test" component={Test}/>
         </Switch>
         <Footer />
       </>

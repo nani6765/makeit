@@ -12,7 +12,6 @@ function ReviewForm(props) {
   let history = useHistory();
 
   const setReviewFunc = (e) => {
-    console.log("Test", e.currentTarget.value.length);
     if (e.currentTarget.value.length > 300) {
       return alert("리뷰는 300자까지 작성할 수 있습니다.");
     } else {
@@ -41,7 +40,7 @@ function ReviewForm(props) {
         alert("리뷰가 등록되었습니다.");
         return window.location.reload();
       } else {
-        return alert(response.data.message);
+        return alert("response.data.message");
       }
     });
     

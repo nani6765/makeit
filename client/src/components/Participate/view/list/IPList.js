@@ -24,6 +24,10 @@ function IPList(props) {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [SubCategory, Skip])
+
+  useEffect(() => {
     let body = {
       type: "IP",
       subCategory: SubCategory,
@@ -52,7 +56,7 @@ function IPList(props) {
     <PartIPLoListDiv>
       <IPFilter category="프로 알리기" SubCategory={SubCategory} setSubCategory={setSubCategory} SubCategoryList={SubCategoryList} />
       <div className="right">
-        <PostList type="IP" SubCategory={SubCategory} Skip={Skip} Sort/>
+        <PostList user={props.user} type="IP" SubCategory={SubCategory} Skip={Skip} Sort={props.Sort}/>
       </div>
     </PartIPLoListDiv>
     <FNBDiv>   

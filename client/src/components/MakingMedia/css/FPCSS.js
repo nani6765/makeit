@@ -178,7 +178,7 @@ const ProducerListContainer = styled.div`
       .thumbnail {
         margin-top: 10px;
         width: 100%;
-        height: 50%;
+        height: 200px;
         border-radius: 15px;
       }
       .info {

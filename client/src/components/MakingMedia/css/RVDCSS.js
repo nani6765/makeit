@@ -58,16 +58,23 @@ const NoQuotationDiv = styled.div`
 
 const QuotationInfo = styled.div`
   padding: 30px 0px;
+  height: 100%;
   .quotationList {
     width: 100%;
+    height: 100%;
     padding: 0px 30px;
     .slick-list {
       padding-bottom: 30px;
+      height: 100%;
     }
     .slick-track {
       margin: 0px;
       min-width: 100%;
       width: 100%;
+      height: 100%;
+    }
+    .slick-slide {
+      height: 100%;
     }
   }
   .btnDiv {
@@ -95,6 +102,7 @@ const LinkCSS = css`
 const InfoDiv = styled.div`
   display: inline-block;
   width: 30%;
+  height: 100%;
   padding: 10px;
   cursor: pointer;
   .container {
@@ -103,6 +111,10 @@ const InfoDiv = styled.div`
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
       0px 9px 10px rgba(163, 1, 79, 0.05);
     border-radius: 15px;
+    .private {
+      padding: 5rem 0;
+      cursor: default;
+    }
     p {
       margin-top: 20px;
       color: #a7a5a8;

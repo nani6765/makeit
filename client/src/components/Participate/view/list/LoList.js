@@ -26,6 +26,10 @@ function LoList(props) {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [SubCategory, Skip]);
+
+  useEffect(() => {
     let body = {
       type: "Lo",
       subCategory: SubCategory,
@@ -54,7 +58,7 @@ function LoList(props) {
       <PartIPLoListDiv>
         <LoFilter category="로케이션" SubCategory={SubCategory} setSubCategory={setSubCategory} SubCategoryList={SubCategoryList} />
         <div className="right">
-          <PostList type="Lo" SubCategory={SubCategory} Skip={Skip*12} Sort={props.Sort}/>
+          <PostList user={props.user} type="Lo" SubCategory={SubCategory} Skip={Skip*12} Sort={props.Sort}/>
         </div>
       </PartIPLoListDiv>
       <FNBDiv>   

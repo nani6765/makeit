@@ -13,6 +13,8 @@ import {
   QuotationDetailDiv,
 } from "../../../../css/RVDCSS.js";
 
+import "./test.css";
+
 function Quotation(props) {
   const [QTIdx, setQTIdx] = useState(-1);
   const user = useSelector((state) => state.user.userData);
@@ -39,9 +41,17 @@ function Quotation(props) {
           {props.QuotationArr.map((quotation, idx) => {
             if (quotation.isPublic) {
               if (user != null) {
-                if (props.auther !== user.uid) {
-                  console.log("ispulic", quotation.oneLineIntroduce);
-                  return null;
+                if (props.auther !== user.uid || quotation.uid !== user.uid) {
+                  return (
+                    <InfoDiv key={idx} style={{cursor:"default", height: "100%"}}>
+                      <div className="container">
+                        <div className="private">
+                          작성자에게만<br />
+                          공개된 견적입니다.
+                        </div>
+                      </div>
+                    </InfoDiv>
+                  )
                 }
               }
             }

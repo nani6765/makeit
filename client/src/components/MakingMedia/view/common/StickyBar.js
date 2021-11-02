@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { StickyBarDiv } from "../../css/CommonCSS.js";
 
 function StickyBar(props) {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [props.SubCategory]);
+    
     return (
         <StickyBarDiv>
             <div className="category">

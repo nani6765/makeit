@@ -80,6 +80,7 @@ router.post("/image", setUpload("makeit/community"), (req, res, next) => {
 
 router.post("/", (req, res) => {
   let temp = req.body;
+
   let PostModel = SelectModel(req.body.type);
   //카테고리 정렬
   let category = {
@@ -87,9 +88,9 @@ router.post("/", (req, res) => {
     $or: [],
   };
 
-  if(temp.category && temp.category !== "전체") {
+  if(temp.subCategory && temp.subCategory !== "전체") {
     delete category.$or;
-    category.category = req.body.category;
+    category.subCategory = req.body.subCategory;
   }
   if(temp.gender) {
     for(let i=0; i<temp.gender.length; i++) {
@@ -107,7 +108,7 @@ router.post("/", (req, res) => {
       category["$or"].push({classification: temp.classification[i]});
     }
   }
-  if(!category.$or.length)
+  if(category.$or && !category.$or.length)
     delete category.$or;
 
   //최신순&&인기순 정렬

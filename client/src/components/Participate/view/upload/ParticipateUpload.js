@@ -28,6 +28,7 @@ function ParticipateUpload(props) {
     if(!user) {
       props.history.push("/login");
     }
+    window.scrollTo(0, 0);
   }, [])
 
   return (
