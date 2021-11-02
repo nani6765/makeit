@@ -100,7 +100,7 @@ function PostList(props) {
                   <Link
                     to={"/participate/post/" + post.postNum}
                     key={idx}
-                    style={{ width: "30%", color:"black", textDecoration:"none", marginLeft: "15px" }}
+                    style={{ width: "30%", color:"black", textDecoration:"none", marginLeft: "3%", marginBottom: "1rem" }}
                     css={LinkCSS}
                   >
                     <IPLoPostCard>
@@ -108,7 +108,11 @@ function PostList(props) {
                       <p className="author">{post.auther.displayName}</p>
                       <p className="intro">{post.oneLineIntroduce}</p>
                       <div className="like">
-                        <LGIcon />
+                        {
+                          props.user && post.likeArray.includes(props.user.uid)
+                          ? <LPIcon />
+                          : <LGIcon />
+                        }
                         추천
                         {post.likeNum != 0 && <span>({post.likeNum})</span>}
                       </div>

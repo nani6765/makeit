@@ -15,6 +15,7 @@ function RequestVideo(props) {
   const [PageIdxArr, setPageIdxArr] = useState([]);
   const [SubCategory, setSubCategory] = useState("전체");
 
+
   const getPageLen = () => {
     let body = {
       category: SubCategory,
@@ -22,7 +23,6 @@ function RequestVideo(props) {
 
     axios.post("/api/making/requestVideo/postLength", body).then((response) => {
       if (response.data.success) {
-        console.log(response.data.len);
         setPageLen(parseInt((response.data.len - 1) / 6) + 1);
         setSkip(0);
       }
@@ -41,11 +41,10 @@ function RequestVideo(props) {
     }
     setPageIdxArr(temp);
   }, [PageLen, parseInt(Skip / 60)]);
-
+  
   useEffect(() => {
-    console.log(PageIdxArr);
-    console.log("PageLen", PageLen);
-  }, [PageIdxArr]);
+    window.scrollTo(0,0);
+  }, [Skip]);
 
   return (
     <RequestListDiv>
@@ -103,9 +102,6 @@ function RequestVideo(props) {
                 );
               })}
             </ul>
-            {
-              console.log(PageIdxArr[PageIdxArr.length -1], PageLen)
-            }
             {
                 PageIdxArr[PageIdxArr.length - 1] < PageLen && (
                   <button onClick={() => setSkip((parseInt(Skip / 60) + 1) * 60)}>

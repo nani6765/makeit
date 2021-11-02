@@ -155,6 +155,7 @@ router.post("/like", (req, res) => {
     )
       .exec()
       .then((response) => {
+        console.log(response);
         if (response.uid != req.body.userId) {
           let alarmTemp = {
             uid: response.uid,

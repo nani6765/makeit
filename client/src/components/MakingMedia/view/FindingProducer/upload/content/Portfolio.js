@@ -16,6 +16,10 @@ function Portfolio(props) {
   const [CheckFlag, setCheckFlag] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setThumbnailArrLength(props.Thumbnail.length);
   }, [props.Thumbnail]);
 
@@ -40,18 +44,6 @@ function Portfolio(props) {
     let removed = [];
     removed = temp.splice(idx, 1);
     props.setVideoArr([...temp]);
-  };
-
-  const CheckEmptyContent = () => {
-    if (!props.Thumbnail.length) {
-      alert("썸네일을 등록하세요.");
-      return false;
-    }
-    if (props.VideoArr.length < 3) {
-      alert("동영상을 3개 이상 등록하세요.");
-      return false;
-    }
-    return true;
   };
 
   return (
@@ -170,7 +162,7 @@ function Portfolio(props) {
       <FooterBtnArea
         setCurrentProcess={props.setCurrentProcess}
         NextStep="가격설정"
-        CheckEmptyContent={CheckEmptyContent}
+        CheckEmptyContent={props.CheckEmptyContent}
         TempSaveHandler={props.TempSaveHandler}
       />
     </ProtFolioDiv>

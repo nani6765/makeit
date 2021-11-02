@@ -29,7 +29,7 @@ function ProducerContentDetail(props) {
               <FPRule />
             </div>
 
-            {props.PostInfo.FAQList.length > 0 && (
+            {props.PostInfo.FAQList[0].q && (
               <FAQ FAQList={props.PostInfo.FAQList} />
             )}
 

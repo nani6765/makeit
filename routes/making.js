@@ -228,7 +228,7 @@ router.post("/producer/getUser", (req, res) => {
 
 router.post("/producer/review/upload", (req, res) => {
   let temp = req.body;
-  ProReview.findOne({ uid: temp.uid })
+  ProReview.findOne({ url: temp.url, uid: temp.uid })
     .exec()
     .then((doc) => {
       if (doc === null) {

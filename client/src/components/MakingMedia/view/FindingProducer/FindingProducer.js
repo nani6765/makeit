@@ -45,6 +45,10 @@ function FindingProducer(props) {
     setSkip(0);
   }, [Sort]);
 
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [Skip]);
+
   return (
     <ProducerListDiv>
       <div className="left">

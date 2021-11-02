@@ -23,8 +23,9 @@ function ShareVideoUpload(props) {
   
   useEffect(() => {
     if(!user.userData) {
-      props.history.push({pathname: "/making", state: {menu: "제작 영상 알리기"}});
+      props.history.push("/login");
     }
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -78,7 +79,7 @@ function ShareVideoUpload(props) {
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
         alert("의뢰 게시가 완료되었습니다.");
-        props.history.push("/login");
+        props.history.push({pathname: "/making", state: {menu: "제작 영상 알리기"}});
       } else {
         alert("의뢰 게시가 실패하였습니다.");
       }
@@ -104,7 +105,11 @@ function ShareVideoUpload(props) {
           className="OneLineIntroduce"
           placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
           value={OneLineIntroduce}
-          onChange={(e) => setOneLineIntroduce(e.currentTarget.value)}
+          onChange={(e) => {
+            if(e.currentTarget.value.length <= 30) {
+              setOneLineIntroduce(e.currentTarget.value)
+            }
+          }}
         />
 
         <ShareVideoContentDiv>

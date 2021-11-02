@@ -38,7 +38,11 @@ function ShareVideo(props) {
       if (parseInt(Skip / 120) * 10 + i === PageLen) break;
     }
     setPageIdxArr(temp);
-  }, [PageLen, parseInt(Skip/120)])
+  }, [PageLen, parseInt(Skip/120)]);
+  
+  useEffect(() => {
+    window.scrollTo(0,0);
+  }, [Skip]);
 
   return (
     <ShareVideoDiv>
@@ -64,7 +68,7 @@ function ShareVideo(props) {
       </div>
 
       <div className="list">
-        <ShareVideoList Sort={Sort} Skip={Skip} />
+        <ShareVideoList user={props.user} Sort={Sort} Skip={Skip} />
       </div>
 
       <div className="FNB">

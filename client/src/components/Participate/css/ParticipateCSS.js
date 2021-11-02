@@ -188,7 +188,7 @@ const PartIPLoListDiv = styled.div`
   height: auto;
   margin-top: 30px;
   display: grid;
-  grid-template-columns: 2fr 7fr;
+  grid-template-columns: 2fr 8fr;
   grid-template-rows: auto;
   grid-template-areas: "left right";
   grid-gap: 1rem;
@@ -310,7 +310,7 @@ const IPLoPostCard = styled.div`
   border-radius: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr auto auto auto;
+  grid-template-rows: 200px auto auto auto;
   grid-template-areas:
     "thumbnail thumbnail"
     "author author"

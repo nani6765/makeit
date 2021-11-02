@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
 
@@ -35,22 +35,10 @@ function Detail(props) {
       setVideoPurpose("");
     }
   };
-
-  const CheckEmptyContent = () => {
-    if (!props.OneLineIntroduce) {
-      alert("한줄 소개를 입력하세요.");
-      return false;
-    }
-    if (props.Category === "카테고리") {
-      alert("카테고리를 선택하세요.");
-      return false;
-    }
-    if (!props.Description) {
-      alert("상세 설명을 입력하세요.");
-      return false;
-    }
-    return true;
-  };
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <DetailDiv>
@@ -110,7 +98,7 @@ function Detail(props) {
       <FooterBtnArea
         setCurrentProcess={props.setCurrentProcess}
         NextStep="포트폴리오"
-        CheckEmptyContent={CheckEmptyContent}
+        CheckEmptyContent={props.CheckEmptyContent}
         TempSaveHandler={props.TempSaveHandler}
       />
     </DetailDiv>
