@@ -71,12 +71,16 @@ function App() {
         <Header />
         <TopArea />
         <Switch>
+          {/*Main*/}
           <Route exact path="/" component={MainPage} />
           <Route exact path="/landingPage" component={LandingPage} />
+          {/*User*/}
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/register/complete" component={RegisterComplete} />
-          <Route exact path="/community" component={CommunityList} />
+          <Route exact path="/myPage" component={MyPage} />
+          <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
+          {/*Community*/}
           <Route
             exact
             path="/community/post/:postId"
@@ -84,10 +88,8 @@ function App() {
           />
           <Route exact path="/community/upload" component={PostUpload} />
           <Route exact path="/community/update/:postId" component={PostEdit} />
-
-          <Route exact path="/myPage" component={MyPage} />
-          <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
-
+          <Route path="/community" component={CommunityList} />
+          {/*Making*/}
           <Route
             exact
             path="/making/ProducerUpload"
@@ -123,7 +125,6 @@ function App() {
             path="/making/QuotationUpload"
             component={QuotationUpload}
           />
-
           <Route
             exact
             path="/making/ShareUpload"
@@ -135,14 +136,14 @@ function App() {
             component={ShareVideoDetail}
           />
           <Route path="/making" component={MakingMedia} />
-
-          <Route exact path="/participate" component={Participate} />
+          {/*Participate*/}
           <Route
             exact
             path="/participate/upload"
             component={ParticipateUpload}
           />
           <Route exact path="/participate/post/:url" component={PartDetail} />
+          <Route path="/participate" component={Participate} />
         </Switch>
         <Footer />
         <MobileFooter />
