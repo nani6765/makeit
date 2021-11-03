@@ -3,21 +3,21 @@ const path = require("path");
 const cookeParser = require("cookie-parser");
 const app = express();
 const http = require("http").createServer(app);
-const config = require("./config/key");
+const config = require("./server/config/key");
 const mongoose = require("mongoose");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookeParser());
 
-app.use("/api/main", require("./routes/main.js"));
-app.use("/api/user", require("./routes/user.js"));
-app.use("/api/community", require("./routes/community.js"));
-app.use("/api/chat", require("./routes/chat.js"));
-app.use("/api/alarm", require("./routes/alarms.js"));
-app.use("/api/making", require("./routes/making.js"));
-app.use("/api/participate", require("./routes/participate.js"));
-app.use("/api/util", require("./routes/util.js"));
+app.use("/api/main", require("./server/routes/main.js"));
+app.use("/api/user", require("./server/routes/user.js"));
+app.use("/api/community", require("./server/routes/community.js"));
+app.use("/api/chat", require("./server/routes/chat.js"));
+app.use("/api/alarm", require("./server/routes/alarms.js"));
+app.use("/api/making", require("./server/routes/making.js"));
+app.use("/api/participate", require("./server/routes/participate.js"));
+app.use("/api/util", require("./server/routes/util.js"));
 
 const port = process.env.PORT || 5000;
 

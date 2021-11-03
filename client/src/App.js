@@ -8,6 +8,7 @@ import firebase from "./config/firebase.js";
 import Header from "./components/HeaderAndFooter/Header/Header.js";
 import Footer from "./components/HeaderAndFooter/Footer/Footer.js";
 import TopArea from "./components/utils/view/Area/TopArea.js";
+import MobileFooter from "./components/HeaderAndFooter/Footer/MobileFooter.js";
 
 //Main
 import MainPage from "./components/MainPage/MainPage.js";
@@ -47,8 +48,6 @@ import Participate from "./components/Participate/view/Participate.js";
 import ParticipateUpload from "./components/Participate/view/upload/ParticipateUpload.js";
 import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 
-import Test from "./components/Test.js";
-
 function App() {
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -87,8 +86,6 @@ function App() {
 
           <Route exact path="/myPage" component={MyPage} />
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
-
-        
 
           <Route
             exact
@@ -144,14 +141,10 @@ function App() {
             path="/participate/upload"
             component={ParticipateUpload}
           />
-          <Route
-            exact
-            path="/participate/post/:url"
-            component={PartDetail}
-          />
-          <Route path="/test" component={Test}/>
+          <Route exact path="/participate/post/:url" component={PartDetail} />
         </Switch>
         <Footer />
+        <MobileFooter />
       </>
     );
   }

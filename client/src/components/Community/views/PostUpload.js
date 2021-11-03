@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import PostUploadFrom from "./content/Upload/PostUploadForm.js";
 
 import { PostUploadDiv } from "../css/CommunityFormCSS.js";
@@ -29,8 +28,6 @@ function PostUpload(props) {
       <PostUploadDiv>
         <PostUploadFrom />
       </PostUploadDiv>
-
-      <MobileFooter />
     </>
   );
 }
