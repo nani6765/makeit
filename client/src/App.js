@@ -125,12 +125,12 @@ function App() {
 
           <Route
             exact
-            path="/Making/ShareUpload"
+            path="/making/ShareUpload"
             component={ShareVideoUpload}
           />
           <Route
             exact
-            path="/Making/ShareVideo/:url"
+            path="/making/ShareVideo/:url"
             component={ShareVideoDetail}
           />
           <Route path="/making" component={MakingMedia} />
