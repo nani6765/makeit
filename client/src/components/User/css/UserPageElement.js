@@ -1,6 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
+import styled from "@emotion/styled";
 
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
@@ -81,10 +82,26 @@ const FormDivCSS = css`
     border: none;
     color: white;
     padding: 10px;
-    &:disabled{
-      opacity: .5;
+    &:disabled {
+      opacity: 0.5;
     }
   }
 `;
 
-export { DivCSS, Logo, BoxDivCSS, FormDivCSS };
+const CompeleteDiv = styled.div`
+  padding-left: 1rem;
+  padding-right: 1rem;
+  h1 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  button {
+    background: #702c8a;
+    border-radius: 12px;
+    font-size: 24px;
+    padding: 10px 15px 10px 15px;
+    color: white;
+  }
+`;
+
+export { DivCSS, Logo, BoxDivCSS, FormDivCSS, CompeleteDiv };

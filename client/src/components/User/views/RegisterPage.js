@@ -161,7 +161,10 @@ function RegisterPage() {
 
       setLoading(false);
       //회원가입 완료 페이지 만들고 push
-      history.push("/");
+      history.push({
+        pathname: "/register/complete",
+        state: { flag: true },
+      });
     } catch (error) {
       console.log(error);
       setErrorFormSubmit(error.message);

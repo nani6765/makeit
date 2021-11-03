@@ -19,6 +19,7 @@ import LandingPage from "./components/LandingPage/LandingPage.js";
 //User
 import LoginPage from "./components/User/views/LoginPage.js";
 import RegisterPage from "./components/User/views/RegisterPage.js";
+import RegisterComplete from "./components/User/views/RegisterComplete.js";
 import MyPage from "./components/MyPage/MyPage.js";
 import ChatDetailDiv from "./components/MyPage/Chat/ChatDetailDiv.js";
 
@@ -74,7 +75,7 @@ function App() {
           <Route exact path="/landingPage" component={LandingPage} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
-
+          <Route exact path="/register/complete" component={RegisterComplete} />
           <Route exact path="/community" component={CommunityList} />
           <Route
             exact
