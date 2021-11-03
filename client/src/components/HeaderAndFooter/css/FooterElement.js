@@ -103,12 +103,12 @@ const MobileFooterDiv = styled.div`
     display: block;
     ul {
       width: 90%;
-      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       padding-top: 15px;
       padding-bottom: 15px;
       list-style: none;
+      margin: 0 auto;
       li {
         width: auto;
         margin-left: 0px;
@@ -127,6 +127,11 @@ const MobileFooterDiv = styled.div`
           color: #aa5ddd;
           path {
             stroke: #aa5ddd;
+          }
+          svg {
+            rect {
+              stroke: #aa5ddd;
+            }
           }
         }
       }
