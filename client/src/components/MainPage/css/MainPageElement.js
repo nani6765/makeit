@@ -151,8 +151,8 @@ const CardImg = styled.article`
     drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));
   border-radius: 10px;
   .thumbnail {
-    width: 100%;
-    height: 100%;
+    width: 480px;
+    height: 320px;
   }
   ${mq[1]} {
     width: 100%;
@@ -160,10 +160,6 @@ const CardImg = styled.article`
     height: 281.25px;
     min-height: 281.25px;
     padding-left: 10px;
-    .thumbnail {
-      width: 100%;
-      height: 100%;
-    }
   }
 `;
 

@@ -20,7 +20,7 @@ function MobileFooter(props) {
 
   return (
     <MobileFooterDiv>
-      <ul>
+      <ul style={{ paddingLeft: "0px" }}>
         <li className={Location === "/" ? "active" : null}>
           <Link to="/">
             <FooterMobileBottom1 />

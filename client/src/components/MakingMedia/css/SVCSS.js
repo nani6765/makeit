@@ -108,8 +108,8 @@ const ShareVideoCard = styled.div`
   margin-bottom: 1rem;
   .thumbnail {
     grid-area: thumbnail;
-    width: 100%;
-    height: 100%;
+    width: 320px;
+    height: 160px;
     border-radius: 11px;
   }
   .author {
