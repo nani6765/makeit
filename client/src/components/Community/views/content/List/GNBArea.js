@@ -1,9 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { ReactComponent as AllBoard } from "../../../css/img/전체게시판.svg";
 import { ReactComponent as FreeBoard } from "../../../css/img/자유게시판.svg";
 import { ReactComponent as QuestionBoard } from "../../../css/img/질문게시판.svg";
 import { ReactComponent as PRBoard } from "../../../css/img/홍보게시판.svg";
 import { ReactComponent as SuggestionBoard } from "../../../css/img/건의게시판.svg";
+
+import qs from "qs";
 
 function GNBArea(props) {
   const GNBList = [
@@ -34,11 +36,18 @@ function GNBArea(props) {
     },
   ];
 
+  const GNBClickFunc = (gnb) => {
+    let temp = qs.parse(props.URL);
+    temp.category = gnb;
+    let temp2 = qs.stringify(temp);
+    props.setURL(decodeURI(temp2));
+  };
+
   return (
     <div className="GNBDiv">
       {GNBList.map((category, idx) => {
         return (
-          <div key={idx} onClick={() => props.setGNB(`${category.GNB}`)}>
+          <div key={idx} onClick={() => GNBClickFunc(category.GNB)}>
             {category.icon}
             {category.text}
           </div>

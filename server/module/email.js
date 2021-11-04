@@ -61,6 +61,7 @@ const txt = (name, Key) => {
       `;
 };
 
+/*
 async function sendEmail(toEmail, key, name) {
   let transporter = nodemailer.createTransport({
     host: config.smtpServerURL, //SMTP 서버 주소 port: 587,
@@ -74,6 +75,37 @@ async function sendEmail(toEmail, key, name) {
 
   let mailOptions = {
     from: config.authUser, //보내는 사람 주소
+    to: toEmail, //받는 사람 주소
+    subject: title, //제목
+    html: txt(name, key), //본문
+  };
+
+  //전송 시작!
+  await transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      //에러
+      console.log(error);
+      return false;
+    } else {
+      transporter.close();
+      return true;
+    }
+  });
+}
+*/
+async function sendEmail(toEmail, key, name) {
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com", //SMTP 서버 주소 port: 587,
+    port: "465",
+    secure: true,
+    auth: {
+      user: "mfmakeit2021@gmail.com", //메일서버 계정
+      pass: "mfs0601!", //메일서버 비번
+    },
+  });
+
+  let mailOptions = {
+    from: "mfmakeit2021@gmail.com", //보내는 사람 주소
     to: toEmail, //받는 사람 주소
     subject: title, //제목
     html: txt(name, key), //본문
