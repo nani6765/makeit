@@ -158,10 +158,11 @@ const ProducerListContainer = styled.div`
   }
 
   .producercard {
-    width: 30%;
+    width: 31%;
     height: auto;
     padding: 15px;
-    margin: 1.5%;
+    margin-right: 3.5%;
+    margin-bottom: 3%;
 
     background: #ffffff;
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
@@ -225,6 +226,9 @@ const ProducerListContainer = styled.div`
     ${mq[1]} {
       margin-bottom: 30px;
     }
+  }
+  .producercard:last-child {
+    margin-right: 0px;
   }
 `;
 

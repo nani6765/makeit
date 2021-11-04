@@ -13,7 +13,7 @@ function ProducerTitleDetail(props) {
 
   var settings = {
     dots: true,
-    infinite: true,
+    infinite: props.PostInfo.detailImgArr[0] > 1,
     speed: 500,
     arrows: true,
     easing: "ease-in-out",

@@ -78,8 +78,7 @@ const StickyBarDiv = styled.div`
   top: 100px;
   left: 0px;
   width: 100%;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 10px;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),

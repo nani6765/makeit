@@ -30,7 +30,9 @@ function QuotationUpload(props) {
     setIsPublic(!IsPublic);
   };
 
-  const submitHanlder = () => {
+  const submitHanlder = (e) => {
+    e.preventDefault();
+
     if (!OneLineIntroduce) {
       alert("한줄 소개를 입력하세요");
       return;
@@ -147,8 +149,8 @@ function QuotationUpload(props) {
             </button>
             <button
               className="submit"
-              onClick={() => {
-                submitHanlder();
+              onClick={(e) => {
+                submitHanlder(e);
               }}
             >
               완료

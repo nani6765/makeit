@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import YoutubeModal from "./YoutubeModal.js";
+import YoutubeModal from "../../../../../utils/view/Modal/YoutubeCheckModal.js";
 import { VideoUploadDiv } from "../../../../css/RVUCSS.js";
 
 function QuotationVideoUpload(props) {
@@ -36,6 +36,7 @@ function QuotationVideoUpload(props) {
           setModalFlag={setModalFlag}
           VideoArr={props.VideoArr}
           setVideoArr={props.setVideoArr}
+          SearchLength="6"
         />
       )}
 
