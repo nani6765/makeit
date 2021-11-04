@@ -34,7 +34,7 @@ router.post("/", (req, res) => {
   Community.find(category)
     .populate("auther")
     .sort(sort)
-    .skip(req.body.skip)
+    //.skip(req.body.skip)
     .limit(req.body.limit)
     .exec((err, postInfo) => {
       if (err) return res.status(400).json({ success: false, err });

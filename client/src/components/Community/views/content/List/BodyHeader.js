@@ -1,29 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { BodyHeaderDiv } from "../../../css/CommunityListCSS.js";
 import { ReactComponent as PenIcon } from "../../../css/img/Pen.svg";
+import qs from "qs";
 
 function BodyHeader(props) {
+  const SortClickFunc = (sort) => {
+    let temp = qs.parse(props.URL);
+    temp.sort = sort;
+    let temp2 = qs.stringify(temp);
+    props.setURL(decodeURI(temp2));
+  };
+
+  useEffect(() => {
+    console.log(qs.parse(props.URL).sort);
+  }, [props.URL]);
+
   return (
     <BodyHeaderDiv>
       <div>
-        <p className="category">{props.GNB}</p>
+        <p className="category">{qs.parse(props.URL).category}</p>
         <p>
           <span
-            className={props.SortPost === "new" ? "activate" : undefined}
+            className={
+              qs.parse(props.URL).sort === "new" ? "activate" : undefined
+            }
             onClick={() => {
-              props.setSortPost("new");
+              SortClickFunc("new");
             }}
-            disabled={props.SortPost === "new" && "ture"}
+            disabled={qs.parse(props.URL).sort === "new" && true}
           >
             최신순
           </span>
           <span
-            className={props.SortPost === "hot" ? "activate" : undefined}
+            className={
+              qs.parse(props.URL).sort === "hot" ? "activate" : undefined
+            }
             onClick={() => {
-              props.setSortPost("hot");
+              SortClickFunc("hot");
             }}
-            disabled={props.SortPost === "new" && "ture"}
+            disabled={qs.parse(props.URL).sort === "hot" && true}
           >
             인기순
           </span>
