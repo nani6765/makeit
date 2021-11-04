@@ -39,28 +39,50 @@ function Quotation(props) {
         <Slider {...settings} className="quotationList" >
           {props.QuotationArr.map((quotation, idx) => {
             if (quotation.isPublic) {
-              if (user != null) {
-                if (props.auther !== user.uid && quotation.uid !== user.uid) {
-                  return (
-                    <InfoDiv
-                      key={idx}
-                      style={{ cursor: "default", height: "100%" }}
-                    >
-                      <div className="container">
-                        <div className="private">
-                          작성자에게만
-                          <br />
-                          공개된 견적입니다.
-                        </div>
-                      </div>
-                    </InfoDiv>
-                  );
-                }
+              if (!user || (props.auther !== user.uid && quotation.uid !== user.uid)) {
+                return (
+                  <InfoDiv
+                    key={idx}
+                    style={{ cursor: "default", height: "100%" }}
+                  >
+                  <div
+                    className="container"
+                  >
+                    <Avatar
+                      src="https://kr.object.ncloudstorage.com/makeit/user/profile.png"
+                      size="70"
+                      round={true}
+                      style={{
+                        border: "1px solid #c6c6c6",
+                        display: "block",
+                        margin: "0 auto",
+                      }}
+                    />
+                    <p>
+                       김미프
+                      <i className="bi bi-heart"></i>
+                    </p>
+                    <p className="quotationTitle title">
+                      의뢰를 작성한 회원에게만 <br />공개되는 게시글입니다.
+                    </p>
+                    <div className="filter">
+                      <p>• 예상 금액 : 미공개</p>
+                      <p>• 예상 기간 : 미공개</p>
+                      <p>• 평균 응답 시간 : 미구현?</p>
+                    </div>
+                  </div>
+                  </InfoDiv>
+                );
               }
             }
             
             return (
-              <QuotationCard key={idx} idx={idx} quotation={quotation} containerCN={QTIdx === idx} />
+              <InfoDiv
+                key={idx}
+                style={{ cursor: "default", height: "100%" }}
+              >
+                <QuotationCard quotation={quotation} containerCN={QTIdx === idx ? "container active" : "container"} />
+              </InfoDiv>
             );
           })}
         </Slider>

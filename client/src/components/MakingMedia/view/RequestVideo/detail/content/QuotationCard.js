@@ -1,14 +1,8 @@
 import React from 'react';
 import Avatar from "react-avatar";
-import { InfoDiv } from "../../../../css/RVDCSS.js";
 
 function QuotationCard(props) {
     return (
-        <InfoDiv
-          onClick={() => {
-            props.showDetail(props.idx);
-          }}
-        >
           <div
             className={props.containerCN}
           >
@@ -30,12 +24,11 @@ function QuotationCard(props) {
               {props.quotation.oneLineIntroduce}
             </p>
             <div className="filter">
-              <p>• 예상 금액 : {quotation.price}</p>
-              <p>• 예상 기간 : {quotation.deadline}</p>
+              <p>• 예상 금액 : {props.quotation.price}</p>
+              <p>• 예상 기간 : {props.quotation.deadline}</p>
               <p>• 평균 응답 시간 : 미구현?</p>
             </div>
           </div>
-        </InfoDiv>
     )
 }
 
