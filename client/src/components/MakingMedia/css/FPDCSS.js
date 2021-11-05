@@ -78,27 +78,36 @@ const ProducerTitleDiv = styled.div`
   .titleInfo {
     margin-left: 20px;
     width: 50%;
-    .like {
+    .top {
+      display: flex;
+      justify-content: space-between;
+      color: #C4C4C4;
+      
       margin-bottom: 10px;
-      user-select: none;
-      color: #ccd2e3;
-      span {
-        margin-right: 10px;
-        i {
-          margin-left: 5px;
-          color: #ff5151;
-        }
-        .share {
-          color: #9e9e9e;
-          background: #d8d8d8;
-          padding: 0px 3px 0px 2px;
-          border-radius: 50%;
-          box-sizing: border-box;
-          text-align: center;
+      .like {
+        user-select: none;
+        color: #ccd2e3;
+        span {
+          margin-right: 10px;
+          i {
+            margin-left: 5px;
+            color: #ff5151;
+          }
+          .share {
+            color: #9e9e9e;
+            background: #d8d8d8;
+            padding: 0px 3px 0px 2px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            text-align: center;
+          }
         }
       }
+      .hambuc {
+        position: relative;
+      }
     }
-    .title {
+    .oneLineIntro {
       font-size: 30px;
       font-weight: 500;
       line-height: 35px;

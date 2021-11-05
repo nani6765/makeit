@@ -62,7 +62,7 @@ function MakingMedia(props) {
 
   useEffect(() => {
     if(props.history.location.state !== undefined) {
-      setMenu(props.history.location.state.menu);
+      setMenu(props.history.location.state.category);
     }
   }, []);
 

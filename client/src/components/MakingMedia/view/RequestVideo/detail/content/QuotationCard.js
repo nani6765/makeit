@@ -1,11 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Avatar from "react-avatar";
+import UserModal from "../../../../../utils/view/Modal/UserModal.js";
+import GuestModal from "../../../../../utils/view/Modal/GuestModal.js";
 
 function QuotationCard(props) {
+  const [hambucControl, sethambucControl] = useState(false);
+
+  const innerRef = useOuterClick((e) => {
+    sethambucControl(false);
+  });
+
     return (
           <div
             className={props.containerCN}
+            onClick={(e) => {
+              if(e.target.className !== "bi bi-three-dots" && e.target.className !== "delete" && e.target.className !== "background")
+                props.showDetail(props.idx);
+            }}
           >
+            <div className="hambuc" ref={innerRef}>
+              <i
+                className="bi bi-three-dots"
+                onClick={() => { props.setQTIdx(-1); sethambucControl(!hambucControl);}}
+              ></i>
+              {hambucControl && (
+                props.user.uid === props.quotation.uid
+                ? <UserModal modalType="/making/quotation" Info={props.quotation} path="reload"/>
+                : <GuestModal modalType="post" postInfo={props.quotation} />
+              )}
+            </div>
             <Avatar
               src={props.quotation.auther.photoURL}
               size="70"
@@ -24,12 +47,33 @@ function QuotationCard(props) {
               {props.quotation.oneLineIntroduce}
             </p>
             <div className="filter">
-              <p>• 예상 금액 : {props.quotation.price}</p>
+              <p>• 예상 금액 : {props.quotation.price.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
               <p>• 예상 기간 : {props.quotation.deadline}</p>
               <p>• 평균 응답 시간 : 미구현?</p>
             </div>
           </div>
     )
+}
+
+function useOuterClick(callback) {
+  const callbackRef = useRef();
+  const innerRef = useRef();
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e) {
+      if (
+        innerRef.current &&
+        callbackRef.current &&
+        !innerRef.current.contains(e.target)
+      )
+        callbackRef.current(e);
+    }
+  }, []);
+  return innerRef;
 }
 
 export default QuotationCard

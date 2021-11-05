@@ -66,8 +66,8 @@ function Quotation(props) {
                       의뢰를 작성한 회원에게만 <br />공개되는 게시글입니다.
                     </p>
                     <div className="filter">
-                      <p>• 예상 금액 : 미공개</p>
-                      <p>• 예상 기간 : 미공개</p>
+                      <p>• 예상 금액 : 비공개</p>
+                      <p>• 예상 기간 : 비공개</p>
                       <p>• 평균 응답 시간 : 미구현?</p>
                     </div>
                   </div>
@@ -81,7 +81,7 @@ function Quotation(props) {
                 key={idx}
                 style={{ cursor: "default", height: "100%" }}
               >
-                <QuotationCard quotation={quotation} containerCN={QTIdx === idx ? "container active" : "container"} />
+                <QuotationCard user={user} idx={idx} showDetail={showDetail} setQTIdx={setQTIdx} quotation={quotation} containerCN={QTIdx === idx ? "container active" : "container"} />
               </InfoDiv>
             );
           })}

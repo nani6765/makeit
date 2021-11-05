@@ -33,7 +33,7 @@ function ProducerContentDetail(props) {
               <FAQ FAQList={props.PostInfo.FAQList} />
             )}
 
-            <ReviewArea PostURL={props.PostInfo.url} />
+            <ReviewArea auther={props.PostInfo.uid} PostURL={props.PostInfo.url} />
           </div>
         </div>
       </DetailFilterDiv>

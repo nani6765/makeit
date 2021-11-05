@@ -304,9 +304,11 @@ const GNBDiv = styled.div`
   margin: 30px 10px;
   .public {
     float: left;
-    span {
-      margin-left: 10px;
+    label {
       font-weight: bold;
+      input {
+        margin-right: 10px;
+      }
     }
   }
   .btnDiv {

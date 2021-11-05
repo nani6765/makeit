@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { ReviewUploadDiv } from "../../../../../css/FPDCSS.js";
 import { withRouter, useHistory } from "react-router";
 import axios from "axios";
@@ -8,7 +7,6 @@ function ReviewForm(props) {
   const [Review, setReview] = useState("");
   const [Star, setStar] = useState(new Array(5).fill(null));
   const [StarValue, setStarValue] = useState(0);
-  const user = useSelector((state) => state.user);
   let history = useHistory();
 
   const setReviewFunc = (e) => {
@@ -21,15 +19,11 @@ function ReviewForm(props) {
 
   const SubmitHandler = (e) => {
     e.preventDefault();
-    if (user.userData === null) {
-      alert("로그인한 회원만 댓글을 작성 할 수 있습니다.");
-      return history.push("/login");
-    }
     if (Review === "") {
       return alert("리뷰 내용을 채워주세요!");
     }
     let body = {
-      uid: user.userData.uid,
+      uid: props.user.uid,
       url: props.PostURL,
       grade: StarValue,
       content: Review,

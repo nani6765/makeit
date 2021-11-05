@@ -115,6 +115,11 @@ const InfoDiv = styled.div`
       padding: 5rem 0;
       cursor: default;
     }
+    .hambuc {
+      position: relative;
+      color: #c4c4c4;
+      float: right;
+    }
     p {
       margin-top: 20px;
       color: #a7a5a8;
@@ -239,11 +244,10 @@ const DetailContentDiv = styled.div`
       }
     }
     .hambuc {
-      grid-area: hambuc;
+      position: relative;
       color: #c4c4c4;
       float: right;
       margin-top: -45px;
-      position: relative;
       text-align: center;
       i {
         cursor: pointer;

@@ -3,7 +3,6 @@ import Avatar from "react-avatar";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-import ReviewModal from "./modal/ReviewModal.js";
 import Modal from "../../../../../../utils/view/Modal/UserModal.js";
 import { ReviewDiv } from "../../../../../css/FPDCSS.js";
 
@@ -29,7 +28,10 @@ function Review(props) {
   }, []);
 
   useEffect(() => {
-    if (EditFlag) sethambucControl(false);
+    if (EditFlag) {
+      sethambucControl(false);
+      setEditReview(props.Review.content);
+    }
   }, [EditFlag]);
 
   const innerRef = useOuterClick((e) => {
@@ -82,18 +84,19 @@ function Review(props) {
       <div className="author">
         <p>{ReviewUser.displayName}</p>
       </div>
-      {user.userData.uid === ReviewUser.uid && (
+      {user.userData && user.userData.uid === ReviewUser.uid && (
         <div className="hambuc" ref={innerRef}>
-          <i
+          {!EditFlag &&
+            <i
             className="bi bi-three-dots"
             onClick={() => sethambucControl(true)}
           ></i>
+          }
           {hambucControl && (
-            <ReviewModal setEditFlag={setEditFlag} Review={props.Review} />
+            <Modal modalType="review" setEditFlag={setEditFlag} Info={props.Review} />
           )}
         </div>
       )}
-
       <div className="review">
         {EditFlag
           ? EditStar.map((temp, idx) => {

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
+import UserModal from "../../../../utils/view/Modal/UserModal.js";
+import GuestModal from "../../../../utils/view/Modal/GuestModal.js";
 import { ProducerTitleDiv } from "../../../css/FPDCSS.js";
 import axios from "axios";
 
@@ -11,6 +13,8 @@ function ProducerTitleDetail(props) {
   const user = useSelector((state) => state.user);
   let history = useHistory();
 
+  const [hambucControl, sethambucControl] = useState(false);
+
   var settings = {
     dots: true,
     infinite: props.PostInfo.detailImgArr[0] > 1,
@@ -20,6 +24,10 @@ function ProducerTitleDetail(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+  
+  const innerRef = useOuterClick((e) => {
+    sethambucControl(false);
+  });
 
   const GuestLikeHandler = () => {
     alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
@@ -57,18 +65,6 @@ function ProducerTitleDetail(props) {
           <span>
             홈 &gt; 영상제작 &gt; 제작자 탐색 &gt; {props.PostInfo.category}
           </span>
-          {props.user
-            ? props.PostInfo.uid === props.user.uid && (
-                <Link
-                  to={{
-                    pathname: "/making/ProducerEdit",
-                    state: { post: props.PostInfo },
-                  }}
-                >
-                  <button className="editBtn">수정하기</button>
-                </Link>
-              )
-            : null}
         </div>
       </div>
       <ProducerTitleDiv>
@@ -82,31 +78,46 @@ function ProducerTitleDetail(props) {
           })}
         </Slider>
         <div className="titleInfo">
-          <div className="like">
-            <span
-              onClick={() =>
-                props.user
-                  ? likeHandler(
-                      props.PostInfo.likeArray.includes(props.user.uid)
-                    )
-                  : GuestLikeHandler()
-              }
-            >
-              찜하기
-              {props.user &&
-              props.PostInfo.likeArray.includes(props.user.uid) ? (
-                <i className="bi bi-heart-fill"></i>
-              ) : (
-                <i className="bi bi-heart"></i>
-              )}
-            </span>
-            <span>|</span>
-            <span>
-              공유하기
-              <i className="bi bi-share-fill share"></i>
-            </span>
+          <div className="top">
+            <div className="like">
+              <span
+                onClick={() =>
+                  props.user
+                    ? likeHandler(
+                        props.PostInfo.likeArray.includes(props.user.uid)
+                      )
+                    : GuestLikeHandler()
+                }
+              >
+                찜하기
+                {props.user &&
+                props.PostInfo.likeArray.includes(props.user.uid) ? (
+                  <i className="bi bi-heart-fill"></i>
+                ) : (
+                  <i className="bi bi-heart"></i>
+                )}
+              </span>
+              <span>|</span>
+              <span>
+                공유하기
+                <i className="bi bi-share-fill share"></i>
+              </span>
+            </div>
+            {user.userData && (
+              <div className="hambuc" ref={innerRef}>
+                <i
+                className="bi bi-three-dots"
+                onClick={() => sethambucControl(true)}
+                ></i>
+                {hambucControl && (
+                  user.userData.uid === props.PostInfo.uid
+                  ? <UserModal modalType="/making/producer" Info={props.PostInfo} path="/making" category="영상 제작자 탐색"/>
+                  : <GuestModal modalType="post" postInfo={props.PostInfo} />
+                )}
+              </div>
+            )}
           </div>
-          <div className="title">{props.PostInfo.oneLineIntroduce}</div>
+          <div className="oneLineIntro">{props.PostInfo.oneLineIntroduce}</div>
           <div className="price">
             {props.PostInfo.priceInfo === "직접 입력"
               ? props.PostInfo.priceDirectInput
@@ -127,6 +138,27 @@ function ProducerTitleDetail(props) {
       </ProducerTitleDiv>
     </>
   );
+}
+
+function useOuterClick(callback) {
+  const callbackRef = useRef();
+  const innerRef = useRef();
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e) {
+      if (
+        innerRef.current &&
+        callbackRef.current &&
+        !innerRef.current.contains(e.target)
+      )
+        callbackRef.current(e);
+    }
+  }, []);
+  return innerRef;
 }
 
 export default withRouter(ProducerTitleDetail);
