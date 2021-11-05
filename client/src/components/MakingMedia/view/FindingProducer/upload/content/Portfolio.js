@@ -4,7 +4,7 @@ import FooterBtnArea from "../utils/FooterBtnArea.js";
 
 import FileUploadArea from "../../../../../utils/view/Files/FileUploadArea.js";
 import FileShowArea from "../../../../../utils/view/Files/FileShowArea.js";
-import YoutubeModal from "../../../../../utils/view/Modal/YoutubeModal.js";
+import YoutubeModal from "../../../../../utils/view/Modal/YoutubeCheckModal.js";
 
 import { ProtFolioDiv } from "../../../../css/FPUCSS.js";
 

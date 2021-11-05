@@ -61,6 +61,10 @@ const HeaderLogo = styled.div`
     width: 100%;
     height: 100%;
   }
+  svg {
+    width: 100%;
+    height: 100%;
+  }
   ${mq[0]} {
     padding: 5px;
   }

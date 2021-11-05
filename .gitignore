@@ -3,5 +3,5 @@ client/node_modules/
 client/src/firebase.js
 client/src/config
 client/package-lock.json
-config/dev.js
+server/config/dev.js
 package-lock.json

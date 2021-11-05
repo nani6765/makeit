@@ -6,6 +6,7 @@ import { YoutubeDiv } from "./ModalCSS.js";
 function YoutubeCheckModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
+  const [MaxResult, setMaxResult] = useState(5);
   const [CheckFlag, setCheckFlag] = useState([
     false,
     false,
@@ -19,16 +20,11 @@ function YoutubeCheckModal(props) {
     const response = await YOUTUBE_API.get("/search", {
       params: {
         q: SearchTerm,
+        maxResults: MaxResult,
       },
     });
     setSearchResultArr([...response.data.items]);
     
-  };
-
-  const ClickFunc = (obj) => {
-    props.setVideoURL(obj.id.videoId);
-    props.setModalFlag(false);
-    props.setThumbnail(obj.snippet.thumbnails.high.url);
   };
 
   function InputCheckHandler(e, snippet, flagIdx) {
@@ -48,6 +44,12 @@ function YoutubeCheckModal(props) {
       setCheckFlag([...flagTemp]);
     }
   }
+
+  useEffect(() => {
+    if(props.SearchResult) {
+      setMaxResult(props.SearchResult);
+    }
+  }, []);
 
   useEffect(() => {
     let temp = [false, false, false, false, false];
@@ -87,22 +89,15 @@ function YoutubeCheckModal(props) {
               SearchResultArr.map((Video, idx) => {
                 return (
                   <li key={idx}>
-                    {
-                      props.type==="FP"
-                      ? (
-                        <div>
-                          <input
-                            type="checkbox"
-                            checked={CheckFlag[idx]}
-                            onChange={(e) => InputCheckHandler(e, Video, idx)}
-                            value={"" || ""}
-                            disabled={props.VideoArr.length >= 5 ? true : false}
-                          />
-                        </div>
-                      ) : (
-                        <span onClick={() => ClickFunc(Video)}>선택</span>
-                      )
-                    }
+                    <div>
+                      <input
+                        type="checkbox"
+                        checked={CheckFlag[idx]}
+                        onChange={(e) => InputCheckHandler(e, Video, idx)}
+                        value={"" || ""}
+                        disabled={props.VideoArr.length >= 5 ? true : false}
+                      />
+                    </div>
                     <img src={Video.snippet.thumbnails.high.url} alt="" />
                     <div>
                       <p className="title">{Video.snippet.title}</p>

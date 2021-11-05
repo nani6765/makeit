@@ -141,12 +141,13 @@ router.post("/producer/proPostEdit", (req, res) => {
   let temp = req.body;
 
   temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
-  ProPost.findOneAndUpdate({ uid: temp.uid }, temp)
+  ProPost.findOneAndUpdate({ url: temp.url }, temp)
     .exec()
     .then((response) => {
       return res.status(200).send({ success: true });
     })
     .catch((err) => {
+      console.log(err);
       return res.json({ success: false, err });
     });
 });

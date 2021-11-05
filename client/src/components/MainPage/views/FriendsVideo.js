@@ -20,7 +20,7 @@ function FriendsVideo() {
 
   var settings = {
     dots: false,
-    infinite: true,
+    infinite: FVideos.length > 3,
     speed: 500,
     easing: "ease-in-out",
     draggable: true,

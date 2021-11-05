@@ -32,7 +32,7 @@ function FindingProducerEdit(props) {
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
   //포트폴리오
-  const [ThumbnailArr, setThumbnailArr] = useState([]);
+  const [Thumbnail, setThumbnail] = useState([]);
   const [DetailImgArr, setDetailImgArr] = useState([]);
   const [VideoArr, setVideoArr] = useState([]);
 
@@ -53,7 +53,7 @@ function FindingProducerEdit(props) {
     setVideoPurposeArr([...props.location.state.post.videoPurposeArr]);
 
     // 포트폴리오
-    setThumbnailArr([...props.location.state.post.thumbnailArr]);
+    setThumbnail([...props.location.state.post.thumbnailArr]);
     setDetailImgArr([...props.location.state.post.detailImgArr]);
     setVideoArr([...props.location.state.post.videoArr]);
 
@@ -96,6 +96,93 @@ function FindingProducerEdit(props) {
       });
   };*/
 
+  const DetailCheckEmptyContent = () => {
+    if (!OneLineIntroduce) {
+      alert("한줄 소개를 입력하세요.");
+      return false;
+    }
+    if (Category === "카테고리") {
+      alert("카테고리를 선택하세요.");
+      return false;
+    }
+    if (!Description) {
+      alert("상세 설명을 입력하세요.");
+      return false;
+    }
+    return true;
+  };
+  
+  const PortfolioCheckEmptyContent = () => {
+    if (!Thumbnail.length) {
+      alert("썸네일을 등록하세요.");
+      return false;
+    }
+    if (VideoArr.length < 3) {
+      alert("동영상을 3개 이상 등록하세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const PriceCheckEmptyContent = () => {
+    if (PriceInfo === "가격선택") {
+      alert("가격을 선택하세요.");
+      return false;
+    }
+    if (PriceInfo === PriceDirectInput) {
+      alert("가격을 입력하세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const ConfirmCheckEmptyContent = () => {
+    if (!EditandReprogress) {
+      alert("수정 및 재진행 절차를 입력하세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const NextHandler = (process) => {
+    switch(process.value) {
+      case "포트폴리오":
+        if(!DetailCheckEmptyContent()) {
+          setCurrentProcess("상세설명");
+          return;
+        }
+        break;
+      case "가격설정":
+        if(!DetailCheckEmptyContent()) {
+          setCurrentProcess("상세설명");
+          return;
+        }
+        if(!PortfolioCheckEmptyContent()) {
+          setCurrentProcess("포트폴리오");
+          return;
+        }
+        break;
+      case "수정/환불안내":
+        if(!DetailCheckEmptyContent()) {
+          setCurrentProcess("상세설명");
+          return;
+        }
+        if(!PortfolioCheckEmptyContent()) {
+          setCurrentProcess("포트폴리오");
+          return;
+        }
+        if(!PriceCheckEmptyContent()) {
+          setCurrentProcess("가격설정");
+          return;
+        }
+        break;
+      
+      default:
+        break;
+    }
+    setCurrentProcess(process.value);
+  }
+
   const SubmitHandler = () => {
     let body = {
       uid: user.userData.uid,
@@ -105,7 +192,7 @@ function FindingProducerEdit(props) {
       description: Description,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: ThumbnailArr,
+      thumbnailArr: Thumbnail,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -145,6 +232,7 @@ function FindingProducerEdit(props) {
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
             setVideoPurposeArr={setVideoPurposeArr}
+            CheckEmptyContent={DetailCheckEmptyContent}
             //TempSaveHandler={TempSaveHandler}
           />
         );
@@ -153,12 +241,13 @@ function FindingProducerEdit(props) {
         return (
           <Portfolio
             setCurrentProcess={setCurrentProcess}
-            ThumbnailArr={ThumbnailArr}
-            setThumbnailArr={setThumbnailArr}
+            Thumbnail={Thumbnail}
+            setThumbnail={setThumbnail}
             DetailImgArr={DetailImgArr}
             setDetailImgArr={setDetailImgArr}
             VideoArr={VideoArr}
             setVideoArr={setVideoArr}
+            CheckEmptyContent={PortfolioCheckEmptyContent}
             //TempSaveHandler={TempSaveHandler}
           />
         );
@@ -172,6 +261,7 @@ function FindingProducerEdit(props) {
             //TempSaveHandler={TempSaveHandler}
             PriceDirectInput={PriceDirectInput}
             setPriceDirectInput={setPriceDirectInput}
+            CheckEmptyContent={PriceCheckEmptyContent}
           />
         );
 
@@ -185,6 +275,7 @@ function FindingProducerEdit(props) {
             //TempSaveHandler={TempSaveHandler}
             SubmitHandler={SubmitHandler}
             setCurrentProcess={setCurrentProcess}
+            CheckEmptyContent={ConfirmCheckEmptyContent}
           />
         );
 
@@ -242,6 +333,7 @@ function FindingProducerEdit(props) {
                       className={
                         CurrentProcess === process.value ? "active" : null
                       }
+                      onClick={() => {NextHandler(process)}}
                     >
                       {idx + 1}){process.value}
                     </li>
@@ -250,7 +342,9 @@ function FindingProducerEdit(props) {
               </ul>
             </div>
           </LeftContent>
-          <div className="rightContent">{setRightContent()}</div>
+          <div className="rightContent">
+            {setRightContent()}
+          </div>
         </ContentDiv>
       </UploadForm>
     </>

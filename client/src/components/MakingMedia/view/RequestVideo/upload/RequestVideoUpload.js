@@ -43,7 +43,9 @@ function RequestVideoUpload(props) {
     }
   };
 
-  const submitHandler = () => {
+  const submitHandler = (e) => {
+    e.preventDefault();
+
     let body = {
       uid: user.userData.uid,
       email: user.userData.email,
@@ -171,7 +173,7 @@ function RequestVideoUpload(props) {
           >
             취소
           </button>
-          <button className="submit" onClick={() => submitHandler()}>
+          <button className="submit" onClick={(e) => submitHandler(e)}>
             완료
           </button>
         </div>

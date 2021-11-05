@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Avatar from "react-avatar";
 import Slider from "react-slick";
 import ReactPlayer from "react-player/youtube";
+import QuotationCard from "./QuotationCard.js";
 import {
   QuotationDiv,
   LinkCSS,
@@ -19,8 +20,8 @@ function Quotation(props) {
 
   var settings = {
     dots: false,
-    infinite: true,
     speed: 500,
+    infinite: props.QuotationArr.length > 3,
     easing: "ease-in-out",
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -35,61 +36,52 @@ function Quotation(props) {
     <QuotationDiv>
       <p className="title">업체 견적</p>
       <QuotationInfo>
-        <Slider {...settings} className="quotationList">
+        <Slider {...settings} className="quotationList" >
           {props.QuotationArr.map((quotation, idx) => {
             if (quotation.isPublic) {
-              if (user != null) {
-                if (props.auther !== user.uid || quotation.uid !== user.uid) {
-                  return (
-                    <InfoDiv
-                      key={idx}
-                      style={{ cursor: "default", height: "100%" }}
-                    >
-                      <div className="container">
-                        <div className="private">
-                          작성자에게만
-                          <br />
-                          공개된 견적입니다.
-                        </div>
-                      </div>
-                    </InfoDiv>
-                  );
-                }
+              if (!user || (props.auther !== user.uid && quotation.uid !== user.uid)) {
+                return (
+                  <InfoDiv
+                    key={idx}
+                    style={{ cursor: "default", height: "100%" }}
+                  >
+                  <div
+                    className="container"
+                  >
+                    <Avatar
+                      src="https://kr.object.ncloudstorage.com/makeit/user/profile.png"
+                      size="70"
+                      round={true}
+                      style={{
+                        border: "1px solid #c6c6c6",
+                        display: "block",
+                        margin: "0 auto",
+                      }}
+                    />
+                    <p>
+                       김미프
+                      <i className="bi bi-heart"></i>
+                    </p>
+                    <p className="quotationTitle title">
+                      의뢰를 작성한 회원에게만 <br />공개되는 게시글입니다.
+                    </p>
+                    <div className="filter">
+                      <p>• 예상 금액 : 미공개</p>
+                      <p>• 예상 기간 : 미공개</p>
+                      <p>• 평균 응답 시간 : 미구현?</p>
+                    </div>
+                  </div>
+                  </InfoDiv>
+                );
               }
             }
+            
             return (
               <InfoDiv
                 key={idx}
-                onClick={() => {
-                  showDetail(idx);
-                }}
+                style={{ cursor: "default", height: "100%" }}
               >
-                <div
-                  className={QTIdx === idx ? "container active" : "container"}
-                >
-                  <Avatar
-                    src={quotation.auther.photoURL}
-                    size="70"
-                    round={true}
-                    style={{
-                      border: "1px solid #c6c6c6",
-                      display: "block",
-                      margin: "0 auto",
-                    }}
-                  />
-                  <p>
-                    {quotation.auther.displayName}
-                    <i className="bi bi-heart"></i>
-                  </p>
-                  <p className="quotationTitle title">
-                    {quotation.oneLineIntroduce}
-                  </p>
-                  <div className="filter">
-                    <p>• 예상 금액 : {quotation.price}</p>
-                    <p>• 예상 기간 : {quotation.deadline}</p>
-                    <p>• 평균 응답 시간 : 미구현?</p>
-                  </div>
-                </div>
+                <QuotationCard quotation={quotation} containerCN={QTIdx === idx ? "container active" : "container"} />
               </InfoDiv>
             );
           })}
@@ -116,7 +108,16 @@ function Quotation(props) {
             <div className="content">{props.QuotationArr[QTIdx].content}</div>
             <div className="reference">
               <p>참고 자료</p>
-              <Slider {...settings}>
+              <Slider
+                {
+                  ...{
+                    dots: false,
+                    speed: 500,
+                    infinite: props.QuotationArr[QTIdx].videoArr.length > 3,
+                    easing: "ease-in-out",
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+              }}>
                 {props.QuotationArr[QTIdx].videoArr.map((video, idx) => {
                   return (
                     <ReactPlayer

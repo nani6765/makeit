@@ -66,7 +66,7 @@ function RequestDetail(props) {
                 auther={PostInfo.uid}
               />
             ) : (
-              <NoQuotation url={PostInfo.url} />
+              <NoQuotation url={PostInfo.url} auther={PostInfo.uid} />
             )}
           </>
         )}
