@@ -4,17 +4,18 @@ import { BodyHeaderDiv } from "../../../css/CommunityListCSS.js";
 import { ReactComponent as PenIcon } from "../../../css/img/Pen.svg";
 import qs from "qs";
 
+import { useHistory } from "react-router-dom";
+
 function BodyHeader(props) {
+  let history = useHistory();
+
   const SortClickFunc = (sort) => {
     let temp = qs.parse(props.URL);
     temp.sort = sort;
     let temp2 = qs.stringify(temp);
-    props.setURL(decodeURI(temp2));
+    history.push(`?${decodeURI(temp2)}`);
+    //props.setURL(decodeURI(temp2));
   };
-
-  useEffect(() => {
-    console.log(qs.parse(props.URL).sort);
-  }, [props.URL]);
 
   return (
     <BodyHeaderDiv>

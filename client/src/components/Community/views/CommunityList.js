@@ -11,7 +11,6 @@ import axios from "axios";
 import { CommunityHeader, CommunityBody } from "../css/CommunityListCSS";
 
 function CommunityList() {
-  let history = useHistory();
   let location = useLocation();
 
   const [URL, setURL] = useState("");
@@ -24,7 +23,11 @@ function CommunityList() {
   const getPostList = () => {
     setLoading(true);
     let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
-    console.log("temp", temp);
+
+    if (location.search.slice(1) != URL) {
+      setURL(location.search.slice(1));
+    }
+
     let body = {
       GNB: { category: temp.category },
       sortPost: temp.sort,
@@ -63,19 +66,19 @@ function CommunityList() {
     getPostList();
   }, [location.search]);
 
+  /*
   useEffect(() => {
     if (URL != location.search.slice(1)) {
       history.push(`?${URL}`);
     }
   }, [URL]);
+  */
 
-  /*
   useEffect(() => {
     if (!PostSkip && !PostList.length) {
       getPostList();
     }
   }, [PostSkip, PostList]);
-  */
 
   return (
     <>

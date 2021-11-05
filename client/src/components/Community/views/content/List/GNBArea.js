@@ -6,8 +6,11 @@ import { ReactComponent as PRBoard } from "../../../css/img/홍보게시판.svg"
 import { ReactComponent as SuggestionBoard } from "../../../css/img/건의게시판.svg";
 
 import qs from "qs";
+import { useHistory } from "react-router-dom";
 
 function GNBArea(props) {
+  let history = useHistory();
+
   const GNBList = [
     {
       icon: <AllBoard />,
@@ -40,7 +43,9 @@ function GNBArea(props) {
     let temp = qs.parse(props.URL);
     temp.category = gnb;
     let temp2 = qs.stringify(temp);
-    props.setURL(decodeURI(temp2));
+    console.log(decodeURI(temp2));
+    history.push(`?${decodeURI(temp2)}`);
+    //props.setURL(decodeURI(temp2));
   };
 
   return (
