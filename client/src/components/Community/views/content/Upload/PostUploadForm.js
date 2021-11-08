@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Select from "react-select";
@@ -31,6 +31,10 @@ function PostUploadForm(props) {
     { value: "홍보게시판", label: "홍보게시판" },
     { value: "건의함", label: "건의함" },
   ];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const submitHandler = (e) => {
     e.preventDefault();

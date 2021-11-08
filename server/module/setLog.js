@@ -8,7 +8,7 @@ async function setLog(uid, type, url) {
   const LogDoc = new Log(log);
   await LogDoc.save()
     .then((doc) => {
-      User.findOneAndUpdate({ uid: uid }, { $push: { logs: doc._id } })
+       User.findOneAndUpdate({ uid: uid }, { $push: { logs: doc._id } })
         .exec()
         .then((result) => {
           console.log("Log Saved...");

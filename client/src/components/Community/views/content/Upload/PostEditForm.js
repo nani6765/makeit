@@ -36,6 +36,10 @@ function PostEditForm(props) {
   ];
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  useEffect(() => {
     setTitle(props.PostInfo.title);
     setContent(props.PostInfo.content);
     let temp = props.PostInfo.images;
