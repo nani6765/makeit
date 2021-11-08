@@ -60,6 +60,7 @@ function Portfolio(props) {
           Images={props.Thumbnail}
           setImages={props.setThumbnail}
           type="thumbnail"
+          dirURL="making"
         />
         {props.Thumbnail[0] ? (
           <FileShowArea
@@ -81,6 +82,7 @@ function Portfolio(props) {
         <FileUploadArea
           Images={props.DetailImgArr}
           setImages={props.setDetailImgArr}
+          dirURL="making"
         />
         {props.DetailImgArr[0] ? (
           <FileShowArea

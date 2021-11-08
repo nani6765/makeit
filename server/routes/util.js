@@ -107,8 +107,32 @@ const SelectRerepleModel = (types, SecondType = "") => {
 /////////////////////////////
 
 router.post(
-  "/image/upload",
+  "/community/image/upload",
   setUpload(`makeit/community`),
+  (req, res, next) => {
+    return res.json({
+      success: true,
+      key: res.req.file.key,
+      filePath: res.req.file.location,
+      fileName: res.req.file.originalname,
+    });
+  }
+);
+router.post(
+  "/making/image/upload",
+  setUpload(`makeit/making`),
+  (req, res, next) => {
+    return res.json({
+      success: true,
+      key: res.req.file.key,
+      filePath: res.req.file.location,
+      fileName: res.req.file.originalname,
+    });
+  }
+);
+router.post(
+  "/participate/image/upload",
+  setUpload(`makeit/participate`),
   (req, res, next) => {
     return res.json({
       success: true,
@@ -224,7 +248,7 @@ router.post("/repleSubmit", (req, res) => {
 
   let PostModel = SelectPostModel(req.body.type);
   //let RepleModel = SelectRepleModel(req.body.type, req.body.stype);
-  console.log()
+  console.log();
 
   User.findOne({ uid: req.body.uid })
     .exec()

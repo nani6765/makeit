@@ -12,9 +12,7 @@ import {
   UploadDiv,
   UploadForm,
 } from "../../../css/ParticipateUploadCSS.js";
-import {
-  PartFilter
-} from "../../../css/ParticipateCSS.js";
+import { PartFilter } from "../../../css/ParticipateCSS.js";
 
 import axios from "axios";
 
@@ -28,19 +26,19 @@ function FPUpload(props) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(!title) {
+    if (!title) {
       alert("제목을 입력하세요.");
       return;
     }
-    if(!FilmType.length) {
+    if (!FilmType.length) {
       alert("촬영 형태를 선택하세요.");
       return;
     }
-    if(!Classification.length) {
+    if (!Classification.length) {
       alert("분류를 선택하세요.");
       return;
     }
-    if(!content) {
+    if (!content) {
       alert("내용을 입력하세요.");
       return;
     }
@@ -57,15 +55,17 @@ function FPUpload(props) {
     };
 
     axios.post("/api/participate/postSubmit", body).then((response) => {
-      if(response.data.success) {
+      if (response.data.success) {
         alert("게시글 등록 성공");
-        props.history.push({pathname: "/participate", state: {category: "파트너찾기"}});
-      }
-      else {
+        props.history.push({
+          pathname: "/participate",
+          state: { category: "파트너찾기" },
+        });
+      } else {
         alert("게시글 등록 실패");
         console.log(response.data.err);
       }
-    })
+    });
   };
 
   useEffect(() => {
@@ -74,33 +74,35 @@ function FPUpload(props) {
 
   return (
     <>
-    <UploadHeader>
-      <div>
+      <UploadHeader>
+        <div>
           <h1>
             <span onClick={() => props.history.goBack()}>&lt;</span>
             파트너 찾기
           </h1>
         </div>
-    </UploadHeader>
-    <UploadDiv>
-      <UploadForm>
-        <Title title={title} settitle={settitle} />
-        <PartFilter>
-          <FPUploadFilter
-            FilmType={FilmType}
-            setFilmType={setFilmType}
-            Classification={Classification}
-            setClassification={setClassification}
+      </UploadHeader>
+      <UploadDiv>
+        <UploadForm>
+          <Title title={title} settitle={settitle} />
+          <PartFilter>
+            <FPUploadFilter
+              FilmType={FilmType}
+              setFilmType={setFilmType}
+              Classification={Classification}
+              setClassification={setClassification}
+            />
+          </PartFilter>
+          <Content content={content} setcontent={setcontent} />
+          <FileUploadArea
+            Images={Images}
+            setImages={setImages}
+            dirURL="participate"
           />
-        </PartFilter>
-        <Content content={content} setcontent={setcontent} />
-        <FileUploadArea Images={Images} setImages={setImages} />
-        {
-          Images[0] && <FileShowArea Images={Images} setImages={setImages} />
-        }
-        <BtnDiv submitHandler={submitHandler} />
-      </UploadForm>
-    </UploadDiv>
+          {Images[0] && <FileShowArea Images={Images} setImages={setImages} />}
+          <BtnDiv submitHandler={submitHandler} />
+        </UploadForm>
+      </UploadDiv>
     </>
   );
 }

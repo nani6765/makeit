@@ -11,6 +11,7 @@ import axios from "axios";
 import { CommunityHeader, CommunityBody } from "../css/CommunityListCSS";
 
 function CommunityList() {
+  let history = useHistory();
   let location = useLocation();
 
   const [URL, setURL] = useState("");
@@ -59,20 +60,13 @@ function CommunityList() {
       setURL(location.search.slice(1));
     } else {
       setURL("category=전체게시판&sort=new");
+      history.push(`?category=전체게시판&sort=new`);
     }
   }, []);
 
   useEffect(() => {
     getPostList();
   }, [location.search]);
-
-  /*
-  useEffect(() => {
-    if (URL != location.search.slice(1)) {
-      history.push(`?${URL}`);
-    }
-  }, [URL]);
-  */
 
   useEffect(() => {
     if (!PostSkip && !PostList.length) {

@@ -24,6 +24,7 @@ function PrivateUpload(props) {
           Images={props.Thumbnail}
           setImages={props.setThumbnail}
           type="thumbnail"
+          dirURL="making"
         />
       </div>
       <div className="imgShow">

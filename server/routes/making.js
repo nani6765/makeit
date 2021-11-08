@@ -9,7 +9,6 @@ const {
   RequestPost,
   Quotation,
   ShareVideo,
-  ShareVideoReple,
 } = require("../model/Making.js");
 
 const setDelete = require("../module/multer/delete.js");
@@ -162,19 +161,19 @@ router.post("/producer/delete", (req, res) => {
     setDelete("makeit/community", temp.detailImgArr[i].key);
   }
 
-  ProReview.deleteMany({url: temp.url})
-  .exec()
-  .then(() => {
-    ProPost.findOneAndDelete({url: temp.url})
+  ProReview.deleteMany({ url: temp.url })
     .exec()
     .then(() => {
-      return res.status(200).send({ success: true });
+      ProPost.findOneAndDelete({ url: temp.url })
+        .exec()
+        .then(() => {
+          return res.status(200).send({ success: true });
+        });
     })
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.json({ success: false, err });
-  });
+    .catch((err) => {
+      console.log(err);
+      return res.json({ success: false, err });
+    });
 });
 
 router.post("/producer/getPostDetail", (req, res) => {
@@ -259,7 +258,7 @@ router.post("/producer/review/upload", (req, res) => {
       if (doc === null) {
         ProPost.findOneAndUpdate(
           { url: temp.url },
-          { $inc: { gradeArrayNum: 1, grade: temp.grade+1 } }
+          { $inc: { gradeArrayNum: 1, grade: temp.grade + 1 } }
         )
           .exec()
           .then((doc) => {
@@ -282,7 +281,7 @@ router.post("/producer/review/update", (req, res) => {
   let temp = req.body;
   ProPost.findOneAndUpdate(
     { url: temp.url },
-    { $inc: { grade: temp.grade-temp.originGrade }}
+    { $inc: { grade: temp.grade - temp.originGrade } }
   )
     .exec()
     .then((doc) => {
@@ -304,7 +303,7 @@ router.post("/producer/review/delete", (req, res) => {
   let temp = req.body;
   ProPost.findOneAndUpdate(
     { url: temp.url },
-    { $inc: { gradeArrayNum: -1, grade: -temp.grade-1 } }
+    { $inc: { gradeArrayNum: -1, grade: -temp.grade - 1 } }
   )
     .exec()
     .then((doc) => {
@@ -425,18 +424,18 @@ router.post("/requestVideo/getPostDetail", (req, res) => {
 
 router.post("/requestVideo/delete", (req, res) => {
   let temp = req.body.postInfo;
-  Quotation.deleteMany({url: temp.url})
-  .exec()
-  .then(() => {
-    RequestPost.findByIdAndDelete({ _id: temp._id })
+  Quotation.deleteMany({ url: temp.url })
     .exec()
-    .then((doc) => {
-      return res.status(200).send({ success: true });
+    .then(() => {
+      RequestPost.findByIdAndDelete({ _id: temp._id })
+        .exec()
+        .then((doc) => {
+          return res.status(200).send({ success: true });
+        });
     })
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  });
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
 });
 
 router.post("/requestVideo/quotationSubmit", (req, res) => {
@@ -461,30 +460,30 @@ router.post("/requestVideo/quotationSubmit", (req, res) => {
 router.post("/quotationEdit", (req, res) => {
   let temp = req.body;
 
-  Quotation.findOneAndUpdate({_id: temp._id}, temp)
-  .exec()
-  .then(() => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    console.log("quotationUpload Error: ", err);
-    return res.json({ success: false, err });
-  });
+  Quotation.findOneAndUpdate({ _id: temp._id }, temp)
+    .exec()
+    .then(() => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      console.log("quotationUpload Error: ", err);
+      return res.json({ success: false, err });
+    });
 });
 
 router.post("/quotation/delete", (req, res) => {
   let temp = req.body.postInfo;
 
-  Quotation.findOneAndDelete({_id: temp._id})
-  .exec()
-  .then(() => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    console.log("quotationUpload Error: ", err);
-    return res.json({ success: false, err });
-  });
-})
+  Quotation.findOneAndDelete({ _id: temp._id })
+    .exec()
+    .then(() => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      console.log("quotationUpload Error: ", err);
+      return res.json({ success: false, err });
+    });
+});
 
 router.post("/requestVideo/getQuotation", (req, res) => {
   let temp = req.body;
@@ -529,14 +528,14 @@ router.post("/shareVideo", (req, res) => {
 
 router.post("/shareVideo/getPageLen", (req, res) => {
   ShareVideo.countDocuments({})
-  .exec()
-  .then((len) => {
-    return res.status(200).send({success: true, len: len});
-  })
-  .catch((err) => {
-    return res.status(400).json({ success: false, err });
-  });
-})
+    .exec()
+    .then((len) => {
+      return res.status(200).send({ success: true, len: len });
+    })
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
+    });
+});
 
 router.post("/shareVideo/submit", (req, res) => {
   let temp = req.body;
@@ -574,37 +573,6 @@ router.post("/shareVideo/getPostDetail", (req, res) => {
     .catch((err) => {
       console.log("requestVideo getPostDetail Error", err);
       return res.json({ success: false, err });
-    });
-});
-
-router.post("/shareVideo/reple", (req, res) => {
-  let filter = {};
-  filter.postNum = req.body.postNum;
-  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-  let limit = req.body.limit ? parseInt(req.body.limit) : 5;
-  let sort = {};
-  sort.createdAt = 1;
-  ShareVideoReple.find(filter)
-    .exec()
-    .then((totalReple) => {
-      ShareVideoReple.find(filter)
-        .populate("auther")
-        .populate("rerepleArray")
-        .sort(sort)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then((repleInfo) => {
-          return res.status(200).json({
-            success: true,
-            repleInfo,
-            repleSize: repleInfo.length,
-            totalSize: totalReple.length,
-          });
-        });
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, err });
     });
 });
 

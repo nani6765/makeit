@@ -32,6 +32,10 @@ const partFASchema = mongoose.Schema(
     content: {
       type: String,
     },
+    images: {
+      type: Array,
+      default: [],
+    },
     realTime: {
       type: String,
       default: realTime(),
@@ -69,7 +73,7 @@ const partFASchema = mongoose.Schema(
     },
     classification: {
       type: Array,
-    }
+    },
   },
   {
     timestamps: true,
@@ -139,7 +143,7 @@ const partFPSchema = mongoose.Schema(
     },
     classification: {
       type: Array,
-    }
+    },
   },
   {
     timestamps: true,
@@ -205,7 +209,7 @@ const partIPSchema = mongoose.Schema(
     //filter
     subCategory: {
       type: String,
-    }
+    },
   },
   {
     timestamps: true,
@@ -271,7 +275,7 @@ const partLoSchema = mongoose.Schema(
     //filter
     subCategory: {
       type: String,
-    }
+    },
   },
   {
     timestamps: true,
