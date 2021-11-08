@@ -1,9 +1,7 @@
 var router = require("express").Router();
 const { Community } = require("../model/CoPost.js");
-const { Reple, Rereple } = require("../model/Reple.js");
 const { Counter } = require("../model/Counter.js");
-const { User } = require("../model/User.js");
-const { Alarm } = require("../model/Alarm.js");
+const { User, Log } = require("../model/User.js");
 
 //const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
@@ -147,51 +145,4 @@ router.post("/postDelete", (req, res) => {
     });
 });
 
-/*
-router.post("/like", (req, res) => {
-  let key = req.body.likeFlag;
-
-  if (key) {
-    // 좋아요를 이미 누른 상태
-    Community.findOneAndUpdate(
-      { postNum: req.body.postNum },
-      { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.userId } }
-    )
-      .exec()
-      .then((response) => {
-        return res.status(200).send({ success: true });
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(400).json({ success: false, err });
-      });
-  } else {
-    Community.findOneAndUpdate(
-      { postNum: req.body.postNum },
-      { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
-    )
-      .exec()
-      .then((response) => {
-        if (response.uid != req.body.userId) {
-          let alarmTemp = {
-            uid: response.uid,
-            url: req.body.postNum,
-            type: "likeToPost",
-            category: "community/post",
-          };
-          const alarm = new Alarm(alarmTemp);
-          alarm.save(() => {
-            return res.status(200).send({ success: true });
-          });
-        } else {
-          return res.status(200).send({ success: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(400).json({ success: false, err });
-      });
-  }
-});
-*/
 module.exports = router;

@@ -1,41 +1,48 @@
 import React, { useState, useEffect } from "react";
-import { withRouter, useLocation } from "react-router-dom";
+import { withRouter, useLocation, useHistory } from "react-router-dom";
 import { MyPageMainDiv, MyPageSubTitle } from "./css/MyPageElement.js";
 
 import BasicMyPage from "./MyPageContent/Taps/BasicMyPage.js";
 import EditProfile from "./MyPageContent/Taps/EditProfile.js";
 import AlarmCenter from "./MyPageContent/Taps/Alarm/AlarmCenter.js";
 import ActivityLog from "./MyPageContent/Taps/Logs/ActivityLog.js";
-
-import MobileFooter from "../HeaderAndFooter/Footer/MobileFooter.js";
+import { batch } from "react-redux";
 
 function MyPage(props) {
   const location = useLocation();
+  let history = useHistory();
 
-  const [Taps, setTaps] = useState("내정보");
-  const [AlarmType, setAlarmType] = useState("알림센터");
-  const [LogList, setLogList] = useState([]);
-  const [Limit, setLimit] = useState(0)
+  const [Taps, setTaps] = useState("basic");
+  const [AlarmType, setAlarmType] = useState("alarm");
 
   useEffect(() => {
-    if(location.state) {
+    if (location.state) {
       setTaps(location.state.Taps);
       setAlarmType(location.state.AlarmType);
     }
-  }, [location.state])
+  }, [location.state]);
 
+  useEffect(() => {
+    if (location.search === "") {
+      setTaps("basic");
+    } else {
+      if (location.search.slice(1) != Taps) {
+        setTaps(location.search.slice(1));
+      }
+    }
+  }, [location.search]);
 
   const SwitchTaps = () => {
     switch (Taps) {
-      case "내정보":
+      case "basic":
         return <BasicMyPage setTaps={setTaps} />;
-      case "프로필":
+      case "profile":
         return <EditProfile setTaps={setTaps} />;
-      case "알림":
+      case "alarmCenter":
         return (
           <AlarmCenter AlarmType={AlarmType} setAlarmType={setAlarmType} />
         );
-      case "활동이력":
+      case "activityHistory":
         return <ActivityLog setTaps={setTaps} />;
       default:
         return <BasicMyPage setTaps={setTaps} />;
@@ -44,16 +51,17 @@ function MyPage(props) {
 
   const SwitchTapHeader = () => {
     switch (Taps) {
-      case "내정보":
+      case "basic":
         return <p>내정보 관리</p>;
 
-      case "프로필":
+      case "profile":
         return (
           <React.Fragment>
             <p>프로필 관리</p>
             <span
               onClick={() => {
-                setTaps("내정보");
+                setTaps("basic");
+                history.push("/mypage");
               }}
             >
               X
@@ -61,26 +69,27 @@ function MyPage(props) {
           </React.Fragment>
         );
 
-      case "알림":
+      case "alarmCenter":
         return (
           <React.Fragment>
             <div>
               <p
-                className={AlarmType === "알림센터" ? "active" : null}
-                onClick={() => setAlarmType("알림센터")}
+                className={AlarmType === "alarm" ? "active" : null}
+                onClick={() => setAlarmType("alarm")}
               >
                 알림센터
               </p>
               <p
-                className={AlarmType === "쪽지함" ? "active" : null}
-                onClick={() => setAlarmType("쪽지함")}
+                className={AlarmType === "note" ? "active" : null}
+                onClick={() => setAlarmType("note")}
               >
                 쪽지함
               </p>
             </div>
             <span
               onClick={() => {
-                setTaps("내정보");
+                setTaps("basic");
+                history.push("/mypage");
               }}
             >
               X
@@ -88,14 +97,14 @@ function MyPage(props) {
           </React.Fragment>
         );
 
-        
-      case "활동이력":
+      case "activityHistory":
         return (
           <React.Fragment>
             <p>활동이력</p>
             <span
               onClick={() => {
-                setTaps("내정보");
+                setTaps("basic");
+                history.push("/mypage");
               }}
             >
               X
@@ -115,7 +124,6 @@ function MyPage(props) {
         <MyPageSubTitle>{SwitchTapHeader()}</MyPageSubTitle>
         {SwitchTaps()}
       </MyPageMainDiv>
-      <MobileFooter />
     </>
   );
 }

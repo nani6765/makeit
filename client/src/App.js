@@ -79,7 +79,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
           <Route exact path="/register/complete" component={RegisterComplete} />
-          <Route exact path="/myPage" component={MyPage} />
+          <Route path="/myPage" component={MyPage} />
           <Route exact path="/chat/:chatUrl" component={ChatDetailDiv} />
           {/*Community*/}
           <Route
@@ -126,11 +126,7 @@ function App() {
             path="/making/QuotationUpload"
             component={QuotationUpload}
           />
-          <Route
-            exact
-            path="/making/QuotationEdit"
-            component={QuotationEdit}
-          />
+          <Route exact path="/making/QuotationEdit" component={QuotationEdit} />
           <Route
             exact
             path="/making/ShareUpload"

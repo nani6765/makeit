@@ -1,11 +1,7 @@
 var router = require("express").Router();
-const { User } = require("../model/User.js");
+const { User, Log } = require("../model/User.js");
 const { Alarm } = require("../model/Alarm.js");
-const {
-  Community,
-  CommunityReple,
-  CommunityRereple,
-} = require("../model/CoPost.js");
+const { Community } = require("../model/CoPost.js");
 const {
   ProPost,
   TempProPost,
@@ -13,8 +9,6 @@ const {
   RequestPost,
   Quotation,
   ShareVideo,
-  ShareVideoReple,
-  ShareVideoRereple,
 } = require("../model/Making.js");
 const { PartFA, PartFP, PartIP, PartLo } = require("../model/Participate.js");
 
@@ -80,25 +74,6 @@ const SelectPostModel = (types) => {
       return PartIP;
     case "Lo":
       return PartLo;
-  }
-};
-
-const SelectRepleModel = (types) => {
-  switch (types) {
-    case "Community":
-      return CommunityReple;
-    case "ShareVideo":
-      return ShareVideoReple;
-  }
-};
-
-const SelectRerepleModel = (types, SecondType = "") => {
-  console.log(SecondType);
-  switch (types) {
-    case "Community":
-      return CommunityRereple;
-    case "ShareVideo":
-      return ShareVideoRereple;
   }
 };
 
@@ -323,54 +298,6 @@ router.post("/repleDelete", (req, res) => {
     });
 });
 
-/*
-router.post("/repleLike", (req, res) => {
-  let key = req.body.likeFlag;
-
-  if (key) {
-    // 좋아요를 이미 누른 상태
-    Reple.findOneAndUpdate(
-      { _id: req.body.repleId },
-      { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.userId } }
-    )
-      .exec()
-      .then((response) => {
-        return res.status(200).send({ success: true });
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(400).json({ success: false, err });
-      });
-  } else {
-    Reple.findOneAndUpdate(
-      { _id: req.body.repleId },
-      { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
-    )
-      .exec()
-      .then((response) => {
-        if (response.uid != req.body.userId) {
-          let alarmTemp = {
-            uid: response.uid,
-            url: response.postNum,
-            type: "likeToReple",
-            category: "community/post",
-          };
-          const alarm = new Alarm(alarmTemp);
-          alarm.save(() => {
-            return res.status(200).send({ success: true });
-          });
-        } else {
-          return res.status(200).send({ success: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(400).json({ success: false, err });
-      });
-  }
-});
-*/
-
 ///////////////////////////////
 //          rereple          //
 ///////////////////////////////
@@ -488,47 +415,5 @@ router.post("/rerepleDelete", (req, res) => {
       return res.status(400).json({ success: false, err });
     });
 });
-
-/*
-router.post("/rerepleLike", (req, res) => {
-  let RerepleModel = SelectRerepleModel(req.body.type);
-
-  let rerepleId = req.body.rerepleId;
-  let key = req.body.likeFlag;
-  let user = req.body.userId;
-  if (key) {
-    //likeArray에서 userId 삭제
-    RerepleModel.findOneAndUpdate(
-      { _id: rerepleId },
-      { $inc: { likeNum: -1 }, $pull: { likeArray: user } }
-    ).exec((err, result) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).send({ success: true });
-    });
-  } else {
-    //userId 삽입
-    RerepleModel.findOneAndUpdate(
-      { _id: rerepleId },
-      { $inc: { likeNum: 1 }, $push: { likeArray: user } }
-    )
-      .exec()
-      .then((result) => {
-        let alarmtemp = {
-          uid: result.uid,
-          url: result.postNum,
-          type: "likeToRereple",
-          category: "community/post",
-        };
-        const alarm = new Alarm(alarmtemp);
-        alarm.save(() => {
-          return res.status(200).send({ success: true });
-        });
-      })
-      .catch((err) => {
-        return res.status(400).send({ success: false, err });
-      });
-  }
-});
-*/
 
 module.exports = router;
