@@ -1,4 +1,4 @@
-import { User, Log } from "../model/User.js";
+const { User, Log } = require("../model/User.js");
 
 function setLog(uid, type, url) {
   let log = {
@@ -6,18 +6,19 @@ function setLog(uid, type, url) {
     url: url,
   };
   const LogDoc = new Log(log);
-  LogDoc.then((doc) => {
-    User.findOneAndUpdate({ uid: uid }, { $push: { logs: doc._id } })
-      .exec()
-      .then((err, result) => {
-        if (err) {
-          console.log(err);
-          return false;
-        } else {
+  LogDoc.save()
+    .then((doc) => {
+      User.findOneAndUpdate({ uid: uid }, { $push: { logs: doc._id } })
+        .exec()
+        .then((result) => {
+          console.log("Log Saved...");
           return true;
-        }
-      });
-  });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return false;
+    });
 }
 
 module.exports = setLog;

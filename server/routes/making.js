@@ -127,8 +127,15 @@ router.post("/producer/proPostSubmit", (req, res) => {
             .exec()
             .then(() => {
               const post = new ProPost(temp);
-              post.save(() => {
-                return res.status(200).send({ success: true });
+              post.save().then((doc) => {
+                let flag = setLog(
+                  temp.uid,
+                  "post",
+                  `/making/producerPost/${temp.url}`
+                );
+                if (flag) {
+                  return res.status(200).send({ success: true });
+                }
               });
             });
         });

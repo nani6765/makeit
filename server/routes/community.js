@@ -1,10 +1,11 @@
 var router = require("express").Router();
 const { Community } = require("../model/CoPost.js");
 const { Counter } = require("../model/Counter.js");
-const { User, Log } = require("../model/User.js");
+const { User } = require("../model/User.js");
 
 //const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
+const setLog = require("../module/setLog.js");
 
 var moment = require("moment");
 require("moment-timezone");
@@ -94,7 +95,9 @@ router.post("/postSubmit", (req, res) => {
           temp.auther = userInfo._id;
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const communityPost = new Community(temp);
-          communityPost.save();
+          communityPost.save().then((doc) => {
+            setLog(req.body.uid, "post", `/community/post/${temp.postNum}`);
+          });
         });
       counter
         .updateOne({ $inc: { coPostNum: 1 } })
