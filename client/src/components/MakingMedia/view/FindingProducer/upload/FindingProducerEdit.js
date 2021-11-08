@@ -46,24 +46,24 @@ function FindingProducerEdit(props) {
 
   useEffect(() => {
     // 상세설명
-    setOneLineIntroduce(props.location.state.post.oneLineIntroduce);
-    setCategory(props.location.state.post.category);
-    setDescription(props.location.state.post.description);
-    setWorkTypeArr([...props.location.state.post.workTypeArr]);
-    setVideoPurposeArr([...props.location.state.post.videoPurposeArr]);
+    setOneLineIntroduce(props.location.state.postInfo.oneLineIntroduce);
+    setCategory(props.location.state.postInfo.category);
+    setDescription(props.location.state.postInfo.description);
+    setWorkTypeArr([...props.location.state.postInfo.workTypeArr]);
+    setVideoPurposeArr([...props.location.state.postInfo.videoPurposeArr]);
 
     // 포트폴리오
-    setThumbnail([...props.location.state.post.thumbnailArr]);
-    setDetailImgArr([...props.location.state.post.detailImgArr]);
-    setVideoArr([...props.location.state.post.videoArr]);
+    setThumbnail([...props.location.state.postInfo.thumbnailArr]);
+    setDetailImgArr([...props.location.state.postInfo.detailImgArr]);
+    setVideoArr([...props.location.state.postInfo.videoArr]);
 
     // 가격설정
-    setPriceInfo(props.location.state.post.priceInfo);
-    setPriceDirectInput(props.location.state.post.priceDirectInput);
+    setPriceInfo(props.location.state.postInfo.priceInfo);
+    setPriceDirectInput(props.location.state.postInfo.priceDirectInput);
 
     // 수정환불 안내
-    setEditandReprogress(props.location.state.post.editandReprogress);
-    setFAQList([...props.location.state.post.FAQList]);
+    setEditandReprogress(props.location.state.postInfo.editandReprogress);
+    setFAQList([...props.location.state.postInfo.FAQList]);
   }, []);
 
   /* 임시저장이 필요한가?
@@ -199,8 +199,8 @@ function FindingProducerEdit(props) {
       priceDirectInput: PriceDirectInput,
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
-      url: props.location.state.post.url,
-      auther: props.location.state.post.auther._id,
+      url: props.location.state.postInfo.url,
+      auther: props.location.state.postInfo.auther._id,
     };
     axios
       .post("/api/making/producer/proPostEdit", body)

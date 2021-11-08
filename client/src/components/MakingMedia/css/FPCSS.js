@@ -227,7 +227,7 @@ const ProducerListContainer = styled.div`
       margin-bottom: 30px;
     }
   }
-  .producercard:last-child {
+  .producercard:nth-child(3n) {
     margin-right: 0px;
   }
 `;

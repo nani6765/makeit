@@ -4,14 +4,16 @@ import { useSelector } from "react-redux";
 
 import Avatar from "react-avatar";
 import RequestDetailFilter from "./RequestDetailFilter.js";
+import UserModal from "../../../../../utils/view/Modal/UserModal.js";
+import GuestModal from "../../../../../utils/view/Modal/GuestModal.js";
 import { DetailContentDiv } from "../../../../css/RVDCSS.js";
 
 function RequestDatailContent(props) {
-  const [ModalFlag, setModalFlag] = useState(false);
+  const [hambucControl, sethambucControl] = useState(false);
   const user = useSelector((state) => state.user.userData);
 
   const innerRef = useOuterClick((e) => {
-    setModalFlag(false);
+    sethambucControl(false);
   });
 
   return (
@@ -19,20 +21,6 @@ function RequestDatailContent(props) {
       <p className="path">
         홈 &gt; 영상제작 &gt; 의뢰하기 &gt; {props.PostInfo.category}
       </p>
-
-      {user != null
-        ? props.PostInfo.uid === user.uid && (
-            <Link
-              to={{
-                pathname: "/making/requestEdit",
-                state: { postInfo: props.PostInfo },
-              }}
-            >
-              <button>수정하기</button>
-            </Link>
-          )
-        : null}
-
       <div className="container">
         <div className="profile">
           <Avatar
@@ -48,16 +36,19 @@ function RequestDatailContent(props) {
             <p>{props.PostInfo.realTime}</p>
           </div>
         </div>
-        {user
-          ? user.uid === props.PostInfo.uid && (
-              <div className="hambuc" ref={innerRef}>
-                <i
-                  className="bi bi-three-dots"
-                  onClick={() => setModalFlag(!ModalFlag)}
-                ></i>
-              </div>
-            )
-          : null}
+        {user && (
+          <div className="hambuc" ref={innerRef}>
+            <i
+              className="bi bi-three-dots"
+              onClick={() => sethambucControl(!hambucControl)}
+            ></i>
+            {hambucControl && (
+              user.uid === props.PostInfo.uid
+              ? <UserModal modalType="/making/requestVideo" Info={props.PostInfo} path="/making" category="영상 의뢰하기"/>
+              : <GuestModal modalType="post" postInfo={props.PostInfo} />
+            )}
+          </div>
+        )}
         <RequestDetailFilter PostInfo={props.PostInfo} />
         <div className="content">{props.PostInfo.content}</div>
       </div>

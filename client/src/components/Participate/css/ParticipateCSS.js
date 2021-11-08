@@ -328,11 +328,12 @@ const IPLoPostCard = styled.div`
     grid-area: author;
     color: #a7a5a8;
     font-size: 12px;
+    margin-bottom: 0px;
   }
   .intro {
     grid-area: intro;
-    padding: 10px;
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: bold;
   }
   .like {
     grid-area: like;

@@ -6,7 +6,6 @@ import { YoutubeDiv } from "./ModalCSS.js";
 function YoutubeCheckModal(props) {
   const [SearchTerm, setSearchTerm] = useState("");
   const [SearchResultArr, setSearchResultArr] = useState([]);
-  const [MaxResult, setMaxResult] = useState(5);
   const [CheckFlag, setCheckFlag] = useState([
     false,
     false,
@@ -17,12 +16,15 @@ function YoutubeCheckModal(props) {
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
-    const response = await YOUTUBE_API.get("/search", {
-      params: {
-        q: SearchTerm,
-        maxResults: MaxResult,
-      },
-    });
+    let params = {
+      q: SearchTerm,
+      maxResults: 5,
+    }
+    if(props.SearchLength) {
+      params.maxResults=props.SearchLength;
+    }
+    
+    const response = await YOUTUBE_API.get("/search", {params});
     setSearchResultArr([...response.data.items]);
     
   };
@@ -44,12 +46,6 @@ function YoutubeCheckModal(props) {
       setCheckFlag([...flagTemp]);
     }
   }
-
-  useEffect(() => {
-    if(props.SearchResult) {
-      setMaxResult(props.SearchResult);
-    }
-  }, []);
 
   useEffect(() => {
     let temp = [false, false, false, false, false];

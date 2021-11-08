@@ -106,7 +106,7 @@ function PostList(props) {
                     <IPLoPostCard>
                       <img src={post.thumbnail[0].path} className="thumbnail" />
                       <p className="author">{post.auther.displayName}</p>
-                      <p className="intro">{post.oneLineIntroduce}</p>
+                      <p className="intro">{post.title}</p>
                       <div className="like">
                         {
                           props.user && post.likeArray.includes(props.user.uid)

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import ReviewForm from "./ReviewForm.js";
 import Review from "./Review.js";
 import axios from "axios";
@@ -6,6 +7,7 @@ import axios from "axios";
 import { DetaulContentSubTitle } from "../../../../../css/FPDCSS.js";
 
 function ReviewArea(props) {
+  const user = useSelector((state) => state.user.userData);
   const [ReviewList, setReviewList] = useState([]);
 
   useEffect(() => {
@@ -19,10 +21,13 @@ function ReviewArea(props) {
   return (
     <div id="review" style={{ marginTop: "1rem" }}>
       <DetaulContentSubTitle>서비스 평가</DetaulContentSubTitle>
-      <ReviewForm PostURL={props.PostURL} />
+      {
+        user && user.uid !== props.auther
+        ? <ReviewForm user={user} PostURL={props.PostURL} />
+        : null
+      }
       {ReviewList[0] &&
         ReviewList.map((review, idx) => {
-          console.log(idx, " : ", review);
           return <Review key={idx} Review={review} PostURL={props.PostURL} />;
         })}
     </div>

@@ -13,7 +13,7 @@ import { ContentDiv, GNBDiv } from "../../../css/RVUCSS.js";
 
 import axios from "axios";
 
-function QuotationUpload(props) {
+function QuotationEdit(props) {
   const user = useSelector((state) => state.user);
 
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
@@ -51,6 +51,7 @@ function QuotationUpload(props) {
     }
 
     let body = {
+      _id: props.location.state.postInfo._id,
       uid: user.userData.uid,
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
@@ -59,22 +60,24 @@ function QuotationUpload(props) {
       content: Content,
       videoArr: VideoArr,
       isPublic: IsPublic,
-      url: props.location.state.url,
+      url: props.location.state.postInfo.url,
     };
 
     axios
-      .post("/api/making/requestVideo/quotationSubmit", body)
+      .post("/api/making/quotationEdit", body)
       .then((response) => {
         if (response.data.success) {
-          alert("견적 등록이 완료되었습니다.");
+          alert("수정이 완료되었습니다.");
           props.history.goBack();
         } else {
-          alert("견적 등록이 실패하였습니다.");
+          alert("수정이 실패하였습니다.");
         }
       });
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     if (props.location.state === undefined) {
       props.history.push("/making");
     }
@@ -83,6 +86,13 @@ function QuotationUpload(props) {
       alert("회원만 글을 작성할 수 있습니다.");
       props.history.push("/login");
     }
+
+    setOneLineIntroduce(props.location.state.postInfo.oneLineIntroduce);
+    setDeadline(props.location.state.postInfo.deadline);
+    setPrice(props.location.state.postInfo.price);
+    setContent(props.location.state.postInfo.content);
+    setVideoArr([...props.location.state.postInfo.videoArr]);
+    setIsPublic(props.location.state.postInfo.isPublic);
   }, []);
 
   return (
@@ -164,4 +174,4 @@ function QuotationUpload(props) {
   );
 }
 
-export default withRouter(QuotationUpload);
+export default withRouter(QuotationEdit);

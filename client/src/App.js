@@ -40,6 +40,7 @@ import RequestVideoUpload from "./components/MakingMedia/view/RequestVideo/uploa
 import RequestVideoEdit from "./components/MakingMedia/view/RequestVideo/upload/RequestVideoEdit.js";
 import RequestDetail from "./components/MakingMedia/view/RequestVideo/detail/RequestDetail.js";
 import QuotationUpload from "./components/MakingMedia/view/RequestVideo/upload/QuotationUpload.js";
+import QuotationEdit from "./components/MakingMedia/view/RequestVideo/upload/QuotationEdit.js";
 
 import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 import ShareVideoDetail from "./components/MakingMedia/view/ShareVideo/detail/ShareVideoDetail.js";
@@ -112,7 +113,7 @@ function App() {
           />
           <Route
             exact
-            path="/making/RequestEdit"
+            path="/making/RequestVideoEdit"
             component={RequestVideoEdit}
           />
           <Route
@@ -124,6 +125,11 @@ function App() {
             exact
             path="/making/QuotationUpload"
             component={QuotationUpload}
+          />
+          <Route
+            exact
+            path="/making/QuotationEdit"
+            component={QuotationEdit}
           />
           <Route
             exact

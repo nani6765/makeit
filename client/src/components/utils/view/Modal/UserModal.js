@@ -9,27 +9,22 @@ function UserModal(props) {
   let history = useHistory();
 
   const [ModalFlag, setModalFlag] = useState(false);
-  const [PostInfo, setPostInfo] = useState(props.postInfo || "");
 
   function EditHandler() {
     if (props.modalType === "post") {
       return history.push({
-        pathname: "/community/update/" + PostInfo.postNum,
-        state: { postInfo: PostInfo },
+        pathname: "/community/update/" + props.Info.postNum,
+        state: { postInfo: props.Info },
       });
     }
-  }
-
-  function DeleteHandler() {
-    if (props.modalType === "post") {
-      return (
-        <DeleteModal
-          PostInfo={PostInfo}
-          setModalFlag={setModalFlag}
-          modalType="post"
-          type={props.type}
-        />
-      );
+    else if (props.modalType === "review") {
+      props.setEditFlag(true);
+    }
+    else {
+      return history.push({
+        pathname: props.modalType+"Edit",
+        state: { postInfo: props.Info },
+      });
     }
   }
 
@@ -46,7 +41,14 @@ function UserModal(props) {
           <i className="bi bi-trash"></i>삭제
         </button>
       </div>
-      {ModalFlag && DeleteHandler()}
+      {ModalFlag && 
+        <DeleteModal
+          Info={props.Info}
+          setModalFlag={setModalFlag}
+          modalType={props.modalType}
+          path={props.path}
+          category={props.category}
+        />}
     </ModalDiv>
   );
 }
