@@ -44,6 +44,7 @@ import QuotationEdit from "./components/MakingMedia/view/RequestVideo/upload/Quo
 
 import ShareVideoUpload from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoUpload.js";
 import ShareVideoDetail from "./components/MakingMedia/view/ShareVideo/detail/ShareVideoDetail.js";
+import ShareVideoEdit from "./components/MakingMedia/view/ShareVideo/upload/ShareVideoEdit.js";
 
 //Participate
 import Participate from "./components/Participate/view/Participate.js";
@@ -131,6 +132,11 @@ function App() {
             exact
             path="/making/ShareUpload"
             component={ShareVideoUpload}
+          />
+          <Route
+            exact
+            path="/making/ShareVideoEdit"
+            component={ShareVideoEdit}
           />
           <Route
             exact

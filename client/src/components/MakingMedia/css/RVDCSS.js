@@ -111,7 +111,6 @@ const InfoDiv = styled.div`
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
       0px 9px 10px rgba(163, 1, 79, 0.05);
     border-radius: 15px;
-    position: relative;
     .private {
       padding: 5rem 0;
       cursor: default;
@@ -306,8 +305,8 @@ const ModalDiv = styled.div`
 const DeleteModalDiv = styled.div`
   .content {
     position: absolute;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     top: 0px;
     left: 0px;
     display: flex;
@@ -329,12 +328,13 @@ const DeleteModalDiv = styled.div`
       grid-gap: 5px;
       grid-template-rows: auto auto auto;
       padding: 20px;
+      position: absolute;
       grid-template-areas:
         ". title delete"
         ". desc ."
         ". buttonDiv .";
       z-index: 51;
-      position: fixed;
+      position: absolute;
       .title {
         grid-area: title;
         text-align: center;
