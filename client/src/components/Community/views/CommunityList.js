@@ -12,13 +12,13 @@ import { CommunityHeader, CommunityBody, FNBDiv } from "../css/CommunityListCSS"
 
 function CommunityList() {
   let location = useLocation();
-
+  let history = useHistory();
+  
   const [URL, setURL] = useState("");
   const [PostList, setPostList] = useState([]);
   const [Skip, setSkip] = useState(0);
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([]);
-  const [PostLimit, setPostLimit] = useState(10);
   const [Loading, setLoading] = useState(false);
 
   const getPostList = () => {
@@ -27,14 +27,14 @@ function CommunityList() {
 
     if (location.search.slice(1) != URL) {
       setURL(location.search.slice(1));
-      setSkip(temp.pIdx);
+      setSkip(parseInt(temp.pIdx));
     }
 
     let body = {
       GNB: { category: temp.category },
       sortPost: temp.sort,
       skip: temp.pIdx * 10,
-      limit: PostLimit,
+      limit: 10,
     };
 
     axios.post("/api/community/", body).then((response) => {
@@ -52,8 +52,9 @@ function CommunityList() {
   useEffect(() => {
     if (location.search) {
       setURL(location.search.slice(1));
-    } else {
-      setURL("category=전체게시판&sort=new&pIdx=1");
+    } else {      
+      setURL("category=전체게시판&sort=new&pIdx=0");
+      history.push(`?category=전체게시판&sort=new&pIdx=0`);
     }
   }, []);
 
@@ -62,24 +63,14 @@ function CommunityList() {
   }, [location.search]);
 
   useEffect(() => {
-    console.log(Skip);
-  }, [Skip]);
-
-  useEffect(() => {
     let sIdx = parseInt(Skip/10);
     let temp = [];
-    for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 9, PageLen); i++) {
+    for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 10, PageLen); i++) {
       temp.push(i);
     }
     setPageIdxArr(temp);
-    console.log(PageLen);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parseInt(Skip/10), PageLen])
-
-  useEffect(() => {
-    console.log("PageIdxArr", PageIdxArr);
-  }, [PageIdxArr]);
-
+  }, [parseInt(Skip/10), PageLen]);
 
   return (
     <>

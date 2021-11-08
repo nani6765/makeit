@@ -44,7 +44,6 @@ function GNBArea(props) {
     temp.category = gnb;
     let temp2 = qs.stringify(temp);
     history.push(`?${decodeURI(temp2)}`);
-    //props.setURL(decodeURI(temp2));
   };
 
   return (

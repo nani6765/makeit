@@ -111,6 +111,7 @@ const InfoDiv = styled.div`
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
       0px 9px 10px rgba(163, 1, 79, 0.05);
     border-radius: 15px;
+    position: relative;
     .private {
       padding: 5rem 0;
       cursor: default;
@@ -268,7 +269,7 @@ const ModalDiv = styled.div`
   box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
   border-radius: 11px;
   position: absolute;
-  right: -10px;
+  right: 0px;
   top: 20px;
   min-width: 150px;
   min-height: 70px;
@@ -304,11 +305,11 @@ const ModalDiv = styled.div`
 
 const DeleteModalDiv = styled.div`
   .content {
+    position: absolute;
     height: 100vh;
     width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
+    top: 0px;
+    left: 0px;
     display: flex;
     align-items: center;
     justify-content: center;

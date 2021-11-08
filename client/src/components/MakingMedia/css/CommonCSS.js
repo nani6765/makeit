@@ -113,6 +113,7 @@ const LinkCSS = css`
   text-decoration: none;
   &:hover {
     text-decoration: none;
+    color: black;
   }
 `;
 

@@ -12,11 +12,9 @@ import {
   UploadForm,
   ThumbnailArea,
 } from "../../../css/ParticipateUploadCSS.js";
-import {
-  PartFilter
-} from "../../../css/ParticipateCSS.js";
+import { PartFilter } from "../../../css/ParticipateCSS.js";
 
-import axios from 'axios';
+import axios from "axios";
 
 function LoUpload(props) {
   const [Category, setCategory] = useState("");
@@ -27,39 +25,41 @@ function LoUpload(props) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(!title) {
+    if (!title) {
       alert("제목을 입력하세요.");
       return;
     }
-    if(!Thumbnail) {
+    if (!Thumbnail) {
       alert("썸네일을 등록하세요.");
       return;
     }
-    if(!Category) {
+    if (!Category) {
       alert("카테고리를 선택하세요.");
       return;
     }
-    if(!content) {
+    if (!content) {
       alert("내용을 입력하세요.");
       return;
     }
 
     let body = {
-      uid : props.user.uid,
+      uid: props.user.uid,
       email: props.user.email,
       title: title,
       content: content,
       subCategory: Category,
       thumbnail: Thumbnail,
       type: "Lo",
-    }
+    };
 
     axios.post("/api/participate/postSubmit", body).then((response) => {
-      if(response.data.success) {
+      if (response.data.success) {
         alert("게시글 등록 성공");
-        props.history.push({pathname: "/participate", state: {category: "로케이션"}}); 
-      }
-      else {
+        props.history.push({
+          pathname: "/participate",
+          state: { category: "로케이션" },
+        });
+      } else {
         alert("게시글 등록 실패");
         console.log(response.data.err);
       }
@@ -82,12 +82,14 @@ function LoUpload(props) {
               Images={Thumbnail}
               setImages={setThumbnail}
               type="thumbnail"
+              dirURL="participate"
             />
             {Thumbnail[0] ? (
               <FileShowArea
                 Images={Thumbnail}
                 setImages={setThumbnail}
                 type="PUThumbnail"
+                dirURL="participate"
               />
             ) : null}
           </div>

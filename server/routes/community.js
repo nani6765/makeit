@@ -138,10 +138,10 @@ router.post("/postDelete", (req, res) => {
   for (let i = 0; i < temp.imageLength; i++) {
     setDelete("makeit/community", temp.images[i].key);
   }
-  CommunityRereple.deleteMany({ postNum: temp.postNum })
+  Rereple.deleteMany({ postId: temp.postInfoId })
     .exec()
     .then(() => {
-      CommunityReple.deleteMany({ postNum: temp.postNum }).exec();
+      Reple.deleteMany({ postId: temp.postInfoId }).exec();
     })
     .then(() => {
       Community.deleteOne({ _id: temp.postInfoId }).exec();

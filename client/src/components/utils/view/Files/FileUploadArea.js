@@ -8,6 +8,16 @@ import axios from "axios";
 import { jsx, css } from "@emotion/react";
 
 function FileUploadArea(props) {
+  const setURL = (key) => {
+    switch (key) {
+      case "community":
+        return "/api/util/community/image/upload";
+      case "making":
+        return "/api/util/making/image/upload";
+      case "participate":
+        return "/api/util/participate/image/upload";
+    }
+  };
   const dropHandler = (files) => {
     let formData = new FormData();
     const config = {
@@ -15,7 +25,7 @@ function FileUploadArea(props) {
     };
     formData.append("file", files[0]);
 
-    axios.post("/api/util/image/upload", formData, config).then((response) => {
+    axios.post(setURL(props.dirURL), formData, config).then((response) => {
       if (response.data.success) {
         //console.log(response.data);
         if (props.type === "thumbnail") {

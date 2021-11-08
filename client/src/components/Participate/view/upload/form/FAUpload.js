@@ -5,17 +5,16 @@ import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
+import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
 
 import {
   UploadHeader,
   UploadDiv,
   UploadForm,
 } from "../../../css/ParticipateUploadCSS.js";
-import {
-  PartFilter
-} from "../../../css/ParticipateCSS.js";
+import { PartFilter } from "../../../css/ParticipateCSS.js";
 
-import axios from 'axios';
+import axios from "axios";
 
 function FAUpload(props) {
   const [Gender, setGender] = useState([]);
@@ -23,6 +22,7 @@ function FAUpload(props) {
   const [Classification, setClassification] = useState([]);
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
+  const [Images, setImages] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -56,19 +56,22 @@ function FAUpload(props) {
       gender: Gender,
       filmType: FilmType,
       classification: Classification,
+      images: Images,
       type: "FA",
     };
 
     axios.post("/api/participate/postSubmit", body).then((response) => {
-      if(response.data.success) {
+      if (response.data.success) {
         alert("게시글 등록 성공");
-        props.history.push({pathname: "/participate", state: {category: "배우찾기"}});
-      }
-      else {
+        props.history.push({
+          pathname: "/participate",
+          state: { category: "배우찾기" },
+        });
+      } else {
         alert("게시글 등록 실패");
         console.log(response.data.err);
       }
-    })
+    });
   };
 
   return (
@@ -95,6 +98,12 @@ function FAUpload(props) {
             />
           </PartFilter>
           <Content content={content} setcontent={setcontent} />
+          <FileUploadArea
+            Images={Images}
+            setImages={setImages}
+            dirURL="participate"
+          />
+          {Images[0] && <FileShowArea Images={Images} setImages={setImages} />}
           <BtnDiv submitHandler={submitHandler} />
         </UploadForm>
       </UploadDiv>

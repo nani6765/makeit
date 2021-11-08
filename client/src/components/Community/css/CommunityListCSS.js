@@ -306,8 +306,9 @@ const FNBDiv = styled.div`
       }
       ul {
         li {
+          display: inline-block;
           border-left: 1px solid black;
-          padding-left: 0.5rem;
+          padding: 0 0.5rem;
           text-decoration: none;
           list-style: none;
           p {

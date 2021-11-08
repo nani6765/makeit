@@ -12,11 +12,9 @@ import {
   UploadForm,
   ThumbnailArea,
 } from "../../../css/ParticipateUploadCSS.js";
-import {
-  PartFilter
-} from "../../../css/ParticipateCSS.js";
+import { PartFilter } from "../../../css/ParticipateCSS.js";
 
-import axios from 'axios';
+import axios from "axios";
 
 function IPUpload(props) {
   const [Category, setCategory] = useState("");
@@ -27,23 +25,23 @@ function IPUpload(props) {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if(!Category) {
+    if (!Category) {
       alert("카테고리를 선택하세요.");
       return;
     }
-    if(!Thumbnail[0]) {
+    if (!Thumbnail[0]) {
       alert("썸네일을 등록하세요.");
       return;
     }
-    if(!title) {
+    if (!title) {
       alert("제목을 입력하세요.");
       return;
     }
-    if(!content) {
+    if (!content) {
       alert("내용을 입력하세요.");
       return;
     }
-    
+
     let body = {
       uid: props.user.uid,
       email: props.user.email,
@@ -52,18 +50,20 @@ function IPUpload(props) {
       thumbnail: Thumbnail,
       subCategory: Category,
       type: "IP",
-    }
+    };
 
     axios.post("/api/participate/postSubmit", body).then((response) => {
-      if(response.data.success) {
+      if (response.data.success) {
         alert("게시글 등록 성공");
-        props.history.push({pathname: "/participate", state: {category: "프로알리기"}}); 
-      }
-      else {
+        props.history.push({
+          pathname: "/participate",
+          state: { category: "프로알리기" },
+        });
+      } else {
         alert("게시글 등록 실패");
         console.log(response.data.err);
       }
-    })
+    });
   };
 
   return (
@@ -82,6 +82,7 @@ function IPUpload(props) {
               Images={Thumbnail}
               setImages={setThumbnail}
               type="thumbnail"
+              dirURL="participate"
             />
             {Thumbnail[0] ? (
               <FileShowArea

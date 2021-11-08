@@ -6,6 +6,8 @@ import Avatar from "react-avatar";
 import YouTube from "react-youtube";
 import axios from "axios";
 
+import UserModal from '../../../../../utils/view/Modal/UserModal.js';
+import GuestModal from "../../../../../utils/view/Modal/GuestModal.js";
 import { DetailDiv } from "../../../../css/SVDCSS.js";
 import { ReactComponent as LGIcon } from "../../../../css/Img/LikeGrey.svg";
 import { ReactComponent as LPIcon } from "../../../../css/Img/LikePurple.svg";
@@ -102,9 +104,9 @@ function ShareVideoPost(props) {
             ></i>
             {hambucControl &&
               (user.userData.uid === props.PostInfo.auther.uid ? (
-                <p>UserModal</p>
+                <UserModal Info={props.PostInfo} modalType="/making/ShareVideo" path="/making" category="제작 영상 알리기"/>
               ) : (
-                <p>GuestModal</p>
+                <GuestModal modalType="post" postInfo={props.PostInfo}/>
               ))}
           </div>
         )}

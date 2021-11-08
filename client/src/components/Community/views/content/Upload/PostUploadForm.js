@@ -92,7 +92,11 @@ function PostUploadForm(props) {
       ></textarea>
 
       <DropZoneDiv>
-        <FileUploadArea Images={Image} setImages={setImage} />
+        <FileUploadArea
+          Images={Image}
+          setImages={setImage}
+          dirURL="community"
+        />
         {Image[0] ? (
           <FileShowArea Images={Image} setImages={setImage} type="community" />
         ) : null}

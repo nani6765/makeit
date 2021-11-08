@@ -78,10 +78,10 @@ function ShareVideoUpload(props) {
 
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
-        alert("의뢰 게시가 완료되었습니다.");
+        alert("제작 영상 게시가 완료되었습니다.");
         props.history.push({pathname: "/making", state: {menu: "제작 영상 알리기"}});
       } else {
-        alert("의뢰 게시가 실패하였습니다.");
+        alert("제작 영상 게시가 실패하였습니다.");
       }
     });
   };
