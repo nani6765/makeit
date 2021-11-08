@@ -61,7 +61,6 @@ const txt = (name, Key) => {
       `;
 };
 
-/*
 async function sendEmail(toEmail, key, name) {
   let transporter = nodemailer.createTransport({
     host: config.smtpServerURL, //SMTP 서버 주소 port: 587,
@@ -92,7 +91,7 @@ async function sendEmail(toEmail, key, name) {
     }
   });
 }
-*/
+/*
 async function sendEmail(toEmail, key, name) {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com", //SMTP 서버 주소 port: 587,
@@ -123,5 +122,6 @@ async function sendEmail(toEmail, key, name) {
     }
   });
 }
+*/
 
 module.exports = sendEmail;
