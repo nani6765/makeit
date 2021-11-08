@@ -15,7 +15,7 @@ import {
 import MobileSlide from "./MobileSlide.js";
 import HeaderNavArea from "./HeaderNavArea.js";
 import HeaderLoginArea from "./HeaderLoginArea.js";
-import { ReactComponent as Logo } from "../../css/logo.svg";
+
 import "../../css/header.css";
 import "../../css/animation.css";
 
@@ -30,13 +30,10 @@ function HeaderElement(props) {
         <HeaderGrid>
           <HeaderLogo>
             <Link to="/">
-              {/*
               <img
                 src={process.env.PUBLIC_URL + "/Img/logo.png"}
                 alt="MainLogo"
               />
-              */}
-              <Logo />
             </Link>
           </HeaderLogo>
 
