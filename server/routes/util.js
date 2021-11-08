@@ -199,6 +199,7 @@ router.post("/getReple", (req, res) => {
         .limit(limit)
         .exec()
         .then((repleInfo) => {
+          console.log(repleInfo);
           return res.status(200).json({
             success: true,
             repleInfo,

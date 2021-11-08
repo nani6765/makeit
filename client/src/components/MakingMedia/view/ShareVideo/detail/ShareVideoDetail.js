@@ -35,19 +35,21 @@ function ShareVideoDetail(props) {
   }, []);
 
   useEffect(() => {
-    let body = {
-      postNum: props.match.params.postId,
-      skip: Skip,
-      limit: Limit,
-      type: "ShareVideo",
-    };
-    getReples(body);
-  }, []);
+    if(PostInfo._id) {
+      let body = {
+        postId: PostInfo._id,
+        skip: Skip,
+        limit: Limit,
+        type: "ShareVideo",
+      };
+      getReples(body);
+    }
+  }, [PostInfo]);
 
   const loadMoreHanlder = () => {
     let skip = Skip + Limit;
     let body = {
-      postNum: props.match.params.postId,
+      postId: PostInfo._id,
       skip: skip,
       limit: Limit,
       loadMore: true,

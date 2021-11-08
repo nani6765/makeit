@@ -14,6 +14,7 @@ const {
 const { Reple, Rereple } = require("../model/Reple.js");
 
 const setDelete = require("../module/multer/delete.js");
+const setLog = require("../module/setLog.js");
 
 var moment = require("moment");
 require("moment-timezone");
@@ -165,9 +166,9 @@ router.post("/producer/proPostEdit", (req, res) => {
 router.post("/producer/delete", (req, res) => {
   let temp = req.body.postInfo;
 
-  setDelete("makeit/community", temp.thumbnailArr[0].key);
+  setDelete("makeit/making", temp.thumbnailArr[0].key);
   for (let i = 0; i < temp.detailImgArr.length; i++) {
-    setDelete("makeit/community", temp.detailImgArr[i].key);
+    setDelete("makeit/making", temp.detailImgArr[i].key);
   }
 
   ProReview.deleteMany({ url: temp.url })
@@ -572,7 +573,21 @@ router.post("/shareVideo/submit", (req, res) => {
     });
 });
 
-router.post("shareVideo/delete", (req, res) => {
+router.post("/shareVideo/Edit", (req, res) => {
+  let temp = req.body;
+
+  ShareVideo.findByIdAndUpdate({_id: temp._id}, {temp})
+  .exec()
+  .then(() => {
+    return res.status(200).send({ success: true });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.json({ success: false, err });
+  });
+})
+
+router.post("/shareVideo/delete", (req, res) => {
   let temp = req.body.postInfo;
 
   Rereple.deleteMany({postId: temp._id})
@@ -581,9 +596,17 @@ router.post("shareVideo/delete", (req, res) => {
     Reple.deleteMany({postId: temp._id})
     .exec()
     .then(() => {
-      
+      ShareVideo.findByIdAndDelete({_id: temp._id})
+      .exec()
+      .then(() => {
+        return res.status(200).send({ success: true });
+      })
     })
   })
+  .catch((err) => {
+    console.log("requestVideo delete Error", err);
+    return res.json({ success: false, err });
+  });
 })
 
 router.post("/shareVideo/getPostDetail", (req, res) => {
