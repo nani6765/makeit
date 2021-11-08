@@ -77,32 +77,6 @@ const SelectPostModel = (types) => {
   }
 };
 
-const SelectLogURL = (types) => {
-  switch (types) {
-    case "CoPost":
-      return "/community/post/";
-    case "Community":
-      return "/community/post/";
-    case "Reple":
-      return Reple;
-    case "Rereple":
-      return Rereple;
-    case "ProPost":
-      return ProPost;
-    case "Quotation":
-      return Quotation;
-    case "ShareVideo":
-      return ShareVideo;
-    case "FA":
-      return PartFA;
-    case "FP":
-      return PartFP;
-    case "IP":
-      return PartIP;
-    case "Lo":
-      return PartLo;
-  }
-};
 /////////////////////////////
 //          Image          //
 /////////////////////////////
@@ -226,7 +200,6 @@ router.post("/getReple", (req, res) => {
         .limit(limit)
         .exec()
         .then((repleInfo) => {
-          console.log(repleInfo);
           return res.status(200).json({
             success: true,
             repleInfo,
