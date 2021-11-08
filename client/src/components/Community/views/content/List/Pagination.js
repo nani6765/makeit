@@ -1,12 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { withRouter } from "react-router-dom";
+import qs from "qs";
 
 function Pagination(props) {
+
+    const setPIdx = (page) => {
+        let temp = qs.parse(props.URL);
+        temp.pIdx = page;
+        let temp2 = qs.stringify(temp);
+        props.history.push(`?${decodeURI(temp2)}`);
+    }
+
     return (
         <div className="FNB">
           <div className="pagination">
             {
               props.PageIdxArr[0] !== 1 && (
-                <button onClick={() => props.setSkip(parseInt((props.Skip-10)/10)*10)}>
+                <button onClick={() => setPIdx(parseInt(props.Skip - 10)/10 * 10)}>
                   &lt; 이전
                 </button>
               )
@@ -15,7 +25,7 @@ function Pagination(props) {
             {
               props.PageIdxArr.map((page, idx) => {
                 return (
-                    <li key={idx} className={page===props.Skip + 1 ? "active" : null} onClick={() => props.setSkip(page - 1)}>
+                    <li key={idx} className={page===props.Skip + 1 ? "active" : null} onClick={() => setPIdx(page - 1)}>
                       <p>{page}</p>
                     </li>
                 )
@@ -24,7 +34,7 @@ function Pagination(props) {
             </ul>
             {
                 props.PageIdxArr[props.PageIdxArr.length - 1] < props.PageLen && (
-                    <button onClick={() => props.setSkip(parseInt((props.Skip +10)/10)*10)}>
+                    <button onClick={() => setPIdx(parseInt((props.Skip +10)/10)*10)}>
                         &gt; 다음
                     </button>
                 )
@@ -34,4 +44,4 @@ function Pagination(props) {
     )
 }
 
-export default Pagination
+export default withRouter(Pagination)

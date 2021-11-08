@@ -277,10 +277,60 @@ const BodyFooterDiv = styled.div`
   }
 `;
 
+const FNBDiv = styled.div`
+  margin-bottom: 20px;
+  .submitBtn {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      font-size: 15px;
+      font-weight: bold;
+      background: #935EA5;
+      color: #fff;
+      padding: 7px 10px;
+      border: none;
+      border-radius: 10px;
+      svg {
+        margin-left: 3px;
+      }
+    }
+  }
+  .FNB {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .pagination {
+      .active {
+        font-weight: bold;
+      }
+      ul {
+        li {
+          border-left: 1px solid black;
+          padding-left: 0.5rem;
+          text-decoration: none;
+          list-style: none;
+          p {
+            cursor: pointer;
+            margin: 0;
+          }
+        }
+        li:first-child {
+          border: none;
+        }
+      }
+      button {
+        background: none;
+        border: none;
+      }
+    }
+  }
+`;
+
 export {
   CommunityHeader,
   CommunityBody,
   BodyHeaderDiv,
   PostCard,
-  BodyFooterDiv,
+  FNBDiv,
 };
