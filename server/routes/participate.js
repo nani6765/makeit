@@ -24,22 +24,6 @@ const SelectModel = (types) => {
   }
 };
 
-/*
-
-router.post("/postDetail", (req, res) => {
-  let filter = {};
-  filter.postNum = req.body.postNum;
-  Community.findOneAndUpdate(filter, { $inc: { views: 1 } })
-    .populate("auther")
-    .exec((err, postInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).json({ success: true, postInfo });
-    });
-});
-
-
-*/
-
 router.post("/", (req, res) => {
   let temp = req.body;
 
@@ -165,9 +149,14 @@ router.post("/postSubmit", (req, res) => {
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const Post = new PostModel(temp);
           Post.save().then(() => {
-            return res.status(200).send({
-              success: true,
-            });
+            let flag = setLog(
+              temp.uid,
+              "post",
+              `participate/post/${temp.postNum}`
+            );
+            if (flag) {
+              return res.status(200).send({ success: true });
+            }
           });
         });
     })

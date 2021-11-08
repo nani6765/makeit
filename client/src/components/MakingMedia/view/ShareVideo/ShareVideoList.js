@@ -40,7 +40,7 @@ function ShareVideoList(props) {
       {PostList.map((post, idx) => {
         return (
           <Link
-            to={"/Making/shareVideo/" + post.url}
+            to={"/making/shareVideo/" + post.url}
             key={idx}
             style={{ width: "30%" }}
             css={LinkCSS}
@@ -50,11 +50,11 @@ function ShareVideoList(props) {
               <p className="author">{post.auther.displayName}</p>
               <p className="intro">{post.oneLineIntroduce}</p>
               <div className="like">
-                {
-                  props.user && post.likeArray.includes(props.user.uid)
-                  ? <LPIcon />
-                  : <LGIcon />
-                }
+                {props.user && post.likeArray.includes(props.user.uid) ? (
+                  <LPIcon />
+                ) : (
+                  <LGIcon />
+                )}
                 추천
                 {post.likeNum != 0 && <span>({post.likeNum})</span>}
               </div>

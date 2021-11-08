@@ -14,6 +14,7 @@ const {
 const { Reple, Rereple } = require("../model/Reple.js");
 
 const setDelete = require("../module/multer/delete.js");
+const setLog = require("../module/setLog.js");
 
 var moment = require("moment");
 require("moment-timezone");
@@ -273,7 +274,14 @@ router.post("/producer/review/upload", (req, res) => {
           .then((doc) => {
             const proReview = new ProReview(temp);
             proReview.save().then((doc) => {
-              return res.status(200).send({ success: true });
+              let flag = setLog(
+                temp.uid,
+                "review",
+                `/making/producerPost/${temp.url}`
+              );
+              if (flag) {
+                return res.status(200).send({ success: true });
+              }
             });
           });
       } else {
@@ -393,7 +401,14 @@ router.post("/requestVideo/reqPostSubmit", (req, res) => {
           temp.url = cnt.reqPostNum;
           const post = new RequestPost(temp);
           post.save(() => {
-            return res.status(200).send({ success: true });
+            let flag = setLog(
+              temp.uid,
+              "post",
+              `/making/requestPost/${temp.url}`
+            );
+            if (flag) {
+              return res.status(200).send({ success: true });
+            }
           });
         });
     })
@@ -457,6 +472,10 @@ router.post("/requestVideo/quotationSubmit", (req, res) => {
       temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
       const newQuotation = new Quotation(temp);
       newQuotation.save((result) => {
+        let flag = setLog(temp.uid, "post", `/making/requestPost/${temp.url}`);
+        if (flag) {
+          return res.status(200).send({ success: true });
+        }
         return res.status(200).send({ success: true });
       });
     })
@@ -563,7 +582,14 @@ router.post("/shareVideo/submit", (req, res) => {
           temp.url = cnt.shareVideoNum;
           const post = new ShareVideo(temp);
           post.save(() => {
-            return res.status(200).send({ success: true });
+            let flag = setLog(
+              temp.uid,
+              "post",
+              `/making/shareVideo/${temp.url}`
+            );
+            if (flag) {
+              return res.status(200).send({ success: true });
+            }
           });
         });
     })
@@ -575,16 +601,14 @@ router.post("/shareVideo/submit", (req, res) => {
 router.post("shareVideo/delete", (req, res) => {
   let temp = req.body.postInfo;
 
-  Rereple.deleteMany({postId: temp._id})
-  .exec()
-  .then(() => {
-    Reple.deleteMany({postId: temp._id})
+  Rereple.deleteMany({ postId: temp._id })
     .exec()
     .then(() => {
-      
-    })
-  })
-})
+      Reple.deleteMany({ postId: temp._id })
+        .exec()
+        .then(() => {});
+    });
+});
 
 router.post("/shareVideo/getPostDetail", (req, res) => {
   ShareVideo.findOneAndUpdate({ url: req.body.url }, { $inc: { view: 1 } })

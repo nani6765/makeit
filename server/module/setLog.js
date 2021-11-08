@@ -1,12 +1,12 @@
 const { User, Log } = require("../model/User.js");
 
-function setLog(uid, type, url) {
+async function setLog(uid, type, url) {
   let log = {
     type: type,
     url: url,
   };
   const LogDoc = new Log(log);
-  LogDoc.save()
+  await LogDoc.save()
     .then((doc) => {
       User.findOneAndUpdate({ uid: uid }, { $push: { logs: doc._id } })
         .exec()
