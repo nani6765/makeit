@@ -2,9 +2,12 @@ import React from "react";
 import { PCOnly } from "../../css/MyPageElement.js";
 import Avatar from "react-avatar";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function BasicMyPage(props) {
   const user = useSelector((state) => state.user);
+  let history = useHistory();
+
   return (
     <div>
       <div className="profile">
@@ -27,7 +30,8 @@ function BasicMyPage(props) {
           <div
             className="next"
             onClick={() => {
-              props.setTaps("프로필");
+              props.setTaps("profile");
+              history.push("/mypage?profile");
             }}
           >
             <span>＞</span>
@@ -43,8 +47,24 @@ function BasicMyPage(props) {
       </div>
 
       <div className="btnDiv">
-        <div className="topLeft"  onClick={() => { props.setTaps("활동이력");}}>활동이력</div>
-        <div className="topRight" onClick={() => { props.setTaps("알림");}}>알림센터/쪽지함</div>
+        <div
+          className="topLeft"
+          onClick={() => {
+            props.setTaps("activityHistory");
+            history.push("/mypage?activityHistory");
+          }}
+        >
+          활동이력
+        </div>
+        <div
+          className="topRight"
+          onClick={() => {
+            props.setTaps("alarmCenter");
+            history.push("/mypage?alarmCenter");
+          }}
+        >
+          알림센터/쪽지함
+        </div>
         <div className="bottomLeft">문의하기/신고하기</div>
         <div className="bottomRight">환경설정</div>
       </div>

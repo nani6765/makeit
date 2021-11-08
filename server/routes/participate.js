@@ -37,45 +37,7 @@ router.post("/postDetail", (req, res) => {
     });
 });
 
-router.post("/postDetail/reple", (req, res) => {
-  let filter = {};
-  filter.postNum = req.body.postNum;
-  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-  let limit = req.body.limit ? parseInt(req.body.limit) : 5;
-  let sort = {};
-  sort.createdAt = 1;
-  Reple.find(filter)
-    .exec()
-    .then((totalReple) => {
-      Reple.find(filter)
-        .populate("auther")
-        .populate("rerepleArray")
-        .sort(sort)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then((repleInfo) => {
-          return res.status(200).json({
-            success: true,
-            repleInfo,
-            repleSize: repleInfo.length,
-            totalSize: totalReple.length,
-          });
-        });
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, err });
-    });
-});
 
-router.post("/image", setUpload("makeit/community"), (req, res, next) => {
-  return res.json({
-    success: true,
-    key: res.req.file.key,
-    filePath: res.req.file.location,
-    fileName: res.req.file.originalname,
-  });
-});
 */
 
 router.post("/", (req, res) => {
@@ -88,28 +50,27 @@ router.post("/", (req, res) => {
     $or: [],
   };
 
-  if(temp.subCategory && temp.subCategory !== "전체") {
+  if (temp.subCategory && temp.subCategory !== "전체") {
     delete category.$or;
     category.subCategory = req.body.subCategory;
   }
-  if(temp.gender) {
-    for(let i=0; i<temp.gender.length; i++) {
-      category["$or"].push({gender: temp.gender[i]});
+  if (temp.gender) {
+    for (let i = 0; i < temp.gender.length; i++) {
+      category["$or"].push({ gender: temp.gender[i] });
     }
   }
-  if(temp.filmType) {
-    for(let i=0; i<temp.filmType.length; i++) {
-      category["$or"].push({filmType: temp.filmType[i]});
+  if (temp.filmType) {
+    for (let i = 0; i < temp.filmType.length; i++) {
+      category["$or"].push({ filmType: temp.filmType[i] });
     }
   }
 
-  if(temp.classification) {
-    for(let i=0; i<temp.classification.length; i++) {
-      category["$or"].push({classification: temp.classification[i]});
+  if (temp.classification) {
+    for (let i = 0; i < temp.classification.length; i++) {
+      category["$or"].push({ classification: temp.classification[i] });
     }
   }
-  if(category.$or && !category.$or.length)
-    delete category.$or;
+  if (category.$or && !category.$or.length) delete category.$or;
 
   //최신순&&인기순 정렬
   let sort = {};
@@ -139,62 +100,61 @@ router.post("/getPageLen", (req, res) => {
     $or: [],
   };
 
-  if(temp.category && temp.category !== "전체") {
+  if (temp.category && temp.category !== "전체") {
     delete category.$or;
     category.category = req.body.category;
   }
-  if(temp.gender) {
-    for(let i=0; i<temp.gender.length; i++) {
-      category["$or"].push({gender: temp.gender[i]});
+  if (temp.gender) {
+    for (let i = 0; i < temp.gender.length; i++) {
+      category["$or"].push({ gender: temp.gender[i] });
     }
   }
-  if(temp.filmType) {
-    for(let i=0; i<temp.filmType.length; i++) {
-      category["$or"].push({filmType: temp.filmType[i]});
+  if (temp.filmType) {
+    for (let i = 0; i < temp.filmType.length; i++) {
+      category["$or"].push({ filmType: temp.filmType[i] });
     }
   }
-  if(temp.classification) {
-    for(let i=0; i<temp.classification.length; i++) {
-      category["$or"].push({classification: temp.classification[i]});
+  if (temp.classification) {
+    for (let i = 0; i < temp.classification.length; i++) {
+      category["$or"].push({ classification: temp.classification[i] });
     }
   }
-  if(!category.$or.length)
-    delete category.$or;
+  if (!category.$or.length) delete category.$or;
 
   PostModel.countDocuments(category)
-  .exec()
-  .then((cnt) => {
-    return res.status(200).send({
-      success: true,
-      len: cnt,
+    .exec()
+    .then((cnt) => {
+      return res.status(200).send({
+        success: true,
+        len: cnt,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false, err });
     });
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({ success: false, err });
-  })
 });
 
 router.post("/getPostDetail", (req, res) => {
-  PartFP.findOne({postNum: req.body.postNum})
-  .populate("auther")
-  .exec()
-  .then((post) => {
-    return res.status(200).send({
-      success: true,
-      post: post,
+  PartFP.findOne({ postNum: req.body.postNum })
+    .populate("auther")
+    .exec()
+    .then((post) => {
+      return res.status(200).send({
+        success: true,
+        post: post,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({ success: false, err });
     });
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({ success: false, err });
-  });
 });
 
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
   let PostModel = SelectModel(req.body.type);
-  Counter.findOneAndUpdate({ name: "counter" }, {$inc: {participateNum : 1}})
+  Counter.findOneAndUpdate({ name: "counter" }, { $inc: { participateNum: 1 } })
     .exec()
     .then((counter) => {
       temp.postNum = counter.participateNum;
@@ -204,12 +164,11 @@ router.post("/postSubmit", (req, res) => {
           temp.auther = userInfo._id;
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const Post = new PostModel(temp);
-          Post.save()
-          .then(()=> {  
+          Post.save().then(() => {
             return res.status(200).send({
               success: true,
             });
-          })
+          });
         });
     })
     .catch((err) => {
@@ -234,12 +193,6 @@ router.post("/postUpdate", (req, res) => {
   );
 });
 
-router.post("/image/delete", (req, res) => {
-  setDelete("makeit/community", req.body.key);
-  return res.json({
-    success: true,
-  });
-});
 
 router.post("/postDelete", (req, res) => {
   let temp = req.body;
@@ -261,50 +214,6 @@ router.post("/postDelete", (req, res) => {
     });
 });
 
-router.post("/like", (req, res) => {
-  let key = req.body.likeFlag;
 
-  if (key) {
-    // 좋아요를 이미 누른 상태
-    Community.findOneAndUpdate(
-      { postNum: req.body.postNum },
-      { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.userId } }
-    )
-      .exec()
-      .then((response) => {
-        return res.status(200).send({ success: true });
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(400).json({ success: false, err });
-      });
-  } else {
-    Community.findOneAndUpdate(
-      { postNum: req.body.postNum },
-      { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
-    )
-      .exec()
-      .then((response) => {
-        if (response.uid != req.body.userId) {
-          let alarmTemp = {
-            uid: response.uid,
-            url: req.body.postNum,
-            type: "likeToPost",
-            category: "community/post",
-          };
-          const alarm = new Alarm(alarmTemp);
-          alarm.save(() => {
-            return res.status(200).send({ success: true });
-          });
-        } else {
-          return res.status(200).send({ success: true });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(400).json({ success: false, err });
-      });
-  }
-});
 */
 module.exports = router;

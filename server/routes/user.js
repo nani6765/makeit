@@ -1,11 +1,7 @@
 var router = require("express").Router();
 const { User } = require("../model/User.js");
 const { Counter } = require("../model/Counter.js");
-const {
-  Community,
-  CommunityReple,
-  CommunityRereple,
-} = require("../model/CoPost.js");
+const { Community } = require("../model/CoPost.js");
 const setUpload = require("../module/multer/upload.js");
 const sendEmail = require("../module/email.js");
 
@@ -81,41 +77,6 @@ router.post("/sendEmail", (req, res) => {
 //           mypagelog          //
 //////////////////////////////////
 
-function PureTime(time) {
-  return time.replaceAll("-", "").replace(":", "").replace(" ", "");
-}
-
-router.post("/getMyLog", (req, res) => {
-  let logList = [];
-  Community.find({
-    $or: [{ uid: req.body.uid }, { likeArray: req.body.uid }],
-  })
-    .exec()
-    .then((result) => {
-      logList = [...result];
-      CommunityReple.find({
-        $or: [{ uid: req.body.uid }, { likeArray: req.body.uid }],
-      })
-        .exec()
-        .then((result) => {
-          logList = [...logList, ...result];
-          CommunityRereple.find({
-            $or: [{ uid: req.body.uid }, { likeArray: req.body.uid }],
-          })
-            .exec()
-            .then((result) => {
-              logList = [...logList, ...result];
-
-              logList.sort(
-                (a, b) => PureTime(b.realTime) - PureTime(a.realTime)
-              );
-              return res.status(200).send({ success: true, logList: logList });
-            });
-        });
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, err });
-    });
-});
+router.post("/getMyLog", (req, res) => {});
 
 module.exports = router;
