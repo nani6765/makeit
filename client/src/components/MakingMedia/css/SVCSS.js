@@ -98,7 +98,7 @@ const ShareVideoCard = styled.div`
   border-radius: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr auto auto auto;
+  grid-template-rows: 200px auto auto auto;
   grid-template-areas:
     "thumbnail thumbnail"
     "author author"
@@ -108,8 +108,8 @@ const ShareVideoCard = styled.div`
   margin-bottom: 1rem;
   .thumbnail {
     grid-area: thumbnail;
-    width: 320px;
-    height: 160px;
+    width: 100%;
+    height: 100%;
     border-radius: 11px;
   }
   .author {

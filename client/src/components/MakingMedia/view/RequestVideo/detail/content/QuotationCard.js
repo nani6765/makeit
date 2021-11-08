@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Avatar from "react-avatar";
-import UserModal from "../../../../../utils/view/Modal/UserModal.js";
-import GuestModal from "../../../../../utils/view/Modal/GuestModal.js";
+import UserModal from "./Modal/UserModal.js";
+import GuestModal from "./Modal/GuestModal.js";
+import DeleteModal from './Modal/DeleteModal.js';
 
 function QuotationCard(props) {
   const [hambucControl, sethambucControl] = useState(false);
+  const [ModalFlag, setModalFlag] = useState(false);
 
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
@@ -25,10 +27,15 @@ function QuotationCard(props) {
               ></i>
               {hambucControl && (
                 props.user.uid === props.quotation.uid
-                ? <UserModal modalType="/making/quotation" Info={props.quotation} path="reload"/>
-                : <GuestModal modalType="post" postInfo={props.quotation} />
+                ? <UserModal Info={props.quotation} setModalFlag={setModalFlag}/>
+                : <GuestModal postInfo={props.quotation} />
               )}
             </div>
+            {ModalFlag && 
+            <DeleteModal
+                _id={props.quotation._id}
+                setModalFlag={setModalFlag}
+            />}
             <Avatar
               src={props.quotation.auther.photoURL}
               size="70"

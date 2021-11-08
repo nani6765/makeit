@@ -30,15 +30,21 @@ router.post("/", (req, res) => {
     sort.likeNum = -1;
   }
 
-  Community.find(category)
+  Community.countDocuments(category)
+  .exec()
+  .then((pageLen) => {
+    Community.find(category)
     .populate("auther")
     .sort(sort)
-    //.skip(req.body.skip)
+    .skip(req.body.skip)
     .limit(req.body.limit)
     .exec((err, postInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).json({ success: true, postInfo });
-    });
+      return res.status(200).json({ success: true, postInfo, pageLen: pageLen });
+    })
+  })
+  .catch((err) => {
+    return res.status(400).json({ success: false, err });
+  });
 });
 
 router.post("/postDetail", (req, res) => {
@@ -133,10 +139,10 @@ router.post("/postDelete", (req, res) => {
   for (let i = 0; i < temp.imageLength; i++) {
     setDelete("makeit/community", temp.images[i].key);
   }
-  CommunityRereple.deleteMany({ postNum: temp.postNum })
+  Rereple.deleteMany({ postId: temp.postInfoId })
     .exec()
     .then(() => {
-      CommunityReple.deleteMany({ postNum: temp.postNum }).exec();
+      Reple.deleteMany({ postId: temp.postInfoId }).exec();
     })
     .then(() => {
       Community.deleteOne({ _id: temp.postInfoId }).exec();

@@ -3,22 +3,22 @@ import { useHistory, useLocation } from "react-router";
 import GNBArea from "./content/List/GNBArea";
 import BodyHeader from "./content/List/BodyHeader";
 import PostListArea from "./content/List/PostListArea";
-import BodyFooter from "./content/List/BodyFooter";
+import Pagination from "./content/List/Pagination";
 import qs from "qs";
 
 import axios from "axios";
 
-import { CommunityHeader, CommunityBody } from "../css/CommunityListCSS";
+import { CommunityHeader, CommunityBody, FNBDiv } from "../css/CommunityListCSS";
 
 function CommunityList() {
-  let history = useHistory();
   let location = useLocation();
-
+  let history = useHistory();
+  
   const [URL, setURL] = useState("");
   const [PostList, setPostList] = useState([]);
-  const [PostSkip, setPostSkip] = useState(0);
-  const [PostEnd, setPostEnd] = useState(false);
-  const [PostLimit, setPostLimit] = useState(10);
+  const [Skip, setSkip] = useState(0);
+  const [PageLen, setPageLen] = useState(1);
+  const [PageIdxArr, setPageIdxArr] = useState([]);
   const [Loading, setLoading] = useState(false);
 
   const getPostList = () => {
@@ -27,27 +27,21 @@ function CommunityList() {
 
     if (location.search.slice(1) != URL) {
       setURL(location.search.slice(1));
+      setSkip(parseInt(temp.pIdx));
     }
 
     let body = {
       GNB: { category: temp.category },
       sortPost: temp.sort,
-      skip: PostSkip,
-      limit: PostLimit,
+      skip: temp.pIdx * 10,
+      limit: 10,
     };
 
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
         let temp = [...response.data.postInfo];
         setPostList(temp);
-        /*
-        if (temp.length) {
-          setPostList(temp);
-          setPostSkip((PostSkip) => {
-            return Math.min(PostSkip + PostLimit, temp.length);
-          });
-        }
-        */
+        setPageLen(parseInt((response.data.pageLen - 1)/10) + 1);
       } else {
         alert("error");
       }
@@ -58,9 +52,9 @@ function CommunityList() {
   useEffect(() => {
     if (location.search) {
       setURL(location.search.slice(1));
-    } else {
-      setURL("category=전체게시판&sort=new");
-      history.push(`?category=전체게시판&sort=new`);
+    } else {      
+      setURL("category=전체게시판&sort=new&pIdx=0");
+      history.push(`?category=전체게시판&sort=new&pIdx=0`);
     }
   }, []);
 
@@ -69,10 +63,14 @@ function CommunityList() {
   }, [location.search]);
 
   useEffect(() => {
-    if (!PostSkip && !PostList.length) {
-      getPostList();
+    let sIdx = parseInt(Skip/10);
+    let temp = [];
+    for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 10, PageLen); i++) {
+      temp.push(i);
     }
-  }, [PostSkip, PostList]);
+    setPageIdxArr(temp);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [parseInt(Skip/10), PageLen]);
 
   return (
     <>
@@ -89,7 +87,9 @@ function CommunityList() {
         ) : (
           <>
             <PostListArea PostList={PostList} getPostList={getPostList} />
-            <BodyFooter />
+            <FNBDiv>
+              <Pagination PageLen={PageLen} PageIdxArr={PageIdxArr} Skip={Skip} URL={URL}/>
+            </FNBDiv>
           </>
         )}
       </CommunityBody>

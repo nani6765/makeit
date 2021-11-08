@@ -11,6 +11,8 @@ const {
   ShareVideo,
 } = require("../model/Making.js");
 
+const { Reple, Rereple } = require("../model/Reple.js");
+
 const setDelete = require("../module/multer/delete.js");
 
 var moment = require("moment");
@@ -479,7 +481,7 @@ router.post("/quotationEdit", (req, res) => {
 });
 
 router.post("/quotation/delete", (req, res) => {
-  let temp = req.body.postInfo;
+  let temp = req.body;
 
   Quotation.findOneAndDelete({ _id: temp._id })
     .exec()
@@ -569,6 +571,20 @@ router.post("/shareVideo/submit", (req, res) => {
       return res.json({ success: false, err });
     });
 });
+
+router.post("shareVideo/delete", (req, res) => {
+  let temp = req.body.postInfo;
+
+  Rereple.deleteMany({postId: temp._id})
+  .exec()
+  .then(() => {
+    Reple.deleteMany({postId: temp._id})
+    .exec()
+    .then(() => {
+      
+    })
+  })
+})
 
 router.post("/shareVideo/getPostDetail", (req, res) => {
   ShareVideo.findOneAndUpdate({ url: req.body.url }, { $inc: { view: 1 } })

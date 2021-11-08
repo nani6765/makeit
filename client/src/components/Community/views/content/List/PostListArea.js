@@ -11,33 +11,6 @@ function PostListArea(props) {
     setposts([...props.PostList]);
   }, [props.PostList]);
 
-  const ScrollFunction = (e) => {
-    e.preventDefault();
-    let scrollHeight = Math.max(
-      document.documentElement.scrollHeight,
-      document.body.scrollHeight
-    );
-    let scrollTop = Math.max(
-      document.documentElement.scrollTop,
-      document.body.scrollTop
-    );
-    let clientHeight = document.documentElement.clientHeight;
-    // console.log("scrollHeight ", scrollHeight)
-    // console.log("scrollTop ", scrollTop)
-    // console.log("clientHeight ", clientHeight)
-    if (scrollTop + clientHeight >= scrollHeight) {
-      props.getPostList();
-      //setPostSkip(PostSkip => PostSkip + PostLimit);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", ScrollFunction, true);
-    return () => {
-      window.removeEventListener("scroll", ScrollFunction, true);
-    };
-  });
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -45,8 +18,6 @@ function PostListArea(props) {
   return (
     <div
       style={{ gridArea: "content" }}
-      id="PostList"
-      onScroll={ScrollFunction}
     >
       {posts.map((post, idx) => {
         return (

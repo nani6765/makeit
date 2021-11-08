@@ -12,8 +12,8 @@ function FAList(props) {
   const [Gender, setGender] = useState([]);
   const [FilmType, setFilmType] = useState([]);
   const [Classification, setClassification] = useState([]);
-  const [Skip, setSkip] = useState(0);
-  const [PageLen, setPageLen] = useState(1);
+  const [Skip, setSkip] = useState(1);
+  const [PageLen, setPageLen] = useState(0);
   const [PageIdxArr, setPageIdxArr] = useState([]);
   
   useEffect(() => {
@@ -32,21 +32,21 @@ function FAList(props) {
 
     axios.post("/api/participate/getPageLen", body).then((response) => {
       if(response.data.success) {
-        setPageLen(parseInt(response.data.len/6) + 1);
+        setPageLen(parseInt((response.data.len - 1)/6) + 1);
         setSkip(0);
       }
     })
   }, [Gender, FilmType, Classification]);
 
   useEffect(() => {
-    let sIdx = parseInt((Skip-1)/10);
+    let sIdx = parseInt(Skip/10);
     let temp = [];
-    for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 10, PageLen); i++) {
+    for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 9, PageLen); i++) {
       temp.push(i);
     }
     setPageIdxArr(temp);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parseInt((Skip-1)/10), PageLen])
+  }, [parseInt(Skip/10), PageLen])
 
   return (
     <>

@@ -19,12 +19,13 @@ function PostList(props) {
         let body = {
             type: props.type,
             sortPost: props.Sort,
-            skip: props.Skip,
+            skip: props.Skip * 6,
             limit: 6,
         }
 
         if(props.type === "IP" || props.type === "Lo") {
             body.limit = 12;
+            body.skip = body.skip * 2;
         }
         
         if(props.SubCategory) {

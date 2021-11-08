@@ -84,10 +84,9 @@ function PostDetailContent(props) {
               ></i>
               {hambucControl &&
                 (user.userData.uid === postInfo.auther.uid ? (
-                  <UserModal postInfo={postInfo} modalType="post" />
+                  <UserModal Info={postInfo} modalType="post" />
                 ) : (
                   <GuestModal
-                    userId={user.userData.uid}
                     postInfo={postInfo}
                     modalType="post"
                   />

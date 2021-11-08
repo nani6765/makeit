@@ -4,7 +4,7 @@ import { withRouter, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
-import { ModalDiv } from "./ModalCSS.js";
+import { ModalDiv } from "../../../../../css/RVDCSS.js";
 
 function GuestModal(props) {
   const user = useSelector((state) => state.user);
@@ -17,9 +17,7 @@ function GuestModal(props) {
   };
 
   const OtherUid = () => {
-    if (props.modalType === "post") {
-      return props.postInfo.auther.uid;
-    }
+    return props.postInfo.auther.uid;
   };
 
   function SendMessage() {
@@ -28,7 +26,6 @@ function GuestModal(props) {
       you: OtherUid(),
     };
     axios.post("/api/chat/create", body).then((response) => {
-      console.log(response.data);
       if (response.data.success) {
         history.push(`/chat/${response.data.resultUrl}`);
       } else {
