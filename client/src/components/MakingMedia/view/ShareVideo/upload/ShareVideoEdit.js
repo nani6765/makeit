@@ -120,6 +120,7 @@ function ShareVideoEdit(props) {
           placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
           value={OneLineIntroduce}
           onChange={(e) => {
+            console.log(e.currentTarget.value);
             if(e.currentTarget.value.length <= 30) {
               setOneLineIntroduce(e.currentTarget.value)
             }

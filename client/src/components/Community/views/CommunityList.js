@@ -9,6 +9,7 @@ import qs from "qs";
 import axios from "axios";
 
 import { CommunityHeader, CommunityBody, FNBDiv } from "../css/CommunityListCSS";
+import { ReactComponent as SearchIcon } from "../css/img/searchIcon.svg";
 
 function CommunityList() {
   let location = useLocation();
@@ -20,6 +21,7 @@ function CommunityList() {
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([]);
   const [Loading, setLoading] = useState(false);
+  const [SearchTerm, setSearchTerm] = useState("");
 
   const getPostList = () => {
     setLoading(true);
@@ -28,6 +30,11 @@ function CommunityList() {
     if (location.search.slice(1) != URL) {
       setURL(location.search.slice(1));
       setSkip(parseInt(temp.pIdx));
+      if(temp.searchTerm) {
+        setSearchTerm(temp.searchTerm);
+      } else {
+        setSearchTerm("");
+      }
     }
 
     let body = {
@@ -36,6 +43,10 @@ function CommunityList() {
       skip: temp.pIdx * 10,
       limit: 10,
     };
+
+    if(temp.searchTerm) {
+      body.searchTerm = temp.searchTerm;
+    }
 
     axios.post("/api/community/", body).then((response) => {
       if (response.data.success) {
@@ -48,6 +59,17 @@ function CommunityList() {
       setLoading(false);
     });
   };
+  
+  const SearchHandler = (e) => {
+    e.preventDefault();
+    if (!/\S/.test(SearchTerm)) {
+      return;
+    }
+    let temp = qs.parse(URL);
+    temp.searchTerm=SearchTerm.trim();
+    let temp2 = qs.stringify(temp);
+    history.push(`?${decodeURI(temp2)}`);
+  }
 
   useEffect(() => {
     if (location.search) {
@@ -88,7 +110,11 @@ function CommunityList() {
           <>
             <PostListArea PostList={PostList} getPostList={getPostList} />
             <FNBDiv>
-              <Pagination PageLen={PageLen} PageIdxArr={PageIdxArr} Skip={Skip} URL={URL}/>
+              <Pagination PageLen={PageLen} PageIdxArr={PageIdxArr} Skip={Skip} URL={URL} />
+              <div className="search">
+                <input type="text" value={SearchTerm} onChange={(e) => setSearchTerm(e.currentTarget.value)} onKeyDown={(e) => {if(e.keyCode === 13) SearchHandler(e)}}/>
+                <SearchIcon onClick={(e) => SearchHandler(e)}/>
+              </div>
             </FNBDiv>
           </>
         )}

@@ -6,6 +6,7 @@ const { User } = require("../model/User.js");
 
 const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
+const setLog = require('../module/setLog.js');
 
 var moment = require("moment");
 require("moment-timezone");
@@ -161,44 +162,46 @@ router.post("/postSubmit", (req, res) => {
     });
 });
 
-/*
-router.post("/postUpdate", (req, res) => {
-  let temp = {};
-  temp.title = req.body.title;
-  temp.content = req.body.content;
-  temp.images = req.body.images;
-  temp.subCategory = req.body.subCategory;
-  temp.filters = req.body.filters;
-  let key = req.body.id;
-  Community.findByIdAndUpdate({ _id: key }, { $set: temp }).exec(
-    (err, post) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).send({ success: true });
-    }
-  );
-});
-
-
-router.post("/postDelete", (req, res) => {
+router.post("/post/edit", (req, res) => {
   let temp = req.body;
-  for (let i = 0; i < temp.imageLength; i++) {
-    setDelete("makeit/community", temp.images[i].key);
+
+  if(temp.deleteThumbnail && temp.deleteThumbnail[0].key !== temp.thumbnail[0].key) {
+    setDelete("makeit/participate", temp.deleteThumbnail[0].key);
+    delete temp.deleteThumbnail;
   }
-  Rereple.deleteMany({ postNum: temp.postNum })
-    .exec()
-    .then(() => {
-      Reple.deleteMany({ postNum: temp.postNum }).exec();
-    })
-    .then(() => {
-      Community.deleteOne({ _id: temp.postInfoId }).exec();
-      return res.status(200).send({ success: true });
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(400).json({ success: false, err });
-    });
+
+  let PostModel = SelectModel(temp.type);
+
+  PostModel.findOneAndUpdate({url: temp.url}, temp)
+  .exec()
+  .then((result) => {
+    return res.status(200).send({ success: true });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  });
 });
 
+router.post("/post/delete", (req, res) => {
+  let temp = req.body.postInfo;
+  
+  if(temp.thumbnail) {
+    setDelete("makeit/participate", temp.thumbnail[0].key);
+  }
+  if(temp.images) {
+    for (let i = 0; i < temp.images.length; i++) {
+      setDelete("makeit/participate", temp.images[i].key);
+    }
+  }
 
-*/
+  let PostModel = SelectModel(temp.type);
+  PostModel.findOneAndDelete({url: temp.url})
+  .exec()
+  .then(() => {
+    return res.status(200).send({ success: true });
+  })
+  .catch((err) => {
+    return res.json({ success: false, err });
+  });
+});
 module.exports = router;

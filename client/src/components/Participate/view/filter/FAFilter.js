@@ -51,6 +51,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="male"
               value="남자"
+              defaultChecked={props.Gender.includes("남자")}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -62,6 +63,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="female"
               value="여자"
+              defaultChecked={props.Gender.includes("여자")}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -73,6 +75,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="noMatter"
               value="무관"
+              defaultChecked={props.Gender.includes("무관")}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -95,6 +98,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="video"
               value="영상"
+              defaultChecked={props.FilmType.includes("영상")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -106,6 +110,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="photo"
               value="사진"
+              defaultChecked={props.FilmType.includes("사진")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -117,6 +122,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="etc"
               value="기타"
+              defaultChecked={props.FilmType.includes("기타")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -137,6 +143,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="short"
               value="단편"
+              defaultChecked={props.Classification.includes("단편")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -148,6 +155,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="long"
               value="장편"
+              defaultChecked={props.Classification.includes("장편")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -159,6 +167,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="ad"
               value="광고"
+              defaultChecked={props.Classification.includes("광고")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -170,6 +179,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="TV"
               value="TV"
+              defaultChecked={props.Classification.includes("TV")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -181,6 +191,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="pictorial"
               value="화보"
+              defaultChecked={props.Classification.includes("화보")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -192,6 +203,7 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="classificationETC"
               value="기타"
+              defaultChecked={props.Classification.includes("기타")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}

@@ -13,6 +13,13 @@ function Participate(props) {
   const [GNB, setGNB] = useState("파트너찾기");
   const [Sort, setSort] = useState("인기순");
 
+  const GNBObj = {
+    "FA": "배우찾기",
+    "FP": "파트너찾기",
+    "IP": "프로알리기",
+    "Lo": "로케이션",
+  }
+
   const SetContent = () => {
     // eslint-disable-next-line default-case
     switch (GNB) {
@@ -29,7 +36,7 @@ function Participate(props) {
 
   useEffect(() => {
     if(props.history.location.state !== undefined) {
-      setGNB(props.history.location.state.category);
+      setGNB(GNBObj[props.history.location.state.category]);
     }
   }, []);
 

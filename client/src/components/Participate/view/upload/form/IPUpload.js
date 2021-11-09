@@ -57,7 +57,7 @@ function IPUpload(props) {
         alert("게시글 등록 성공");
         props.history.push({
           pathname: "/participate",
-          state: { category: "프로알리기" },
+          state: { category: "IP" },
         });
       } else {
         alert("게시글 등록 실패");

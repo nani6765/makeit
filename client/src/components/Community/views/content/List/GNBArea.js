@@ -42,6 +42,9 @@ function GNBArea(props) {
   const GNBClickFunc = (gnb) => {
     let temp = qs.parse(props.URL);
     temp.category = gnb;
+    if(temp.searchTerm) {
+      delete temp.searchTerm;
+    }
     let temp2 = qs.stringify(temp);
     history.push(`?${decodeURI(temp2)}`);
   };

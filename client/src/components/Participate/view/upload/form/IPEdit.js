@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
-import LoUploadFilter from "../content/filter/LoUploadFilter.js";
+import IPUploadFilter from "../content/filter/IPUploadFilter.js";
 
 import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
@@ -16,25 +16,26 @@ import { PartFilter } from "../../../css/ParticipateCSS.js";
 
 import axios from "axios";
 
-function LoUpload(props) {
+function IPEdit(props) {
   const [Category, setCategory] = useState("");
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
   const [Thumbnail, setThumbnail] = useState([]);
+  const [DeleteThumbnail, setDeleteThumbnail] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (!title) {
-      alert("제목을 입력하세요.");
+    if (!Category) {
+      alert("카테고리를 선택하세요.");
       return;
     }
-    if (!Thumbnail) {
+    if (!Thumbnail[0]) {
       alert("썸네일을 등록하세요.");
       return;
     }
-    if (!Category) {
-      alert("카테고리를 선택하세요.");
+    if (!title) {
+      alert("제목을 입력하세요.");
       return;
     }
     if (!content) {
@@ -47,24 +48,33 @@ function LoUpload(props) {
       email: props.user.email,
       title: title,
       content: content,
-      subCategory: Category,
       thumbnail: Thumbnail,
-      type: "Lo",
+      subCategory: Category,
+      deleteThumbnail: DeleteThumbnail,
+      url: props.postInfo.url,
+      type: "IP",
     };
 
-    axios.post("/api/participate/postSubmit", body).then((response) => {
+    axios.post("/api/participate/post/edit", body).then((response) => {
       if (response.data.success) {
-        alert("게시글 등록 성공");
-        props.history.push({
-          pathname: "/participate",
-          state: { category: "Lo" },
-        });
+        alert("게시글 수정 성공");
+        props.history.push("/participate/post/"+props.postInfo.url);
       } else {
-        alert("게시글 등록 실패");
+        alert("게시글 수정 실패");
         console.log(response.data.err);
       }
     });
   };
+
+  useEffect(() => {
+    let postInfo = props.postInfo;
+
+    setCategory(postInfo.subCategory);
+    settitle(postInfo.title);
+    setcontent(postInfo.content);
+    setThumbnail([...postInfo.thumbnail]);
+    setDeleteThumbnail([...postInfo.thumbnail]);
+}, []);
 
   return (
     <UploadDiv>
@@ -89,14 +99,13 @@ function LoUpload(props) {
                 Images={Thumbnail}
                 setImages={setThumbnail}
                 type="PUThumbnail"
-                dirURL="participate"
               />
             ) : null}
           </div>
         </ThumbnailArea>
 
         <PartFilter>
-          <LoUploadFilter Category={Category} setCategory={setCategory} />
+          { Category && <IPUploadFilter Category={Category} setCategory={setCategory} /> }
         </PartFilter>
         <Content content={content} setcontent={setcontent} />
         <BtnDiv submitHandler={submitHandler} />
@@ -105,4 +114,4 @@ function LoUpload(props) {
   );
 }
 
-export default withRouter(LoUpload);
+export default withRouter(IPEdit);
