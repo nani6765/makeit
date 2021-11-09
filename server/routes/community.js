@@ -31,25 +31,27 @@ router.post("/", (req, res) => {
   }
 
   Community.countDocuments(category)
-  .exec()
-  .then((pageLen) => {
-    Community.find(category)
-    .populate("auther")
-    .sort(sort)
-    .skip(req.body.skip)
-    .limit(req.body.limit)
-    .exec((err, postInfo) => {
-      return res.status(200).json({ success: true, postInfo, pageLen: pageLen });
+    .exec()
+    .then((pageLen) => {
+      Community.find(category)
+        .populate("auther")
+        .sort(sort)
+        .skip(req.body.skip)
+        .limit(req.body.limit)
+        .exec((err, postInfo) => {
+          return res
+            .status(200)
+            .json({ success: true, postInfo, pageLen: pageLen });
+        });
     })
-  })
-  .catch((err) => {
-    return res.status(400).json({ success: false, err });
-  });
+    .catch((err) => {
+      return res.status(400).json({ success: false, err });
+    });
 });
 
 router.post("/postDetail", (req, res) => {
   let filter = {};
-  filter.postNum = req.body.postNum;
+  filter.url = req.body.url;
   Community.findOneAndUpdate(filter, { $inc: { views: 1 } })
     .populate("auther")
     .exec((err, postInfo) => {
@@ -58,43 +60,12 @@ router.post("/postDetail", (req, res) => {
     });
 });
 
-router.post("/postDetail/reple", (req, res) => {
-  let filter = {};
-  filter.postNum = req.body.postNum;
-  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
-  let limit = req.body.limit ? parseInt(req.body.limit) : 5;
-  let sort = {};
-  sort.createdAt = 1;
-  CommunityReple.find(filter)
-    .exec()
-    .then((totalReple) => {
-      CommunityReple.find(filter)
-        .populate("auther")
-        .populate("rerepleArray")
-        .sort(sort)
-        .skip(skip)
-        .limit(limit)
-        .exec()
-        .then((repleInfo) => {
-          return res.status(200).json({
-            success: true,
-            repleInfo,
-            repleSize: repleInfo.length,
-            totalSize: totalReple.length,
-          });
-        });
-    })
-    .catch((err) => {
-      return res.status(400).json({ success: false, err });
-    });
-});
-
 router.post("/postSubmit", (req, res) => {
   let temp = req.body;
   Counter.findOne({ name: "counter" })
     .exec()
     .then((counter) => {
-      temp.postNum = counter.coPostNum;
+      temp.url = counter.coPostNum;
       User.findOne({ uid: req.body.uid })
         .exec()
         .then((userInfo) => {
@@ -102,7 +73,7 @@ router.post("/postSubmit", (req, res) => {
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const communityPost = new Community(temp);
           communityPost.save().then((doc) => {
-            setLog(req.body.uid, "post", `/community/post/${temp.postNum}`);
+            setLog(req.body.uid, "post", `/community/post/${temp.url}`);
           });
         });
       counter

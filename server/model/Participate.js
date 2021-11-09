@@ -60,7 +60,7 @@ const partFASchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
-    postNum: {
+    url: {
       type: Number,
       //unique: true,
     },
@@ -133,7 +133,7 @@ const partFPSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
-    postNum: {
+    url: {
       type: Number,
       //unique: true,
     },
@@ -202,7 +202,7 @@ const partIPSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
-    postNum: {
+    url: {
       type: Number,
       //unique: true,
     },
@@ -268,7 +268,7 @@ const partLoSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
-    postNum: {
+    url: {
       type: Number,
       //unique: true,
     },

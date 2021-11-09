@@ -57,7 +57,7 @@ const coPostSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
-    postNum: {
+    url: {
       type: Number,
       //unique: true,
     },

@@ -30,6 +30,7 @@ moment.tz.setDefault("Asia/Seoul");
 const setRealTime = require("../module/multer/realTime.js");
 const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
+const setLog = require("../module/setLog.js");
 
 /////////////////////////////
 //         Model           //
@@ -74,6 +75,27 @@ const SelectPostModel = (types) => {
       return PartIP;
     case "Lo":
       return PartLo;
+  }
+};
+
+const SelectURL = (types) => {
+  switch (types) {
+    case "CoPost":
+      return "/community/post/";
+    case "ProPost":
+      return "making/producerPost/";
+    case "Quotation":
+      return "/making/requestPost/";
+    case "ShareVideo":
+      return "/making/shareVideo/";
+    case "FA":
+      return "/participate/post/";
+    case "FP":
+      return "/participate/post/";
+    case "IP":
+      return "/participate/post/";
+    case "Lo":
+      return "/participate/post/";
   }
 };
 
@@ -149,6 +171,7 @@ router.post("/like", (req, res) => {
         return res.status(400).json({ success: false, err });
       });
   } else {
+    let URL = SelectURL(req.body.type);
     Model.findOneAndUpdate(
       { _id: req.body._id },
       { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
@@ -165,7 +188,10 @@ router.post("/like", (req, res) => {
           };
           const alarm = new Alarm(alarmTemp);
           alarm.save(() => {
-            return res.status(200).send({ success: true });
+            let flag = setLog(req.body.userId, "like", `${URL + temp.url}`);
+            if (flag) {
+              return res.status(200).send({ success: true });
+            }
           });
         } else {
           return res.status(200).send({ success: true });
@@ -224,7 +250,8 @@ router.post("/repleSubmit", (req, res) => {
 
   let PostModel = SelectPostModel(req.body.type);
   //let RepleModel = SelectRepleModel(req.body.type, req.body.stype);
-  console.log();
+  //console.log();
+  let URL = SelectURL(req.body.type);
 
   User.findOne({ uid: req.body.uid })
     .exec()
@@ -249,7 +276,10 @@ router.post("/repleSubmit", (req, res) => {
 
               const alarm = new Alarm(alarmTemp);
               alarm.save(() => {
-                return res.status(200).send({ success: true });
+                let flag = setLog(req.body.uid, "reple", `${URL + temp.url}`);
+                if (flag) {
+                  return res.status(200).send({ success: true });
+                }
               });
             } else {
               return res.status(200).send({ success: true });

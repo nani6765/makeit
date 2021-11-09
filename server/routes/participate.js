@@ -120,7 +120,7 @@ router.post("/getPageLen", (req, res) => {
 });
 
 router.post("/getPostDetail", (req, res) => {
-  PartFP.findOne({ postNum: req.body.postNum })
+  PartFP.findOne({ url: req.body.url })
     .populate("auther")
     .exec()
     .then((post) => {
@@ -141,7 +141,7 @@ router.post("/postSubmit", (req, res) => {
   Counter.findOneAndUpdate({ name: "counter" }, { $inc: { participateNum: 1 } })
     .exec()
     .then((counter) => {
-      temp.postNum = counter.participateNum;
+      temp.url = counter.participateNum;
       User.findOne({ uid: req.body.uid })
         .exec()
         .then((userInfo) => {
@@ -149,11 +149,7 @@ router.post("/postSubmit", (req, res) => {
           temp.realTime = moment().format("YY-MM-DD[ ]HH:mm");
           const Post = new PostModel(temp);
           Post.save().then(() => {
-            let flag = setLog(
-              temp.uid,
-              "post",
-              `participate/post/${temp.postNum}`
-            );
+            let flag = setLog(temp.uid, "post", `participate/post/${temp.url}`);
             if (flag) {
               return res.status(200).send({ success: true });
             }

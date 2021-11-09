@@ -601,16 +601,16 @@ router.post("/shareVideo/submit", (req, res) => {
 router.post("/shareVideo/Edit", (req, res) => {
   let temp = req.body;
 
-  ShareVideo.findByIdAndUpdate({_id: temp._id}, {temp})
-  .exec()
-  .then(() => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.json({ success: false, err });
-  });
-})
+  ShareVideo.findByIdAndUpdate({ _id: temp._id }, { temp })
+    .exec()
+    .then(() => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.json({ success: false, err });
+    });
+});
 
 router.post("/shareVideo/delete", (req, res) => {
   let temp = req.body.postInfo;
@@ -618,18 +618,17 @@ router.post("/shareVideo/delete", (req, res) => {
   Rereple.deleteMany({ postId: temp._id })
     .exec()
     .then(() => {
-      ShareVideo.findByIdAndDelete({_id: temp._id})
-      .exec()
-      .then(() => {
-        return res.status(200).send({ success: true });
-      })
+      ShareVideo.findByIdAndDelete({ _id: temp._id })
+        .exec()
+        .then(() => {
+          return res.status(200).send({ success: true });
+        });
     })
-  })
-  .catch((err) => {
-    console.log("requestVideo delete Error", err);
-    return res.json({ success: false, err });
-  });
-})
+    .catch((err) => {
+      console.log("requestVideo delete Error", err);
+      return res.json({ success: false, err });
+    });
+});
 
 router.post("/shareVideo/getPostDetail", (req, res) => {
   ShareVideo.findOneAndUpdate({ url: req.body.url }, { $inc: { view: 1 } })

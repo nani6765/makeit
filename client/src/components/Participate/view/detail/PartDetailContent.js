@@ -50,14 +50,13 @@ function ShareVideoPost(props) {
     if (props.PostInfo.auther.uid === user.userData.uid) {
       return alert("본인 글에는 좋아요를 누를 수 없습니다!");
     }
-    
+
     let target = document.querySelector("#likeArea");
     target.style.disabled = "true";
-    
 
     let body = {
       _id: props.PostInfo._id,
-      postNum: props.PostInfo.postNum,
+      postNum: props.PostInfo.url,
       likeFlag: likeFlag,
       userId: user.userData.uid,
       type: props.PostInfo.type,

@@ -16,7 +16,7 @@ function CommunityDetail(props) {
 
   useEffect(() => {
     let body = {
-      postNum: props.match.params.postId,
+      url: props.match.params.postId,
     };
     axios.post("/api/community/postDetail", body).then((response) => {
       if (response.data.success) {
@@ -32,7 +32,7 @@ function CommunityDetail(props) {
   }, []);
 
   useEffect(() => {
-    if(postInfo._id) {
+    if (postInfo._id) {
       let body = {
         postId: postInfo._id,
         skip: Skip,
@@ -96,7 +96,11 @@ function CommunityDetail(props) {
         </>
       ) : null}
       {postInfo._id != null ? (
-        <RepleUpload postInfo={postInfo} type="Community" category="/Community/post"/>
+        <RepleUpload
+          postInfo={postInfo}
+          type="Community"
+          category="/Community/post"
+        />
       ) : null}
     </>
   );

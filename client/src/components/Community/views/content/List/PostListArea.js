@@ -16,13 +16,11 @@ function PostListArea(props) {
   }, []);
 
   return (
-    <div
-      style={{ gridArea: "content" }}
-    >
+    <div style={{ gridArea: "content" }}>
       {posts.map((post, idx) => {
         return (
           <Link
-            to={"/community/post/" + post.postNum}
+            to={"/community/post/" + post.url}
             style={{ textDecorationLine: "none", color: "black" }}
             key={idx}
           >
