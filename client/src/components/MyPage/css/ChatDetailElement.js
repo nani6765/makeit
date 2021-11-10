@@ -122,6 +122,9 @@ const ChatMeContentGrid = css`
       word-break: keep-all;
       text-align: left;
     }
+    img {
+      border-radius: 14px;
+    }
   }
   ${mq[1]} {
     width: 100%;
@@ -162,6 +165,9 @@ const ChatYouContentGrid = css`
       line-break: anywhere;
       word-break: keep-all;
       text-align: left;
+    }
+    img {
+      border-radius: 14px;
     }
   }
   ${mq[1]} {

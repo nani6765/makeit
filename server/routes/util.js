@@ -444,4 +444,40 @@ router.post("/rerepleDelete", (req, res) => {
     });
 });
 
+///////////////////////////////
+//          search           //
+///////////////////////////////
+
+router.post("/search", (req, res) => {
+
+  Community.find({$or: [{ title: { $regex : req.body.term}}, { content: { $regex : req.body.term }}]})
+  .populate("auther")
+  .limit(3)
+  .exec()
+  .then((copost) => {
+    ProPost.find({$or: [{ oneLineIntroduce: { $regex : req.body.term}}, { description: { $regex : req.body.term }}]})
+    .populate("auther")
+    .limit(3)
+    .exec()
+    .then((making) => {
+      RequestPost.find({$or: [{ oneLineIntroduce: { $regex : req.body.term}}, { content: { $regex : req.body.term }}]})
+      .populate("auther")
+      .limit(3)
+      .exec()
+      .then((reqPost) => {
+        making = [...making, ...reqPost];
+        ShareVideo.find({$or: [{ oneLineIntroduce: { $regex : req.body.term}}, { content: { $regex : req.body.term }}]})
+        .populate("auther")
+        .limit(3)
+        .exec()
+        .then((sharePost) => {
+          making = [...making, ...sharePost];
+          making.sort((a, b) => { return a.createdAt - b.createdAt});
+          making = making.splice(0, 3);
+        });
+      });
+    });
+  })
+});
+
 module.exports = router;
