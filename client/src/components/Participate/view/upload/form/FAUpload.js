@@ -65,7 +65,7 @@ function FAUpload(props) {
         alert("게시글 등록 성공");
         props.history.push({
           pathname: "/participate",
-          state: { category: "배우찾기" },
+          state: { category: "FA" },
         });
       } else {
         alert("게시글 등록 실패");

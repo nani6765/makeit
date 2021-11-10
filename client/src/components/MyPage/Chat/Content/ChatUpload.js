@@ -25,10 +25,6 @@ function ChatUpload(props) {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("OtherInfo", OtherInfo);
-  }, [OtherInfo]);
-
   const submitHandler = (e) => {
     e.preventDefault();
     if (!/\S/.test(SendComment)) {

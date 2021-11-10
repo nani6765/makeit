@@ -41,14 +41,14 @@ function ProducerTitleDetail(props) {
     }
     let body = {
       uid: props.user.uid,
-      _id: props.PostInfo.url,
+      _id: props.PostInfo._id,
       key: key,
       url: props.PostInfo.url,
       type: "ProPost",
       category: "making/ProducerPost",
     };
 
-    axios.post("/api/making/producer/producerLike", body).then((response) => {
+    axios.post("/api/util/like", body).then((response) => {
       if (response.data.success) {
         window.location.reload();
       } else {

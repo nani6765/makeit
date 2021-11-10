@@ -41,7 +41,7 @@ function HeaderElement(props) {
 
           <HeaderSearch>
             <form action="/search" method="GET">
-              <input type="text" placeholder="Search..." />
+              <input type="text" placeholder="Search..." name="search"/>
             </form>
           </HeaderSearch>
 

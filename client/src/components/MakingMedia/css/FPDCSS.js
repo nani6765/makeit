@@ -89,6 +89,7 @@ const ProducerTitleDiv = styled.div`
         color: #ccd2e3;
         span {
           margin-right: 10px;
+          cursor: pointer;
           i {
             margin-left: 5px;
             color: #ff5151;

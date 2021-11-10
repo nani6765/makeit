@@ -21,6 +21,10 @@ router.post("/", (req, res) => {
   if (category.category === "전체게시판") {
     delete category.category;
   }
+  
+  if(req.body.searchTerm) {
+    category.$or = [{title : {$regex: req.body.searchTerm}}, {content: {$regex: req.body.searchTerm}}];
+  }
 
   //최신순&&인기순 정렬
   let sort = {};

@@ -31,10 +31,6 @@ function ShareVideoList(props) {
     });
   }, [props.sort, props.skip]);
 
-  useEffect(() => {
-    console.log("ShareVideoPostList : ", PostList);
-  }, [PostList]);
-
   return (
     <>
       {PostList.map((post, idx) => {

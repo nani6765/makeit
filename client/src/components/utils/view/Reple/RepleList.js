@@ -23,6 +23,7 @@ function RepleList(props) {
             reple={reple}
             postInfo={props.postInfo}
             type={props.type}
+            category={props.category}
           />
         );
       })}

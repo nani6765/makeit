@@ -50,9 +50,9 @@ function RepleContent(props) {
       _id: Reple._id,
       likeFlag: likeFlag,
       userId: user.userData.uid,
-      url: props.postInfo.postNum,
+      url: props.postInfo.url,
       type: "Reple",
-      category: "community/post",
+      category: props.category,
     };
 
     axios.post("/api/util/like", body).then((response) => {
@@ -147,7 +147,8 @@ function RepleContent(props) {
           Reple={Reple}
           setrerepleUpload={setrerepleUpload}
           type={props.type}
-          postNum={props.postInfo.postNum}
+          url={props.postInfo.url}
+          category={props.category}
         />
       )}
 
@@ -159,7 +160,8 @@ function RepleContent(props) {
               repleInfo={Reple}
               key={idx}
               type={props.type}
-              postNum={props.postInfo.postNum}
+              url={props.postInfo.url}
+              category={props.category}
             />
           );
         })}

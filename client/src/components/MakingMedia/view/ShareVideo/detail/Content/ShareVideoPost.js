@@ -54,11 +54,11 @@ function ShareVideoPost(props) {
 
     let body = {
       _id: props.PostInfo._id,
-      postNum: props.PostInfo.postNum,
+      url: props.PostInfo.url,
       likeFlag: likeFlag,
       userId: user.userData.uid,
       type: "ShareVideo",
-      cateogry: "Making/shareVideo",
+      category: "Making/shareVideo",
     };
 
     axios.post("/api/util/like", body).then((response) => {
@@ -95,12 +95,11 @@ function ShareVideoPost(props) {
         {user.userData && (
           <div
             className="hambuc"
-            onClick={() => sethambucControl(true)}
             ref={innerRef}
           >
             <i
               className="bi bi-three-dots"
-              onClick={() => sethambucControl(true)}
+              onClick={() => sethambucControl(!hambucControl)}
             ></i>
             {hambucControl &&
               (user.userData.uid === props.PostInfo.auther.uid ? (
@@ -126,7 +125,7 @@ function ShareVideoPost(props) {
           />
         </div>
         <div className="desc">
-          <p>{props.PostInfo.oneLineIntroduce}</p>
+          <p>{props.PostInfo.content}</p>
         </div>
         <div className="like" id="likeArea">
           {likeFlag ? (

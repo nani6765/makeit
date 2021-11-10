@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function FPUploadFilter(props) {
 
@@ -24,8 +24,6 @@ function FPUploadFilter(props) {
         }
     }
 
-    
-
     return (
         <>
           <div className="select">
@@ -42,6 +40,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="video"
               value="영상"
+              defaultChecked={props.FilmType.includes("영상")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -53,6 +52,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="photo"
               value="사진"
+              defaultChecked={props.FilmType.includes("사진")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -64,6 +64,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="etc"
               value="기타"
+              defaultChecked={props.FilmType.includes("기타")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -84,6 +85,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="a"
               value="기획"
+              defaultChecked={props.Classification.includes("기획")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -95,6 +97,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="b"
               value="편집"
+              defaultChecked={props.Classification.includes("편집")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -106,6 +109,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="c"
               value="촬영"
+              defaultChecked={props.Classification.includes("촬영")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -117,6 +121,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="d"
               value="조명"
+              defaultChecked={props.Classification.includes("조명")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -128,6 +133,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="e"
               value="음향"
+              defaultChecked={props.Classification.includes("음향")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -139,6 +145,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="f"
               value="성우"
+              defaultChecked={props.Classification.includes("성우")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -150,6 +157,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="g"
               value="미용"
+              defaultChecked={props.Classification.includes("미용")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -161,6 +169,7 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="h"
               value="기타"
+              defaultChecked={props.Classification.includes("기타")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}

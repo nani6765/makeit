@@ -17,6 +17,7 @@ function MyPage(props) {
 
   useEffect(() => {
     if (location.state) {
+      console.log(location.state.AlarmType);
       setTaps(location.state.Taps);
       setAlarmType(location.state.AlarmType);
     }

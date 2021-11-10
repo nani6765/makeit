@@ -24,7 +24,7 @@ function PartDetail(props) {
             onClick={() =>
               props.history.push({
                 pathname: "/participate",
-                state: { category: "배우찾기" },
+                state: { category: "FA" },
               })
             }
           >
@@ -37,7 +37,7 @@ function PartDetail(props) {
             onClick={() =>
               props.history.push({
                 pathname: "/participate",
-                state: { category: "파트너찾기" },
+                state: { category: "FP" },
               })
             }
           >
@@ -50,7 +50,7 @@ function PartDetail(props) {
             onClick={() =>
               props.history.push({
                 pathname: "/participate",
-                state: { category: "프로알리기" },
+                state: { category: "IP" },
               })
             }
           >
@@ -63,7 +63,7 @@ function PartDetail(props) {
             onClick={() =>
               props.history.push({
                 pathname: "/participate",
-                state: { category: "로케이션" },
+                state: { category: "Lo" },
               })
             }
           >
@@ -142,6 +142,7 @@ function PartDetail(props) {
             loadMoreHanlder={loadMoreHanlder}
             postInfo={PostInfo}
             type={PostInfo.type}
+            category="/participate/post"
           />
           {TotalSize > Reple.length ? (
             <RepleBtnDiv>

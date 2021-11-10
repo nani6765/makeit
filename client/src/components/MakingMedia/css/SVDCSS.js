@@ -101,6 +101,7 @@ const DetailDiv = styled.div`
     grid-area: desc;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    white-space: pre;
   }
   .like {
     grid-area: like;

@@ -18,7 +18,7 @@ function ShareVideo(props) {
   const getPageLen = () => {
     axios.post("/api/making/shareVideo/getPageLen").then((response) => {
       if(response.data.success) {
-        setPageLen(parseInt((response.data.len-1)/12 + 1));
+        setPageLen(parseInt((response.data.len-1)/12) + 1);
       }
     })
   }
