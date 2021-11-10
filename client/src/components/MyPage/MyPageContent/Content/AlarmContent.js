@@ -37,7 +37,6 @@ function AlarmContent(props) {
       </div>
       <div className="Content">
         <p>
-          내 {props.ContentType}에{" "}
           {props.AlarmType === "댓글" ? (
             <React.Fragment>{props.AlarmType}이 달렸어요</React.Fragment>
           ) : (

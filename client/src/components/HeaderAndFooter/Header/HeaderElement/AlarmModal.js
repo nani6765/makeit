@@ -9,8 +9,8 @@ function AlarmModal(props) {
         <Link to={{
             pathname: `/MyPage`,
             state: {
-                Taps:"알림",
-                AlarmType:"알림센터",
+                Taps:"alarmCenter",
+                AlarmType:"alarm",
             }
           }}
            style={{ color: "black", textDecoration: "none" }}
@@ -22,8 +22,8 @@ function AlarmModal(props) {
         <Link to={{
             pathname: `/MyPage`,
             state: {
-                Taps:"알림",
-                AlarmType:"쪽지함",
+                Taps:"alarmCenter",
+                AlarmType:"note",
             }
           }}
            style={{ color: "black", textDecoration: "none" }}

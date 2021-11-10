@@ -67,6 +67,8 @@ const DetailDiv = styled.div`
       grid-area: desc;
       text-align: left;
       word-break: keep-all;
+      white-space: pre;
+      line-height: 25px;
     }
     .image {
       grid-area: image;

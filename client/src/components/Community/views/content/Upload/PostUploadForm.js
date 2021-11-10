@@ -22,7 +22,7 @@ function PostUploadForm(props) {
   const [Title, setTitle] = useState("");
   const [Content, setContent] = useState("");
   const [Image, setImage] = useState([]);
-  const [Category, setCategory] = useState("");
+  const [Category, setCategory] = useState(props.category || "");
   const user = useSelector((state) => state.user);
 
   const options = [
@@ -81,6 +81,7 @@ function PostUploadForm(props) {
           placeholder="카테고리"
           blurInputOnSelect="true"
           menuShouldBlockScroll="true"
+          defaultValue={options[options.findIndex((obj, idx) => {if(obj.value===Category) return idx})]}
           onChange={(e) => setCategory(e.value)}
         />
       </div>

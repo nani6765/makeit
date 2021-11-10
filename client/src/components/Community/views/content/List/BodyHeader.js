@@ -48,6 +48,7 @@ function BodyHeader(props) {
       <Link
         to={{
           pathname: "/community/upload/",
+          state: { category: qs.parse(props.URL).category}
         }}
       >
         <button>

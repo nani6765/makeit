@@ -45,8 +45,9 @@ function PostDetailContent(props) {
       _id: postInfo._id,
       likeFlag: likeFlag,
       userId: user.userData.uid,
+      url: postInfo.url,
       type: "CoPost",
-      cateogry: "community/post",
+      category: "community/post",
     };
 
     axios.post("/api/util/like", body).then((response) => {

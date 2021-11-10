@@ -38,7 +38,7 @@ function AlarmCenter(props) {
 
   useEffect(() => {
     setLoading(false);
-    if (props.AlarmType === "쪽지함") {
+    if (props.AlarmType === "note") {
       let temp = [];
       setChatList(...temp);
       UserRef.child("chats").on("value", (DataSnapshot) => {
@@ -53,7 +53,7 @@ function AlarmCenter(props) {
   return (
     <>
       {Loading ? (
-        props.AlarmType === "쪽지함" ? (
+        props.AlarmType === "note" ? (
           <ChatListFnc ChatList={ChatList} />
         ) : (
           <AlarmListFnc AlarmList={AlarmList} GetAlarmList={GetAlarmList} />

@@ -63,7 +63,7 @@ const SelectLikeModel = (types) => {
 
 const SelectPostModel = (types) => {
   switch (types) {
-    case "Community":
+    case "CoPost":
       return Community;
     case "ShareVideo":
       return ShareVideo;
@@ -163,7 +163,6 @@ router.post("/like", (req, res) => {
     )
       .exec()
       .then((response) => {
-        console.log("response : ", response);
         return res.status(200).send({ success: true });
       })
       .catch((err) => {
@@ -178,24 +177,20 @@ router.post("/like", (req, res) => {
     )
       .exec()
       .then((response) => {
-        console.log(response);
-        if (response.uid != req.body.userId) {
-          let alarmTemp = {
-            uid: response.uid,
-            url: req.body.url,
-            type: `likeTo${req.body.type}`,
-            category: req.body.category,
-          };
-          const alarm = new Alarm(alarmTemp);
-          alarm.save(() => {
-            let flag = setLog(req.body.userId, "like", `${URL + temp.url}`);
-            if (flag) {
-              return res.status(200).send({ success: true });
-            }
-          });
-        } else {
-          return res.status(200).send({ success: true });
-        }
+        let alarmTemp = {
+          uid: response.uid,
+          url: req.body.url,
+          type: "like",
+          category: req.body.category,
+        };
+        console.log("alarm", alarmTemp);
+        const alarm = new Alarm(alarmTemp);
+        alarm.save(() => {
+          let flag = setLog(req.body.userId, "like", `${URL + req.body.url}`);
+          if (flag) {
+            return res.status(200).send({ success: true });
+          }
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -245,7 +240,7 @@ router.post("/repleSubmit", (req, res) => {
     uid: req.body.uid,
     postId: req.body.postId,
     content: req.body.content,
-    postNum: req.body.postNum,
+    url: req.body.url,
   };
 
   let PostModel = SelectPostModel(req.body.type);
@@ -269,14 +264,14 @@ router.post("/repleSubmit", (req, res) => {
             if (response.uid != reple.uid) {
               let alarmTemp = {
                 uid: response.uid,
-                url: reple.postNum,
-                type: "repleTopost",
+                url: reple.url,
+                type: "reple",
                 category: req.body.category,
               };
 
               const alarm = new Alarm(alarmTemp);
               alarm.save(() => {
-                let flag = setLog(req.body.uid, "reple", `${URL + temp.url}`);
+                let flag = setLog(req.body.uid, "reple", `${URL + reple.postNum}`);
                 if (flag) {
                   return res.status(200).send({ success: true });
                 }
@@ -347,8 +342,10 @@ router.post("/rerepleSubmit", (req, res) => {
 
   let temp = req.body;
   let rereple = {};
+  rereple.uid = temp.uid;
   rereple.content = temp.content;
   rereple.postId = temp.postId;
+  rereple.url = temp.url;
   rereple.realTime = moment().format("YY-MM-DD[ ]HH:mm");
   User.findOne({ uid: temp.uid })
     .exec()
@@ -368,8 +365,8 @@ router.post("/rerepleSubmit", (req, res) => {
             if (result.uid != req.body.uid) {
               let alarmtemp = {
                 uid: result.uid,
-                url: temp.postNum,
-                type: "rerepleToReple",
+                url: temp.url,
+                type: "reple",
                 category: req.body.category,
               };
               const replealarm = new Alarm(alarmtemp);
@@ -388,8 +385,8 @@ router.post("/rerepleSubmit", (req, res) => {
         .then((result) => {
           let alarmtemp = {
             uid: result.uid,
-            url: temp.postNum,
-            type: "rerepleToPost",
+            url: temp.url,
+            type: "reple",
             category: req.body.category,
           };
           if (req.body.uid != result.uid) {

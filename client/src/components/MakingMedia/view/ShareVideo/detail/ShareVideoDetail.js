@@ -88,6 +88,7 @@ function ShareVideoDetail(props) {
             loadMoreHanlder={loadMoreHanlder}
             postInfo={PostInfo}
             type="ShareVideo"
+            category="/making/shareVideo"
           />
           {TotalSize > Reples.length ? (
             <RepleBtnDiv>
