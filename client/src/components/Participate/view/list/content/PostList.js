@@ -58,7 +58,7 @@ function PostList(props) {
                 Posts.map((post, idx) => {
                 return (
                 <Link
-                    to={"/participate/post/" + post.postNum}
+                    to={"/participate/post/" + post.url}
                     style={{ textDecorationLine: "none", color: "black" }}
                     key={idx}
                 >
@@ -99,7 +99,7 @@ function PostList(props) {
                 Posts.map((post, idx) => {
                 return (
                   <Link
-                    to={"/participate/post/" + post.postNum}
+                    to={"/participate/post/" + post.url}
                     key={idx}
                     style={{ width: "30%", color:"black", textDecoration:"none", marginLeft: "3%", marginBottom: "1rem" }}
                     css={LinkCSS}

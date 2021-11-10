@@ -16,11 +16,12 @@ import { PartFilter } from "../../../css/ParticipateCSS.js";
 
 import axios from "axios";
 
-function LoUpload(props) {
+function LoEdit(props) {
   const [Category, setCategory] = useState("");
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
   const [Thumbnail, setThumbnail] = useState([]);
+  const [DeleteThumbnail, setDeleteThumbnail] = useState([]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -49,22 +50,31 @@ function LoUpload(props) {
       content: content,
       subCategory: Category,
       thumbnail: Thumbnail,
+      deleteThumbnail: DeleteThumbnail,
+      url: props.postInfo.url,
       type: "Lo",
     };
 
-    axios.post("/api/participate/postSubmit", body).then((response) => {
+    axios.post("/api/participate/post/Edit", body).then((response) => {
       if (response.data.success) {
-        alert("게시글 등록 성공");
-        props.history.push({
-          pathname: "/participate",
-          state: { category: "Lo" },
-        });
+        alert("게시글 수정 성공");
+        props.history.push("/participate/post/"+props.postInfo.url);
       } else {
-        alert("게시글 등록 실패");
+        alert("게시글 수정 실패");
         console.log(response.data.err);
       }
     });
   };
+
+  useEffect(() => {
+    let postInfo = props.postInfo;
+
+    setCategory(postInfo.subCategory);
+    settitle(postInfo.title);
+    setcontent(postInfo.content);
+    setThumbnail([...postInfo.thumbnail]);
+    setDeleteThumbnail([...postInfo.thumbnail]);
+}, []);
 
   return (
     <UploadDiv>
@@ -96,7 +106,7 @@ function LoUpload(props) {
         </ThumbnailArea>
 
         <PartFilter>
-          <LoUploadFilter Category={Category} setCategory={setCategory} />
+          { Category && <LoUploadFilter Category={Category} setCategory={setCategory} /> }
         </PartFilter>
         <Content content={content} setcontent={setcontent} />
         <BtnDiv submitHandler={submitHandler} />
@@ -105,4 +115,4 @@ function LoUpload(props) {
   );
 }
 
-export default withRouter(LoUpload);
+export default withRouter(LoEdit);

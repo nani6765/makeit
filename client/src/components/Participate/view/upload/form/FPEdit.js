@@ -16,7 +16,7 @@ import { PartFilter } from "../../../css/ParticipateCSS.js";
 
 import axios from "axios";
 
-function FPUpload(props) {
+function FPEdit(props) {
   const [FilmType, setFilmType] = useState([]);
   const [Classification, setClassification] = useState([]);
   const [title, settitle] = useState("");
@@ -51,26 +51,30 @@ function FPUpload(props) {
       filmType: FilmType,
       classification: Classification,
       images: Images,
+      url: props.postInfo.url,
       type: "FP",
     };
 
-    axios.post("/api/participate/postSubmit", body).then((response) => {
+    axios.post("/api/participate/post/edit", body).then((response) => {
       if (response.data.success) {
-        alert("게시글 등록 성공");
-        props.history.push({
-          pathname: "/participate",
-          state: { category: "FP" },
-        });
+        alert("게시글 수정 성공");
+        props.history.push("/participate/post/"+props.postInfo.url);
       } else {
-        alert("게시글 등록 실패");
+        alert("게시글 수정 실패");
         console.log(response.data.err);
       }
     });
   };
 
   useEffect(() => {
-    console.log(Images);
-  }, [Images]);
+    let postInfo = props.postInfo;
+
+    settitle(postInfo.title);
+    setcontent(postInfo.content);
+    setFilmType([...postInfo.filmType]);
+    setClassification([...postInfo.classification]);
+    setImages([...postInfo.images]);
+}, []);
 
   return (
     <>
@@ -86,12 +90,15 @@ function FPUpload(props) {
         <UploadForm>
           <Title title={title} settitle={settitle} />
           <PartFilter>
-            <FPUploadFilter
-              FilmType={FilmType}
-              setFilmType={setFilmType}
-              Classification={Classification}
-              setClassification={setClassification}
-            />
+            {
+              Classification[0] &&
+              <FPUploadFilter
+                FilmType={FilmType}
+                setFilmType={setFilmType}
+                Classification={Classification}
+                setClassification={setClassification}
+              />
+            }
           </PartFilter>
           <Content content={content} setcontent={setcontent} />
           <FileUploadArea
@@ -107,4 +114,4 @@ function FPUpload(props) {
   );
 }
 
-export default withRouter(FPUpload);
+export default withRouter(FPEdit);

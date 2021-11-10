@@ -279,27 +279,11 @@ const BodyFooterDiv = styled.div`
 
 const FNBDiv = styled.div`
   margin-bottom: 20px;
-  .submitBtn {
-    display: flex;
-    justify-content: flex-end;
-    button {
-      font-size: 15px;
-      font-weight: bold;
-      background: #935EA5;
-      color: #fff;
-      padding: 7px 10px;
-      border: none;
-      border-radius: 10px;
-      svg {
-        margin-left: 3px;
-      }
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .FNB {
     margin: 10px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     .pagination {
       .active {
         font-weight: bold;
@@ -324,6 +308,24 @@ const FNBDiv = styled.div`
         background: none;
         border: none;
       }
+    }
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 5px 1rem;
+    border: 2px solid #6759F6;
+    border-radius: 50px;
+    input {
+      border: none;
+    }
+    input:focus {
+      border: none;
+      outline: none;
+    }
+    svg {
+      cursor: pointer;
     }
   }
 `;

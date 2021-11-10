@@ -7,6 +7,8 @@ import YouTube from "react-youtube";
 import axios from "axios";
 
 import PostImages from "./PostImages.js";
+import UserModal from '../../../utils/view/Modal/UserModal.js';
+import GuestModal from '../../../utils/view/Modal/GuestModal.js';
 import { DetailDiv } from "../../css/ParticipateDetailCSS.js";
 import { ReactComponent as LGIcon } from "../../../MakingMedia/css/Img/LikeGrey.svg";
 import { ReactComponent as LPIcon } from "../../../MakingMedia/css/Img/LikePurple.svg";
@@ -24,7 +26,6 @@ function ShareVideoPost(props) {
   });
 
   useEffect(() => {
-    console.log(props.user);
     if (user.userData && props.PostInfo.likeArray.includes(user.userData.uid)) {
       setlikeFlag(true);
     } else {
@@ -72,11 +73,7 @@ function ShareVideoPost(props) {
       }
     });
   };
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
+  
   return (
     <>
       <DetailDiv>
@@ -106,9 +103,9 @@ function ShareVideoPost(props) {
             ></i>
             {hambucControl &&
               (user.userData.uid === props.PostInfo.auther.uid ? (
-                <p>UserModal</p>
+                <UserModal modalType="/participate/post" Info={props.PostInfo} path="/participate" category={props.PostInfo.type}/>
               ) : (
-                <p>GuestModal</p>
+                <GuestModal modalType="post" postInfo={props.PostInfo} />
               ))}
           </div>
         )}

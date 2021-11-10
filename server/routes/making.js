@@ -601,7 +601,7 @@ router.post("/shareVideo/submit", (req, res) => {
 router.post("/shareVideo/Edit", (req, res) => {
   let temp = req.body;
 
-  ShareVideo.findByIdAndUpdate({ _id: temp._id }, { temp })
+  ShareVideo.findOneAndUpdate({ _id: temp._id }, temp)
     .exec()
     .then(() => {
       return res.status(200).send({ success: true });

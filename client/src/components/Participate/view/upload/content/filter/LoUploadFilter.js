@@ -18,6 +18,7 @@ function LoUploadFilter(props) {
         placeholder="카테고리"
         blurInputOnSelect="true"
         menuShouldBlockScroll="true"
+        defaultValue={props.Category && options[options.findIndex((obj, idx) => {if(obj.value === props.Category) return idx;})]}
         onChange={(e) => props.setCategory(e.value)}
       />
     </div>

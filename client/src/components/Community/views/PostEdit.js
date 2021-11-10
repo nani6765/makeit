@@ -4,7 +4,7 @@ import { withRouter, useHistory } from "react-router";
 
 import { PostUploadDiv } from "../css/CommunityFormCSS.js";
 
-import UpdateFrorm from "./content/Upload/PostEditForm";
+import UpdateForm from "./content/Upload/PostEditForm";
 
 function PostEdit(props) {
   const [PostInfo, setPostInfo] = useState({ checkPosition: 0 });
@@ -29,7 +29,7 @@ function PostEdit(props) {
   return (
     <PostUploadDiv>
       {PostInfo.checkPosition != "undefined" && (
-        <UpdateFrorm PostInfo={PostInfo} />
+        <UpdateForm PostInfo={PostInfo} />
       )}
     </PostUploadDiv>
   );
