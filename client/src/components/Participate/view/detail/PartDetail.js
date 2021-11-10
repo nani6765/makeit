@@ -142,6 +142,7 @@ function PartDetail(props) {
             loadMoreHanlder={loadMoreHanlder}
             postInfo={PostInfo}
             type={PostInfo.type}
+            category="/participate/post"
           />
           {TotalSize > Reple.length ? (
             <RepleBtnDiv>

@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { CommunityHeader, CommunityBody, FNBDiv } from "../css/CommunityListCSS";
 import { ReactComponent as SearchIcon } from "../css/img/searchIcon.svg";
+import { ReactComponent as Surprising } from "../css/img/Surprising.svg";
 
 function CommunityList() {
   let location = useLocation();
@@ -29,7 +30,11 @@ function CommunityList() {
 
     if (location.search.slice(1) != URL) {
       setURL(location.search.slice(1));
-      setSkip(parseInt(temp.pIdx));
+      if(temp.pIdx) {
+        setSkip(parseInt(temp.pIdx));
+      } else {
+        setSkip(0);
+      }
       if(temp.searchTerm) {
         setSearchTerm(temp.searchTerm);
       } else {
@@ -56,8 +61,8 @@ function CommunityList() {
       } else {
         alert("error");
       }
-      setLoading(false);
     });
+    setLoading(false);
   };
   
   const SearchHandler = (e) => {
@@ -67,6 +72,7 @@ function CommunityList() {
     }
     let temp = qs.parse(URL);
     temp.searchTerm=SearchTerm.trim();
+    temp.pIdx = 0;
     let temp2 = qs.stringify(temp);
     history.push(`?${decodeURI(temp2)}`);
   }
@@ -78,7 +84,7 @@ function CommunityList() {
       setURL("category=전체게시판&sort=new&pIdx=0");
       history.push(`?category=전체게시판&sort=new&pIdx=0`);
     }
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     getPostList();
@@ -108,6 +114,19 @@ function CommunityList() {
           <p>loading</p>
         ) : (
           <>
+          {
+            qs.parse(URL).searchTerm &&
+            <div className="searchResult"><span className="term">"{qs.parse(URL).searchTerm}"</span> 검색 결과</div>
+          }
+          {
+            qs.parse(URL).searchTerm && PostList.length === 0 && (
+              <div className="noResult">
+                <p>검색 결과가 없습니다.</p>
+                <Surprising/>
+                <p>단어의 철자가 정확한지 확인해 주시기 바랍니다.</p>
+              </div>
+            )
+          }
             <PostListArea PostList={PostList} getPostList={getPostList} />
             <FNBDiv>
               <Pagination PageLen={PageLen} PageIdxArr={PageIdxArr} Skip={Skip} URL={URL} />

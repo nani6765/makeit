@@ -85,6 +85,29 @@ const CommunityHeader = styled.div`
 const CommunityBody = styled.div`
   width: 70%;
   margin: 0 auto;
+
+  .searchResult {
+    margin-top: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid black;
+    font-size: 20px;
+    .term {
+      color: #935EA5;
+    }
+  }
+  .noResult {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 2rem;
+    p:first-child {
+      font-size: 20px;
+    }
+    svg {
+      margin: 1rem 0;
+    }
+  }
   ${mq[1]} {
     width: 90%;
   }

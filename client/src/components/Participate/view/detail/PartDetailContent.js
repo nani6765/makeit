@@ -57,11 +57,11 @@ function ShareVideoPost(props) {
 
     let body = {
       _id: props.PostInfo._id,
-      postNum: props.PostInfo.url,
+      url: props.PostInfo.url,
       likeFlag: likeFlag,
       userId: user.userData.uid,
       type: props.PostInfo.type,
-      cateogry: "participate/post",
+      category: "participate/post",
     };
 
     axios.post("/api/util/like", body).then((response) => {

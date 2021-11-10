@@ -15,12 +15,16 @@ function AlarmListFnc(props) {
   function SwitchCard(alarm) {
     let key = alarm.type;
     let alarmType, contentType;
+    // eslint-disable-next-line default-case
     switch (key) {
-      case "repleToPost":
+      case "reple":
         alarmType = "댓글";
-        contentType = "게시글";
         break;
 
+        case "like":
+          alarmType = "공감";
+          break;
+/*
       case "rerepleToReple":
         alarmType = "대댓글";
         contentType = "댓글";
@@ -28,11 +32,6 @@ function AlarmListFnc(props) {
 
       case "rerepleToPost":
         alarmType = "대댓글";
-        contentType = "게시글";
-        break;
-
-      case "likeToPost":
-        alarmType = "공감";
         contentType = "게시글";
         break;
 
@@ -45,11 +44,11 @@ function AlarmListFnc(props) {
         alarmType = "공감";
         contentType = "대댓글";
         break;
+        */
     }
     return (
       <AlarmContent
         AlarmType={alarmType}
-        ContentType={contentType}
         alarm={alarm}
         allChecked={allChecked}
       />

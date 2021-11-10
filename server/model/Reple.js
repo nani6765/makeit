@@ -20,6 +20,9 @@ const RepleSchema = mongoose.Schema(
     postId: {
       type: Schema.Types.ObjectId,
     },
+    url: {
+      type: Number,
+    },
     content: {
       type: String,
     },
@@ -72,6 +75,9 @@ const RerepleSchema = mongoose.Schema(
     },
     postId: {
       type: Schema.Types.ObjectId,
+    },
+    postNum: {
+      type: Number,
     },
     content: {
       type: String,
