@@ -5,7 +5,6 @@ import axios from "axios";
 import Avatar from "react-avatar";
 import { RequestPostCard } from "../../css/RVCSS.js";
 import { LinkCSS } from "../../css/CommonCSS.js";
-import qs from 'qs';
 
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -17,50 +16,24 @@ function RequestPostList(props) {
 
   useEffect(() => {
     let body = {
-      category: props.SubCategory,
-      sort: props.Sort,
-      skip: props.Skip,
+      category: props.URLQuery.subCategory,
+      sort: props.URLQuery.sort,
+      skip: props.URLQuery.pIdx*5,
     };
 
-    axios.post("/api/making/requestVideo", body).then((response) => {
-      if (response.data.success) {
-        let temp = [...response.data.post];
-        setPostList(temp);
-      } else {
-        console.log("get requestVideo Error", response.data.err);
-      }
-    });
-  }, [props.SubCategory, props.Sort]);
-
-  
-  useEffect(() => {
-    let body = {
-      category: props.SubCategory,
-      sort: props.Sort,
-      skip: props.Skip,
-    };
-
-    axios.post("/api/making/requestVideo", body).then((response) => {
-      if (response.data.success) {
-        let temp = [...response.data.post];
-        setPostList(temp);
-        //history.push(`making?category=requestVideo&sort=${props.Sort}&skip=${props.Skip}`);
-      } else {
-        console.log("get requestVideo Error", response.data.err);
-      }
-    });
-  }, [props.Skip]);
-
-  /*
-  useEffect(() => {
-    if(history.location.search) {
-      const query = qs.parse(history.location.search, {
-        ignoreQueryPrefix: true
-      });
-      console.log(query);
+    if(props.URLQuery.searchTerm) {
+      body.searchTerm = props.URLQuery.searchTerm;
     }
-  }, [props.Skip]);
-  */
+
+    axios.post("/api/making/requestVideo", body).then((response) => {
+      if (response.data.success) {
+        let temp = [...response.data.post];
+        setPostList(temp);
+      } else {
+        console.log("get requestVideo Error", response.data.err);
+      }
+    });
+  }, [props.URLQuery]);
 
   return (
     <div>

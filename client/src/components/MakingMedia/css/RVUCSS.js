@@ -418,18 +418,22 @@ const RUFilterDiv = styled.div`
     padding: 20px 10px 20px 0px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     .react-datepicker-wrapper {
       width: 100%;
       height: 100%;
+      cursor: pointer;
       .react-datepicker__input-container {
         width: 100%;
         height: 100%;
+        cursor: pointer;
         .date {
           width: 100%;
           height: 100%;
           border: 1px solid #d8d8d8;
           border-radius: 8px;
           text-align: center;
+          cursor: pointer;
         }
       }
     }

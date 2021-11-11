@@ -79,7 +79,7 @@ function ShareVideoUpload(props) {
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
         alert("제작 영상 게시가 완료되었습니다.");
-        props.history.push({pathname: "/making", state: {category: "제작 영상 알리기"}});
+        props.history.push("/making?category=제작 영상 알리기&subCategory=전체&sort=인기순&pIdx=0")
       } else {
         alert("제작 영상 게시가 실패하였습니다.");
       }
@@ -156,7 +156,7 @@ function ShareVideoUpload(props) {
         <div className="BtnDiv">
           <button
             className="cancel"
-            onClick={() => props.history.push({pathname: "/making", state: {category: "제작 영상 알리기"}}) }
+            onClick={() => props.history.push("/making?category=제작 영상 알리기&subCategory=전체&sort=인기순&pIdx=0") }
           >
             취소
           </button>

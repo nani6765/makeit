@@ -28,6 +28,10 @@ router.post("/producer", (req, res) => {
     delete category.category;
   }
 
+  if(req.body.searchTerm) {
+    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { description : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
+  }
+
   //최신순&&인기순 정렬
   let sort = {};
   if (req.body.sort === "최신순") {
@@ -57,6 +61,10 @@ router.post("/producer/postLength", (req, res) => {
   };
   if (category.category === "전체") {
     delete category.category;
+  }
+
+  if(req.body.searchTerm) {
+    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { description : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
   }
 
   ProPost.find(category)
@@ -347,6 +355,10 @@ router.post("/requestVideo", (req, res) => {
     delete category.category;
   }
 
+  if(req.body.searchTerm) {
+    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}];
+  }
+
   //최신순&&인기순 정렬
   let sort = {};
   if (req.body.sort === "최신순") {
@@ -359,7 +371,7 @@ router.post("/requestVideo", (req, res) => {
     .populate("auther")
     .sort(sort)
     .skip(req.body.skip)
-    .limit(6)
+    .limit(5)
     .exec()
     .then((post) => {
       return res.status(200).send({ success: true, post: post });
@@ -375,6 +387,10 @@ router.post("/requestVideo/postLength", (req, res) => {
   };
   if (category.category === "전체") {
     delete category.category;
+  }
+
+  if(req.body.searchTerm) {
+    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}];
   }
 
   RequestPost.find(category)
@@ -540,7 +556,12 @@ router.post("/shareVideo", (req, res) => {
     sort.view = -1;
   }
 
-  ShareVideo.find()
+  let search = {};
+  if(req.body.searchTerm) {
+    search.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}];
+  }
+
+  ShareVideo.find(search)
     .populate("auther")
     .sort(sort)
     .skip(req.body.skip)
@@ -555,7 +576,7 @@ router.post("/shareVideo", (req, res) => {
 });
 
 router.post("/shareVideo/getPageLen", (req, res) => {
-  ShareVideo.countDocuments({})
+  ShareVideo.countDocuments(req.body)
     .exec()
     .then((len) => {
       return res.status(200).send({ success: true, len: len });

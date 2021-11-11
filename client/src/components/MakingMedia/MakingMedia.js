@@ -6,6 +6,7 @@ import FindingProducer from "./view/FindingProducer/FindingProducer.js";
 import RequestVideo from "./view/RequestVideo/RequestVideo.js";
 import ShareVideo from "./view/ShareVideo/ShareVideo";
 import { MakingDiv, MakingHeader } from "./css/CommonCSS.js";
+import qs from 'qs';
 
 function MakingMedia(props) {
   const location = useLocation();
@@ -13,6 +14,7 @@ function MakingMedia(props) {
   const user = useSelector((state) => state.user.userData);
 
   const [URL, setURL] = useState("");
+  const [URLQuery, setURLQuery] = useState({});
   const [Menu, setMenu] = useState("영상 제작자 탐색");
   const [SubCategoryList, setSubCategoryList] = useState([
     "전체",
@@ -28,11 +30,11 @@ function MakingMedia(props) {
   ]);
 
   const setContent = () => {
-    switch (Menu) {
+    switch (URLQuery.category) {
       case "영상 제작자 탐색":
         return (
           <FindingProducer
-            Menu={Menu}
+            URLQuery={URLQuery}
             user={user}
             SubCategoryList={SubCategoryList}
             setSubCategoryList={setSubCategoryList}
@@ -42,7 +44,7 @@ function MakingMedia(props) {
       case "영상 의뢰하기":
         return (
           <RequestVideo
-            Menu={Menu}
+            URLQuery={URLQuery}
             user={user}
             SubCategoryList={SubCategoryList}
             setSubCategoryList={setSubCategoryList}
@@ -52,7 +54,7 @@ function MakingMedia(props) {
       case "제작 영상 알리기":
         return (
           <ShareVideo
-            Menu={Menu}
+            URLQuery={URLQuery}
             user={user}
             SubCategoryList={SubCategoryList}
             setSubCategoryList={setSubCategoryList}
@@ -65,22 +67,17 @@ function MakingMedia(props) {
   };
 
   useEffect(() => {
-    if(props.history.location.state !== undefined && props.history.location.state.category !== undefined) {
-      setMenu(props.history.location.state.category);
-    }
-  }, []);
+    setURL(location.search.slice(1));
+  }, [location.search]);
 
-  /*
   useEffect(() => {
-    if (location.search) {
-      setURL(location.search.slice(1));
-    } else {      
-      setURL("category=전체게시판&sort=new&pIdx=0");
-      history.push(`?category=전체게시판&sort=new&pIdx=0`);
-    }
-  }, [location]);
+    setURLQuery(qs.parse(URL));
+  }, [URL])
 
-  */
+  useEffect(() => {
+    console.log(URLQuery);
+  }, [URLQuery]);
+
   return (
     <>
     <MakingHeader>
@@ -88,8 +85,8 @@ function MakingMedia(props) {
           src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
           style={{ width: "100%" }}
         />
-      <HeaderGNB Menu={Menu} setMenu={setMenu} />
-      <div className="category">{Menu}</div>
+      <HeaderGNB URLQuery={URLQuery} />
+      <div className="category">{URLQuery.category}</div>
     </MakingHeader>
     <MakingDiv>
       {setContent()}

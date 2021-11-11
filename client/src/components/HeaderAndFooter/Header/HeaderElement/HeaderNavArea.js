@@ -12,7 +12,7 @@ function HeaderNavArea() {
           </li>
           */}
         <li>
-          <Link to="/making">영상제작</Link>
+          <Link to={`/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0`}>영상제작</Link>
         </li>
         <li>
           <Link to="/participate">영상참여</Link>

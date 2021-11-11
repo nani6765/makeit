@@ -79,20 +79,47 @@ const ProducerListDiv = styled.div`
       .category {
           color: #A7A5A8;
       }
-      #sort {
-        button {
-          background-color: #ffffff;
-          color: black;
-          font-weight: bold;
-          border: 1.5px solid #eaeaea;
-          border-radius: 16px;
-          &:foucs {
-            outline: none;
-            box-shadow: none;
+      .filter {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 100%;
+        .search {
+          background: #F7F7F7;
+          padding: 5px;
+          height: 100%;
+          input {
+            background: none;
+            border: none;
+            text-align: right;
+            height: 100%;
+            &::placeholder {
+              color: #BFBFBF;
+            }
           }
-          &.btn-primary:focus {
-            outline: none;
-            box-shadow: none;
+          svg {
+            margin-left: 5px;
+            height: 100%;
+            cursor: pointer;
+          }
+        }
+        #sort {
+          display: inline-block;
+          margin-left: 1rem;
+          button {
+            background-color: #ffffff;
+            color: black;
+            font-weight: bold;
+            border: 1.5px solid #eaeaea;
+            border-radius: 16px;
+            &:foucs {
+              outline: none;
+              box-shadow: none;
+            }
+            &.btn-primary:focus {
+              outline: none;
+              box-shadow: none;
+            }
           }
         }
       }
