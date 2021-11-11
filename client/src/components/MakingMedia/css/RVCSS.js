@@ -33,35 +33,65 @@ const RequestListDiv = styled.div`
       .category {
         color: #a7a5a8;
       }
-      #sort {
-        button {
-          background-color: #ffffff;
-          color: black;
-          font-weight: bold;
-          border: 1.5px solid #eaeaea;
-          border-radius: 16px;
-          &:foucs {
-            outline: none;
-            box-shadow: none;
+      .filter {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        height: 100%;
+        .search {
+          background: #F7F7F7;
+          padding: 5px;
+          height: 100%;
+          input {
+            background: none;
+            border: none;
+            text-align: right;
+            height: 100%;
+            &::placeholder {
+              color: #BFBFBF;
+            }
           }
-          &.btn-primary:focus {
-            outline: none;
-            box-shadow: none;
+          svg {
+            margin-left: 5px;
+            height: 100%;
+            cursor: pointer;
+          }
+        }
+        #sort {
+          display: inline-block;
+          margin-left: 1rem;
+          button {
+            background-color: #ffffff;
+            color: black;
+            font-weight: bold;
+            border: 1.5px solid #eaeaea;
+            border-radius: 16px;
+            &:foucs {
+              outline: none;
+              box-shadow: none;
+            }
+            &.btn-primary:focus {
+              outline: none;
+              box-shadow: none;
+            }
           }
         }
       }
     }
     .postBtn {
-      float: right;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      padding: 7px 10px;
-      background: #935ea5;
-      border: none;
-      border-radius: 10px;
-      svg {
-        margin-left: 3px;
+      display: inline-block;
+      button {
+        float: right;
+        color: #fff;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 7px 10px;
+        background: #935ea5;
+        border: none;
+        border-radius: 10px;
+        svg {
+          margin-left: 3px;
+        }
       }
     }
     .FNB {
@@ -70,6 +100,7 @@ const RequestListDiv = styled.div`
       align-items: center;
 
       margin-top: 20px;
+      padding-top: 20px;
       .pagination {
         display: flex;
         button {
@@ -102,6 +133,7 @@ const RequestListDiv = styled.div`
 const RequestPostCard = styled.div`
   padding: 20px;
   margin: 20px;
+  margin-left: 0px;
   background: #ffffff;
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);

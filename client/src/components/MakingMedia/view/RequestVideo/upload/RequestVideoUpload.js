@@ -78,7 +78,7 @@ function RequestVideoUpload(props) {
       .then((response) => {
         if (response.data.success) {
           alert("의뢰 게시가 완료되었습니다.");
-          props.history.push({pathname: "/making", state: {menu: "영상 의뢰하기"}});
+          props.history.push({pathname: "/making", state: {category: "영상 의뢰하기"}});
         } else {
           alert("의뢰 게시가 실패하였습니다.");
         }
@@ -97,7 +97,7 @@ function RequestVideoUpload(props) {
       <UploadHead>
         <div>
           <h1>
-            <span onClick={() => props.history.push({pathname: "/making", state: {menu: "영상 의뢰하기"}})}>&lt;</span>
+            <span onClick={() => props.history.push({pathname: "/making", state: {category: "영상 의뢰하기"}})}>&lt;</span>
             의뢰 작성하기
           </h1>
         </div>

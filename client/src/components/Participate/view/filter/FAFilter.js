@@ -56,7 +56,7 @@ function FAUploadFilter(props) {
                 GenderFilterManager(e);
               }}
             />
-            <label for="male">남자</label>
+            <label htmlFor="male">남자</label>
           </div>
           <div>
             <input
@@ -68,7 +68,7 @@ function FAUploadFilter(props) {
                 GenderFilterManager(e);
               }}
             />
-            <label for="female">여자</label>
+            <label htmlFor="female">여자</label>
           </div>
           <div>
             <input
@@ -80,7 +80,7 @@ function FAUploadFilter(props) {
                 GenderFilterManager(e);
               }}
             />
-            <label for="noMatter">무관</label>
+            <label htmlFor="noMatter">무관</label>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ function FAUploadFilter(props) {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label for="video">영상</label>
+            <label htmlFor="video">영상</label>
           </div>
           <div>
             <input
@@ -115,7 +115,7 @@ function FAUploadFilter(props) {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label for="photo">사진</label>
+            <label htmlFor="photo">사진</label>
           </div>
           <div>
             <input
@@ -127,7 +127,7 @@ function FAUploadFilter(props) {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label for="etc">기타</label>
+            <label htmlFor="etc">기타</label>
           </div>
         </div>
       </div>
@@ -148,7 +148,7 @@ function FAUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="short">단편</label>
+            <label htmlFor="short">단편</label>
           </div>
           <div>
             <input
@@ -160,7 +160,7 @@ function FAUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="long">장편</label>
+            <label htmlFor="long">장편</label>
           </div>
           <div>
             <input
@@ -172,7 +172,7 @@ function FAUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="ad">광고</label>
+            <label htmlFor="ad">광고</label>
           </div>
           <div>
             <input
@@ -184,7 +184,7 @@ function FAUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="TV">TV</label>
+            <label htmlFor="TV">TV</label>
           </div>
           <div>
             <input
@@ -196,7 +196,7 @@ function FAUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="pictorial">화보</label>
+            <label htmlFor="pictorial">화보</label>
           </div>
           <div>
             <input
@@ -208,7 +208,7 @@ function FAUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="classificationETC">기타</label>
+            <label htmlFor="classificationETC">기타</label>
           </div>
         </div>
       </div>
