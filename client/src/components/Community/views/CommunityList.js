@@ -61,8 +61,10 @@ function CommunityList() {
       } else {
         alert("error");
       }
+      setLoading(false);
+
     });
-    setLoading(false);
+
   };
   
   const SearchHandler = (e) => {
