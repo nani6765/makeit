@@ -66,6 +66,7 @@ function CommunityList() {
         alert("error");
       }
       setLoading(false);
+
     });
   }
 
