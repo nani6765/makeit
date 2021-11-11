@@ -171,7 +171,7 @@ function ShareVideoEdit(props) {
         <div className="BtnDiv">
           <button
             className="cancel"
-            onClick={() => props.history.push("/making")}
+            onClick={() => props.history.push({ pathname: "/making", state: {category: "제작 영상 알리기"}})}
           >
             취소
           </button>

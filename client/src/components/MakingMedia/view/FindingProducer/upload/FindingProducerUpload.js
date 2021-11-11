@@ -24,7 +24,6 @@ function FindingProducerUpload(props) {
     { idx: 3, value: "수정/환불안내" },
   ];
   const [CurrentProcess, setCurrentProcess] = useState("상세설명");
-  const [CureentIdx, setCureentIdx] = useState(0);
 
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");

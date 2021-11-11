@@ -28,6 +28,7 @@ function ShareVideo(props) {
   }, []);
 
   useEffect(() => {
+    console.log(Sort);
     setSkip(0);
   }, [Sort]);
 

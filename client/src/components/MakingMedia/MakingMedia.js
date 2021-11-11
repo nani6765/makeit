@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useLocation, useHistory } from "react-router-dom";
 import HeaderGNB from "./view/common/HeaderGNB";
 import FindingProducer from "./view/FindingProducer/FindingProducer.js";
 import RequestVideo from "./view/RequestVideo/RequestVideo.js";
@@ -7,8 +8,11 @@ import ShareVideo from "./view/ShareVideo/ShareVideo";
 import { MakingDiv, MakingHeader } from "./css/CommonCSS.js";
 
 function MakingMedia(props) {
+  const location = useLocation();
+  const history = useHistory();
   const user = useSelector((state) => state.user.userData);
 
+  const [URL, setURL] = useState("");
   const [Menu, setMenu] = useState("영상 제작자 탐색");
   const [SubCategoryList, setSubCategoryList] = useState([
     "전체",
@@ -61,11 +65,22 @@ function MakingMedia(props) {
   };
 
   useEffect(() => {
-    if(props.history.location.state !== undefined) {
+    if(props.history.location.state !== undefined && props.history.location.state.category !== undefined) {
       setMenu(props.history.location.state.category);
     }
   }, []);
 
+  /*
+  useEffect(() => {
+    if (location.search) {
+      setURL(location.search.slice(1));
+    } else {      
+      setURL("category=전체게시판&sort=new&pIdx=0");
+      history.push(`?category=전체게시판&sort=new&pIdx=0`);
+    }
+  }, [location]);
+
+  */
   return (
     <>
     <MakingHeader>

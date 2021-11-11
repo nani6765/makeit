@@ -45,7 +45,7 @@ function FPUploadFilter(props) {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label for="video">영상</label>
+            <label htmlFor="video">영상</label>
           </div>
           <div>
             <input
@@ -57,7 +57,7 @@ function FPUploadFilter(props) {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label for="photo">사진</label>
+            <label htmlFor="photo">사진</label>
           </div>
           <div>
             <input
@@ -69,7 +69,7 @@ function FPUploadFilter(props) {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label for="etc">기타</label>
+            <label htmlFor="etc">기타</label>
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="a">기획</label>
+            <label htmlFor="a">기획</label>
           </div>
           <div>
             <input
@@ -102,7 +102,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="b">편집</label>
+            <label htmlFor="b">편집</label>
           </div>
           <div>
             <input
@@ -114,7 +114,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="c">촬영</label>
+            <label htmlFor="c">촬영</label>
           </div>
           <div>
             <input
@@ -126,7 +126,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="d">조명</label>
+            <label htmlFor="d">조명</label>
           </div>
           <div>
             <input
@@ -138,7 +138,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="e">음향</label>
+            <label htmlFor="e">음향</label>
           </div>
           <div>
             <input
@@ -150,7 +150,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="f">성우</label>
+            <label htmlFor="f">성우</label>
           </div>
           <div>
             <input
@@ -162,7 +162,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="g">미용</label>
+            <label htmlFor="g">미용</label>
           </div>
           <div>
             <input
@@ -174,7 +174,7 @@ function FPUploadFilter(props) {
                 ClassificationFilterManager(e);
               }}
             />
-            <label for="h">기타</label>
+            <label htmlFor="h">기타</label>
           </div>
         </div>
       </div>
