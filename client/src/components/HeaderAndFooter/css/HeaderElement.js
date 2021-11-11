@@ -56,7 +56,7 @@ const HeaderLogo = styled.div`
   grid-area: logo;
   height: 100%;
   width: 100%;
-  padding: 10px 10px 20px 10px;
+  padding: 20px 5px 20px 5px;
   img {
     width: 100%;
     height: 100%;

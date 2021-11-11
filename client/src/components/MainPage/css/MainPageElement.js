@@ -23,29 +23,46 @@ const MainPageDiv = styled.div`
       width: 100%;
     }
   }
+  .slick-arrow {
+    display: flex;
+    background-color: white;
+    border: black;
+    border: 1px solid rgba(213, 218, 221, 1);
+    border-radius: 50%;
+    padding: 20px;
+  }
   .slick-prev {
-    height: 60px;
-    left: -10px;
+    left: 20px;
     z-index: 1;
-    background: none;
   }
   .slick-next {
-    height: 60px;
-    right: 0px;
-    background: none;
+    right: 20px;
+    z-index: 1;
+  }
+  ${mq[1]} {
+    .slick-prev {
+      left: 10px;
+    }
+    .slick-next {
+      right: 10px;
+    }
   }
   .slick-next:before,
   .slick-prev:before {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
     opacity: 1;
-    color: #702c8a;
-    font-weight: 800;
-    font-size: 60px;
+    color: black;
   }
   .slick-prev:before {
-    content: "〈";
+    content: "<";
   }
   .slick-next:before {
-    content: "〉";
+    content: ">";
   }
 `;
 
@@ -151,18 +168,19 @@ const CardImg = styled.article`
     drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));
   border-radius: 10px;
   .thumbnail {
-    width: 480px;
-    height: 320px;
+    width: 100%;
+    height: 100%;
   }
   ${mq[1]} {
     width: 100%;
     min-width: 80vw;
     height: 281.25px;
     min-height: 281.25px;
-    padding-left: 10px;
+    margin-left: 0px;
   }
 `;
 
+/*
 const PlayButtonCSS = css`
   position: absolute;
   width: 100px;
@@ -180,6 +198,7 @@ const PlayButtonCSS = css`
   right: 0;
   text-align: center;
 `;
+*/
 
 export {
   MainPageDiv,
@@ -187,5 +206,4 @@ export {
   MainPageSubHading,
   MainPageGridContent,
   CardImg,
-  PlayButtonCSS,
 };

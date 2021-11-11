@@ -6,7 +6,7 @@ const { User } = require("../model/User.js");
 
 const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
-const setLog = require('../module/setLog.js');
+const setLog = require("../module/setLog.js");
 
 var moment = require("moment");
 require("moment-timezone");
@@ -30,6 +30,7 @@ router.post("/", (req, res) => {
 
   let PostModel = SelectModel(req.body.type);
   //카테고리 정렬
+
   let category = {
     type: temp.type,
     $or: [],
@@ -165,43 +166,46 @@ router.post("/postSubmit", (req, res) => {
 router.post("/post/edit", (req, res) => {
   let temp = req.body;
 
-  if(temp.deleteThumbnail && temp.deleteThumbnail[0].key !== temp.thumbnail[0].key) {
+  if (
+    temp.deleteThumbnail &&
+    temp.deleteThumbnail[0].key !== temp.thumbnail[0].key
+  ) {
     setDelete("makeit/participate", temp.deleteThumbnail[0].key);
     delete temp.deleteThumbnail;
   }
 
   let PostModel = SelectModel(temp.type);
 
-  PostModel.findOneAndUpdate({url: temp.url}, temp)
-  .exec()
-  .then((result) => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  });
+  PostModel.findOneAndUpdate({ url: temp.url }, temp)
+    .exec()
+    .then((result) => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
 });
 
 router.post("/post/delete", (req, res) => {
   let temp = req.body.postInfo;
-  
-  if(temp.thumbnail) {
+
+  if (temp.thumbnail) {
     setDelete("makeit/participate", temp.thumbnail[0].key);
   }
-  if(temp.images) {
+  if (temp.images) {
     for (let i = 0; i < temp.images.length; i++) {
       setDelete("makeit/participate", temp.images[i].key);
     }
   }
 
   let PostModel = SelectModel(temp.type);
-  PostModel.findOneAndDelete({url: temp.url})
-  .exec()
-  .then(() => {
-    return res.status(200).send({ success: true });
-  })
-  .catch((err) => {
-    return res.json({ success: false, err });
-  });
+  PostModel.findOneAndDelete({ url: temp.url })
+    .exec()
+    .then(() => {
+      return res.status(200).send({ success: true });
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
 });
 module.exports = router;

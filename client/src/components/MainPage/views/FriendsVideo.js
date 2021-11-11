@@ -20,12 +20,21 @@ function FriendsVideo() {
 
   var settings = {
     dots: false,
-    infinite: FVideos.length > 3,
+    infinite: true,
     speed: 500,
     easing: "ease-in-out",
     draggable: true,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 576,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
