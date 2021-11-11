@@ -5,7 +5,11 @@ import StickyBar from "./StickyBar.js";
 function LoFilter(props) {
   return (
     <div className="left">
-      <StickyBar category={props.category} SubCategory={props.SubCategory} setSubCategory={props.setSubCategory} SubCategoryList={props.SubCategoryList} />
+      <StickyBar
+        category="로케이션"
+        SubCategoryList={props.SubCategoryList}
+        URL={props.URL}
+      />
     </div>
   );
 }

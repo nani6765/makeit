@@ -1,32 +1,51 @@
-import React, { useEffect } from 'react'
+import React from "react";
+import { useHistory } from "react-router";
+import qs from "qs";
 
 function FPUploadFilter(props) {
+  let history = useHistory();
 
-    const FilmTypeFilterManager = (e) => {
-        if(e.target.checked) {
-            let temp = [...props.FilmType];
-            temp.push(e.target.value);
-            props.setFilmType(temp);
+  const FilmTypeFilterManager = (e) => {
+    let temp = props.URL;
+    if (temp.filmType) {
+      if (temp.filmType.includes(e.target.id)) {
+        var idx = temp.filmType.indexOf(e.target.id);
+        if (idx !== -1) {
+          temp.filmType.splice(idx, 1);
         }
-        else {
-            props.setFilmType(props.FilmType.filter(film => film!==e.target.value));
-        }
+      } else {
+        temp.filmType.push(e.target.id);
+      }
+    } else {
+      temp.filmType = [];
+      temp.filmType.push(e.target.id);
     }
+    let temp2 = qs.stringify(temp);
+    history.push(`?${decodeURI(temp2)}`);
+  };
 
-    const ClassificationFilterManager = (e) => {
-        if(e.target.checked) {
-            let temp = [...props.Classification];
-            temp.push(e.target.value);
-            props.setClassification(temp);
+  const ClassificationFilterManager = (e) => {
+    let temp = props.URL;
+    if (temp.class) {
+      if (temp.class.includes(e.target.id)) {
+        var idx = temp.class.indexOf(e.target.id);
+        if (idx !== -1) {
+          temp.class.splice(idx, 1);
         }
-        else {
-            props.setClassification(props.Classification.filter(cf => cf!==e.target.value));
-        }
+      } else {
+        temp.class.push(e.target.id);
+      }
+    } else {
+      temp.class = [];
+      temp.class.push(e.target.id);
     }
+    let temp2 = qs.stringify(temp);
+    history.push(`?${decodeURI(temp2)}`);
+  };
 
-    return (
-        <>
-          <div className="select">
+  return (
+    <>
+      <div className="select">
         <div className="labelArea">
           <span>촬</span>
           <span>영</span>
@@ -40,7 +59,6 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="video"
               value="영상"
-              defaultChecked={props.FilmType.includes("영상")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -52,7 +70,6 @@ function FPUploadFilter(props) {
               type="checkbox"
               id="photo"
               value="사진"
-              defaultChecked={props.FilmType.includes("사진")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -62,14 +79,13 @@ function FPUploadFilter(props) {
           <div>
             <input
               type="checkbox"
-              id="etc"
+              id="filmTypeEtc"
               value="기타"
-              defaultChecked={props.FilmType.includes("기타")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label htmlFor="etc">기타</label>
+            <label htmlFor="filmTypeEtc">기타</label>
           </div>
         </div>
       </div>
@@ -83,103 +99,95 @@ function FPUploadFilter(props) {
           <div>
             <input
               type="checkbox"
-              id="a"
+              id="plan"
               value="기획"
-              defaultChecked={props.Classification.includes("기획")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="a">기획</label>
+            <label htmlFor="plan">기획</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="b"
+              id="edit"
               value="편집"
-              defaultChecked={props.Classification.includes("편집")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="b">편집</label>
+            <label htmlFor="edit">편집</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="c"
+              id="filming"
               value="촬영"
-              defaultChecked={props.Classification.includes("촬영")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="c">촬영</label>
+            <label htmlFor="filming">촬영</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="d"
+              id="light"
               value="조명"
-              defaultChecked={props.Classification.includes("조명")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="d">조명</label>
+            <label htmlFor="light">조명</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="e"
+              id="acoustic"
               value="음향"
-              defaultChecked={props.Classification.includes("음향")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="e">음향</label>
+            <label htmlFor="acoustic">음향</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="f"
+              id="voiceActor"
               value="성우"
-              defaultChecked={props.Classification.includes("성우")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="f">성우</label>
+            <label htmlFor="voiceActor">성우</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="g"
+              id="beauty"
               value="미용"
-              defaultChecked={props.Classification.includes("미용")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="g">미용</label>
+            <label htmlFor="beauty">미용</label>
           </div>
           <div>
             <input
               type="checkbox"
-              id="h"
+              id="classEtc"
               value="기타"
-              defaultChecked={props.Classification.includes("기타")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="h">기타</label>
+            <label htmlFor="classEtc">기타</label>
           </div>
         </div>
       </div>
-        </>
-    )
+    </>
+  );
 }
 
-export default FPUploadFilter
+export default FPUploadFilter;

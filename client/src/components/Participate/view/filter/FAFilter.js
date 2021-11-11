@@ -1,40 +1,65 @@
 import React from "react";
+import { useHistory } from "react-router";
+import qs from "qs";
 
 function FAUploadFilter(props) {
+  let history = useHistory();
+
   const GenderFilterManager = (e) => {
-    if (e.target.checked) {
-      let temp = [...props.Gender];
-      temp.push(e.target.value);
-      props.setGender(temp);
+    let temp = props.URL;
+    if (temp.gender) {
+      if (temp.gender.includes(e.target.id)) {
+        var idx = temp.gender.indexOf(e.target.id);
+        if (idx !== -1) {
+          temp.gender.splice(idx, 1);
+        }
+      } else {
+        temp.gender.push(e.target.id);
+      }
     } else {
-      props.setGender(
-        props.Gender.filter((gender) => gender !== e.target.value)
-      );
+      temp.gender = [];
+      temp.gender.push(e.target.id);
     }
+    let temp2 = qs.stringify(temp);
+    history.push(`?${decodeURI(temp2)}`);
   };
 
   const FilmTypeFilterManager = (e) => {
-    if (e.target.checked) {
-      let temp = [...props.FilmType];
-      temp.push(e.target.value);
-      props.setFilmType(temp);
+    let temp = props.URL;
+    if (temp.filmType) {
+      if (temp.filmType.includes(e.target.id)) {
+        var idx = temp.filmType.indexOf(e.target.id);
+        if (idx !== -1) {
+          temp.filmType.splice(idx, 1);
+        }
+      } else {
+        temp.filmType.push(e.target.id);
+      }
     } else {
-      props.setFilmType(
-        props.FilmType.filter((film) => film !== e.target.value)
-      );
+      temp.filmType = [];
+      temp.filmType.push(e.target.id);
     }
+    let temp2 = qs.stringify(temp);
+    history.push(`?${decodeURI(temp2)}`);
   };
 
   const ClassificationFilterManager = (e) => {
-    if (e.target.checked) {
-      let temp = [...props.Classification];
-      temp.push(e.target.value);
-      props.setClassification(temp);
+    let temp = props.URL;
+    if (temp.class) {
+      if (temp.class.includes(e.target.id)) {
+        var idx = temp.class.indexOf(e.target.id);
+        if (idx !== -1) {
+          temp.class.splice(idx, 1);
+        }
+      } else {
+        temp.class.push(e.target.id);
+      }
     } else {
-      props.setClassification(
-        props.Classification.filter((cf) => cf !== e.target.value)
-      );
+      temp.class = [];
+      temp.class.push(e.target.id);
     }
+    let temp2 = qs.stringify(temp);
+    history.push(`?${decodeURI(temp2)}`);
   };
 
   return (
@@ -51,7 +76,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="male"
               value="남자"
-              defaultChecked={props.Gender.includes("남자")}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -63,7 +87,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="female"
               value="여자"
-              defaultChecked={props.Gender.includes("여자")}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -75,7 +98,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="noMatter"
               value="무관"
-              defaultChecked={props.Gender.includes("무관")}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -98,7 +120,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="video"
               value="영상"
-              defaultChecked={props.FilmType.includes("영상")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -110,7 +131,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="photo"
               value="사진"
-              defaultChecked={props.FilmType.includes("사진")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
@@ -120,14 +140,13 @@ function FAUploadFilter(props) {
           <div>
             <input
               type="checkbox"
-              id="etc"
+              id="filmTypeEtc"
               value="기타"
-              defaultChecked={props.FilmType.includes("기타")}
               onClick={(e) => {
                 FilmTypeFilterManager(e);
               }}
             />
-            <label htmlFor="etc">기타</label>
+            <label htmlFor="filmTypeEtc">기타</label>
           </div>
         </div>
       </div>
@@ -143,7 +162,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="short"
               value="단편"
-              defaultChecked={props.Classification.includes("단편")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -155,7 +173,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="long"
               value="장편"
-              defaultChecked={props.Classification.includes("장편")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -167,7 +184,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="ad"
               value="광고"
-              defaultChecked={props.Classification.includes("광고")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -179,7 +195,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="TV"
               value="TV"
-              defaultChecked={props.Classification.includes("TV")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -191,7 +206,6 @@ function FAUploadFilter(props) {
               type="checkbox"
               id="pictorial"
               value="화보"
-              defaultChecked={props.Classification.includes("화보")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
@@ -201,14 +215,13 @@ function FAUploadFilter(props) {
           <div>
             <input
               type="checkbox"
-              id="classificationETC"
+              id="classEtc"
               value="기타"
-              defaultChecked={props.Classification.includes("기타")}
               onClick={(e) => {
                 ClassificationFilterManager(e);
               }}
             />
-            <label htmlFor="classificationETC">기타</label>
+            <label htmlFor="classEtc">기타</label>
           </div>
         </div>
       </div>
