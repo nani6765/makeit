@@ -216,9 +216,7 @@ function FindingProducerUpload(props) {
       .then((response, err) => {
         if (response.data.success) {
           alert("제작자 게시가 완료되었습니다.");
-          props.history.push({
-            pathname: "/making",
-          });
+          props.history.push("/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0");
         } else {
           alert("제작자 게시에 실패했습니다.");
           console.log("prosubmit error", err);
@@ -310,7 +308,7 @@ function FindingProducerUpload(props) {
     <>
       <UploadHead>
         <div>
-          <h1 onClick={() => props.history.goBack()}>
+          <h1 onClick={() => props.history.push("/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0")}>
             <span>&lt;</span>
             게시하기
           </h1>

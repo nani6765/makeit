@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+import qs from 'qs';
 import { ReactComponent as FindingProducer } from "../../css/Img/제작자탐색.svg";
 import { ReactComponent as RequestVideo } from "../../css/Img/의뢰하기.svg";
 import { ReactComponent as ShareVideo } from "../../css/Img/영상알리기.svg";
@@ -32,7 +34,15 @@ function HeaderGNB(props) {
           return (
             <MenuItem
               key={idx}
-              onClick={() => props.setMenu(GNB.label)}
+              onClick={() => {
+                props.URLQuery.category = GNB.label;
+                props.URLQuery.pIdx = 0;
+                props.URLQuery.sort="인기순";
+                if(props.URLQuery.searchTerm) {
+                  delete props.URLQuery.searchTerm;
+                }
+                props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+              }}
             >
               {GNB.icon}
               <p>{GNB.label}</p>
@@ -44,4 +54,4 @@ function HeaderGNB(props) {
   );
 }
 
-export default HeaderGNB;
+export default withRouter(HeaderGNB);
