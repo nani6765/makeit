@@ -13,9 +13,7 @@ function MakingMedia(props) {
   const history = useHistory();
   const user = useSelector((state) => state.user.userData);
 
-  const [URL, setURL] = useState("");
-  const [URLQuery, setURLQuery] = useState({});
-  const [Menu, setMenu] = useState("영상 제작자 탐색");
+  const [URL, setURL] = useState({});
   const [SubCategoryList, setSubCategoryList] = useState([
     "전체",
     "일반 영상",
@@ -30,11 +28,11 @@ function MakingMedia(props) {
   ]);
 
   const setContent = () => {
-    switch (URLQuery.category) {
+    switch (URL.category) {
       case "영상 제작자 탐색":
         return (
           <FindingProducer
-            URLQuery={URLQuery}
+            URL={URL}
             user={user}
             SubCategoryList={SubCategoryList}
             setSubCategoryList={setSubCategoryList}
@@ -44,7 +42,7 @@ function MakingMedia(props) {
       case "영상 의뢰하기":
         return (
           <RequestVideo
-            URLQuery={URLQuery}
+            URL={URL}
             user={user}
             SubCategoryList={SubCategoryList}
             setSubCategoryList={setSubCategoryList}
@@ -54,7 +52,7 @@ function MakingMedia(props) {
       case "제작 영상 알리기":
         return (
           <ShareVideo
-            URLQuery={URLQuery}
+            URL={URL}
             user={user}
             SubCategoryList={SubCategoryList}
             setSubCategoryList={setSubCategoryList}
@@ -67,16 +65,12 @@ function MakingMedia(props) {
   };
 
   useEffect(() => {
-    setURL(location.search.slice(1));
+    let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
+    if(temp.category && temp.sort && temp.pIdx && temp.subCategory) {
+      setURL(qs.parse(location.search, { ignoreQueryPrefix: true }));
+    }
+    else history.push("?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0");
   }, [location.search]);
-
-  useEffect(() => {
-    setURLQuery(qs.parse(URL));
-  }, [URL])
-
-  useEffect(() => {
-    console.log(URLQuery);
-  }, [URLQuery]);
 
   return (
     <>
@@ -85,8 +79,8 @@ function MakingMedia(props) {
           src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
           style={{ width: "100%" }}
         />
-      <HeaderGNB URLQuery={URLQuery} />
-      <div className="category">{URLQuery.category}</div>
+      <HeaderGNB URL={URL} />
+      <div className="category">{URL.category}</div>
     </MakingHeader>
     <MakingDiv>
       {setContent()}

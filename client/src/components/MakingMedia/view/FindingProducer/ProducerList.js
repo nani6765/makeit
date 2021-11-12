@@ -10,13 +10,13 @@ function ProducerList(props) {
   const loadPostList = async () => {
     try {
       let body = {
-        category: props.URLQuery.subCategory,
-        sort: props.URLQuery.sort,
-        skip: props.URLQuery.pIdx*9,
+        category: props.URL.subCategory,
+        sort: props.URL.sort,
+        skip: props.URL.pIdx*9,
       };
 
-      if(props.URLQuery.searchTerm) {
-        body.searchTerm = props.URLQuery.searchTerm;
+      if(props.URL.searchTerm) {
+        body.searchTerm = props.URL.searchTerm;
       }
 
       axios.post("/api/making/producer", body).then((response) => {
@@ -32,7 +32,7 @@ function ProducerList(props) {
 
   useEffect(() => {
     loadPostList();
-  }, [props.URLQuery]);
+  }, [props.URL]);
 
   return (
     <ProducerListContainer>
