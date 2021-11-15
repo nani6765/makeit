@@ -25,60 +25,6 @@ const PartHeader = styled.div`
       height: 20vh;
     }
   }
-
-  .GNBDiv {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    width: 70%;
-    height: 120px;
-
-    margin: 0 auto;
-    padding: 25px 0;
-
-    div {
-      cursor: pointer;
-      text-align: center;
-      svg {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 5px;
-        ${mq[1]} {
-          width: 30px;
-          height: 30px;
-        }
-      }
-      p {
-        color: #702c8a;
-        font-weight: bold;
-        user-select: none;
-        ${mq[1]} {
-          font-size: 10px;
-        }
-      }
-      &:hover {
-        svg {
-          width: 60px;
-          height: 60px;
-        }
-      }
-      ${mq[1]} {
-        &:hover,
-        &:focus {
-          svg {
-            width: 30px;
-            height: 30px;
-          }
-        }
-      }
-    }
-    ${mq[1]} {
-      width: 90%;
-      height: auto;
-      padding: 2vh 3vw 2vh 3vw;
-    }
-  }
   .category {
     width: 100%;
     background: #EDE7F6;
@@ -108,6 +54,59 @@ const PartHeader = styled.div`
   }
 `;
 
+const MenuList = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 70%;
+  height: 120px;
+
+  margin: 0 auto;
+  padding: 25px 0;
+  ${mq[1]} {
+    width: 90%;
+    height: auto;
+    padding: 2vh 3vw 2vh 3vw;
+  }
+`;
+
+const MenuItem = styled.li`
+  cursor: pointer;
+  text-align: center;
+  svg {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    ${mq[1]} {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  p {
+    color: #702c8a;
+    font-weight: bold;
+    user-select: none;
+    ${mq[1]} {
+      font-size: 10px;
+    }
+  }
+  &:hover {
+    svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  ${mq[1]} {
+    &:hover,
+    &:focus {
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+`;
 const PartBody = styled.div`
   width: 70%;
   margin: 0 auto;
@@ -450,4 +449,4 @@ const LinkCSS = css`
   }
 `;
 
-export { PartHeader, PartBody, PartFilter, PartIPLoListDiv, PostCard, IPLoPostCard, StickyBarDiv, FNBDiv, LinkCSS };
+export { PartHeader, PartBody, PartFilter, PartIPLoListDiv, PostCard, IPLoPostCard, StickyBarDiv, FNBDiv, LinkCSS, MenuList, MenuItem };

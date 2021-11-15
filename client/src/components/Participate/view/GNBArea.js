@@ -2,6 +2,8 @@ import React from "react";
 import qs from "qs";
 import { useHistory } from "react-router-dom";
 
+import { MenuList, MenuItem } from "../css/ParticipateCSS.js";
+
 import { ReactComponent as Location } from "../css/img/로케이션.svg";
 import { ReactComponent as FindingActor } from "../css/img/배우찾기.svg";
 import { ReactComponent as FindingPartner } from "../css/img/파트너찾기.svg";
@@ -13,22 +15,22 @@ function GNBArea(props) {
   const GNBList = [
     {
       icon: <FindingPartner />,
-      text: <p>파트너찾기</p>,
+      text: "파트너찾기",
       GNB: "FP",
     },
     {
       icon: <FindingActor />,
-      text: <p>배우찾기</p>,
+      text: "배우찾기",
       GNB: "FA",
     },
     {
       icon: <InformPro />,
-      text: <p>프로알리기</p>,
+      text: "프로알리기",
       GNB: "IP",
     },
     {
       icon: <Location />,
-      text: <p>로케이션</p>,
+      text: "로케이션",
       GNB: "Lo",
     },
   ];
@@ -39,16 +41,16 @@ function GNBArea(props) {
   };
 
   return (
-    <div className="GNBDiv">
+    <MenuList>
       {GNBList.map((category, idx) => {
         return (
-          <div key={idx} onClick={() => ClickFunc(category.GNB)}>
+          <MenuItem key={idx} onClick={() => ClickFunc(category.GNB)}>
             {category.icon}
-            {category.text}
-          </div>
+            <p>{category.text}</p>
+          </MenuItem>
         );
       })}
-    </div>
+    </MenuList>
   );
 }
 

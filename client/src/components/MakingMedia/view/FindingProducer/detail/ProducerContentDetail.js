@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import FPRule from "../../../../utils/Rule/FPRule.js";
+import FPRule from "../../../../utils/rule/FPRule.js";
 import { DetailFilterDiv, DetaulContentSubTitle } from "../../../css/FPDCSS.js";
 
 import ContentGNB from "./content/ContentGNB.js";

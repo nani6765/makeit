@@ -76,7 +76,7 @@ function CommunityPost() {
           </p>
           <CPGridDiv>
             <CPGridHot>
-              <p css={GridTitle}>Hot 게시글</p>
+              <p css={GridTitle}>HOT 게시글</p>
               {hotPost.map((post, idx) => (
                 <Link
                   to={"/community/post/" + post.postNum}
