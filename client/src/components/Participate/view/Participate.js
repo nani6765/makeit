@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
-import { PartHeader, PartBody } from "../css/ParticipateCSS.js";
+import { PartHeader, PartBody, PagiCSS } from "../css/ParticipateCSS.js";
 import axios from "axios";
 import qs from "qs";
 
@@ -10,6 +10,7 @@ import FAList from "./list/FAList.js";
 import FPList from "./list/FPList.js";
 import IPList from "./list/IPList.js";
 import LoList from "./list/LoList.js";
+import Pagination from "./list/content/Pagination.js";
 
 function Participate(props) {
   const user = useSelector((state) => state.user.userData);
@@ -18,9 +19,8 @@ function Participate(props) {
 
   const [URL, setURL] = useState({});
   const [Loading, setLoading] = useState(false);
-  const [Skip, setSkip] = useState(0);
   const [PageLen, setPageLen] = useState(1);
-  const [PageIdxArr, setPageIdxArr] = useState([]);
+  const [PageIdxArr, setPageIdxArr] = useState([1]);
   const [SearchTerm, setSearchTerm] = useState("");
 
   const GNBObj = {
@@ -66,49 +66,36 @@ function Participate(props) {
   async function getPostLen() {
     setLoading(true);
     let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
-    /*
+
     if (location.search.slice(1) != URL) {
       setURL(location.search.slice(1));
-      if (temp.pIdx) {
-        setSkip(parseInt(temp.pIdx));
-      } else {
-        setSkip(0);
-      }
       if (temp.searchTerm) {
         setSearchTerm(temp.searchTerm);
       } else {
         setSearchTerm("");
       }
     }
-    */
 
-    let body = {};
-    /*
     let body = {
-      type: "FP",
-      subCategory: SubCategory,
+      type: temp.category,
+      sort: temp.sort,
     };
-    if (FilmType[0]) {
-      body.filmType = FilmType;
+    if (temp.subCategory) {
+      body.category = temp.subCategory;
     }
-    if (Classification[0]) {
-      body.classification = Classification;
+    if (temp.gender) {
+      body.gender = temp.gender;
+    }
+    if (temp.class) {
+      body.classfication = temp.class;
+    }
+    if (temp.filmType) {
+      body.filmType = temp.filmType;
     }
 
-    if (Gender[0]) {
-      body.gender = Gender;
-    }
-    if (FilmType[0]) {
-      body.filmType = FilmType;
-    }
-    if (Classification[0]) {
-      body.classification = Classification;
-    }
-    */
     await axios.post("/api/participate/getPageLen", body).then((response) => {
       if (response.data.success) {
-        //setPageLen(parseInt(response.data.len / 12) + 1);
-        //setSkip(0);
+        setPageLen(parseInt(response.data.len / 12) + 1);
       } else {
         alert("error");
       }
@@ -116,27 +103,18 @@ function Participate(props) {
     });
   }
 
-  /*
-  useEffect(() => {
-    if (props.history.location.state !== undefined) {
-      setGNB(GNBObj[props.history.location.state.category]);
-    }
-  }, []);
-  */
-
   useEffect(() => {
     getPostLen();
   }, [location.search]);
 
   useEffect(() => {
-    let sIdx = parseInt(Skip / 10);
+    let sIdx = parseInt(parseInt(URL.pIdx) / 10);
     let temp = [];
     for (let i = sIdx * 10 + 1; i <= Math.min(sIdx * 10 + 10, PageLen); i++) {
       temp.push(i);
     }
     setPageIdxArr(temp);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [parseInt(Skip / 10), PageLen]);
+  }, [parseInt(URL.pIdx / 10), PageLen]);
 
   useEffect(() => {
     if (location.search) {
@@ -178,6 +156,11 @@ function Participate(props) {
         </div>
       </PartHeader>
       <PartBody>{SetContent()}</PartBody>
+      <PagiCSS>
+        {!Loading && (
+          <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />
+        )}
+      </PagiCSS>
     </>
   );
 }

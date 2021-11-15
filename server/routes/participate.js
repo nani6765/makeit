@@ -79,6 +79,7 @@ router.post("/", (req, res) => {
 
 router.post("/getPageLen", (req, res) => {
   let PostModel = SelectModel(req.body.type);
+
   let temp = req.body;
 
   let category = {

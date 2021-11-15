@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import FPRule from "../../../../utils/rule/FPRule.js";
 import { DetailFilterDiv, DetaulContentSubTitle } from "../../../css/FPDCSS.js";
 
@@ -33,7 +33,10 @@ function ProducerContentDetail(props) {
               <FAQ FAQList={props.PostInfo.FAQList} />
             )}
 
-            <ReviewArea auther={props.PostInfo.uid} PostURL={props.PostInfo.url} />
+            <ReviewArea
+              auther={props.PostInfo.uid}
+              PostURL={props.PostInfo.url}
+            />
           </div>
         </div>
       </DetailFilterDiv>
