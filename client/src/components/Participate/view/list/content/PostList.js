@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
-import axios from "axios";
 
 import {
   PostCard,
@@ -17,43 +16,6 @@ import { ReactComponent as LPIcon } from "../../../../MakingMedia/css/Img/LikePu
 
 function PostList(props) {
   const [Posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    /*
-        let body = {
-            type: props.type,
-            sortPost: props.Sort,
-            skip: props.Skip * 6,
-            limit: 6,
-        }
-
-        if(props.type === "IP" || props.type === "Lo") {
-            body.limit = 12;
-            body.skip = body.skip * 2;
-        }
-        
-        if(props.SubCategory) {
-            body.subCategory = props.SubCategory;
-        }
-
-        if(props.Gender) {
-            body.gender = props.Gender;
-        }
-        if(props.FilmType) {
-            body.filmType = props.FilmType;
-        }
-        if(props.Classification) {
-            body.classification = props.Classification;
-        }
-
-        axios.post("/api/participate", body).then((response) => {
-            if(response.data.success) {
-                let temp = response.data.post;
-                setPosts(temp);
-            }
-        })
-        */
-  }, []);
 
   return (
     <>

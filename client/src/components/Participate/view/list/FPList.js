@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import FPFilter from "../filter/FPFilter";
 import PostList from "./content/PostList";
 import UploadButton from "../filter/UploadButton";
-import Pagination from "./content/Pagination";
 
 import { PartFilter, FNBDiv } from "../../css/ParticipateCSS.js";
 
@@ -19,7 +18,6 @@ function FPList(props) {
       <PostList type="FP" />
       <FNBDiv>
         <UploadButton category="파트너찾기" />
-        <Pagination />
       </FNBDiv>
     </>
   );

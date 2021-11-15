@@ -81,11 +81,11 @@ const PartHeader = styled.div`
   }
   .category {
     width: 100%;
-    background: #EDE7F6;
+    background: #ede7f6;
     padding: 10px 15%;
     p {
       display: inline-block;
-      color: #702C8A;
+      color: #702c8a;
       font-size: 24px;
       font-weight: bold;
     }
@@ -95,12 +95,12 @@ const PartHeader = styled.div`
         margin-left: 20px;
         color: #979393;
         font-size: 16px;
-        background: #EFE9E9;
+        background: #efe9e9;
         padding: 5px 10px;
         font-weight: normal;
       }
       .active {
-        background: #935EA5;
+        background: #935ea5;
         border-radius: 16px;
         color: #fff;
       }
@@ -399,44 +399,13 @@ const FNBDiv = styled.div`
     button {
       font-size: 15px;
       font-weight: bold;
-      background: #935EA5;
+      background: #935ea5;
       color: #fff;
       padding: 7px 10px;
       border: none;
       border-radius: 10px;
       svg {
         margin-left: 3px;
-      }
-    }
-  }
-  .FNB {
-    margin: 10px auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .pagination {
-      .active {
-        font-weight: bold;
-      }
-      ul {
-        li {
-          display: inline-block;s
-          border-left: 1px solid black;
-          padding: 0.5rem;
-          text-decoration: none;
-          list-style: none;
-          p {
-            cursor: pointer;
-            margin: 0;
-          }
-        }
-        li:first-child {
-          border: none;
-        }
-      }
-      button {
-        background: none;
-        border: none;
       }
     }
   }
@@ -450,4 +419,47 @@ const LinkCSS = css`
   }
 `;
 
-export { PartHeader, PartBody, PartFilter, PartIPLoListDiv, PostCard, IPLoPostCard, StickyBarDiv, FNBDiv, LinkCSS };
+const PagiCSS = styled.div`
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .pagination {
+    .active {
+      font-weight: bold;
+    }
+    ul {
+      li {
+        display: inline-block;s
+        border-left: 1px solid black;
+        padding: 0.5rem;
+        text-decoration: none;
+        list-style: none;
+        p {
+          cursor: pointer;
+          margin: 0;
+        }
+        &:first-of-type(1) {
+        border: none;
+        }
+      }
+    }
+    button {
+      background: none;
+      border: none;
+    }
+  }
+`;
+
+export {
+  PartHeader,
+  PartBody,
+  PartFilter,
+  PartIPLoListDiv,
+  PostCard,
+  IPLoPostCard,
+  StickyBarDiv,
+  FNBDiv,
+  PagiCSS,
+  LinkCSS,
+};

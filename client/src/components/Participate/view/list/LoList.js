@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import LoFilter from "../filter/LoFilter.js";
 import PostList from "./content/PostList.js";
 import UploadButton from "../filter/UploadButton";
-import Pagination from "./content/Pagination.js";
 
 import { PartIPLoListDiv, FNBDiv } from "../../css/ParticipateCSS.js";
 
@@ -42,7 +41,6 @@ function LoList(props) {
       </PartIPLoListDiv>
       <FNBDiv>
         <UploadButton category="로케이션" />
-        <Pagination URL={props.URL} setURL={props.setURL} />
       </FNBDiv>
     </>
   );

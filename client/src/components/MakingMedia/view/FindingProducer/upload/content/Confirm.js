@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ContentHeadingArea from "../utils/ContentHeadingArea.js";
 import FooterBtnArea from "../utils/FooterBtnArea.js";
-import FPRule from "../../../../../utils/Rule/FPRule.js";
+import FPRule from "../../../../../utils/rule/FPRule.js";
 import FAQ from "../utils/FAQ.js";
 import { ConfirmDiv } from "../../../../css/FPUCSS.js";
 
@@ -16,7 +16,7 @@ function Confirm(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   return (
     <ConfirmDiv>

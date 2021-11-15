@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import IPFilter from "../filter/IPFilter.js";
 import PostList from "./content/PostList.js";
 import UploadButton from "../filter/UploadButton";
-import Pagination from "./content/Pagination.js";
 
 import { PartIPLoListDiv, FNBDiv } from "../../css/ParticipateCSS.js";
 
@@ -29,7 +28,6 @@ function IPList(props) {
       </PartIPLoListDiv>
       <FNBDiv>
         <UploadButton category="프로알리기" />
-        <Pagination user={props.user} />
       </FNBDiv>
     </>
   );
