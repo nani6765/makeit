@@ -17,11 +17,14 @@ function ShareVideo(props) {
 
   const SearchHandler = (e) => {
     e.preventDefault();
-    if (!/\S/.test(SearchTerm)) {
+    if (SearchTerm && !/\S/.test(SearchTerm)) {
       return;
     }
-    let temp = qs.parse(props.URLQuery);
+    let temp = qs.parse(props.URL);
     temp.searchTerm = SearchTerm.trim();
+    if(!SearchTerm) {
+      delete temp.searchTerm;
+    }
     temp.pIdx = 0;
     let temp2 = qs.stringify(temp);
     props.history.push(`?${decodeURI(temp2)}`);
@@ -30,9 +33,9 @@ function ShareVideo(props) {
   const getPageLen = () => {
     let body = {};
 
-    if(props.URLQuery.searchTerm) {
-      body.searchTerm = props.URLQuery.searchTerm;
-      setSearchTerm(props.URLQuery.searchTerm);
+    if(props.URL.searchTerm) {
+      body.searchTerm = props.URL.searchTerm;
+      setSearchTerm(props.URL.searchTerm);
     }
     axios.post("/api/making/shareVideo/getPageLen", body).then((response) => {
       if(response.data.success) {
@@ -43,21 +46,21 @@ function ShareVideo(props) {
 
   useEffect(() => {
     getPageLen();
-  }, [props.URLQuery]);
+  }, [props.URL]);
 
 
   useEffect(() => {
-    let sIdx = parseInt(props.URLQuery.pIdx/10);
+    let sIdx = parseInt(props.URL.pIdx/10);
     let temp = [];
     for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 10, PageLen); i++) {
       temp.push(i);
     }
     setPageIdxArr(temp);
-  }, [PageLen, parseInt(props.URLQuery.pIdx)]);
+  }, [PageLen, parseInt(props.URL.pIdx)]);
   
   useEffect(() => {
     window.scrollTo(0,0);
-  }, [props.URLQuery.pIdx]);
+  }, [props.URL.pIdx]);
 
   return (
     <ShareVideoDiv>
@@ -68,21 +71,21 @@ function ShareVideo(props) {
                 <SearchIcon onClick={(e) => SearchHandler(e)}/>
             </div>
             <Dropdown id="sort">
-              <Dropdown.Toggle id="dropdown-basic">{props.URLQuery.sort}</Dropdown.Toggle>
+              <Dropdown.Toggle id="dropdown-basic">{props.URL.sort}</Dropdown.Toggle>
               <Dropdown.Menu id="dropdown-menu">
                 <Dropdown.Item
                   onClick={() => {
-                    props.URLQuery.sort = "인기순";
-                    props.URLQuery.qIdx = 0;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                    props.URL.sort = "인기순";
+                    props.URL.qIdx = 0;
+                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}> 
                   인기순
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => {
-                    props.URLQuery.sort = "최신순";
-                    props.URLQuery.qIdx = 0;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                    props.URL.sort = "최신순";
+                    props.URL.qIdx = 0;
+                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}>
                   최신순
                 </Dropdown.Item>
@@ -99,7 +102,7 @@ function ShareVideo(props) {
       </div>
 
       <div className="list">
-        <ShareVideoList user={props.user} URLQuery={props.URLQuery} />
+        <ShareVideoList user={props.user} URL={props.URL} />
       </div>
 
       <div className="FNB">
@@ -107,8 +110,8 @@ function ShareVideo(props) {
             {PageIdxArr[0] !== 1 ? (
               <button
                 onClick={() => {
-                  props.URLQuery.pIdx = parseInt((parseInt(parseInt(props.URLQuery.pIdx)) - 10)/10)*10;
-                  props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                  props.URL.pIdx = parseInt((parseInt(parseInt(props.URL.pIdx)) - 10)/10)*10;
+                  props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                 }}>
                 &lt; 이전
               </button>
@@ -119,10 +122,10 @@ function ShareVideo(props) {
                   <li
                     key={idx}
                     onClick={() => {
-                      props.URLQuery.pIdx = page - 1;
-                      props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                      props.URL.pIdx = page - 1;
+                      props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                     }}
-                    className={props.URLQuery.pIdx === (page - 1).toString() ? "active" : null}
+                    className={props.URL.pIdx === (page - 1).toString() ? "active" : null}
                   >
                     <p>{page}</p>
                   </li>
@@ -132,8 +135,8 @@ function ShareVideo(props) {
             {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
               <button
                 onClick={() => {
-                  props.URLQuery.pIdx = parseInt((parseInt(parseInt(props.URLQuery.pIdx)) + 10)/10)*10;
-                  props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                  props.URL.pIdx = parseInt((parseInt(parseInt(props.URL.pIdx)) + 10)/10)*10;
+                  props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                 }}>
                 다음 &gt;
               </button>

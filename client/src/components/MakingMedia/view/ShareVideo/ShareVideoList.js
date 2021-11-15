@@ -18,12 +18,12 @@ function ShareVideoList(props) {
 
   useEffect(() => {
     let body = {
-      sort: props.URLQuery.sort,
-      skip: props.URLQuery.pIdx*9,
+      sort: props.URL.sort,
+      skip: props.URL.pIdx*9,
     };
 
-    if(props.URLQuery.searchTerm) {
-      body.searchTerm = props.URLQuery.searchTerm;
+    if(props.URL.searchTerm) {
+      body.searchTerm = props.URL.searchTerm;
     }
 
     axios.post("/api/making/shareVideo", body).then((response) => {
@@ -33,7 +33,7 @@ function ShareVideoList(props) {
         console.log(response.data.err);
       }
     });
-  }, [props.URLQuery]);
+  }, [props.URL]);
 
   return (
     <>

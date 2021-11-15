@@ -51,6 +51,10 @@ const RequestListDiv = styled.div`
               color: #BFBFBF;
             }
           }
+          input:focus {
+            border: none;
+            outline: none;
+          }
           svg {
             margin-left: 5px;
             height: 100%;

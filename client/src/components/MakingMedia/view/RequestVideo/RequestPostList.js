@@ -16,13 +16,13 @@ function RequestPostList(props) {
 
   useEffect(() => {
     let body = {
-      category: props.URLQuery.subCategory,
-      sort: props.URLQuery.sort,
-      skip: props.URLQuery.pIdx*5,
+      category: props.URL.subCategory,
+      sort: props.URL.sort,
+      skip: props.URL.pIdx*5,
     };
 
-    if(props.URLQuery.searchTerm) {
-      body.searchTerm = props.URLQuery.searchTerm;
+    if(props.URL.searchTerm) {
+      body.searchTerm = props.URL.searchTerm;
     }
 
     axios.post("/api/making/requestVideo", body).then((response) => {
@@ -33,7 +33,7 @@ function RequestPostList(props) {
         console.log("get requestVideo Error", response.data.err);
       }
     });
-  }, [props.URLQuery]);
+  }, [props.URL]);
 
   return (
     <div>

@@ -17,11 +17,14 @@ function FindingProducer(props) {
 
   const SearchHandler = (e) => {
     e.preventDefault();
-    if (!/\S/.test(SearchTerm)) {
+    if (SearchTerm && !/\S/.test(SearchTerm)) {
       return;
     }
-    let temp = qs.parse(props.URLQuery);
+    let temp = qs.parse(props.URL);
     temp.searchTerm = SearchTerm.trim();
+    if(!SearchTerm) {
+      delete temp.searchTerm;
+    }
     temp.pIdx = 0;
     let temp2 = qs.stringify(temp);
     props.history.push(`?${decodeURI(temp2)}`);
@@ -29,12 +32,12 @@ function FindingProducer(props) {
 
   const getPageLen = () => {
     let body = {
-      category: props.URLQuery.subCategory,
+      category: props.URL.subCategory,
     };
 
-    if(props.URLQuery.searchTerm) {
-      body.searchTerm = props.URLQuery.searchTerm;
-      setSearchTerm(props.URLQuery.searchTerm);
+    if(props.URL.searchTerm) {
+      body.searchTerm = props.URL.searchTerm;
+      setSearchTerm(props.URL.searchTerm);
     }
 
     axios.post("/api/making/producer/postLength", body).then((response) => {
@@ -46,33 +49,33 @@ function FindingProducer(props) {
 
   useEffect(() => {
     getPageLen();
-  }, [props.URLQuery]);
+  }, [props.URL]);
 
   useEffect(() => {
-    let sIdx = parseInt(props.URLQuery.pIdx/10);
+    let sIdx = parseInt(props.URL.pIdx/10);
     let temp = [];
     for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 10, PageLen); i++) {
       temp.push(i);
     }
     setPageIdxArr(temp);
-  }, [PageLen, parseInt(props.URLQuery.pIdx)]);
+  }, [PageLen, parseInt(props.URL.pIdx)]);
 
   useEffect(() => {
     window.scrollTo(0,0);
-  }, [props.URLQuery.pIdx]);
+  }, [props.URL.pIdx]);
 
   return (
     <ProducerListDiv>
       <div className="left">
         <StickyBar
-          URLQuery={props.URLQuery}
+          URL={props.URL}
           SubCategoryList={props.SubCategoryList}
         />
       </div>
       <div className="right">
         <div className="GNB">
           <p className="category">
-            홈 &gt; 영상제작 &gt; 제작자 탐색 &gt; {props.URLQuery.subCategory}
+            홈 &gt; 영상제작 &gt; 제작자 탐색 &gt; {props.URL.subCategory}
           </p>
           <div className="filter">
             <div className="search">
@@ -80,21 +83,21 @@ function FindingProducer(props) {
                 <SearchIcon onClick={(e) => SearchHandler(e)}/>
             </div>
             <Dropdown id="sort">
-              <Dropdown.Toggle id="dropdown-basic">{props.URLQuery.sort}</Dropdown.Toggle>
+              <Dropdown.Toggle id="dropdown-basic">{props.URL.sort}</Dropdown.Toggle>
               <Dropdown.Menu id="dropdown-menu">
                 <Dropdown.Item
                   onClick={() => {
-                    props.URLQuery.sort = "인기순";
-                    props.URLQuery.qIdx = 0;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                    props.URL.sort = "인기순";
+                    props.URL.qIdx = 0;
+                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}> 
                   인기순
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => {
-                    props.URLQuery.sort = "최신순";
-                    props.URLQuery.qIdx = 0;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                    props.URL.sort = "최신순";
+                    props.URL.qIdx = 0;
+                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}>
                   최신순
                 </Dropdown.Item>
@@ -104,7 +107,7 @@ function FindingProducer(props) {
         </div>
 
         <ProducerList
-          URLQuery={props.URLQuery}
+          URL={props.URL}
           user={props.user}
         />
 
@@ -119,8 +122,8 @@ function FindingProducer(props) {
             {PageIdxArr[0] !== 1 ? (
               <button
                 onClick={() => {
-                  props.URLQuery.pIdx = parseInt((props.URLQuery.pIdx - 10)/10)*10;
-                  props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                  props.URL.pIdx = parseInt((props.URL.pIdx - 10)/10)*10;
+                  props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                 }}>
                 &lt; 이전
               </button>
@@ -131,10 +134,10 @@ function FindingProducer(props) {
                   <li
                     key={idx}
                     onClick={() => {
-                      props.URLQuery.pIdx = page - 1;
-                      props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                      props.URL.pIdx = page - 1;
+                      props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                     }}
-                    className={props.URLQuery.pIdx === (page - 1).toString() ? "active" : null}
+                    className={props.URL.pIdx === (page - 1).toString() ? "active" : null}
                   >
                     <p>{page}</p>
                   </li>
@@ -144,8 +147,8 @@ function FindingProducer(props) {
             {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
               <button
                 onClick={() => {
-                  props.URLQuery.pIdx = parseInt((props.URLQuery.pIdx + 10)/10)*10;
-                  props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                  props.URL.pIdx = parseInt((props.URL.pIdx + 10)/10)*10;
+                  props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                 }}>
                 다음 &gt;
               </button>

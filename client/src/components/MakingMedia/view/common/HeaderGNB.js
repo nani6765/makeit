@@ -35,13 +35,7 @@ function HeaderGNB(props) {
             <MenuItem
               key={idx}
               onClick={() => {
-                props.URLQuery.category = GNB.label;
-                props.URLQuery.pIdx = 0;
-                props.URLQuery.sort="인기순";
-                if(props.URLQuery.searchTerm) {
-                  delete props.URLQuery.searchTerm;
-                }
-                props.history.push(`?${decodeURI(qs.stringify(props.URLQuery))}`);
+                props.history.push(`?category=${GNB.label}&subCategory=전체&sort=인기순&pIdx=0`);
               }}
             >
               {GNB.icon}
