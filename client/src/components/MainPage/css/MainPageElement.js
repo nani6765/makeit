@@ -40,10 +40,10 @@ const MainPageDiv = styled.div`
   }
   ${mq[1]} {
     .slick-prev {
-      left: 10px;
+      left: -10px;
     }
     .slick-next {
-      right: 10px;
+      right: -10px;
     }
   }
   .slick-next:before,
@@ -72,7 +72,7 @@ const MainPageHading = css`
   font-size: 32px;
   line-height: 44px;
   color: #702c8a;
-  padding-bottom: 22px;
+  padding-bottom: 1rem;
   a {
     margin-left: 1rem;
     background: #efe9e9;
@@ -89,7 +89,7 @@ const MainPageHading = css`
     a {
       margin-left: 1rem;
       background: #efe9e9;
-      border-radius: 6px;
+      border-radius: 50%;
       padding: 0.5rem;
       font-weight: 500;
       font-size: 0.5rem;
@@ -104,7 +104,7 @@ const MainPageSubHading = css`
   font-size: 16px;
   line-height: 22px;
   color: #b0abab;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
 `;
 
 function MainPageGridContent(parameter) {
@@ -166,7 +166,7 @@ const CardImg = styled.article`
   z-index: 1;
   filter: drop-shadow(0px 3px 6px rgba(75, 81, 91, 0.15)),
     drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));
-  border-radius: 10px;
+  //border-radius: 10px;
   .thumbnail {
     width: 100%;
     height: 100%;

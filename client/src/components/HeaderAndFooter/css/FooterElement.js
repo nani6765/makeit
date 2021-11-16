@@ -8,7 +8,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const FooterDiv = styled.div`
   display: flex;
-  background: #cdabe9;
+  background: #FAF5F5;
   ${mq[1]} {
     margin-bottom: 75px;
   }
@@ -28,13 +28,12 @@ const FooterMenuArea = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem 20px;
-  border-bottom: 1px solid #ececec;
   div {
     margin-right: 20px;
     p {
       font-weight: 700;
       font-size: 14px;
-      color: #eee;
+      color: #454343;
       padding: 16px 0;
       line-height: 1.43;
       word-break: keep-all;
@@ -60,14 +59,18 @@ const FooterMenuArea = styled.div`
 const FooterContentArea = styled.div`
   display: flex;
   padding: 1rem 20px;
-  justify-content: flex-start;
-  font-size: 12px;
+  justify-content: center;
+  font-size: 14px;
   line-height: 1.5;
   .mobileHidden {
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-content: stretch;
+    color: #454343;
+    &:first-of-type {
+      margin-right: 3rem;
+    }
   }
   .onlyMoblie {
     display: none;

@@ -11,9 +11,6 @@ function StickyBar(props) {
     
     return (
         <StickyBarDiv>
-            <div className="category">
-                {props.URL.category}
-            </div>
             <div className="subCategory">
                 {
                     props.SubCategoryList.map((sub, idx) => {

@@ -80,7 +80,6 @@ function MakingMedia(props) {
           style={{ width: "100%" }}
         />
       <HeaderGNB URL={URL} />
-      <div className="category">{URL.category}</div>
     </MakingHeader>
     <MakingDiv>
       {setContent()}

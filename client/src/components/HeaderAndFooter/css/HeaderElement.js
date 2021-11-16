@@ -104,6 +104,12 @@ const HeaderNav = styled.div`
         font-weight: 600;
         font-size: 14px;
         line-height: 25px;
+        &:hover {
+          color: #5A278B;
+        }
+      }
+      .active {
+        color: #5A278B;
       }
     }
   }

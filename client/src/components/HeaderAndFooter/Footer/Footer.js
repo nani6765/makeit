@@ -6,6 +6,7 @@ import {
   FooterMenuArea,
   FooterContentArea,
 } from "../css/FooterElement.js";
+import { ReactComponent as FLogo } from "../css/footerLogo.svg";
 
 function Footer(props) {
   return (
@@ -34,14 +35,10 @@ function Footer(props) {
           </FooterMenuArea>
           <FooterContentArea>
             <div style={{ width: "30%" }} className="mobileHidden">
-              <img
-                src={process.env.PUBLIC_URL + "/Img/comLogo.png"}
-                alt="MainLogo"
-                className="img-fluid"
-              />
+              <FLogo />
             </div>
             <div className="mobileHidden">
-              <p>(주)미디어프렌즈</p>
+              <p>(주)미디어프렌드</p>
               <p>
                 메이킷 고객센터 : 00-0000-0000 (평일 09:00~19:00,주말/공휴일
                 휴무) <br />

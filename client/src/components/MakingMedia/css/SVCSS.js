@@ -22,8 +22,8 @@ const ShareVideoDiv = styled.div`
       align-items: center;
       height: 100%;
       .search {
-        background: #F7F7F7;
-        padding: 5px;
+          background: #F7F7F7;
+          padding: 5px;
         height: 100%;
         input {
           background: none;
@@ -48,11 +48,10 @@ const ShareVideoDiv = styled.div`
         display: inline-block;
         margin-left: 1rem;
         button {
-          background-color: #ffffff;
+          background-color: #F7F7F7;
           color: black;
-          font-weight: bold;
-          border: 1.5px solid #eaeaea;
-          border-radius: 16px;
+          border-radius: 3px;
+          border: none;
           &:foucs {
             outline: none;
             box-shadow: none;
@@ -60,6 +59,12 @@ const ShareVideoDiv = styled.div`
           &.btn-primary:focus {
             outline: none;
             box-shadow: none;
+          }
+          &:after {
+            margin-left: 1rem;
+            content: "⌵";
+            border: none;
+            font-weight: bold;
           }
         }
       }

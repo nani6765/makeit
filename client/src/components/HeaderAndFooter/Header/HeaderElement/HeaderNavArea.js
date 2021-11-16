@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { HeaderNav } from "../../css/HeaderElement.js";
 
-function HeaderNavArea() {
+function HeaderNavArea(props) {
+
+  useEffect(() => {
+    console.log(props.history);
+
+  }, []);
+
   return (
     <HeaderNav>
       <ul>
@@ -12,16 +18,16 @@ function HeaderNavArea() {
           </li>
           */}
         <li>
-          <Link to={`/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0`}>영상제작</Link>
+          <Link to={`/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0`} className={props.history.location.pathname==="/making" && "active"}>영상제작</Link>
         </li>
         <li>
-          <Link to="/participate">영상참여</Link>
+          <Link to="/participate" className={props.history.location.pathname==="/participate" && "active"}>영상참여</Link>
         </li>
         <li>
-          <Link to="/landingPage">포트폴리오</Link>
+          <Link to="/landingPage" className={props.history.location.pathname==="/portfolio" && "active"}>포트폴리오</Link>
         </li>
         <li>
-          <Link to="/community">커뮤니티</Link>
+          <Link to="/community" className={props.history.location.pathname==="/community" && "active"}>커뮤니티</Link>
         </li>
       </ul>
     </HeaderNav>

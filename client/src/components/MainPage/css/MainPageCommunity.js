@@ -8,7 +8,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const CPGridDiv = styled.div`
   display: grid;
-  padding-top: 3rem;
+  //padding-top: 3rem;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 100%;
   grid-template-areas: "hot new comment";
