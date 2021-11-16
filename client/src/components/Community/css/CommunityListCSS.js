@@ -237,6 +237,7 @@ const PostCard = styled.div`
     grid-area: desc;
     margin-top: 10px;
     margin-bottom: 10px;
+    line-height: 24px;
   }
   .like {
     grid-area: like;

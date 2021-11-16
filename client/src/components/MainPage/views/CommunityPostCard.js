@@ -35,7 +35,7 @@ function CommunityPostCard(props) {
         <div className="profile">
           <Avatar
             src={props.post.auther.photoURL}
-            size="50"
+            size="40"
             round={true}
             style={{ border: "1px solid #c6c6c6" }}
           />

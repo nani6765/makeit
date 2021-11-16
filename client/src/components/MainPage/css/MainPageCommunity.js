@@ -59,22 +59,21 @@ const GridTitle = css`
 
 const CardImg = styled.article`
   width: 100%;
-  height: 220px;
+  height: 195px;
   background-color: white;
-  border-radius: 10px;
   display: block;
   margin-top: 30px;
   margin-bottom: 30px;
   display: grid;
-  padding: 10px 20px 10px 20px;
-  grid-template-columns: 1fr 1fr 1fr 2fr 2fr;
-  grid-template-rows: 2fr 1fr 14px 1fr 1fr;
+  padding: 20px;
+  grid-template-columns: 1fr 1fr 2fr 2fr;
+  grid-template-rows: 50px 30px 30px 25px 20px;
   grid-template-areas:
-    "profile author author author view"
-    "title title title title title"
-    "desc desc desc desc desc"
-    "date date date date date"
-    "category category . like comment";
+    "profile author author view"
+    "title title title title"
+    "desc desc desc desc"
+    "date date date date"
+    "category category like comment";
   .profile {
     grid-area: profile;
     display: flex;
@@ -99,31 +98,32 @@ const CardImg = styled.article`
   }
   .title {
     grid-area: title;
-    font-weight: bold;
+    font-weight: 700;
     margin-top: 5px;
     text-align: left;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 24px;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
   .desc {
     grid-area: desc;
     text-align: left;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 30px;
   }
   .date {
     grid-area: date;
     text-align: right;
-    border-bottom: 1px solid #efe9e9;
-    padding-top: 5px;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
     font-size: 12px;
+    line-height: 20px;
+    padding-bottom: 5px;
   }
   .category {
     grid-area: category;
     background-color: #efe9e9;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    border-radius: 6px;
+    border-radius: 10px;
     border: none;
     align-items: center;
     display: flex;
@@ -144,12 +144,11 @@ const CardImg = styled.article`
     margin-bottom: 0px;
     display: flex;
     justify-content: flex-end;
-    font-size: 12px;
-    p {
-      i {
-        margin-right: 5px;
-        color: #ccd2e3;
-      }
+    font-size: 14px;
+    i {
+      margin-right: 5px;
+      color: #ccd2e3;
+      font-size: 18px;
     }
   }
   .comment {
@@ -159,12 +158,11 @@ const CardImg = styled.article`
     align-items: center;
     display: flex;
     justify-content: flex-end;
-    font-size: 12px;
-    p {
-      i {
-        margin-right: 5px;
-        color: #ccd2e3;
-      }
+    font-size: 14px;
+    i {
+      margin-right: 5px;
+      color: #ccd2e3;
+      font-size: 18px;
     }
   }
 `;

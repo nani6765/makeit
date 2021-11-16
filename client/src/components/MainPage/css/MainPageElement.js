@@ -16,7 +16,6 @@ const MainPageDiv = styled.div`
   }
   .friendsVideoList {
     width: 100%;
-    padding: 0px 30px;
     .slick-track {
       margin: 0px;
       min-width: 100%;
@@ -32,11 +31,11 @@ const MainPageDiv = styled.div`
     padding: 20px;
   }
   .slick-prev {
-    left: 20px;
+    left: -10px;
     z-index: 1;
   }
   .slick-next {
-    right: 20px;
+    right: -10px;
     z-index: 1;
   }
   ${mq[1]} {
@@ -67,7 +66,8 @@ const MainPageDiv = styled.div`
 `;
 
 const MainPageHading = css`
-  display: blcok;
+  display: flex;
+  align-items:center;
   font-weight: bold;
   font-size: 32px;
   line-height: 44px;
@@ -76,11 +76,11 @@ const MainPageHading = css`
   a {
     margin-left: 1rem;
     background: #efe9e9;
-    border-radius: 6px;
-    padding: 0.5rem;
+    border-radius: 20px;
+    padding: 0.2rem 0.5rem;
     font-weight: 500;
     font-size: 1rem;
-    line-height: 25px;
+    line-height: 1.4rem;
     color: #b3b3b3;
   }
   ${mq[0]} {
