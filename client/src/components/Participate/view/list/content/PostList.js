@@ -15,87 +15,91 @@ import { ReactComponent as LGIcon } from "../../../../MakingMedia/css/Img/LikeGr
 import { ReactComponent as LPIcon } from "../../../../MakingMedia/css/Img/LikePurple.svg";
 
 function PostList(props) {
-  const [Posts, setPosts] = useState([]);
-
   return (
     <>
       {props.type === "FP" || props.type === "FA"
-        ? Posts.map((post, idx) => {
-            return (
-              <Link
-                to={"/participate/post/" + post.url}
-                style={{ textDecorationLine: "none", color: "black" }}
-                key={idx}
-              >
-                <PostCard>
-                  <Avatar
-                    src={post.auther.photoURL}
-                    size="50"
-                    round={true}
-                    style={{ border: "1px solid #c6c6c6" }}
-                  />
-                  <p className="author">{post.auther.displayName}</p>
-                  <p className="view">조회수 {post.views}</p>
-                  <p className="date">{post.realTime}</p>
-                  <p className="title">{post.title}</p>
-                  <TextEllipsis lines={2} tag={"p"} tagClass={"desc"}>
-                    {post.content}
-                  </TextEllipsis>
-                  {post.images
-                    ? post.images[0] && (
-                        <p className="image">
-                          <i className="bi bi-card-image"></i>
-                          첨부({post.images.length})
-                        </p>
-                      )
-                    : null}
-                  <p className="like">
-                    <i className="bi bi-emoji-smile"></i>
-                    공감({post.likeNum})
-                  </p>
-                  <p className="reple">
-                    <i className="bi bi-chat-square-dots"></i>
-                    댓글({post.repleNum})
-                  </p>
-                </PostCard>
-              </Link>
-            );
+        ? props.PostList &&
+          props.PostList.map((post, idx) => {
+            if (post.type === "FP" || post.type === "FA") {
+              return (
+                <Link
+                  to={"/participate/post/" + post.url}
+                  style={{ textDecorationLine: "none", color: "black" }}
+                  key={idx}
+                >
+                  <PostCard>
+                    <Avatar
+                      src={post.auther.photoURL}
+                      size="50"
+                      round={true}
+                      style={{ border: "1px solid #c6c6c6" }}
+                    />
+                    <p className="author">{post.auther.displayName}</p>
+                    <p className="view">조회수 {post.views}</p>
+                    <p className="date">{post.realTime}</p>
+                    <p className="title">{post.title}</p>
+                    <TextEllipsis lines={2} tag={"p"} tagClass={"desc"}>
+                      {post.content}
+                    </TextEllipsis>
+                    {post.images
+                      ? post.images[0] && (
+                          <p className="image">
+                            <i className="bi bi-card-image"></i>
+                            첨부({post.images.length})
+                          </p>
+                        )
+                      : null}
+                    <p className="like">
+                      <i className="bi bi-emoji-smile"></i>
+                      공감({post.likeNum})
+                    </p>
+                    <p className="reple">
+                      <i className="bi bi-chat-square-dots"></i>
+                      댓글({post.repleNum})
+                    </p>
+                  </PostCard>
+                </Link>
+              );
+            }
           })
-        : Posts.map((post, idx) => {
-            return (
-              <Link
-                to={"/participate/post/" + post.url}
-                key={idx}
-                style={{
-                  width: "30%",
-                  color: "black",
-                  textDecoration: "none",
-                  marginLeft: "3%",
-                  marginBottom: "1rem",
-                }}
-                css={LinkCSS}
-              >
-                <IPLoPostCard>
-                  <img src={post.thumbnail[0].path} className="thumbnail" />
-                  <p className="author">{post.auther.displayName}</p>
-                  <p className="intro">{post.title}</p>
-                  <div className="like">
-                    {props.user && post.likeArray.includes(props.user.uid) ? (
-                      <LPIcon />
-                    ) : (
-                      <LGIcon />
-                    )}
-                    추천
-                    {post.likeNum != 0 && <span>({post.likeNum})</span>}
-                  </div>
-                  <div className="comment">
-                    {post.repleNum ? <CGIcon /> : <CYIcon />}
-                    의견
-                    {post.repleNum != 0 && <span>({post.repleNum})</span>}
-                  </div>
-                </IPLoPostCard>
-              </Link>
-            );
+        : props.PostList &&
+          props.PostList.map((post, idx) => {
+            if (post.type === "IP" || post.type === "Lo") {
+              return (
+                <Link
+                  to={"/participate/post/" + post.url}
+                  key={idx}
+                  style={{
+                    width: "30%",
+                    color: "black",
+                    textDecoration: "none",
+                    marginLeft: "3%",
+                    marginBottom: "1rem",
+                  }}
+                  css={LinkCSS}
+                >
+                  <IPLoPostCard>
+                    <img src={post.thumbnail[0].path} className="thumbnail" />
+                    <p className="author">{post.auther.displayName}</p>
+                    <p className="intro">{post.title}</p>
+                    <div className="like">
+                      {props.user && post.likeArray.includes(props.user.uid) ? (
+                        <LPIcon />
+                      ) : (
+                        <LGIcon />
+                      )}
+                      추천
+                      {post.likeNum != 0 && <span>({post.likeNum})</span>}
+                    </div>
+                    <div className="comment">
+                      {post.repleNum ? <CGIcon /> : <CYIcon />}
+                      의견
+                      {post.repleNum != 0 && <span>({post.repleNum})</span>}
+                    </div>
+                  </IPLoPostCard>
+                </Link>
+              );
+            }
           })}
     </>
   );

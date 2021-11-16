@@ -34,13 +34,21 @@ function Participate(props) {
   const SetContent = () => {
     switch (URL.category) {
       case "FP":
-        return <FPList user={user} URL={URL} setURL={setURL} />;
+        return (
+          <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+        );
       case "FA":
-        return <FAList user={user} URL={URL} setURL={setURL} />;
+        return (
+          <FAList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+        );
       case "IP":
-        return <IPList user={user} URL={URL} setURL={setURL} />;
+        return (
+          <IPList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+        );
       case "Lo":
-        return <LoList user={user} URL={URL} setURL={setURL} />;
+        return (
+          <LoList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+        );
     }
   };
 
@@ -193,7 +201,7 @@ function Participate(props) {
           </div>
         </div>
       </PartHeader>
-      <PartBody>{SetContent()}</PartBody>
+      <PartBody>{Loading ? <p>Loading</p> : SetContent()}</PartBody>
       <PagiCSS>
         {!Loading && (
           <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />

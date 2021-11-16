@@ -31,12 +31,9 @@ function LoList(props) {
           SubCategoryList={SubCategoryList}
         />
         <div className="right">
-          <PostList
-            user={props.user}
-            type="Lo"
-            URL={props.URL}
-            setURL={props.setURL}
-          />
+          {props.URL.category === "Lo" && (
+            <PostList type="Lo" PostList={props.PostList} user={props.user} />
+          )}
         </div>
       </PartIPLoListDiv>
       <FNBDiv>

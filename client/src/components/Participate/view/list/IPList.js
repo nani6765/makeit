@@ -23,7 +23,9 @@ function IPList(props) {
           SubCategoryList={SubCategoryList}
         />
         <div className="right">
-          <PostList user={props.user} type="IP" user={props.user} />
+          {props.URL.category === "IP" && (
+            <PostList type="IP" PostList={props.PostList} user={props.user} />
+          )}
         </div>
       </PartIPLoListDiv>
       <FNBDiv>
