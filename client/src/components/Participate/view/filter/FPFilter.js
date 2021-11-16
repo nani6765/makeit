@@ -7,6 +7,7 @@ function FPUploadFilter(props) {
 
   const FilmTypeFilterManager = (e) => {
     let temp = props.URL;
+    console.log(props.URL);
     if (temp.filmType) {
       if (temp.filmType.includes(e.target.id)) {
         var idx = temp.filmType.indexOf(e.target.id);

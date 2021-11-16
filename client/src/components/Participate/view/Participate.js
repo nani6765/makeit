@@ -22,6 +22,7 @@ function Participate(props) {
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([1]);
   const [SearchTerm, setSearchTerm] = useState("");
+  const [PostList, setPostList] = useState([]);
 
   const GNBObj = {
     FA: "배우찾기",
@@ -64,33 +65,29 @@ function Participate(props) {
   };
 
   async function getPostLen() {
-    setLoading(true);
-    let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
-
-    if (location.search.slice(1) != URL) {
-      setURL(location.search.slice(1));
-      if (temp.searchTerm) {
-        setSearchTerm(temp.searchTerm);
-      } else {
-        setSearchTerm("");
-      }
+    /*
+    if (URL.searchTerm) {
+      setSearchTerm(temp.searchTerm);
+    } else {
+      setSearchTerm("");
     }
+    */
 
     let body = {
-      type: temp.category,
-      sort: temp.sort,
+      type: URL.category,
+      sort: URL.sort,
     };
-    if (temp.subCategory) {
-      body.category = temp.subCategory;
+    if (URL.subCategory) {
+      body.category = URL.subCategory;
     }
-    if (temp.gender) {
-      body.gender = temp.gender;
+    if (URL.gender) {
+      body.gender = URL.gender;
     }
-    if (temp.class) {
-      body.classfication = temp.class;
+    if (URL.class) {
+      body.classfication = URL.class;
     }
-    if (temp.filmType) {
-      body.filmType = temp.filmType;
+    if (URL.filmType) {
+      body.filmType = URL.filmType;
     }
 
     await axios.post("/api/participate/getPageLen", body).then((response) => {
@@ -99,12 +96,63 @@ function Participate(props) {
       } else {
         alert("error");
       }
+    });
+  }
+
+  async function getPostList() {
+    setLoading(true);
+    let body = {
+      type: URL.category,
+      sort: URL.sort,
+      limit: 12,
+      skip: URL.pIdx * 12,
+    };
+
+    if (URL.subCategory) {
+      body.category = URL.subCategory;
+    }
+    if (URL.gender) {
+      body.gender = URL.gender;
+    }
+    if (URL.class) {
+      body.classfication = URL.class;
+    }
+    if (URL.filmType) {
+      body.filmType = URL.filmType;
+    }
+
+    await axios.post("/api/participate", body).then((response) => {
+      if (response.data.success) {
+        setPostList([...response.data.post]);
+      } else {
+        alert("error");
+      }
       setLoading(false);
     });
   }
 
   useEffect(() => {
+    //console.log("URL : ", URL);
+    if (URL.category) {
+      getPostLen();
+      getPostList();
+    }
+  }, [URL]);
+
+  /*
+  useEffect(() => {
     getPostLen();
+  }, [location.search]);
+  */
+
+  useEffect(() => {
+    if (location.search) {
+      let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
+      setURL(temp);
+    } else {
+      //최초접속
+      history.push(`?category=FP&sort=hot&pIdx=0`);
+    }
   }, [location.search]);
 
   useEffect(() => {
@@ -115,16 +163,6 @@ function Participate(props) {
     }
     setPageIdxArr(temp);
   }, [parseInt(URL.pIdx / 10), PageLen]);
-
-  useEffect(() => {
-    if (location.search) {
-      let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
-      setURL(temp);
-    } else {
-      //최초접속
-      history.push(`?category=FP&sort=hot&pIdx=0`);
-    }
-  }, [location]);
 
   return (
     <>

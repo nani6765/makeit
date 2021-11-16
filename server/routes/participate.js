@@ -81,16 +81,13 @@ router.post("/getPageLen", (req, res) => {
   let PostModel = SelectModel(req.body.type);
 
   let temp = req.body;
+  console.log(temp);
 
   let category = {
     type: temp.type,
     $or: [],
   };
 
-  if (temp.category && temp.category !== "전체") {
-    delete category.$or;
-    category.category = req.body.category;
-  }
   if (temp.gender) {
     for (let i = 0; i < temp.gender.length; i++) {
       category["$or"].push({ gender: temp.gender[i] });
@@ -106,7 +103,12 @@ router.post("/getPageLen", (req, res) => {
       category["$or"].push({ classification: temp.classification[i] });
     }
   }
+
   if (!category.$or.length) delete category.$or;
+  if (temp.category && temp.category !== "전체") {
+    delete category.$or;
+    category.category = req.body.category;
+  }
 
   PostModel.countDocuments(category)
     .exec()

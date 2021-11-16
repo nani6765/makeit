@@ -36,8 +36,11 @@ function GNBArea(props) {
   ];
 
   const ClickFunc = (gnb) => {
-    console.log(history.location.search);
-    history.push(`?category=${gnb}&sort=hot&pIdx=0`);
+    if (gnb === "FP" || gnb === "FA") {
+      history.push(`?category=${gnb}&sort=hot&pIdx=0`);
+    } else {
+      history.push(`?category=${gnb}&sort=hot&pIdx=0&subCategory=전체`);
+    }
   };
 
   return (
