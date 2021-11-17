@@ -4,7 +4,6 @@ import StickyBar from "../common/StickyBar.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import RequestPostList from "./RequestPostList.js";
 import { RequestListDiv } from "../../css/RVCSS.js";
-import { ReactComponent as PenIcon } from "../../css/Img/Pen.svg";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
 import qs from 'qs';
 import axios from "axios";
@@ -77,7 +76,7 @@ function RequestVideo(props) {
       <div className="right">
         <div className="GNB">
           <p className="category">
-            홈 &gt; 영상제작 &gt; 의뢰하기 &gt; {props.URL.subCategory}
+            홈 &gt; 영상 의뢰하기 &gt; {props.URL.subCategory}
           </p>
           <div className="filter">
             <div className="search">
@@ -92,7 +91,9 @@ function RequestVideo(props) {
                     props.URL.sort = "인기순";
                     props.URL.qIdx = 0;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                  }}> 
+                  }}
+                  className={props.URL.sort==="인기순" && "active"}
+                  > 
                   인기순
                 </Dropdown.Item>
                 <Dropdown.Item
@@ -100,7 +101,9 @@ function RequestVideo(props) {
                     props.URL.sort = "최신순";
                     props.URL.qIdx = 0;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                  }}>
+                  }}
+                  className={props.URL.sort==="최신순" && "active"}
+                  >
                   최신순
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -112,7 +115,6 @@ function RequestVideo(props) {
           <Link to="/Making/RequestUpload">
             <button>
               게시하기
-              <PenIcon />
             </button>
           </Link>
         </div>

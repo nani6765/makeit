@@ -31,7 +31,7 @@ const RequestListDiv = styled.div`
       justify-content: space-between;
       align-items: center;
       .category {
-        color: #a7a5a8;
+        font-weight: bold;
       }
       .filter {
         display: flex;
@@ -65,11 +65,11 @@ const RequestListDiv = styled.div`
           display: inline-block;
           margin-left: 1rem;
           button {
-            background-color: #ffffff;
+            background-color: #F7F7F7;
             color: black;
+            border-radius: 3px;
+            border: none;
             font-weight: bold;
-            border: 1.5px solid #eaeaea;
-            border-radius: 16px;
             &:foucs {
               outline: none;
               box-shadow: none;
@@ -77,6 +77,28 @@ const RequestListDiv = styled.div`
             &.btn-primary:focus {
               outline: none;
               box-shadow: none;
+            }
+            &:after {
+              margin-left: 1rem;
+              content: "⌵";
+              border: none;
+              font-weight: bold;
+            }
+          }
+          #dropdown-menu {
+            width: 100%;
+            background-color: #F7F7F7;
+            border: none;
+            min-width: 5rem;
+            .dropdown-item {
+              font-weight: bold;
+              &:hover {
+                background: none;
+              }
+            }
+            .active {
+              color: #5A278B;
+              background: none;
             }
           }
         }
@@ -90,9 +112,9 @@ const RequestListDiv = styled.div`
         font-size: 15px;
         font-weight: bold;
         padding: 7px 10px;
-        background: #935ea5;
+        background: #5A278B;
         border: none;
-        border-radius: 10px;
+        border-radius: 3px;
         svg {
           margin-left: 3px;
         }
@@ -117,7 +139,8 @@ const RequestListDiv = styled.div`
         li {
           display: inline-block;
           padding: 0px 6px;
-          border-right: 1.5px solid black;
+          border-right: 1.5px solid #C9C9C9;
+          color: #C9C9C9;
           p {
             cursor: pointer;
             margin: 0;
@@ -125,6 +148,7 @@ const RequestListDiv = styled.div`
         }
         li.active {
           font-weight: bold;
+          color: #5A278B;
         }
         li:last-child {
           border: none;

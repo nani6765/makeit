@@ -45,29 +45,19 @@ function ProducerList(props) {
           >
             <div>
               <img src={post.thumbnailArr[0].path} className="thumbnail" />
-              <div className="info">
-                <span className="producerName">{post.auther.displayName}</span>
-                {props.user ? (
-                  post.likeArray.indexOf(props.user.uid) === -1 ? (
-                    <i className="bi bi-heart"></i>
-                  ) : (
-                    <i className="bi bi-heart-fill"></i>
-                  )
-                ) : (
-                  <i className="bi bi-heart"></i>
-                )}
-              </div>
+              <p className="producerName">{post.auther.displayName}</p>
               <p className="title">{post.oneLineIntroduce}</p>
-              <div className="priceAndGrade">
-                <p className="price">{post.priceInfo}</p>
-                <p className="grade">
-                  <i className="bi bi-star"></i>
-                  {post.grade
-                    ? (post.grade / post.gradeArrayNum).toFixed(1)
-                    : post.grade}{" "}
-                  | {post.gradeArrayNum}개의 평가
-                </p>
-              </div>
+              <p className="evaluation">
+                <span>
+                {post.grade
+                  ? (post.grade / post.gradeArrayNum).toFixed(1)
+                  : post.grade} / 5.0
+                </span>
+                <span>
+                  {post.likeArray.length}
+                </span>
+              </p>
+              <p className="price">&#8361; {post.priceInfo}</p>
             </div>
           </Link>
         );

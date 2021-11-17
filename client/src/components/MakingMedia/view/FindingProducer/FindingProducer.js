@@ -4,7 +4,6 @@ import ProducerList from "./ProducerList.js";
 import StickyBar from "../common/StickyBar.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { ProducerListDiv } from "../../css/FPCSS.js";
-import { ReactComponent as PenIcon } from "../../css/Img/Pen.svg";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
 import qs from 'qs';
 
@@ -75,7 +74,7 @@ function FindingProducer(props) {
       <div className="right">
         <div className="GNB">
           <p className="category">
-            홈 &gt; 영상제작 &gt; 제작자 탐색 &gt; {props.URL.subCategory}
+            홈 &gt; 영상 제작자 탐색 &gt; {props.URL.subCategory}
           </p>
           <div className="filter">
             <div className="search">
@@ -90,7 +89,9 @@ function FindingProducer(props) {
                     props.URL.sort = "인기순";
                     props.URL.qIdx = 0;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                  }}> 
+                  }}
+                  className={props.URL.sort==="인기순" && "active"}
+                  > 
                   인기순
                 </Dropdown.Item>
                 <Dropdown.Item
@@ -98,7 +99,9 @@ function FindingProducer(props) {
                     props.URL.sort = "최신순";
                     props.URL.qIdx = 0;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                  }}>
+                  }}
+                  className={props.URL.sort==="최신순" && "active"}
+                  >
                   최신순
                 </Dropdown.Item>
               </Dropdown.Menu>
@@ -112,10 +115,7 @@ function FindingProducer(props) {
         />
 
         <Link to="/Making/ProducerUpload">
-          <button className="postBtn">
-            게시하기
-            <PenIcon />
-          </button>
+          <button className="postBtn">게시하기</button>
         </Link>
         <div className="FNB">
           <div className="pagination">

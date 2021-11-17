@@ -8,24 +8,7 @@ import { ReactComponent as MakeitPay } from "../../css/Img/메이킷페이.svg";
 import { MenuList, MenuItem } from "../../css/CommonCSS.js";
 
 function HeaderGNB(props) {
-  const GNBList = [
-    {
-      label: "영상 제작자 탐색",
-      icon: <FindingProducer />
-    },
-    {
-      label: "영상 의뢰하기",
-      icon: <RequestVideo />
-    },
-    {
-      label: "제작 영상 알리기",
-      icon: <ShareVideo />
-    },
-    {
-      label: "메이킷 페이 안내",
-      icon: <MakeitPay />
-    },
-  ];
+  const GNBList = [ "영상 제작자 탐색", "영상 의뢰하기", "제작 영상 알리기", "메이킷 페이 안내" ];
 
   return (
     <>
@@ -35,11 +18,10 @@ function HeaderGNB(props) {
             <MenuItem
               key={idx}
               onClick={() => {
-                props.history.push(`?category=${GNB.label}&subCategory=전체&sort=인기순&pIdx=0`);
+                props.history.push(`?category=${GNB}&subCategory=전체&sort=인기순&pIdx=0`);
               }}
             >
-              {GNB.icon}
-              <p>{GNB.label}</p>
+              <p className={props.URL.category===GNB && "active"}>{GNB}</p>
             </MenuItem>
           );
         })}

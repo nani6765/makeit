@@ -76,8 +76,9 @@ const ProducerListDiv = styled.div`
       align-content: center;
       justify-content: space-between;
       align-items: center;;
+      margin-bottom: 1rem;
       .category {
-          color: #A7A5A8;
+        font-weight: bold;
       }
       .filter {
         display: flex;
@@ -88,6 +89,7 @@ const ProducerListDiv = styled.div`
           background: #F7F7F7;
           padding: 5px;
           height: 100%;
+          border-radius: 3px;
           input {
             background: none;
             border: none;
@@ -111,11 +113,11 @@ const ProducerListDiv = styled.div`
           display: inline-block;
           margin-left: 1rem;
           button {
-            background-color: #ffffff;
+            background-color: #F7F7F7;
             color: black;
+            border-radius: 3px;
+            border: none;
             font-weight: bold;
-            border: 1.5px solid #eaeaea;
-            border-radius: 16px;
             &:foucs {
               outline: none;
               box-shadow: none;
@@ -123,6 +125,28 @@ const ProducerListDiv = styled.div`
             &.btn-primary:focus {
               outline: none;
               box-shadow: none;
+            }
+            &:after {
+              margin-left: 1rem;
+              content: "⌵";
+              border: none;
+              font-weight: bold;
+            }
+          }
+          #dropdown-menu {
+            width: 100%;
+            background-color: #F7F7F7;
+            border: none;
+            min-width: 5rem;
+            .dropdown-item {
+              font-weight: bold;
+              &:hover {
+                background: none;
+              }
+            }
+            .active {
+              color: #5A278B;
+              background: none;
             }
           }
         }
@@ -134,12 +158,9 @@ const ProducerListDiv = styled.div`
       font-size: 15px;
       font-weight: bold;
       padding: 7px 10px;
-      background: #935ea5;
+      background: #5A278B;
       border: none;
-      border-radius: 10px;
-      svg {
-        margin-left: 3px;
-      }
+      border-radius: 3px;      
     }
     .FNB {
       display: flex;
@@ -167,6 +188,7 @@ const ProducerListDiv = styled.div`
         }
         li.active {
           font-weight: bold;
+          color: #5A278B;
         }
         li:last-child {
           border: none;
@@ -191,7 +213,6 @@ const ProducerListContainer = styled.div`
   .producercard {
     width: 31%;
     height: auto;
-    padding: 15px;
     margin-right: 3.5%;
     margin-bottom: 3%;
 
@@ -199,7 +220,6 @@ const ProducerListContainer = styled.div`
     box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
       0px 9px 30px rgba(163, 1, 79, 0.05);
     box-sizing: border-box;
-    border-radius: 22px;
 
     div {
       display: flex;
@@ -208,51 +228,37 @@ const ProducerListContainer = styled.div`
       height: 100%;
 
       .thumbnail {
-        margin-top: 10px;
         width: 100%;
         height: 200px;
-        border-radius: 15px;
       }
-      .info {
-        display: block;
+      p {
         margin-top: 15px;
+        padding: 0 15px;
         height: auto;
-        color: #a7a5a8;
         align-items: center;
-        i {
-          color: #ff5151;
-          margin-left: 5px;
-        }
+        font-weight: 600;
+        font-size: 15px;
       }
       .title {
-        height: auto;
-        max-height: 60px;
-        margin-top: 5px;
-        font-size: 18px;
-        line-height: 30px;
-        font-weight: 600;
+        padding: 0 15px;
+        height: 50px;
+        line-height: 25px;
         word-break: keep-all;
         overflow: hidden;
       }
-      .priceAndGrade {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        font-size: 16px;
-        .price {
-          text-align: right;
-          font-weight: 600;
+      .evaluation {
+        font-size: 14px;
+        i {
+          color: #ffe459;
+          margin-right: 5px;
         }
-        .grade {
-          margin-top: 5px;
-          color: #ccd2e3;
-          i {
-            color: #ffe459;
-            margin-right: 5px;
-          }
+        span {
+          margin-right: 1rem;
         }
-    }
+      }
+      .price {
+        margin-bottom: 15px;
+      }
     }
     ${mq[1]} {
       margin-bottom: 30px;
