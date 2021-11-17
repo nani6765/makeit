@@ -147,12 +147,6 @@ function Participate(props) {
     }
   }, [URL]);
 
-  /*
-  useEffect(() => {
-    getPostLen();
-  }, [location.search]);
-  */
-
   useEffect(() => {
     if (location.search) {
       let temp = qs.parse(location.search, { ignoreQueryPrefix: true });

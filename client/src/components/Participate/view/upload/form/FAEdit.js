@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import FAUploadFilter from "../../filter/FAFilter.js";
+import FAUploadFilter from "../content/filter/FAUploadFilter.js";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
@@ -64,7 +64,7 @@ function FAEdit(props) {
     axios.post("/api/participate/post/edit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 수정 성공");
-        props.history.push("/participate/post/"+props.postInfo.url);
+        props.history.push("/participate/post/" + props.postInfo.url);
       } else {
         alert("게시글 수정 실패");
         console.log(response.data.err);
@@ -73,16 +73,16 @@ function FAEdit(props) {
   };
 
   useEffect(() => {
-      let postInfo = props.postInfo;
+    let postInfo = props.postInfo;
 
-      settitle(postInfo.title);
-      setcontent(postInfo.content);
-      setGender([...postInfo.gender]);
-      setFilmType([...postInfo.filmType]);
-      setClassification([...postInfo.classification]);
-      setImages([...postInfo.images]);
+    settitle(postInfo.title);
+    setcontent(postInfo.content);
+    setGender([...postInfo.gender]);
+    setFilmType([...postInfo.filmType]);
+    setClassification([...postInfo.classification]);
+    setImages([...postInfo.images]);
   }, []);
-  
+
   return (
     <>
       <UploadHeader>
@@ -97,17 +97,16 @@ function FAEdit(props) {
         <UploadForm>
           <Title title={title} settitle={settitle} />
           <PartFilter>
-            {
-              Classification[0] &&
+            {Classification[0] && (
               <FAUploadFilter
-              Gender={Gender}
-              setGender={setGender}
-              FilmType={FilmType}
-              setFilmType={setFilmType}
-              Classification={Classification}
-              setClassification={setClassification}
+                Gender={Gender}
+                setGender={setGender}
+                FilmType={FilmType}
+                setFilmType={setFilmType}
+                Classification={Classification}
+                setClassification={setClassification}
               />
-            }
+            )}
           </PartFilter>
           <Content content={content} setcontent={setcontent} />
           <FileUploadArea

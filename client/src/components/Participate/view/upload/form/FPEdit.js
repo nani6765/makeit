@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Title from "../content/Title.js";
-import FPUploadFilter from "../../filter/FPFilter.js";
+import FPUploadFilter from "../content/filter/FPUploadFilter.js";
 import Content from "../content/Content.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";
@@ -58,7 +58,7 @@ function FPEdit(props) {
     axios.post("/api/participate/post/edit", body).then((response) => {
       if (response.data.success) {
         alert("게시글 수정 성공");
-        props.history.push("/participate/post/"+props.postInfo.url);
+        props.history.push("/participate/post/" + props.postInfo.url);
       } else {
         alert("게시글 수정 실패");
         console.log(response.data.err);
@@ -74,7 +74,7 @@ function FPEdit(props) {
     setFilmType([...postInfo.filmType]);
     setClassification([...postInfo.classification]);
     setImages([...postInfo.images]);
-}, []);
+  }, []);
 
   return (
     <>
@@ -90,15 +90,14 @@ function FPEdit(props) {
         <UploadForm>
           <Title title={title} settitle={settitle} />
           <PartFilter>
-            {
-              Classification[0] &&
+            {Classification[0] && (
               <FPUploadFilter
                 FilmType={FilmType}
                 setFilmType={setFilmType}
                 Classification={Classification}
                 setClassification={setClassification}
               />
-            }
+            )}
           </PartFilter>
           <Content content={content} setcontent={setcontent} />
           <FileUploadArea
