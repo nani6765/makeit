@@ -140,7 +140,7 @@ const HeaderSearch = styled.div`
   display: flex;
   div {
     width: 100%;
-    height: 40%;
+    height: 50%;
     padding: 5px;
     background: #F7F7F7;
     border-radius: 3px;
@@ -188,13 +188,17 @@ const HeaderLoginDiv = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  .loginBtn {
-    background: #702c8a;
-    border-radius: 6px;
-    color: white;
-    border: none;
-    padding: 10px 20px 10px 20px;
-    font-weight: bold;
+  a {
+    height: 50%;
+    .loginBtn {
+      height: 100%;
+      background: #FFFFFF;
+      border: 1px solid #ADA4A4;
+      box-sizing: border-box;
+      border-radius: 3px;
+      padding: 0 10px;
+      color: #ADA4A4;
+    }
   }
   .bell {
     color: #702c8a;
