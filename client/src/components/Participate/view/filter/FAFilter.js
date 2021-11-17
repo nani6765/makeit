@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import qs from "qs";
 
@@ -61,6 +61,49 @@ function FAUploadFilter(props) {
     let temp2 = qs.stringify(temp);
     history.push(`?${decodeURI(temp2)}`);
   };
+
+  useEffect(() => {
+    let genderArr = ["male", "female", "noMatter"];
+    if (props.URL.gender != undefined) {
+      genderArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = props.URL.gender.includes(type);
+      });
+    } else {
+      genderArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = false;
+      });
+    }
+
+    let typeArr = ["video", "photo", "filmTypeEtc"];
+
+    if (props.URL.filmType != undefined) {
+      typeArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = props.URL.filmType.includes(type);
+      });
+    } else {
+      typeArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = false;
+      });
+    }
+
+    let classArr = ["short", "long", "ad", "TV", "pictorial", "classEtc"];
+
+    if (props.URL.class != undefined) {
+      classArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = props.URL.class.includes(type);
+      });
+    } else {
+      classArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = false;
+      });
+    }
+  }, [props.URL]);
 
   return (
     <>

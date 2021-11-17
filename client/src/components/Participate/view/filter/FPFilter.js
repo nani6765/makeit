@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import qs from "qs";
 
@@ -7,7 +7,7 @@ function FPUploadFilter(props) {
 
   const FilmTypeFilterManager = (e) => {
     let temp = props.URL;
-    console.log(props.URL);
+
     if (temp.filmType) {
       if (temp.filmType.includes(e.target.id)) {
         var idx = temp.filmType.indexOf(e.target.id);
@@ -43,6 +43,45 @@ function FPUploadFilter(props) {
     let temp2 = qs.stringify(temp);
     history.push(`?${decodeURI(temp2)}`);
   };
+
+  useEffect(() => {
+    let typeArr = ["video", "photo", "filmTypeEtc"];
+
+    if (props.URL.filmType != undefined) {
+      typeArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = props.URL.filmType.includes(type);
+      });
+    } else {
+      typeArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = false;
+      });
+    }
+
+    let classArr = [
+      "plan",
+      "edit",
+      "filming",
+      "light",
+      "acoustic",
+      "voiceActor",
+      "beauty",
+      "classEtc",
+    ];
+
+    if (props.URL.class != undefined) {
+      classArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = props.URL.class.includes(type);
+      });
+    } else {
+      classArr.map((type, idx) => {
+        let target = document.querySelector(`#${type}`);
+        target.checked = false;
+      });
+    }
+  }, [props.URL]);
 
   return (
     <>

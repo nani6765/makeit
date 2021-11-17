@@ -35,19 +35,19 @@ function Participate(props) {
     switch (URL.category) {
       case "FP":
         return (
-          <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+          <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
         );
       case "FA":
         return (
-          <FAList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+          <FAList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
         );
       case "IP":
         return (
-          <IPList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+          <IPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
         );
       case "Lo":
         return (
-          <LoList user={user} URL={URL} setURL={setURL} PostList={PostList} />
+          <LoList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
         );
     }
   };
@@ -147,12 +147,6 @@ function Participate(props) {
     }
   }, [URL]);
 
-  /*
-  useEffect(() => {
-    getPostLen();
-  }, [location.search]);
-  */
-
   useEffect(() => {
     if (location.search) {
       let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -201,7 +195,7 @@ function Participate(props) {
           </div>
         </div>
       </PartHeader>
-      <PartBody>{Loading ? <p>Loading</p> : SetContent()}</PartBody>
+      <PartBody>{SetContent()}</PartBody>
       <PagiCSS>
         {!Loading && (
           <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />

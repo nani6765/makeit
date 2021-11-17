@@ -23,8 +23,12 @@ function IPList(props) {
           SubCategoryList={SubCategoryList}
         />
         <div className="right">
-          {props.URL.category === "IP" && (
-            <PostList type="IP" PostList={props.PostList} user={props.user} />
+          {props.Loading ? (
+            <p>isLoading</p>
+          ) : (
+            props.URL.category === "IP" && (
+              <PostList type="IP" PostList={props.PostList} user={props.user} />
+            )
           )}
         </div>
       </PartIPLoListDiv>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import Title from "../content/Title.js";
-import FPUploadFilter from "../../filter/FPFilter.js";
+import FPUploadFilter from "../content/filter/FPUploadFilter.js";
 import Content from "../content/Content.js";
 import FileUploadArea from "../../../../utils/view/Files/FileUploadArea.js";
 import FileShowArea from "../../../../utils/view/Files/FileShowArea.js";

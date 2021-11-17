@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import FAUploadFilter from "../../filter/FAFilter.js";
+import FAUploadFilter from "../content/filter/FAUploadFilter.js";
 import Title from "../content/Title.js";
 import Content from "../content/Content.js";
 import BtnDiv from "../content/BtnDiv.js";
