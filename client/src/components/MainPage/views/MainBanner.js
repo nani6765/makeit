@@ -42,12 +42,36 @@ function MainBanner() {
     }
   `;
 
+  let TempBanner = styled.div`
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background-image: url(${process.env.PUBLIC_URL + "/Img/MainBG.png"});
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      color: #fff;
+      text-align: center;
+      font-weigt: 800;
+      font-size: 24px;
+    }
+  `;
+
   return (
     <>
       <div>
-        <Banner>
-          <img src={process.env.PUBLIC_URL + "/Img/MainBanner.png"} />
-        </Banner>
+        <TempBanner>
+          <h1>
+            영상이 필요할땐?
+            <br />
+            MAKE IT!
+          </h1>
+        </TempBanner>
       </div>
     </>
   );
