@@ -15,7 +15,11 @@ function FAList(props) {
       <PartFilter style={{ borderRadius: "15px" }}>
         <FAFilter user={props.user} URL={props.URL} setURL={props.setURL} />
       </PartFilter>
-      {props.URL.category === "FA" && (
+      {
+      props.Loading 
+      ? 
+      <p>isLoading</p> 
+      : props.URL.category === "FA" && (
         <PostList type="FA" PostList={props.PostList} user={props.user} />
       )}
       <FNBDiv>

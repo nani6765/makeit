@@ -31,8 +31,12 @@ function LoList(props) {
           SubCategoryList={SubCategoryList}
         />
         <div className="right">
-          {props.URL.category === "Lo" && (
-            <PostList type="Lo" PostList={props.PostList} user={props.user} />
+          {props.Loading ? (
+            <p>isLoading</p>
+          ) : (
+            props.URL.category === "Lo" && (
+              <PostList type="Lo" PostList={props.PostList} user={props.user} />
+            )
           )}
         </div>
       </PartIPLoListDiv>
