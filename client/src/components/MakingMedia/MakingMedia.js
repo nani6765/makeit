@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import HeaderGNB from "./view/common/HeaderGNB";
+import SubGNB from "./view/common/SubGNB";
 import FindingProducer from "./view/FindingProducer/FindingProducer.js";
 import RequestVideo from "./view/RequestVideo/RequestVideo.js";
 import ShareVideo from "./view/ShareVideo/ShareVideo";
 import { MakingDiv, MakingHeader } from "./css/CommonCSS.js";
-import qs from 'qs';
+import qs from "qs";
 
 function MakingMedia(props) {
   const location = useLocation();
@@ -66,24 +67,29 @@ function MakingMedia(props) {
 
   useEffect(() => {
     let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
-    if(temp.category && temp.sort && temp.pIdx && temp.subCategory) {
+    if (temp.category && temp.sort && temp.pIdx && temp.subCategory) {
       setURL(qs.parse(location.search, { ignoreQueryPrefix: true }));
-    }
-    else history.push("?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0");
+    } else
+      history.push(
+        "?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0"
+      );
   }, [location.search]);
 
   return (
     <>
-    <MakingHeader>
-      <img
+      <MakingHeader>
+        <img
           src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
           style={{ width: "100%" }}
         />
-      <HeaderGNB URL={URL} />
-    </MakingHeader>
-    <MakingDiv>
-      {setContent()}
-    </MakingDiv>
+        <HeaderGNB URL={URL} />
+        <SubGNB SubCategoryList={SubCategoryList} URL={URL} />
+      </MakingHeader>
+      <MakingDiv>
+        {/*
+        setContent()
+         */}
+      </MakingDiv>
     </>
   );
 }
