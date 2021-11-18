@@ -7,8 +7,6 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const MakingHeader = styled.div`
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
   img {
     min-height: 150px;
   }
@@ -24,19 +22,50 @@ const MakingDiv = styled.div`
   }
 `;
 
-const MenuList = styled.ul`
+const MenuList = styled.div`
+  width: 100%;
+  padding: 0px 15%;
+  border-bottom: 1px solid #acb0b4;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  list-style: none;
-  width: 70%;
-  margin: 0 auto;
-  padding: 1rem 0;
-  ${mq[0]} {
-    width: 80%;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-content: center;
+  ul {
+    height: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 1rem !important;
+    margin-top: 3rem;
+    list-style: none;
   }
+  .search {
+    background: #f7f7f7;
+    padding: 5px;
+    height: 100%;
+    margin-bottom: 0.5rem;
+    input {
+      background: none;
+      border: none;
+      text-align: right;
+      height: 100%;
+      &::placeholder {
+        color: #bfbfbf;
+      }
+    }
+    input:focus {
+      border: none;
+      outline: none;
+    }
+    svg {
+      margin-left: 5px;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+
   ${mq[1]} {
-    width: 90%;
+    padding: 0px 5%;
     justify-content: space-evenly;
   }
 `;
@@ -46,13 +75,20 @@ const MenuItem = styled.li`
   cursor: pointer;
   text-align: center;
   margin-right: 2rem;
+  padding-bottom: 2rem !important;
+
+  height: 1rem;
+  &.active {
+    border-bottom: 3px solid #61057d;
+    p {
+      color: #61057d;
+    }
+  }
   p {
     font-weight: bold;
     user-select: none;
   }
-  .active {
-    color: #61057d;
-  }
+
   ${mq[1]} {
     margin-right: 0px;
     p {

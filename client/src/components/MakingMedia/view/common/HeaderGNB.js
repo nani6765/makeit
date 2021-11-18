@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { MenuList, MenuItem } from "../../css/CommonCSS.js";
+import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
 
 function HeaderGNB(props) {
   const GNBList = [
@@ -10,25 +11,77 @@ function HeaderGNB(props) {
     "메이킷 페이 안내",
   ];
 
+  const [SearchTerm, setSearchTerm] = useState("");
+
+  const SearchHandler = (e) => {
+    e.preventDefault();
+    /*
+     if (SearchTerm && !/\S/.test(SearchTerm)) {
+       return;
+     }
+     let temp = qs.parse(props.URL);
+     temp.searchTerm = SearchTerm.trim();
+     if (!SearchTerm) {
+       delete temp.searchTerm;
+     }
+     temp.pIdx = 0;
+     let temp2 = qs.stringify(temp);
+     props.history.push(`?${decodeURI(temp2)}`);
+   };
+
+   const getPageLen = () => {
+     let body = {
+       category: props.URL.subCategory,
+     };
+
+     if (props.URL.searchTerm) {
+       body.searchTerm = props.URL.searchTerm;
+       setSearchTerm(props.URL.searchTerm);
+     }
+
+     axios
+       .post("/api/making/requestVideo/postLength", body)
+       .then((response) => {
+         if (response.data.success) {
+           setPageLen(parseInt((response.data.len - 1) / 5) + 1);
+           setSkip(0);
+         }
+       });
+       */
+  };
+
   return (
     <>
       <MenuList>
-        {GNBList.map((GNB, idx) => {
-          return (
-            <MenuItem
-              key={idx}
-              onClick={() => {
-                props.history.push(
-                  `?category=${GNB}&subCategory=전체&sort=인기순&pIdx=0`
-                );
-              }}
-            >
-              <p className={props.URL.category === GNB ? "active" : null}>
-                {GNB}
-              </p>
-            </MenuItem>
-          );
-        })}
+        <ul>
+          {GNBList.map((GNB, idx) => {
+            return (
+              <MenuItem
+                key={idx}
+                className={props.URL.category === GNB ? "active" : null}
+                onClick={() => {
+                  props.history.push(
+                    `?category=${GNB}&subCategory=전체&sort=인기순&pIdx=0`
+                  );
+                }}
+              >
+                <p>{GNB}</p>
+              </MenuItem>
+            );
+          })}
+        </ul>
+        <div className="search">
+          <input
+            type="text"
+            placeholder="검색하기"
+            value={SearchTerm}
+            onChange={(e) => setSearchTerm(e.currentTarget.value)}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) SearchHandler(e);
+            }}
+          />
+          <SearchIcon onClick={(e) => SearchHandler(e)} />
+        </div>
       </MenuList>
     </>
   );
