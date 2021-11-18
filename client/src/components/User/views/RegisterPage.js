@@ -10,6 +10,7 @@ import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import axios from "axios";
 import shortId from "shortid";
 import { Spinner } from 'react-bootstrap';
+import ModalDiv from "./ModalDiv.js";
 
 function RegisterPage() {
   //회원정보
@@ -30,9 +31,13 @@ function RegisterPage() {
 
   //회원가입 완료
   const [ErrorFormSubmit, setErrorFormSubmit] = useState("");
+  const [submitLoading, setsubmitLoading] = useState(false);
+
+  
   const [emailLoading, setemailLoading] = useState(false);
   const [nicknameLoading, setnicknameLoading] = useState(false);
-  const [submitLoading, setsubmitLoading] = useState(false);
+  const [ModalFlag, setModalFlag] = useState(false);
+  const [ModalType, setModalType] = useState("sendVerification");
 
   let history = useHistory();
 
@@ -45,7 +50,10 @@ function RegisterPage() {
     };
     setKey(temp);
     axios.post("api/user/sendEmail", body).then((response) => {
-      if (response.data.success) alert("이메일이 전송되었습니다.");
+      if (response.data.success) {
+        setModalType('sendVerification');
+        setModalFlag(true); 
+      }
     });
   };
 
@@ -59,9 +67,11 @@ function RegisterPage() {
   const StartTimer = async () => {
     setemailLoading(true);
     if (!(Email && Name)) {
+      setemailLoading(false);
       return alert("이메일과 이름을 모두 입력해주십시오.");
     }
     if (!verifyEmail(Email)) {
+      setemailLoading(false);
       return alert("이메일 주소가 잘못되었습니다.");
     }
     var EmailCheckFunc = new Promise((resolve, reject) => {
@@ -129,10 +139,12 @@ function RegisterPage() {
       if(response.data.success) {
         if(response.data.checkFlag) {
           setNicknameCheck(true);
-          alert("사용가능한 닉네임입니다.");
+          setModalType("available");
+          setModalFlag(true);
         }
         else {
-          alert("이미 존재하는 닉네임입니다.");
+          setModalType("duplicate");
+          setModalFlag(true);
         }
         setnicknameLoading(false);
       }
@@ -271,7 +283,8 @@ function RegisterPage() {
                     onClick={() => {
                       if (Key === InputKey) {
                         setEmailCheckVerification(true);
-                        alert("이메일 인증이 완료되었습니다.");
+                        setModalType("checkVerification");
+                        setModalFlag(true);
                       }
                     }}
                   >
@@ -297,7 +310,7 @@ function RegisterPage() {
               className="nicknameBtn"
               onClick={() => CheckNickName()}
             >
-              중복확인
+              중복 확인
             </button>
             <label className="pw">비밀번호</label>
             <input
@@ -335,6 +348,7 @@ function RegisterPage() {
           </form>
         </div>
       </div>
+      {ModalFlag && <ModalDiv modalType={ModalType} setModalFlag={setModalFlag}/>}
       <MobileFooter />
     </>
   );

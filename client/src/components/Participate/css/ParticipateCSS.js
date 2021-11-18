@@ -51,6 +51,9 @@ const PartHeader = styled.div`
         color: #fff;
       }
     }
+    ${mq[1]} {
+      padding: 10px 5%;
+    }
   }
 `;
 

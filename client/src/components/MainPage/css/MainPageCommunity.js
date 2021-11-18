@@ -13,6 +13,15 @@ const CPGridDiv = styled.div`
   grid-template-rows: 100%;
   grid-template-areas: "hot new comment";
   column-gap: 2rem;
+  ${mq[0]} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 0.5rem;
+    grid-template-areas:
+      "hot"
+      "new"
+      "comment";
+  }
   ${mq[1]} {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
@@ -49,8 +58,12 @@ const GridTitle = css`
     padding: 5px 10px 5px 10px;
     line-height: 20px;
     font-size: 15px;
+    display: block;
+    width: 10rem;
+    margin: 0 auto;
   }
   ${mq[1]} {
+    display: inline;
     padding: 5px 10px 5px 10px;
     line-height: 15px;
     font-size: 15px;
@@ -164,6 +177,17 @@ const CardImg = styled.article`
       color: #ccd2e3;
       font-size: 18px;
     }
+  }
+  ${mq[0]} {
+    width: 45%;
+    display: inline-grid;
+    margin-left:2.5%;
+    margin-right:2.5%;
+  }
+  ${mq[1]} {
+    width: 100%;
+    display: grid;
+    margin: 30px 0;
   }
 `;
 
