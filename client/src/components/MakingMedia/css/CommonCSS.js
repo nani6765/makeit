@@ -7,7 +7,11 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const MakingHeader = styled.div`
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03), 0px 9px 30px rgba(163, 1, 79, 0.05);
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  img {
+    min-height: 150px;
+  }
 `;
 
 const MakingDiv = styled.div`
@@ -28,6 +32,13 @@ const MenuList = styled.ul`
   width: 70%;
   margin: 0 auto;
   padding: 1rem 0;
+  ${mq[0]} {
+    width: 80%;
+  }
+  ${mq[1]} {
+    width: 90%;
+    justify-content: space-evenly;
+  }
 `;
 
 const MenuItem = styled.li`
@@ -38,12 +49,15 @@ const MenuItem = styled.li`
   p {
     font-weight: bold;
     user-select: none;
-    ${mq[1]} {
-      font-size: 10px;
-    }
   }
   .active {
-    color: #61057D;
+    color: #61057d;
+  }
+  ${mq[1]} {
+    margin-right: 0px;
+    p {
+      font-size: 10px;
+    }
   }
 `;
 
@@ -73,7 +87,7 @@ const StickyBarDiv = styled.div`
       }
     }
     p.active {
-      color: #5A278B;
+      color: #5a278b;
     }
   }
 `;

@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import TextEllipsis from "react-text-ellipsis";
 import Avatar from "react-avatar";
 
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
+
 import {
   PostCard,
   IPLoPostCard,
@@ -69,13 +73,6 @@ function PostList(props) {
                 <Link
                   to={"/participate/post/" + post.url}
                   key={idx}
-                  style={{
-                    width: "30%",
-                    color: "black",
-                    textDecoration: "none",
-                    marginLeft: "3%",
-                    marginBottom: "1rem",
-                  }}
                   css={LinkCSS}
                 >
                   <IPLoPostCard>

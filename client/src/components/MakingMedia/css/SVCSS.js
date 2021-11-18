@@ -15,15 +15,15 @@ const ShareVideoDiv = styled.div`
     align-content: center;
     justify-content: space-between;
     align-items: center;
-    
+
     .filter {
       display: flex;
       align-content: center;
       align-items: center;
       height: 100%;
       .search {
-          background: #F7F7F7;
-          padding: 5px;
+        background: #f7f7f7;
+        padding: 5px;
         height: 100%;
         input {
           background: none;
@@ -31,7 +31,7 @@ const ShareVideoDiv = styled.div`
           text-align: right;
           height: 100%;
           &::placeholder {
-            color: #BFBFBF;
+            color: #bfbfbf;
           }
         }
         input:focus {
@@ -48,7 +48,7 @@ const ShareVideoDiv = styled.div`
         display: inline-block;
         margin-left: 1rem;
         button {
-          background-color: #F7F7F7;
+          background-color: #f7f7f7;
           color: black;
           border-radius: 3px;
           border: none;
@@ -125,6 +125,19 @@ const ShareVideoDiv = styled.div`
   }
 `;
 
+const ShareVideoLink = css`
+  color: black;
+  text-decoration: none;
+  width: 30%;
+  &:hover {
+    text-decoration: none;
+    color: black;
+  }
+  ${mq[1]} {
+    width: auto;
+  }
+`;
+
 const ShareVideoCard = styled.div`
   background: #ffffff;
   width: 100%;
@@ -179,4 +192,4 @@ const ShareVideoCard = styled.div`
   }
 `;
 
-export { ShareVideoDiv, ShareVideoCard };
+export { ShareVideoDiv, ShareVideoLink, ShareVideoCard };

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import { ShareVideoCard } from "../../css/SVCSS.js";
-import { LinkCSS } from "../../css/CommonCSS";
+import { ShareVideoLink, ShareVideoCard } from "../../css/SVCSS.js";
 import { ReactComponent as CGIcon } from "../../css/Img/CommentGray.svg";
 import { ReactComponent as CYIcon } from "../../css/Img/CommentYellow.svg";
 import { ReactComponent as LGIcon } from "../../css/Img/LikeGrey.svg";
@@ -19,10 +18,10 @@ function ShareVideoList(props) {
   useEffect(() => {
     let body = {
       sort: props.URL.sort,
-      skip: props.URL.pIdx*9,
+      skip: props.URL.pIdx * 9,
     };
 
-    if(props.URL.searchTerm) {
+    if (props.URL.searchTerm) {
       body.searchTerm = props.URL.searchTerm;
     }
 
@@ -42,8 +41,7 @@ function ShareVideoList(props) {
           <Link
             to={"/making/shareVideo/" + post.url}
             key={idx}
-            style={{ width: "30%" }}
-            css={LinkCSS}
+            css={ShareVideoLink}
           >
             <ShareVideoCard>
               <img src={post.thumbnailUrl} className="thumbnail" />

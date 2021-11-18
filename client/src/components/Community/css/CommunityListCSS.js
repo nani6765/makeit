@@ -37,7 +37,6 @@ const CommunityHeader = styled.div`
     margin: 0 auto;
     padding: 25px 0;
 
-
     div {
       cursor: pointer;
       text-align: center;
@@ -51,7 +50,7 @@ const CommunityHeader = styled.div`
         }
       }
       p {
-        color: #702C8A;
+        color: #702c8a;
         font-weight: bold;
         user-select: none;
         ${mq[1]} {
@@ -92,7 +91,7 @@ const CommunityBody = styled.div`
     border-bottom: 1px solid black;
     font-size: 20px;
     .term {
-      color: #935EA5;
+      color: #935ea5;
     }
   }
   .noResult {
@@ -120,8 +119,8 @@ const BodyHeaderDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   user-select: none;
-  background: #EDE7F6;
-  margin: 0px;
+  background: #ede7f6;
+  margin: 0 auto;
   width: 100%;
   padding: 15px 15%;
   div {
@@ -142,21 +141,12 @@ const BodyHeaderDiv = styled.div`
         cursor: pointer;
         margin-left: 15px;
         &.activate {
-          background: #935EA5;
+          background: #935ea5;
           cursor: default;
           color: white;
           border-radius: 16px;
           padding: 5px 10px;
         }
-      }
-    }
-    ${mq[1]} {
-      h1 {
-        font-size: 24px;
-      }
-      p {
-        margin-left: 5px;
-        font-size: 12px;
       }
     }
   }
@@ -170,7 +160,19 @@ const BodyHeaderDiv = styled.div`
     svg {
       margin-left: 3px;
     }
-    ${mq[1]} {
+  }
+  ${mq[1]} {
+    padding: 15px 5%;
+    div {
+      h1 {
+        font-size: 24px;
+      }
+      p {
+        margin-left: 5px;
+        font-size: 12px;
+      }
+    }
+    button {
       font-size: 10px;
       svg {
         width: 12px;
@@ -240,6 +242,7 @@ const PostCard = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    line-break: anywhere;
   }
   .desc {
     grid-area: desc;
@@ -347,7 +350,7 @@ const FNBDiv = styled.div`
     align-items: center;
     margin-top: 1rem;
     padding: 5px 1rem;
-    border: 2px solid #6759F6;
+    border: 2px solid #6759f6;
     border-radius: 50px;
     input {
       border: none;
@@ -362,10 +365,4 @@ const FNBDiv = styled.div`
   }
 `;
 
-export {
-  CommunityHeader,
-  CommunityBody,
-  BodyHeaderDiv,
-  PostCard,
-  FNBDiv,
-};
+export { CommunityHeader, CommunityBody, BodyHeaderDiv, PostCard, FNBDiv };
