@@ -51,6 +51,9 @@ const PartHeader = styled.div`
         color: #fff;
       }
     }
+    ${mq[1]} {
+      padding: 10px 5%;
+    }
   }
 `;
 
@@ -411,10 +414,16 @@ const FNBDiv = styled.div`
 `;
 
 const LinkCSS = css`
+  width: 30%;
+  margin-left: 3%;
+  margin-bottom: 1rem;
   color: black;
   text-decoration: none;
   &:hover {
     text-decoration: none;
+  }
+  ${mq[1]} {
+    width: auto;
   }
 `;
 

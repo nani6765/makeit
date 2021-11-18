@@ -65,13 +65,9 @@ function MainBanner() {
   return (
     <>
       <div>
-        <TempBanner>
-          <h1>
-            영상이 필요할땐?
-            <br />
-            MAKE IT!
-          </h1>
-        </TempBanner>
+        <Banner>
+          <img src={process.env.PUBLIC_URL + "/Img/MainBanner.png"} />
+        </Banner>
       </div>
     </>
   );
