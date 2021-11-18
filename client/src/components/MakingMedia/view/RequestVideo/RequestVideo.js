@@ -92,7 +92,7 @@ function RequestVideo(props) {
                     props.URL.qIdx = 0;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}
-                  className={props.URL.sort==="인기순" && "active"}
+                  className={props.URL.sort==="인기순" ? "active" : null}
                   > 
                   인기순
                 </Dropdown.Item>
@@ -102,7 +102,7 @@ function RequestVideo(props) {
                     props.URL.qIdx = 0;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}
-                  className={props.URL.sort==="최신순" && "active"}
+                  className={props.URL.sort==="최신순" ? "active" : null}
                   >
                   최신순
                 </Dropdown.Item>

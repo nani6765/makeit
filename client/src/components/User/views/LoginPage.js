@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, withRouter, useHistory } from "react-router-dom";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
-import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
+import { DivCSS, BoxDivCSS, Logo, FormDivCSS, passwordFind } from "../css/UserPageElement.js";
 import firebase from "../../../config/firebase.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
@@ -49,25 +49,18 @@ function LoginPage(props) {
     }
   };
 
-  const passwordFind = css`
-    width: 100%;
-    text-align: right;
-    color: #454345;
-    font-size: 10px;
-    cursor: pointer;
-  `;
-
   const GoRegister = css`
-    font-size: 12px;
-    line-height: 19px;
+    width: 40%;
     text-align: center;
-    color: #454345;
-    a {
+    button {
+      width: 100%;
+      border: 1px solid #5A278B;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 15px 10px;
+      background: #fff;
+      color: #5A278B;
       font-weight: bold;
-      text-decoration: none;
-      pointer: cursor;
-      color: #454345;
-      cursor: pointer;
     }
   `;
 
@@ -76,29 +69,27 @@ function LoginPage(props) {
       <div css={DivCSS}>
         <div css={BoxDivCSS}>
           <div css={Logo}>
-            <img src={process.env.PUBLIC_URL + "/Img/logo.png"} alt="" />
-            <p>
-              영상의 시작,
-              <br />
-              영상이 쉬워지는 곳
-            </p>
+            <p>로그인</p>
           </div>
 
           <form css={FormDivCSS} onSubmit={onSubmitHandler}>
-            <label>이메일</label>
             <input
               type="email"
+              placeholder="이메일을 입력해 주세요"
               value={Email}
               onChange={(e) => setEmail(e.currentTarget.value)}
             />
-            <label>비밀번호</label>
             <input
               type="password"
+              placeholder="비밀번호를 입력해 주세요"
               value={Password}
               onChange={(e) => setPassword(e.currentTarget.value)}
             />
             <br />
-            <p css={passwordFind}>비밀번호찾기</p>
+            <p css={passwordFind}>
+              <span>이메일 찾기</span>
+              <span>비밀번호 찾기</span>
+            </p>
             {ErrorLogin && <p>{ErrorLogin}</p>}
             <button type="submit" disabled={Loading}>
               로그인
@@ -106,9 +97,9 @@ function LoginPage(props) {
           </form>
 
           <div id="naverIdLogin"></div>
-          <p css={GoRegister}>
-            아직 계정이 없으신가요? <Link to="/register">간편가입하기</Link>
-          </p>
+          <Link to="/register" css={GoRegister}>
+            <button>간편가입하기</button>
+          </Link>
         </div>
       </div>
       <MobileFooter />

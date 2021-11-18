@@ -47,7 +47,7 @@ function HeaderLoginArea(props) {
         </>
       ) : (
         <Link to="/login">
-          <button className="loginBtn">Login</button>
+          <button className="loginBtn">로그인</button>
         </Link>
       )}
     </HeaderLoginDiv>

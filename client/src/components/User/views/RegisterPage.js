@@ -5,15 +5,18 @@ import firebase from "../../../config/firebase.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { DivCSS, BoxDivCSS, Logo, FormDivCSS } from "../css/UserPageElement.js";
+import { DivCSS, BoxDivCSS, Logo, RegisterFormDiv } from "../css/UserPageElement.js";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import axios from "axios";
 import shortId from "shortid";
+import { Spinner } from 'react-bootstrap';
 
 function RegisterPage() {
   //회원정보
   const [Email, setEmail] = useState("");
   const [Name, setName] = useState("");
+  const [Nickname, setNickname] = useState("");
+  const [NicknameCheck, setNicknameCheck] = useState(false);
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
 
@@ -27,7 +30,9 @@ function RegisterPage() {
 
   //회원가입 완료
   const [ErrorFormSubmit, setErrorFormSubmit] = useState("");
-  const [Loading, setLoading] = useState(false);
+  const [emailLoading, setemailLoading] = useState(false);
+  const [nicknameLoading, setnicknameLoading] = useState(false);
+  const [submitLoading, setsubmitLoading] = useState(false);
 
   let history = useHistory();
 
@@ -52,6 +57,7 @@ function RegisterPage() {
   };
 
   const StartTimer = async () => {
+    setemailLoading(true);
     if (!(Email && Name)) {
       return alert("이메일과 이름을 모두 입력해주십시오.");
     }
@@ -81,6 +87,7 @@ function RegisterPage() {
     });
 
     EmailCheckFunc.then((val) => {
+      setemailLoading(false);
       if (val) {
         return alert("이미 가입된 이메일입니다.");
       } else {
@@ -112,6 +119,26 @@ function RegisterPage() {
     return () => clearInterval(countdown);
   }, [minutes, seconds]);
 
+  async function CheckNickName() {
+    setnicknameLoading(true);
+    let body = {
+      displayName:Nickname,
+    };
+
+    await axios.post("/api/user/checkNickname", body).then((response) => {
+      if(response.data.success) {
+        if(response.data.checkFlag) {
+          setNicknameCheck(true);
+          alert("사용가능한 닉네임입니다.");
+        }
+        else {
+          alert("이미 존재하는 닉네임입니다.");
+        }
+        setnicknameLoading(false);
+      }
+    })
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (Password !== ConfirmPassword) {
@@ -121,14 +148,18 @@ function RegisterPage() {
       return alert("이메일 인증을 완료해 주세요.");
     }
 
+    if(!NicknameCheck) {
+      return alert("닉네임 중복 확인을 완료해 주세요.");
+    }
+
     let body = {
       email: Email,
       password: Password,
-      name: Name,
+      name: Nickname,
     };
 
     try {
-      setLoading(true);
+      setsubmitLoading(true);
       let createdUser = await firebase
         .auth()
         .createUserWithEmailAndPassword(body.email, body.password);
@@ -159,7 +190,7 @@ function RegisterPage() {
         image: createdUser.user.photoURL,
       });
 
-      setLoading(false);
+      setsubmitLoading(false);
       //회원가입 완료 페이지 만들고 push
       history.push({
         pathname: "/register/complete",
@@ -171,36 +202,41 @@ function RegisterPage() {
 
       setTimeout(() => {
         setErrorFormSubmit("");
-        setLoading(false);
+        setsubmitLoading(false);
       }, 5000);
     }
   };
 
   return (
     <>
+      {(emailLoading || nicknameLoading || submitLoading) && 
+        <div style={{backgroundColor: "black", opacity: "0.3", width: "100vw", height: "100vh", zIndex: "10", position: "absolute", top: "0", left: "0", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center"}}>
+          <Spinner animation="border" role="status">
+           <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
+      }
       <div css={DivCSS}>
         <div css={BoxDivCSS}>
           <div css={Logo}>
-            <img src={process.env.PUBLIC_URL + "/Img/logo.png"} alt="" />
-            <p>
-              영상의 시작,
-              <br />
-              영상이 쉬워지는 곳
-            </p>
+            <p>회원가입</p>
           </div>
-          <form css={FormDivCSS} onSubmit={onSubmitHandler}>
-            <label>이름</label>
+          <form css={RegisterFormDiv} onSubmit={onSubmitHandler}>
+            <label className="name">이름</label>
             <input
               type="text"
               value={Name}
+              className="nameInput"
               onChange={(e) => setName(e.currentTarget.value)}
               required
             />
 
-            <label>이메일</label>
+            <label className="email">이메일</label>
             <input
               type="email"
               value={Email}
+              placeholder="example@makeit.com"
+              className="emailInput"
               onChange={(e) => setEmail(e.currentTarget.value)}
               required
               disabled={EmailCheckVerification ? true : false}
@@ -208,6 +244,7 @@ function RegisterPage() {
             {!EmailCheckVerification && (
               <button
                 type="button"
+                className="emailBtn"
                 onClick={() => StartTimer()}
                 disabled={Key ? true : false}
               >
@@ -217,21 +254,20 @@ function RegisterPage() {
 
             {Key && !EmailCheckVerification ? (
               <>
-                <div style={{ textAlign: "left", width: "100%" }}>
-                  <p>
-                    인증번호
+                <div className="checkEmail" style={{ textAlign: "left", width: "100%" }}>
+                  <div className="checkEmailInput">
+                    <input
+                      type="verification"
+                      value={InputKey}
+                      onChange={(e) => setInputKey(e.currentTarget.value)}
+                    />
                     <span style={{ color: "red", marginLeft: "1rem" }}>
                       {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
                     </span>
-                  </p>
-                  <br />
-                  <input
-                    type="verification"
-                    value={InputKey}
-                    onChange={(e) => setInputKey(e.currentTarget.value)}
-                  />
+                  </div>
                   <button
                     type="button"
+                    className="checkEmailBtn"
                     onClick={() => {
                       if (Key === InputKey) {
                         setEmailCheckVerification(true);
@@ -244,28 +280,58 @@ function RegisterPage() {
                 </div>
               </>
             ) : null}
-
-            <label>비밀번호</label>
+            <label className="nickname">닉네임</label>
+            <input
+              type="text"
+              value={Nickname}
+              className="nicknameInput"
+              onChange={(e) => {
+                setNickname(e.currentTarget.value);
+                if(NicknameCheck)
+                  setNicknameCheck(false);
+              }}
+              required
+            />
+            <button
+              type="button"
+              className="nicknameBtn"
+              onClick={() => CheckNickName()}
+            >
+              중복확인
+            </button>
+            <label className="pw">비밀번호</label>
             <input
               type="password"
+              className="pwInput"
+              placeholder="비밀번호를 입력해주세요"
               value={Password}
               onChange={(e) => setPassword(e.currentTarget.value)}
               required
             />
 
-            <label>비밀번호확인</label>
+            <label className="checkPW">비밀번호 확인</label>
             <input
               type="password"
+              className="checkPWInput"
               value={ConfirmPassword}
+              placeholder="비밀번호를 한번 더 입력해주세요"
               onChange={(e) => setConfirmPassword(e.currentTarget.value)}
               required
             />
-
-            <br />
+            <div className="footer">  
+            <label>이용약관</label>
+            <div className="service">1</div>
+            <div className="service">2</div>
+            <p className="more">약관 보기 &gt;</p>
+            <div className="service">3</div>
+            <p className="more">약관 보기 &gt;</p>
+            <div className="service">4</div>
+            <p className="more">약관 보기 &gt;</p>
+            </div>
             {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
-            <button type="submit" disabled={Loading}>
-              회원 가입
-            </button>
+              <button className="submitBtn" type="submit" disabled={submitLoading}>
+                가입하기
+              </button>
           </form>
         </div>
       </div>

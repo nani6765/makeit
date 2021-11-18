@@ -91,6 +91,7 @@ const RequestListDiv = styled.div`
             border: none;
             min-width: 5rem;
             .dropdown-item {
+              color: #BFBFBF;
               font-weight: bold;
               &:hover {
                 background: none;

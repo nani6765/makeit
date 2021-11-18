@@ -21,7 +21,7 @@ function HeaderGNB(props) {
                 props.history.push(`?category=${GNB}&subCategory=전체&sort=인기순&pIdx=0`);
               }}
             >
-              <p className={props.URL.category===GNB && "active"}>{GNB}</p>
+              <p className={props.URL.category===GNB ? "active" : null}>{GNB}</p>
             </MenuItem>
           );
         })}

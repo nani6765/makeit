@@ -65,6 +65,21 @@ router.post("/checkEmail", (req, res) => {
     });
 });
 
+router.post("/checkNickname", (req, res) => {
+  User.findOne({ displayName: req.body.displayName })
+    .exec()
+    .then((doc) => {
+      let checkFlag = true;
+      if(doc) {
+        checkFlag=false;
+      }
+      return res.status(200).send({ success: true, checkFlag });
+    })
+    .catch((err) => {
+      if (err) return res.json({ success: false, err });
+    });
+});
+
 router.post("/sendEmail", (req, res) => {
   if (sendEmail(req.body.email, req.body.key, req.body.name)) {
     return res.status(200).send({ success: true });
