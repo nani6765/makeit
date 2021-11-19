@@ -94,19 +94,6 @@ const CommunityBody = styled.div`
       color: #935ea5;
     }
   }
-  .noResult {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    margin: 2rem;
-    p:first-child {
-      font-size: 20px;
-    }
-    svg {
-      margin: 1rem 0;
-    }
-  }
   ${mq[1]} {
     width: 90%;
   }

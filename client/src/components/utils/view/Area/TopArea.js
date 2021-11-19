@@ -18,7 +18,11 @@ let TopAreaDiv = styled.div`
 `;
 
 function TopArea() {
-  return <TopAreaDiv />;
+  return (
+    <>
+      <TopAreaDiv />
+    </>
+  );
 }
 
 export default TopArea;
