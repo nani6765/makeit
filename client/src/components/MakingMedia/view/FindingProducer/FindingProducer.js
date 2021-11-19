@@ -65,95 +65,49 @@ function FindingProducer(props) {
 
   return (
     <ProducerListDiv>
-      <div className="left">
-        <StickyBar
-          URL={props.URL}
-          SubCategoryList={props.SubCategoryList}
-        />
-      </div>
-      <div className="right">
-        <div className="GNB">
-          <p className="category">
-            홈 &gt; 영상 제작자 탐색 &gt; {props.URL.subCategory}
-          </p>
-          <div className="filter">
-            <div className="search">
-                <input type="text" placeholder="검색하기" value={SearchTerm} onChange={(e) => setSearchTerm(e.currentTarget.value)} onKeyDown={(e) => {if(e.keyCode === 13) SearchHandler(e)}}/>
-                <SearchIcon onClick={(e) => SearchHandler(e)}/>
-            </div>
-            <Dropdown id="sort">
-              <Dropdown.Toggle id="dropdown-basic">{props.URL.sort}</Dropdown.Toggle>
-              <Dropdown.Menu id="dropdown-menu">
-                <Dropdown.Item
+      <Link to="/Making/ProducerUpload">
+        <button className="postBtn">게시하기</button>
+      </Link>
+      <ProducerList
+        URL={props.URL}
+        user={props.user}
+      />
+      <div className="FNB">
+        <div className="pagination">
+          {PageIdxArr[0] !== 1 ? (
+            <button
+              onClick={() => {
+                props.URL.pIdx = parseInt((props.URL.pIdx - 10)/10)*10;
+                props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
+              }}>
+              &lt; 이전
+            </button>
+          ) : null}
+          <ul>
+            {PageIdxArr.map((page, idx) => {
+              return (
+                <li
+                  key={idx}
                   onClick={() => {
-                    props.URL.sort = "인기순";
-                    props.URL.qIdx = 0;
+                    props.URL.pIdx = page - 1;
                     props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                   }}
-                  className={props.URL.sort==="인기순" ? "active" : null}
-                  > 
-                  인기순
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => {
-                    props.URL.sort = "최신순";
-                    props.URL.qIdx = 0;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                  }}
-                  className={props.URL.sort==="최신순" ? "active" : null}
-                  >
-                  최신순
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        </div>
-
-        <ProducerList
-          URL={props.URL}
-          user={props.user}
-        />
-
-        <Link to="/Making/ProducerUpload">
-          <button className="postBtn">게시하기</button>
-        </Link>
-        <div className="FNB">
-          <div className="pagination">
-            {PageIdxArr[0] !== 1 ? (
-              <button
-                onClick={() => {
-                  props.URL.pIdx = parseInt((props.URL.pIdx - 10)/10)*10;
-                  props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                }}>
-                &lt; 이전
-              </button>
-            ) : null}
-            <ul>
-              {PageIdxArr.map((page, idx) => {
-                return (
-                  <li
-                    key={idx}
-                    onClick={() => {
-                      props.URL.pIdx = page - 1;
-                      props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                    }}
-                    className={props.URL.pIdx === (page - 1).toString() ? "active" : null}
-                  >
-                    <p>{page}</p>
-                  </li>
-                );
-              })}
-            </ul>
-            {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
-              <button
-                onClick={() => {
-                  props.URL.pIdx = parseInt((props.URL.pIdx + 10)/10)*10;
-                  props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                }}>
-                다음 &gt;
-              </button>
-            )}
-          </div>
+                  className={props.URL.pIdx === (page - 1).toString() ? "active" : null}
+                >
+                  <p>{page}</p>
+                </li>
+              );
+            })}
+          </ul>
+          {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
+            <button
+              onClick={() => {
+                props.URL.pIdx = parseInt((props.URL.pIdx + 10)/10)*10;
+                props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
+              }}>
+              다음 &gt;
+            </button>
+          )}
         </div>
       </div>
     </ProducerListDiv>
