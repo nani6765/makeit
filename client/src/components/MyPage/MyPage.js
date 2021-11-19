@@ -6,7 +6,7 @@ import BasicMyPage from "./MyPageContent/Taps/BasicMyPage.js";
 import EditProfile from "./MyPageContent/Taps/EditProfile.js";
 import AlarmCenter from "./MyPageContent/Taps/Alarm/AlarmCenter.js";
 import ActivityLog from "./MyPageContent/Taps/Logs/ActivityLog.js";
-import { batch } from "react-redux";
+import qs from 'qs';
 
 function MyPage(props) {
   const location = useLocation();
@@ -15,22 +15,20 @@ function MyPage(props) {
   const [Taps, setTaps] = useState("basic");
   const [AlarmType, setAlarmType] = useState("alarm");
 
-  useEffect(() => {
-    if (location.state) {
-      setTaps(location.state.Taps);
-      setAlarmType(location.state.AlarmType);
-    }
-  }, [location.state]);
 
   useEffect(() => {
     if (location.search === "") {
       setTaps("basic");
     } else {
-      if (location.search.slice(1) != Taps) {
-        setTaps(location.search.slice(1));
+      let temp = qs.parse(location.search, { ignoreQueryPrefix: true});
+      if (temp.Taps !== Taps) {
+        setTaps(temp.Taps);
+      }
+      if(temp.AlarmType) {
+        setAlarmType(temp.AlarmType);
       }
     }
-  }, [location.search]);
+  }, [location]);
 
   const SwitchTaps = () => {
     switch (Taps) {

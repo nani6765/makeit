@@ -79,7 +79,7 @@ function CommunityPost() {
               <p css={GridTitle}>HOT 게시글</p>
               {hotPost.map((post, idx) => (
                 <Link
-                  to={"/community/post/" + post.postNum}
+                  to={"/community/post/" + post.url}
                   style={{ textDecorationLine: "none", color: "black" }}
                   key={idx}
                 >
@@ -91,7 +91,7 @@ function CommunityPost() {
               <p css={GridTitle}>최신 게시글</p>
               {newPost.map((post, idx) => (
                 <Link
-                  to={"/community/post/" + post.postNum}
+                  to={"/community/post/" + post.url}
                   style={{ textDecorationLine: "none", color: "black" }}
                   key={idx}
                 >
@@ -103,7 +103,7 @@ function CommunityPost() {
               <p css={GridTitle}>댓글 많은 게시글</p>
               {commentPost.map((post, idx) => (
                 <Link
-                  to={"/community/post/" + post.postNum}
+                  to={"/community/post/" + post.url}
                   style={{ textDecorationLine: "none", color: "black" }}
                   key={idx}
                 >

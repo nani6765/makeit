@@ -124,6 +124,8 @@ const BodyHeaderDiv = styled.div`
   width: 100%;
   padding: 15px 15%;
   div {
+    display: flex;
+    align-items: center;
     .category {
       font-size: 24px;
       font-weight: bold;
@@ -177,6 +179,9 @@ const BodyHeaderDiv = styled.div`
         height: 12px;
       }
     }
+  }
+  ${mq[1]} {
+    padding: 10px 5%;
   }
 `;
 
@@ -234,6 +239,9 @@ const PostCard = styled.div`
     font-weight: 600;
     margin-top: 10px;
     font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     line-break: anywhere;
   }
   .desc {

@@ -89,14 +89,17 @@ const MainPageHading = css`
     a {
       margin-left: 1rem;
       background: #efe9e9;
-      border-radius: 50%;
-      padding: 0.5rem;
       font-weight: 500;
       font-size: 0.5rem;
       line-height: 15px;
       color: #b3b3b3;
     }
   } ;
+  ${mq[1]} {
+    a {
+      border-radius: 20px;
+    }
+  }
 `;
 
 const MainPageSubHading = css`
