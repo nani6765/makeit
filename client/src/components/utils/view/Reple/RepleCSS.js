@@ -41,7 +41,7 @@ const RepleContentGrid = styled.div`
     .hambuc {
       grid-area: hambuc;
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       color: #c4c4c4;
       position: relative;
@@ -358,7 +358,7 @@ const RerepleUploadDiv = styled.div`
       color: white;
     }
     ${mq[1]} {
-      grid-template-columns: 50px auto 1fr 50px 5px 50px;
+      grid-template-columns: 50px auto 1fr 70px 20px 70px;
       grid-template-rows: 50px auto auto;
       grid-gap: 0px;
       grid-template-areas:
@@ -379,6 +379,7 @@ const RerepleUploadDiv = styled.div`
       }
       .cancel {
         font-size: 12px;
+        padding: 5px;
       }
       .submit {
         font-size: 12px;

@@ -6,6 +6,8 @@ import firebase from "../../../config/firebase.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
+const breakpoints = [1200, 576];
+const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 function LoginPage(props) {
   const [Email, setEmail] = useState("");
@@ -61,6 +63,9 @@ function LoginPage(props) {
       background: #fff;
       color: #5A278B;
       font-weight: bold;
+    }
+    ${mq[1]} {
+      width: 70%;
     }
   `;
 

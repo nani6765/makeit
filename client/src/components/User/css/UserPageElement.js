@@ -33,7 +33,7 @@ const BoxDivCSS = css`
     margin-bottom: 10vh;
   }
   ${mq[1]} {
-    width: 80%;
+    width: 95%;
     margin-top: 10vh;
     margin-bottom: 10vh;
   }
@@ -49,6 +49,9 @@ const Logo = css`
     font-size: 2rem;
     color: #2e2e2e;
     line-height: 1.5rem;
+    ${mq[0]} {
+      font-size: 1.5rem;
+    }
   }
 `;
 
@@ -87,6 +90,9 @@ const FormDivCSS = css`
       opacity: 0.5;
     }
   }
+  ${mq[1]} {
+    width: 70%;
+  }
 `;
 
 const RegisterFormDiv = css`
@@ -113,6 +119,7 @@ const RegisterFormDiv = css`
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 2rem;
+    word-break: keep-all;
   }
   input{
     border: 1.5px solid #B1B1B1;
@@ -134,6 +141,15 @@ const RegisterFormDiv = css`
     margin-bottom: 2rem !important;
     margin: 0 auto;
     width: 70%;
+    ${mq[0]} {
+      width: 80%;
+    }
+    ${mq[1]} {
+      width: 90%;
+      margin-left: 10%;
+      margin-right: 0;
+      word-break: keep-all;
+    }
   }
   .name {
     grid-area: name;
@@ -264,6 +280,19 @@ const RegisterFormDiv = css`
     border: 1px solid #61057D;
     box-sizing: border-box;
     border-radius: 5px;
+    ${mq[1]} {
+      margin: 2rem auto 0 auto;
+      width: 70%;
+      word-break: keep-all;
+    }
+  }
+  ${mq[0]} {
+    width: 80%;
+    font-size: 14px;
+  }
+  ${mq[1]} {
+    width: 90%;
+    font-size: 12px;
   }
 `;
 
@@ -303,4 +332,83 @@ const passwordFind = css`
   }
 `;
 
-export { DivCSS, Logo, BoxDivCSS, passwordFind, FormDivCSS, RegisterFormDiv, CompeleteDiv };
+const ModalContainerDiv = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .background {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 11;
+  }
+  .container {
+    position: fixed;
+    width: 20vw;
+    background: #fff;
+    z-index: 12;
+    padding: 0;
+    .content {
+      margin: 0 1.5rem;
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding-top: 1.5rem;
+        padding-bottom: 10px;
+
+        border-bottom: 1px solid black;
+
+        span {
+          color: #61057D;
+          font-size: 15px;
+          font-weight: bold;
+          &:last-of-type {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+          }
+
+        }
+      }
+      .msg {
+        padding: 2rem 0;
+        text-align: center;
+        font-size: 15px;
+      }
+    }
+    .btnDiv {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 1rem 0;
+      background: #F5F5F5;
+      button {
+        padding: 10px 30px;
+        color: #fff;
+        background: #61057D;
+        border: 1px solid #61057D;
+        font-size: 15px;
+      }
+    }
+    ${mq[0]} {
+      width: 40vw;
+    }
+    ${mq[1]} {
+      width: 80vw;
+    }
+  }
+  z-index: 11;
+`;
+
+export { DivCSS, Logo, BoxDivCSS, passwordFind, FormDivCSS, RegisterFormDiv, CompeleteDiv, ModalContainerDiv };

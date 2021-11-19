@@ -62,6 +62,7 @@ const DetailDiv = styled.div`
       text-align: left;
       margin-top: 1rem;
       margin-bottom: 1rem;
+      overflow-wrap: break-word;
     }
     .desc {
       grid-area: desc;
@@ -69,6 +70,7 @@ const DetailDiv = styled.div`
       word-break: keep-all;
       white-space: pre;
       line-height: 25px;
+      overflow-wrap: break-word;
     }
     .image {
       grid-area: image;
