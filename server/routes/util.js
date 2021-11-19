@@ -261,6 +261,7 @@ router.post("/repleSubmit", (req, res) => {
         )
           .exec()
           .then((response) => {
+            let flag = setLog(req.body.uid, "reple", `${URL + reple.postNum}`);
             if (response.uid != reple.uid) {
               let alarmTemp = {
                 uid: response.uid,
@@ -268,13 +269,9 @@ router.post("/repleSubmit", (req, res) => {
                 type: "reple",
                 category: req.body.category,
               };
-
               const alarm = new Alarm(alarmTemp);
               alarm.save(() => {
-                let flag = setLog(req.body.uid, "reple", `${URL + reple.postNum}`);
-                if (flag) {
-                  return res.status(200).send({ success: true });
-                }
+                return res.status(200).send({ success: true });
               });
             } else {
               return res.status(200).send({ success: true });
@@ -339,7 +336,7 @@ router.post("/rerepleGetAuther", (req, res) => {
 
 router.post("/rerepleSubmit", (req, res) => {
   let PostModel = SelectPostModel(req.body.type);
-
+  let URL = SelectURL(req.body.type);
   let temp = req.body;
   let rereple = {};
   rereple.uid = temp.uid;
@@ -383,6 +380,8 @@ router.post("/rerepleSubmit", (req, res) => {
       )
         .exec()
         .then((result) => {
+          let flag = setLog(req.body.uid, "rereple", `${URL + reple.postNum}`);
+
           let alarmtemp = {
             uid: result.uid,
             url: temp.url,
@@ -449,35 +448,56 @@ router.post("/rerepleDelete", (req, res) => {
 ///////////////////////////////
 
 router.post("/search", (req, res) => {
-
-  Community.find({$or: [{ title: { $regex : req.body.term}}, { content: { $regex : req.body.term }}]})
-  .populate("auther")
-  .limit(3)
-  .exec()
-  .then((copost) => {
-    ProPost.find({$or: [{ oneLineIntroduce: { $regex : req.body.term}}, { description: { $regex : req.body.term }}]})
+  Community.find({
+    $or: [
+      { title: { $regex: req.body.term } },
+      { content: { $regex: req.body.term } },
+    ],
+  })
     .populate("auther")
     .limit(3)
     .exec()
-    .then((making) => {
-      RequestPost.find({$or: [{ oneLineIntroduce: { $regex : req.body.term}}, { content: { $regex : req.body.term }}]})
-      .populate("auther")
-      .limit(3)
-      .exec()
-      .then((reqPost) => {
-        making = [...making, ...reqPost];
-        ShareVideo.find({$or: [{ oneLineIntroduce: { $regex : req.body.term}}, { content: { $regex : req.body.term }}]})
+    .then((copost) => {
+      ProPost.find({
+        $or: [
+          { oneLineIntroduce: { $regex: req.body.term } },
+          { description: { $regex: req.body.term } },
+        ],
+      })
         .populate("auther")
         .limit(3)
         .exec()
-        .then((sharePost) => {
-          making = [...making, ...sharePost];
-          making.sort((a, b) => { return a.createdAt - b.createdAt});
-          making = making.splice(0, 3);
+        .then((making) => {
+          RequestPost.find({
+            $or: [
+              { oneLineIntroduce: { $regex: req.body.term } },
+              { content: { $regex: req.body.term } },
+            ],
+          })
+            .populate("auther")
+            .limit(3)
+            .exec()
+            .then((reqPost) => {
+              making = [...making, ...reqPost];
+              ShareVideo.find({
+                $or: [
+                  { oneLineIntroduce: { $regex: req.body.term } },
+                  { content: { $regex: req.body.term } },
+                ],
+              })
+                .populate("auther")
+                .limit(3)
+                .exec()
+                .then((sharePost) => {
+                  making = [...making, ...sharePost];
+                  making.sort((a, b) => {
+                    return a.createdAt - b.createdAt;
+                  });
+                  making = making.splice(0, 3);
+                });
+            });
         });
-      });
     });
-  })
 });
 
 module.exports = router;

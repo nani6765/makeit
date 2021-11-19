@@ -32,4 +32,3 @@ function RepleList(props) {
 }
 
 export default RepleList;
- 
