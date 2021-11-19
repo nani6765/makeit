@@ -67,6 +67,7 @@ function MakingMedia(props) {
 
   useEffect(() => {
     let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
+    console.log(temp);
     if (temp.category && temp.sort && temp.pIdx && temp.subCategory) {
       setURL(qs.parse(location.search, { ignoreQueryPrefix: true }));
     } else
@@ -86,9 +87,7 @@ function MakingMedia(props) {
         <SubGNB SubCategoryList={SubCategoryList} URL={URL} />
       </MakingHeader>
       <MakingDiv>
-        {/*
-        setContent()
-         */}
+        {setContent()}
       </MakingDiv>
     </>
   );

@@ -20,13 +20,20 @@ function FriendsVideo() {
 
   var settings = {
     dots: false,
-    infinite: true,
+    infinite: FVideos.length > 3,
     speed: 500,
     easing: "ease-in-out",
     draggable: true,
     slidesToShow: 3,
     slidesToScroll: 3,
     responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
       {
         breakpoint: 576,
         settings: {

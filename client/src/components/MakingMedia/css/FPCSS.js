@@ -56,144 +56,52 @@ const ProducerListDiv = styled.div`
   width: 100%;
   height: auto;
   margin-top: 30px;
-  display: grid;
-  grid-template-columns: 2fr 8fr;
-  grid-template-rows: auto;
-  grid-template-areas: "left right";
-  grid-gap: 1rem;
-  .left {
-    grid-area: left;
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  .postBtn {
+    float: right;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 7px 10px;
+    background: #5A278B;
+    border: none;
+    border-radius: 3px;      
   }
-  .right {
-    grid-area: right;
+  .FNB {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    align-items: center;
 
-    .GNB {
+    margin-top: 20px;
+    .pagination {
       display: flex;
-      align-content: center;
-      justify-content: space-between;
-      align-items: center;;
-      margin-bottom: 1rem;
-      .category {
+      button {
+        display: inline-block;
+        background: none;
+        color: black;
+        font-weight: normal;
+        border: none;
+      }
+      li {
+        display: inline-block;
+        padding: 0px 6px;
+        border-right: 1.5px solid black;
+        p {
+          cursor: pointer;
+          margin: 0;
+        }
+      }
+      li.active {
         font-weight: bold;
+        color: #5A278B;
       }
-      .filter {
-        display: flex;
-        align-content: center;
-        align-items: center;
-        height: 100%;
-        .search {
-          background: #F7F7F7;
-          padding: 5px;
-          height: 100%;
-          border-radius: 3px;
-          input {
-            background: none;
-            border: none;
-            text-align: right;
-            height: 100%;
-            &::placeholder {
-              color: #BFBFBF;
-            }
-          }
-          input:focus {
-            border: none;
-            outline: none;
-          }
-          svg {
-            margin-left: 5px;
-            height: 100%;
-            cursor: pointer;
-          }
-        }
-        #sort {
-          display: inline-block;
-          margin-left: 1rem;
-          button {
-            background-color: #F7F7F7;
-            color: black;
-            border-radius: 3px;
-            border: none;
-            font-weight: bold;
-            &:foucs {
-              outline: none;
-              box-shadow: none;
-            }
-            &.btn-primary:focus {
-              outline: none;
-              box-shadow: none;
-            }
-            &:after {
-              margin-left: 1rem;
-              content: "⌵";
-              border: none;
-              font-weight: bold;
-            }
-          }
-          #dropdown-menu {
-            width: 100%;
-            background-color: #F7F7F7;
-            border: none;
-            min-width: 5rem;
-            .dropdown-item {
-              color: #BFBFBF;
-              font-weight: bold;
-              &:hover {
-                background: none;
-              }
-            }
-            .active {
-              color: #5A278B;
-              background: none;
-            }
-          }
-        }
-      }
-    }
-    .postBtn {
-      float: right;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
-      padding: 7px 10px;
-      background: #5A278B;
-      border: none;
-      border-radius: 3px;      
-    }
-    .FNB {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      margin-top: 20px;
-      .pagination {
-        display: flex;
-        button {
-          display: inline-block;
-          background: none;
-          color: black;
-          font-weight: normal;
-          border: none;
-        }
-        li {
-          display: inline-block;
-          padding: 0px 6px;
-          border-right: 1.5px solid black;
-          p {
-            cursor: pointer;
-            margin: 0;
-          }
-        }
-        li.active {
-          font-weight: bold;
-          color: #5A278B;
-        }
-        li:last-child {
-          border: none;
-        }
+      li:last-child {
+        border: none;
       }
     }
   }
@@ -212,17 +120,14 @@ const ProducerListContainer = styled.div`
   }
 
   .producercard {
-    width: 31%;
+    width: 23.5%;
     height: auto;
-    margin-right: 3.5%;
+    margin-right: 2%;
     margin-bottom: 3%;
 
-    background: #ffffff;
-    box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-      0px 9px 30px rgba(163, 1, 79, 0.05);
-    box-sizing: border-box;
+    background: none;
 
-    div {
+    .container {
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -230,43 +135,85 @@ const ProducerListContainer = styled.div`
 
       .thumbnail {
         width: 100%;
-        height: 200px;
+        height: 180px;
+        border-radius: 5px;
+        ${mq[1]} {
+          height: 200px;
+        }
       }
       p {
-        margin-top: 15px;
+        margin-top: 10px;
         padding: 0 15px;
         height: auto;
         align-items: center;
         font-weight: 600;
-        font-size: 15px;
+        font-size: 18px;
       }
       .title {
         padding: 0 15px;
-        height: 50px;
+        height: 25px;
         line-height: 25px;
         word-break: keep-all;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         overflow: hidden;
       }
-      .evaluation {
-        font-size: 14px;
-        i {
-          color: #ffe459;
-          margin-right: 5px;
+      .info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        margin-top: 10px;
+        padding: 0 10px;
+        p {
+          margin: 0;
         }
-        span {
-          margin-right: 1rem;
+        .producerInfo {
+          .profile {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+          }
+          .name {
+            font-size: 15px;
+            color: #9D9EA9;
+            line-height: 20px;
+            margin-left: 5px;
+          }
+        }
+        .evaluation {
+          font-size: 12px;
+          padding: 0;
+          line-height: 20px;
+          i {
+            color: #ffe459;
+            margin-right: 5px;
+          }
+          span {
+            margin-right: 1rem;
+          }
         }
       }
       .price {
         margin-bottom: 15px;
+        text-align: right;
+      }
+    }
+    &:nth-child(4n) {
+      margin-right: 0px;
+    }
+    ${mq[0]} {
+      width: 47.5%;
+      margin-right: 5%;
+      &:nth-of-type(2n) {
+        margin-right: 0px;
       }
     }
     ${mq[1]} {
       margin-bottom: 30px;
+      width: 100%;
+      margin-right: 0;
     }
-  }
-  .producercard:nth-child(3n) {
-    margin-right: 0px;
   }
 `;
 

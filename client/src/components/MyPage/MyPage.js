@@ -73,13 +73,13 @@ function MyPage(props) {
             <div>
               <p
                 className={AlarmType === "alarm" ? "active" : null}
-                onClick={() => setAlarmType("alarm")}
+                onClick={() => props.history.push("/MyPage?Taps=alarmCenter&AlarmType=alarm")}
               >
                 알림센터
               </p>
               <p
                 className={AlarmType === "note" ? "active" : null}
-                onClick={() => setAlarmType("note")}
+                onClick={() => props.history.push("/MyPage?Taps=alarmCenter&AlarmType=note")}
               >
                 쪽지함
               </p>

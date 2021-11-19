@@ -81,6 +81,7 @@ function FAEdit(props) {
     setFilmType([...postInfo.filmType]);
     setClassification([...postInfo.classification]);
     setImages([...postInfo.images]);
+    
   }, []);
 
   return (

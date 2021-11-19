@@ -49,6 +49,8 @@ function Participate(props) {
         return (
           <LoList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
         );
+      default:
+        return <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
     }
   };
 

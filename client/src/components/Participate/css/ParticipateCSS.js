@@ -34,6 +34,7 @@ const PartHeader = styled.div`
       color: #702c8a;
       font-size: 24px;
       font-weight: bold;
+      margin: 0;
     }
     .sorting {
       display: inline-block;
@@ -157,6 +158,11 @@ const PartFilter = styled.div`
         label {
           margin: 0px;
           user-select: none;
+          ${mq[1]} {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+          }
         }
         input + label:before {
           content: "";
@@ -168,6 +174,9 @@ const PartFilter = styled.div`
           border-radius: 4px;
           margin: 0 0.5rem 0 1.5rem;
           cursor: pointer;
+          ${mq[1]} {
+            margin: 0 0.5rem 0 1rem;
+          }
         }
         input:checked + label:before {
           content: "✓";
@@ -182,6 +191,9 @@ const PartFilter = styled.div`
     &:nth-last-of-type(1) {
       margin-bottom: 0px;
     }
+  }
+  ${mq[1]} {
+    padding: 20px 10px;
   }
 `;
 

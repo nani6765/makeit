@@ -10,150 +10,58 @@ const RequestListDiv = styled.div`
   width: 100%;
   height: auto;
   margin-top: 30px;
-  display: grid;
-  grid-template-columns: 2fr 8fr;
-  grid-template-rows: auto;
-  grid-template-areas: "left right";
-  grid-gap: 1rem;
-  .left {
-    grid-area: left;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .postBtn {
+    display: inline-block;
+    button {
+      float: right;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 7px 10px;
+      background: #5A278B;
+      border: none;
+      border-radius: 3px;
+      svg {
+        margin-left: 3px;
+      }
+    }
   }
-  .right {
-    grid-area: right;
+  .FNB {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    height: 100%;
+    align-items: center;
 
-    .GNB {
+    margin-top: 20px;
+    padding-top: 20px;
+    .pagination {
       display: flex;
-      align-content: center;
-      justify-content: space-between;
-      align-items: center;
-      .category {
-        font-weight: bold;
-      }
-      .filter {
-        display: flex;
-        align-content: center;
-        align-items: center;
-        height: 100%;
-        .search {
-          background: #F7F7F7;
-          padding: 5px;
-          height: 100%;
-          input {
-            background: none;
-            border: none;
-            text-align: right;
-            height: 100%;
-            &::placeholder {
-              color: #BFBFBF;
-            }
-          }
-          input:focus {
-            border: none;
-            outline: none;
-          }
-          svg {
-            margin-left: 5px;
-            height: 100%;
-            cursor: pointer;
-          }
-        }
-        #sort {
-          display: inline-block;
-          margin-left: 1rem;
-          button {
-            background-color: #F7F7F7;
-            color: black;
-            border-radius: 3px;
-            border: none;
-            font-weight: bold;
-            &:foucs {
-              outline: none;
-              box-shadow: none;
-            }
-            &.btn-primary:focus {
-              outline: none;
-              box-shadow: none;
-            }
-            &:after {
-              margin-left: 1rem;
-              content: "⌵";
-              border: none;
-              font-weight: bold;
-            }
-          }
-          #dropdown-menu {
-            width: 100%;
-            background-color: #F7F7F7;
-            border: none;
-            min-width: 5rem;
-            .dropdown-item {
-              color: #BFBFBF;
-              font-weight: bold;
-              &:hover {
-                background: none;
-              }
-            }
-            .active {
-              color: #5A278B;
-              background: none;
-            }
-          }
-        }
-      }
-    }
-    .postBtn {
-      display: inline-block;
       button {
-        float: right;
-        color: #fff;
-        font-size: 15px;
-        font-weight: bold;
-        padding: 7px 10px;
-        background: #5A278B;
+        display: inline-block;
+        background: none;
+        color: black;
+        font-weight: normal;
         border: none;
-        border-radius: 3px;
-        svg {
-          margin-left: 3px;
+      }
+      li {
+        display: inline-block;
+        padding: 0px 6px;
+        border-right: 1.5px solid #C9C9C9;
+        color: #C9C9C9;
+        p {
+          cursor: pointer;
+          margin: 0;
         }
       }
-    }
-    .FNB {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      margin-top: 20px;
-      padding-top: 20px;
-      .pagination {
-        display: flex;
-        button {
-          display: inline-block;
-          background: none;
-          color: black;
-          font-weight: normal;
-          border: none;
-        }
-        li {
-          display: inline-block;
-          padding: 0px 6px;
-          border-right: 1.5px solid #C9C9C9;
-          color: #C9C9C9;
-          p {
-            cursor: pointer;
-            margin: 0;
-          }
-        }
-        li.active {
-          font-weight: bold;
-          color: #5A278B;
-        }
-        li:last-child {
-          border: none;
-        }
+      li.active {
+        font-weight: bold;
+        color: #5A278B;
+      }
+      li:last-child {
+        border: none;
       }
     }
   }

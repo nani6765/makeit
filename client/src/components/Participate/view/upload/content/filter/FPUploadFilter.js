@@ -6,42 +6,25 @@ function FPUploadFilter(props) {
   let history = useHistory();
 
   const FilmTypeFilterManager = (e) => {
-    let temp = props.URL;
-
-    if (temp.filmType) {
-      if (temp.filmType.includes(e.target.id)) {
-        var idx = temp.filmType.indexOf(e.target.id);
-        if (idx !== -1) {
-          temp.filmType.splice(idx, 1);
-        }
-      } else {
-        temp.filmType.push(e.target.id);
-      }
+    if (e.target.checked) {
+      let temp = [...props.FilmType];
+      temp.push(e.target.id);
+      props.setFilmType(temp);
     } else {
-      temp.filmType = [];
-      temp.filmType.push(e.target.id);
+      let temp = props.FilmType.filter((film) => { return e.target.id !== film});
+      props.setFilmType(temp);
     }
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
   };
 
   const ClassificationFilterManager = (e) => {
-    let temp = props.URL;
-    if (temp.class) {
-      if (temp.class.includes(e.target.id)) {
-        var idx = temp.class.indexOf(e.target.id);
-        if (idx !== -1) {
-          temp.class.splice(idx, 1);
-        }
-      } else {
-        temp.class.push(e.target.id);
-      }
+    if (e.target.checked) {
+      let temp = [...props.Classification];
+      temp.push(e.target.id);
+      props.setClassification(temp);
     } else {
-      temp.class = [];
-      temp.class.push(e.target.id);
+      let temp = props.Classification.filter((classification) => { return e.target.id !== classification});
+      props.setClassification(temp);
     }
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
   };
 
   return (
@@ -59,6 +42,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="video"
+              defaultChecked={props.FilmType.includes("video")}
               value="영상"
               onClick={(e) => {
                 FilmTypeFilterManager(e);
@@ -70,6 +54,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="photo"
+              defaultChecked={props.FilmType.includes("photo")}
               value="사진"
               onClick={(e) => {
                 FilmTypeFilterManager(e);
@@ -81,6 +66,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="filmTypeEtc"
+              defaultChecked={props.FilmType.includes("filmTypeEtc")}
               value="기타"
               onClick={(e) => {
                 FilmTypeFilterManager(e);
@@ -101,6 +87,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="plan"
+              defaultChecked={props.Classification.includes("plan")}
               value="기획"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -112,6 +99,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="edit"
+              defaultChecked={props.Classification.includes("edit")}
               value="편집"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -123,6 +111,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="filming"
+              defaultChecked={props.Classification.includes("filming")}
               value="촬영"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -134,6 +123,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="light"
+              defaultChecked={props.Classification.includes("light")}
               value="조명"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -145,6 +135,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="acoustic"
+              defaultChecked={props.Classification.includes("acoustic")}
               value="음향"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -156,6 +147,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="voiceActor"
+              defaultChecked={props.Classification.includes("voiceActor")}
               value="성우"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -167,6 +159,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="beauty"
+              defaultChecked={props.Classification.includes("beauty")}
               value="미용"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -178,6 +171,7 @@ function FPUploadFilter(props) {
             <input
               type="checkbox"
               id="classEtc"
+              defaultChecked={props.Classification.includes("classEtc")}
               value="기타"
               onClick={(e) => {
                 ClassificationFilterManager(e);
