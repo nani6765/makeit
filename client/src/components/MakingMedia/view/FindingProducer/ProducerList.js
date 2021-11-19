@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Avatar from 'react-avatar';
 import axios from "axios";
 
 import { ProducerListContainer } from "../../css/FPCSS.js";
@@ -43,20 +44,32 @@ function ProducerList(props) {
             key={idx}
             className="producercard"
           >
-            <div>
+            <div className="container">
               <img src={post.thumbnailArr[0].path} className="thumbnail" />
-              <p className="producerName">{post.auther.displayName}</p>
               <p className="title">{post.oneLineIntroduce}</p>
-              <p className="evaluation">
-                <span>
-                {post.grade
-                  ? (post.grade / post.gradeArrayNum).toFixed(1)
-                  : post.grade} / 5.0
-                </span>
-                <span>
-                  {post.likeArray.length}
-                </span>
-              </p>
+              <div className="info">
+                <div className="producerInfo">
+                  <div className="profile">
+                    <Avatar
+                      src={post.auther.photoURL}
+                      size="20"
+                      round={true}
+                      style={{ border: "1px solid #c6c6c6" }}
+                    />
+                  </div>
+                  <span className="name">{post.auther.displayName}</span>
+                </div>
+                <p className="evaluation">
+                  <span>
+                  {post.grade
+                    ? (post.grade / post.gradeArrayNum).toFixed(1)
+                    : post.grade} / 5.0
+                  </span>
+                  <span>
+                    {post.likeArray.length}
+                  </span>
+                </p>
+              </div>
               <p className="price">&#8361; {post.priceInfo}</p>
             </div>
           </Link>

@@ -6,60 +6,36 @@ function FAUploadFilter(props) {
   let history = useHistory();
 
   const GenderFilterManager = (e) => {
-    let temp = props.URL;
-    if (temp.gender) {
-      if (temp.gender.includes(e.target.id)) {
-        var idx = temp.gender.indexOf(e.target.id);
-        if (idx !== -1) {
-          temp.gender.splice(idx, 1);
-        }
-      } else {
-        temp.gender.push(e.target.id);
-      }
+    if (e.target.checked) {
+      let temp = [...props.Gender];
+      temp.push(e.target.id);
+      props.setGender(temp);
     } else {
-      temp.gender = [];
-      temp.gender.push(e.target.id);
+      let temp = props.Gender.filter((gender) => { return e.target.id !== gender});
+      props.setGender(temp);
     }
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
   };
 
   const FilmTypeFilterManager = (e) => {
-    let temp = props.URL;
-    if (temp.filmType) {
-      if (temp.filmType.includes(e.target.id)) {
-        var idx = temp.filmType.indexOf(e.target.id);
-        if (idx !== -1) {
-          temp.filmType.splice(idx, 1);
-        }
-      } else {
-        temp.filmType.push(e.target.id);
-      }
+    if (e.target.checked) {
+      let temp = [...props.FilmType];
+      temp.push(e.target.id);
+      props.setFilmType(temp);
     } else {
-      temp.filmType = [];
-      temp.filmType.push(e.target.id);
+      let temp = props.FilmType.filter((film) => { return e.target.id !== film});
+      props.setFilmType(temp);
     }
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
   };
 
   const ClassificationFilterManager = (e) => {
-    let temp = props.URL;
-    if (temp.class) {
-      if (temp.class.includes(e.target.id)) {
-        var idx = temp.class.indexOf(e.target.id);
-        if (idx !== -1) {
-          temp.class.splice(idx, 1);
-        }
-      } else {
-        temp.class.push(e.target.id);
-      }
+    if (e.target.checked) {
+      let temp = [...props.Classification];
+      temp.push(e.target.id);
+      props.setClassification(temp);
     } else {
-      temp.class = [];
-      temp.class.push(e.target.id);
+      let temp = props.Classification.filter((classification) => { return e.target.id !== classification});
+      props.setClassification(temp);
     }
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
   };
 
   return (
@@ -75,6 +51,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="male"
+              defaultChecked={props.Gender.includes("male")}
               value="남자"
               onClick={(e) => {
                 GenderFilterManager(e);
@@ -86,7 +63,9 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="female"
+              defaultChecked={props.Gender.includes("female")}
               value="여자"
+              defaultChecked={props.GEn}
               onClick={(e) => {
                 GenderFilterManager(e);
               }}
@@ -97,6 +76,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="noMatter"
+              defaultChecked={props.Gender.includes("noMatter")}
               value="무관"
               onClick={(e) => {
                 GenderFilterManager(e);
@@ -119,6 +99,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="video"
+              defaultChecked={props.FilmType.includes("video")}
               value="영상"
               onClick={(e) => {
                 FilmTypeFilterManager(e);
@@ -130,6 +111,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="photo"
+              defaultChecked={props.FilmType.includes("photo")}
               value="사진"
               onClick={(e) => {
                 FilmTypeFilterManager(e);
@@ -141,6 +123,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="filmTypeEtc"
+              defaultChecked={props.FilmType.includes("filmTypeEtc")}
               value="기타"
               onClick={(e) => {
                 FilmTypeFilterManager(e);
@@ -161,6 +144,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="short"
+              defaultChecked={props.Classification.includes("short")}
               value="단편"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -172,6 +156,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="long"
+              defaultChecked={props.Classification.includes("long")}
               value="장편"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -183,6 +168,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="ad"
+              defaultChecked={props.Classification.includes("ad")}
               value="광고"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -194,6 +180,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="TV"
+              defaultChecked={props.Classification.includes("TV")}
               value="TV"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -205,6 +192,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="pictorial"
+              defaultChecked={props.Classification.includes("pictorial")}
               value="화보"
               onClick={(e) => {
                 ClassificationFilterManager(e);
@@ -216,6 +204,7 @@ function FAUploadFilter(props) {
             <input
               type="checkbox"
               id="classEtc"
+              defaultChecked={props.Classification.includes("classEtc")}
               value="기타"
               onClick={(e) => {
                 ClassificationFilterManager(e);

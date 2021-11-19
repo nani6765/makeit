@@ -136,6 +136,7 @@ const SubGNBDiv = styled.div`
       font-size: 12px;
       color: rgba(172, 176, 180, 1);
       user-select: none;
+      cursor: pointer;
       &.active {
         color: rgba(97, 5, 125, 1);
         font-weight: bold;

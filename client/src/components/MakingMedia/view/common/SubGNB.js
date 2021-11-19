@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useHistory, withRouter } from "react-router";
 import { SubGNBDiv } from "../../css/CommonCSS.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import qs from "qs";
@@ -15,7 +15,10 @@ function SubGNB(props) {
             props.URL.category === "영상 의뢰하기") && (
             <ul>
               {props.SubCategoryList.map((list, idx) => {
-                return <li key={idx}>{list}</li>;
+                return <li key={idx}
+                          className={list === props.URL.subCategory ? "active" : null}
+                          onClick={() => props.history.push(`?category=${props.URL.category}&subCategory=${list}&sort=인기순&pIdx=0`)}
+                        >{list}</li>;
               })}
             </ul>
           )}
@@ -52,4 +55,4 @@ function SubGNB(props) {
   );
 }
 
-export default SubGNB;
+export default withRouter(SubGNB);

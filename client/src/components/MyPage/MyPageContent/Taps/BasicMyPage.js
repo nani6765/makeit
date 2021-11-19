@@ -2,7 +2,7 @@ import React from "react";
 import { PCOnly } from "../../css/MyPageElement.js";
 import Avatar from "react-avatar";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 function BasicMyPage(props) {
   const user = useSelector((state) => state.user);
@@ -31,7 +31,7 @@ function BasicMyPage(props) {
             className="next"
             onClick={() => {
               props.setTaps("profile");
-              history.push("/mypage?profile");
+              history.push("/mypage?Taps=profile");
             }}
           >
             <span>＞</span>
@@ -49,19 +49,13 @@ function BasicMyPage(props) {
       <div className="btnDiv">
         <div
           className="topLeft"
-          onClick={() => {
-            props.setTaps("activityHistory");
-            history.push("/mypage?activityHistory");
-          }}
+          onClick={() => props.history.push("/MyPage?Taps=activityHistory")}
         >
           활동이력
         </div>
         <div
           className="topRight"
-          onClick={() => {
-            props.setTaps("alarmCenter");
-            history.push("/mypage?alarmCenter");
-          }}
+          onClick={() => props.history.push("/MyPage?Taps=alarmCenter&AlarmType=alarm")}
         >
           알림센터/쪽지함
         </div>
@@ -72,4 +66,4 @@ function BasicMyPage(props) {
   );
 }
 
-export default BasicMyPage;
+export default withRouter(BasicMyPage);

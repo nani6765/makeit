@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { MenuList, MenuItem } from "../../css/CommonCSS.js";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
+import qs from 'qs';
 
 function HeaderGNB(props) {
   const GNBList = [
@@ -15,7 +16,6 @@ function HeaderGNB(props) {
 
   const SearchHandler = (e) => {
     e.preventDefault();
-    /*
      if (SearchTerm && !/\S/.test(SearchTerm)) {
        return;
      }
@@ -29,26 +29,6 @@ function HeaderGNB(props) {
      props.history.push(`?${decodeURI(temp2)}`);
    };
 
-   const getPageLen = () => {
-     let body = {
-       category: props.URL.subCategory,
-     };
-
-     if (props.URL.searchTerm) {
-       body.searchTerm = props.URL.searchTerm;
-       setSearchTerm(props.URL.searchTerm);
-     }
-
-     axios
-       .post("/api/making/requestVideo/postLength", body)
-       .then((response) => {
-         if (response.data.success) {
-           setPageLen(parseInt((response.data.len - 1) / 5) + 1);
-           setSkip(0);
-         }
-       });
-       */
-  };
 
   return (
     <>

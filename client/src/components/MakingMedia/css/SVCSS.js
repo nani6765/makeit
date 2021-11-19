@@ -13,74 +13,17 @@ const ShareVideoDiv = styled.div`
   .headding {
     display: flex;
     align-content: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-
-    .filter {
-      display: flex;
-      align-content: center;
-      align-items: center;
-      height: 100%;
-      .search {
-        background: #f7f7f7;
-        padding: 5px;
-        height: 100%;
-        input {
-          background: none;
-          border: none;
-          text-align: right;
-          height: 100%;
-          &::placeholder {
-            color: #bfbfbf;
-          }
-        }
-        input:focus {
-          border: none;
-          outline: none;
-        }
-        svg {
-          margin-left: 5px;
-          height: 100%;
-          cursor: pointer;
-        }
-      }
-      #sort {
-        display: inline-block;
-        margin-left: 1rem;
-        button {
-          background-color: #f7f7f7;
-          color: black;
-          border-radius: 3px;
-          border: none;
-          &:foucs {
-            outline: none;
-            box-shadow: none;
-          }
-          &.btn-primary:focus {
-            outline: none;
-            box-shadow: none;
-          }
-          &:after {
-            margin-left: 1rem;
-            content: "⌵";
-            border: none;
-            font-weight: bold;
-          }
-        }
-      }
-    }
     .postBtn {
       float: right;
       color: #fff;
       font-size: 15px;
       font-weight: bold;
       padding: 7px 10px;
-      background: #935ea5;
+      background: #5A278B;
       border: none;
-      border-radius: 10px;
-      svg {
-        margin-left: 3px;
-      }
+      border-radius: 3px;      
     }
   }
 
@@ -132,6 +75,9 @@ const ShareVideoLink = css`
   &:hover {
     text-decoration: none;
     color: black;
+  }
+  ${mq[0]} {
+    width: 45%;
   }
   ${mq[1]} {
     width: auto;
