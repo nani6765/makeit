@@ -2,7 +2,7 @@ var router = require("express").Router();
 const { Community } = require("../model/CoPost.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
-
+const { Reple, Rereple } = require("../model/Reple.js");
 //const setUpload = require("../module/multer/upload.js");
 const setDelete = require("../module/multer/delete.js");
 const setLog = require("../module/setLog.js");
@@ -21,9 +21,12 @@ router.post("/", (req, res) => {
   if (category.category === "전체게시판") {
     delete category.category;
   }
-  
-  if(req.body.searchTerm) {
-    category.$or = [{title : {$regex: req.body.searchTerm}}, {content: {$regex: req.body.searchTerm}}];
+
+  if (req.body.searchTerm) {
+    category.$or = [
+      { title: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ];
   }
 
   //최신순&&인기순 정렬
