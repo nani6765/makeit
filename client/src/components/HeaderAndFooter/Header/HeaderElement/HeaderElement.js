@@ -47,8 +47,10 @@ function HeaderElement(props) {
           <HeaderSearch>
             <div>
               <form action="/search" method="GET">
-                <input type="text" placeholder="Search" name="search"/>
-                <button type="submit"><SearchIcon /></button>
+                <input type="text" placeholder="Search" name="term" />
+                <button type="submit">
+                  <SearchIcon />
+                </button>
               </form>
             </div>
           </HeaderSearch>

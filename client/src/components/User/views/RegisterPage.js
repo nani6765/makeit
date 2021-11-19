@@ -5,12 +5,17 @@ import firebase from "../../../config/firebase.js";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
-import { DivCSS, BoxDivCSS, Logo, RegisterFormDiv } from "../css/UserPageElement.js";
+import {
+  DivCSS,
+  BoxDivCSS,
+  Logo,
+  RegisterFormDiv,
+} from "../css/UserPageElement.js";
 import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import axios from "axios";
 import shortId from "shortid";
-import { Spinner } from 'react-bootstrap';
 import ModalDiv from "./ModalDiv.js";
+import Loading from "../../utils/view/Page/Loading.js";
 
 function RegisterPage() {
   //회원정보
@@ -33,7 +38,6 @@ function RegisterPage() {
   const [ErrorFormSubmit, setErrorFormSubmit] = useState("");
   const [submitLoading, setsubmitLoading] = useState(false);
 
-  
   const [emailLoading, setemailLoading] = useState(false);
   const [nicknameLoading, setnicknameLoading] = useState(false);
   const [ModalFlag, setModalFlag] = useState(false);
@@ -51,8 +55,8 @@ function RegisterPage() {
     setKey(temp);
     axios.post("api/user/sendEmail", body).then((response) => {
       if (response.data.success) {
-        setModalType('sendVerification');
-        setModalFlag(true); 
+        setModalType("sendVerification");
+        setModalFlag(true);
       }
     });
   };
@@ -132,23 +136,22 @@ function RegisterPage() {
   async function CheckNickName() {
     setnicknameLoading(true);
     let body = {
-      displayName:Nickname,
+      displayName: Nickname,
     };
 
     await axios.post("/api/user/checkNickname", body).then((response) => {
-      if(response.data.success) {
-        if(response.data.checkFlag) {
+      if (response.data.success) {
+        if (response.data.checkFlag) {
           setNicknameCheck(true);
           setModalType("available");
           setModalFlag(true);
-        }
-        else {
+        } else {
           setModalType("duplicate");
           setModalFlag(true);
         }
         setnicknameLoading(false);
       }
-    })
+    });
   }
 
   const onSubmitHandler = async (e) => {
@@ -160,7 +163,7 @@ function RegisterPage() {
       return alert("이메일 인증을 완료해 주세요.");
     }
 
-    if(!NicknameCheck) {
+    if (!NicknameCheck) {
       return alert("닉네임 중복 확인을 완료해 주세요.");
     }
 
@@ -221,13 +224,7 @@ function RegisterPage() {
 
   return (
     <>
-      {(emailLoading || nicknameLoading || submitLoading) && 
-        <div style={{backgroundColor: "black", opacity: "0.3", width: "100vw", height: "100vh", zIndex: "10", position: "absolute", top: "0", left: "0", display: "flex", justifyContent: "center", alignContent: "center", alignItems: "center"}}>
-          <Spinner animation="border" role="status">
-           <span className="visually-hidden">Loading...</span>
-          </Spinner>
-        </div>
-      }
+      {(emailLoading || nicknameLoading || submitLoading) && <Loading />}
       <div css={DivCSS}>
         <div css={BoxDivCSS}>
           <div css={Logo}>
@@ -266,7 +263,10 @@ function RegisterPage() {
 
             {Key && !EmailCheckVerification ? (
               <>
-                <div className="checkEmail" style={{ textAlign: "left", width: "100%" }}>
+                <div
+                  className="checkEmail"
+                  style={{ textAlign: "left", width: "100%" }}
+                >
                   <div className="checkEmailInput">
                     <input
                       type="verification"
@@ -300,8 +300,7 @@ function RegisterPage() {
               className="nicknameInput"
               onChange={(e) => {
                 setNickname(e.currentTarget.value);
-                if(NicknameCheck)
-                  setNicknameCheck(false);
+                if (NicknameCheck) setNicknameCheck(false);
               }}
               required
             />
@@ -331,24 +330,30 @@ function RegisterPage() {
               onChange={(e) => setConfirmPassword(e.currentTarget.value)}
               required
             />
-            <div className="footer">  
-            <label>이용약관</label>
-            <div className="service">1</div>
-            <div className="service">2</div>
-            <p className="more">약관 보기 &gt;</p>
-            <div className="service">3</div>
-            <p className="more">약관 보기 &gt;</p>
-            <div className="service">4</div>
-            <p className="more">약관 보기 &gt;</p>
+            <div className="footer">
+              <label>이용약관</label>
+              <div className="service">1</div>
+              <div className="service">2</div>
+              <p className="more">약관 보기 &gt;</p>
+              <div className="service">3</div>
+              <p className="more">약관 보기 &gt;</p>
+              <div className="service">4</div>
+              <p className="more">약관 보기 &gt;</p>
             </div>
             {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
-              <button className="submitBtn" type="submit" disabled={submitLoading}>
-                가입하기
-              </button>
+            <button
+              className="submitBtn"
+              type="submit"
+              disabled={submitLoading}
+            >
+              가입하기
+            </button>
           </form>
         </div>
       </div>
-      {ModalFlag && <ModalDiv modalType={ModalType} setModalFlag={setModalFlag}/>}
+      {ModalFlag && (
+        <ModalDiv modalType={ModalType} setModalFlag={setModalFlag} />
+      )}
       <MobileFooter />
     </>
   );

@@ -13,7 +13,7 @@ const PageDiv = styled.div`
   margin: 5rem 0;
   flex-direction: column;
   align-content: center;
-  justify-content: center;
+  []justify-content: center;
   align-items: center;
   img {
     margin: 1rem 0;
@@ -55,4 +55,19 @@ const PageDiv = styled.div`
   }
 `;
 
-export default PageDiv;
+const LoadingDiv = styled.div`
+  background-color: black;
+  opacity: 0.3;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+`;
+
+export { PageDiv, LoadingDiv };

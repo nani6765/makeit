@@ -1,5 +1,5 @@
 import React from "react";
-import PageDiv from "./PageCSS.js";
+import { PageDiv } from "./PageCSS.js";
 
 function NoURL() {
   return (

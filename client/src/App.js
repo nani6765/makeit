@@ -12,9 +12,7 @@ import MobileFooter from "./components/HeaderAndFooter/Footer/MobileFooter.js";
 
 //Main
 import MainPage from "./components/MainPage/MainPage.js";
-
-//Search
-import SearchResult from "./components/utils/view/Search/SearchResult.js";
+import Search from "./components/MainPage/Search/Search.js";
 
 //Landing
 import LandingPage from "./components/LandingPage/LandingPage.js";
@@ -79,8 +77,8 @@ function App() {
         <Switch>
           {/*Main*/}
           <Route exact path="/" component={MainPage} />
-          <Route exact path="/search" component={SearchResult} />
           <Route exact path="/landingPage" component={LandingPage} />
+          <Route exact path="/search" component={Search} />
           {/*User*/}
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />

@@ -448,55 +448,82 @@ router.post("/rerepleDelete", (req, res) => {
 ///////////////////////////////
 
 router.post("/search", (req, res) => {
-  Community.find({
-    $or: [
-      { title: { $regex: req.body.term } },
-      { content: { $regex: req.body.term } },
-    ],
+  console.log(req.body.term);
+  User.find({
+    displayName: { $regex: req.body.term },
   })
-    .populate("auther")
-    .limit(3)
     .exec()
-    .then((copost) => {
-      ProPost.find({
+    .then((userInfo) => {
+      if (userInfo.uid) {
+        console.log("True");
+      } else {
+        console.log("False");
+      }
+
+      Community.find({
         $or: [
-          { oneLineIntroduce: { $regex: req.body.term } },
-          { description: { $regex: req.body.term } },
+          { title: { $regex: req.body.term } },
+          { content: { $regex: req.body.term } },
         ],
       })
         .populate("auther")
-        .limit(3)
         .exec()
-        .then((making) => {
-          RequestPost.find({
+        .then((coPost) => {
+          return res.status(200).send({
+            success: true,
+          });
+        });
+      /*
+          ProPost.find({
             $or: [
               { oneLineIntroduce: { $regex: req.body.term } },
-              { content: { $regex: req.body.term } },
+              { description: { $regex: req.body.term } },
+              { uid: { $regex: userInfo.uid } },
             ],
           })
             .populate("auther")
-            .limit(3)
             .exec()
-            .then((reqPost) => {
-              making = [...making, ...reqPost];
-              ShareVideo.find({
+            .then((proPost) => {
+              RequestPost.find({
                 $or: [
                   { oneLineIntroduce: { $regex: req.body.term } },
                   { content: { $regex: req.body.term } },
+                  { uid: { $regex: userInfo.uid } },
                 ],
               })
                 .populate("auther")
-                .limit(3)
                 .exec()
-                .then((sharePost) => {
-                  making = [...making, ...sharePost];
-                  making.sort((a, b) => {
-                    return a.createdAt - b.createdAt;
-                  });
-                  making = making.splice(0, 3);
+                .then((reqPost) => {
+                  ShareVideo.find({
+                    $or: [
+                      { oneLineIntroduce: { $regex: req.body.term } },
+                      { content: { $regex: req.body.term } },
+                      { uid: { $regex: userInfo.uid } },
+                    ],
+                  })
+                    .populate("auther")
+                    .exec()
+                    .then((sharePost) => {
+                      return res.status(200).send({
+                        success: true,
+                        coLength: coPost.length,
+                        coPost: coPost.splice(0, 3),
+                        proLength: proPost.length,
+                        proPost: proPost.splice(0, 3),
+                        reqLength: reqPost.length,
+                        reqPost: reqPost.splice(0, 3),
+                        shareLength: sharePost.length,
+                        sharePost: sharePost.splice(0, 3),
+                      });
+                    });
                 });
             });
         });
+        */
+    })
+    .catch((err) => {
+      console.log("err", err);
+      return res.status(400).json({ success: false, err });
     });
 });
 
