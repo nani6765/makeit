@@ -5,6 +5,7 @@ import BodyHeader from "./content/List/BodyHeader";
 import PostListArea from "./content/List/PostListArea";
 import Pagination from "./content/List/Pagination";
 import qs from "qs";
+import NoSearch from "../../utils/view/Page/NoSearch.js";
 
 import axios from "axios";
 
@@ -14,7 +15,6 @@ import {
   FNBDiv,
 } from "../css/CommunityListCSS";
 import { ReactComponent as SearchIcon } from "../css/img/searchIcon.svg";
-import { ReactComponent as Surprising } from "../css/img/Surprising.svg";
 
 function CommunityList() {
   let location = useLocation();
@@ -124,13 +124,7 @@ function CommunityList() {
                 결과
               </div>
             )}
-            {qs.parse(URL).searchTerm && PostList.length === 0 && (
-              <div className="noResult">
-                <p>검색 결과가 없습니다.</p>
-                <Surprising />
-                <p>단어의 철자가 정확한지 확인해 주시기 바랍니다.</p>
-              </div>
-            )}
+            {qs.parse(URL).searchTerm && PostList.length === 0 && <NoSearch />}
             <PostListArea PostList={PostList} getPostList={getPostList} />
             <FNBDiv>
               <Pagination

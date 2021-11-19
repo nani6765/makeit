@@ -449,30 +449,22 @@ router.post("/rerepleDelete", (req, res) => {
 
 router.post("/search", (req, res) => {
   console.log(req.body.term);
-  User.find({
-    displayName: { $regex: req.body.term },
-  })
-    .exec()
-    .then((userInfo) => {
-      if (userInfo.uid) {
-        console.log("True");
-      } else {
-        console.log("False");
-      }
 
-      Community.find({
-        $or: [
-          { title: { $regex: req.body.term } },
-          { content: { $regex: req.body.term } },
-        ],
-      })
-        .populate("auther")
-        .exec()
-        .then((coPost) => {
-          return res.status(200).send({
-            success: true,
-          });
-        });
+  Community.find({
+    $or: [
+      { title: { $regex: req.body.term } },
+      { content: { $regex: req.body.term } },
+      { "auther.displayname": { $regex: req.body.term } },
+    ],
+  })
+    .populate("auther")
+    .exec()
+    .then((coPost) => {
+      console.log(coPost);
+      return res.status(200).send({
+        success: true,
+      });
+
       /*
           ProPost.find({
             $or: [
