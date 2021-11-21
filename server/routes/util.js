@@ -454,64 +454,136 @@ router.post("/search", (req, res) => {
     $or: [
       { title: { $regex: req.body.term } },
       { content: { $regex: req.body.term } },
-      { "auther.displayname": { $regex: req.body.term } },
     ],
   })
-    .populate("auther")
+    .populate()
     .exec()
     .then((coPost) => {
-      console.log(coPost);
-      return res.status(200).send({
-        success: true,
-      });
+      Community.find()
+        .populate({
+          path: "auther",
+          match: {
+            displayName: { $regex: req.body.term },
+          },
+        })
+        .exec()
+        .then((coAuther) => {
+          let coResult = [...coPost, ...coAuther];
+          if (coResult.length > 2) {
+            coResult.sort((a, b) => {
+              let Day1 = new Date(a.updatedAt);
+              let Day2 = new Date(b.updatedAt);
+              return Day2 - Day1;
+            });
+          }
+          console.log(coResult);
 
-      /*
           ProPost.find({
             $or: [
               { oneLineIntroduce: { $regex: req.body.term } },
               { description: { $regex: req.body.term } },
-              { uid: { $regex: userInfo.uid } },
             ],
           })
             .populate("auther")
             .exec()
             .then((proPost) => {
-              RequestPost.find({
-                $or: [
-                  { oneLineIntroduce: { $regex: req.body.term } },
-                  { content: { $regex: req.body.term } },
-                  { uid: { $regex: userInfo.uid } },
-                ],
-              })
-                .populate("auther")
+              ProPost.find()
+                .populate({
+                  path: "auther",
+                  match: {
+                    displayName: { $regex: req.body.term },
+                  },
+                })
                 .exec()
-                .then((reqPost) => {
-                  ShareVideo.find({
+                .then((proAuther) => {
+                  let proResult = [...proPost, proAuther];
+                  if (proResult.length > 2) {
+                    proResult.sort((a, b) => {
+                      let Day1 = new Date(a.updatedAt);
+                      let Day2 = new Date(b.updatedAt);
+                      return Day2 - Day1;
+                    });
+                  }
+                  RequestPost.find({
                     $or: [
                       { oneLineIntroduce: { $regex: req.body.term } },
                       { content: { $regex: req.body.term } },
-                      { uid: { $regex: userInfo.uid } },
                     ],
                   })
                     .populate("auther")
                     .exec()
-                    .then((sharePost) => {
-                      return res.status(200).send({
-                        success: true,
-                        coLength: coPost.length,
-                        coPost: coPost.splice(0, 3),
-                        proLength: proPost.length,
-                        proPost: proPost.splice(0, 3),
-                        reqLength: reqPost.length,
-                        reqPost: reqPost.splice(0, 3),
-                        shareLength: sharePost.length,
-                        sharePost: sharePost.splice(0, 3),
-                      });
+                    .then((reqPost) => {
+                      RequestPost.find()
+                        .populate({
+                          path: "auther",
+                          match: {
+                            displayName: { $regex: req.body.term },
+                          },
+                        })
+                        .exec()
+                        .then((reqAuther) => {
+                          let reqResult = [...reqPost, ...reqAuther];
+                          if (reqResult.length > 2) {
+                            reqResult.sort((a, b) => {
+                              let Day1 = new Date(a.updatedAt);
+                              let Day2 = new Date(b.updatedAt);
+                              return Day2 - Day1;
+                            });
+                          }
+                          ShareVideo.find({
+                            $or: [
+                              { oneLineIntroduce: { $regex: req.body.term } },
+                              { content: { $regex: req.body.term } },
+                            ],
+                          })
+                            .populate("auther")
+                            .exec()
+                            .then((sharePost) => {
+                              ShareVideo.find({
+                                $or: [
+                                  {
+                                    oneLineIntroduce: { $regex: req.body.term },
+                                  },
+                                  { content: { $regex: req.body.term } },
+                                ],
+                              })
+                                .populate({
+                                  path: "auther",
+                                  match: {
+                                    displayName: { $regex: req.body.term },
+                                  },
+                                })
+                                .exec()
+                                .then((shareAuther) => {
+                                  let shareResult = [
+                                    ...sharePost,
+                                    ...shareAuther,
+                                  ];
+                                  if (shareResult.length > 2) {
+                                    shareResult.sort((a, b) => {
+                                      let Day1 = new Date(a.updatedAt);
+                                      let Day2 = new Date(b.updatedAt);
+                                      return Day2 - Day1;
+                                    });
+                                  }
+                                  return res.status(200).send({
+                                    success: true,
+                                    coLength: coResult.length,
+                                    coResult: coResult.splice(0, 3),
+                                    proLength: proResult.length,
+                                    proResult: proResult.splice(0, 3),
+                                    reqLength: reqResult.length,
+                                    reqResult: reqResult.splice(0, 3),
+                                    shareLength: shareResult.length,
+                                    shareResult: shareResult.splice(0, 3),
+                                  });
+                                });
+                            });
+                        });
                     });
                 });
             });
         });
-        */
     })
     .catch((err) => {
       console.log("err", err);
