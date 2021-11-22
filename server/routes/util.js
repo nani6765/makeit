@@ -2,6 +2,7 @@ var router = require("express").Router();
 const { User, Log } = require("../model/User.js");
 const { Alarm } = require("../model/Alarm.js");
 const { Community } = require("../model/CoPost.js");
+
 const {
   ProPost,
   TempProPost,
@@ -455,155 +456,93 @@ router.post("/rerepleDelete", (req, res) => {
 
 router.post("/search", (req, res) => {
   console.log(req.body.term);
-
-  Community.find({
-    $or: [
-      { title: { $regex: req.body.term } },
-      { content: { $regex: req.body.term } },
-    ],
-  })
-    .populate("auther")
+  User.find({ displayName: { $regex: req.body.term } })
     .exec()
-    .then((coPost) => {
-      Community.find()
-        .populate({
-          path: "auther",
-          match: {
-            displayName: { $regex: req.body.term },
-          },
-        })
+    .then((userInfo) => {
+      let uidArr = [];
+      if (userInfo != []) {
+        for (let i = 0; i < userInfo.length; i++) {
+          uidArr.push(userInfo[i].uid);
+        }
+      }
+      //community
+      Community.find({
+        $or: [
+          { title: { $regex: req.body.term } },
+          { content: { $regex: req.body.term } },
+          { uid: { $in: uidArr } },
+        ],
+      })
+        .populate("auther")
         .exec()
-        .then((coAuther) => {
-          let coResult = [...coPost, ...coAuther];
-          if (coResult.length > 2) {
-            coResult.sort((a, b) => {
-              let Day1 = new Date(a.updatedAt);
-              let Day2 = new Date(b.updatedAt);
-              return Day2 - Day1;
-            });
-          }
-
+        .then((coPost) => {
+          //making
           ProPost.find({
             $or: [
               { oneLineIntroduce: { $regex: req.body.term } },
               { description: { $regex: req.body.term } },
+              { uid: { $in: uidArr } },
             ],
           })
             .populate("auther")
             .exec()
             .then((proPost) => {
-              ProPost.find()
-                .populate({
-                  path: "auther",
-                  match: {
-                    displayName: { $regex: req.body.term },
-                  },
-                })
+              RequestPost.find({
+                $or: [
+                  { oneLineIntroduce: { $regex: req.body.term } },
+                  { content: { $regex: req.body.term } },
+                  { uid: { $in: uidArr } },
+                ],
+              })
+                .populate("auther")
                 .exec()
-                .then((proAuther) => {
-                  let making = [...proPost, ...proAuther];
-                  if (making.length > 2) {
-                    making.sort((a, b) => {
-                      let Day1 = new Date(a.updatedAt);
-                      let Day2 = new Date(b.updatedAt);
-                      return Day2 - Day1;
-                    });
-                  }
-                  RequestPost.find({
+                .then((reqPost) => {
+                  ShareVideo.find({
                     $or: [
-                      { oneLineIntroduce: { $regex: req.body.term } },
+                      {
+                        oneLineIntroduce: { $regex: req.body.term },
+                      },
                       { content: { $regex: req.body.term } },
+                      { uid: { $in: uidArr } },
                     ],
                   })
                     .populate("auther")
                     .exec()
-                    .then((reqPost) => {
-                      RequestPost.find()
-                        .populate({
-                          path: "auther",
-                          match: {
-                            displayName: { $regex: req.body.term },
+                    .then((sharePost) => {
+                      let MakingPost = [...proPost, ...reqPost, ...sharePost];
+                      if (MakingPost.length > 2) {
+                        MakingPost.sort((a, b) => {
+                          let Day1 = new Date(a.updatedAt);
+                          let Day2 = new Date(b.updatedAt);
+                          return Day2 - Day1;
+                        });
+                      }
+                      //participate
+                      PartFA.find({
+                        $or: [
+                          {
+                            oneLineIntroduce: {
+                              $regex: req.body.term,
+                            },
                           },
-                        })
+                          {
+                            content: { $regex: req.body.term },
+                          },
+                          { uid: { $in: uidArr } },
+                        ],
+                      })
+                        .populate("auther")
                         .exec()
-                        .then((reqAuther) => {
-                          making = [...making, ...reqPost, ...reqAuther];
-                          if (making.length > 2) {
-                            making.sort((a, b) => {
-                              let Day1 = new Date(a.updatedAt);
-                              let Day2 = new Date(b.updatedAt);
-                              return Day2 - Day1;
-                            });
-                          }
-                          ShareVideo.find({
-                            $or: [
-                              { oneLineIntroduce: { $regex: req.body.term } },
-                              { content: { $regex: req.body.term } },
-                            ],
-                          })
-                            .populate("auther")
-                            .exec()
-                            .then((sharePost) => {
-                              ShareVideo.find()
-                                .populate({
-                                  path: "auther",
-                                  match: {
-                                    displayName: { $regex: req.body.term },
-                                  },
-                                })
-                                .exec()
-                                .then((shareAuther) => {
-                                  making = [
-                                    ...making,
-                                    ...sharePost,
-                                    ...shareAuther,
-                                  ];
-                                  if (making.length > 2) {
-                                    making.sort((a, b) => {
-                                      let Day1 = new Date(a.updatedAt);
-                                      let Day2 = new Date(b.updatedAt);
-                                      return Day2 - Day1;
-                                    });
-                                  }
-                                  PartFA.find({
-                                    $or: [
-                                      { oneLineIntroduce: { $regex: req.body.term } },
-                                      { content: { $regex: req.body.term } },
-                                    ],
-                                  })
-                                  .populate("auther")
-                                  .exec()
-                                  .then((partPost) => {
-                                    PartFA.find()
-                                    .populate({
-                                      path: "auther",
-                                      match: {
-                                        displayName: { $regex: req.body.term },
-                                      },
-                                    })
-                                    .exec()
-                                    .then((partAuther) => {
-                                      let participate = [...partPost, ... partAuther];
-                                      if (participate.length > 2) {
-                                        participate.sort((a, b) => {
-                                          let Day1 = new Date(a.updatedAt);
-                                          let Day2 = new Date(b.updatedAt);
-                                          return Day2 - Day1;
-                                        });
-                                      }
-                                      return res.status(200).send({
-                                        success: true,
-                                        coLength: coResult.length,
-                                        coResult: coResult.splice(0, 5),
-                                        makingLength: making.length,
-                                        makingResult: making.splice(0, 5),
-                                        participateLength: participate.length,
-                                        participateResult: participate.splice(0, 5),
-                                      });
-                                    })
-                                  })
-                                });
-                            });
+                        .then((partPost) => {
+                          return res.status(200).send({
+                            success: true,
+                            coLength: coPost.length,
+                            coResult: coPost.splice(0, 5),
+                            makingLength: MakingPost.length,
+                            makingResult: MakingPost.splice(0, 5),
+                            participateLength: partPost.length,
+                            participateResult: partPost.splice(0, 5),
+                          });
                         });
                     });
                 });
