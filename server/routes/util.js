@@ -462,7 +462,7 @@ router.post("/search", (req, res) => {
       { content: { $regex: req.body.term } },
     ],
   })
-    .populate()
+    .populate("auther")
     .exec()
     .then((coPost) => {
       Community.find()
@@ -482,7 +482,6 @@ router.post("/search", (req, res) => {
               return Day2 - Day1;
             });
           }
-          console.log(coResult);
 
           ProPost.find({
             $or: [
@@ -502,9 +501,9 @@ router.post("/search", (req, res) => {
                 })
                 .exec()
                 .then((proAuther) => {
-                  let proResult = [...proPost, proAuther];
-                  if (proResult.length > 2) {
-                    proResult.sort((a, b) => {
+                  let making = [...proPost, ...proAuther];
+                  if (making.length > 2) {
+                    making.sort((a, b) => {
                       let Day1 = new Date(a.updatedAt);
                       let Day2 = new Date(b.updatedAt);
                       return Day2 - Day1;
@@ -528,9 +527,9 @@ router.post("/search", (req, res) => {
                         })
                         .exec()
                         .then((reqAuther) => {
-                          let reqResult = [...reqPost, ...reqAuther];
-                          if (reqResult.length > 2) {
-                            reqResult.sort((a, b) => {
+                          making = [...making, ...reqPost, ...reqAuther];
+                          if (making.length > 2) {
+                            making.sort((a, b) => {
                               let Day1 = new Date(a.updatedAt);
                               let Day2 = new Date(b.updatedAt);
                               return Day2 - Day1;
@@ -545,14 +544,7 @@ router.post("/search", (req, res) => {
                             .populate("auther")
                             .exec()
                             .then((sharePost) => {
-                              ShareVideo.find({
-                                $or: [
-                                  {
-                                    oneLineIntroduce: { $regex: req.body.term },
-                                  },
-                                  { content: { $regex: req.body.term } },
-                                ],
-                              })
+                              ShareVideo.find()
                                 .populate({
                                   path: "auther",
                                   match: {
@@ -561,28 +553,55 @@ router.post("/search", (req, res) => {
                                 })
                                 .exec()
                                 .then((shareAuther) => {
-                                  let shareResult = [
+                                  making = [
+                                    ...making,
                                     ...sharePost,
                                     ...shareAuther,
                                   ];
-                                  if (shareResult.length > 2) {
-                                    shareResult.sort((a, b) => {
+                                  if (making.length > 2) {
+                                    making.sort((a, b) => {
                                       let Day1 = new Date(a.updatedAt);
                                       let Day2 = new Date(b.updatedAt);
                                       return Day2 - Day1;
                                     });
                                   }
-                                  return res.status(200).send({
-                                    success: true,
-                                    coLength: coResult.length,
-                                    coResult: coResult.splice(0, 3),
-                                    proLength: proResult.length,
-                                    proResult: proResult.splice(0, 3),
-                                    reqLength: reqResult.length,
-                                    reqResult: reqResult.splice(0, 3),
-                                    shareLength: shareResult.length,
-                                    shareResult: shareResult.splice(0, 3),
-                                  });
+                                  PartFA.find({
+                                    $or: [
+                                      { oneLineIntroduce: { $regex: req.body.term } },
+                                      { content: { $regex: req.body.term } },
+                                    ],
+                                  })
+                                  .populate("auther")
+                                  .exec()
+                                  .then((partPost) => {
+                                    PartFA.find()
+                                    .populate({
+                                      path: "auther",
+                                      match: {
+                                        displayName: { $regex: req.body.term },
+                                      },
+                                    })
+                                    .exec()
+                                    .then((partAuther) => {
+                                      let participate = [...partPost, ... partAuther];
+                                      if (participate.length > 2) {
+                                        participate.sort((a, b) => {
+                                          let Day1 = new Date(a.updatedAt);
+                                          let Day2 = new Date(b.updatedAt);
+                                          return Day2 - Day1;
+                                        });
+                                      }
+                                      return res.status(200).send({
+                                        success: true,
+                                        coLength: coResult.length,
+                                        coResult: coResult.splice(0, 5),
+                                        makingLength: making.length,
+                                        makingResult: making.splice(0, 5),
+                                        participateLength: participate.length,
+                                        participateResult: participate.splice(0, 5),
+                                      });
+                                    })
+                                  })
                                 });
                             });
                         });

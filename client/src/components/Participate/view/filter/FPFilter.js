@@ -47,7 +47,7 @@ function FPUploadFilter(props) {
   useEffect(() => {
     let typeArr = ["video", "photo", "filmTypeEtc"];
 
-    if (props.URL.filmType != undefined) {
+    if (props.URL.filmType !== undefined) {
       typeArr.map((type, idx) => {
         let target = document.querySelector(`#${type}`);
         target.checked = props.URL.filmType.includes(type);
@@ -70,7 +70,7 @@ function FPUploadFilter(props) {
       "classEtc",
     ];
 
-    if (props.URL.class != undefined) {
+    if (props.URL.class !== undefined) {
       classArr.map((type, idx) => {
         let target = document.querySelector(`#${type}`);
         target.checked = props.URL.class.includes(type);

@@ -11,6 +11,12 @@ function Search() {
 
   const [Term, setTerm] = useState({});
   const [IsLoading, setIsLoading] = useState(false);
+  const [CoLength, setCoLength] = useState(0);
+  const [CoResult, setCoResult] = useState([]);
+  const [MakingLength, setMakingLength] = useState(0);
+  const [MakingResult, setMakingResult] = useState([]);
+  const [PartLength, setPartLength] = useState(0);
+  const [PartResult, setPartResult] = useState([]);
 
   useEffect(() => {
     if (location.search) {
@@ -25,10 +31,18 @@ function Search() {
       let body = {
         term: Term.term,
       };
-      console.log(body);
       axios.post("/api/util/search", body).then((response) => {
         if (response.data.success) {
           setIsLoading(false);
+          let temp = [...response.data.coResult];
+          setCoResult(temp);
+          setCoLength(response.data.coLength);
+          temp = [...response.data.makingResult];
+          setMakingResult(temp);
+          setMakingLength(response.data.makingLength);
+          temp = [...response.data.participateResult];
+          setPartResult(temp);
+          setPartLength(response.data.participateLength);
           console.log(response.data);
         } else {
           console.log(response.data.err);
@@ -38,7 +52,49 @@ function Search() {
   }, [Term]);
 
   return (
-    <>{IsLoading ? <Loading /> : <div>"{Term.term}"에 대한 총 검색결과</div>}</>
+    <>
+    {IsLoading
+      ? <Loading />
+      :
+        <div>
+          <p>"{Term.term}"에 대한 총 검색결과</p>
+          <div>
+            <p>영상 제작 총 {MakingLength}개의 결과</p>
+            <button>더보기 &gt;</button>    
+            {
+              MakingLength && (
+                MakingResult.map((making, idx) => {
+                  return (
+                    <div>{making.oneLineIntroduce}</div>
+                  )
+                })
+            )}
+          </div>
+          <div>
+            <p>영상 참여 총 {PartLength}개의 결과</p>
+            <button>더보기 &gt;</button>
+            {
+              PartLength.length > 0 && PartResult.map((participate, idx) => {
+                  return (
+                    <div>{participate.title}</div>
+                  )
+              })
+            }
+          </div>
+          <div>
+            <p>커뮤니티 총 {CoLength}개의 결과</p>
+            <button>더보기 &gt;</button>
+            {
+              CoLength.length > 0 && CoResult.map((post, idx) => {
+                  return (
+                    <div>{post.title}</div>
+                  )
+              })
+            }
+          </div>
+      </div>
+    }
+    </>
   );
 }
 

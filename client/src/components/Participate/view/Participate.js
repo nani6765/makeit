@@ -21,7 +21,6 @@ function Participate(props) {
   const [Loading, setLoading] = useState(false);
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([1]);
-  const [SearchTerm, setSearchTerm] = useState("");
   const [PostList, setPostList] = useState([]);
 
   const GNBObj = {
@@ -54,18 +53,6 @@ function Participate(props) {
     }
   };
 
-  const SearchHandler = (e) => {
-    e.preventDefault();
-    if (!/\S/.test(SearchTerm)) {
-      return;
-    }
-    let temp = qs.parse(URL);
-    temp.searchTerm = SearchTerm.trim();
-    temp.pIdx = 0;
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
-  };
-
   const SortFilter = (sort) => {
     let temp = qs.parse(URL);
     temp.sort = sort;
@@ -75,13 +62,6 @@ function Participate(props) {
   };
 
   async function getPostLen() {
-    /*
-    if (URL.searchTerm) {
-      setSearchTerm(temp.searchTerm);
-    } else {
-      setSearchTerm("");
-    }
-    */
 
     let body = {
       type: URL.category,

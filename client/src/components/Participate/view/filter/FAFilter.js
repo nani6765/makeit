@@ -64,7 +64,7 @@ function FAUploadFilter(props) {
 
   useEffect(() => {
     let genderArr = ["male", "female", "noMatter"];
-    if (props.URL.gender != undefined) {
+    if (props.URL.gender !== undefined) {
       genderArr.map((type, idx) => {
         let target = document.querySelector(`#${type}`);
         target.checked = props.URL.gender.includes(type);
@@ -92,7 +92,7 @@ function FAUploadFilter(props) {
 
     let classArr = ["short", "long", "ad", "TV", "pictorial", "classEtc"];
 
-    if (props.URL.class != undefined) {
+    if (props.URL.class !== undefined) {
       classArr.map((type, idx) => {
         let target = document.querySelector(`#${type}`);
         target.checked = props.URL.class.includes(type);
