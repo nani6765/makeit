@@ -131,7 +131,7 @@ function PartDetail(props) {
       <DetailHeaderDiv>
         <div>{setHeader()}</div>
       </DetailHeaderDiv>
-      {PostInfo.url != undefined && <PartDetailContent PostInfo={PostInfo} />}
+      {PostInfo.url !== undefined && <PartDetailContent PostInfo={PostInfo} />}
       {TotalSize > 0 ? (
         <>
           <RepleBtnDiv>
@@ -153,7 +153,7 @@ function PartDetail(props) {
           ) : null}
         </>
       ) : null}
-      {PostInfo._id != null ? (
+      {PostInfo._id !== null ? (
         <RepleUpload
           postInfo={PostInfo}
           type={PostInfo.type}

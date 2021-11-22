@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
@@ -17,11 +17,13 @@ import HeaderNavArea from "./HeaderNavArea.js";
 import HeaderLoginArea from "./HeaderLoginArea.js";
 import { ReactComponent as SearchIcon } from "../../css/search.svg";
 import { ReactComponent as Logo } from "../../css/logo.svg";
+import qs from 'qs';
 
 import "../../css/header.css";
 import "../../css/animation.css";
 
 function HeaderElement(props) {
+  let location = useLocation();
   //modal
   const [alarmHambucControl, setalarmHambucControl] = useState(false);
   const [myPageHambucControl, setmyPageHambucControl] = useState(false);
@@ -47,7 +49,7 @@ function HeaderElement(props) {
           <HeaderSearch>
             <div>
               <form action="/search" method="GET">
-                <input type="text" placeholder="Search" name="term" />
+                <input type="text" defaultValue={location.search ? qs.parse(location.search, { ignoreQueryPrefix : true }).term : ""} placeholder="Search" name="term" />
                 <button type="submit">
                   <SearchIcon />
                 </button>

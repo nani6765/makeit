@@ -1,5 +1,4 @@
 import React from "react";
-import qs from "qs";
 import { useHistory } from "react-router-dom";
 
 import { MenuList, MenuItem } from "../css/ParticipateCSS.js";
