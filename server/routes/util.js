@@ -65,8 +65,14 @@ const SelectPostModel = (types) => {
   switch (types) {
     case "CoPost":
       return Community;
+    case "Community":
+      return Community;
+    case "ProPost":
+      return ProPost;
     case "ShareVideo":
       return ShareVideo;
+    case "Request":
+      return RequestPost;
     case "FA":
       return PartFA;
     case "FP":
@@ -583,6 +589,49 @@ router.post("/search", (req, res) => {
                     });
                 });
             });
+        });
+    })
+    .catch((err) => {
+      console.log("err", err);
+      return res.status(400).json({ success: false, err });
+    });
+});
+
+router.post("/category/search", (req, res) => {
+  console.log(req.body.term);
+  console.log(req.body.category);
+  let Term = req.body.term;
+  let Model = SelectPostModel(req.body.category);
+
+  Model.find({
+    $or: [{ title: { $regex: Term } }, { content: { $regex: Term } }],
+  })
+    .populate()
+    .exec()
+    .then((postResult) => {
+      Model.find()
+        .populate({
+          path: "auther",
+          match: {
+            displayName: { $regex: Term },
+          },
+        })
+        .exec()
+        .then((autherResult) => {
+          let searchResult = [...postResult, ...autherResult];
+          if (searchResult.length > 2) {
+            coResult.sort((a, b) => {
+              let Day1 = new Date(a.updatedAt);
+              let Day2 = new Date(b.updatedAt);
+              return Day2 - Day1;
+            });
+          }
+          console.log(searchResult);
+          return res.status(200).send({
+            success: true,
+            searchLength: searchResult.length,
+            searchResult: searchResult,
+          });
         });
     })
     .catch((err) => {
