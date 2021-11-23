@@ -27,7 +27,7 @@ function DetailExplanation(props) {
       )}
       <div>
         <p>서비스 설명</p>
-        <div>{props.Description}</div>
+        <div>{props.Content}</div>
       </div>
     </DetailExplanationDiv>
   );

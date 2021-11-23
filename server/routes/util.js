@@ -90,7 +90,7 @@ const SelectURL = (types) => {
     case "CoPost":
       return "/community/post/";
     case "ProPost":
-      return "making/producerPost/";
+      return "/making/producerPost/";
     case "Quotation":
       return "/making/requestPost/";
     case "ShareVideo":
@@ -456,6 +456,9 @@ router.post("/rerepleDelete", (req, res) => {
 
 router.post("/search", (req, res) => {
   console.log(req.body.term);
+  let sort = {};
+  sort.createdAt = -1;
+
   User.find({ displayName: { $regex: req.body.term } })
     .exec()
     .then((userInfo) => {
@@ -474,17 +477,19 @@ router.post("/search", (req, res) => {
         ],
       })
         .populate("auther")
+        .sort(sort)
         .exec()
         .then((coPost) => {
           //making
           ProPost.find({
             $or: [
               { oneLineIntroduce: { $regex: req.body.term } },
-              { description: { $regex: req.body.term } },
+              { content: { $regex: req.body.term } },
               { uid: { $in: uidArr } },
             ],
           })
             .populate("auther")
+            .sort(sort)
             .exec()
             .then((proPost) => {
               RequestPost.find({
@@ -495,6 +500,7 @@ router.post("/search", (req, res) => {
                 ],
               })
                 .populate("auther")
+                .sort(sort)
                 .exec()
                 .then((reqPost) => {
                   ShareVideo.find({
@@ -507,13 +513,14 @@ router.post("/search", (req, res) => {
                     ],
                   })
                     .populate("auther")
+                    .sort(sort)
                     .exec()
                     .then((sharePost) => {
                       let MakingPost = [...proPost, ...reqPost, ...sharePost];
                       if (MakingPost.length > 2) {
                         MakingPost.sort((a, b) => {
-                          let Day1 = new Date(a.updatedAt);
-                          let Day2 = new Date(b.updatedAt);
+                          let Day1 = new Date(a.createdAt);
+                          let Day2 = new Date(b.createdAt);
                           return Day2 - Day1;
                         });
                       }
@@ -532,6 +539,7 @@ router.post("/search", (req, res) => {
                         ],
                       })
                         .populate("auther")
+                        .sort(sort)
                         .exec()
                         .then((partPost) => {
                           return res.status(200).send({

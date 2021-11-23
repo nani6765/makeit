@@ -28,7 +28,7 @@ function FindingProducerUpload(props) {
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
   const [Category, setCategory] = useState("카테고리");
-  const [Description, setDescription] = useState("");
+  const [Content, setContent] = useState("");
   const [WorkTypeArr, setWorkTypeArr] = useState([]);
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
@@ -65,7 +65,7 @@ function FindingProducerUpload(props) {
               //datail
               setOneLineIntroduce(response.data.tempPost.oneLineIntroduce);
               setCategory(response.data.tempPost.category);
-              setDescription(response.data.tempPost.description);
+              setContent(response.data.tempPost.content);
               setWorkTypeArr(response.data.tempPost.workTypeArr);
               setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
 
@@ -99,7 +99,7 @@ function FindingProducerUpload(props) {
       alert("카테고리를 선택하세요.");
       return false;
     }
-    if (!Description) {
+    if (!Content) {
       alert("상세 설명을 입력하세요.");
       return false;
     }
@@ -171,7 +171,7 @@ function FindingProducerUpload(props) {
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
       category: Category,
-      description: Description,
+      content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
       thumbnailArr: Thumbnail,
@@ -200,7 +200,7 @@ function FindingProducerUpload(props) {
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
       category: Category,
-      description: Description,
+      content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
       thumbnailArr: Thumbnail,
@@ -233,8 +233,8 @@ function FindingProducerUpload(props) {
             setCurrentProcess={setCurrentProcess}
             Category={Category}
             setCategory={setCategory}
-            Description={Description}
-            setDescription={setDescription}
+            Content={Content}
+            setContent={setContent}
             WorkTypeArr={WorkTypeArr}
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
@@ -292,8 +292,8 @@ function FindingProducerUpload(props) {
             setCurrentProcess={setCurrentProcess}
             Category={Category}
             setCategory={setCategory}
-            Description={Description}
-            setDescription={setDescription}
+            Content={Content}
+            setContent={setContent}
             WorkTypeArr={WorkTypeArr}
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
