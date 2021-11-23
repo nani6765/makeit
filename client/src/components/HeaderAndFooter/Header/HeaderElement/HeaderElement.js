@@ -17,7 +17,6 @@ import HeaderNavArea from "./HeaderNavArea.js";
 import HeaderLoginArea from "./HeaderLoginArea.js";
 import { ReactComponent as SearchIcon } from "../../css/search.svg";
 import { ReactComponent as Logo } from "../../css/logo.svg";
-import qs from 'qs';
 
 import "../../css/header.css";
 import "../../css/animation.css";
@@ -49,7 +48,7 @@ function HeaderElement(props) {
           <HeaderSearch>
             <div>
               <form action="/search" method="GET">
-                <input type="text" defaultValue={location.search ? qs.parse(location.search, { ignoreQueryPrefix : true }).term : ""} placeholder="Search" name="term" />
+                <input type="text" placeholder="Search" name="term" />
                 <button type="submit">
                   <SearchIcon />
                 </button>

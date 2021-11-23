@@ -27,7 +27,7 @@ function FindingProducerEdit(props) {
   //상세설명
   const [OneLineIntroduce, setOneLineIntroduce] = useState("");
   const [Category, setCategory] = useState("카테고리");
-  const [Description, setDescription] = useState("");
+  const [Content, setContent] = useState("");
   const [WorkTypeArr, setWorkTypeArr] = useState([]);
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
@@ -48,7 +48,7 @@ function FindingProducerEdit(props) {
     // 상세설명
     setOneLineIntroduce(props.location.state.postInfo.oneLineIntroduce);
     setCategory(props.location.state.postInfo.category);
-    setDescription(props.location.state.postInfo.description);
+    setContent(props.location.state.postInfo.content);
     setWorkTypeArr([...props.location.state.postInfo.workTypeArr]);
     setVideoPurposeArr([...props.location.state.postInfo.videoPurposeArr]);
 
@@ -73,7 +73,7 @@ function FindingProducerEdit(props) {
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
       category: Category,
-      description: Description,
+      content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
       thumbnailArr: ThumbnailArr,
@@ -105,7 +105,7 @@ function FindingProducerEdit(props) {
       alert("카테고리를 선택하세요.");
       return false;
     }
-    if (!Description) {
+    if (!Content) {
       alert("상세 설명을 입력하세요.");
       return false;
     }
@@ -189,7 +189,7 @@ function FindingProducerEdit(props) {
       email: user.userData.email,
       oneLineIntroduce: OneLineIntroduce,
       category: Category,
-      description: Description,
+      content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
       thumbnailArr: Thumbnail,
@@ -226,8 +226,8 @@ function FindingProducerEdit(props) {
             setCurrentProcess={setCurrentProcess}
             Category={Category}
             setCategory={setCategory}
-            Description={Description}
-            setDescription={setDescription}
+            Content={Content}
+            setContent={setContent}
             WorkTypeArr={WorkTypeArr}
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}
@@ -285,8 +285,8 @@ function FindingProducerEdit(props) {
             setCurrentProcess={setCurrentProcess}
             Category={Category}
             setCategory={setCategory}
-            Description={Description}
-            setDescription={setDescription}
+            Content={Content}
+            setContent={setContent}
             WorkTypeArr={WorkTypeArr}
             setWorkTypeArr={setWorkTypeArr}
             VideoPurposeArr={VideoPurposeArr}

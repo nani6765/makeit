@@ -6,6 +6,7 @@ function ChatListFnc(props) {
     <AlarmListDiv>
       {props.ChatList &&
         Object.values(props.ChatList).map((chatInfo, idx) => {
+          console.log(chatInfo);
           return (
             <ChatContent
               key={idx}

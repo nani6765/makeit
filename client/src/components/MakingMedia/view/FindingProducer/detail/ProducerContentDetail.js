@@ -19,7 +19,7 @@ function ProducerContentDetail(props) {
             <DetailExplanation
               WorkTypeArr={props.PostInfo.workTypeArr}
               VideoPurposeArr={props.PostInfo.videoPurposeArr}
-              Description={props.PostInfo.description}
+              Content={props.PostInfo.content}
             />
             <PortFolio />
             <PriceRule PriceInfo={props.PostInfo.priceInfo} />

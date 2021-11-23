@@ -32,7 +32,7 @@ const ProPostSchema = mongoose.Schema(
     category: {
       type: String,
     },
-    description: {
+    content: {
       type: String,
     },
     workTypeArr: {
@@ -87,6 +87,10 @@ const ProPostSchema = mongoose.Schema(
     likeArray: {
       type: Array,
     },
+    type: {
+      type: String,
+      default: "영상 제작자 탐색",
+    },
     url: {
       type: Number,
       unique: true,
@@ -131,7 +135,7 @@ const TempProPostSchema = mongoose.Schema(
     category: {
       type: String,
     },
-    description: {
+    content: {
       type: String,
     },
     workTypeArr: {
@@ -273,6 +277,10 @@ const RequestPostSchema = mongoose.Schema(
       type: String,
       default: realTime(),
     },
+    type: {
+      type: String,
+      default: "영상 의뢰하기",
+    },
     url: {
       type: Number,
       unique: true,
@@ -383,6 +391,10 @@ const ShareVideoSchema = mongoose.Schema(
       default: realTime(),
     },
     //post속성
+    type: {
+      type: String,
+      default: "제작 영상 알리기",
+    },
     url: {
       type: Number,
       unique: true,
