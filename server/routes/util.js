@@ -561,35 +561,40 @@ router.post("/category/search", (req, res) => {
   let Term = req.body.term;
   let Model = SelectPostModel(req.body.category);
 
-  Model.find({
-    $or: [{ title: { $regex: Term } }, { content: { $regex: Term } }],
-  })
-    .populate()
+  User.find({ displayName: { $regex: req.body.term } })
     .exec()
-    .then((postResult) => {
-      Model.find()
-        .populate({
-          path: "auther",
-          match: {
-            displayName: { $regex: Term },
-          },
-        })
+    .then((userInfo) => {
+      let uidArr = [];
+      if (userInfo != []) {
+        for (let i = 0; i < userInfo.length; i++) {
+          uidArr.push(userInfo[i].uid);
+        }
+      }
+      Model.find({
+        $or: [{ title: { $regex: Term } }, { content: { $regex: Term } }],
+      })
+        .populate()
         .exec()
-        .then((autherResult) => {
-          let searchResult = [...postResult, ...autherResult];
-          if (searchResult.length > 2) {
-            coResult.sort((a, b) => {
-              let Day1 = new Date(a.updatedAt);
-              let Day2 = new Date(b.updatedAt);
-              return Day2 - Day1;
+        .then((postResult) => {
+          Model.find()
+            .populate("auther")
+            .exec()
+            .then((autherResult) => {
+              let searchResult = [...postResult, ...autherResult];
+              if (searchResult.length > 2) {
+                coResult.sort((a, b) => {
+                  let Day1 = new Date(a.updatedAt);
+                  let Day2 = new Date(b.updatedAt);
+                  return Day2 - Day1;
+                });
+              }
+              console.log(searchResult);
+              return res.status(200).send({
+                success: true,
+                searchLength: searchResult.length,
+                searchResult: searchResult,
+              });
             });
-          }
-          console.log(searchResult);
-          return res.status(200).send({
-            success: true,
-            searchLength: searchResult.length,
-            searchResult: searchResult,
-          });
         });
     })
     .catch((err) => {

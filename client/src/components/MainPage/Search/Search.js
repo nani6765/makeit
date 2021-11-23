@@ -1,83 +1,166 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, css } from "@emotion/react";
+import styled from "@emotion/styled";
 
-import axios from "axios";
-import qs from "qs";
-import Loading from "../../utils/view/Page/Loading.js";
+const breakpoints = [1200, 576];
+const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-function Search() {
-  let history = useHistory();
-  let location = useLocation();
+const SearchBody = styled.div`
+  width: 70%;
+  margin: 0 auto;
 
-  const [Term, setTerm] = useState({});
-  const [IsLoading, setIsLoading] = useState(false);
-
-  const [CoLength, setCoLength] = useState(0);
-  const [CoResult, setCoResult] = useState([]);
-  const [MakingLength, setMakingLength] = useState(0);
-  const [MakingResult, setMakingResult] = useState([]);
-  const [PartLength, setPartLength] = useState(0);
-  const [PartResult, setPartResult] = useState([]);
-
-  useEffect(() => {
-    if (location.search) {
-      setTerm(qs.parse(location.search, { ignoreQueryPrefix: true }));
-    } else {
-      history.push("/");
+  .result {
+    margin-bottom: 1rem;
+    a {
+      color: black;
+      &:hover {
+        text-decoration: none;
+      }
     }
-  }, []);
-
-  useEffect(() => {
-    if (Term.term) {
-      let body = {
-        term: Term.term,
-      };
-      axios.post("/api/util/search", body).then((response) => {
-        if (response.data.success) {
-          console.log(response.data);
-          setIsLoading(false);
-        } else {
-          console.log(response.data.err);
+    .resultHeader {
+      display: flex;
+      justify-content: space-between;
+      color: #565656;
+      padding: 1rem 0;
+      border-bottom: 2px solid #565656;
+      p {
+        display: inline-block;
+        font-weight: bold;
+        span {
+          color: #5a298b;
         }
-      });
+      }
+      button {
+        background: none;
+        border: none;
+      }
     }
-  }, [Term]);
+  }
+  ${mq[0]} {
+    width: 80%;
+  }
+  ${mq[1]} {
+    width: 90%;
+  }
+`;
 
-  return (
-    <>
-      {IsLoading ? (
-        <Loading />
-      ) : (
-        <div>
-          <p>"{Term.term}"에 대한 총 검색결과</p>
-          <div>
-            <p>영상 제작 총 {MakingLength}개의 결과</p>
-            <button>더보기 &gt;</button>
-            {MakingLength &&
-              MakingResult.map((making, idx) => {
-                return <div>{making.oneLineIntroduce}</div>;
-              })}
-          </div>
-          <div>
-            <p>영상 참여 총 {PartLength}개의 결과</p>
-            <button>더보기 &gt;</button>
-            {PartLength.length > 0 &&
-              PartResult.map((participate, idx) => {
-                return <div>{participate.title}</div>;
-              })}
-          </div>
-          <div>
-            <p>커뮤니티 총 {CoLength}개의 결과</p>
-            <button>더보기 &gt;</button>
-            {CoLength.length > 0 &&
-              CoResult.map((post, idx) => {
-                return <div>{post.title}</div>;
-              })}
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
+const SearchInput = styled.div`
+  width: 20vw;
+  height: 44px;
 
-export default Search;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  input {
+    width: 85%;
+    margin-right: 0px !important;
+    height: 100%;
+    padding: 10px;
+    border: 2px solid #5a298b;
+    border-radius: 5px 0px 0px 5px;
+    &:active,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    width: 15%;
+    margin-left: 0px !important;
+    height: 100%;
+    background-color: #5a298b;
+    color: white;
+    border: none;
+    border-radius: 0px 5px 5px 0px;
+
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 60%;
+      height: 60%;
+    }
+  }
+  ${mq[0]} {
+    width: 40vw;
+  }
+  ${mq[1]} {
+    width: 60vw;
+  }
+`;
+
+const PostCard = styled.div`
+  display: grid;
+  grid-template-rows: 30px 30px;
+  grid-template-columns: 6fr 30px 0.6fr 1.2fr 1.2fr;
+  grid-template-areas:
+    "title . . . ."
+    "content avatar auther realTime category";
+
+  width: 100%;
+  height: auto;
+
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #eeeeee;
+  box-sizing: border-box;
+  border-radius: 5px;
+
+  .title {
+    grid-area: title;
+    font-weight: bold;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-break: anywhere;
+    max-width: 60%;
+  }
+  .content {
+    grid-area: content;
+    width: 90%;
+    line-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-break: anywhere;
+  }
+  .sb-avatar {
+    grid-area: avatar;
+  }
+  .auther {
+    grid-area: auther;
+    margin: 5px 0;
+    margin-left: 5px;
+    line-height: 20px;
+    height: 20px;
+    color: #9d9ea9;
+    border-right: 1px solid #9a9a9a;
+  }
+  .realTime {
+    grid-area: realTime;
+    text-align: center;
+    line-height: 20px;
+    height: 20px;
+    margin: 5px 0;
+    color: #9d9ea9;
+    border-right: 1px solid #9a9a9a;
+  }
+  .category {
+    grid-area: category;
+    line-height: 30px;
+    text-align: center;
+    color: #9d9ea9;
+  }
+`;
+
+export { SearchBody, SearchInput, PostCard };
