@@ -13,6 +13,9 @@ import MobileFooter from "./components/HeaderAndFooter/Footer/MobileFooter.js";
 //Main
 import MainPage from "./components/MainPage/MainPage.js";
 import Search from "./components/MainPage/Search/Search.js";
+import MakingSearch from "./components/MainPage/Search/MakingSearch.js";
+import CoSearch from "./components/MainPage/Search/CoSearch.js";
+import PartSearch from "./components/MainPage/Search/PartSearch.js";
 
 //Landing
 import LandingPage from "./components/LandingPage/LandingPage.js";
@@ -79,6 +82,9 @@ function App() {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/landingPage" component={LandingPage} />
           <Route exact path="/search" component={Search} />
+          <Route exact path="/search/making" component={MakingSearch} />
+          <Route exact path="/search/participate" component={PartSearch} />
+          <Route exact path="/search/community" component={CoSearch} />
           {/*User*/}
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={RegisterPage} />
