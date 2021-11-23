@@ -29,7 +29,7 @@ router.post("/producer", (req, res) => {
   }
 
   if(req.body.searchTerm) {
-    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { description : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
+    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
   }
 
   //최신순&&인기순 정렬
@@ -64,7 +64,7 @@ router.post("/producer/postLength", (req, res) => {
   }
 
   if(req.body.searchTerm) {
-    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { description : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
+    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
   }
 
   ProPost.find(category)
