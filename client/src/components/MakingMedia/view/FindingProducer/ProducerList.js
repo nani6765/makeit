@@ -44,8 +44,10 @@ function ProducerList(props) {
             key={idx}
             className="producercard"
           >
-            <div className="container">
-              <img src={post.thumbnailArr[0].path} className="thumbnail" />
+            <div className="card">
+              <figure className="thumbnail">
+                <img src={post.thumbnailUrl} />
+              </figure>
               <p className="title">{post.oneLineIntroduce}</p>
               <div className="info">
                 <div className="producerInfo">

@@ -110,59 +110,69 @@ const ProducerListDiv = styled.div`
 const ProducerListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-
   margin-top: 10px;
-  
+  position: relative;
   a {
     color: black;
     text-decoration: none;
     &hover: text-decoration: none;
   }
-
-  .producercard {
-    width: 23.5%;
+  .producercard{
+    width: 25%;
     height: auto;
-    margin-right: 2%;
-    margin-bottom: 3%;
-
-    background: none;
-
-    .container {
-      display: flex;
-      flex-direction: column;
+    padding: 0.5rem;
+    position: relative;
+    ${mq[0]} {
+      width: 50%;
+    }
+    ${mq[1]} {
       width: 100%;
+    }
+    .card {
+      border: none;
+      display: grid;
       height: 100%;
-
-      .thumbnail {
-        width: 100%;
-        height: 180px;
-        border-radius: 5px;
-        ${mq[1]} {
-          height: 200px;
-        }
-      }
+      grid-template-rows: auto auto auto auto;
+      grid-template-columns: auto;
+      grid-template-areas:
+      "thumbnail"
+      "title" 
+      "info"
+      "price";
+      position: relative;
       p {
         margin-top: 10px;
-        padding: 0 15px;
         height: auto;
         align-items: center;
         font-weight: 600;
         font-size: 18px;
       }
+      .thumbnail {
+        grid-area: thumbnail;
+        display: block;
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        img{
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+      }
       .title {
-        padding: 0 15px;
-        height: 25px;
-        line-height: 25px;
+        grid-area: title;
         word-break: keep-all;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
       }
       .info {
+        grid-area: info;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
         margin-top: 10px;
         padding: 0 10px;
         p {
@@ -195,26 +205,13 @@ const ProducerListContainer = styled.div`
         }
       }
       .price {
+        grid-area: price;
         margin-bottom: 15px;
         text-align: right;
       }
-    }
-    &:nth-child(4n) {
-      margin-right: 0px;
-    }
-    ${mq[0]} {
-      width: 47.5%;
-      margin-right: 5%;
-      &:nth-of-type(2n) {
-        margin-right: 0px;
-      }
-    }
-    ${mq[1]} {
-      margin-bottom: 30px;
-      width: 100%;
-      margin-right: 0;
-    }
+    }    
   }
+}
 `;
 
 export {
