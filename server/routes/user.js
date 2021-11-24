@@ -70,8 +70,8 @@ router.post("/checkNickname", (req, res) => {
     .exec()
     .then((doc) => {
       let checkFlag = true;
-      if(doc) {
-        checkFlag=false;
+      if (doc) {
+        checkFlag = false;
       }
       return res.status(200).send({ success: true, checkFlag });
     })

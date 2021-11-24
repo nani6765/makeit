@@ -28,7 +28,7 @@ function ReviewForm(props) {
       grade: StarValue,
       content: Review,
     };
-    
+
     axios.post("/api/making/producer/review/upload", body).then((response) => {
       if (response.data.success) {
         alert("리뷰가 등록되었습니다.");
@@ -37,7 +37,6 @@ function ReviewForm(props) {
         return alert("response.data.message");
       }
     });
-    
   };
 
   return (

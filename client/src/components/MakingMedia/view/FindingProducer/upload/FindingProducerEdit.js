@@ -111,7 +111,7 @@ function FindingProducerEdit(props) {
     }
     return true;
   };
-  
+
   const PortfolioCheckEmptyContent = () => {
     if (!Thumbnail.length) {
       alert("썸네일을 등록하세요.");
@@ -145,43 +145,43 @@ function FindingProducerEdit(props) {
   };
 
   const NextHandler = (process) => {
-    switch(process.value) {
+    switch (process.value) {
       case "포트폴리오":
-        if(!DetailCheckEmptyContent()) {
+        if (!DetailCheckEmptyContent()) {
           setCurrentProcess("상세설명");
           return;
         }
         break;
       case "가격설정":
-        if(!DetailCheckEmptyContent()) {
+        if (!DetailCheckEmptyContent()) {
           setCurrentProcess("상세설명");
           return;
         }
-        if(!PortfolioCheckEmptyContent()) {
+        if (!PortfolioCheckEmptyContent()) {
           setCurrentProcess("포트폴리오");
           return;
         }
         break;
       case "수정/환불안내":
-        if(!DetailCheckEmptyContent()) {
+        if (!DetailCheckEmptyContent()) {
           setCurrentProcess("상세설명");
           return;
         }
-        if(!PortfolioCheckEmptyContent()) {
+        if (!PortfolioCheckEmptyContent()) {
           setCurrentProcess("포트폴리오");
           return;
         }
-        if(!PriceCheckEmptyContent()) {
+        if (!PriceCheckEmptyContent()) {
           setCurrentProcess("가격설정");
           return;
         }
         break;
-      
+
       default:
         break;
     }
     setCurrentProcess(process.value);
-  }
+  };
 
   const SubmitHandler = () => {
     let body = {
@@ -315,8 +315,8 @@ function FindingProducerEdit(props) {
             placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
             value={OneLineIntroduce}
             onChange={(e) => {
-              if(e.currentTarget.value.length <= 30) {
-                setOneLineIntroduce(e.currentTarget.value)
+              if (e.currentTarget.value.length <= 30) {
+                setOneLineIntroduce(e.currentTarget.value);
               }
             }}
           />
@@ -333,7 +333,9 @@ function FindingProducerEdit(props) {
                       className={
                         CurrentProcess === process.value ? "active" : null
                       }
-                      onClick={() => {NextHandler(process)}}
+                      onClick={() => {
+                        NextHandler(process);
+                      }}
                     >
                       {idx + 1}){process.value}
                     </li>
@@ -342,9 +344,7 @@ function FindingProducerEdit(props) {
               </ul>
             </div>
           </LeftContent>
-          <div className="rightContent">
-            {setRightContent()}
-          </div>
+          <div className="rightContent">{setRightContent()}</div>
         </ContentDiv>
       </UploadForm>
     </>

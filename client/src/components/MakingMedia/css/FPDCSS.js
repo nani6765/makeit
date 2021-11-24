@@ -81,8 +81,8 @@ const ProducerTitleDiv = styled.div`
     .top {
       display: flex;
       justify-content: space-between;
-      color: #C4C4C4;
-      
+      color: #c4c4c4;
+
       margin-bottom: 10px;
       .like {
         user-select: none;

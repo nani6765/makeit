@@ -19,7 +19,7 @@ function Price(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [])
+  }, []);
 
   return (
     <PriceDiv>

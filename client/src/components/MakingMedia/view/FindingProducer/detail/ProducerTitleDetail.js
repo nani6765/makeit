@@ -24,7 +24,7 @@ function ProducerTitleDetail(props) {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  
+
   const innerRef = useOuterClick((e) => {
     sethambucControl(false);
   });
@@ -106,14 +106,20 @@ function ProducerTitleDetail(props) {
             {user.userData && (
               <div className="hambuc" ref={innerRef}>
                 <i
-                className="bi bi-three-dots"
-                onClick={() => sethambucControl(true)}
+                  className="bi bi-three-dots"
+                  onClick={() => sethambucControl(true)}
                 ></i>
-                {hambucControl && (
-                  user.userData.uid === props.PostInfo.uid
-                  ? <UserModal modalType="/making/producer" Info={props.PostInfo} path="/making" category="영상 제작자 탐색"/>
-                  : <GuestModal modalType="post" postInfo={props.PostInfo} />
-                )}
+                {hambucControl &&
+                  (user.userData.uid === props.PostInfo.uid ? (
+                    <UserModal
+                      modalType="/making/producer"
+                      Info={props.PostInfo}
+                      path="/making"
+                      category="영상 제작자 탐색"
+                    />
+                  ) : (
+                    <GuestModal modalType="post" postInfo={props.PostInfo} />
+                  ))}
               </div>
             )}
           </div>

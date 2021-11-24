@@ -7,7 +7,15 @@ import qs from "qs";
 import Loading from "../../utils/view/Page/Loading.js";
 
 import Avatar from "react-avatar";
-import { SearchBody, SearchInput, PostCard, ImageCard, GNBDiv, GNBItem, PagiCSS } from "../css/SearchCSS.js";
+import {
+  SearchBody,
+  SearchInput,
+  PostCard,
+  ImageCard,
+  GNBDiv,
+  GNBItem,
+  PagiCSS,
+} from "../css/SearchCSS.js";
 import SearchIcon from "./search.svg";
 
 function MakingSearch() {
@@ -24,18 +32,22 @@ function MakingSearch() {
 
   const CategoryList = [
     {
-      label:"전체",
+      label: "전체",
       value: "all",
-    }, {
+    },
+    {
       label: "영상 제작자 탐색",
       value: "proPost",
-    }, {
+    },
+    {
       label: "영상 의뢰하기",
       value: "reqVideo",
-    }, {
+    },
+    {
       label: "제작 영상 알리기",
       value: "shareVideo",
-    }];
+    },
+  ];
 
   const SearchHandler = (e) => {
     e.preventDefault();
@@ -44,12 +56,13 @@ function MakingSearch() {
     }
     if (!SearchTerm) {
       history.push("/");
-    } else history.push(`/search/making?term=${SearchTerm}&pIdx=0&category=all`);
+    } else
+      history.push(`/search/making?term=${SearchTerm}&pIdx=0&category=all`);
   };
 
   const ClickFunc = (category) => {
     history.push(`/search/making?term=${URL.term}&pIdx=0&category=${category}`);
-  }
+  };
 
   const setMakingURL = (type) => {
     switch (type) {
@@ -63,14 +76,13 @@ function MakingSearch() {
         return;
     }
   };
-  
+
   useEffect(() => {
     let temp = qs.parse(location.search, { ignoreQueryPrefix: true });
     console.log(temp);
-    if(temp.term && temp.pIdx && temp.category) {
+    if (temp.term && temp.pIdx && temp.category) {
       setURL(qs.parse(location.search, { ignoreQueryPrefix: true }));
-    }
-    else if (temp.term && (!temp.pIdx || !temp.category)) {
+    } else if (temp.term && (!temp.pIdx || !temp.category)) {
       history.push(`/search/making?term=${temp.term}&pIdx=0&category=all`);
     } else {
       history.push("/");
@@ -78,14 +90,14 @@ function MakingSearch() {
   }, [location]);
 
   useEffect(() => {
-    if(URL.term) {
+    if (URL.term) {
       setIsLoading(true);
       let body = {
         term: URL.term,
         skip: URL.pIdx * 10,
         limit: 10,
       };
-      if(URL.category) {
+      if (URL.category) {
         body.category = URL.category;
       }
 
@@ -93,10 +105,10 @@ function MakingSearch() {
         if (response.data.success) {
           setMakingLength(response.data.postLength);
           setMakingResult([...response.data.post]);
-          setPageLen(parseInt(response.data.postLength/10)+1);
+          setPageLen(parseInt(response.data.postLength / 10) + 1);
         }
         setIsLoading(false);
-      })
+      });
     }
   }, [URL]);
 
@@ -107,102 +119,111 @@ function MakingSearch() {
       temp.push(i);
     }
     setPageIdxArr(temp);
-  }, [parseInt(URL.pIdx / 10),PageLen]);
-
+  }, [parseInt(URL.pIdx / 10), PageLen]);
 
   return (
     <>
-    {
-      IsLoading
-      ? <Loading />
-      : (
+      {IsLoading ? (
+        <Loading />
+      ) : (
         <>
-        <SearchBody>
-          <div>
-            <SearchInput>
-              <input
-                type="text"
-                defaultValue={URL.term}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.keyCode === 13) SearchHandler(e);
-                }}
-              />
-              <button onClick={(e) => SearchHandler(e)}>
-                <img src={SearchIcon} />
-              </button>
-            </SearchInput>
-          </div>
-          <div className="result">
-            <div className="resultHeader" style={{border: "none"}}>
-              <p>
-                <span>"영상 제작"</span> 검색 결과 ({MakingLength})
-              </p>
+          <SearchBody>
+            <div>
+              <SearchInput>
+                <input
+                  type="text"
+                  defaultValue={URL.term}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.keyCode === 13) SearchHandler(e);
+                  }}
+                />
+                <button onClick={(e) => SearchHandler(e)}>
+                  <img src={SearchIcon} />
+                </button>
+              </SearchInput>
             </div>
-            <GNBDiv>
-              <ul>
-                {
-                  CategoryList.map((category, idx) => {
-                    return <GNBItem className={category.value===URL.category ? "active" : null} onClick={() => ClickFunc(category.value)}key={idx}>
-                      <p>{category.label}</p>
-                    </GNBItem>
-                  })
-                }
-              </ul>
-            </GNBDiv>
-            {MakingLength > 0 &&
-              MakingResult.map((making, idx) => {
-                if(making.thumbnailUrl !== undefined){
-                  return (
-                    <Link to={setMakingURL(making.type) + making.url} key={idx}>
-                      <ImageCard>
-                        <div className="thumbnail">
-                          <img src={making.thumbnailUrl} />
-                        </div>
-                        <p className="title">{making.oneLineIntroduce}</p>
-                        <div className="content">{making.content}</div>
-                        <Avatar
-                          src={making.auther.photoURL}
-                          size="30"
-                          round={true}
-                          style={{ border: "1px solid #c6c6c6" }}
-                        />
-                        <p className="auther">{making.auther.displayName}</p>
-                        <p className="realTime">{making.realTime}</p>
-                        <p className="category">{making.type}</p>
-                      </ImageCard>
-                    </Link>
-                  );
-                } else {
-                  return (
-                    <Link to={setMakingURL(making.type) + making.url} key={idx}>
-                      <PostCard>
-                        <p className="title">{making.oneLineIntroduce}</p>
-                        <div className="content">{making.content}</div>
-                        <Avatar
-                          src={making.auther.photoURL}
-                          size="30"
-                          round={true}
-                          style={{ border: "1px solid #c6c6c6" }}
-                        />
-                        <p className="auther">{making.auther.displayName}</p>
-                        <p className="realTime">{making.realTime}</p>
-                        <p className="category">{making.type}</p>
-                      </PostCard>
-                    </Link>
-                  );
-                }
-              })}
-          </div>
-        </SearchBody>
-        {!IsLoading && (
-          <PagiCSS>
-            <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />
-          </PagiCSS>
-        )}
+            <div className="result">
+              <div className="resultHeader" style={{ border: "none" }}>
+                <p>
+                  <span>"영상 제작"</span> 검색 결과 ({MakingLength})
+                </p>
+              </div>
+              <GNBDiv>
+                <ul>
+                  {CategoryList.map((category, idx) => {
+                    return (
+                      <GNBItem
+                        className={
+                          category.value === URL.category ? "active" : null
+                        }
+                        onClick={() => ClickFunc(category.value)}
+                        key={idx}
+                      >
+                        <p>{category.label}</p>
+                      </GNBItem>
+                    );
+                  })}
+                </ul>
+              </GNBDiv>
+              {MakingLength > 0 &&
+                MakingResult.map((making, idx) => {
+                  if (making.thumbnailUrl !== undefined) {
+                    return (
+                      <Link
+                        to={setMakingURL(making.type) + making.url}
+                        key={idx}
+                      >
+                        <ImageCard>
+                          <div className="thumbnail">
+                            <img src={making.thumbnailUrl} />
+                          </div>
+                          <p className="title">{making.oneLineIntroduce}</p>
+                          <div className="content">{making.content}</div>
+                          <Avatar
+                            src={making.auther.photoURL}
+                            size="30"
+                            round={true}
+                            style={{ border: "1px solid #c6c6c6" }}
+                          />
+                          <p className="auther">{making.auther.displayName}</p>
+                          <p className="realTime">{making.realTime}</p>
+                          <p className="category">{making.type}</p>
+                        </ImageCard>
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <Link
+                        to={setMakingURL(making.type) + making.url}
+                        key={idx}
+                      >
+                        <PostCard>
+                          <p className="title">{making.oneLineIntroduce}</p>
+                          <div className="content">{making.content}</div>
+                          <Avatar
+                            src={making.auther.photoURL}
+                            size="30"
+                            round={true}
+                            style={{ border: "1px solid #c6c6c6" }}
+                          />
+                          <p className="auther">{making.auther.displayName}</p>
+                          <p className="realTime">{making.realTime}</p>
+                          <p className="category">{making.type}</p>
+                        </PostCard>
+                      </Link>
+                    );
+                  }
+                })}
+            </div>
+          </SearchBody>
+          {!IsLoading && (
+            <PagiCSS>
+              <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />
+            </PagiCSS>
+          )}
         </>
-      )
-    }
+      )}
     </>
   );
 }

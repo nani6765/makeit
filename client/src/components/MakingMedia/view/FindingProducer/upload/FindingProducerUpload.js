@@ -44,16 +44,16 @@ function FindingProducerUpload(props) {
   const [FAQList, setFAQList] = useState([{ q: "", a: "" }]);
 
   useEffect(() => {
-    if(!user.userData) {
+    if (!user.userData) {
       props.history.push("/login");
     }
     window.scrollTo(0, 0);
     LoadTempPost();
-  }, [])
+  }, []);
 
   const LoadTempPost = async () => {
     try {
-      if(user.userData) {
+      if (user.userData) {
         await axios
           .post("/api/making/producer/loadTempPost", { uid: user.userData.uid })
           .then((response) => {
@@ -103,7 +103,7 @@ function FindingProducerUpload(props) {
     }
     return true;
   };
-  
+
   const PortfolioCheckEmptyContent = () => {
     if (!Thumbnail.length) {
       alert("썸네일을 등록하세요.");
@@ -137,31 +137,25 @@ function FindingProducerUpload(props) {
   };
 
   const NextHandler = (process) => {
-    switch(process.value) {
+    switch (process.value) {
       case "포트폴리오":
-        if(!DetailCheckEmptyContent())
-          return;
+        if (!DetailCheckEmptyContent()) return;
         break;
       case "가격설정":
-        if(!DetailCheckEmptyContent())
-          return;
-        if(!PortfolioCheckEmptyContent())
-            return;
+        if (!DetailCheckEmptyContent()) return;
+        if (!PortfolioCheckEmptyContent()) return;
         break;
       case "수정/환불안내":
-        if(!DetailCheckEmptyContent())
-          return;
-        if(!PortfolioCheckEmptyContent())
-            return;
-        if(!PriceCheckEmptyContent())
-            return;
+        if (!DetailCheckEmptyContent()) return;
+        if (!PortfolioCheckEmptyContent()) return;
+        if (!PriceCheckEmptyContent()) return;
         break;
-      
+
       default:
         break;
     }
     setCurrentProcess(process.value);
-  }
+  };
 
   const TempSaveHandler = () => {
     let body = {
@@ -172,7 +166,7 @@ function FindingProducerUpload(props) {
       content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailUrl : Thumbnail[0].path,
+      thumbnailUrl: Thumbnail[0].path,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -201,7 +195,7 @@ function FindingProducerUpload(props) {
       content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailUrl : Thumbnail[0].path,
+      thumbnailUrl: Thumbnail[0].path,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -216,7 +210,9 @@ function FindingProducerUpload(props) {
       .then((response, err) => {
         if (response.data.success) {
           alert("제작자 게시가 완료되었습니다.");
-          props.history.push("/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0");
+          props.history.push(
+            "/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0"
+          );
         } else {
           alert("제작자 게시에 실패했습니다.");
           console.log("prosubmit error", err);
@@ -308,7 +304,13 @@ function FindingProducerUpload(props) {
     <>
       <UploadHead>
         <div>
-          <h1 onClick={() => props.history.push("/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0")}>
+          <h1
+            onClick={() =>
+              props.history.push(
+                "/making?category=영상 제작자 탐색&subCategory=전체&sort=인기순&pIdx=0"
+              )
+            }
+          >
             <span>&lt;</span>
             게시하기
           </h1>
@@ -322,8 +324,8 @@ function FindingProducerUpload(props) {
             placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
             value={OneLineIntroduce}
             onChange={(e) => {
-              if(e.currentTarget.value.length <= 30) {
-                setOneLineIntroduce(e.currentTarget.value)
+              if (e.currentTarget.value.length <= 30) {
+                setOneLineIntroduce(e.currentTarget.value);
               }
             }}
           />
@@ -340,7 +342,9 @@ function FindingProducerUpload(props) {
                       className={
                         CurrentProcess === process.value ? "active" : null
                       }
-                      onClick={() => {NextHandler(process)}}
+                      onClick={() => {
+                        NextHandler(process);
+                      }}
                     >
                       {idx + 1}){process.value}
                     </li>

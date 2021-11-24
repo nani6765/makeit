@@ -30,7 +30,7 @@ const SearchBody = styled.div`
         font-weight: bold;
         margin-bottom: 0;
         span {
-          color: #5A298B;
+          color: #5a298b;
         }
       }
       button {
@@ -39,10 +39,10 @@ const SearchBody = styled.div`
       }
     }
   }
-  ${mq[0]}{
+  ${mq[0]} {
     width: 80%;
   }
-  ${mq[1]}{
+  ${mq[1]} {
     width: 90%;
   }
 `;
@@ -50,7 +50,7 @@ const SearchBody = styled.div`
 const SearchInput = styled.div`
   width: 30vw;
   height: 50px;
- 
+
   display: flex;
   align-content: center;
   justify-content: center;
@@ -65,9 +65,10 @@ const SearchInput = styled.div`
     margin-right: 0px !important;
     height: 100%;
     padding: 10px;
-    border: 2px solid #5A298B;
+    border: 2px solid #5a298b;
     border-radius: 5px 0px 0px 5px;
-    &:active, &:focus{
+    &:active,
+    &:focus {
       outline: none;
     }
   }
@@ -76,24 +77,24 @@ const SearchInput = styled.div`
     width: 10%;
     margin-left: 0px !important;
     height: 100%;
-    background-color: #5A298B;
+    background-color: #5a298b;
     color: white;
     border: none;
     border-radius: 0px 5px 5px 0px;
-    
+
     display: flex;
     align-content: center;
     justify-content: center;
     align-items: center;
-    img{
+    img {
       width: 60%;
       height: 60%;
     }
   }
-  ${mq[0]}{
+  ${mq[0]} {
     width: 40vw;
   }
-  ${mq[1]}{
+  ${mq[1]} {
     width: 60vw;
   }
 `;
@@ -103,26 +104,26 @@ const PostCard = styled.div`
   grid-template-rows: auto auto;
   grid-template-columns: 6fr 30px 0.6fr 1.2fr 1.2fr;
   grid-template-areas:
-  "title title title title title"
-  "content avatar auther realTime category";
+    "title title title title title"
+    "content avatar auther realTime category";
   width: 100%;
   height: auto;
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #eeeeee;
   box-sizing: border-box;
   border-radius: 5px;
-  ${mq[0]}{
+  ${mq[0]} {
     grid-template-columns: 3fr 30px 0.6fr 1.2fr 1.2fr;
     padding: 0.75rem;
   }
-  ${mq[1]}{
+  ${mq[1]} {
     grid-template-rows: auto auto 30px;
     grid-template-columns: 30px 0.6fr 1.2fr 1.2fr;
     grid-template-areas:
-    "title title title title"
-    "content content content content "
-    "auther auther realTime category";
+      "title title title title"
+      "content content content content "
+      "auther auther realTime category";
     padding: 0.5rem;
   }
 
@@ -135,7 +136,7 @@ const PostCard = styled.div`
     line-break: anywhere;
     max-width: 60%;
     margin-bottom: 1rem;
-    ${mq[1]}{
+    ${mq[1]} {
       margin-bottom: 0;
     }
   }
@@ -150,7 +151,7 @@ const PostCard = styled.div`
   }
   .sb-avatar {
     grid-area: avatar;
-    ${mq[1]}{
+    ${mq[1]} {
       display: none !important;
     }
   }
@@ -158,16 +159,16 @@ const PostCard = styled.div`
     grid-area: auther;
     margin: 5px 0;
     margin-left: 5px;
-    color: #9D9EA9;
-    border-right: 1px solid #9A9A9A;
-    ${mq[0]}{
+    color: #9d9ea9;
+    border-right: 1px solid #9a9a9a;
+    ${mq[0]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 12px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       display: flex;
       align-content: center;
       justify-content: flex-start;
@@ -179,16 +180,16 @@ const PostCard = styled.div`
     grid-area: realTime;
     text-align: center;
     margin: 5px 0;
-    color: #9D9EA9;
-    border-right: 1px solid #9A9A9A;
-    ${mq[0]}{
+    color: #9d9ea9;
+    border-right: 1px solid #9a9a9a;
+    ${mq[0]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 12px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       display: flex;
       align-content: center;
       justify-content: center;
@@ -199,16 +200,16 @@ const PostCard = styled.div`
   .category {
     grid-area: category;
     text-align: center;
-    color: #9D9EA9;
+    color: #9d9ea9;
     margin: 5px 0;
-    ${mq[0]}{
+    ${mq[0]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 12px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       display: flex;
       align-content: center;
       justify-content: center;
@@ -223,51 +224,51 @@ const ImageCard = styled.div`
   grid-template-rows: auto auto auto auto;
   grid-template-columns: 2fr 4fr 30px 0.6fr 1.2fr 1.2fr;
   grid-template-areas:
-  "thumbnail title title title title title"
-  "thumbnail content content content content content"
-  "thumbnail . . . . ."
-  "thumbnail . avatar auther realTime category";
+    "thumbnail title title title title title"
+    "thumbnail content content content content content"
+    "thumbnail . . . . ."
+    "thumbnail . avatar auther realTime category";
 
   width: 100%;
   height: auto;
   margin-top: 1rem;
   padding: 1rem;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #eeeeee;
   box-sizing: border-box;
   border-radius: 5px;
-  ${mq[0]}{
+  ${mq[0]} {
     padding: 0.75rem;
     grid-template-rows: auto auto auto auto;
     grid-template-columns: 3fr 30px 0.6fr 1.2fr 1.2fr;
     grid-template-areas:
-    "thumbnail title title title title"
-    "thumbnail content content content content"
-    "thumbnail . . . ."
-    "thumbnail avatar auther realTime category";
+      "thumbnail title title title title"
+      "thumbnail content content content content"
+      "thumbnail . . . ."
+      "thumbnail avatar auther realTime category";
   }
-  ${mq[1]}{
+  ${mq[1]} {
     padding: 0.5rem;
     grid-template-rows: auto auto auto 30px;
     grid-template-columns: 30px 0.6fr 1.2fr 1.2fr;
     grid-template-areas:
-    "thumbnail thumbnail thumbnail thumbnail"
-    "title title title title"
-    "content content content content "
-    "auther auther realTime category";
+      "thumbnail thumbnail thumbnail thumbnail"
+      "title title title title"
+      "content content content content "
+      "auther auther realTime category";
   }
 
-  .thumbnail{
+  .thumbnail {
     grid-area: thumbnail;
     min-height: 160px;
     max-height: 160px;
-    img{
+    img {
       width: 100%;
       height: 100%;
     }
-    ${mq[0]}{
+    ${mq[0]} {
       margin-right: 1rem;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       margin-right: 0;
     }
   }
@@ -282,10 +283,10 @@ const ImageCard = styled.div`
     max-width: 60%;
     margin-bottom: 1rem;
     margin-left: 1rem;
-    ${mq[0]}{
+    ${mq[0]} {
       margin-left: 0;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       margin-bottom: 0;
     }
   }
@@ -298,13 +299,13 @@ const ImageCard = styled.div`
     white-space: nowrap;
     line-break: anywhere;
     margin-left: 1rem;
-    ${mq[0]}{
+    ${mq[0]} {
       margin-left: 0;
     }
   }
   .sb-avatar {
     grid-area: avatar;
-    ${mq[1]}{
+    ${mq[1]} {
       display: none !important;
     }
   }
@@ -312,16 +313,16 @@ const ImageCard = styled.div`
     grid-area: auther;
     margin: 5px 0;
     margin-left: 5px;
-    color: #9D9EA9;
-    border-right: 1px solid #9A9A9A;
-    ${mq[0]}{
+    color: #9d9ea9;
+    border-right: 1px solid #9a9a9a;
+    ${mq[0]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 12px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       display: flex;
       align-content: center;
       justify-content: flex-start;
@@ -333,16 +334,16 @@ const ImageCard = styled.div`
     grid-area: realTime;
     text-align: center;
     margin: 5px 0;
-    color: #9D9EA9;
-    border-right: 1px solid #9A9A9A;
-    ${mq[0]}{
+    color: #9d9ea9;
+    border-right: 1px solid #9a9a9a;
+    ${mq[0]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 12px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       display: flex;
       align-content: center;
       justify-content: center;
@@ -353,25 +354,24 @@ const ImageCard = styled.div`
   .category {
     grid-area: category;
     text-align: center;
-    color: #9D9EA9;
+    color: #9d9ea9;
     margin: 5px 0;
-    ${mq[0]}{
+    ${mq[0]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 12px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       display: flex;
       align-content: center;
       justify-content: center;
       align-items: center;
       font-size: 10px;
     }
-  }`
-;
-
+  }
+`;
 const GNBDiv = styled.div`
   width: 100%;
   padding: 0;
@@ -474,6 +474,12 @@ const PagiCSS = styled.div`
   }
 `;
 
-
-
-export { SearchBody, SearchInput, PostCard, ImageCard, GNBDiv, GNBItem, PagiCSS };
+export {
+  SearchBody,
+  SearchInput,
+  PostCard,
+  ImageCard,
+  GNBDiv,
+  GNBItem,
+  PagiCSS,
+};

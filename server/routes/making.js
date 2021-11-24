@@ -31,13 +31,13 @@ const SelectSearchModel = (category) => {
     default:
       break;
   }
-}
+};
 
 router.post("/search", (req, res) => {
   let sort = {};
   sort.createdAt = -1;
 
-  if(req.body.category !== "all") {
+  if (req.body.category !== "all") {
     let Model = SelectSearchModel(req.body.category);
     User.find({ displayName: { $regex: req.body.term } })
       .exec()
@@ -59,9 +59,15 @@ router.post("/search", (req, res) => {
           .sort(sort)
           .exec()
           .then((post) => {
-            return res.status(200).send({ success: true, postLength: post.length, post: post.splice(req.body.skip, req.body.limit) });
-          })
-        });
+            return res
+              .status(200)
+              .send({
+                success: true,
+                postLength: post.length,
+                post: post.splice(req.body.skip, req.body.limit),
+              });
+          });
+      });
   } else {
     User.find({ displayName: { $regex: req.body.term } })
       .exec()
@@ -115,11 +121,17 @@ router.post("/search", (req, res) => {
                         return Day2 - Day1;
                       });
                     }
-                    return res.status(200).send({ success: true, postLength: MakingPost.length, post: MakingPost.splice(req.body.skip, req.body.limit) });
-                  })
-              })
-          })
-      })
+                    return res
+                      .status(200)
+                      .send({
+                        success: true,
+                        postLength: MakingPost.length,
+                        post: MakingPost.splice(req.body.skip, req.body.limit),
+                      });
+                  });
+              });
+          });
+      });
   }
 });
 
@@ -131,8 +143,12 @@ router.post("/producer", (req, res) => {
     delete category.category;
   }
 
-  if(req.body.searchTerm) {
-    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
+  if (req.body.searchTerm) {
+    category.$or = [
+      { oneLineIntroduce: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+      { editandReprogress: { $regex: req.body.searchTerm } },
+    ];
   }
 
   //최신순&&인기순 정렬
@@ -166,8 +182,12 @@ router.post("/producer/postLength", (req, res) => {
     delete category.category;
   }
 
-  if(req.body.searchTerm) {
-    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}, { editandReprogress: { $regex: req.body.searchTerm }}];
+  if (req.body.searchTerm) {
+    category.$or = [
+      { oneLineIntroduce: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+      { editandReprogress: { $regex: req.body.searchTerm } },
+    ];
   }
 
   ProPost.find(category)
@@ -458,8 +478,11 @@ router.post("/requestVideo", (req, res) => {
     delete category.category;
   }
 
-  if(req.body.searchTerm) {
-    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}];
+  if (req.body.searchTerm) {
+    category.$or = [
+      { oneLineIntroduce: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ];
   }
 
   //최신순&&인기순 정렬
@@ -492,8 +515,11 @@ router.post("/requestVideo/postLength", (req, res) => {
     delete category.category;
   }
 
-  if(req.body.searchTerm) {
-    category.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}];
+  if (req.body.searchTerm) {
+    category.$or = [
+      { oneLineIntroduce: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ];
   }
 
   RequestPost.find(category)
@@ -660,8 +686,11 @@ router.post("/shareVideo", (req, res) => {
   }
 
   let search = {};
-  if(req.body.searchTerm) {
-    search.$or = [{ oneLineIntroduce : { $regex : req.body.searchTerm }}, { content : { $regex : req.body.searchTerm }}];
+  if (req.body.searchTerm) {
+    search.$or = [
+      { oneLineIntroduce: { $regex: req.body.searchTerm } },
+      { content: { $regex: req.body.searchTerm } },
+    ];
   }
 
   ShareVideo.find(search)

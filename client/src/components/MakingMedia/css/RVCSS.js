@@ -22,7 +22,7 @@ const RequestListDiv = styled.div`
       font-size: 15px;
       font-weight: bold;
       padding: 7px 10px;
-      background: #5A278B;
+      background: #5a278b;
       border: none;
       border-radius: 3px;
       svg {
@@ -49,8 +49,8 @@ const RequestListDiv = styled.div`
       li {
         display: inline-block;
         padding: 0px 6px;
-        border-right: 1.5px solid #C9C9C9;
-        color: #C9C9C9;
+        border-right: 1.5px solid #c9c9c9;
+        color: #c9c9c9;
         p {
           cursor: pointer;
           margin: 0;
@@ -58,7 +58,7 @@ const RequestListDiv = styled.div`
       }
       li.active {
         font-weight: bold;
-        color: #5A278B;
+        color: #5a278b;
       }
       li:last-child {
         border: none;

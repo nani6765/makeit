@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Avatar from 'react-avatar';
+import Avatar from "react-avatar";
 import axios from "axios";
 
 import { ProducerListContainer } from "../../css/FPCSS.js";
@@ -13,10 +13,10 @@ function ProducerList(props) {
       let body = {
         category: props.URL.subCategory,
         sort: props.URL.sort,
-        skip: props.URL.pIdx*9,
+        skip: props.URL.pIdx * 9,
       };
 
-      if(props.URL.searchTerm) {
+      if (props.URL.searchTerm) {
         body.searchTerm = props.URL.searchTerm;
       }
 
@@ -63,13 +63,12 @@ function ProducerList(props) {
                 </div>
                 <p className="evaluation">
                   <span>
-                  {post.grade
-                    ? (post.grade / post.gradeArrayNum).toFixed(1)
-                    : post.grade} / 5.0
+                    {post.grade
+                      ? (post.grade / post.gradeArrayNum).toFixed(1)
+                      : post.grade}{" "}
+                    / 5.0
                   </span>
-                  <span>
-                    {post.likeArray.length}
-                  </span>
+                  <span>{post.likeArray.length}</span>
                 </p>
               </div>
               <p className="price">&#8361; {post.priceInfo}</p>

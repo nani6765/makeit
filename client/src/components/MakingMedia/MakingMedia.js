@@ -78,17 +78,17 @@ function MakingMedia(props) {
   return (
     <>
       <MakingHeader>
-        {// eslint-disable-next-line jsx-a11y/alt-text
-        <img
-          src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
-          style={{ width: "100%" }}
-        />}
+        {
+          // eslint-disable-next-line jsx-a11y/alt-text
+          <img
+            src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
+            style={{ width: "100%" }}
+          />
+        }
         <HeaderGNB URL={URL} />
         <SubGNB SubCategoryList={SubCategoryList} URL={URL} />
       </MakingHeader>
-      <MakingDiv>
-        {setContent()}
-      </MakingDiv>
+      <MakingDiv>{setContent()}</MakingDiv>
     </>
   );
 }

@@ -21,11 +21,9 @@ function ReviewArea(props) {
   return (
     <div id="review" style={{ marginTop: "1rem" }}>
       <DetaulContentSubTitle>서비스 평가</DetaulContentSubTitle>
-      {
-        user && user.uid !== props.auther
-        ? <ReviewForm user={user} PostURL={props.PostURL} />
-        : null
-      }
+      {user && user.uid !== props.auther ? (
+        <ReviewForm user={user} PostURL={props.PostURL} />
+      ) : null}
       {ReviewList[0] &&
         ReviewList.map((review, idx) => {
           return <Review key={idx} Review={review} PostURL={props.PostURL} />;

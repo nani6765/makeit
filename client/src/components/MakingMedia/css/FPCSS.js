@@ -68,9 +68,9 @@ const ProducerListDiv = styled.div`
     font-size: 15px;
     font-weight: bold;
     padding: 7px 10px;
-    background: #5A278B;
+    background: #5a278b;
     border: none;
-    border-radius: 3px;      
+    border-radius: 3px;
   }
   .FNB {
     display: flex;
@@ -98,7 +98,7 @@ const ProducerListDiv = styled.div`
       }
       li.active {
         font-weight: bold;
-        color: #5A278B;
+        color: #5a278b;
       }
       li:last-child {
         border: none;

@@ -21,9 +21,9 @@ const ShareVideoDiv = styled.div`
       font-size: 15px;
       font-weight: bold;
       padding: 7px 10px;
-      background: #5A278B;
+      background: #5a278b;
       border: none;
-      border-radius: 3px;      
+      border-radius: 3px;
     }
   }
 

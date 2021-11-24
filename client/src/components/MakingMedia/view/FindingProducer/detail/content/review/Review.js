@@ -86,14 +86,18 @@ function Review(props) {
       </div>
       {user.userData && user.userData.uid === ReviewUser.uid && (
         <div className="hambuc" ref={innerRef}>
-          {!EditFlag &&
+          {!EditFlag && (
             <i
-            className="bi bi-three-dots"
-            onClick={() => sethambucControl(true)}
-          ></i>
-          }
+              className="bi bi-three-dots"
+              onClick={() => sethambucControl(true)}
+            ></i>
+          )}
           {hambucControl && (
-            <Modal modalType="review" setEditFlag={setEditFlag} Info={props.Review} />
+            <Modal
+              modalType="review"
+              setEditFlag={setEditFlag}
+              Info={props.Review}
+            />
           )}
         </div>
       )}

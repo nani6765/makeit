@@ -4,7 +4,7 @@ import ProducerList from "./ProducerList.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { ProducerListDiv } from "../../css/FPCSS.js";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
-import qs from 'qs';
+import qs from "qs";
 
 import axios from "axios";
 
@@ -20,20 +20,20 @@ function FindingProducer(props) {
     }
     let temp = qs.parse(props.URL);
     temp.searchTerm = SearchTerm.trim();
-    if(!SearchTerm) {
+    if (!SearchTerm) {
       delete temp.searchTerm;
     }
     temp.pIdx = 0;
     let temp2 = qs.stringify(temp);
     props.history.push(`?${decodeURI(temp2)}`);
-  }
+  };
 
   const getPageLen = () => {
     let body = {
       category: props.URL.subCategory,
     };
 
-    if(props.URL.searchTerm) {
+    if (props.URL.searchTerm) {
       body.searchTerm = props.URL.searchTerm;
       setSearchTerm(props.URL.searchTerm);
     }
@@ -50,16 +50,16 @@ function FindingProducer(props) {
   }, [props.URL]);
 
   useEffect(() => {
-    let sIdx = parseInt(props.URL.pIdx/10);
+    let sIdx = parseInt(props.URL.pIdx / 10);
     let temp = [];
-    for(let i = sIdx*10 + 1; i<=Math.min(sIdx*10 + 10, PageLen); i++) {
+    for (let i = sIdx * 10 + 1; i <= Math.min(sIdx * 10 + 10, PageLen); i++) {
       temp.push(i);
     }
     setPageIdxArr(temp);
   }, [PageLen, parseInt(props.URL.pIdx)]);
 
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [props.URL.pIdx]);
 
   return (
@@ -67,18 +67,16 @@ function FindingProducer(props) {
       <Link to="/Making/ProducerUpload">
         <button className="postBtn">게시하기</button>
       </Link>
-      <ProducerList
-        URL={props.URL}
-        user={props.user}
-      />
+      <ProducerList URL={props.URL} user={props.user} />
       <div className="FNB">
         <div className="pagination">
           {PageIdxArr[0] !== 1 ? (
             <button
               onClick={() => {
-                props.URL.pIdx = parseInt((props.URL.pIdx - 10)/10)*10;
+                props.URL.pIdx = parseInt((props.URL.pIdx - 10) / 10) * 10;
                 props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-              }}>
+              }}
+            >
               &lt; 이전
             </button>
           ) : null}
@@ -89,9 +87,13 @@ function FindingProducer(props) {
                   key={idx}
                   onClick={() => {
                     props.URL.pIdx = page - 1;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
+                    props.history.push(
+                      `?${decodeURI(qs.stringify(props.URL))}`
+                    );
                   }}
-                  className={props.URL.pIdx === (page - 1).toString() ? "active" : null}
+                  className={
+                    props.URL.pIdx === (page - 1).toString() ? "active" : null
+                  }
                 >
                   <p>{page}</p>
                 </li>
@@ -101,9 +103,10 @@ function FindingProducer(props) {
           {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
             <button
               onClick={() => {
-                props.URL.pIdx = parseInt((props.URL.pIdx + 10)/10)*10;
+                props.URL.pIdx = parseInt((props.URL.pIdx + 10) / 10) * 10;
                 props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-              }}>
+              }}
+            >
               다음 &gt;
             </button>
           )}
