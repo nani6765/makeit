@@ -419,7 +419,7 @@ const GNBItem = styled.li`
       content: "";
       background: #61057d;
       width: 100%;
-      height: 1px;
+      height: 2px;
       bottom: -1px;
       left: 0px;
     }
