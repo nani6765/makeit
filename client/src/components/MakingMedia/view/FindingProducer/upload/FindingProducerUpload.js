@@ -11,8 +11,6 @@ import axios from "axios";
 
 import { UploadForm, UploadHead } from "../../../css/CommonUploadCSS.js";
 import { ContentDiv, LeftContent } from "../../../css/FPUCSS.js";
-import Switch from "react-bootstrap/esm/Switch";
-import e from "cors";
 
 function FindingProducerUpload(props) {
   const user = useSelector((state) => state.user);
@@ -33,7 +31,7 @@ function FindingProducerUpload(props) {
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
   //포트폴리오
-  const [Thumbnail, setThumbnail] = useState([]);
+  const [Thumbnail, setThumbnail] = useState("");
   const [DetailImgArr, setDetailImgArr] = useState([]);
   const [VideoArr, setVideoArr] = useState([]);
 
@@ -70,7 +68,7 @@ function FindingProducerUpload(props) {
               setVideoPurposeArr(response.data.tempPost.videoPurposeArr);
 
               //Portfolio
-              setThumbnail(response.data.tempPost.thumbnailArr);
+              setThumbnail(response.data.tempPost.thumbnailUrl);
               setDetailImgArr(response.data.tempPost.detailImgArr);
               setVideoArr(response.data.tempPost.videoArr);
 
@@ -174,7 +172,7 @@ function FindingProducerUpload(props) {
       content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: Thumbnail,
+      thumbnailUrl : Thumbnail[0].path,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -203,7 +201,7 @@ function FindingProducerUpload(props) {
       content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: Thumbnail,
+      thumbnailUrl : Thumbnail[0].path,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
@@ -211,6 +209,8 @@ function FindingProducerUpload(props) {
       editandReprogress: EditandReprogress,
       FAQList: FAQList,
     };
+    console.log(body);
+
     axios
       .post("/api/making/producer/proPostSubmit", body)
       .then((response, err) => {

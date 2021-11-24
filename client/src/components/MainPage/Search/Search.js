@@ -123,7 +123,7 @@ function Search(props) {
                 <span>"영상 제작"</span> 검색 결과 ({MakingLength})
               </p>
               {MakingLength > 5 ? (
-                <Link to={`/search/making?term=${Term}`}>
+                <Link to={`/search/making?term=${Term}&pIdx=0&category=all`}>
                   <button>더보기 &gt;</button>
                 </Link>
               ) : null}

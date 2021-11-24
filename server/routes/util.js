@@ -455,7 +455,6 @@ router.post("/rerepleDelete", (req, res) => {
 ///////////////////////////////
 
 router.post("/search", (req, res) => {
-  console.log(req.body.term);
   let sort = {};
   sort.createdAt = -1;
 

@@ -20,6 +20,109 @@ var moment = require("moment");
 require("moment-timezone");
 moment.tz.setDefault("Asia/Seoul");
 
+const SelectSearchModel = (category) => {
+  switch (category) {
+    case "proPost":
+      return ProPost;
+    case "reqVideo":
+      return RequestPost;
+    case "shareVideo":
+      return ShareVideo;
+    default:
+      break;
+  }
+}
+
+router.post("/search", (req, res) => {
+  let sort = {};
+  sort.createdAt = -1;
+
+  if(req.body.category !== "all") {
+    let Model = SelectSearchModel(req.body.category);
+    User.find({ displayName: { $regex: req.body.term } })
+      .exec()
+      .then((userInfo) => {
+        let uidArr = [];
+        if (userInfo != []) {
+          for (let i = 0; i < userInfo.length; i++) {
+            uidArr.push(userInfo[i].uid);
+          }
+        }
+        Model.find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+            { uid: { $in: uidArr } },
+          ],
+        })
+          .populate("auther")
+          .sort(sort)
+          .exec()
+          .then((post) => {
+            return res.status(200).send({ success: true, postLength: post.length, post: post.splice(req.body.skip, req.body.limit) });
+          })
+        });
+  } else {
+    User.find({ displayName: { $regex: req.body.term } })
+      .exec()
+      .then((userInfo) => {
+        let uidArr = [];
+        if (userInfo != []) {
+          for (let i = 0; i < userInfo.length; i++) {
+            uidArr.push(userInfo[i].uid);
+          }
+        }
+        ProPost.find({
+          $or: [
+            { oneLineIntroduce: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+            { uid: { $in: uidArr } },
+          ],
+        })
+          .populate("auther")
+          .sort(sort)
+          .exec()
+          .then((proPost) => {
+            RequestPost.find({
+              $or: [
+                { oneLineIntroduce: { $regex: req.body.term } },
+                { content: { $regex: req.body.term } },
+                { uid: { $in: uidArr } },
+              ],
+            })
+              .populate("auther")
+              .sort(sort)
+              .exec()
+              .then((reqPost) => {
+                ShareVideo.find({
+                  $or: [
+                    {
+                      oneLineIntroduce: { $regex: req.body.term },
+                    },
+                    { content: { $regex: req.body.term } },
+                    { uid: { $in: uidArr } },
+                  ],
+                })
+                  .populate("auther")
+                  .sort(sort)
+                  .exec()
+                  .then((sharePost) => {
+                    let MakingPost = [...proPost, ...reqPost, ...sharePost];
+                    if (MakingPost.length > 2) {
+                      MakingPost.sort((a, b) => {
+                        let Day1 = new Date(a.createdAt);
+                        let Day2 = new Date(b.createdAt);
+                        return Day2 - Day1;
+                      });
+                    }
+                    return res.status(200).send({ success: true, postLength: MakingPost.length, post: MakingPost.splice(req.body.skip, req.body.limit) });
+                  })
+              })
+          })
+      })
+  }
+});
+
 router.post("/producer", (req, res) => {
   let category = {
     category: req.body.category,

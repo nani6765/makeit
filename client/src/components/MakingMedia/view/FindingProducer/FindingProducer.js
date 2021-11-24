@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import ProducerList from "./ProducerList.js";
-import StickyBar from "../common/StickyBar.js";
 import Dropdown from "react-bootstrap/Dropdown";
 import { ProducerListDiv } from "../../css/FPCSS.js";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";

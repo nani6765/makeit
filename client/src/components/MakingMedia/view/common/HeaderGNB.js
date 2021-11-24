@@ -19,6 +19,7 @@ function HeaderGNB(props) {
      if (SearchTerm && !/\S/.test(SearchTerm)) {
        return;
      }
+     /*
      let temp = qs.parse(props.URL);
      temp.searchTerm = SearchTerm.trim();
      if (!SearchTerm) {
@@ -27,6 +28,8 @@ function HeaderGNB(props) {
      temp.pIdx = 0;
      let temp2 = qs.stringify(temp);
      props.history.push(`?${decodeURI(temp2)}`);
+     */
+    props.history.push(`/search/making?term=${SearchTerm}&pIdx=0&category=all`);
    };
 
 

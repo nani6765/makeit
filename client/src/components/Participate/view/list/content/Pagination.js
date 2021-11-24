@@ -6,7 +6,6 @@ function Pagination(props) {
   let history = useHistory();
 
   const ClickFunc = (type, page = 0) => {
-    console.log("type : ", type, " , page : ", page);
     let temp = props.URL;
     console.log(temp);
     switch (type) {

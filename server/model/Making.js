@@ -45,10 +45,10 @@ const ProPostSchema = mongoose.Schema(
     },
 
     //포트폴리오
-    thumbnailArr: {
-      type: Array,
-      default: [],
+    thumbnailUrl: {
+      type: String,
     },
+
     detailImgArr: {
       type: Array,
       default: [],
