@@ -70,8 +70,7 @@ function ProducerTitleDetail(props) {
       <ProducerTitleDiv>
         <Slider {...settings} className="TitleImg">
           <img
-            src={props.PostInfo.thumbnailArr[0].path}
-            alt={props.PostInfo.thumbnailArr[0].key}
+            src={props.PostInfo.thumbnailUrl}
           />
           {props.PostInfo.detailImgArr.map((img, idx) => {
             return <img src={img.path} alt={img.key} key={idx} />;

@@ -153,6 +153,12 @@ const ProtFolioDiv = styled.div`
     justify-content: flex-start;
     margin-top: 20px;
     margin-left: 10px;
+    .imgShow {
+      img {
+        height: 180px;
+        width: 320px;
+      }
+    }
   }
   .notice {
     background: #faf5f5;

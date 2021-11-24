@@ -263,6 +263,8 @@ const ImageCard = styled.div`
     img{
       width: 100%;
       height: 100%;
+      min-height: 160px;
+      max-height: 160px;
     }
     ${mq[0]}{
       margin-right: 1rem;

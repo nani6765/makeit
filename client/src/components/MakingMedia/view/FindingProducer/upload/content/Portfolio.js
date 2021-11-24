@@ -62,13 +62,13 @@ function Portfolio(props) {
           type="thumbnail"
           dirURL="making"
         />
-        {props.Thumbnail[0] ? (
-          <FileShowArea
-            Images={props.Thumbnail}
-            setImages={props.setThumbnail}
-            type="PUThumbnail"
-          />
-        ) : null}
+        <div className="imgShow">
+          {props.Thumbnail[0] !== undefined &&
+          props.Thumbnail[0].path !== undefined ? (
+            <img src={props.Thumbnail[0].path} alt="" />
+          ) : 
+          <img src={props.Thumbnail} alt="" />}
+        </div>
       </div>
 
       <p style={{ marginTop: "1rem" }}>
@@ -84,12 +84,11 @@ function Portfolio(props) {
           setImages={props.setDetailImgArr}
           dirURL="making"
         />
-        {props.DetailImgArr[0] ? (
+        {props.DetailImgArr.length > 0 &&
           <FileShowArea
             Images={props.DetailImgArr}
             setImages={props.setDetailImgArr}
-          />
-        ) : null}
+          />}
       </div>
 
       <div className="notice">
