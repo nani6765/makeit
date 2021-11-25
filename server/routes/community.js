@@ -56,6 +56,63 @@ router.post("/", (req, res) => {
     });
 });
 
+router.post("/search", (req, res) => {
+  let category = { category: req.body.category };
+  let sort = {};
+  sort.createdAt = -1;
+  User.find({ displayName: { $regex: req.body.term } })
+    .exec()
+    .then((userInfo) => {
+      let uidArr = [];
+      if (userInfo != []) {
+        for (let i = 0; i < userInfo.length; i++) {
+          uidArr.push(userInfo[i].uid);
+        }
+      }
+      if (req.body.category === "전체게시판") {
+        Community.find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+            { uid: { $in: uidArr } },
+          ],
+        })
+          .populate("auther")
+          .sort(sort)
+          .exec()
+          .then((post) => {
+            return res.status(200).send({
+              success: true,
+              postLength: post.length,
+              post: post.splice(req.body.skip, req.body.limit),
+            });
+          });
+      } else {
+        Community.find({
+          $or: [
+            { title: { $regex: req.body.term } },
+            { content: { $regex: req.body.term } },
+            { uid: { $in: uidArr } },
+          ],
+          category: { $regex: category.category },
+        })
+          .populate("auther")
+          .sort(sort)
+          .exec()
+          .then((post) => {
+            return res.status(200).send({
+              success: true,
+              postLength: post.length,
+              post: post.splice(req.body.skip, req.body.limit),
+            });
+          });
+      }
+    })
+    .catch((err) => {
+      return res.json({ success: false, err });
+    });
+});
+
 router.post("/postDetail", (req, res) => {
   let filter = {};
   filter.url = req.body.url;
