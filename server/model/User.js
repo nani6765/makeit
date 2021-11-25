@@ -9,6 +9,20 @@ function realTime() {
   return moment().format("YY-MM-DD[ ]HH:mm");
 }
 
+const logSchema = mongoose.Schema({
+  type: {
+    type: String,
+  },
+  url: {
+    type: String,
+  },
+  realTime: {
+    type: String,
+    default: realTime(),
+  },
+});
+const Log = mongoose.model("Log", logSchema);
+
 const userSchema = mongoose.Schema(
   {
     uid: {
@@ -32,27 +46,12 @@ const userSchema = mongoose.Schema(
     logs: [
       {
         type: Schema.Types.ObjectId,
-        ref: "logSchema",
+        ref: "Log",
       },
     ],
   },
   { collection: "userInfo" }
 );
-
-const logSchema = mongoose.Schema({
-  type: {
-    type: String,
-  },
-  url: {
-    type: String,
-  },
-  realTime: {
-    type: String,
-    default: realTime(),
-  },
-});
-
 const User = mongoose.model("User", userSchema);
-const Log = mongoose.model("Log", logSchema);
 
 module.exports = { User, Log };

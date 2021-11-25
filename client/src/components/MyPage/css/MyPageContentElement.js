@@ -149,11 +149,32 @@ const LoadingDiv = styled.div`
   justify-content: center;
   align-items: center;
   background-color: black;
-  opacity: .5;
+  opacity: 0.5;
   top: 0;
   left: 0;
   z-index: 51;
   scroll: none;
-`
+`;
 
-export { EditProfileDiv, EditProfile, LoadingDiv };
+const LogContentDiv = styled.div`
+  background: #f6f2ff;
+  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
+    0px 9px 30px rgba(163, 1, 79, 0.05);
+  border-radius: 110.5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  a {
+    text-decoration: none;
+    color: black;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+  ${mq[1]} {
+    box-shadow: 0px 1px 5px rgba(178, 3, 108, 0.03),
+      0px 9px 30px rgba(163, 1, 79, 0.05);
+  }
+`;
+
+export { EditProfileDiv, EditProfile, LoadingDiv, LogContentDiv };

@@ -92,6 +92,18 @@ router.post("/sendEmail", (req, res) => {
 //           mypagelog          //
 //////////////////////////////////
 
-router.post("/getMyLog", (req, res) => {});
+router.post("/getMyLog", (req, res) => {
+  User.findOne({ uid: req.body.uid })
+    .populate("logs")
+    .exec()
+    .then((userInfo) => {
+      console.log(userInfo);
+      return res.status(200).send({ success: true, logs: userInfo.logs });
+    })
+    .catch((err) => {
+      console.log(err);
+      if (err) return res.json({ success: false, err });
+    });
+});
 
 module.exports = router;

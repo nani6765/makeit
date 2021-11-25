@@ -9,22 +9,21 @@ import axios from "axios";
 function AlarmListFnc(props) {
   const user = useSelector((state) => state.user);
   const [allChecked, setallChecked] = useState(false);
-  
+
   let dispatch = useDispatch();
 
   function SwitchCard(alarm) {
     let key = alarm.type;
     let alarmType, contentType;
-    // eslint-disable-next-line default-case
     switch (key) {
       case "reple":
         alarmType = "댓글";
         break;
 
-        case "like":
-          alarmType = "공감";
-          break;
-/*
+      case "like":
+        alarmType = "공감";
+        break;
+
       case "rerepleToReple":
         alarmType = "대댓글";
         contentType = "댓글";
@@ -44,7 +43,6 @@ function AlarmListFnc(props) {
         alarmType = "공감";
         contentType = "대댓글";
         break;
-        */
     }
     return (
       <AlarmContent
@@ -57,17 +55,17 @@ function AlarmListFnc(props) {
 
   const ScrollFunction = () => {
     let TargetDiv = document.querySelector("#AlarmListDiv");
-      //console.log("TargetDiv.scrollTop", TargetDiv.scrollTop);
-      //console.log("TargetDiv.clientHeight", TargetDiv.clientHeight);
-      //console.log("TargetDiv.scrollHeight", TargetDiv.scrollHeight);
-    if(Math.ceil(TargetDiv.scrollTop) + Math.ceil(TargetDiv.clientHeight) >= TargetDiv.scrollHeight) {
+    if (
+      Math.ceil(TargetDiv.scrollTop) + Math.ceil(TargetDiv.clientHeight) >=
+      TargetDiv.scrollHeight
+    ) {
       props.GetAlarmList(5);
     }
   };
 
   useEffect(() => {
     let TargetDiv = document.querySelector("#AlarmListDiv");
-    window.addEventListener('scorll', ScrollFunction, true);
+    window.addEventListener("scorll", ScrollFunction, true);
   }, []);
 
   const AllCheck = () => {
@@ -97,7 +95,7 @@ function AlarmListFnc(props) {
       >
         모두 읽기
       </p>
-      <AlarmListDiv id="AlarmListDiv"  onScroll={ScrollFunction}>
+      <AlarmListDiv id="AlarmListDiv" onScroll={ScrollFunction}>
         {props.AlarmList.map((alarm, idx) => {
           return <React.Fragment key={idx}>{SwitchCard(alarm)}</React.Fragment>;
         })}
