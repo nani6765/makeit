@@ -7,6 +7,7 @@ import { CommunityImageArea, PUThumbnail } from "./FileCSS.js";
 import { jsx, css } from "@emotion/react";
 
 function FileShow(props) {
+  console.log(props);
   const deleteHandler = (image) => {
     axios
       .post("/api/util/image/delete", {

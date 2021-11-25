@@ -264,6 +264,8 @@ const ImageCard = styled.div`
     img {
       width: 100%;
       height: 100%;
+      min-height: 160px;
+      max-height: 160px;
     }
     ${mq[0]} {
       margin-right: 1rem;
@@ -419,7 +421,7 @@ const GNBItem = styled.li`
       content: "";
       background: #61057d;
       width: 100%;
-      height: 1px;
+      height: 2px;
       bottom: -1px;
       left: 0px;
     }

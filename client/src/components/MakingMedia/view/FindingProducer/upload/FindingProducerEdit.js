@@ -32,7 +32,7 @@ function FindingProducerEdit(props) {
   const [VideoPurposeArr, setVideoPurposeArr] = useState([]);
 
   //포트폴리오
-  const [Thumbnail, setThumbnail] = useState([]);
+  const [Thumbnail, setThumbnail] = useState("");
   const [DetailImgArr, setDetailImgArr] = useState([]);
   const [VideoArr, setVideoArr] = useState([]);
 
@@ -53,7 +53,7 @@ function FindingProducerEdit(props) {
     setVideoPurposeArr([...props.location.state.postInfo.videoPurposeArr]);
 
     // 포트폴리오
-    setThumbnail([...props.location.state.postInfo.thumbnailArr]);
+    setThumbnail(props.location.state.postInfo.thumbnailUrl);
     setDetailImgArr([...props.location.state.postInfo.detailImgArr]);
     setVideoArr([...props.location.state.postInfo.videoArr]);
 
@@ -192,7 +192,7 @@ function FindingProducerEdit(props) {
       content: Content,
       workTypeArr: WorkTypeArr,
       videoPurposeArr: VideoPurposeArr,
-      thumbnailArr: Thumbnail,
+      thumbnailUrl: Thumbnail[0].path,
       detailImgArr: DetailImgArr,
       videoArr: VideoArr,
       priceInfo: PriceInfo,
