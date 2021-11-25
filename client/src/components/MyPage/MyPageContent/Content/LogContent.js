@@ -7,6 +7,7 @@ function LogContent(props) {
     <LogContentDiv>
       <Link to={props.Log.url}>
         {props.Log.type}
+        <br />
         {props.Log.realTime}
       </Link>
     </LogContentDiv>
