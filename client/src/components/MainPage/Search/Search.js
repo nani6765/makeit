@@ -155,7 +155,7 @@ function Search(props) {
                 <span>"영상 참여"</span> 검색 결과 ({PartLength})
               </p>
               {PartLength > 5 ? (
-                <Link to={`/search/participate?term=${Term}`}>
+                <Link to={`/search/participate?term=${Term}&pIdx=0&category=all`}>
                   <button>더보기 &gt;</button>
                 </Link>
               ) : null}

@@ -30,7 +30,7 @@ function SubGNB(props) {
               <Dropdown.Item
                 onClick={() => {
                   props.URL.sort = "인기순";
-                  props.URL.qIdx = 0;
+                  props.URL.pIdx = 0;
                   history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                 }}
                 className={props.URL.sort === "인기순" ? "active" : null}
@@ -40,7 +40,7 @@ function SubGNB(props) {
               <Dropdown.Item
                 onClick={() => {
                   props.URL.sort = "최신순";
-                  props.URL.qIdx = 0;
+                  props.URL.pIdx = 0;
                   history.push(`?${decodeURI(qs.stringify(props.URL))}`);
                 }}
                 className={props.URL.sort === "최신순" ? "active" : null}
