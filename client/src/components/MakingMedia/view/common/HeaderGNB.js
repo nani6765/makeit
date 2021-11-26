@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { MenuList, MenuItem } from "../../css/CommonCSS.js";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
-import qs from "qs";
 
 function HeaderGNB(props) {
   const GNBList = [

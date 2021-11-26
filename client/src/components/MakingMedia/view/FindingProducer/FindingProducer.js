@@ -64,9 +64,6 @@ function FindingProducer(props) {
 
   return (
     <ProducerListDiv>
-      <Link to="/Making/ProducerUpload">
-        <button className="postBtn">게시하기</button>
-      </Link>
       <ProducerList URL={props.URL} user={props.user} />
       <div className="FNB">
         <div className="pagination">

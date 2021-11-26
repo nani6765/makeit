@@ -59,75 +59,75 @@ const PartHeader = styled.div`
 `;
 
 const MenuList = styled.div`
-width: 100%;
-padding: 0px 15%;
-border-bottom: 1px solid #acb0b4;
-display: flex;
-justify-content: space-between;
-align-items: flex-end;
-align-content: center;
-ul {
-  height: 1rem;
+  width: 100%;
+  padding: 0px 15%;
+  border-bottom: 1px solid #acb0b4;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding-bottom: 1rem !important;
-  margin-top: 3rem;
-  list-style: none;
-}
-.search {
-  background: #f7f7f7;
-  padding: 5px;
-  height: 100%;
-  margin-bottom: 0.5rem;
-  input {
-    background: none;
-    border: none;
-    text-align: right;
-    height: 100%;
-    &::placeholder {
-      color: #bfbfbf;
-    }
-  }
-  input:focus {
-    border: none;
-    outline: none;
-  }
-  svg {
-    margin-left: 5px;
-    height: 100%;
-    cursor: pointer;
-  }
-}
-
-${mq[1]} {
-  padding: 0px 5%;
-  justify-content: space-evenly;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: flex-end;
+  align-content: center;
   ul {
-    width: 100%;
-    align-content: center;
-    justify-content: space-evenly;
-    padding-bottom: 0px !important;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 1rem !important;
+    margin-top: 3rem;
+    list-style: none;
   }
   .search {
-    padding: 3px;
-    width: 150px;
+    background: #f7f7f7;
+    padding: 5px;
+    height: 100%;
+    margin-bottom: 0.5rem;
     input {
-      width: 120px;
+      background: none;
+      border: none;
+      text-align: right;
+      height: 100%;
       &::placeholder {
-        font-size: 10px;
+        color: #bfbfbf;
+      }
+    }
+    input:focus {
+      border: none;
+      outline: none;
+    }
+    svg {
+      margin-left: 5px;
+      height: 100%;
+      cursor: pointer;
+    }
+  }
+
+  ${mq[1]} {
+    padding: 0px 5%;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: flex-end;
+    ul {
+      width: 100%;
+      align-content: center;
+      justify-content: space-evenly;
+      padding-bottom: 0px !important;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    .search {
+      padding: 3px;
+      width: 150px;
+      input {
+        width: 120px;
+        &::placeholder {
+          font-size: 10px;
+        }
       }
     }
   }
-}
 `;
 
 const MenuItem = styled.li`
-  color: #ACB0B4;
+  color: #acb0b4;
   background: #ffffff;
   cursor: pointer;
   text-align: center;
@@ -194,12 +194,12 @@ const PartFilter = styled.div`
       display: flex;
       width: 90%;
       flex-wrap: wrap;
-     
+
       div {
         width: auto;
         margin-bottom: 1rem;
         margin-right: 1rem;
-        &:nth-last-of-type(1){
+        &:nth-last-of-type(1) {
           margin-right: 0rem;
         }
         input {
@@ -208,13 +208,12 @@ const PartFilter = styled.div`
         label {
           padding: 0.75rem;
           cursor: pointer;
-          border: 1px solid #ACB0B4;
+          border: 1px solid #acb0b4;
           border-radius: 5px;
-          
         }
         input:checked + label {
-          background: #61057D;
-          border: 1px solid #61057D;
+          background: #61057d;
+          border: 1px solid #61057d;
           box-sizing: border-box;
           border-radius: 5px;
           color: white;
@@ -222,11 +221,6 @@ const PartFilter = styled.div`
       }
     }
   }
-`;
-
-const PartIPLoListDiv = styled.div`
-  width: 100%;
-  height: auto;
 `;
 
 const PostCard = styled.div`
@@ -324,11 +318,36 @@ const PostCard = styled.div`
   }
 `;
 
+const CardDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  position: relative;
+  a {
+    color: black;
+    text-decoration: none;
+    &hover: text-decoration: none;
+  }
+  .IPLoPostCard{
+    width: 25%;
+    height: auto;
+    padding: 0.5rem;
+    position: relative;
+    ${mq[0]} {
+      width: 50%;
+    }
+    ${mq[1]} {
+      width: 100%;
+    }
+  }
+`;
+
 const IPLoPostCard = styled.div`
   background: #ffffff;
   width: 100%;
   height: 100%;
   padding: 20px;
+
   box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
     0px 9px 30px rgba(163, 1, 79, 0.05);
   border-radius: 15px;
@@ -380,44 +399,44 @@ const IPLoPostCard = styled.div`
 `;
 
 const SubCategoryDiv = styled.div`
-width: 100%;
-background-color: #fafafa;
-padding: 1rem 15%;
-display: flex;
-justify-content: space-between;
-align-items: center;
-align-content: center;
-ul {
-  height: 1rem;
+  width: 100%;
+  background-color: #fafafa;
+  padding: 1rem 15%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   align-content: center;
-  list-style: none;
-  li {
-    margin-right: 1rem;
-    font-size: 12px;
-    color: rgba(172, 176, 180, 1);
-    user-select: none;
-    cursor: pointer;
-    &.active {
-      color: rgba(97, 5, 125, 1);
-      font-weight: bold;
-    }
-  }
-}
-${mq[1]} {
-  padding: 0rem 5% 0rem 5%;
   ul {
-    flex-wrap: wrap;
-    flex-direction: row;
-    height: auto;
+    height: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    list-style: none;
     li {
-      font-size: 10px;
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
+      margin-right: 1rem;
+      font-size: 12px;
+      color: rgba(172, 176, 180, 1);
+      user-select: none;
+      cursor: pointer;
+      &.active {
+        color: rgba(97, 5, 125, 1);
+        font-weight: bold;
+      }
     }
   }
-}
+  ${mq[1]} {
+    padding: 0rem 5% 0rem 5%;
+    ul {
+      flex-wrap: wrap;
+      flex-direction: row;
+      height: auto;
+      li {
+        font-size: 10px;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 `;
 
 const FNBDiv = styled.div`
@@ -487,18 +506,69 @@ const PagiCSS = styled.div`
   }
 `;
 
-const UploadBtnDiv = styled.div`
+const ListTopAreaDiv = styled.div`
   width: 100%;
   text-align: right;
   margin: 1rem 0;
-  button{
-    background: #5A278B;
-    border: 1px solid #5A278B;
-    box-sizing: border-box;
-    border-radius: 5px;
-    padding: 1rem;
-    color: white;
-    font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+
+  .upload {
+    button {
+      background: #5a278b;
+      border: 1px solid #5a278b;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 0.5rem;
+      color: white;
+      font-weight: bold;
+    }
+  }
+  #sort {
+    display: inline-block;
+    button {
+      background-color: #fff;
+      color: black;
+      border-radius: 3px;
+      border: 1px solid #acb0b4;
+      font-weight: bold;
+      padding: 6px 3px;
+      font-size: 12px;
+      width: 5rem;
+      &:foucs {
+        outline: none;
+        box-shadow: none;
+      }
+      &.btn-primary:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      &:after {
+        margin-left: 1rem;
+        content: "⌵";
+        border: none;
+        font-weight: bold;
+      }
+    }
+    #dropdown-menu {
+      background-color: #fff;
+      border: 1px solid #acb0b4;
+      max-width: 5rem;
+      min-width: 5rem;
+      .dropdown-item {
+        color: #bfbfbf;
+        font-weight: bold;
+        font-size: 12px;
+
+        &:hover {
+          background: none;
+        }
+      }
+      .active {
+        color: #5a278b;
+        background: none;
+      }
+    }
   }
 `;
 
@@ -506,7 +576,7 @@ export {
   PartHeader,
   PartBody,
   PartFilter,
-  PartIPLoListDiv,
+  CardDiv,
   PostCard,
   IPLoPostCard,
   SubCategoryDiv,
@@ -515,5 +585,5 @@ export {
   LinkCSS,
   MenuList,
   MenuItem,
-  UploadBtnDiv
+  ListTopAreaDiv,
 };

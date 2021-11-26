@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import RequestPostList from "./RequestPostList.js";
 import { RequestListDiv } from "../../css/RVCSS.js";
-import qs from 'qs';
+import qs from "qs";
 import axios from "axios";
 
 function RequestVideo(props) {
-
   const [Skip, setSkip] = useState(0);
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([]);
@@ -17,7 +16,7 @@ function RequestVideo(props) {
       category: props.URL.subCategory,
     };
 
-    if(props.URL.searchTerm) {
+    if (props.URL.searchTerm) {
       body.searchTerm = props.URL.searchTerm;
       setSearchTerm(props.URL.searchTerm);
     }
@@ -42,29 +41,24 @@ function RequestVideo(props) {
     }
     setPageIdxArr(temp);
   }, [PageLen, parseInt(Skip / 60)]);
-  
+
   useEffect(() => {
-    window.scrollTo(0,0);
+    window.scrollTo(0, 0);
   }, [props.URL]);
 
   return (
     <RequestListDiv>
-      <div className="postBtn">
-        <Link to="/Making/RequestUpload">
-          <button>
-            게시하기
-          </button>
-        </Link>
-      </div>
       <RequestPostList URL={props.URL} />
       <div className="FNB">
         <div className="pagination">
           {PageIdxArr[0] !== 1 ? (
             <button
               onClick={() => {
-                props.URL.pIdx = parseInt((parseInt(props.URL.pIdx) - 10)/10)*10;
+                props.URL.pIdx =
+                  parseInt((parseInt(props.URL.pIdx) - 10) / 10) * 10;
                 props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-              }}>
+              }}
+            >
               &lt; 이전
             </button>
           ) : null}
@@ -75,26 +69,29 @@ function RequestVideo(props) {
                   key={idx}
                   onClick={() => {
                     props.URL.pIdx = page - 1;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
+                    props.history.push(
+                      `?${decodeURI(qs.stringify(props.URL))}`
+                    );
                   }}
-                  className={props.URL.pIdx === (page - 1).toString() ? "active" : null}
+                  className={
+                    props.URL.pIdx === (page - 1).toString() ? "active" : null
+                  }
                 >
                   <p>{page}</p>
                 </li>
               );
             })}
           </ul>
-          {
-              PageIdxArr[PageIdxArr.length - 1] < PageLen && (
-                <button
-                  onClick={() => {
-                    props.URL.pIdx = parseInt(parseInt(props.URL.pIdx)/10)*10;
-                    props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
-                  }}>
-                  다음 &gt;
-                </button>
-              )
-          }
+          {PageIdxArr[PageIdxArr.length - 1] < PageLen && (
+            <button
+              onClick={() => {
+                props.URL.pIdx = parseInt(parseInt(props.URL.pIdx) / 10) * 10;
+                props.history.push(`?${decodeURI(qs.stringify(props.URL))}`);
+              }}
+            >
+              다음 &gt;
+            </button>
+          )}
         </div>
       </div>
     </RequestListDiv>

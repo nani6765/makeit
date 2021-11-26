@@ -143,6 +143,44 @@ const SubGNBDiv = styled.div`
       }
     }
   }
+  ${mq[1]} {
+    padding: 0rem 5% 0rem 5%;
+    ul {
+      flex-wrap: wrap;
+      flex-direction: row;
+      height: auto;
+      li {
+        font-size: 10px;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+`;
+
+const TopArea = styled.div`
+  width: 70%;
+  text-align: right;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-between;
+  ${mq[0]} {
+    width: 80%;
+  }
+  ${mq[1]} {
+    width: 90%;
+  }
+  .upload {
+    button {
+      background: #5a278b;
+      border: 1px solid #5a278b;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 0.5rem;
+      color: white;
+      font-weight: bold;
+    }
+  }
   #sort {
     display: inline-block;
     button {
@@ -186,19 +224,6 @@ const SubGNBDiv = styled.div`
       .active {
         color: #5a278b;
         background: none;
-      }
-    }
-  }
-  ${mq[1]} {
-    padding: 0rem 5% 0rem 5%;
-    ul {
-      flex-wrap: wrap;
-      flex-direction: row;
-      height: auto;
-      li {
-        font-size: 10px;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
       }
     }
   }
@@ -250,6 +275,7 @@ export {
   MenuList,
   MenuItem,
   SubGNBDiv,
+  TopArea,
   StickyBarDiv,
   LinkCSS,
 };

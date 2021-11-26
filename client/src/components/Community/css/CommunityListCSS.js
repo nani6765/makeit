@@ -68,7 +68,6 @@ const GNBDiv = styled.div`
       cursor: pointer;
     }
   }
-
   ${mq[1]} {
     padding: 0px 5%;
     justify-content: space-evenly;
@@ -108,13 +107,10 @@ const MenuItem = styled.li`
     font-weight: bold;
     user-select: none;
   }
-
   ${mq[1]} {
     margin-right: 0px;
     padding-bottom: 0rem !important;
-    p {
-      font-size: 10px;
-    }
+    font-size: 10px;
   }
 `;
 
@@ -123,10 +119,26 @@ const SortDiv = styled.div`
   background-color: #fafafa;
   padding: 1rem 15%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   align-content: center;
-
+  ${mq[0]} {
+    padding: 1rem 10%;
+  }
+  ${mq[0]} {
+    padding: 1rem 5%;
+  }
+  .upload {
+    button {
+      background: #5a278b;
+      border: 1px solid #5a278b;
+      box-sizing: border-box;
+      border-radius: 5px;
+      padding: 0.5rem;
+      color: white;
+      font-weight: bold;
+    }
+  }
   #sort {
     display: inline-block;
     button {
@@ -173,19 +185,6 @@ const SortDiv = styled.div`
       }
     }
   }
-  ${mq[1]} {
-    padding: 0rem 5% 0rem 5%;
-    ul {
-      flex-wrap: wrap;
-      flex-direction: row;
-      height: auto;
-      li {
-        font-size: 10px;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-      }
-    }
-  }
 `;
 const CommunityBody = styled.div`
   width: 70%;
@@ -202,79 +201,6 @@ const CommunityBody = styled.div`
   }
   ${mq[1]} {
     width: 90%;
-  }
-`;
-
-const BodyHeaderDiv = styled.div`
-  margin-top: 5vh;
-  heght: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  user-select: none;
-  background: #ede7f6;
-  margin: 0 auto;
-  width: 100%;
-  padding: 15px 15%;
-  div {
-    display: flex;
-    align-items: center;
-    .category {
-      font-size: 24px;
-      font-weight: bold;
-      width: auto;
-      display: inline;
-      color: rgba(112, 44, 138, 1);
-    }
-    p {
-      font-size: 16px;
-      display: inline;
-      color: #979393;
-      span {
-        cursor: pointer;
-        margin-left: 15px;
-        &.activate {
-          background: #935ea5;
-          cursor: default;
-          color: white;
-          border-radius: 16px;
-          padding: 5px 10px;
-        }
-      }
-    }
-  }
-  button {
-    background: #935ea5;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    border: none;
-    padding: 5px 10px 5px 10px;
-    svg {
-      margin-left: 3px;
-    }
-  }
-  ${mq[1]} {
-    padding: 15px 5%;
-    div {
-      h1 {
-        font-size: 24px;
-      }
-      p {
-        margin-left: 5px;
-        font-size: 12px;
-      }
-    }
-    button {
-      font-size: 10px;
-      svg {
-        width: 12px;
-        height: 12px;
-      }
-    }
-  }
-  ${mq[1]} {
-    padding: 10px 5%;
   }
 `;
 
@@ -437,7 +363,6 @@ export {
   MenuItem,
   SortDiv,
   CommunityBody,
-  BodyHeaderDiv,
   PostCard,
   FNBDiv,
 };

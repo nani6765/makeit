@@ -56,22 +56,8 @@ const ProducerListDiv = styled.div`
   width: 100%;
   height: auto;
   margin-top: 30px;
-  grid-area: right;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-
-  .postBtn {
-    float: right;
-    color: #fff;
-    font-size: 15px;
-    font-weight: bold;
-    padding: 7px 10px;
-    background: #5a278b;
-    border: none;
-    border-radius: 3px;
-  }
   .FNB {
     display: flex;
     flex-direction: column;

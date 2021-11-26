@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory, withRouter, Link } from "react-router-dom";
+
 import Dropdown from "react-bootstrap/Dropdown";
 
 import qs from "qs";
@@ -107,6 +108,16 @@ function GNBArea(props) {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
+        <div className="upload">
+          <Link
+            to={{
+              pathname: "/community/upload/",
+              state: { category: qs.parse(props.URL).category },
+            }}
+          >
+            <button>글쓰기</button>
+          </Link>
+        </div>
       </SortDiv>
     </>
   );

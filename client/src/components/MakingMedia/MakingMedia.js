@@ -79,7 +79,6 @@ function MakingMedia(props) {
     <>
       <MakingHeader>
         {
-          // eslint-disable-next-line jsx-a11y/alt-text
           <img
             src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
             style={{ width: "100%" }}

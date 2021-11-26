@@ -9,8 +9,10 @@ import GNBArea from "./content/GNBArea.js";
 import SubCategory from "./filter/SubCategory.js";
 import FAFilter from "./filter/FAFilter.js";
 import FPFilter from "./filter/FPFilter.js";
-import UploadButton from "./content/UploadButton.js";
-import Pagination from "./content/Pagination.js.js";
+import ListTopArea from "./content/ListTopArea.js";
+import Pagination from "./content/Pagination.js";
+import PostListDiv from "./content/PostListDiv.js";
+import Loading from "../../utils/view/Page/Loading.js";
 
 function Participate(props) {
   const user = useSelector((state) => state.user.userData);
@@ -18,67 +20,10 @@ function Participate(props) {
   let history = useHistory();
 
   const [URL, setURL] = useState({});
-  const [Loading, setLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([1]);
   const [PostList, setPostList] = useState([]);
-
-  /*
-  const SetContent = () => {
-    switch (URL.category) {
-      case "FP":
-        return (
-          <FPList
-            user={user}
-            URL={URL}
-            setURL={setURL}
-            PostList={PostList}
-            Loading={Loading}
-          />
-        );
-      case "FA":
-        return (
-          <FAList
-            user={user}
-            URL={URL}
-            setURL={setURL}
-            PostList={PostList}
-            Loading={Loading}
-          />
-        );
-      case "IP":
-        return (
-          <IPList
-            user={user}
-            URL={URL}
-            setURL={setURL}
-            PostList={PostList}
-            Loading={Loading}
-          />
-        );
-      case "Lo":
-        return (
-          <LoList
-            user={user}
-            URL={URL}
-            setURL={setURL}
-            PostList={PostList}
-            Loading={Loading}
-          />
-        );
-      default:
-        return (
-          <FPList
-            user={user}
-            URL={URL}
-            setURL={setURL}
-            PostList={PostList}
-            Loading={Loading}
-          />
-        );
-    }
-  };
-  */
 
   const SetSubCategory = () => {
     switch (URL.category) {
@@ -90,24 +35,7 @@ function Participate(props) {
         return <SubCategory URL={URL} />;
       case "Lo":
         return <SubCategory URL={URL} />;
-      default:
-        return (
-          <FPList
-            URL={URL}
-            setURL={setURL}
-            PostList={PostList}
-            Loading={Loading}
-          />
-        );
     }
-  };
-
-  const SortFilter = (sort) => {
-    let temp = qs.parse(URL);
-    temp.sort = sort;
-    temp.pIdx = 0;
-    let temp2 = qs.stringify(temp);
-    history.push(`?${decodeURI(temp2)}`);
   };
 
   async function getPostLen() {
@@ -128,7 +56,6 @@ function Participate(props) {
       body.filmType = URL.filmType;
     }
 
-    console.log(body);
     await axios.post("/api/participate/getPageLen", body).then((response) => {
       if (response.data.success) {
         setPageLen(parseInt(response.data.len / 12) + 1);
@@ -139,7 +66,7 @@ function Participate(props) {
   }
 
   async function getPostList() {
-    setLoading(true);
+    setisLoading(true);
     let body = {
       type: URL.category,
       sort: URL.sort,
@@ -166,12 +93,11 @@ function Participate(props) {
       } else {
         alert("error");
       }
-      setLoading(false);
+      setisLoading(false);
     });
   }
 
   useEffect(() => {
-    //console.log("URL : ", URL);
     if (URL.category) {
       getPostLen();
       getPostList();
@@ -184,7 +110,7 @@ function Participate(props) {
       setURL(temp);
     } else {
       //최초접속
-      history.push(`?category=FP&sort=hot&pIdx=0`);
+      history.push(`?category=FP&sort=인기순&pIdx=0`);
     }
   }, [location.search]);
 
@@ -204,19 +130,19 @@ function Participate(props) {
           <img src="./Img/CommunityBanner.png" alt="" />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
-        <PostList
-          type={URL.category}
-          PostList={props.PostList}
-          user={props.user}
-        />
+        {SetSubCategory()}
       </PartHeader>
 
       <PartBody>
-        <UploadButton category={URL.category} />
-        {SetContent()}
+        <ListTopArea URL={URL} category={URL.category} />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <PostListDiv type={URL.category} PostList={PostList} user={user} />
+        )}
       </PartBody>
       <PagiCSS>
-        {!Loading && (
+        {!isLoading && (
           <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />
         )}
       </PagiCSS>
