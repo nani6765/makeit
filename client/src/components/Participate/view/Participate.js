@@ -86,7 +86,6 @@ function Participate(props) {
     if (URL.filmType) {
       body.filmType = URL.filmType;
     }
-
     await axios.post("/api/participate", body).then((response) => {
       if (response.data.success) {
         setPostList([...response.data.post]);

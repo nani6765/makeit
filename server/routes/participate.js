@@ -33,7 +33,7 @@ router.post("/search", (req, res) => {
     $or: [
       { title: { $regex: req.body.term } },
       { content: { $regex: req.body.term } },
-    ]
+    ],
   };
 
   if (req.body.type !== "all") {
@@ -55,13 +55,11 @@ router.post("/search", (req, res) => {
         .sort(sort)
         .exec()
         .then((post) => {
-          return res
-            .status(200)
-            .send({
-              success: true,
-              postLength: post.length,
-              post: post.splice(req.body.skip, req.body.limit),
-            });
+          return res.status(200).send({
+            success: true,
+            postLength: post.length,
+            post: post.splice(req.body.skip, req.body.limit),
+          });
         });
     });
 });
@@ -99,11 +97,9 @@ router.post("/", (req, res) => {
   }
   if (category.$or && !category.$or.length) delete category.$or;
 
-  console.log(category);
-
   //최신순&&인기순 정렬
   let sort = {};
-  if (temp.sortPost === "최신순") {
+  if (temp.sort === "최신순") {
     sort.createdAt = -1;
   } else {
     sort.likeNum = -1;
