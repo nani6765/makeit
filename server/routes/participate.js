@@ -25,6 +25,47 @@ const SelectModel = (types) => {
   }
 };
 
+router.post("/search", (req, res) => {
+  let sort = {};
+  sort.createdAt = -1;
+
+  let filter = {
+    $or: [
+      { title: { $regex: req.body.term } },
+      { content: { $regex: req.body.term } },
+    ]
+  };
+
+  if (req.body.type !== "all") {
+    filter.type = req.body.type;
+  }
+
+  User.find({ displayName: { $regex: req.body.term } })
+    .exec()
+    .then((userInfo) => {
+      let uidArr = [];
+      if (userInfo != []) {
+        for (let i = 0; i < userInfo.length; i++) {
+          uidArr.push(userInfo[i].uid);
+        }
+      }
+      filter.$or.push({ uid: { $in: uidArr } });
+      PartFA.find(filter)
+        .populate("auther")
+        .sort(sort)
+        .exec()
+        .then((post) => {
+          return res
+            .status(200)
+            .send({
+              success: true,
+              postLength: post.length,
+              post: post.splice(req.body.skip, req.body.limit),
+            });
+        });
+    });
+});
+
 router.post("/", (req, res) => {
   let temp = req.body;
 
