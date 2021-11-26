@@ -12,9 +12,6 @@ function FPList(props) {
 
   return (
     <>
-      <PartFilter style={{ borderRadius: "15px" }}>
-        <FPFilter URL={props.URL} setURL={props.setURL} />
-      </PartFilter>
       {props.Loading ? (
         <p>isLoading</p>
       ) : (
@@ -22,9 +19,6 @@ function FPList(props) {
           <PostList type="FP" PostList={props.PostList} user={props.user} />
         )
       )}
-      <FNBDiv>
-        <UploadButton category="파트너찾기" />
-      </FNBDiv>
     </>
   );
 }

@@ -12,7 +12,7 @@ import {
   UploadDiv,
   UploadForm,
 } from "../../../css/ParticipateUploadCSS.js";
-import { PartFilter } from "../../../css/ParticipateCSS.js";
+import { PartFilter } from "../../../css/ParticipateUploadCSS.js";
 
 import axios from "axios";
 

@@ -12,9 +12,6 @@ function FAList(props) {
 
   return (
     <>
-      <PartFilter style={{ borderRadius: "15px" }}>
-        <FAFilter user={props.user} URL={props.URL} setURL={props.setURL} />
-      </PartFilter>
       {
       props.Loading 
       ? 
@@ -22,9 +19,6 @@ function FAList(props) {
       : props.URL.category === "FA" && (
         <PostList type="FA" PostList={props.PostList} user={props.user} />
       )}
-      <FNBDiv>
-        <UploadButton category="배우찾기" />
-      </FNBDiv>
     </>
   );
 }

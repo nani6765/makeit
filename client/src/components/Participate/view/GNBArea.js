@@ -1,34 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { MenuList, MenuItem } from "../css/ParticipateCSS.js";
-
-import { ReactComponent as Location } from "../css/img/로케이션.svg";
-import { ReactComponent as FindingActor } from "../css/img/배우찾기.svg";
-import { ReactComponent as FindingPartner } from "../css/img/파트너찾기.svg";
-import { ReactComponent as InformPro } from "../css/img/프로알리기.svg";
+import { ReactComponent as SearchIcon } from "../css/img/searchIcon.svg";
 
 function GNBArea(props) {
   let history = useHistory();
+  const [SearchTerm, setSearchTerm] = useState("");
 
   const GNBList = [
     {
-      icon: <FindingPartner />,
       text: "파트너찾기",
       GNB: "FP",
     },
     {
-      icon: <FindingActor />,
       text: "배우찾기",
       GNB: "FA",
     },
     {
-      icon: <InformPro />,
       text: "프로알리기",
       GNB: "IP",
     },
     {
-      icon: <Location />,
       text: "로케이션",
       GNB: "Lo",
     },
@@ -42,16 +35,37 @@ function GNBArea(props) {
     }
   };
 
+  const SearchHandler = (e) => {
+    e.preventDefault();
+    if (SearchTerm && !/\S/.test(SearchTerm)) {
+      return;
+    }
+    history.push(`/search/participate?term=${SearchTerm}&pIdx=0&category=all`);
+  };
+
   return (
     <MenuList>
-      {GNBList.map((category, idx) => {
-        return (
-          <MenuItem key={idx} onClick={() => ClickFunc(category.GNB)}>
-            {category.icon}
-            <p>{category.text}</p>
-          </MenuItem>
-        );
-      })}
+      <ul>
+        {GNBList.map((category, idx) => {
+          return (
+            <MenuItem key={idx} className={category.GNB === props.URL.category ? "active" : null} onClick={() => ClickFunc(category.GNB)}>
+              <p>{category.text}</p>
+            </MenuItem>
+          );
+        })}
+      </ul>
+        <div className="search">
+          <input
+            type="text"
+            placeholder="검색하기"
+            value={SearchTerm}
+            onChange={(e) => setSearchTerm(e.currentTarget.value)}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) SearchHandler(e);
+            }}
+          />
+          <SearchIcon onClick={(e) => SearchHandler(e)} />
+        </div>
     </MenuList>
   );
 }

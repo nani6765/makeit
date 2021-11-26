@@ -77,9 +77,9 @@ router.post("/", (req, res) => {
     $or: [],
   };
 
-  if (temp.subCategory && temp.subCategory !== "전체") {
+  if (temp.category && temp.category !== "전체") {
     delete category.$or;
-    category.subCategory = req.body.subCategory;
+    category.subCategory = req.body.category;
   }
   if (temp.gender) {
     for (let i = 0; i < temp.gender.length; i++) {
@@ -98,6 +98,8 @@ router.post("/", (req, res) => {
     }
   }
   if (category.$or && !category.$or.length) delete category.$or;
+
+  console.log(category);
 
   //최신순&&인기순 정렬
   let sort = {};

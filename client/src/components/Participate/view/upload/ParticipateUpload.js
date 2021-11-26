@@ -11,13 +11,13 @@ function ParticipateUpload(props) {
   const user = useSelector((state) => state.user.userData);
   const setContent = () => {
     switch (props.location.state.category) {
-      case "배우찾기":
+      case "FA":
         return <FAUpload user={user} />;
-      case "파트너찾기":
+      case "FP":
         return <FPUpload user={user} />;
-      case "프로알리기":
+      case "IP":
         return <IPUpload user={user} />;
-      case "로케이션":
+      case "Lo":
         return <LoUpload user={user} />;
       default:
         return <FPUpload user={user} />;

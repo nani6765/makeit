@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import qs from "qs";
+import {PartFilter} from "../../css/ParticipateCSS.js";
 
 function FAUploadFilter(props) {
   let history = useHistory();
@@ -106,7 +107,7 @@ function FAUploadFilter(props) {
   }, [props.URL]);
 
   return (
-    <>
+    <PartFilter>
       <div className="select">
         <div className="labelArea">
           <span>성</span>
@@ -268,7 +269,7 @@ function FAUploadFilter(props) {
           </div>
         </div>
       </div>
-    </>
+    </PartFilter>
   );
 }
 
