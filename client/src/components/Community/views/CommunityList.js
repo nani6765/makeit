@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
 import GNBArea from "./content/List/GNBArea";
-import BodyHeader from "./content/List/BodyHeader";
 import PostListArea from "./content/List/PostListArea";
 import Pagination from "./content/List/Pagination";
 import qs from "qs";
@@ -85,8 +84,8 @@ function CommunityList() {
     if (location.search) {
       setURL(location.search.slice(1));
     } else {
-      setURL("category=전체게시판&sort=new&pIdx=0");
-      history.push(`?category=전체게시판&sort=new&pIdx=0`);
+      setURL("category=전체게시판&sort=최신순&pIdx=0");
+      history.push(`?category=전체게시판&sort=최신순&pIdx=0`);
     }
   }, [location]);
 
@@ -111,7 +110,6 @@ function CommunityList() {
           <img src="./Img/CommunityBanner.png" alt="" />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
-        <BodyHeader URL={URL} setURL={setURL} />
       </CommunityHeader>
       <CommunityBody>
         {URL === "" || Loading ? (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { MenuList, MenuItem } from "../../css/CommonCSS.js";
 import { ReactComponent as SearchIcon } from "../../css/Img/searchIcon.svg";
-import qs from 'qs';
+import qs from "qs";
 
 function HeaderGNB(props) {
   const GNBList = [
@@ -16,22 +16,11 @@ function HeaderGNB(props) {
 
   const SearchHandler = (e) => {
     e.preventDefault();
-     if (SearchTerm && !/\S/.test(SearchTerm)) {
-       return;
-     }
-     /*
-     let temp = qs.parse(props.URL);
-     temp.searchTerm = SearchTerm.trim();
-     if (!SearchTerm) {
-       delete temp.searchTerm;
-     }
-     temp.pIdx = 0;
-     let temp2 = qs.stringify(temp);
-     props.history.push(`?${decodeURI(temp2)}`);
-     */
+    if (SearchTerm && !/\S/.test(SearchTerm)) {
+      return;
+    }
     props.history.push(`/search/making?term=${SearchTerm}&pIdx=0&category=all`);
-   };
-
+  };
 
   return (
     <>

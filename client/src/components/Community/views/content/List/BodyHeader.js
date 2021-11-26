@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { BodyHeaderDiv } from "../../../css/CommunityListCSS.js";
 import { ReactComponent as PenIcon } from "../../../css/img/Pen.svg";
 import qs from "qs";
-
 import { useHistory } from "react-router-dom";
 
 function BodyHeader(props) {
@@ -48,7 +47,7 @@ function BodyHeader(props) {
       <Link
         to={{
           pathname: "/community/upload/",
-          state: { category: qs.parse(props.URL).category}
+          state: { category: qs.parse(props.URL).category },
         }}
       >
         <button>
