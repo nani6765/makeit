@@ -58,59 +58,101 @@ const PartHeader = styled.div`
   }
 `;
 
-const MenuList = styled.ul`
+const MenuList = styled.div`
+width: 100%;
+padding: 0px 15%;
+border-bottom: 1px solid #acb0b4;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+align-content: center;
+ul {
+  height: 1rem;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: space-between;
-
-  width: 70%;
-  height: 120px;
-
-  margin: 0 auto;
-  padding: 25px 0;
-  ${mq[1]} {
-    width: 90%;
-    height: auto;
-    padding: 2vh 3vw 2vh 3vw;
+  padding-bottom: 1rem !important;
+  margin-top: 3rem;
+  list-style: none;
+}
+.search {
+  background: #f7f7f7;
+  padding: 5px;
+  height: 100%;
+  margin-bottom: 0.5rem;
+  input {
+    background: none;
+    border: none;
+    text-align: right;
+    height: 100%;
+    &::placeholder {
+      color: #bfbfbf;
+    }
   }
-`;
-
-const MenuItem = styled.li`
-  cursor: pointer;
-  text-align: center;
+  input:focus {
+    border: none;
+    outline: none;
+  }
   svg {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 5px;
-    ${mq[1]} {
-      width: 30px;
-      height: 30px;
-    }
+    margin-left: 5px;
+    height: 100%;
+    cursor: pointer;
   }
-  p {
-    color: #702c8a;
-    font-weight: bold;
-    user-select: none;
-    ${mq[1]} {
-      font-size: 10px;
-    }
+}
+
+${mq[1]} {
+  padding: 0px 5%;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: flex-end;
+  ul {
+    width: 100%;
+    align-content: center;
+    justify-content: space-evenly;
+    padding-bottom: 0px !important;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
-  &:hover {
-    svg {
-      width: 60px;
-      height: 60px;
-    }
-  }
-  ${mq[1]} {
-    &:hover,
-    &:focus {
-      svg {
-        width: 30px;
-        height: 30px;
+  .search {
+    padding: 3px;
+    width: 150px;
+    input {
+      width: 120px;
+      &::placeholder {
+        font-size: 10px;
       }
     }
   }
+}
 `;
+
+const MenuItem = styled.li`
+  color: #ACB0B4;
+  background: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  margin-right: 2rem;
+  padding-bottom: 2rem !important;
+  height: 1rem;
+  font-weight: bold;
+  &.active {
+    border-bottom: 3px solid #61057d;
+    user-select: none;
+    p {
+      color: #61057d;
+      font-weight: bold;
+    }
+  }
+
+  ${mq[1]} {
+    margin-right: 0px;
+    padding-bottom: 0rem !important;
+    p {
+      font-size: 10px;
+    }
+  }
+`;
+
 const PartBody = styled.div`
   width: 70%;
   margin: 0 auto;
@@ -120,26 +162,29 @@ const PartBody = styled.div`
 `;
 
 const PartFilter = styled.div`
-  border-radius: 15px 15px 0px 0px;
-  margin-top: 30px;
-  background: #ede7f6;
+  background: #fafafa;
   border: none;
   height: auto;
-  padding: 20px 20px 10px 20px;
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
+  padding: 0 15%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding-top: 1rem;
+  ${mq[0]} {
+    padding: 10px 10%;
+  }
+  ${mq[1]} {
+    padding: 10px 5%;
+  }
   .select {
     display: flex;
     .labelArea {
-      width: 20%;
+      width: 10%;
       display: flex;
       align-content: center;
-      justify-content: space-evenly;
-      align-items: flex-start;
+      align-items: center;
       user-select: none;
+      margin-bottom: 1rem;
       span {
         font-weight: bold;
         margin: 0px;
@@ -147,76 +192,41 @@ const PartFilter = styled.div`
     }
     .contentArea {
       display: flex;
-      width: 80%;
+      width: 90%;
       flex-wrap: wrap;
+     
       div {
         width: auto;
-        margin-bottom: 10px;
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+        &:nth-last-of-type(1){
+          margin-right: 0rem;
+        }
         input {
           display: none;
         }
         label {
-          margin: 0px;
-          user-select: none;
-          ${mq[1]} {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-          }
-        }
-        input + label:before {
-          content: "";
-          display: inline-flex;
-          width: 1rem;
-          height: 1rem;
-          background: rgba(179, 82, 255, 0.12);
-          border: 2px solid rgba(179, 82, 255, 0.24);
-          border-radius: 4px;
-          margin: 0 0.5rem 0 1.5rem;
+          padding: 0.75rem;
           cursor: pointer;
-          ${mq[1]} {
-            margin: 0 0.5rem 0 1rem;
-          }
+          border: 1px solid #ACB0B4;
+          border-radius: 5px;
+          
         }
-        input:checked + label:before {
-          content: "✓";
+        input:checked + label {
+          background: #61057D;
+          border: 1px solid #61057D;
+          box-sizing: border-box;
+          border-radius: 5px;
           color: white;
-          background: #9b51e0;
-          align-items: center;
-          align-content: center;
-          justify-content: center;
         }
       }
     }
-    &:nth-last-of-type(1) {
-      margin-bottom: 0px;
-    }
-  }
-  ${mq[1]} {
-    padding: 20px 10px;
   }
 `;
 
 const PartIPLoListDiv = styled.div`
   width: 100%;
   height: auto;
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: 2fr 8fr;
-  grid-template-rows: auto;
-  grid-template-areas: "left right";
-  grid-gap: 1rem;
-  .left {
-    grid-area: left;
-  }
-  .right {
-    grid-area: right;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    height: 100%;
-  }
 `;
 
 const PostCard = styled.div`
@@ -369,40 +379,45 @@ const IPLoPostCard = styled.div`
   }
 `;
 
-const StickyBarDiv = styled.div`
-  position: sticky;
-  top: 100px;
-  left: 0px;
-  width: 100%;
-  padding: 20px;
-  margin-top: 20px;
-  background-color: #fff;
-  border-radius: 15px;
-  box-shadow: 0px 2px 10px rgba(178, 3, 108, 0.03),
-    0px 9px 30px rgba(163, 1, 79, 0.05);
-  text-align: center;
-  .category {
-    height: 40px;
-    color: #702c8a;
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .subCategory {
-    margin-top: 10px;
-    p {
-      height: auto;
-      cursor: pointer;
-      font-size: 15px;
-      line-height: 15px;
-      margin-bottom: 1.5rem;
-      &:nth-last-of-type(1) {
-        margin-bottom: 0px;
-      }
-    }
-    p.active {
+const SubCategoryDiv = styled.div`
+width: 100%;
+background-color: #fafafa;
+padding: 1rem 15%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+align-content: center;
+ul {
+  height: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  list-style: none;
+  li {
+    margin-right: 1rem;
+    font-size: 12px;
+    color: rgba(172, 176, 180, 1);
+    user-select: none;
+    cursor: pointer;
+    &.active {
+      color: rgba(97, 5, 125, 1);
       font-weight: bold;
     }
   }
+}
+${mq[1]} {
+  padding: 0rem 5% 0rem 5%;
+  ul {
+    flex-wrap: wrap;
+    flex-direction: row;
+    height: auto;
+    li {
+      font-size: 10px;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
 `;
 
 const FNBDiv = styled.div`
@@ -433,6 +448,7 @@ const LinkCSS = css`
   text-decoration: none;
   &:hover {
     text-decoration: none;
+    color: black;
   }
   ${mq[1]} {
     width: auto;
@@ -471,6 +487,21 @@ const PagiCSS = styled.div`
   }
 `;
 
+const UploadBtnDiv = styled.div`
+  width: 100%;
+  text-align: right;
+  margin: 1rem 0;
+  button{
+    background: #5A278B;
+    border: 1px solid #5A278B;
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 1rem;
+    color: white;
+    font-weight: bold;
+  }
+`;
+
 export {
   PartHeader,
   PartBody,
@@ -478,10 +509,11 @@ export {
   PartIPLoListDiv,
   PostCard,
   IPLoPostCard,
-  StickyBarDiv,
+  SubCategoryDiv,
   FNBDiv,
   PagiCSS,
   LinkCSS,
   MenuList,
   MenuItem,
+  UploadBtnDiv
 };

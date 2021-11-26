@@ -20,7 +20,8 @@ function Portfolio(props) {
   }, []);
 
   useEffect(() => {
-    setThumbnailArrLength(props.Thumbnail.length);
+    if(props.Thumbnail)
+      setThumbnailArrLength(1);
   }, [props.Thumbnail]);
 
   useEffect(() => {
@@ -62,14 +63,15 @@ function Portfolio(props) {
           type="thumbnail"
           dirURL="making"
         />
-        <div className="imgShow">
-          {props.Thumbnail[0] !== undefined &&
-          props.Thumbnail[0].path !== undefined ? (
-            <img src={props.Thumbnail[0].path} alt="" />
-          ) : 
-          <img src={props.Thumbnail} alt="" />}
-        </div>
       </div>
+      {
+        props.Thumbnail[0] !== undefined &&
+        <div className="imgShow">
+          {props.Thumbnail[0].path !== undefined
+          ? <img src={props.Thumbnail[0].path} alt="" />
+          : <img src={props.Thumbnail} alt="" />}
+        </div>
+      }
 
       <p style={{ marginTop: "1rem" }}>
         상세이미지등록(선택)

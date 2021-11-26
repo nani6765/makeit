@@ -6,6 +6,12 @@ import axios from "axios";
 import qs from "qs";
 
 import GNBArea from "./GNBArea.js";
+import SubCategory from "./filter/SubCategory.js";
+import FAFilter from "./filter/FAFilter.js";
+import FPFilter from "./filter/FPFilter.js";
+import UploadButton from "./filter/UploadButton.js";
+
+
 import FAList from "./list/FAList.js";
 import FPList from "./list/FPList.js";
 import IPList from "./list/IPList.js";
@@ -22,13 +28,6 @@ function Participate(props) {
   const [PageLen, setPageLen] = useState(1);
   const [PageIdxArr, setPageIdxArr] = useState([1]);
   const [PostList, setPostList] = useState([]);
-
-  const GNBObj = {
-    FA: "배우찾기",
-    FP: "파트너찾기",
-    IP: "프로알리기",
-    Lo: "로케이션",
-  };
 
   const SetContent = () => {
     switch (URL.category) {
@@ -50,6 +49,26 @@ function Participate(props) {
         );
       default:
         return <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
+    }
+  };
+
+  
+  const SetSubCategory = () => {
+    switch (URL.category) {
+      case "FP":
+        return <FPFilter URL={URL} setURL={setURL} />
+      case "FA":
+        return  <FAFilter URL={URL} setURL={setURL} />;
+      case "IP":
+        return (
+          <SubCategory URL={URL} />
+        );
+      case "Lo":
+        return (
+          <SubCategory URL={URL} />
+        );
+      default:
+        return <FPList URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
     }
   };
 
@@ -80,6 +99,7 @@ function Participate(props) {
       body.filmType = URL.filmType;
     }
 
+    console.log(body);
     await axios.post("/api/participate/getPageLen", body).then((response) => {
       if (response.data.success) {
         setPageLen(parseInt(response.data.len / 12) + 1);
@@ -155,29 +175,15 @@ function Participate(props) {
           <img src="./Img/CommunityBanner.png" alt="" />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
-        <div className="category">
-          <p>{GNBObj[URL.category]}</p>
-          <div className="sorting">
-            <p
-              className={URL.sort === "hot" ? "active" : null}
-              onClick={() => {
-                SortFilter("hot");
-              }}
-            >
-              인기순
-            </p>
-            <p
-              className={URL.sort === "new" ? "active" : null}
-              onClick={() => {
-                SortFilter("new");
-              }}
-            >
-              최신순
-            </p>
-          </div>
-        </div>
+        {
+         SetSubCategory()
+        }
       </PartHeader>
-      <PartBody>{SetContent()}</PartBody>
+     
+      <PartBody>
+        <UploadButton category={URL.category} />
+        {SetContent()}
+      </PartBody>
       <PagiCSS>
         {!Loading && (
           <Pagination URL={URL} PageLen={PageLen} PageIdxArr={PageIdxArr} />

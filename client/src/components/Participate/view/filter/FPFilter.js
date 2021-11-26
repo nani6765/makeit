@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router";
+import { PartFilter } from "../../css/ParticipateCSS.js";
+
 import qs from "qs";
 
 function FPUploadFilter(props) {
@@ -84,7 +86,7 @@ function FPUploadFilter(props) {
   }, [props.URL]);
 
   return (
-    <>
+    <PartFilter>
       <div className="select">
         <div className="labelArea">
           <span>촬</span>
@@ -226,7 +228,7 @@ function FPUploadFilter(props) {
           </div>
         </div>
       </div>
-    </>
+    </PartFilter>
   );
 }
 

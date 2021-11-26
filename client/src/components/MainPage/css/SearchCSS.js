@@ -374,6 +374,7 @@ const ImageCard = styled.div`
     }
   }
 `;
+
 const GNBDiv = styled.div`
   width: 100%;
   padding: 0;
