@@ -5,18 +5,12 @@ import { PartHeader, PartBody, PagiCSS } from "../css/ParticipateCSS.js";
 import axios from "axios";
 import qs from "qs";
 
-import GNBArea from "./GNBArea.js";
+import GNBArea from "./content/GNBArea.js";
 import SubCategory from "./filter/SubCategory.js";
 import FAFilter from "./filter/FAFilter.js";
 import FPFilter from "./filter/FPFilter.js";
-import UploadButton from "./filter/UploadButton.js";
-
-
-import FAList from "./list/FAList.js";
-import FPList from "./list/FPList.js";
-import IPList from "./list/IPList.js";
-import LoList from "./list/LoList.js";
-import Pagination from "./list/content/Pagination.js";
+import UploadButton from "./content/UploadButton.js";
+import Pagination from "./content/Pagination.js.js";
 
 function Participate(props) {
   const user = useSelector((state) => state.user.userData);
@@ -29,46 +23,82 @@ function Participate(props) {
   const [PageIdxArr, setPageIdxArr] = useState([1]);
   const [PostList, setPostList] = useState([]);
 
+  /*
   const SetContent = () => {
     switch (URL.category) {
       case "FP":
         return (
-          <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
+          <FPList
+            user={user}
+            URL={URL}
+            setURL={setURL}
+            PostList={PostList}
+            Loading={Loading}
+          />
         );
       case "FA":
         return (
-          <FAList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
+          <FAList
+            user={user}
+            URL={URL}
+            setURL={setURL}
+            PostList={PostList}
+            Loading={Loading}
+          />
         );
       case "IP":
         return (
-          <IPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
+          <IPList
+            user={user}
+            URL={URL}
+            setURL={setURL}
+            PostList={PostList}
+            Loading={Loading}
+          />
         );
       case "Lo":
         return (
-          <LoList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading}/>
+          <LoList
+            user={user}
+            URL={URL}
+            setURL={setURL}
+            PostList={PostList}
+            Loading={Loading}
+          />
         );
       default:
-        return <FPList user={user} URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
+        return (
+          <FPList
+            user={user}
+            URL={URL}
+            setURL={setURL}
+            PostList={PostList}
+            Loading={Loading}
+          />
+        );
     }
   };
+  */
 
-  
   const SetSubCategory = () => {
     switch (URL.category) {
       case "FP":
-        return <FPFilter URL={URL} setURL={setURL} />
+        return <FPFilter URL={URL} setURL={setURL} />;
       case "FA":
-        return  <FAFilter URL={URL} setURL={setURL} />;
+        return <FAFilter URL={URL} setURL={setURL} />;
       case "IP":
-        return (
-          <SubCategory URL={URL} />
-        );
+        return <SubCategory URL={URL} />;
       case "Lo":
-        return (
-          <SubCategory URL={URL} />
-        );
+        return <SubCategory URL={URL} />;
       default:
-        return <FPList URL={URL} setURL={setURL} PostList={PostList} Loading={Loading} />
+        return (
+          <FPList
+            URL={URL}
+            setURL={setURL}
+            PostList={PostList}
+            Loading={Loading}
+          />
+        );
     }
   };
 
@@ -81,7 +111,6 @@ function Participate(props) {
   };
 
   async function getPostLen() {
-
     let body = {
       type: URL.category,
       sort: URL.sort,
@@ -175,11 +204,13 @@ function Participate(props) {
           <img src="./Img/CommunityBanner.png" alt="" />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
-        {
-         SetSubCategory()
-        }
+        <PostList
+          type={URL.category}
+          PostList={props.PostList}
+          user={props.user}
+        />
       </PartHeader>
-     
+
       <PartBody>
         <UploadButton category={URL.category} />
         {SetContent()}

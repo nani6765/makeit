@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { MenuList, MenuItem } from "../css/ParticipateCSS.js";
-import { ReactComponent as SearchIcon } from "../css/img/searchIcon.svg";
+import { MenuList, MenuItem } from "../../css/ParticipateCSS.js";
+import { ReactComponent as SearchIcon } from "../../css/img/searchIcon.svg";
 
 function GNBArea(props) {
   let history = useHistory();
@@ -48,24 +48,28 @@ function GNBArea(props) {
       <ul>
         {GNBList.map((category, idx) => {
           return (
-            <MenuItem key={idx} className={category.GNB === props.URL.category ? "active" : null} onClick={() => ClickFunc(category.GNB)}>
+            <MenuItem
+              key={idx}
+              className={category.GNB === props.URL.category ? "active" : null}
+              onClick={() => ClickFunc(category.GNB)}
+            >
               <p>{category.text}</p>
             </MenuItem>
           );
         })}
       </ul>
-        <div className="search">
-          <input
-            type="text"
-            placeholder="검색하기"
-            value={SearchTerm}
-            onChange={(e) => setSearchTerm(e.currentTarget.value)}
-            onKeyDown={(e) => {
-              if (e.keyCode === 13) SearchHandler(e);
-            }}
-          />
-          <SearchIcon onClick={(e) => SearchHandler(e)} />
-        </div>
+      <div className="search">
+        <input
+          type="text"
+          placeholder="검색하기"
+          value={SearchTerm}
+          onChange={(e) => setSearchTerm(e.currentTarget.value)}
+          onKeyDown={(e) => {
+            if (e.keyCode === 13) SearchHandler(e);
+          }}
+        />
+        <SearchIcon onClick={(e) => SearchHandler(e)} />
+      </div>
     </MenuList>
   );
 }
