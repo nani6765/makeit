@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { LogContentDiv } from "../../css/MyPageContentElement.js";
+import { LogContentDiv } from "../css/MyPageContentElement.js";
 
 function LogContent(props) {
   return (

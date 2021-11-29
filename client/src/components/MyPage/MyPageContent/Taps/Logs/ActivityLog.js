@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Loading from "../../../../utils/view/Page/Loading.js";
 import LogContent from "../../Content/LogContent.js";
 
-import { AlarmListDiv } from "../../../css/AlarmCenterCSS.js";
+import { AlarmListDiv } from "../../css/AlarmCenterCSS.js";
 
 import axios from "axios";
 

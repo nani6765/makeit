@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setAlarmFalse } from "../../../../redux/_actions/alarm_action.js";
@@ -11,7 +11,7 @@ import TextEllipsis from "react-text-ellipsis";
 import moment from "moment";
 import "moment/locale/ko";
 
-import { ChatContentDiv } from "../../css/AlarmCenterCSS.js";
+import { ChatContentDiv } from "../css/AlarmCenterCSS.js";
 
 function ChatContent(props) {
   let UserRef = firebase.database().ref("users");

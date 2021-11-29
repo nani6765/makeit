@@ -1,6 +1,7 @@
 import React from "react";
 import ChatContent from "../../Content/ChatContent.js";
-import { AlarmListDiv } from "../../../css/AlarmCenterCSS.js";
+import { AlarmListDiv } from "../../css/AlarmCenterCSS.js";
+
 function ChatListFnc(props) {
   return (
     <AlarmListDiv>

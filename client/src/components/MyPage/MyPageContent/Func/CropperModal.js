@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
-import { EditProfile } from "../../css/MyPageContentElement.js";
+import { EditProfile } from "../css/MyPageContentElement.js";
 
 function CropperModal(props) {
   //cropping
@@ -49,7 +49,6 @@ function CropperModal(props) {
           이미지 선택
         </button>
       </div>
-      
     </EditProfile>
   );
 }

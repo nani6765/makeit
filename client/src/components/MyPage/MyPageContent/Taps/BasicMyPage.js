@@ -1,8 +1,10 @@
 import React from "react";
-import { PCOnly } from "../../css/MyPageElement.js";
+
 import Avatar from "react-avatar";
 import { useSelector } from "react-redux";
 import { useHistory, withRouter } from "react-router-dom";
+
+import { PCOnly } from "../css/MyPageElement.js";
 
 function BasicMyPage(props) {
   const user = useSelector((state) => state.user);
@@ -55,7 +57,9 @@ function BasicMyPage(props) {
         </div>
         <div
           className="topRight"
-          onClick={() => props.history.push("/MyPage?Taps=alarmCenter&AlarmType=alarm")}
+          onClick={() =>
+            props.history.push("/MyPage?Taps=alarmCenter&AlarmType=alarm")
+          }
         >
           알림센터/쪽지함
         </div>

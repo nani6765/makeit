@@ -4,9 +4,9 @@ import { withRouter, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAlarmFalse } from "../../../../redux/_actions/alarm_action.js";
 
-import { AlarmContentDiv } from "../../css/AlarmCenterCSS.js";
-import { ReactComponent as Comment } from "../../css/comment.svg";
-import { ReactComponent as Like } from "../../css/like.svg";
+import { AlarmContentDiv } from "../css/AlarmCenterCSS.js";
+import { ReactComponent as Comment } from "../css/comment.svg";
+import { ReactComponent as Like } from "../css/like.svg";
 
 import axios from "axios";
 
