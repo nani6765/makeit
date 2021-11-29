@@ -17,9 +17,9 @@ function ShareVideoUpload(props) {
   const [Content, setContent] = useState("");
   const [Thumbnail, setThumbnail] = useState("");
   const [VideoURL, setVideoURL] = useState("");
-  const [ShareOpts, setShareOpts] = useState("공개");
+  //const [ShareOpts, setShareOpts] = useState("공개");
 
-  const radioOptions = ["공개", "일부공개"];
+  //const radioOptions = ["공개", "일부공개"];
   
   useEffect(() => {
     if(!user.userData) {
@@ -28,10 +28,10 @@ function ShareVideoUpload(props) {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    setThumbnail("");
-    setVideoURL("");
-  }, [ShareOpts]);
+  // useEffect(() => {
+  //   setThumbnail("");
+  //   setVideoURL("");
+  // }, [ShareOpts]);
 
   const setURL = (originURL) => {
     var regExp =
@@ -48,33 +48,40 @@ function ShareVideoUpload(props) {
     if (Content === "") {
       return alert("본문을 작성해주세요!");
     }
-    if (ShareOpts === "일부공개") {
-      if (!setURL(VideoURL)) {
-        return alert("영상 URL을 확인해주세요!");
-      }
-      if (Thumbnail === "") {
-        return alert("썸네일을 선택해주세요!");
-      }
-    } else {
-      if (!VideoURL) {
-        return alert("영상을 선택해주세요!");
-      }
+    // if (ShareOpts === "일부공개") {
+    //   if (!setURL(VideoURL)) {
+    //     return alert("영상 URL을 확인해주세요!");
+    //   }
+    //   if (Thumbnail === "") {
+    //     return alert("썸네일을 선택해주세요!");
+    //   }
+    // } else {
+    //   if (!VideoURL) {
+    //     return alert("영상을 선택해주세요!");
+    //   }
+    // }
+    if (!setURL(VideoURL)) {
+      return alert("영상 URL을 확인해주세요!");
+    }
+    if (Thumbnail === "") {
+      return alert("썸네일을 선택해주세요!");
     }
 
-    console.log("Thumbnail : ", Thumbnail);
     let body = {
       uid: user.userData.uid,
       oneLineIntroduce: OneLineIntroduce,
       content: Content,
+      thumbnailUrl : Thumbnail[0].path,
+      videoUrl : setURL(VideoURL),
     };
 
-    if (ShareOpts === "공개") {
-      body.thumbnailUrl = Thumbnail;
-      body.videoUrl = VideoURL;
-    } else {
-      body.thumbnailUrl = Thumbnail[0].path;
-      body.videoUrl = setURL(VideoURL);
-    }
+    // if (ShareOpts === "공개") {
+    //   body.thumbnailUrl = Thumbnail;
+    //   body.videoUrl = VideoURL;
+    // } else {
+    //   body.thumbnailUrl = Thumbnail[0].path;
+    //   body.videoUrl = setURL(VideoURL);
+    // }
 
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
@@ -113,7 +120,7 @@ function ShareVideoUpload(props) {
         />
 
         <ShareVideoContentDiv>
-          <div className="setShareOpt">
+          {/* <div className="setShareOpt">
             <label className="filmTypelabel">등록 영상 공개 범위</label>
             {radioOptions.map((option, idx) => {
               return (
@@ -145,7 +152,13 @@ function ShareVideoUpload(props) {
               VideoURL={VideoURL}
               setVideoURL={setVideoURL}
             />
-          )}
+          )} */}
+          <PrivateUpload
+              Thumbnail={Thumbnail}
+              setThumbnail={setThumbnail}
+              VideoURL={VideoURL}
+              setVideoURL={setVideoURL}
+            />
           <div className="contentArea">
             <textarea
               value={Content}

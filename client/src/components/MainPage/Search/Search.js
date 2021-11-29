@@ -48,8 +48,9 @@ function Search(props) {
   };
 
   useEffect(() => {
-    if (location.search) {
-      setTerm(qs.parse(location.search, { ignoreQueryPrefix: true }).term);
+    let temp = qs.parse(location.search, { ignoreQueryPrefix: true }).term;
+    if (location.search && temp) {
+      setTerm(temp);
     } else {
       history.push("/");
     }
