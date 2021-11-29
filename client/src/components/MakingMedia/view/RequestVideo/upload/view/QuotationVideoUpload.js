@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import YoutubeModal from "../../../../../utils/view/Modal/YoutubeCheckModal.js";
+//import YoutubeModal from "../../../../../utils/view/Modal/YoutubeCheckModal.js";
+import YoutubeLinkModal from "../../../../../utils/view/Modal/YoutubeLinkModal.js";
 import { VideoUploadDiv } from "../../../../css/RVUCSS.js";
 
 function QuotationVideoUpload(props) {
@@ -27,16 +28,15 @@ function QuotationVideoUpload(props) {
           className="search"
           onClick={() => setModalFlag(true)}
         >
-          검색
+          추가
         </button>
       </div>
 
       {ModalFlag && (
-        <YoutubeModal
+        <YoutubeLinkModal
           setModalFlag={setModalFlag}
           VideoArr={props.VideoArr}
           setVideoArr={props.setVideoArr}
-          SearchLength="6"
         />
       )}
 
@@ -56,10 +56,9 @@ function QuotationVideoUpload(props) {
                   />
                 </div>
 
-                <img src={Video.snippet.thumbnails.high.url} alt="" />
+                <img src={Video.thumbnail} alt="" />
                 <div>
-                  <p className="title">{Video.snippet.title}</p>
-                  <p className="channel">{Video.snippet.channelTitle}</p>
+                  <p className="title">{Video.video}</p>
                 </div>
               </li>
             );

@@ -139,6 +139,113 @@ const YoutubeDiv = styled.div`
       height: 100%;
       z-index: 50;
     }
+    .linkDiv {
+      background: #ffffff;
+      box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);
+      border-radius: 11px;
+      z-index: 51;
+      position: fixed;
+      width: 50%;
+      padding: 20px;
+
+      display: grid;
+      grid-template-rows: auto auto auto auto;
+      grid-template-columns: 2fr 3fr 3fr 2fr;
+      grid-template-areas:
+        " urlLabel urlInput urlInput urlInput "
+        " imgLabel imgUpload imgUpload imgUpload "
+        " . imgShow imgShow . "
+        " . . . btnDiv ";
+      
+      ${mq[0]} {
+        width: 70%;
+        grid-template-columns: 2fr 3fr 2fr 3fr;
+        grid-template-areas:
+          " urlLabel urlInput urlInput urlInput "
+          " imgLabel imgUpload imgUpload imgUpload "
+          " . imgShow imgShow . "
+          " . . . btnDiv ";
+
+      }
+      ${mq[0]} {
+        width: 90%;
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+        grid-template-areas:
+          " urlLabel urlLabel . . ."
+          " urlInput urlInput urlInput urlInput urlInput "
+          " imgLabel imgLabel imgUpload imgUpload imgUpload "
+          " . imgShow imgShow imgShow . "
+          " . . btnDiv btnDiv btnDiv ";
+        font-size: 12px;
+
+      }
+      grid-gap: 1rem;
+      .urlLabel {
+        grid-area: urlLabel;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        margin-bottom: 0px;
+      }
+      .urlInput {
+        display: flex;
+        align-items: center;
+        grid-area: urlInput;
+        width: 100%;
+        background: #ffffff;
+        box-shadow: 0px 1px 5px rgba(178, 3, 108, 0.03),
+          0px 4px 15px rgba(163, 1, 79, 0.05);
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        padding: 10px;
+        &:focus {
+          outline: none;
+        }
+        &::placeholder {
+          text-align: center;
+        }
+      }
+      .imgLabel {
+        grid-area: imgLabel;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        margin-bottom: 0px;
+        span {
+          font-size: 10px;
+        }
+      }
+      .imgUpload {
+        grid-area: imgUpload;
+      }
+      .imgShow {
+        grid-area: imgShow;
+        img {
+          width: 100%;
+          height: auto;
+          max-height: 100%;
+        }
+        max-height: 50vh;
+        margin-bottom: 1rem;
+      }
+      .btnDiv {
+        grid-area: btnDiv;
+        button {
+          background: #935ea5;
+          color: white;
+          font-weight: bold;
+          border: 1px solid #935ea5;
+          padding: 0.5rem 1rem;
+          margin-left: 0.5rem;
+          border-radius: 12px;
+        }
+      }
+    }
     .searchDiv {
       background: #ffffff;
       box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.25);

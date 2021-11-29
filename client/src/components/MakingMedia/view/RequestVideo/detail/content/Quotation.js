@@ -121,7 +121,8 @@ function Quotation(props) {
                 {props.QuotationArr[QTIdx].videoArr.map((video, idx) => {
                   return (
                     <ReactPlayer
-                      url={`youtube.com/watch?v=${video.id.videoId}`}
+                      url={video.video}
+                      light={video.thumbnail}
                       width="100%"
                       volume="1"
                     />
