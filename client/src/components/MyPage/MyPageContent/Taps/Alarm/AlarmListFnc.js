@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import AlarmContent from "../../Content/AlarmContent.js";
 
-import { AlarmListDiv } from "../../css/AlarmCenterCSS.js";
-
+import { AlarmListDiv } from "../../../css/AlarmCenterCSS.js";
 import { setAlarmFalse } from "../../../../../redux/_actions/alarm_action.js";
 import axios from "axios";
 

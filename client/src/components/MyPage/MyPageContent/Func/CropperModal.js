@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import Cropper from "react-easy-crop";
-import { EditProfile } from "../css/MyPageContentElement.js";
+import { EditProfile } from "../../css/MyPageContentElement.js";
 
 function CropperModal(props) {
   //cropping

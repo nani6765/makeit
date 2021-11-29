@@ -11,7 +11,7 @@ import TextEllipsis from "react-text-ellipsis";
 import moment from "moment";
 import "moment/locale/ko";
 
-import { ChatContentDiv } from "../css/AlarmCenterCSS.js";
+import { ChatContentDiv } from "../../css/AlarmCenterCSS.js";
 
 function ChatContent(props) {
   let UserRef = firebase.database().ref("users");

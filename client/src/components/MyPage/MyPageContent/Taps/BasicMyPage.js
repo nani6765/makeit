@@ -1,10 +1,8 @@
 import React from "react";
-
+import { PCOnly } from "../../css/MyPageElement.js";
 import Avatar from "react-avatar";
 import { useSelector } from "react-redux";
 import { useHistory, withRouter } from "react-router-dom";
-
-import { PCOnly } from "../css/MyPageElement.js";
 
 function BasicMyPage(props) {
   const user = useSelector((state) => state.user);

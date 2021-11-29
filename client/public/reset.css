@@ -1,10 +1,39 @@
+@font-face {
+    font-family: "jalnan";
+    src: url(../font/Jalnan.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: "NotoSans";
+    src: url(../font/NotoSansKR-Regular.otf) format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "NotoSans";
+    src: url(../font/NotoSansKR-Bold.otf) format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "NotoSans";
+    src: url(../font/NotoSansKR-Light.otf) format('truetype');
+    font-weight: lighter;
+}
+
+@font-face {
+    font-family: "NotoSans";
+    src: url(../font/NotoSansKR-Medium.otf) format('truetype');
+    font-weight: 600;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
 body{
     overflow-x: hidden;
-    font-family: Noto Sans;
+    font-family: "NotoSans";
 }
  @media (max-width: 576px) {
      body{
@@ -145,3 +174,4 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
