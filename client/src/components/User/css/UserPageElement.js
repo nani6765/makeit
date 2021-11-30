@@ -225,18 +225,23 @@ const RegisterFormDiv = css`
     padding: 3rem 0;
     grid-area: footer;
     display: grid;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
     grid-template-columns: 1fr 2fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 1rem 0;
     grid-template-areas:
     "label agree ."
     "label service1 more1"
-    "label service2 more2"
-    "label service3 more3";
+    "label service2 ."
+    "label service3 more3"
+    "label service4 more4";
     label {
       margin-bottom: 0px;
     }
     .service{
+      text-align: left;
+      span {
+        cursor: pointer;
+      }
       &:nth-of-type(1){
         grid-area: agree;
       }
@@ -252,6 +257,9 @@ const RegisterFormDiv = css`
       &:nth-of-type(4){
         grid-area: service3;
       }
+      &:nth-of-type(5){
+        grid-area: service4;
+      }
     }
     .more{
       font-weight: bold;
@@ -262,11 +270,10 @@ const RegisterFormDiv = css`
       }
       
       &:nth-of-type(2){
-        grid-area: more2;
-      }
-      
-      &:nth-of-type(3){
         grid-area: more3;
+      }
+      &:nth-of-type(3){
+        grid-area: more4;
       }
     }
   }
@@ -411,4 +418,52 @@ const ModalContainerDiv = styled.div`
   z-index: 11;
 `;
 
-export { DivCSS, Logo, BoxDivCSS, passwordFind, FormDivCSS, RegisterFormDiv, CompeleteDiv, ModalContainerDiv };
+const TOSDiv = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+.background {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 11;
+}
+.container {
+  position: fixed;
+  z-index: 12;
+
+  width: 50%;
+  max-height: 80%;
+
+  padding: 2rem;
+
+  overflow: scroll;
+
+  background: #fff;
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .bold {
+    font-weight: bold;
+  }
+  div {
+    margin-bottom: 1rem;
+    line-height: 20px;
+  }
+  .close {
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+  }
+}
+`;
+
+export { DivCSS, Logo, BoxDivCSS, passwordFind, FormDivCSS, RegisterFormDiv, CompeleteDiv, ModalContainerDiv, TOSDiv };
