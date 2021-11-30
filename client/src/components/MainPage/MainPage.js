@@ -17,7 +17,8 @@ function MainPage() {
       <FriendsVideo />
       <CommunityPost />
       <ProArea />
-      <CommonMarginDiv style={{ height: "10vh" }}>
+      {/*
+         <CommonMarginDiv style={{ height: "10vh" }}>
         <div
           style={{ backgroundColor: "red", width: "100%", height: "100%" }}
         ></div>
@@ -32,6 +33,7 @@ function MainPage() {
           style={{ backgroundColor: "green", width: "100%", height: "100%" }}
         ></div>
       </CommonFullDiv>
+        */}
     </>
   );
 }

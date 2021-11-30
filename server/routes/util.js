@@ -387,7 +387,7 @@ router.post("/rerepleSubmit", (req, res) => {
       )
         .exec()
         .then((result) => {
-          let flag = setLog(req.body.uid, "rereple", `${URL + reple.postNum}`);
+          let flag = setLog(req.body.uid, "rereple", `${URL + rereple.postId}`);
 
           let alarmtemp = {
             uid: result.uid,
