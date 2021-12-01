@@ -8,15 +8,17 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const FooterMenuArea = styled.div`
   display: flex;
-
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
   div {
-    margin-right: 100px;
     p {
       font-weight: bold;
       font-size: 16px;
       color: #454343;
       line-height: 16px;
       word-break: keep-all;
+      margin-bottom: 0;
     }
   }
   ${mq[1]} {
