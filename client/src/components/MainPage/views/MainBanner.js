@@ -5,70 +5,190 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 function MainBanner() {
-  const breakpoints = [1200, 576];
+  const breakpoints = [1920, 1440, 1024, 960, 480, 360, 320];
   const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
   let Banner = styled.div`
     width: 100%;
-    height: 300px;
-    overflow: hidden;
-    background-image: url(${process.env.PUBLIC_URL + "/Img/MainBG.png"});
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+    height: auto;
     img {
-      width: 20%;
-      height: 35%;
-      margin-top: 3rem;
-    }
-    ${mq[0]} {
-      height: 200px;
-      img {
-        width: 35%;
-        height: 45%;
-        margin-top: 2.5rem;
+      width: 100%;
+      height: 100%;
+      display: none;
+      ${mq[0]} {
+        &:nth-of-type(1) {
+          display: block;
+        }
+        &:nth-of-type(2) {
+          display: none;
+        }
+        &:nth-of-type(3) {
+          display: none;
+        }
+        &:nth-of-type(4) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          display: none;
+        }
+        &:nth-of-type(6) {
+          display: none;
+        }
+        &:nth-of-type(7) {
+          display: none;
+        }
       }
-    }
-    ${mq[1]} {
-      height: 150px;
-      img {
-        width: 40%;
-        height: 40%;
-        margin-top: 1.5rem;
+      ${mq[1]} {
+        &:nth-of-type(1) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          display: block;
+        }
+        &:nth-of-type(3) {
+          display: none;
+        }
+        &:nth-of-type(4) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          display: none;
+        }
+        &:nth-of-type(6) {
+          display: none;
+        }
+        &:nth-of-type(7) {
+          display: none;
+        }
       }
-    }
-  `;
-
-  let TempBanner = styled.div`
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    background-image: url(${process.env.PUBLIC_URL + "/Img/MainBG.png"});
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
-
-    h1 {
-      color: #fff;
-      text-align: center;
-      font-weigt: 800;
-      font-size: 24px;
+      ${mq[2]} {
+        &:nth-of-type(1) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          display: none;
+        }
+        &:nth-of-type(3) {
+          display: block;
+        }
+        &:nth-of-type(4) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          display: none;
+        }
+        &:nth-of-type(6) {
+          display: none;
+        }
+        &:nth-of-type(7) {
+          display: none;
+        }
+      }
+      ${mq[3]} {
+        &:nth-of-type(1) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          display: none;
+        }
+        &:nth-of-type(3) {
+          display: none;
+        }
+        &:nth-of-type(4) {
+          display: block;
+        }
+        &:nth-of-type(5) {
+          display: none;
+        }
+        &:nth-of-type(6) {
+          display: none;
+        }
+        &:nth-of-type(7) {
+          display: none;
+        }
+      }
+      ${mq[4]} {
+        &:nth-of-type(1) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          display: none;
+        }
+        &:nth-of-type(3) {
+          display: none;
+        }
+        &:nth-of-type(4) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          display: block;
+        }
+        &:nth-of-type(6) {
+          display: none;
+        }
+        &:nth-of-type(7) {
+          display: none;
+        }
+      }
+      ${mq[5]} {
+        &:nth-of-type(1) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          display: none;
+        }
+        &:nth-of-type(3) {
+          display: none;
+        }
+        &:nth-of-type(4) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          display: none;
+        }
+        &:nth-of-type(6) {
+          display: block;
+        }
+        &:nth-of-type(7) {
+          display: none;
+        }
+      }
+      ${mq[6]} {
+        &:nth-of-type(1) {
+          display: none;
+        }
+        &:nth-of-type(2) {
+          display: none;
+        }
+        &:nth-of-type(3) {
+          display: none;
+        }
+        &:nth-of-type(4) {
+          display: none;
+        }
+        &:nth-of-type(5) {
+          display: none;
+        }
+        &:nth-of-type(6) {
+          display: none;
+        }
+        &:nth-of-type(7) {
+          display: block;
+        }
+      }
     }
   `;
 
   return (
     <>
-      <div>
-        <Banner>
-          <img src={process.env.PUBLIC_URL + "/Img/MainBanner.png"} />
-        </Banner>
-      </div>
+      <Banner>
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/1440.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/1024.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/960.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/480.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/360.png"} />
+      </Banner>
     </>
   );
 }

@@ -8,12 +8,12 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 let TopAreaDiv = styled.div`
-  padding-top: 80px;
+  padding-top: 123px;
   ${mq[0]} {
-    padding-top: 80px;
+    padding-top: 123px;
   }
   ${mq[1]} {
-    padding-top: 60px;
+    padding-top: 123px;
   }
 `;
 

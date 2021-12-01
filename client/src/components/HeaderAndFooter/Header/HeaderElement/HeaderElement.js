@@ -12,11 +12,11 @@ import {
   MobileSideBackDiv,
   MobileSlideDiv,
 } from "../../css/HeaderElement.js";
+import { CommonMarginDiv } from "../../../CommonCSS.js";
 import MobileSlide from "./MobileSlide.js";
 import HeaderNavArea from "./HeaderNavArea.js";
 import HeaderLoginArea from "./HeaderLoginArea.js";
 import { ReactComponent as SearchIcon } from "../../css/search.svg";
-import { ReactComponent as Logo } from "../../css/logo.svg";
 
 import "../../css/header.css";
 import "../../css/animation.css";
@@ -30,43 +30,40 @@ function HeaderElement(props) {
   return (
     <>
       <HeaderDiv className={`header ${props.shadowStyle} ${props.hiddenStyle}`}>
-        <HeaderGrid>
-          <HeaderLogo>
-            <Link to="/">
-              {/*
-              <img
-                src={process.env.PUBLIC_URL + "/Img/logo.png"}
-                alt="MainLogo"
-              />
-              */}
-              <Logo />
-            </Link>
-          </HeaderLogo>
+        <CommonMarginDiv>
+          <HeaderGrid>
+            <HeaderLogo>
+              <Link to="/">
+                <img src={process.env.PUBLIC_URL + "/Img/symbol.png"} />
+                <img src={process.env.PUBLIC_URL + "/Img/text.png"} />
+              </Link>
+            </HeaderLogo>
 
-          <HeaderNavArea />
+            <HeaderNavArea />
 
-          <HeaderSearch>
-            <div>
-              <form action="/search" method="GET">
-                <input type="text" placeholder="Search" name="term" />
-                <button type="submit">
-                  <SearchIcon />
-                </button>
-              </form>
-            </div>
-          </HeaderSearch>
+            <HeaderSearch>
+              <div>
+                <form action="/search" method="GET">
+                  <input type="text" placeholder="Search" name="term" />
+                  <button type="submit">
+                    <SearchIcon />
+                  </button>
+                </form>
+              </div>
+            </HeaderSearch>
 
-          <HeaderLoginArea
-            alarmHambucControl={alarmHambucControl}
-            setalarmHambucControl={setalarmHambucControl}
-            myPageHambucControl={myPageHambucControl}
-            setmyPageHambucControl={setmyPageHambucControl}
-          />
+            <HeaderLoginArea
+              alarmHambucControl={alarmHambucControl}
+              setalarmHambucControl={setalarmHambucControl}
+              myPageHambucControl={myPageHambucControl}
+              setmyPageHambucControl={setmyPageHambucControl}
+            />
 
-          <MobileHambuck>
-            <i className="bi bi-list" onClick={() => props.showSide()}></i>
-          </MobileHambuck>
-        </HeaderGrid>
+            <MobileHambuck>
+              <i className="bi bi-list" onClick={() => props.showSide()}></i>
+            </MobileHambuck>
+          </HeaderGrid>
+        </CommonMarginDiv>
       </HeaderDiv>
 
       <MobileSideBackDiv

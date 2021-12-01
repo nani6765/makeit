@@ -11,92 +11,63 @@ const HeaderDiv = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px;
   z-index: 10;
   top: 0;
+  background-color: white;
+  padding-top: 44px;
+  padding-bottom: 30px;
+
   ${mq[0]} {
     width: 100%;
-    height: 80px;
   }
   ${mq[1]} {
     width: 100%;
-    height: 60px;
   }
 `;
 
 const HeaderGrid = styled.div`
   display: grid;
-  width: 70%;
-  margin: 0 auto;
-  height: 100%;
-  background-color: white;
-  grid-template-columns: 150px 1fr 200px 120px;
-  grid-template-rows: 80px;
+  height: auto;
+  grid-template-columns: 179.06px 1fr 200px 120px;
+  grid-template-rows: auto;
   grid-template-areas: "logo nav search loginDiv";
-  ${mq[0]} {
-    -webkit-box-align: center;
-    place-items: center;
-    grid-template-rows: 40px 40px;
-    grid-template-columns: 120px 1fr 50px 50px;
-    grid-template-areas:
-      "logo searchArea loginDiv loginDiv"
-      "nav nav nav nav";
-  }
-  ${mq[1]} {
-    width: 100%;
-    -webkit-box-align: center;
-    place-items: center;
-    grid-template-rows: 60px;
-    grid-template-columns: 50px 50px 1fr 50px 50px;
-    grid-template-areas: "hambuck . logo loginDiv loginDiv";
-  }
 `;
 
 const HeaderLogo = styled.div`
   grid-area: logo;
-  height: 100%;
   width: 100%;
-  padding: 20px 5px 20px 5px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-  ${mq[0]} {
-    padding: 5px;
-  }
-  ${mq[1]} {
-    padding: 10px 0px 10px 0px;
-    margin: 0 auto;
-    text-align: center;
+  height: auto;
+  a {
     img {
-      margin: 0 auto;
-      width: 75%;
-      max-width: 120px;
-      height: 100%;
+      &:nth-of-type(1) {
+        width: 33.83px;
+        height: 33px;
+      }
+      &:nth-of-type(2) {
+        margin-left: 16px;
+        margin-top: 8px;
+        width: 129.23px;
+        height: 20px;
+      }
     }
   }
 `;
 
 const HeaderNav = styled.div`
-  grid-area: nav / nav / nav / nav;
+  grid-area: nav;
   width: 100%;
-  height: 100%;
+  height: auto;
   ul {
-    height: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: rows;
     list-style-type: none;
-    margin: 0;
+    margin-left: 28px;
     padding: 0;
     overflow: hidden;
     li {
-      width: auto;
-      height: inherit;
-      display: inline-flex;
-      align-items: center;
-      margin-left: 35px;
+      padding: 10px;
+      margin-right: 22px;
       a {
         color: black;
         font-family: Noto Sans;
@@ -105,77 +76,57 @@ const HeaderNav = styled.div`
         font-size: 14px;
         line-height: 25px;
         &:hover {
-          color: #5A278B;
+          color: #5a278b;
         }
       }
       .active {
-        color: #5A278B;
+        color: #5a278b;
+      }
+      &:nth-last-of-type(1) {
+        margin-right: 0px;
       }
     }
-  }
-  ${mq[0]} {
-    width: 100%;
-    ul {
-      display: flex;
-      justify-content: space-between;
-      li {
-        width: auto;
-        margin-left: 0px;
-        text-align: center;
-        a {
-          width: 100%;
-        }
-      }
-    }
-  }
-  ${mq[1]} {
-    display: none;
   }
 `;
 
 const HeaderSearch = styled.div`
   grid-area: search;
-  height: 100%;
+  height: auto;
   align-items: center;
   display: flex;
   div {
     width: 100%;
-    height: 50%;
-    padding: 5px;
-    background: #F7F7F7;
-    border-radius: 3px;
     form {
-      display: inline-block;
-      height: 100%;
-      width: 100%;
+      padding: 5px;
+      border: 1px solid #5a278b;
+      box-sizing: border-box;
+      border-radius: 30px;
+      display: flex;
+      justify-content: space-between;
       input {
-        display: inline-block;
-        height: 100%;
-        width: 90%;
+        width: 85%;
         background: none;
         border: none;
         text-align: right;
         &::placeholder {
-          color: #BFBFBF;
+          color: #bfbfbf;
         }
       }
       input:focus {
         outline: none;
       }
-    }
-    button {
-      display: inline-block;
-      border: none;
-      margin-left: 5px;
-      padding: 0;
-      background: none;
-      svg {
-        cursor: pointer;
+      button {
+        width: 15%;
+        height: inherit;
+        display: inline-block;
+        border: none;
+        padding: 0;
+        background: none;
+        svg {
+          cursor: pointer;
+        }
       }
     }
-  }
-  ${mq[0]} {
-    display: none;
   }
 `;
 
@@ -189,15 +140,13 @@ const HeaderLoginDiv = styled.div`
   justify-content: space-evenly;
   align-items: center;
   a {
-    height: 50%;
     .loginBtn {
-      height: 100%;
-      background: #FFFFFF;
-      border: 1px solid #ADA4A4;
+      background: #ffffff;
+      border: 1px solid #dbdbdb;
       box-sizing: border-box;
-      border-radius: 3px;
-      padding: 0 10px;
-      color: #ADA4A4;
+      border-radius: 5px;
+      padding: 10px;
+      color: #ada4a4;
     }
   }
   .bell {
