@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import UserModal from "../../../../utils/view/Modal/UserModal.js";
 import GuestModal from "../../../../utils/view/Modal/GuestModal.js";
@@ -11,6 +10,7 @@ import { withRouter, useHistory } from "react-router";
 
 function ProducerTitleDetail(props) {
   const user = useSelector((state) => state.user);
+  const [LikeLoading, setLikeLoading] = useState(false);
   let history = useHistory();
 
   const [hambucControl, sethambucControl] = useState(false);
@@ -34,11 +34,17 @@ function ProducerTitleDetail(props) {
     return history.push("/login");
   };
 
-  const likeHandler = (key) => {
+  const likeHandler = async (e, key) => {
+    setLikeLoading(true);
+
     if (props.PostInfo.uid === props.user.uid) {
       alert("자신의 프로덕션에는 찜하기를 할 수 없습니다.");
       return;
     }
+    if (e.detail > 1) {
+      return window.location.reload();
+    }
+
     let body = {
       uid: props.user.uid,
       _id: props.PostInfo._id,
@@ -47,15 +53,18 @@ function ProducerTitleDetail(props) {
       type: "ProPost",
       category: "making/ProducerPost",
     };
-
-    axios.post("/api/util/like", body).then((response) => {
-      if (response.data.success) {
-        window.location.reload();
-      } else {
-        console.log("produer like handler error");
-        window.location.reload();
-      }
-    });
+    try {
+      await axios.post("/api/util/like", body).then((response) => {
+        if (response.data.success) {
+          window.location.reload();
+        } else {
+          console.log("produer like handler error");
+          window.location.reload();
+        }
+      });
+    } finally {
+      setLikeLoading(false);
+    }
   };
 
   return (
@@ -69,9 +78,7 @@ function ProducerTitleDetail(props) {
       </div>
       <ProducerTitleDiv>
         <Slider {...settings} className="TitleImg">
-          <img
-            src={props.PostInfo.thumbnailUrl}
-          />
+          <img src={props.PostInfo.thumbnailUrl} />
           {props.PostInfo.detailImgArr.map((img, idx) => {
             return <img src={img.path} alt={img.key} key={idx} />;
           })}
@@ -80,9 +87,11 @@ function ProducerTitleDetail(props) {
           <div className="top">
             <div className="like">
               <span
-                onClick={() =>
+                disabled={LikeLoading}
+                onClick={(e) =>
                   props.user
                     ? likeHandler(
+                        e,
                         props.PostInfo.likeArray.includes(props.user.uid)
                       )
                     : GuestLikeHandler()

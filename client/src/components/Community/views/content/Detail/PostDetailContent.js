@@ -14,6 +14,7 @@ function PostDetailContent(props) {
   const [postInfo, setpostInfo] = useState(props.postInfo);
   const [hambucControl, sethambucControl] = useState(false);
   const [likeFlag, setlikeFlag] = useState(false);
+  const [LikeLoading, setLikeLoading] = useState(false);
   const user = useSelector((state) => state.user);
   let history = useHistory();
 
@@ -29,7 +30,12 @@ function PostDetailContent(props) {
     }
   }, []);
 
-  const LikeHandler = () => {
+  const LikeHandler = async (e) => {
+    setLikeLoading(true);
+    if (e.detail > 1) {
+      return window.location.reload();
+    }
+
     if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
       return history.push("/login");
@@ -37,10 +43,6 @@ function PostDetailContent(props) {
     if (postInfo.auther.uid === user.userData.uid) {
       return alert("본인 글에는 좋아요를 누를 수 없습니다!");
     }
-
-    let target = document.querySelector("#likeArea");
-    target.style.disable = "true";
-
     let body = {
       _id: postInfo._id,
       likeFlag: likeFlag,
@@ -49,15 +51,17 @@ function PostDetailContent(props) {
       type: "CoPost",
       category: "community/post",
     };
-
-    axios.post("/api/util/like", body).then((response) => {
-      if (response.data.success) {
-        target.style.disable = "false";
-        window.location.reload();
-      } else {
-        window.location.reload();
-      }
-    });
+    try {
+      await axios.post("/api/util/like", body).then((response) => {
+        if (response.data.success) {
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+      });
+    } finally {
+      setLikeLoading(false);
+    }
   };
 
   return (
@@ -87,10 +91,7 @@ function PostDetailContent(props) {
                 (user.userData.uid === postInfo.auther.uid ? (
                   <UserModal Info={postInfo} modalType="post" />
                 ) : (
-                  <GuestModal
-                    postInfo={postInfo}
-                    modalType="post"
-                  />
+                  <GuestModal postInfo={postInfo} modalType="post" />
                 ))}
             </div>
           )}
@@ -106,7 +107,10 @@ function PostDetailContent(props) {
             <button
               className={likeFlag ? "active" : null}
               id="likeArea"
-              onClick={LikeHandler}
+              disabled={LikeLoading}
+              onClick={(e) => {
+                LikeHandler(e);
+              }}
               type="button"
             >
               {likeFlag ? (

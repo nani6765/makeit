@@ -6,7 +6,7 @@ import Avatar from "react-avatar";
 import YouTube from "react-youtube";
 import axios from "axios";
 
-import UserModal from '../../../../../utils/view/Modal/UserModal.js';
+import UserModal from "../../../../../utils/view/Modal/UserModal.js";
 import GuestModal from "../../../../../utils/view/Modal/GuestModal.js";
 import { DetailDiv } from "../../../../css/SVDCSS.js";
 import { ReactComponent as LGIcon } from "../../../../css/Img/LikeGrey.svg";
@@ -14,6 +14,7 @@ import { ReactComponent as LPIcon } from "../../../../css/Img/LikePurple.svg";
 
 function ShareVideoPost(props) {
   const [likeFlag, setlikeFlag] = useState(false);
+  const [LikeLoading, setLikeLoading] = useState(false);
   const [hambucControl, sethambucControl] = useState(false);
 
   const user = useSelector((state) => state.user);
@@ -41,7 +42,8 @@ function ShareVideoPost(props) {
     height: "360px",
   };
 
-  const LikeHandler = () => {
+  const LikeHandler = async (e) => {
+    setLikeLoading(true);
     if (props.PostInfo.auther.uid === user.userData.uid) {
       return alert("본인 글에는 좋아요를 누를 수 없습니다!");
     }
@@ -49,8 +51,9 @@ function ShareVideoPost(props) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
       return history.push("/login");
     }
-    let target = document.querySelector("#likeArea");
-    target.style.disable = "true";
+    if (e.detail > 1) {
+      return window.location.reload();
+    }
 
     let body = {
       _id: props.PostInfo._id,
@@ -61,14 +64,17 @@ function ShareVideoPost(props) {
       category: "Making/shareVideo",
     };
 
-    axios.post("/api/util/like", body).then((response) => {
-      if (response.data.success) {
-        target.style.disable = "false";
-        window.location.reload();
-      } else {
-        window.location.reload();
-      }
-    });
+    try {
+      await axios.post("/api/util/like", body).then((response) => {
+        if (response.data.success) {
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+      });
+    } finally {
+      setLikeLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -93,19 +99,21 @@ function ShareVideoPost(props) {
           <p>{props.PostInfo.realTime}</p>
         </div>
         {user.userData && (
-          <div
-            className="hambuc"
-            ref={innerRef}
-          >
+          <div className="hambuc" ref={innerRef}>
             <i
               className="bi bi-three-dots"
               onClick={() => sethambucControl(!hambucControl)}
             ></i>
             {hambucControl &&
               (user.userData.uid === props.PostInfo.auther.uid ? (
-                <UserModal Info={props.PostInfo} modalType="/making/ShareVideo" path="/making" category="제작 영상 알리기"/>
+                <UserModal
+                  Info={props.PostInfo}
+                  modalType="/making/ShareVideo"
+                  path="/making"
+                  category="제작 영상 알리기"
+                />
               ) : (
-                <GuestModal modalType="post" postInfo={props.PostInfo}/>
+                <GuestModal modalType="post" postInfo={props.PostInfo} />
               ))}
           </div>
         )}
@@ -127,11 +135,11 @@ function ShareVideoPost(props) {
         <div className="desc">
           <p>{props.PostInfo.content}</p>
         </div>
-        <div className="like" id="likeArea">
+        <div className="like" disabled={LikeLoading}>
           {likeFlag ? (
-            <LPIcon onClick={() => LikeHandler()} />
+            <LPIcon onClick={(e) => LikeHandler(e)} />
           ) : (
-            <LGIcon onClick={() => LikeHandler()} />
+            <LGIcon onClick={(e) => LikeHandler(e)} />
           )}
           추천({props.PostInfo.likeNum})
         </div>

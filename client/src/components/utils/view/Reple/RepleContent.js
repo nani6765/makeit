@@ -18,6 +18,7 @@ function RepleContent(props) {
   const [Reple, setReple] = useState(props.reple);
   const [UpdateCheck, setUpdateCheck] = useState(false); //글수정 업데이트체크2
   const [likeFlag, setlikeFlag] = useState(false);
+  const [LikeLoading, setLikeLoading] = useState(false);
   const [rerepleUpload, setrerepleUpload] = useState(false);
   const user = useSelector((state) => state.user);
 
@@ -33,7 +34,9 @@ function RepleContent(props) {
     }
   }, [likeFlag]);
 
-  function LikeHandler() {
+  const LikeHandler = async (e) => {
+    setLikeLoading(true);
+
     if (user.userData === null) {
       alert("로그인한 회원만 좋아요를 누를 수 있습니다.");
       return props.history.push("/login");
@@ -41,6 +44,10 @@ function RepleContent(props) {
 
     if (Reple.auther.uid === user.userData.uid) {
       return alert("본인 댓글에는 좋아요를 누를 수 없습니다!");
+    }
+
+    if (e.detail > 1) {
+      return window.location.reload();
     }
 
     let target = document.querySelector("#likeArea");
@@ -55,15 +62,19 @@ function RepleContent(props) {
       category: props.category,
     };
 
-    axios.post("/api/util/like", body).then((response) => {
-      if (response.data.success) {
-        target.style.disable = "false";
-        window.location.reload();
-      } else {
-        window.location.reload();
-      }
-    });
-  }
+    try {
+      await axios.post("/api/util/like", body).then((response) => {
+        if (response.data.success) {
+          target.style.disable = "false";
+          window.location.reload();
+        } else {
+          window.location.reload();
+        }
+      });
+    } finally {
+      setLikeLoading(false);
+    }
+  };
 
   return (
     <>
@@ -128,7 +139,10 @@ function RepleContent(props) {
             <button
               className={likeFlag ? "active" : null}
               id="likeArea"
-              onClick={LikeHandler}
+              disabled={LikeLoading}
+              onClick={(e) => {
+                LikeHandler(e);
+              }}
               type="button"
             >
               {likeFlag ? (
