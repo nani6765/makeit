@@ -78,12 +78,7 @@ function MakingMedia(props) {
   return (
     <>
       <MakingHeader>
-        {
-          <img
-            src="https://kr.object.ncloudstorage.com/makeit/admin/MakingBanner.png"
-            style={{ width: "100%" }}
-          />
-        }
+        <img src="./Img/Banner/MakingBanner.png" style={{ width: "100%" }} />
         <HeaderGNB URL={URL} />
         <SubGNB SubCategoryList={SubCategoryList} URL={URL} />
       </MakingHeader>

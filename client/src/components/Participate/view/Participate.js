@@ -126,7 +126,7 @@ function Participate(props) {
     <>
       <PartHeader>
         <div className="bannerDiv">
-          <img src="./Img/CommunityBanner.png" alt="" />
+          <img src="./Img/Banner/ParticipateBanner.png" style={{ width: "100%" }} />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
         {SetSubCategory()}

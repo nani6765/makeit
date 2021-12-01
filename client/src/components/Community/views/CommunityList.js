@@ -107,7 +107,7 @@ function CommunityList() {
     <>
       <CommunityHeader>
         <div className="bannerDiv">
-          <img src="./Img/CommunityBanner.png" alt="" />
+          <img src="./Img/Banner/CommunityBanner.png" alt="" />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
       </CommunityHeader>

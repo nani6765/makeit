@@ -1,13 +1,13 @@
 const nodemailer = require("nodemailer");
 const config = require("../config/key.js");
 
-const title = "MakeIT 이메일 인증메일입니다.";
+const title = "Make IT 이메일 인증메일입니다.";
 const txt = (name, Key) => {
   return `
         <div style="width:100%; background-color:white; padding: 1rem 0px 1rem 0px;">
         <div style="width: 100%; height: auto;  max-width:640px; margin:0 auto;  background-color:white;">
         <div style="width: 100%; border-bottom: 2px solid #702c8a; display: flex; justify-content: center;">
-          <img src="https://kr.object.ncloudstorage.com/makeit/admin/logo.png" alt="MainLogo" />
+          <img src="https://kr.object.ncloudstorage.com/makeit/admin/MAKEITLogo.png" alt="MainLogo" />
         </div>
         <div style="padding-top: 3rem; width: 90%; margin: 0 auto;">
           <div style="text-align: left;">
@@ -39,8 +39,8 @@ const txt = (name, Key) => {
             </div>
           </div>
           <div style="margin-top: 1rem; margin-bottom: 1rem; display: grid; grid-template-columns: 1fr 4fr; grid-template-rows: auto; grid-template-areas:'fleft fright'; grid-gap: 1rem;">
-            <div style="grid-area: fleft; display: flex; align-content: center; justify-content: center;">
-              <img src="https://kr.object.ncloudstorage.com/makeit/admin/logowithtext.png" style="width:100%; height:60%;"/>
+            <div style="grid-area: fleft; display: flex; align-content: center; justify-content: center; height: auto;" >
+              <img src="https://kr.object.ncloudstorage.com/makeit/admin/MFLogo.png" style="width:100%; height:100%;"/>
             </div>
             <div style="grid-area: fright;">
               <span style="color: #8e8e8e; word-break: keep-all;">
@@ -50,7 +50,7 @@ const txt = (name, Key) => {
                 <br />
                 사업자 등록번호 : 235-88-01980
                 <br />
-                문의 : cs@mediafriends.co.kr
+                문의 : cs@mediafriend.co.kr
                 <br />
               </span>
             </div>
