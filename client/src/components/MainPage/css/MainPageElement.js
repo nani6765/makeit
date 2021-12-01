@@ -7,13 +7,6 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const MainPageDiv = styled.div`
-  width: 70%;
-  margin: 0 auto;
-  padding-top: 10vh;
-  padding-bottom: 10vh;
-  ${mq[1]} {
-    width: 90%;
-  }
   .friendsVideoList {
     width: 100%;
     .slick-track {
@@ -67,47 +60,28 @@ const MainPageDiv = styled.div`
 
 const MainPageHading = css`
   display: flex;
-  align-items:center;
+  align-items: center;
   font-weight: bold;
   font-size: 32px;
-  line-height: 44px;
+  line-height: 30px;
   color: #702c8a;
-  padding-bottom: 1rem;
+  margin-bottom: 18px;
   a {
-    margin-left: 1rem;
-    background: #efe9e9;
-    border-radius: 20px;
-    padding: 0.2rem 0.5rem;
-    font-weight: 500;
-    font-size: 1rem;
-    line-height: 1.4rem;
-    color: #b3b3b3;
-  }
-  ${mq[0]} {
-    font-size: 20px;
-    line-height: 24px;
-    a {
-      margin-left: 1rem;
-      background: #efe9e9;
-      font-weight: 500;
-      font-size: 0.5rem;
-      line-height: 15px;
-      color: #b3b3b3;
-    }
-  } ;
-  ${mq[1]} {
-    a {
-      border-radius: 20px;
+    line-height: 30px;
+    display: flex;
+    margin-left: 12px;
+    svg {
+      height: 100%;
     }
   }
 `;
 
 const MainPageSubHading = css`
-  font-weight: 500;
+  font-weight: light;
   font-size: 16px;
-  line-height: 22px;
+  line-height: 16px;
   color: #b0abab;
-  margin-bottom: 3rem;
+  margin-bottom: 40px;
 `;
 
 function MainPageGridContent(parameter) {

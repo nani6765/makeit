@@ -6,40 +6,17 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const FooterDiv = styled.div`
-  display: flex;
-  background: #FAF5F5;
-  ${mq[1]} {
-    margin-bottom: 75px;
-  }
-`;
-
-const FooterArea = styled.div`
-  width: 70%;
-  margin: 0 auto;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  ${mq[1]} {
-    width: 90%;
-  }
-`;
-
 const FooterMenuArea = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 1rem 20px;
+
   div {
-    margin-right: 20px;
+    margin-right: 100px;
     p {
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: bold;
+      font-size: 16px;
       color: #454343;
-      padding: 16px 0;
-      line-height: 1.43;
+      line-height: 16px;
       word-break: keep-all;
-      ${mq[0]} {
-        font-size: 12px;
-      }
     }
   }
   ${mq[1]} {
@@ -142,10 +119,4 @@ const MobileFooterDiv = styled.div`
   }
 `;
 
-export {
-  FooterDiv,
-  FooterArea,
-  FooterMenuArea,
-  FooterContentArea,
-  MobileFooterDiv,
-};
+export { FooterMenuArea, FooterContentArea, MobileFooterDiv };

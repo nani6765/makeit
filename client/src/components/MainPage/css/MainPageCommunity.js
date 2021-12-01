@@ -8,24 +8,15 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const CPGridDiv = styled.div`
   display: grid;
-  //padding-top: 3rem;
+
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 100%;
   grid-template-areas: "hot new comment";
-  column-gap: 2rem;
-  ${mq[0]} {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
-    column-gap: 0.5rem;
-    grid-template-areas:
-      "hot"
-      "new"
-      "comment";
-  }
+  column-gap: 40px;
   ${mq[1]} {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    column-gap: 0.5rem;
+    column-gap: 40px;
     grid-template-areas:
       "hot"
       "new"
@@ -35,39 +26,60 @@ const CPGridDiv = styled.div`
 const CPGridHot = styled.div`
   grid-area: hot;
   text-align: center;
+  a {
+    article {
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    &:nth-last-of-type(1) {
+      article {
+        margin-bottom: 0px;
+      }
+    }
+  }
 `;
 const CPGridNew = styled.div`
   grid-area: new;
   text-align: center;
+  a {
+    article {
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    &:nth-last-of-type(1) {
+      article {
+        margin-bottom: 0px;
+      }
+    }
+  }
 `;
 const CPGridComment = styled.div`
   grid-area: comment;
   text-align: center;
+  a {
+    article {
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    &:nth-last-of-type(1) {
+      article {
+        margin-bottom: 0px;
+      }
+    }
+  }
 `;
 
 const GridTitle = css`
   font-weight: bold;
-  display: inline;
+  display: inline-block;
+  text-align: center;
   font-size: 18px;
-  line-height: 25px;
-  color: #702c8a;
-  background-color: #efe9e9;
-  padding: 10px 50px 10px 50px;
-  border-radius: 20px;
-  ${mq[0]} {
-    padding: 5px 10px 5px 10px;
-    line-height: 20px;
-    font-size: 15px;
-    display: block;
-    width: 10rem;
-    margin: 0 auto;
-  }
-  ${mq[1]} {
-    display: inline;
-    padding: 5px 10px 5px 10px;
-    line-height: 15px;
-    font-size: 15px;
-  }
+  line-height: 18px;
+  width: 60%;
+  padding: 9px 0px;
+  color: rgba(112, 44, 138, 1);
+  background: #efe9e9;
+  border-radius: 39px;
 `;
 
 const CardImg = styled.article`
@@ -75,10 +87,9 @@ const CardImg = styled.article`
   height: 195px;
   background-color: white;
   display: block;
-  margin-top: 30px;
-  margin-bottom: 30px;
   display: grid;
   padding: 20px;
+
   grid-template-columns: 1fr 1fr 2fr 2fr;
   grid-template-rows: 50px 30px 30px 25px 20px;
   grid-template-areas:
@@ -117,7 +128,7 @@ const CardImg = styled.article`
     overflow: hidden;
     font-size: 16px;
     line-height: 24px;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
   .desc {
@@ -181,8 +192,8 @@ const CardImg = styled.article`
   ${mq[0]} {
     width: 45%;
     display: inline-grid;
-    margin-left:2.5%;
-    margin-right:2.5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
   }
   ${mq[1]} {
     width: 100%;

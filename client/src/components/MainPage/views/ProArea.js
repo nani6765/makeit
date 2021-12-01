@@ -13,15 +13,7 @@ import {
 function ProArea() {
   return (
     <>
-      <MainPageDiv>
-        <p css={MainPageHading}>
-          이 프로님은 어떠세요? <a href="/">더보기&gt;</a>
-        </p>
-        <p css={MainPageSubHading}>
-          지금 뜨고 있는 프로덕션, 프로님을 추천해드려요!
-        </p>
-
-      </MainPageDiv>
+      <MainPageDiv></MainPageDiv>
     </>
   );
 }
