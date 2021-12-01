@@ -15,6 +15,7 @@ import MobileFooter from "../../HeaderAndFooter/Footer/MobileFooter.js";
 import axios from "axios";
 import shortId from "shortid";
 import ModalDiv from "./ModalDiv.js";
+import ToSDiv from "./ToSDiv.js";
 import Loading from "../../utils/view/Page/Loading.js";
 
 function RegisterPage() {
@@ -42,6 +43,15 @@ function RegisterPage() {
   const [nicknameLoading, setnicknameLoading] = useState(false);
   const [ModalFlag, setModalFlag] = useState(false);
   const [ModalType, setModalType] = useState("sendVerification");
+
+  //이용 약관
+  const [AllAgree, setAllAgree] = useState(false);
+  const [Service, setService] = useState(false);
+  const [Age, setAge] = useState(false);
+  const [PersonalInfo, setPersonalInfo] = useState(false);
+  const [AD, setAD] = useState(false);
+  const [TOSModalFlag, setTOSModalFlag] = useState(false);
+  const [TOSType, setTOSType] = useState("서비스 이용약관");
 
   let history = useHistory();
 
@@ -115,6 +125,14 @@ function RegisterPage() {
       console.log(reason);
     });
   };
+
+  const setToS = () => {
+    setService(!AllAgree);
+    setAge(!AllAgree);
+    setPersonalInfo(!AllAgree);
+    setAD(!AllAgree);
+    setAllAgree(!AllAgree);
+  }
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -332,13 +350,14 @@ function RegisterPage() {
             />
             <div className="footer">
               <label>이용약관</label>
-              <div className="service">1</div>
-              <div className="service">2</div>
-              <p className="more">약관 보기 &gt;</p>
-              <div className="service">3</div>
-              <p className="more">약관 보기 &gt;</p>
-              <div className="service">4</div>
-              <p className="more">약관 보기 &gt;</p>
+              <div className="service"><span onClick={setToS}>전체 동의 합니다.</span></div>
+              <div className="service"><span onClick={() => setService(!Service)}>서비스 이용약관 동의 (필수)</span></div>
+              <p className="more" onClick={() => {setTOSType("서비스 이용약관"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
+              <div className="service"><span onClick={() => setAge(!Age)}>만 14세 이상입니다. (필수)</span></div>
+              <div className="service"><span onClick={() => setPersonalInfo(!PersonalInfo)}>개인정보 수집 및 이용 동의 (필수)</span></div>
+              <p className="more" onClick={() => {setTOSType("개인정보"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
+              <div className="service"><span onClick={() => setAD(!AD)}>광고성 정보 수신 동의 (선택)</span></div>
+              <p className="more" onClick={() => {setTOSType("광고"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
             </div>
             {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
             <button
@@ -353,6 +372,9 @@ function RegisterPage() {
       </div>
       {ModalFlag && (
         <ModalDiv modalType={ModalType} setModalFlag={setModalFlag} />
+      )}
+      {TOSModalFlag && (
+        <ToSDiv modalType={TOSType} setTOSModalFlag={setTOSModalFlag} />
       )}
       <MobileFooter />
     </>
