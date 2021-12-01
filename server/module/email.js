@@ -7,7 +7,7 @@ const txt = (name, Key) => {
         <div style="width:100%; background-color:white; padding: 1rem 0px 1rem 0px;">
         <div style="width: 100%; height: auto;  max-width:640px; margin:0 auto;  background-color:white;">
         <div style="width: 100%; border-bottom: 2px solid #702c8a; display: flex; justify-content: center;">
-          <img src="https://kr.object.ncloudstorage.com/makeit/admin/MAKEITLogo.png" alt="MainLogo" />
+          <img src="https://kr.object.ncloudstorage.com/makeit/admin/MAKEITLogo.png" alt="MainLogo" style="width: 50%; height: auto;"/>
         </div>
         <div style="padding-top: 3rem; width: 90%; margin: 0 auto;">
           <div style="text-align: left;">
@@ -38,7 +38,7 @@ const txt = (name, Key) => {
               </span>
             </div>
           </div>
-          <div style="margin-top: 1rem; margin-bottom: 1rem; display: grid; grid-template-columns: 1fr 4fr; grid-template-rows: auto; grid-template-areas:'fleft fright'; grid-gap: 1rem;">
+          <div style="margin-top: 1rem; margin-bottom: 1rem; display: grid; grid-template-columns: 1fr 4fr; grid-template-rows: auto; grid-template-areas:'fleft fright'; grid-template-columns: 2fr 8fr;grid-gap: 1rem;"">
             <div style="grid-area: fleft; display: flex; align-content: center; justify-content: center; height: auto;" >
               <img src="https://kr.object.ncloudstorage.com/makeit/admin/MFLogo.png" style="width:100%; height:100%;"/>
             </div>

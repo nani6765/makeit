@@ -107,7 +107,11 @@ function CommunityList() {
     <>
       <CommunityHeader>
         <div className="bannerDiv">
-          <img src="./Img/Banner/CommunityBanner.png" alt="" />
+          <img
+            src="./Img/Banner/CommunityBanner.png"
+            alt=""
+            style={{ width: "100%" }}
+          />
         </div>
         <GNBArea URL={URL} setURL={setURL} />
       </CommunityHeader>

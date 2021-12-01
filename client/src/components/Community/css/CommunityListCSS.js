@@ -9,18 +9,6 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const CommunityHeader = styled.div`
   position: relative;
   height: auto;
-  .bannerDiv {
-    width: 100%;
-    height: 35vh;
-    position: relative;
-    img {
-      width: 100%;
-      height: 100%;
-      postition: absolute;
-      top: 0;
-      left: 0;
-      z-index: 5;
-    }
     ${mq[1]} {
       height: 20vh;
     }
