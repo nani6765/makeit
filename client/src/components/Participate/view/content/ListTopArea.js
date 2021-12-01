@@ -10,7 +10,9 @@ function ListTopArea(props) {
   return (
     <ListTopAreaDiv>
       <Dropdown id="sort">
-        <Dropdown.Toggle id="dropdown-basic">{props.URL.sort}</Dropdown.Toggle>
+        <Dropdown.Toggle id="dropdown-basic">
+          {props.URL.sort === "hot" ? "인기순" : "최신순"}
+        </Dropdown.Toggle>
         <Dropdown.Menu id="dropdown-menu">
           <Dropdown.Item
             onClick={() => {
