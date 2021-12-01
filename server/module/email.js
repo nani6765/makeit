@@ -31,7 +31,7 @@ const txt = (name, Key) => {
               </div>
             </div>
             <div style="margin-top:3rem; margin-bottom:3rem; width:auto; height:auto; padding: 30px 20px 30px 20px; background: #ececec; text-align: left;">
-              <span style="color:#8e8e8e word-break: keep-all;">
+              <span style="color:#8e8e8e; word-break: keep-all;">
                 본 메일은 가입하신 이메일 주소로 발송되었으며, 발신 전용이므로
                 회신이 되지 않습니다. 문의사항은 홈페이지 고객센터를
                 이용해주시기 바랍니다.
