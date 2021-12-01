@@ -6,6 +6,7 @@ import SubGNB from "./view/common/SubGNB";
 import FindingProducer from "./view/FindingProducer/FindingProducer.js";
 import RequestVideo from "./view/RequestVideo/RequestVideo.js";
 import ShareVideo from "./view/ShareVideo/ShareVideo";
+import MPay from "./view/Pay/MPay";
 import { MakingDiv, MakingHeader } from "./css/CommonCSS.js";
 import qs from "qs";
 
@@ -59,6 +60,9 @@ function MakingMedia(props) {
             setSubCategoryList={setSubCategoryList}
           />
         );
+
+      case "메이킷 페이 안내":
+        return <MPay />;
 
       default:
         break;

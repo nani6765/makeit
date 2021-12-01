@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const config = require("../config/key.js");
 
-const title = "Make IT 이메일 인증메일입니다.";
+const title = "MAKE IT 이메일 인증메일입니다.";
 const txt = (name, Key) => {
   return `
         <div style="width:100%; background-color:white; padding: 1rem 0px 1rem 0px;">
