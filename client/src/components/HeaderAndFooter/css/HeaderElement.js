@@ -73,7 +73,7 @@ const HeaderNav = styled.div`
         font-family: Noto Sans;
         font-style: normal;
         font-weight: 600;
-        font-size: 14px;
+        font-size: 16px;
         line-height: 25px;
         &:hover {
           color: #5a278b;
