@@ -55,8 +55,8 @@ function RepleContent(props) {
 
     let body = {
       _id: Reple._id,
-      likeFlag: likeFlag,
-      userId: user.userData.uid,
+      key: likeFlag,
+      uid: user.userData.uid,
       url: props.postInfo.url,
       type: "Reple",
       category: props.category,

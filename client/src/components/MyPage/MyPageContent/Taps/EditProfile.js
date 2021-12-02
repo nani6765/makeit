@@ -7,6 +7,7 @@ import { EditProfileDiv, LoadingDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
 import axios from "axios";
 import firebase from "../../../../config/firebase.js";
+import Loading from "../../../utils/view/Page/Loading.js";
 
 function EditProfile(props) {
   const user = useSelector((state) => state.user);
@@ -202,11 +203,7 @@ function EditProfile(props) {
   return (
     <>
       {isLoading ? (
-        <LoadingDiv>
-          <div className="spinner-border text-light" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-        </LoadingDiv>
+        <Loading />
       ) : null}
       <EditProfileDiv>
         <div className="editProfileDiv">

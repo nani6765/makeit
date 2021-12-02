@@ -17,6 +17,7 @@ import shortId from "shortid";
 import ModalDiv from "./ModalDiv.js";
 import ToSDiv from "./ToSDiv.js";
 import Loading from "../../utils/view/Page/Loading.js";
+import { InputGroup } from "react-bootstrap";
 
 function RegisterPage() {
   //회원정보
@@ -94,7 +95,8 @@ function RegisterPage() {
       };
       try {
         axios.post("api/user/checkEmail", body).then((response) => {
-          if (!response.data.success) reject(response.data.success);
+          console.log("server Data : ", response.data)
+          if (!response.data.success) reject("다시 시도해주세요.");
           if (!response.data.doc) {
             //이매일이 없는 경우
             setEmailCheck(false);
@@ -111,6 +113,7 @@ function RegisterPage() {
     });
 
     EmailCheckFunc.then((val) => {
+      console.log("email check", val);
       setemailLoading(false);
       if (val) {
         return alert("이미 가입된 이메일입니다.");
@@ -148,7 +151,9 @@ function RegisterPage() {
         }
       }
     }, 1000);
-    return () => clearInterval(countdown);
+    return () => {
+      clearInterval(countdown);
+    }
   }, [minutes, seconds]);
 
   async function CheckNickName() {
@@ -185,6 +190,10 @@ function RegisterPage() {
       return alert("닉네임 중복 확인을 완료해 주세요.");
     }
 
+    if(!Service || !Age || !PersonalInfo) {
+      return alert("이용약관을 확인해주세요.");
+    }
+
     let body = {
       email: Email,
       password: Password,
@@ -207,6 +216,7 @@ function RegisterPage() {
         displayName: createdUser.user.displayName,
         email: body.email,
         photoURL: createdUser.user.photoURL,
+        adAgree: AD,
       };
 
       await axios.post("/api/user/register", user).then((response) => {
@@ -239,6 +249,15 @@ function RegisterPage() {
       }, 5000);
     }
   };
+
+  useEffect(() => {
+    if(AllAgree) {
+      setAllAgree(false);
+    }
+    if(Age && Service && PersonalInfo && AD) {
+      setAllAgree(true)
+    }
+  }, [Age, Service, PersonalInfo, AD])
 
   return (
     <>
@@ -304,6 +323,11 @@ function RegisterPage() {
                         setModalType("checkVerification");
                         setModalFlag(true);
                       }
+                      else if (InputKey) {
+                        setInputKey("");
+                        setModalType("failVerification");
+                        setModalFlag(true);
+                      }
                     }}
                   >
                     인증 완료
@@ -350,13 +374,47 @@ function RegisterPage() {
             />
             <div className="footer">
               <label>이용약관</label>
-              <div className="service"><span onClick={setToS}>전체 동의 합니다.</span></div>
-              <div className="service"><span onClick={() => setService(!Service)}>서비스 이용약관 동의 (필수)</span></div>
+              <div className="service"><span onClick={setToS}>
+                {
+                  AllAgree
+                  ? <i className="bi bi-check-circle-fill fill"></i>
+                  : <i className="bi bi-check-circle"></i>
+                }
+                  전체 동의 합니다.</span>
+              </div>
+              <div className="service"><span onClick={() => setService(!Service)}>
+                {
+                  Service
+                  ? <i className="bi bi-check-circle-fill fill"></i>
+                  : <i className="bi bi-check-circle"></i>
+                }
+                서비스 이용약관 동의 (필수)</span></div>
               <p className="more" onClick={() => {setTOSType("서비스 이용약관"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
-              <div className="service"><span onClick={() => setAge(!Age)}>만 14세 이상입니다. (필수)</span></div>
-              <div className="service"><span onClick={() => setPersonalInfo(!PersonalInfo)}>개인정보 수집 및 이용 동의 (필수)</span></div>
+              <div className="service"><span onClick={() => setAge(!Age)}>
+                {
+                  Age
+                  ? <i className="bi bi-check-circle-fill fill"></i>
+                  : <i className="bi bi-check-circle"></i>
+                }
+                만 14세 이상입니다. (필수)</span></div>
+              <div className="service">
+                <span onClick={() => setPersonalInfo(!PersonalInfo)}>
+                  {
+                    PersonalInfo
+                    ? <i className="bi bi-check-circle-fill fill"></i>
+                    : <i className="bi bi-check-circle"></i>
+                  }
+                  개인정보 수집 및 이용 동의 (필수)
+                </span>
+              </div>
               <p className="more" onClick={() => {setTOSType("개인정보"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
-              <div className="service"><span onClick={() => setAD(!AD)}>광고성 정보 수신 동의 (선택)</span></div>
+              <div className="service"><span onClick={() => setAD(!AD)}>
+                {
+                  AD
+                  ? <i className="bi bi-check-circle-fill fill"></i>
+                  : <i className="bi bi-check-circle"></i>
+                }
+                광고성 정보 수신 동의 (선택)</span></div>
               <p className="more" onClick={() => {setTOSType("광고"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
             </div>
             {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
