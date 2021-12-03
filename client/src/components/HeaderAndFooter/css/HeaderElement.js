@@ -4,7 +4,10 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const breakpoints = [1200, 576];
+const headerBp = [1920, 1440, 1024, 960, 768, 480, 360, 320];
+
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
+const headerbq = headerBp.map((bp) => `@media (max-width: ${bp}px)`);
 
 const HeaderDiv = styled.div`
   position: fixed;
@@ -16,11 +19,22 @@ const HeaderDiv = styled.div`
   background-color: white;
   padding-top: 44px;
   padding-bottom: 30px;
-
-  ${mq[0]} {
-    width: 100%;
+  ${headerbq[2]} {
+    padding-top: 22px;
+    padding-bottom: 15px;
   }
-  ${mq[1]} {
+`;
+
+const HeaderMarginDiv = styled.div`
+  max-width: 1160px;
+  margin: 0 auto !important;
+  ${headerbq[2]} {
+    width: 80%;
+  }
+  ${headerbq[4]} {
+    width: 90%;
+  }
+  ${headerbq[5]} {
     width: 100%;
   }
 `;
@@ -31,6 +45,17 @@ const HeaderGrid = styled.div`
   grid-template-columns: 179.06px 1fr 200px 120px;
   grid-template-rows: auto;
   grid-template-areas: "logo nav search loginDiv";
+  ${headerbq[2]} {
+    grid-template-columns: 120px 1fr 160px 100px;
+  }
+  ${headerbq[4]} {
+    grid-template-columns: 120px 1fr 160px 100px;
+  }
+  ${headerbq[5]} {
+    grid-template-columns: 50px 50px 1fr 18px;
+    grid-template-rows: auto;
+    grid-template-areas: "hambuck . logo loginDiv";
+  }
 `;
 
 const HeaderLogo = styled.div`
@@ -47,9 +72,40 @@ const HeaderLogo = styled.div`
         margin-left: 16px;
         margin-top: 8px;
         width: 129.23px;
-        height: 20px;
+        height: 15px;
       }
     }
+    ${headerbq[1]} {
+      img {
+        &:nth-of-type(1) {
+          width: 35px;
+          height: 35px;
+        }
+        &:nth-of-type(2) {
+          margin-left: 10px;
+          margin-top: 6px;
+          width: 94px;
+          height: 20px;
+        }
+      }
+    }
+    ${headerbq[2]} {
+      img {
+        &:nth-of-type(1) {
+          width: 30px;
+          height: 30px;
+        }
+        &:nth-of-type(2) {
+          margin-left: 8px;
+          margin-top: 4px;
+          width: 80px;
+          height: 15px;
+        }
+      }
+    }
+  }
+  ${headerbq[5]} {
+    text-align: center;
   }
 `;
 
@@ -86,6 +142,31 @@ const HeaderNav = styled.div`
         margin-right: 0px;
       }
     }
+  }
+  ${headerbq[2]} {
+    ul {
+      margin-left: 14px;
+      li {
+        margin-right: 8px;
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  ${headerbq[4]} {
+    ul {
+      margin-left: 0px;
+      li {
+        margin-right: 4px;
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  ${headerbq[5]} {
+    display: none;
   }
 `;
 
@@ -127,6 +208,10 @@ const HeaderSearch = styled.div`
         }
       }
     }
+  }
+
+  ${headerbq[5]} {
+    display: none;
   }
 `;
 
@@ -300,6 +385,7 @@ const ModalDiv = styled.div`
 
 export {
   HeaderDiv,
+  HeaderMarginDiv,
   HeaderGrid,
   HeaderLogo,
   HeaderNav,

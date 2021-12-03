@@ -11,8 +11,8 @@ import {
   MobileHambuck,
   MobileSideBackDiv,
   MobileSlideDiv,
+  HeaderMarginDiv,
 } from "../../css/HeaderElement.js";
-import { CommonMarginDiv } from "../../../CommonCSS.js";
 import MobileSlide from "./MobileSlide.js";
 import HeaderNavArea from "./HeaderNavArea.js";
 import HeaderLoginArea from "./HeaderLoginArea.js";
@@ -30,7 +30,7 @@ function HeaderElement(props) {
   return (
     <>
       <HeaderDiv className={`header ${props.shadowStyle} ${props.hiddenStyle}`}>
-        <CommonMarginDiv>
+        <HeaderMarginDiv>
           <HeaderGrid>
             <HeaderLogo>
               <Link to="/">
@@ -63,7 +63,7 @@ function HeaderElement(props) {
               <i className="bi bi-list" onClick={() => props.showSide()}></i>
             </MobileHambuck>
           </HeaderGrid>
-        </CommonMarginDiv>
+        </HeaderMarginDiv>
       </HeaderDiv>
 
       <MobileSideBackDiv
