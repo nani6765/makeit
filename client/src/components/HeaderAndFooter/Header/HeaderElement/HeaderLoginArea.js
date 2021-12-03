@@ -20,20 +20,24 @@ function HeaderLoginArea(props) {
 
   useEffect(() => {
     console.log(user.userData);
-  }, [])
+  }, []);
 
   return (
     <HeaderLoginDiv>
       {user.userData ? (
         <>
           <div className="hambuc" ref={alarmInnerRef}>
-            <HeaderBell setalarmHambucControl = {props.setalarmHambucControl} alarmHambucControl = {props.alarmHambucControl} setalarmHambucControl={props.setalarmHambucControl}/>
+            <HeaderBell
+              setalarmHambucControl={props.setalarmHambucControl}
+              alarmHambucControl={props.alarmHambucControl}
+              setalarmHambucControl={props.setalarmHambucControl}
+            />
           </div>
           <div className="hambuc" ref={myPageInnerRef}>
             <Avatar
               className="profile"
               src={user.userData ? user.userData.photoURL : "./test.png"}
-              size="35px"
+              size="32px"
               round={true}
               onClick={() => props.setmyPageHambucControl(true)}
             />

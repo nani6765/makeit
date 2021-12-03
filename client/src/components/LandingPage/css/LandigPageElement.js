@@ -32,19 +32,33 @@ const FirstDiv = styled.div`
     width: 80%;
     margin: 0 auto;
     color: white;
-    .Title {
-      font-size: 4.5rem;
-      margin-bottom: 1.75rem;
-      font-weight: bold;
-      span {
-        color: #fff445;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    div {
+      .Title {
+        width: auto;
+        font-size: 4.5rem;
+        margin-bottom: 1.75rem;
+        font-weight: bold;
+        line-height: 6rem;
+        margin-bottom: 0px;
+        span {
+          color: #fff445;
+        }
+      }
+      .SubTitle {
+        width: auto;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 300;
       }
     }
-    .SubTitle {
-      font-size: 2.25rem;
+    img {
+      width: 60%;
     }
   }
-
   ${mq[1]} {
     height: calc(100vh - 60px);
   }
@@ -80,25 +94,37 @@ const ThirdDiv = styled.div`
     width: 80%;
     margin: 0 auto;
     color: white;
-    .Title {
-      font-size: 4.5rem;
-      margin-bottom: 1.75rem;
-      font-weight: bold;
-      line-height: 6rem;
-      margin-bottom: 0px;
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    div {
+      .Title {
+        font-size: 4.5rem;
+        margin-bottom: 1.75rem;
+        font-weight: bold;
+        line-height: 6rem;
+        margin-bottom: 0px;
+      }
+      hr {
+        border: 1px solid #fff445;
+        background-color: #fff445;
+        width: 80px;
+        margin: 0;
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+      }
+      .SubTitle {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 300;
+      }
     }
-    hr {
-      border: 1px solid #fff445;
-      background-color: #fff445;
-      width: 80px;
-      margin: 0;
-      margin-top: 2.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .SubTitle {
-      font-size: 2rem;
-      line-height: 2.5rem;
-      font-weight: 300;
+    img {
+      width: 60%;
     }
   }
   ${mq[1]} {
@@ -114,31 +140,40 @@ const FourthDiv = styled.div`
   justify-content: center;
   align-items: center;
   .content {
-    width: auto;
-    color: #412280;
-    margin-left: 30rem;
-    .Title {
-      width: auto;
-      font-size: 4.5rem;
-      margin-bottom: 1.75rem;
-      font-weight: bold;
-      line-height: 6rem;
-      margin-bottom: 0px;
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 60%;
     }
-    .SubTitle {
-      width: auto;
-      font-size: 2rem;
-      line-height: 2.5rem;
-      font-weight: 300;
-    }
+    div {
+      .Title {
+        width: auto;
+        font-size: 4.5rem;
+        margin-bottom: 1.75rem;
+        font-weight: bold;
+        line-height: 6rem;
+        margin-bottom: 0px;
+      }
+      .SubTitle {
+        width: auto;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 300;
+      }
 
-    hr {
-      border: 1px solid #412280;
-      background-color: #412280;
-      width: 80px;
-      margin: 0;
-      margin-top: 2.5rem;
-      margin-bottom: 1.25rem;
+      hr {
+        border: 1px solid #412280;
+        background-color: #412280;
+        width: 80px;
+        margin: 0;
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+      }
     }
   }
   ${mq[1]} {
@@ -158,25 +193,37 @@ const FifthDiv = styled.div`
     width: 80%;
     margin: 0 auto;
     color: white;
-    .Title {
-      font-size: 4.5rem;
-      margin-bottom: 1.75rem;
-      font-weight: bold;
-      line-height: 6rem;
-      margin-bottom: 0px;
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    div {
+      .Title {
+        font-size: 4.5rem;
+        margin-bottom: 1.75rem;
+        font-weight: bold;
+        line-height: 6rem;
+        margin-bottom: 0px;
+      }
+      hr {
+        border: 1px solid #fff445;
+        background-color: #fff445;
+        width: 80px;
+        margin: 0;
+        margin-top: 2.5rem;
+        margin-bottom: 1.25rem;
+      }
+      .SubTitle {
+        font-size: 2rem;
+        line-height: 2.5rem;
+        font-weight: 300;
+      }
     }
-    hr {
-      border: 1px solid #fff445;
-      background-color: #fff445;
-      width: 80px;
-      margin: 0;
-      margin-top: 2.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .SubTitle {
-      font-size: 2rem;
-      line-height: 2.5rem;
-      font-weight: 300;
+    img {
+      width: 60%;
     }
   }
   ${mq[1]} {
