@@ -8,6 +8,8 @@ function ModalDiv(props) {
         switch(props.modalType) {
             case "sendVerification":
                 return <p>인증번호가 발송되었습니다.</p>
+            case "failVerification":
+                return <p>인증번호가 일치하지 않습니다.</p>
             case "checkVerification":
                 return <p>인증번호가 확인되었습니다.</p>
             case "available":

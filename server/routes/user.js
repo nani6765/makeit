@@ -18,8 +18,7 @@ router.post("/register", (req, res) => {
           .exec()
           .then((result) => {
             return res.status(200).send({
-              success: true,
-              userInfo: userInfo._id,
+              success: true
             });
           });
       });
@@ -58,7 +57,7 @@ router.post("/checkEmail", (req, res) => {
   User.findOne({ email: email })
     .exec()
     .then((doc) => {
-      return res.status(200).send({ success: true });
+      return res.status(200).send({ success: true, doc: doc });
     })
     .catch((err) => {
       if (err) return res.json({ success: false, err });

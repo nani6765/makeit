@@ -241,6 +241,14 @@ const RegisterFormDiv = css`
       text-align: left;
       span {
         cursor: pointer;
+        i {
+          margin-right: 0.5rem;
+          color: #B1B1B1;
+          font-size: 1.5rem;
+        }
+        .fill {
+          color: #61057D;
+        }
       }
       &:nth-of-type(1){
         grid-area: agree;
@@ -265,6 +273,7 @@ const RegisterFormDiv = css`
       font-weight: bold;
       color: #61057D;
       cursor: pointer;
+      margin-bottom: 0;
       &:nth-of-type(1){
         grid-area: more1;
       }
@@ -439,24 +448,57 @@ align-items: center;
   position: fixed;
   z-index: 12;
 
-  width: 50%;
-  max-height: 80%;
-
-  padding: 2rem;
-
-  overflow: scroll;
-
+  width: 40%;
+  height: calc(6rem + 50vh);
   background: #fff;
-  .title {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  .bold {
-    font-weight: bold;
-  }
-  div {
-    margin-bottom: 1rem;
-    line-height: 20px;
+  padding: 1rem;
+
+  .content {
+    position: absolute;
+
+    max-height: 50vh;
+    
+    margin: 3rem 2rem;
+    top: 0;
+    left: 0;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: grey;
+      border-radius: 15px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #c6c6c6;
+      border-radius: 15px;
+      box-shadow: inset 0px 0px 5px white;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    div {
+      div {
+        margin-bottom: 1rem;
+        line-height: 25px;
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+    li {
+      list-style: disc;
+      list-style-position: inside;
+    }
+
   }
   .close {
     color: black;

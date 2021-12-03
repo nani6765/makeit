@@ -160,13 +160,14 @@ router.post("/image/delete", (req, res) => {
 
 router.post("/like", (req, res) => {
   let Model = SelectLikeModel(req.body.type);
+  console.log(req.body);
 
-  let key = req.body.likeFlag;
+  let key = req.body.key;
   if (key) {
     // 좋아요를 이미 누른 상태
     Model.findOneAndUpdate(
       { _id: req.body._id },
-      { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.userId } }
+      { $inc: { likeNum: -1 }, $pull: { likeArray: req.body.uid } }
     )
       .exec()
       .then((response) => {
@@ -180,7 +181,7 @@ router.post("/like", (req, res) => {
     let URL = SelectURL(req.body.type);
     Model.findOneAndUpdate(
       { _id: req.body._id },
-      { $inc: { likeNum: 1 }, $push: { likeArray: req.body.userId } }
+      { $inc: { likeNum: 1 }, $push: { likeArray: req.body.uid } }
     )
       .exec()
       .then((response) => {
@@ -190,7 +191,6 @@ router.post("/like", (req, res) => {
           type: "like",
           category: req.body.category,
         };
-        console.log("alarm", alarmTemp);
         const alarm = new Alarm(alarmTemp);
         alarm.save(() => {
           let flag = setLog(req.body.userId, "like", `${URL + req.body.url}`);

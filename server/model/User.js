@@ -43,6 +43,10 @@ const userSchema = mongoose.Schema(
     userNum: {
       type: Number,
     },
+    adAgree: {
+      type: Boolean,
+      default: false,
+    },
     logs: [
       {
         type: Schema.Types.ObjectId,
