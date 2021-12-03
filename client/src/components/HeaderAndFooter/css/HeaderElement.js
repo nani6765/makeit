@@ -72,7 +72,7 @@ const HeaderLogo = styled.div`
         margin-left: 16px;
         margin-top: 8px;
         width: 129.23px;
-        height: 15px;
+        height: 20px;
       }
     }
     ${headerbq[1]} {
