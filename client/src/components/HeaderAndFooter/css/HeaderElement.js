@@ -52,7 +52,7 @@ const HeaderGrid = styled.div`
     grid-template-columns: 120px 1fr 160px 100px;
   }
   ${headerbq[5]} {
-    grid-template-columns: 50px 50px 1fr 18px;
+    grid-template-columns: 50px 50px 1fr 100px;
     grid-template-rows: auto;
     grid-template-areas: "hambuck . logo loginDiv";
   }
@@ -104,7 +104,7 @@ const HeaderLogo = styled.div`
       }
     }
   }
-  ${headerbq[5]} {
+  ${headerbq[4]} {
     text-align: center;
   }
 `;

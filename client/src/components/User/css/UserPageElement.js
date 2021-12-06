@@ -3,7 +3,8 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const breakpoints = [1200, 576];
+//const breakpoints = [1200, 576];
+const breakpoints = [1920, 1440, 1024, 960, 576, 480, 360, 320];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const DivCSS = css`
@@ -27,12 +28,15 @@ const BoxDivCSS = css`
   margin: 0 auto;
   margin-top: 10vh;
   margin-bottom: 10vh;
-  ${mq[0]} {
+  ${mq[1]} {
+    width: 60%;
+  }
+  ${mq[2]} {
     width: 70%;
     margin-top: 10vh;
     margin-bottom: 10vh;
   }
-  ${mq[1]} {
+  ${mq[4]} {
     width: 95%;
     margin-top: 10vh;
     margin-bottom: 10vh;
@@ -49,7 +53,7 @@ const Logo = css`
     font-size: 2rem;
     color: #2e2e2e;
     line-height: 1.5rem;
-    ${mq[0]} {
+    ${mq[2]} {
       font-size: 1.5rem;
     }
   }
@@ -71,7 +75,7 @@ const FormDivCSS = css`
     border-radius: 5px;
     &::placeholder {
       color: #C4C4C4;
-      ${mq[1]} {
+      ${mq[4]} {
         font-size: 14px;
       }
     }
@@ -90,7 +94,7 @@ const FormDivCSS = css`
       opacity: 0.5;
     }
   }
-  ${mq[1]} {
+  ${mq[4]} {
     width: 70%;
   }
 `;
@@ -112,7 +116,7 @@ const RegisterFormDiv = css`
   width: 70%;
   margin: 0 auto;
   margin-top: 3rem !important;
-
+  
   label{
     font-weight: bold;
     display: flex;
@@ -120,6 +124,7 @@ const RegisterFormDiv = css`
     justify-content: flex-start;
     margin-bottom: 2rem;
     word-break: keep-all;
+    text-align: left;
   }
   input{
     border: 1.5px solid #B1B1B1;
@@ -141,12 +146,12 @@ const RegisterFormDiv = css`
     margin-bottom: 2rem !important;
     margin: 0 auto;
     width: 70%;
-    ${mq[0]} {
+    ${mq[2]} {
       width: 80%;
     }
-    ${mq[1]} {
+    ${mq[4]} {
       width: 90%;
-      margin-left: 10%;
+      mar4in-left: 10%;
       margin-right: 0;
       word-break: keep-all;
     }
@@ -218,6 +223,8 @@ const RegisterFormDiv = css`
   }
   .checkPWInput {
     grid-area: checkPWInput;
+    display: flex;
+    justify-content: flex-start;
   }
   .footer {
     border-top: 1px solid #B1B1B1;
@@ -234,12 +241,18 @@ const RegisterFormDiv = css`
     "label service2 ."
     "label service3 more3"
     "label service4 more4";
+    ${mq[6]} {
+      grid-template-columns: 1fr 2.5fr 1.5fr;
+    }
     label {
       margin-bottom: 0px;
     }
     .service{
       text-align: left;
-      span {
+      p {
+        display: flex;
+        align-content: center;
+        align-items: center;
         cursor: pointer;
         i {
           margin-right: 0.5rem;
@@ -274,6 +287,8 @@ const RegisterFormDiv = css`
       color: #61057D;
       cursor: pointer;
       margin-bottom: 0;
+      width: 100%;
+      margin: 0 auto;
       &:nth-of-type(1){
         grid-area: more1;
       }
@@ -296,19 +311,22 @@ const RegisterFormDiv = css`
     border: 1px solid #61057D;
     box-sizing: border-box;
     border-radius: 5px;
-    ${mq[1]} {
+    ${mq[4]} {
       margin: 2rem auto 0 auto;
       width: 70%;
       word-break: keep-all;
     }
   }
-  ${mq[0]} {
+  ${mq[2]} {
     width: 80%;
     font-size: 14px;
   }
-  ${mq[1]} {
+  ${mq[4]} {
     width: 90%;
     font-size: 12px;
+  }
+  ${mq[6]} {
+    grid-template-columns: 1fr 3fr 1fr;
   }
 `;
 
@@ -338,12 +356,12 @@ const passwordFind = css`
     margin-right: 1rem;
     text-decoration-line: underline;
     &:last-of-type {
-      ${mq[1]} {
+      ${mq[4]} {
         margin-right: 0px;
       }
     }
   }
-  ${mq[1]} {
+  ${mq[4]} {
     text-align: center;
   }
 `;
@@ -417,10 +435,10 @@ const ModalContainerDiv = styled.div`
         font-size: 15px;
       }
     }
-    ${mq[0]} {
+    ${mq[2]} {
       width: 40vw;
     }
-    ${mq[1]} {
+    ${mq[4]} {
       width: 80vw;
     }
   }
@@ -504,6 +522,12 @@ align-items: center;
     color: black;
     cursor: pointer;
     font-weight: bold;
+  }
+  ${mq[4]} {
+    width: 60%;
+  }
+  ${mq[5]} {
+    width: 80%;
   }
 }
 `;

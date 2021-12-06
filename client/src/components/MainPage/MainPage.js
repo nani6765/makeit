@@ -23,7 +23,7 @@ function MainPage() {
           <p css={MainPageHading}>
             프렌즈가 참여한 영상들
             <Link
-              to={{ pathname: "/making", state: { menu: "제작 영상 알리기" } }}
+              to={"/making?category=제작%20영상%20알리기&subCategory=전체&sort=인기순&pIdx=0"}
             >
               <MoreIcon />
             </Link>
