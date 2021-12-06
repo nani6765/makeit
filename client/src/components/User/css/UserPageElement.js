@@ -148,8 +148,10 @@ const RegisterFormDiv = css`
     width: 70%;
     ${mq[2]} {
       width: 80%;
+      font-size: 12px;
     }
     ${mq[4]} {
+      font-size: 10px;
       width: 90%;
       mar4in-left: 10%;
       margin-right: 0;
