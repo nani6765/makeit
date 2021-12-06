@@ -15,6 +15,9 @@ function MainBanner() {
       width: 100%;
       height: 100%;
       display: none;
+      &:nth-of-type(1) {
+        display: block;
+      }
       ${mq[0]} {
         &:nth-of-type(1) {
           display: block;
@@ -182,7 +185,7 @@ function MainBanner() {
   return (
     <>
       <Banner>
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.jpg"} />
         <img src={process.env.PUBLIC_URL + "/Img/Banner/1440.png"} />
         <img src={process.env.PUBLIC_URL + "/Img/Banner/1024.png"} />
         <img src={process.env.PUBLIC_URL + "/Img/Banner/960.png"} />
