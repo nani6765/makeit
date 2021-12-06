@@ -191,6 +191,7 @@ function MainBanner() {
         <img src={process.env.PUBLIC_URL + "/Img/Banner/960.png"} />
         <img src={process.env.PUBLIC_URL + "/Img/Banner/480.png"} />
         <img src={process.env.PUBLIC_URL + "/Img/Banner/360.png"} />
+        <img src={process.env.PUBLIC_URL + "/Img/Banner/320.png"} />
       </Banner>
     </>
   );
