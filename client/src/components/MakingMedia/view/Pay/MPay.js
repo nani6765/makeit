@@ -11,7 +11,11 @@ function MPay() {
         flexDirection: "column",
       }}
     >
-      <img src="/Img/PayTempImg.png" alt="" />
+      <img
+        src="/Img/PayTempImg.png"
+        alt=""
+        style={{ width: "40%", height: "40%" }}
+      />
       <h1 style={{ textAlign: "center", fontSize: "32px", fontWeight: "bold" }}>
         준비중입니다.
         <br />

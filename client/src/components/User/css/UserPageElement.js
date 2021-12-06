@@ -66,11 +66,11 @@ const FormDivCSS = css`
     width: 100%;
     padding: 15px 10px;
     background-color: transparent;
-    border: 1px solid #C4C4C4;
+    border: 1px solid #c4c4c4;
     box-sizing: border-box;
     border-radius: 5px;
     &::placeholder {
-      color: #C4C4C4;
+      color: #c4c4c4;
       ${mq[1]} {
         font-size: 14px;
       }
@@ -80,12 +80,12 @@ const FormDivCSS = css`
     width: 100%;
     margin-top: 30px;
     margin-bottom: 20px;
-    background: #5A278B;
-    border: 1px solid #5A278B;
+    background: #5a278b;
+    border: 1px solid #5a278b;
     border-radius: 5px;
     color: white;
     font-weight: bold;
-    padding: 15px 10px;
+    padding: 10px 5px;
     &:disabled {
       opacity: 0.5;
     }
@@ -100,20 +100,20 @@ const RegisterFormDiv = css`
   grid-template-rows: auto auto auto auto auto auto auto auto;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas:
-  "name nameInput ."
-  "email emailInput emailBtn"
-  "checkEmail checkEmail checkEmail"
-  "nickname nicknameInput nicknameBtn"
-  "pw pwInput ."
-  "checkPW checkPWInput ."
-  "footer footer footer"
-  ". submitBtn .";
+    "name nameInput ."
+    "email emailInput emailBtn"
+    "checkEmail checkEmail checkEmail"
+    "nickname nicknameInput nicknameBtn"
+    "pw pwInput ."
+    "checkPW checkPWInput ."
+    "footer footer footer"
+    ". submitBtn .";
 
   width: 70%;
   margin: 0 auto;
   margin-top: 3rem !important;
 
-  label{
+  label {
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -121,31 +121,34 @@ const RegisterFormDiv = css`
     margin-bottom: 2rem;
     word-break: keep-all;
   }
-  input{
-    border: 1.5px solid #B1B1B1;
+  input {
+    border: 1.5px solid #b1b1b1;
     box-sizing: border-box;
     border-radius: 5px;
     padding: 0.5rem;
     margin-bottom: 2rem;
-    &:focus, &:active {
-      outline: 1px solid #61057D;
+    &:focus,
+    &:active {
+      outline: 1px solid #61057d;
     }
   }
-  button{
-    border: 1.5px solid #61057D;
+  button {
+    border: 1.5px solid #61057d;
     box-sizing: border-box;
     border-radius: 5px;
     background: #fff;
-    color: #61057D;
+    color: #61057d;
     font-weight: bold;
     margin-bottom: 2rem !important;
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     ${mq[0]} {
-      width: 80%;
+      width: 90%;
+      font-size: 12px;
     }
     ${mq[1]} {
-      width: 90%;
+      width: 100%;
+      font-size: 10px;
       margin-left: 10%;
       margin-right: 0;
       word-break: keep-all;
@@ -166,8 +169,8 @@ const RegisterFormDiv = css`
   .emailBtn {
     grid-area: emailBtn;
     &:disabled {
-      border: 1.5px solid #C4C4C4;
-      color: #C4C4C4;
+      border: 1.5px solid #c4c4c4;
+      color: #c4c4c4;
     }
   }
   .checkEmail {
@@ -177,18 +180,20 @@ const RegisterFormDiv = css`
     grid-template-areas: ". checkEmailInput checkEmailBtn";
     .checkEmailInput {
       grid-area: checkEmailInput;
-      border: 1.5px solid #B1B1B1;
+      border: 1.5px solid #b1b1b1;
       box-sizing: border-box;
       border-radius: 5px;
       margin-bottom: 2rem;
-      &:focus-within, &:active {
-        outline: 1px solid #61057D;
+      &:focus-within,
+      &:active {
+        outline: 1px solid #61057d;
       }
       input {
         border: none;
         margin: 0;
         width: 80%;
-        &:focus, &:active {
+        &:focus,
+        &:active {
           outline: none;
         }
       }
@@ -197,7 +202,7 @@ const RegisterFormDiv = css`
       grid-area: checkEmailBtn;
     }
   }
- 
+
   .nickname {
     grid-area: nickname;
   }
@@ -220,8 +225,8 @@ const RegisterFormDiv = css`
     grid-area: checkPWInput;
   }
   .footer {
-    border-top: 1px solid #B1B1B1;
-    border-bottom: 1px solid #B1B1B1;
+    border-top: 1px solid #b1b1b1;
+    border-bottom: 1px solid #b1b1b1;
     padding: 3rem 0;
     grid-area: footer;
     display: grid;
@@ -229,71 +234,71 @@ const RegisterFormDiv = css`
     grid-template-columns: 1fr 2fr 1fr;
     grid-gap: 1rem 0;
     grid-template-areas:
-    "label agree ."
-    "label service1 more1"
-    "label service2 ."
-    "label service3 more3"
-    "label service4 more4";
+      "label agree ."
+      "label service1 more1"
+      "label service2 ."
+      "label service3 more3"
+      "label service4 more4";
     label {
       margin-bottom: 0px;
     }
-    .service{
+    .service {
       text-align: left;
       span {
         cursor: pointer;
         i {
           margin-right: 0.5rem;
-          color: #B1B1B1;
+          color: #b1b1b1;
           font-size: 1.5rem;
         }
         .fill {
-          color: #61057D;
+          color: #61057d;
         }
       }
-      &:nth-of-type(1){
+      &:nth-of-type(1) {
         grid-area: agree;
       }
-      
-      &:nth-of-type(2){
+
+      &:nth-of-type(2) {
         grid-area: service1;
       }
-      
-      &:nth-of-type(3){
+
+      &:nth-of-type(3) {
         grid-area: service2;
       }
-      
-      &:nth-of-type(4){
+
+      &:nth-of-type(4) {
         grid-area: service3;
       }
-      &:nth-of-type(5){
+      &:nth-of-type(5) {
         grid-area: service4;
       }
     }
-    .more{
+    .more {
       font-weight: bold;
-      color: #61057D;
+      color: #61057d;
       cursor: pointer;
       margin-bottom: 0;
-      &:nth-of-type(1){
+      &:nth-of-type(1) {
         grid-area: more1;
       }
-      
-      &:nth-of-type(2){
+
+      &:nth-of-type(2) {
         grid-area: more3;
       }
-      &:nth-of-type(3){
+      &:nth-of-type(3) {
         grid-area: more4;
       }
     }
   }
-  .submitBtn{
+  .submitBtn {
     grid-area: submitBtn;
     width: 100%;
     margin-top: 2rem;
     padding: 1rem;
     color: #fff;
-    background: #61057D;
-    border: 1px solid #61057D;
+    background: #61057d;
+    border: 1px solid #61057d;
     box-sizing: border-box;
     border-radius: 5px;
     ${mq[1]} {
@@ -384,7 +389,7 @@ const ModalContainerDiv = styled.div`
         border-bottom: 1px solid black;
 
         span {
-          color: #61057D;
+          color: #61057d;
           font-size: 15px;
           font-weight: bold;
           &:last-of-type {
@@ -393,7 +398,6 @@ const ModalContainerDiv = styled.div`
             color: black;
             cursor: pointer;
           }
-
         }
       }
       .msg {
@@ -408,12 +412,12 @@ const ModalContainerDiv = styled.div`
       align-items: center;
 
       padding: 1rem 0;
-      background: #F5F5F5;
+      background: #f5f5f5;
       button {
         padding: 10px 30px;
         color: #fff;
-        background: #61057D;
-        border: 1px solid #61057D;
+        background: #61057d;
+        border: 1px solid #61057d;
         font-size: 15px;
       }
     }
@@ -428,84 +432,93 @@ const ModalContainerDiv = styled.div`
 `;
 
 const TOSDiv = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-width: 100vw;
-height: 100vh;
-
-display: flex;
-justify-content: center;
-align-items: center;
-
-.background {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 11;
-}
-.container {
   position: fixed;
-  z-index: 12;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 
-  width: 40%;
-  height: calc(6rem + 50vh);
-  background: #fff;
-  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .content {
-    position: absolute;
+  .background {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 11;
+  }
+  .container {
+    position: fixed;
+    z-index: 12;
 
-    max-height: 50vh;
-    
-    margin: 3rem 2rem;
-    top: 0;
-    left: 0;
+    width: 40%;
+    height: calc(6rem + 50vh);
+    background: #fff;
+    padding: 1rem;
 
-    overflow-y: scroll;
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: grey;
-      border-radius: 15px;
-      background-clip: padding-box;
-      border: 2px solid transparent;
-    }
-    &::-webkit-scrollbar-track {
-      background-color: #c6c6c6;
-      border-radius: 15px;
-      box-shadow: inset 0px 0px 5px white;
-    }
+    .content {
+      position: absolute;
 
-    .title {
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .bold {
-      font-weight: bold;
-    }
-    div {
+      max-height: 50vh;
+
+      margin: 3rem 2rem;
+      top: 0;
+      left: 0;
+
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: grey;
+        border-radius: 15px;
+        background-clip: padding-box;
+        border: 2px solid transparent;
+      }
+      &::-webkit-scrollbar-track {
+        background-color: #c6c6c6;
+        border-radius: 15px;
+        box-shadow: inset 0px 0px 5px white;
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .bold {
+        font-weight: bold;
+      }
       div {
-        margin-bottom: 1rem;
-        line-height: 25px;
-        &:last-of-type {
-          margin-bottom: 0;
+        div {
+          margin-bottom: 1rem;
+          line-height: 25px;
+          &:last-of-type {
+            margin-bottom: 0;
+          }
         }
       }
+      li {
+        list-style: disc;
+        list-style-position: inside;
+      }
     }
-    li {
-      list-style: disc;
-      list-style-position: inside;
+    .close {
+      color: black;
+      cursor: pointer;
+      font-weight: bold;
     }
-
   }
-  .close {
-    color: black;
-    cursor: pointer;
-    font-weight: bold;
-  }
-}
 `;
 
-export { DivCSS, Logo, BoxDivCSS, passwordFind, FormDivCSS, RegisterFormDiv, CompeleteDiv, ModalContainerDiv, TOSDiv };
+export {
+  DivCSS,
+  Logo,
+  BoxDivCSS,
+  passwordFind,
+  FormDivCSS,
+  RegisterFormDiv,
+  CompeleteDiv,
+  ModalContainerDiv,
+  TOSDiv,
+};

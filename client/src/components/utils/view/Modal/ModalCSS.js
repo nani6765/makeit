@@ -150,35 +150,33 @@ const YoutubeDiv = styled.div`
 
       display: grid;
       grid-template-rows: auto auto auto auto;
-      grid-template-columns: 2fr 3fr 3fr 2fr;
+      grid-template-columns: 2fr 3fr 3fr 3fr;
       grid-template-areas:
         " urlLabel urlInput urlInput urlInput "
         " imgLabel imgUpload imgUpload imgUpload "
         " . imgShow imgShow . "
         " . . . btnDiv ";
-      
+
       ${mq[0]} {
         width: 70%;
-        grid-template-columns: 2fr 3fr 2fr 3fr;
+        grid-template-columns: 2fr 3fr 2fr 4fr;
         grid-template-areas:
           " urlLabel urlInput urlInput urlInput "
           " imgLabel imgUpload imgUpload imgUpload "
           " . imgShow imgShow . "
           " . . . btnDiv ";
-
       }
-      ${mq[0]} {
+      ${mq[1]} {
         width: 90%;
         grid-template-rows: auto auto auto auto auto;
-        grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+        grid-template-columns: 2fr 2fr 2fr 2fr 3fr;
         grid-template-areas:
           " urlLabel urlLabel . . ."
           " urlInput urlInput urlInput urlInput urlInput "
           " imgLabel imgLabel imgUpload imgUpload imgUpload "
           " . imgShow imgShow imgShow . "
-          " . . btnDiv btnDiv btnDiv ";
+          " . . . btnDiv btnDiv ";
         font-size: 12px;
-
       }
       grid-gap: 1rem;
       .urlLabel {
