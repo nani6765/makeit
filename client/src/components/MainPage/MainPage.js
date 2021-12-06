@@ -23,11 +23,9 @@ function MainPage() {
           <p css={MainPageHading}>
             프렌즈가 참여한 영상들
             <Link
-              to={{
-                pathname: "/making",
-                search:
-                  "?category=제작%20영상%20알리기&subCategory=전체&sort=인기순&pIdx=0",
-              }}
+              to={
+                "/making?category=제작%20영상%20알리기&subCategory=전체&sort=인기순&pIdx=0"
+              }
             >
               <MoreIcon />
             </Link>

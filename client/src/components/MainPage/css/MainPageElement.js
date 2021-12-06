@@ -3,7 +3,7 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const breakpoints = [1200, 576];
+const breakpoints = [1200, 576, 360];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const MainPageDiv = styled.div`
@@ -73,6 +73,9 @@ const MainPageHading = css`
     svg {
       height: 100%;
     }
+  }
+  ${mq[2]} {
+    font-size: 24px;
   }
 `;
 

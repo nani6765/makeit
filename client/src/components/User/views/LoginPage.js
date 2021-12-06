@@ -27,23 +27,19 @@ function LoginPage(props) {
       await firebase
         .auth()
         .signInWithEmailAndPassword(body.email, body.password);
-
-      /*
-      var user = firebase.auth().currentUser;
-
-      if(user.emailVerified == false) {
-        alert("이메일 인증을 완료해야합니다.");
-        firebase.auth().signOut().then(() => {
-          setLoading(false);
-          history.push("/");
-        }).catch((error) => {
-          console.log("logout error");
-        })
-      }*/
+        
       setLoading(false);
       history.push("/");
     } catch (error) {
-      setErrorLogin(error.message);
+      console.log(error);
+      if(error.code === 'auth/user-not-found') {
+        setErrorLogin("존재하지 않는 이메일입니다.");
+      } else if (error.code === 'auth/wrong-password') {
+        setErrorLogin("비밀번호가 일치하지 않습니다.");
+      } else {
+        setErrorLogin("로그인에 실패하였습니다. 다시 시도해주십시오.");
+      }
+
       setLoading(false);
       setTimeout(() => {
         setErrorLogin("");
@@ -95,7 +91,7 @@ function LoginPage(props) {
               <span>이메일 찾기</span>
               <span>비밀번호 찾기</span>
             </p>
-            {ErrorLogin && <p>{ErrorLogin}</p>}
+            {ErrorLogin && <p style={{marginTop:"1rem"}}>{ErrorLogin}</p>}
             <button type="submit" disabled={Loading}>
               로그인
             </button>

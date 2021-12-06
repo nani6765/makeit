@@ -16,7 +16,8 @@ const CPGridDiv = styled.div`
   ${mq[1]} {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
-    column-gap: 40px;
+    row-gap: 40px;
+    column-gap: 0;
     grid-template-areas:
       "hot"
       "new"
