@@ -3,7 +3,8 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const breakpoints = [1200, 576];
+//const breakpoints = [1200, 576];
+const breakpoints = [1920, 1440, 1024, 960, 576, 480, 360, 320];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const ModalDiv = styled.div`
@@ -134,9 +135,10 @@ const YoutubeDiv = styled.div`
     justify-content: center;
     z-index: 50;
     .background {
+      position: fixed;
       background-color: rgba(0, 0, 0, 0.5);
       width: 100%;
-      height: 100%;
+      height: 100vh;
       z-index: 50;
     }
     .linkDiv {
@@ -155,28 +157,20 @@ const YoutubeDiv = styled.div`
         " urlLabel urlInput urlInput urlInput "
         " imgLabel imgUpload imgUpload imgUpload "
         " . imgShow imgShow . "
-        " . . . btnDiv ";
-      
-      ${mq[0]} {
-        width: 70%;
-        grid-template-columns: 2fr 3fr 2fr 3fr;
-        grid-template-areas:
-          " urlLabel urlInput urlInput urlInput "
-          " imgLabel imgUpload imgUpload imgUpload "
-          " . imgShow imgShow . "
-          " . . . btnDiv ";
+        " . . btnDiv btnDiv ";
 
+      ${mq[2]} {
+        width: 70%;
       }
-      ${mq[0]} {
-        width: 90%;
+      ${mq[4]} {
         grid-template-rows: auto auto auto auto auto;
-        grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+        grid-template-columns: 2fr 1fr 4fr 1fr 2fr;
         grid-template-areas:
           " urlLabel urlLabel . . ."
           " urlInput urlInput urlInput urlInput urlInput "
           " imgLabel imgLabel imgUpload imgUpload imgUpload "
           " . imgShow imgShow imgShow . "
-          " . . btnDiv btnDiv btnDiv ";
+          " . btnDiv btnDiv btnDiv . ";
         font-size: 12px;
 
       }
@@ -185,7 +179,6 @@ const YoutubeDiv = styled.div`
         grid-area: urlLabel;
         display: flex;
         align-items: center;
-        justify-content: center;
         align-content: center;
         margin-bottom: 0px;
       }
@@ -197,7 +190,7 @@ const YoutubeDiv = styled.div`
         background: #ffffff;
         box-shadow: 0px 1px 5px rgba(178, 3, 108, 0.03),
           0px 4px 15px rgba(163, 1, 79, 0.05);
-        border-radius: 15px;
+        border-radius: 8px;
         border: none;
         outline: none;
         padding: 10px;
@@ -212,12 +205,13 @@ const YoutubeDiv = styled.div`
         grid-area: imgLabel;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
-        align-content: center;
+        align-content: flex-start;
         margin-bottom: 0px;
         span {
           font-size: 10px;
+          margin: 0;
         }
       }
       .imgUpload {
@@ -230,11 +224,13 @@ const YoutubeDiv = styled.div`
           height: auto;
           max-height: 100%;
         }
-        max-height: 50vh;
+        max-height: 40vh;
         margin-bottom: 1rem;
       }
       .btnDiv {
         grid-area: btnDiv;
+        display: flex;
+        justify-content: flex-end;
         button {
           background: #935ea5;
           color: white;
@@ -243,6 +239,9 @@ const YoutubeDiv = styled.div`
           padding: 0.5rem 1rem;
           margin-left: 0.5rem;
           border-radius: 12px;
+        }
+        ${mq[4]} {
+          justify-content: center;
         }
       }
     }
