@@ -174,6 +174,7 @@ const SortDiv = styled.div`
     }
   }
 `;
+
 const CommunityBody = styled.div`
   width: 70%;
   margin: 0 auto;

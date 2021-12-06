@@ -163,6 +163,7 @@ const YoutubeDiv = styled.div`
         width: 70%;
       }
       ${mq[4]} {
+        width: 80%;
         grid-template-rows: auto auto auto auto auto;
         grid-template-columns: 2fr 1fr 4fr 1fr 2fr;
         grid-template-areas:
@@ -171,8 +172,17 @@ const YoutubeDiv = styled.div`
           " imgLabel imgLabel imgUpload imgUpload imgUpload "
           " . imgShow imgShow imgShow . "
           " . btnDiv btnDiv btnDiv . ";
-        font-size: 12px;
-
+        font-size: 14px;
+      }
+      ${mq[5]} {
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-columns: 5fr 5fr;
+        grid-template-areas:
+          " urlLabel urlLabel "
+          " urlInput urlInput "
+          " imgLabel imgUpload "
+          " imgShow imgShow "
+          " btnDiv btnDiv ";
       }
       grid-gap: 1rem;
       .urlLabel {

@@ -11,7 +11,6 @@ const PartHeader = styled.div`
   height: auto;
   .bannerDiv {
     width: 100%;
-    height: 35vh;
     position: relative;
     img {
       width: 100%;

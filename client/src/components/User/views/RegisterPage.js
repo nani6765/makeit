@@ -357,7 +357,7 @@ function RegisterPage() {
             <input
               type="password"
               className="pwInput"
-              placeholder="비밀번호를 입력해주세요"
+              placeholder="비밀번호를 8자 이상 입력해주세요"
               value={Password}
               onChange={(e) => setPassword(e.currentTarget.value)}
               required
@@ -374,47 +374,52 @@ function RegisterPage() {
             />
             <div className="footer">
               <label>이용약관</label>
-              <div className="service"><span onClick={setToS}>
+              <div className="service"><p onClick={setToS}>
                 {
                   AllAgree
                   ? <i className="bi bi-check-circle-fill fill"></i>
                   : <i className="bi bi-check-circle"></i>
                 }
-                  전체 동의 합니다.</span>
+                  <span>전체 동의 합니다.</span></p>
               </div>
-              <div className="service"><span onClick={() => setService(!Service)}>
+              <div className="service"><p onClick={() => setService(!Service)}>
                 {
                   Service
                   ? <i className="bi bi-check-circle-fill fill"></i>
                   : <i className="bi bi-check-circle"></i>
                 }
-                서비스 이용약관 동의 (필수)</span></div>
+                <span>서비스 이용약관 동의 (필수)</span></p>
+              </div>
               <p className="more" onClick={() => {setTOSType("서비스 이용약관"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
-              <div className="service"><span onClick={() => setAge(!Age)}>
+              <div className="service"><p onClick={() => setAge(!Age)}>
                 {
                   Age
                   ? <i className="bi bi-check-circle-fill fill"></i>
                   : <i className="bi bi-check-circle"></i>
                 }
-                만 14세 이상입니다. (필수)</span></div>
+                <span>만 14세 이상입니다. (필수)</span></p>
+              </div>
               <div className="service">
-                <span onClick={() => setPersonalInfo(!PersonalInfo)}>
+                <p onClick={() => setPersonalInfo(!PersonalInfo)}>
                   {
                     PersonalInfo
                     ? <i className="bi bi-check-circle-fill fill"></i>
                     : <i className="bi bi-check-circle"></i>
                   }
-                  개인정보 수집 및 이용 동의 (필수)
-                </span>
+                  <span>개인정보 수집 및 이용 동의 (필수)</span>
+                </p>
               </div>
               <p className="more" onClick={() => {setTOSType("개인정보"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
-              <div className="service"><span onClick={() => setAD(!AD)}>
+              <div className="service">
+                <p onClick={() => setAD(!AD)}>
                 {
                   AD
                   ? <i className="bi bi-check-circle-fill fill"></i>
                   : <i className="bi bi-check-circle"></i>
                 }
-                광고성 정보 수신 동의 (선택)</span></div>
+                  <span>광고성 정보 수신 동의 (선택)</span>
+                </p>
+              </div>
               <p className="more" onClick={() => {setTOSType("광고"); setTOSModalFlag(true)}}>약관 보기 &gt;</p>
             </div>
             {ErrorFormSubmit && <p>{ErrorFormSubmit}</p>}
