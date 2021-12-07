@@ -287,16 +287,19 @@ const RegisterFormDiv = css`
       }
     }
     .more {
+      display: flex;
+      align-items: center;
+
+      width: 100%;
+      margin: 0 auto;
+
       font-weight: bold;
       color: #61057d;
       cursor: pointer;
-      margin-bottom: 0;
-      width: 100%;
-      margin: 0 auto;
+
       &:nth-of-type(1) {
         grid-area: more1;
       }
-
       &:nth-of-type(2) {
         grid-area: more3;
       }
@@ -460,7 +463,7 @@ const TOSDiv = styled.div`
   .container {
     position: fixed;
     z-index: 12;
-    width: 40%;
+    width: 30%;
     height: calc(6rem + 50vh);
     background: #fff;
     padding: 1rem;
@@ -469,6 +472,7 @@ const TOSDiv = styled.div`
       max-height: 50vh;
 
       margin: 3rem 2rem;
+      padding-right: 1rem;
       top: 0;
       left: 0;
       overflow-y: scroll;
@@ -503,8 +507,79 @@ const TOSDiv = styled.div`
         }
       }
       li {
-        list-style: disc;
+        list-style-type: disc;
         list-style-position: inside;
+        text-indent: -20px;
+        padding-left: 20px;
+        margin-bottom: 1rem;
+        line-height: 25px;
+      }
+      .adGrid {
+        display: grid;
+        grid-template-rows: auto auto auto auto;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-areas:
+        " collection purpose termLabel "
+        " collection1 purpose1 term "
+        " collection2 purpose2 term "
+        " collection3 purpose3 term ";
+        
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+
+        .collection {
+          grid-area: collection;
+          background: lightgray;
+        }
+        .collection1 {
+          grid-area: collection1;
+        }
+        .collection2 {
+          grid-area: collection2;
+        }
+        .collection3 {
+          grid-area: collection3;
+        }
+        .purpose {
+          grid-area: purpose;
+          background: lightgray;
+        }
+        .purpose1 {
+          grid-area: purpose1;
+        }
+        .purpose2 {
+          grid-area: purpose2;
+        }
+        .purpose3 {
+          grid-area: purpose3;
+        }
+        .termLabel {
+          grid-area: termLabel;
+          background: lightgray;
+        }
+        .term {
+          grid-area: term;
+        }
+        div, ul {
+          border-right: 1px solid black;
+          border-bottom: 1px solid black;
+          padding: 0.5rem;
+          margin: 0;
+        }
+        ${mq[4]} {
+          grid-template-rows: auto auto auto auto auto auto;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas:
+          " collection purpose "
+          " collection1 purpose1 "
+          " collection2 purpose2 "
+          " collection3 purpose3 "
+          " termLabel termLabel "
+          " term term ";
+        }
+      }
+      ${mq[5]} {
+        margin: 3rem 1rem;
       }
     }
     .close {
@@ -512,10 +587,16 @@ const TOSDiv = styled.div`
       cursor: pointer;
       font-weight: bold;
     }
-    ${mq[4]} {
+    ${mq[1]} {
+      width: 40%;
+    }
+    ${mq[2]} {
+      width: 50%;
+    }
+    ${mq[3]} {
       width: 60%;
     }
-    ${mq[5]} {
+    ${mq[4]} {
       width: 80%;
     }
   }
