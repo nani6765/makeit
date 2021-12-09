@@ -4,7 +4,7 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 //const breakpoints = [1200, 576];
-const breakpoints = [1920, 1440, 1024, 960, 576, 480, 360, 320];
+const breakpoints = [1920, 1690, 1440, 1024, 960, 576, 480, 360, 320];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const DivCSS = css`
@@ -29,14 +29,17 @@ const BoxDivCSS = css`
   margin-top: 10vh;
   margin-bottom: 10vh;
   ${mq[1]} {
-    width: 60%;
+    width: 55%;
   }
   ${mq[2]} {
+    width: 60%;
+  }
+  ${mq[3]} {
     width: 70%;
     margin-top: 10vh;
     margin-bottom: 10vh;
   }
-  ${mq[4]} {
+  ${mq[5]} {
     width: 95%;
     margin-top: 10vh;
     margin-bottom: 10vh;
@@ -53,7 +56,7 @@ const Logo = css`
     font-size: 2rem;
     color: #2e2e2e;
     line-height: 1.5rem;
-    ${mq[2]} {
+    ${mq[3]} {
       font-size: 1.5rem;
     }
   }
@@ -70,12 +73,12 @@ const FormDivCSS = css`
     width: 100%;
     padding: 15px 10px;
     background-color: transparent;
-    border: 1px solid #c4c4c4;
+    border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 5px;
     &::placeholder {
-      color: #c4c4c4;
-      ${mq[4]} {
+      color: #C4C4C4;
+      ${mq[5]} {
         font-size: 14px;
       }
     }
@@ -84,8 +87,8 @@ const FormDivCSS = css`
     width: 100%;
     margin-top: 30px;
     margin-bottom: 20px;
-    background: #5a278b;
-    border: 1px solid #5a278b;
+    background: #5A278B;
+    border: 1px solid #5A278B;
     border-radius: 5px;
     color: white;
     font-weight: bold;
@@ -94,7 +97,7 @@ const FormDivCSS = css`
       opacity: 0.5;
     }
   }
-  ${mq[4]} {
+  ${mq[5]} {
     width: 70%;
   }
 `;
@@ -104,19 +107,20 @@ const RegisterFormDiv = css`
   grid-template-rows: auto auto auto auto auto auto auto auto;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas:
-    "name nameInput ."
-    "email emailInput emailBtn"
-    "checkEmail checkEmail checkEmail"
-    "nickname nicknameInput nicknameBtn"
-    "pw pwInput ."
-    "checkPW checkPWInput ."
-    "footer footer footer"
-    ". submitBtn .";
+  "name nameInput ."
+  "email emailInput emailBtn"
+  "checkEmail checkEmail checkEmail"
+  "nickname nicknameInput nicknameBtn"
+  "pw pwInput ."
+  "checkPW checkPWInput ."
+  "footer footer footer"
+  ". submitBtn .";
+
   width: 70%;
   margin: 0 auto;
   margin-top: 3rem !important;
-
-  label {
+  
+  label{
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -125,33 +129,30 @@ const RegisterFormDiv = css`
     word-break: keep-all;
     text-align: left;
   }
-  input {
-    border: 1.5px solid #b1b1b1;
+  input{
+    border: 1.5px solid #B1B1B1;
     box-sizing: border-box;
     border-radius: 5px;
     padding: 0.5rem;
     margin-bottom: 2rem;
-    &:focus,
-    &:active {
-      outline: 1px solid #61057d;
+    &:focus, &:active {
+      outline: 1px solid #61057D;
     }
   }
-  button {
-    border: 1.5px solid #61057d;
+  button{
+    border: 1.5px solid #61057D;
     box-sizing: border-box;
     border-radius: 5px;
     background: #fff;
-    color: #61057d;
+    color: #61057D;
     font-weight: bold;
     margin-bottom: 2rem !important;
     margin: 0 auto;
     width: 70%;
-    ${mq[2]} {
+    ${mq[3]} {
       width: 80%;
-      font-size: 12px;
     }
-    ${mq[4]} {
-      font-size: 10px;
+    ${mq[5]} {
       width: 90%;
       mar4in-left: 10%;
       margin-right: 0;
@@ -173,8 +174,8 @@ const RegisterFormDiv = css`
   .emailBtn {
     grid-area: emailBtn;
     &:disabled {
-      border: 1.5px solid #c4c4c4;
-      color: #c4c4c4;
+      border: 1.5px solid #C4C4C4;
+      color: #C4C4C4;
     }
   }
   .checkEmail {
@@ -184,20 +185,18 @@ const RegisterFormDiv = css`
     grid-template-areas: ". checkEmailInput checkEmailBtn";
     .checkEmailInput {
       grid-area: checkEmailInput;
-      border: 1.5px solid #b1b1b1;
+      border: 1.5px solid #B1B1B1;
       box-sizing: border-box;
       border-radius: 5px;
       margin-bottom: 2rem;
-      &:focus-within,
-      &:active {
-        outline: 1px solid #61057d;
+      &:focus-within, &:active {
+        outline: 1px solid #61057D;
       }
       input {
         border: none;
         margin: 0;
         width: 80%;
-        &:focus,
-        &:active {
+        &:focus, &:active {
           outline: none;
         }
       }
@@ -206,7 +205,7 @@ const RegisterFormDiv = css`
       grid-area: checkEmailBtn;
     }
   }
-
+ 
   .nickname {
     grid-area: nickname;
   }
@@ -231,8 +230,8 @@ const RegisterFormDiv = css`
     justify-content: flex-start;
   }
   .footer {
-    border-top: 1px solid #b1b1b1;
-    border-bottom: 1px solid #b1b1b1;
+    border-top: 1px solid #B1B1B1;
+    border-bottom: 1px solid #B1B1B1;
     padding: 3rem 0;
     grid-area: footer;
     display: grid;
@@ -240,18 +239,18 @@ const RegisterFormDiv = css`
     grid-template-columns: 1fr 2fr 1fr;
     grid-gap: 1rem 0;
     grid-template-areas:
-      "label agree ."
-      "label service1 more1"
-      "label service2 ."
-      "label service3 more3"
-      "label service4 more4";
-    ${mq[6]} {
+    "label agree ."
+    "label service1 more1"
+    "label service2 ."
+    "label service3 more3"
+    "label service4 more4";
+    ${mq[7]} {
       grid-template-columns: 1fr 2.5fr 1.5fr;
     }
     label {
       margin-bottom: 0px;
     }
-    .service {
+    .service{
       text-align: left;
       p {
         display: flex;
@@ -260,79 +259,76 @@ const RegisterFormDiv = css`
         cursor: pointer;
         i {
           margin-right: 0.5rem;
-          color: #b1b1b1;
+          color: #B1B1B1;
           font-size: 1.5rem;
         }
         .fill {
-          color: #61057d;
+          color: #61057D;
         }
       }
-      &:nth-of-type(1) {
+      &:nth-of-type(1){
         grid-area: agree;
       }
-
-      &:nth-of-type(2) {
+      
+      &:nth-of-type(2){
         grid-area: service1;
       }
-
-      &:nth-of-type(3) {
+      
+      &:nth-of-type(3){
         grid-area: service2;
       }
-
-      &:nth-of-type(4) {
+      
+      &:nth-of-type(4){
         grid-area: service3;
       }
-      &:nth-of-type(5) {
+      &:nth-of-type(5){
         grid-area: service4;
       }
     }
-    .more {
-      display: flex;
-      align-items: center;
-
+    .more{
+      font-weight: bold;
+      color: #61057D;
+      cursor: pointer;
+      margin-bottom: 0;
       width: 100%;
       margin: 0 auto;
-
-      font-weight: bold;
-      color: #61057d;
-      cursor: pointer;
-
-      &:nth-of-type(1) {
+      &:nth-of-type(1){
         grid-area: more1;
       }
-      &:nth-of-type(2) {
+      
+      &:nth-of-type(2){
         grid-area: more3;
       }
-      &:nth-of-type(3) {
+      &:nth-of-type(3){
         grid-area: more4;
       }
     }
   }
-  .submitBtn {
+  .submitBtn{
     grid-area: submitBtn;
     width: 100%;
     margin-top: 2rem;
     padding: 1rem;
     color: #fff;
-    background: #61057d;
-    border: 1px solid #61057d;
+    background: #61057D;
+    border: 1px solid #61057D;
     box-sizing: border-box;
     border-radius: 5px;
-    ${mq[4]} {
+    ${mq[5]} {
       margin: 2rem auto 0 auto;
       width: 70%;
       word-break: keep-all;
     }
   }
-  ${mq[2]} {
+  ${mq[3]} {
     width: 80%;
     font-size: 14px;
   }
-  ${mq[4]} {
+  ${mq[5]} {
     width: 90%;
     font-size: 12px;
   }
-  ${mq[6]} {
+  ${mq[7]} {
     grid-template-columns: 1fr 3fr 1fr;
   }
 `;
@@ -363,12 +359,12 @@ const passwordFind = css`
     margin-right: 1rem;
     text-decoration-line: underline;
     &:last-of-type {
-      ${mq[4]} {
+      ${mq[5]} {
         margin-right: 0px;
       }
     }
   }
-  ${mq[4]} {
+  ${mq[5]} {
     text-align: center;
   }
 `;
@@ -379,9 +375,11 @@ const ModalContainerDiv = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   .background {
     width: 100%;
     height: 100%;
@@ -400,11 +398,14 @@ const ModalContainerDiv = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
+
         padding-top: 1.5rem;
         padding-bottom: 10px;
+
         border-bottom: 1px solid black;
+
         span {
-          color: #61057d;
+          color: #61057D;
           font-size: 15px;
           font-weight: bold;
           &:last-of-type {
@@ -413,6 +414,7 @@ const ModalContainerDiv = styled.div`
             color: black;
             cursor: pointer;
           }
+
         }
       }
       .msg {
@@ -425,20 +427,21 @@ const ModalContainerDiv = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+
       padding: 1rem 0;
-      background: #f5f5f5;
+      background: #F5F5F5;
       button {
         padding: 10px 30px;
         color: #fff;
-        background: #61057d;
-        border: 1px solid #61057d;
+        background: #61057D;
+        border: 1px solid #61057D;
         font-size: 15px;
       }
     }
-    ${mq[2]} {
+    ${mq[3]} {
       width: 40vw;
     }
-    ${mq[4]} {
+    ${mq[5]} {
       width: 80vw;
     }
   }
@@ -446,170 +449,90 @@ const ModalContainerDiv = styled.div`
 `;
 
 const TOSDiv = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+
+display: flex;
+justify-content: center;
+align-items: center;
+
+.background {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 11;
+}
+.container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .background {
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 11;
-  }
-  .container {
-    position: fixed;
-    z-index: 12;
-    width: 30%;
-    height: calc(6rem + 50vh);
-    background: #fff;
-    padding: 1rem;
-    .content {
-      position: absolute;
-      max-height: 50vh;
+  z-index: 12;
 
-      margin: 3rem 2rem;
-      padding-right: 1rem;
-      top: 0;
-      left: 0;
-      overflow-y: scroll;
-      &::-webkit-scrollbar {
-        width: 10px;
-      }
-      &::-webkit-scrollbar-thumb {
-        background-color: grey;
-        border-radius: 15px;
-        background-clip: padding-box;
-        border: 2px solid transparent;
-      }
-      &::-webkit-scrollbar-track {
-        background-color: #c6c6c6;
-        border-radius: 15px;
-        box-shadow: inset 0px 0px 5px white;
-      }
-      .title {
-        font-size: 20px;
-        font-weight: bold;
-      }
-      .bold {
-        font-weight: bold;
-      }
-      div {
-        div {
-          margin-bottom: 1rem;
-          line-height: 25px;
-          &:last-of-type {
-            margin-bottom: 0;
-          }
-        }
-      }
-      li {
-        list-style-type: disc;
-        list-style-position: inside;
-        text-indent: -20px;
-        padding-left: 20px;
-        margin-bottom: 1rem;
-        line-height: 25px;
-      }
-      .adGrid {
-        display: grid;
-        grid-template-rows: auto auto auto auto;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-areas:
-        " collection purpose termLabel "
-        " collection1 purpose1 term "
-        " collection2 purpose2 term "
-        " collection3 purpose3 term ";
-        
-        border-top: 1px solid black;
-        border-left: 1px solid black;
+  width: 40%;
+  height: calc(6rem + 50vh);
+  background: #fff;
+  padding: 1rem;
 
-        .collection {
-          grid-area: collection;
-          background: lightgray;
-        }
-        .collection1 {
-          grid-area: collection1;
-        }
-        .collection2 {
-          grid-area: collection2;
-        }
-        .collection3 {
-          grid-area: collection3;
-        }
-        .purpose {
-          grid-area: purpose;
-          background: lightgray;
-        }
-        .purpose1 {
-          grid-area: purpose1;
-        }
-        .purpose2 {
-          grid-area: purpose2;
-        }
-        .purpose3 {
-          grid-area: purpose3;
-        }
-        .termLabel {
-          grid-area: termLabel;
-          background: lightgray;
-        }
-        .term {
-          grid-area: term;
-        }
-        div, ul {
-          border-right: 1px solid black;
-          border-bottom: 1px solid black;
-          padding: 0.5rem;
-          margin: 0;
-        }
-        ${mq[4]} {
-          grid-template-rows: auto auto auto auto auto auto;
-          grid-template-columns: 1fr 1fr;
-          grid-template-areas:
-          " collection purpose "
-          " collection1 purpose1 "
-          " collection2 purpose2 "
-          " collection3 purpose3 "
-          " termLabel termLabel "
-          " term term ";
-        }
-      }
-      ${mq[5]} {
-        margin: 3rem 1rem;
-      }
+  .content {
+    position: absolute;
+
+    max-height: 50vh;
+    
+    margin: 3rem 2rem;
+    top: 0;
+    left: 0;
+
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 10px;
     }
-    .close {
-      color: black;
-      cursor: pointer;
+    &::-webkit-scrollbar-thumb {
+      background-color: grey;
+      border-radius: 15px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #c6c6c6;
+      border-radius: 15px;
+      box-shadow: inset 0px 0px 5px white;
+    }
+
+    .title {
+      font-size: 20px;
       font-weight: bold;
     }
-    ${mq[1]} {
-      width: 40%;
+    .bold {
+      font-weight: bold;
     }
-    ${mq[2]} {
-      width: 50%;
+    div {
+      div {
+        margin-bottom: 1rem;
+        line-height: 25px;
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
     }
-    ${mq[3]} {
-      width: 60%;
+    li {
+      list-style: disc;
+      list-style-position: inside;
     }
-    ${mq[4]} {
-      width: 80%;
-    }
+
   }
+  .close {
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  ${mq[5]} {
+    width: 60%;
+  }
+  ${mq[6]} {
+    width: 80%;
+  }
+}
 `;
 
-export {
-  DivCSS,
-  Logo,
-  BoxDivCSS,
-  passwordFind,
-  FormDivCSS,
-  RegisterFormDiv,
-  CompeleteDiv,
-  ModalContainerDiv,
-  TOSDiv,
-};
+export { DivCSS, Logo, BoxDivCSS, passwordFind, FormDivCSS, RegisterFormDiv, CompeleteDiv, ModalContainerDiv, TOSDiv };

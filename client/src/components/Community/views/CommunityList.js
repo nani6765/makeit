@@ -135,17 +135,6 @@ function CommunityList() {
                 Skip={Skip}
                 URL={URL}
               />
-              <div className="search">
-                <input
-                  type="text"
-                  value={SearchTerm}
-                  onChange={(e) => setSearchTerm(e.currentTarget.value)}
-                  onKeyDown={(e) => {
-                    if (e.keyCode === 13) SearchHandler(e);
-                  }}
-                />
-                <SearchIcon onClick={(e) => SearchHandler(e)} />
-              </div>
             </FNBDiv>
           </>
         )}
