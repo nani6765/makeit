@@ -35,14 +35,13 @@ function CommunityPostCard(props) {
         <div className="profile">
           <Avatar
             src={props.post.auther.photoURL}
-            size="40"
+            size="30"
             round={true}
             style={{ border: "1px solid #c6c6c6" }}
           />
         </div>
 
         <p className="author">{props.post.auther.displayName}</p>
-        <p className="view">조회수 {props.post.views}</p>
         <p className="title">{props.post.title}</p>
         <TextEllipsis lines={1} tag={"p"} tagClass={"desc"}>
           {props.post.content}

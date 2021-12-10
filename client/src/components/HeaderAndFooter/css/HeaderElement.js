@@ -3,11 +3,9 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
-const breakpoints = [1200, 576];
-const headerBp = [1920, 1440, 1024, 960, 768, 670, 480, 360, 320];
+const breakpoints = [1160, 480];
 
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
-const headerbq = headerBp.map((bp) => `@media (max-width: ${bp}px)`);
 
 const HeaderDiv = styled.div`
   position: fixed;
@@ -19,24 +17,31 @@ const HeaderDiv = styled.div`
   background-color: white;
   padding-top: 44px;
   padding-bottom: 30px;
-  ${headerbq[2]} {
-    padding-top: 22px;
-    padding-bottom: 15px;
+  .PC {
+    display: block;
+  }
+  .Mobile{
+    display: none;
+  }
+  ${mq[0]}{
+    padding-top: 32px;
+    padding-bottom: 23px;
+    .PC {
+      display: none;
+    }
+    .Mobile{
+      display: block;
+    }
+  }
+  ${mq[1]}{
+    padding-top: 20px;
+    padding-bottom: 16px;
   }
 `;
 
 const HeaderMarginDiv = styled.div`
   max-width: 1160px;
   margin: 0 auto !important;
-  ${headerbq[2]} {
-    width: 80%;
-  }
-  ${headerbq[4]} {
-    width: 90%;
-  }
-  ${headerbq[5]} {
-    width: 100%;
-  }
 `;
 
 const HeaderGrid = styled.div`
@@ -45,16 +50,13 @@ const HeaderGrid = styled.div`
   grid-template-columns: 179.06px 1fr 200px 120px;
   grid-template-rows: auto;
   grid-template-areas: "logo nav search loginDiv";
-  ${headerbq[2]} {
-    grid-template-columns: 120px 1fr 160px 100px;
+  ${mq[0]}{
+    grid-template-columns: 120px 1fr 120px;
+    grid-template-areas: "hambuck logo loginDiv";
   }
-  ${headerbq[4]} {
-    grid-template-columns: 120px 1fr 160px 100px;
-  }
-  ${headerbq[5]} {
-    grid-template-columns: 50px 50px 1fr 100px;
-    grid-template-rows: auto;
-    grid-template-areas: "hambuck . logo loginDiv";
+  ${mq[1]}{
+    grid-template-columns: 100px 1fr 100px;
+    grid-template-areas: "hambuck logo loginDiv";
   }
 `;
 
@@ -75,38 +77,6 @@ const HeaderLogo = styled.div`
         height: 20px;
       }
     }
-    ${headerbq[1]} {
-      img {
-        &:nth-of-type(1) {
-          width: 35px;
-          height: 35px;
-        }
-        &:nth-of-type(2) {
-          margin-left: 10px;
-          margin-top: 6px;
-          width: 94px;
-          height: 20px;
-        }
-      }
-    }
-    ${headerbq[2]} {
-      img {
-        &:nth-of-type(1) {
-          width: 30px;
-          height: 30px;
-        }
-        &:nth-of-type(2) {
-          margin-left: 8px;
-          margin-top: 4px;
-          width: 80px;
-          height: 15px;
-        }
-      }
-    }
-  }
-  ${headerbq[4]} {
-    text-align: center;
-  }
 `;
 
 const HeaderNav = styled.div`
@@ -142,31 +112,6 @@ const HeaderNav = styled.div`
         margin-right: 0px;
       }
     }
-  }
-  ${headerbq[2]} {
-    ul {
-      margin-left: 14px;
-      li {
-        margin-right: 8px;
-        a {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-  ${headerbq[4]} {
-    ul {
-      margin-left: 0px;
-      li {
-        margin-right: 4px;
-        a {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-  ${headerbq[5]} {
-    display: none;
   }
 `;
 
@@ -210,9 +155,6 @@ const HeaderSearch = styled.div`
     }
   }
 
-  ${headerbq[5]} {
-    display: none;
-  }
 `;
 
 const HeaderLoginDiv = styled.div`
@@ -234,67 +176,48 @@ const HeaderLoginDiv = styled.div`
       color: #ada4a4;
     }
   }
-  .bell {
-    color: #702c8a;
-    font-weight: bold;
-    font-size: 20px;
-  }
-  .profile {
-    img {
-      width: 30px;
-      height: 30px;
-    }
-  }
   .hambuc {
-    grid-area: hambuc;
     display: flex;
     cursor: pointer;
     justify-content: center;
     align-items: center;
     position: relative;
   }
-`;
-
-const MobileLogo = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  text-align: center;
-  background-color: white;
-  grid-area: mlogo;
-  justify-content: flex-start;
-  padding: 5px;
-  img {
-    width: 100%;
-    height: 100%;
+  ${mq[0]}{
+   margin-right: 20px;
   }
-  ${mq[0]} {
-    display: flex;
-  }
-  ${mq[1]} {
-    display: none;
-  }
+  ${mq[1]}{
+    margin-right: 0px;
+    justify-content: flex-end;
+      .hambuc {
+        &:nth-last-of-type(1){
+          margin-left: 10px;
+          margin-right: 10px;
+        }
+      }
+   }
 `;
 
 const MobileHambuck = styled.div`
-  display: none;
+  grid-area: hambuck;
   width: 100%;
   height: 100%;
+
+  display: flex;
   align-items: center;
-  text-align: center;
+  
   background-color: white;
-  grid-area: hambuck;
-  ${mq[0]} {
-    display: none;
+  i {
+    color: #a95ddd;
+    font-size: 30px;
+  }
+  ${mq[0]}{
+    margin-left: 20px;
+    justify-content: flex-start;
   }
   ${mq[1]} {
-    display: flex;
-    justify-content: center;
-    i {
-      color: #a95ddd;
-      font-size: 30px;
-    }
+    display: block;
+    margin-left: 10px;
   }
 `;
 
@@ -391,7 +314,6 @@ export {
   HeaderNav,
   HeaderSearch,
   HeaderLoginDiv,
-  MobileLogo,
   MobileHambuck,
   MobileSideBackDiv,
   MobileSlideDiv,

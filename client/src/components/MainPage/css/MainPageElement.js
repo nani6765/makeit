@@ -9,6 +9,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const MainPageDiv = styled.div`
   .friendsVideoList {
     width: 100%;
+    height: 330px;
     .slick-track {
       margin: 0px;
       min-width: 100%;
@@ -135,21 +136,46 @@ function MainPageGridContent(parameter) {
 }
 
 const CardImg = styled.article`
+  position: relative;
+  width: 360px;
+  overflow: hidden;
+  z-index: 1;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  margin: 0 10px;
-  position: relative;
   clear: both;
-  overflow: hidden;
-  z-index: 1;
-  filter: drop-shadow(0px 3px 6px rgba(75, 81, 91, 0.15)),
-    drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));
-  //border-radius: 10px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px 10px 0 0;
   .thumbnail {
     width: 100%;
-    height: 100%;
+    padding-top: 56.25%;
+    position: relative;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .title {
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 16px;
+    line-height: 24px;
+    color: black;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    margin: 10px 0 20px 20px;
+    span {
+      margin-left: 5px;
+      font-size: 14px;
+      line-height: 21px;
+      color: #9D9EA9;
+    }
   }
   ${mq[1]} {
     width: 100%;
@@ -157,6 +183,14 @@ const CardImg = styled.article`
     height: 281.25px;
     min-height: 281.25px;
     margin-left: 0px;
+  }
+`;
+
+const lineCSS = css`
+  color: black;
+  text-decoration: none;
+  &:hover, &:focus {
+    text-decoration: none;
   }
 `;
 
@@ -186,4 +220,5 @@ export {
   MainPageSubHading,
   MainPageGridContent,
   CardImg,
+  lineCSS
 };
