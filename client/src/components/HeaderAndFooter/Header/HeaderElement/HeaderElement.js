@@ -32,16 +32,16 @@ function HeaderElement(props) {
       <HeaderDiv className={`header ${props.shadowStyle} ${props.hiddenStyle}`}>
         <HeaderMarginDiv>
           <HeaderGrid>
-            <HeaderLogo>
+            <HeaderLogo className="PC">
               <Link to="/">
                 <img src={process.env.PUBLIC_URL + "/Img/symbol.png"} />
                 <img src={process.env.PUBLIC_URL + "/Img/text.png"} />
               </Link>
             </HeaderLogo>
 
-            <HeaderNavArea />
+            <HeaderNavArea className="PC" />
 
-            <HeaderSearch>
+            <HeaderSearch className="PC">
               <div>
                 <form action="/search" method="GET">
                   <input type="text" placeholder="Search" name="term" />
@@ -53,16 +53,19 @@ function HeaderElement(props) {
             </HeaderSearch>
 
             <HeaderLoginArea
+            id="Test"
               alarmHambucControl={alarmHambucControl}
               setalarmHambucControl={setalarmHambucControl}
               myPageHambucControl={myPageHambucControl}
               setmyPageHambucControl={setmyPageHambucControl}
             />
 
-            <MobileHambuck>
-              <i className="bi bi-list" onClick={() => props.showSide()}></i>
-            </MobileHambuck>
-          </HeaderGrid>
+            <div  className="Mobile">
+              <MobileHambuck>
+                <i className="bi bi-list" onClick={() => props.showSide()}></i>
+              </MobileHambuck>
+            </div>
+            </HeaderGrid>
         </HeaderMarginDiv>
       </HeaderDiv>
 

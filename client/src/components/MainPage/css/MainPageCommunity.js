@@ -85,20 +85,20 @@ const GridTitle = css`
 
 const CardImg = styled.article`
   width: 100%;
-  height: 195px;
   background-color: white;
   display: block;
-  display: grid;
   padding: 20px;
+  border-radius: 10px;
 
-  grid-template-columns: 1fr 1fr 2fr 2fr;
-  grid-template-rows: 50px 30px 30px 25px 20px;
+  display: grid;
+  grid-template-columns: 30px 108px 1fr 20px 1fr;
+  grid-template-rows: 30px 21px 50px 29px;
+  row-gap: 8px;
   grid-template-areas:
-    "profile author author view"
-    "title title title title"
-    "desc desc desc desc"
-    "date date date date"
-    "category category like comment";
+    "profile author author . date"
+    "title title title title title"
+    "desc desc desc desc desc"
+    "category category like . comment";
   .profile {
     grid-area: profile;
     display: flex;
@@ -109,26 +109,20 @@ const CardImg = styled.article`
     height: 100%;
   }
   .author {
-    margin-left: 5px;
+    margin-left: 8px;
     grid-area: author;
     text-align: left;
     align-self: center;
-  }
-  .view {
-    grid-area: view;
-    text-align: right;
-    color: #5b4949;
-    align-self: center;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 21px;
   }
   .title {
     grid-area: title;
-    font-weight: 700;
-    margin-top: 5px;
     text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 21px;
     overflow: hidden;
-    font-size: 16px;
-    line-height: 24px;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -136,23 +130,25 @@ const CardImg = styled.article`
     grid-area: desc;
     text-align: left;
     font-size: 14px;
-    line-height: 30px;
+    line-height: 25px;
   }
   .date {
     grid-area: date;
     text-align: right;
-    font-size: 12px;
-    line-height: 20px;
-    padding-bottom: 5px;
+    font-size: 14px;
+    line-height: 21px;
   }
   .category {
     grid-area: category;
-    background-color: #efe9e9;
-    border-radius: 10px;
-    border: none;
-    align-items: center;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-top: 8px;
+    margin-right: 56px;
+    font-size: 12px;
+    line-height: 18px;
+
     p {
       color: #908b8b;
       font-size: 14px;
@@ -164,28 +160,32 @@ const CardImg = styled.article`
   }
   .like {
     grid-area: like;
+    display: flex;
     text-align: right;
     align-items: center;
+    margin-top: 8px;
     margin-bottom: 0px;
-    display: flex;
     justify-content: flex-end;
     font-size: 14px;
+    line-height: 21px;
     i {
-      margin-right: 5px;
+      margin-right: 8px;
       color: #ccd2e3;
       font-size: 18px;
     }
   }
   .comment {
     grid-area: comment;
-    text-align: right;
-    margin-bottom: 0px;
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
+    margin-top: 8px;
+    margin-bottom: 0px;
+    text-align: right;
     font-size: 14px;
+    line-height: 21px;
     i {
-      margin-right: 5px;
+      margin-right: 8px;
       color: #ccd2e3;
       font-size: 18px;
     }

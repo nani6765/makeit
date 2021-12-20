@@ -10,7 +10,7 @@ function HeaderNavArea(props) {
   }, []);
 
   return (
-    <HeaderNav>
+    <HeaderNav className="PC">
       <ul>
         {/*
           <li>

@@ -18,7 +18,7 @@ function MainPage() {
   return (
     <>
       <MainBanner />
-      <CommonMarginDiv style={{ paddingTop: "80px", paddingBottom: "50px" }}>
+      <CommonMarginDiv style={{ paddingTop: "80px" }}>
         <>
           <p css={MainPageHading}>
             프렌즈가 참여한 영상들
@@ -44,7 +44,9 @@ function MainPage() {
         }}
       >
         <CommonMarginDiv>
-          <>
+          {
+            /*
+            <>
             <p css={MainPageHading}>
               커뮤니티
               <Link to="/community">
@@ -56,6 +58,10 @@ function MainPage() {
             </p>
           </>
           <CommunityPost />
+            
+            */
+          }
+          
         </CommonMarginDiv>
       </div>
 

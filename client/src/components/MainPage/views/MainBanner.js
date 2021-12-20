@@ -9,7 +9,12 @@ function MainBanner() {
   const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
   let Banner = styled.div`
-    width: 100%;
+    padding-top: 25%;
+    background-image: url("/Img/Banner/1920.jpg");
+    background-size: 1920px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    /*
     height: auto;
     img {
       width: 100%;
@@ -180,19 +185,29 @@ function MainBanner() {
         }
       }
     }
+    */
   `;
 
   return (
     <>
+    <div style={{marginBottom: "50vh"}}>
       <Banner>
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.jpg"} />
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/1440.png"} />
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/1024.png"} />
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/960.png"} />
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/480.png"} />
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/360.png"} />
-        <img src={process.env.PUBLIC_URL + "/Img/Banner/320.png"} />
-      </Banner>
+          
+          {
+            /*
+            <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.jpg"} />
+            <img src={process.env.PUBLIC_URL + "/Img/Banner/1440.png"} />
+          <img src={process.env.PUBLIC_URL + "/Img/Banner/1024.png"} />
+          <img src={process.env.PUBLIC_URL + "/Img/Banner/960.png"} />
+          <img src={process.env.PUBLIC_URL + "/Img/Banner/480.png"} />
+          <img src={process.env.PUBLIC_URL + "/Img/Banner/360.png"} />
+          <img src={process.env.PUBLIC_URL + "/Img/Banner/320.png"} />
+            */
+          }
+        
+        </Banner>
+    </div>
+   
     </>
   );
 }
