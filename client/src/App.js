@@ -56,6 +56,8 @@ import ParticipateUpload from "./components/Participate/view/upload/ParticipateU
 import ParticipateEdit from "./components/Participate/view/upload/ParticipateEdit.js";
 import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 
+import Test from "./components/Test.js";
+
 function App() {
   let dispatch = useDispatch();
   const isLoading = useSelector((state) => state.user.isLoading);
@@ -166,6 +168,7 @@ function App() {
           />
           <Route exact path="/participate/post/:url" component={PartDetail} />
           <Route path="/participate" component={Participate} />
+          <Route path="/test" component={Test} />
         </Switch>
         <Footer />
         <MobileFooter />

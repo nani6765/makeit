@@ -17,7 +17,6 @@ const S3 = new AWS.S3({
 });
 
 function setUpload(bucket) {
-  
   let upload = multer({
     storage: multerS3({
       s3: S3,
