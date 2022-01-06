@@ -9,6 +9,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const MainPageDiv = styled.div`
   .friendsVideoList {
     width: 100%;
+    height: 330px;
     .slick-track {
       margin: 0px;
       min-width: 100%;
@@ -135,12 +136,14 @@ function MainPageGridContent(parameter) {
 }
 
 const CardImg = styled.article`
+  position: relative;
+  width: 360px;
+  overflow: hidden;
+  z-index: 1;
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  margin: 0 10px;
-  position: relative;
   clear: both;
   overflow: hidden;
   z-index: 1;
@@ -153,6 +156,15 @@ const CardImg = styled.article`
     height: 281.25px;
     min-height: 281.25px;
     margin-left: 0px;
+  }
+`;
+
+const lineCSS = css`
+  color: black;
+  text-decoration: none;
+  &:hover,
+  &:focus {
+    text-decoration: none;
   }
 `;
 
@@ -182,4 +194,5 @@ export {
   MainPageSubHading,
   MainPageGridContent,
   CardImg,
+  lineCSS,
 };

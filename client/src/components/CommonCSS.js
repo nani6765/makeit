@@ -16,7 +16,7 @@ const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 const testbreak = testpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const CommonMarginDiv = styled.div`
-  max-width: 1160px;
+  width: 1160px;
   margin: 0 auto !important;
   ${mq[2]} {
     width: 80%;

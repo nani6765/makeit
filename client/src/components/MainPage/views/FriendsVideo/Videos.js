@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
+import Avatar from "react-avatar";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
 
-import { CardImg, PlayButtonCSS } from "../../css/MainPageElement.js";
+import { CardImg, PlayButtonCSS, lineCSS } from "../../css/MainPageElement.js";
 
 function Videos(props) {
   return (
