@@ -149,38 +149,11 @@ const CardImg = styled.article`
   user-select: none;
   cursor: pointer;
   clear: both;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  .thumbnail {
-    width: 100%;
-    padding-top: 56.25%;
-    position: relative;
-    img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .title {
-    margin-top: 20px;
-    margin-left: 20px;
-    font-size: 16px;
-    line-height: 24px;
-    color: black;
-  }
-  .profile {
-    display: flex;
-    align-items: center;
-    margin: 10px 0 20px 20px;
-    span {
-      margin-left: 5px;
-      font-size: 14px;
-      line-height: 21px;
-      color: #9D9EA9;
-    }
-  }
+  overflow: hidden;
+  z-index: 1;
+  filter: drop-shadow(0px 3px 6px rgba(75, 81, 91, 0.15)),
+    drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.15));
+
   ${mq[1]} {
     width: 100%;
     min-width: 80vw;
@@ -193,7 +166,8 @@ const CardImg = styled.article`
 const lineCSS = css`
   color: black;
   text-decoration: none;
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     text-decoration: none;
   }
 `;
@@ -224,5 +198,5 @@ export {
   MainPageSubHading,
   MainPageGridContent,
   CardImg,
-  lineCSS
+  lineCSS,
 };

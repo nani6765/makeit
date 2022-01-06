@@ -5,210 +5,48 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 function MainBanner() {
-  const breakpoints = [1920, 1440, 1024, 960, 480, 360, 320];
+  const breakpoints = [1160, 480];
   const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
   let Banner = styled.div`
-    padding-top: 25%;
-    background-image: url("/Img/Banner/1920.jpg");
-    background-size: 1920px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    /*
+    width: 100%;
+    max-width: 1920px;
     height: auto;
-    img {
+    position: relative;
+    height: 280px;
+    margin: 0 auto;
+    ${mq[0]}{
+      height: 288px;
+    }
+    ${mq[1]}{
+      height: 178px;
+    }
+    div {
       width: 100%;
       height: 100%;
-      display: none;
-      &:nth-of-type(1) {
-        display: block;
+      padding-top: 280px;
+      background-image: url("/Img/Banner/1920.png");
+      background-size: 1920px;
+      background-position: 50%, 50%;
+      ${mq[0]}{
+         padding-top: 288px;
+         background-image: url("/Img/Banner/1440.png");
+         background-size: 1440px;
       }
-      ${mq[0]} {
-        &:nth-of-type(1) {
-          display: block;
-        }
-        &:nth-of-type(2) {
-          display: none;
-        }
-        &:nth-of-type(3) {
-          display: none;
-        }
-        &:nth-of-type(4) {
-          display: none;
-        }
-        &:nth-of-type(5) {
-          display: none;
-        }
-        &:nth-of-type(6) {
-          display: none;
-        }
-        &:nth-of-type(7) {
-          display: none;
-        }
-      }
-      ${mq[1]} {
-        &:nth-of-type(1) {
-          display: none;
-        }
-        &:nth-of-type(2) {
-          display: block;
-        }
-        &:nth-of-type(3) {
-          display: none;
-        }
-        &:nth-of-type(4) {
-          display: none;
-        }
-        &:nth-of-type(5) {
-          display: none;
-        }
-        &:nth-of-type(6) {
-          display: none;
-        }
-        &:nth-of-type(7) {
-          display: none;
-        }
-      }
-      ${mq[2]} {
-        &:nth-of-type(1) {
-          display: none;
-        }
-        &:nth-of-type(2) {
-          display: none;
-        }
-        &:nth-of-type(3) {
-          display: block;
-        }
-        &:nth-of-type(4) {
-          display: none;
-        }
-        &:nth-of-type(5) {
-          display: none;
-        }
-        &:nth-of-type(6) {
-          display: none;
-        }
-        &:nth-of-type(7) {
-          display: none;
-        }
-      }
-      ${mq[3]} {
-        &:nth-of-type(1) {
-          display: none;
-        }
-        &:nth-of-type(2) {
-          display: none;
-        }
-        &:nth-of-type(3) {
-          display: none;
-        }
-        &:nth-of-type(4) {
-          display: block;
-        }
-        &:nth-of-type(5) {
-          display: none;
-        }
-        &:nth-of-type(6) {
-          display: none;
-        }
-        &:nth-of-type(7) {
-          display: none;
-        }
-      }
-      ${mq[4]} {
-        &:nth-of-type(1) {
-          display: none;
-        }
-        &:nth-of-type(2) {
-          display: none;
-        }
-        &:nth-of-type(3) {
-          display: none;
-        }
-        &:nth-of-type(4) {
-          display: none;
-        }
-        &:nth-of-type(5) {
-          display: block;
-        }
-        &:nth-of-type(6) {
-          display: none;
-        }
-        &:nth-of-type(7) {
-          display: none;
-        }
-      }
-      ${mq[5]} {
-        &:nth-of-type(1) {
-          display: none;
-        }
-        &:nth-of-type(2) {
-          display: none;
-        }
-        &:nth-of-type(3) {
-          display: none;
-        }
-        &:nth-of-type(4) {
-          display: none;
-        }
-        &:nth-of-type(5) {
-          display: none;
-        }
-        &:nth-of-type(6) {
-          display: block;
-        }
-        &:nth-of-type(7) {
-          display: none;
-        }
-      }
-      ${mq[6]} {
-        &:nth-of-type(1) {
-          display: none;
-        }
-        &:nth-of-type(2) {
-          display: none;
-        }
-        &:nth-of-type(3) {
-          display: none;
-        }
-        &:nth-of-type(4) {
-          display: none;
-        }
-        &:nth-of-type(5) {
-          display: none;
-        }
-        &:nth-of-type(6) {
-          display: none;
-        }
-        &:nth-of-type(7) {
-          display: block;
-        }
+      ${mq[1]}{
+         padding-top: 178px;
+         background-image: url("/Img/Banner/480.png");
+         background-size: 480px;
       }
     }
-    */
   `;
 
   return (
-    <>
-    <div style={{marginBottom: "50vh"}}>
       <Banner>
-          
-          {
-            /*
-            <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.jpg"} />
-            <img src={process.env.PUBLIC_URL + "/Img/Banner/1440.png"} />
-          <img src={process.env.PUBLIC_URL + "/Img/Banner/1024.png"} />
-          <img src={process.env.PUBLIC_URL + "/Img/Banner/960.png"} />
-          <img src={process.env.PUBLIC_URL + "/Img/Banner/480.png"} />
-          <img src={process.env.PUBLIC_URL + "/Img/Banner/360.png"} />
-          <img src={process.env.PUBLIC_URL + "/Img/Banner/320.png"} />
-            */
-          }
+        <div>
         
-        </Banner>
-    </div>
-   
-    </>
+        </div>
+      </Banner>
   );
 }
 
