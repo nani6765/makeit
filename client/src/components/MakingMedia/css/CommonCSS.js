@@ -13,7 +13,7 @@ const MakingHeader = styled.div`
 `;
 
 const MakingDiv = styled.div`
-  width: 70%;
+  width: 1160px;
   height: auto;
   margin: 0 auto;
   padding-bottom: 10vh;
@@ -23,20 +23,20 @@ const MakingDiv = styled.div`
 `;
 
 const MenuList = styled.div`
-  width: 100%;
-  padding: 0px 15%;
+  width: 1160px;
+  margin: 68px auto 0 auto;
   border-bottom: 1px solid #acb0b4;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   align-content: center;
   ul {
-    height: 1rem;
+    height: 16px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: 1rem !important;
-    margin-top: 3rem;
+    padding-bottom: 18px !important;
+    margin-top: 18px;
     list-style: none;
   }
   .search {
@@ -65,6 +65,7 @@ const MenuList = styled.div`
   }
 
   ${mq[1]} {
+    width: 100%;
     padding: 0px 5%;
     justify-content: space-evenly;
     flex-direction: column;
@@ -94,10 +95,11 @@ const MenuItem = styled.li`
   background: #ffffff;
   cursor: pointer;
   text-align: center;
-  margin-right: 2rem;
-  padding-bottom: 2rem !important;
+  margin-right: 40px;
+  padding-bottom: 36px !important;
   height: 1rem;
   &.active {
+    padding-bottom: 33px !important;
     border-bottom: 3px solid #61057d;
     p {
       color: #61057d;
@@ -111,6 +113,9 @@ const MenuItem = styled.li`
   ${mq[1]} {
     margin-right: 0px;
     padding-bottom: 0rem !important;
+    &.active {
+      padding-bottom: 0rem !important;
+    }
     p {
       font-size: 10px;
     }
@@ -120,20 +125,22 @@ const MenuItem = styled.li`
 const SubGNBDiv = styled.div`
   width: 100%;
   background-color: #fafafa;
-  padding: 1rem 15%;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   align-content: center;
   ul {
-    height: 1rem;
+    width: 1160px;
+    margin: 0 auto;
+    height: 18px;
     display: flex;
     justify-content: flex-start;
     align-content: center;
     list-style: none;
     li {
-      margin-right: 1rem;
-      font-size: 12px;
+      margin-right: 24px;
+      font-size: 16px;
       color: rgba(172, 176, 180, 1);
       user-select: none;
       cursor: pointer;
@@ -144,8 +151,10 @@ const SubGNBDiv = styled.div`
     }
   }
   ${mq[1]} {
+    width: 100%;
     padding: 0rem 5% 0rem 5%;
     ul {
+      width: 100%;
       flex-wrap: wrap;
       flex-direction: row;
       height: auto;
@@ -159,9 +168,9 @@ const SubGNBDiv = styled.div`
 `;
 
 const TopArea = styled.div`
-  width: 70%;
+  width: 1160px;
   text-align: right;
-  margin: 1rem auto;
+  margin: 14px auto;
   display: flex;
   justify-content: space-between;
   ${mq[0]} {
@@ -172,11 +181,12 @@ const TopArea = styled.div`
   }
   .upload {
     button {
+      width: 95px;
+      height: 32px;
       background: #5a278b;
       border: 1px solid #5a278b;
       box-sizing: border-box;
       border-radius: 5px;
-      padding: 0.5rem;
       color: white;
       font-weight: bold;
     }
@@ -184,14 +194,19 @@ const TopArea = styled.div`
   #sort {
     display: inline-block;
     button {
+      width: 95px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: #fff;
       color: black;
-      border-radius: 3px;
+      border-radius: 5px;
       border: 1px solid #acb0b4;
       font-weight: bold;
-      padding: 6px 3px;
       font-size: 12px;
-      width: 5rem;
+      line-height: 32px;
+      padding: 0;
       &:foucs {
         outline: none;
         box-shadow: none;
@@ -210,8 +225,8 @@ const TopArea = styled.div`
     #dropdown-menu {
       background-color: #fff;
       border: 1px solid #acb0b4;
-      max-width: 5rem;
-      min-width: 5rem;
+      max-width: 95px;
+      min-width: 95px;
       .dropdown-item {
         color: #bfbfbf;
         font-weight: bold;

@@ -53,9 +53,8 @@ const MenuItem = styled.li`
 `;
 
 const ProducerListDiv = styled.div`
-  width: 100%;
+  width: 1160px;
   height: auto;
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   .FNB {
@@ -91,12 +90,14 @@ const ProducerListDiv = styled.div`
       }
     }
   }
+  ${mq[0]} {
+    width: 100%;
+  }
 `;
 
 const ProducerListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
   position: relative;
   a {
     color: black;
@@ -104,15 +105,26 @@ const ProducerListContainer = styled.div`
     &hover: text-decoration: none;
   }
   .producercard{
-    width: 25%;
+    width: 269px;
     height: auto;
-    padding: 0.5rem;
+    margin-right: 20px;
+    margin-top: 20px;
     position: relative;
+    &:nth-of-type(4n) {
+      margin-right: 0;
+    }
+    &:nth-child(n):nth-child(-n+3) {
+      margin-top: 0;
+    }
     ${mq[0]} {
       width: 50%;
+      padding: 0.5rem;
+      margin: 0;
     }
     ${mq[1]} {
       width: 100%;
+      padding: 0.5rem;
+      margin: 0;
     }
     .card {
       border: none;
@@ -142,6 +154,7 @@ const ProducerListContainer = styled.div`
         img{
           width: 100%;
           height: 100%;
+          border-radius: 5px;
           position: absolute;
           top: 0;
           left: 0;
