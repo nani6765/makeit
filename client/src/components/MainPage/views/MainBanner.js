@@ -190,11 +190,9 @@ function MainBanner() {
 
   return (
     <>
-    <div style={{marginBottom: "50vh"}}>
-      <Banner>
-          
-          {
-            /*
+      <div>
+        <Banner>
+          {/*
             <img src={process.env.PUBLIC_URL + "/Img/Banner/1920.jpg"} />
             <img src={process.env.PUBLIC_URL + "/Img/Banner/1440.png"} />
           <img src={process.env.PUBLIC_URL + "/Img/Banner/1024.png"} />
@@ -202,12 +200,9 @@ function MainBanner() {
           <img src={process.env.PUBLIC_URL + "/Img/Banner/480.png"} />
           <img src={process.env.PUBLIC_URL + "/Img/Banner/360.png"} />
           <img src={process.env.PUBLIC_URL + "/Img/Banner/320.png"} />
-            */
-          }
-        
+            */}
         </Banner>
-    </div>
-   
+      </div>
     </>
   );
 }
