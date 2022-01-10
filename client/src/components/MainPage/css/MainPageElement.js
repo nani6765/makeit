@@ -10,6 +10,9 @@ const MainPageDiv = styled.div`
   .friendsVideoList {
     width: 100%;
     height: 330px;
+    .slick-list {
+      height: 330px;
+    }
     .slick-track {
       margin: 0px;
       min-width: 100%;
@@ -138,6 +141,7 @@ function MainPageGridContent(parameter) {
 const CardImg = styled.article`
   position: relative;
   width: 360px;
+  margin: 0 auto;
   overflow: hidden;
   z-index: 1;
   -webkit-user-select: none;

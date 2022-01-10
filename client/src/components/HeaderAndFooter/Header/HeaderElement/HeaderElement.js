@@ -32,9 +32,9 @@ function HeaderElement(props) {
       <HeaderDiv className={`header ${props.shadowStyle} ${props.hiddenStyle}`}>
         <HeaderMarginDiv>
           <HeaderGrid>
-            <HeaderLogo className="PC">
+            <HeaderLogo >
               <Link to="/">
-                <img src={process.env.PUBLIC_URL + "/Img/symbol.png"} />
+                <img className="PC" src={process.env.PUBLIC_URL + "/Img/symbol.png"} />
                 <img src={process.env.PUBLIC_URL + "/Img/text.png"} />
               </Link>
             </HeaderLogo>
@@ -53,7 +53,6 @@ function HeaderElement(props) {
             </HeaderSearch>
 
             <HeaderLoginArea
-            id="Test"
               alarmHambucControl={alarmHambucControl}
               setalarmHambucControl={setalarmHambucControl}
               myPageHambucControl={myPageHambucControl}

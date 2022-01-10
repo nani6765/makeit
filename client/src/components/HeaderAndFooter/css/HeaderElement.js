@@ -64,7 +64,14 @@ const HeaderLogo = styled.div`
   grid-area: logo;
   width: 100%;
   height: auto;
+  ${mq[0]}{
+    display: flex;
+    justify-content: center;
+  }
   a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     img {
       &:nth-of-type(1) {
         width: 33.83px;
@@ -75,6 +82,18 @@ const HeaderLogo = styled.div`
         margin-top: 8px;
         width: 129.23px;
         height: 20px;
+        ${mq[0]}{
+          margin-left: 0px;
+          margin-top: 0px;
+          width: 202px;
+          height: 32px;
+        }
+        ${mq[1]}{
+          margin-left: 0px;
+          margin-top: 0px;
+          width: 101px;
+          height: 16px;
+        }
       }
     }
 `;
@@ -166,7 +185,16 @@ const HeaderLoginDiv = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  //로그인 버튼
   a {
+    ${mq[0]}{
+      width: 100px;
+      margin-right: 20px;
+      height: 100%; 
+    }
+    ${mq[1]}{
+      margin-right: 10px;
+    }
     .loginBtn {
       background: #ffffff;
       border: 1px solid #dbdbdb;
@@ -174,8 +202,18 @@ const HeaderLoginDiv = styled.div`
       border-radius: 5px;
       padding: 10px;
       color: #ada4a4;
+      ${mq[0]}{
+          width:100%;  
+          padding: 5px 10px;
+          height: 100%;
+          font-size: 18px;
+      }
+      ${mq[1]}{
+        font-size: 16px;
+      }
     }
   }
+  //(1) : 벨, (2) : 프로필이미지
   .hambuc {
     display: flex;
     cursor: pointer;
@@ -187,12 +225,15 @@ const HeaderLoginDiv = styled.div`
    margin-right: 20px;
   }
   ${mq[1]}{
-    margin-right: 0px;
+    padding-right: 10px;
     justify-content: flex-end;
       .hambuc {
         &:nth-last-of-type(1){
           margin-left: 10px;
-          margin-right: 10px;
+        }
+        &:nth-last-of-type(2){
+          width: 20px;
+          height: 20px;
         }
       }
    }
