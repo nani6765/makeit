@@ -15,8 +15,8 @@ const HeaderDiv = styled.div`
   z-index: 10;
   top: 0;
   background-color: white;
-  padding-top: 44px;
-  padding-bottom: 30px;
+  padding-top: 50px;
+  padding-bottom: 25px;
   .PC {
     display: block;
   }

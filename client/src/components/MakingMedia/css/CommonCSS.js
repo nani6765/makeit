@@ -16,7 +16,7 @@ const MakingDiv = styled.div`
   width: 1160px;
   height: auto;
   margin: 0 auto;
-  padding-bottom: 10vh;
+  padding-bottom: 50px;
   ${mq[1]} {
     width: 90%;
   }
