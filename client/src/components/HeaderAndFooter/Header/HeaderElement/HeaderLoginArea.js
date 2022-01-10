@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -9,6 +9,7 @@ import HeaderBell from "./HeaderBell.js";
 
 function HeaderLoginArea(props) {
   const user = useSelector((state) => state.user);
+  const [Width, setWidth] = useState(window.innerWidth);
 
   const alarmInnerRef = useOuterClick((e) => {
     props.setalarmHambucControl(false);
@@ -19,7 +20,11 @@ function HeaderLoginArea(props) {
   });
 
   useEffect(() => {
-    console.log(user.userData);
+    const updateWindowDimensions = () => {
+      setWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", updateWindowDimensions);
+    return () => window.removeEventListener("resize", updateWindowDimensions) 
   }, []);
 
   return (
@@ -37,7 +42,7 @@ function HeaderLoginArea(props) {
             <Avatar
               className="profile"
               src={user.userData ? user.userData.photoURL : "./test.png"}
-              size="32px"
+              size={Width > 480 ? 40 : 20}
               round={true}
               onClick={() => props.setmyPageHambucControl(true)}
             />
