@@ -15,10 +15,10 @@ function MainBanner() {
     position: relative;
     height: 280px;
     margin: 0 auto;
-    ${mq[0]}{
+    ${mq[0]} {
       height: 288px;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       height: 178px;
     }
     div {
@@ -28,25 +28,23 @@ function MainBanner() {
       background-image: url("/Img/Banner/1920.png");
       background-size: 1920px;
       background-position: 50%, 50%;
-      ${mq[0]}{
-         padding-top: 288px;
-         background-image: url("/Img/Banner/1440.png");
-         background-size: 1440px;
+      ${mq[0]} {
+        padding-top: 288px;
+        background-image: url("/Img/Banner/1440.png");
+        background-size: 1440px;
       }
-      ${mq[1]}{
-         padding-top: 178px;
-         background-image: url("/Img/Banner/480.png");
-         background-size: 480px;
+      ${mq[1]} {
+        padding-top: 178px;
+        background-image: url("/Img/Banner/480.png");
+        background-size: 480px;
       }
     }
   `;
 
   return (
-      <Banner>
-        <div>
-        
-        </div>
-      </Banner>
+    <Banner>
+      <div></div>
+    </Banner>
   );
 }
 
