@@ -17,7 +17,9 @@ app.use("/api/chat", require("./server/routes/chat.js"));
 app.use("/api/alarm", require("./server/routes/alarms.js"));
 app.use("/api/making", require("./server/routes/making.js"));
 app.use("/api/participate", require("./server/routes/participate.js"));
+app.use("/api/portfolio", require("./server/routes/portfolio.js"));
 app.use("/api/util", require("./server/routes/util.js"));
+
 
 const port = process.env.PORT || 5000;
 

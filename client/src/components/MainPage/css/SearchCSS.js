@@ -7,11 +7,11 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const SearchBody = styled.div`
-  width: 70%;
+  width: 1160px;
   margin: 0 auto;
 
   .result {
-    margin-bottom: 1rem;
+    margin-bottom: 40px;
     a {
       color: black;
       &:hover {
@@ -22,13 +22,14 @@ const SearchBody = styled.div`
       display: flex;
       justify-content: space-between;
       color: #565656;
-      padding: 1rem 0;
+      padding-bottom: 28px;
       border-bottom: 2px solid #565656;
-      margin-bottom: 0.5rem;
+      margin-bottom: 12px;
       p {
         display: inline-block;
         font-weight: bold;
         margin-bottom: 0;
+        font-size: 18px;
         span {
           color: #5a298b;
         }
@@ -48,23 +49,22 @@ const SearchBody = styled.div`
 `;
 
 const SearchInput = styled.div`
-  width: 30vw;
-  height: 50px;
+  width: 600px;
+  height: 68px;
 
   display: flex;
   align-content: center;
   justify-content: center;
   align-items: center;
 
-  margin: 0 auto;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 72px auto;
 
   input {
     width: 90%;
     margin-right: 0px !important;
     height: 100%;
-    padding: 10px;
+    padding: 24px;
+    padding-right: 0;
     border: 2px solid #5a298b;
     border-radius: 5px 0px 0px 5px;
     &:active,
@@ -74,7 +74,7 @@ const SearchInput = styled.div`
   }
 
   button {
-    width: 10%;
+    width: 68px;
     margin-left: 0px !important;
     height: 100%;
     background-color: #5a298b;
