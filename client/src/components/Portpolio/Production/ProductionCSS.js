@@ -59,7 +59,21 @@ const InfoSection = styled.section`
   .links {
     grid-area: links;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    div{
+      span{
+        margin-right: 10px;
+        cursor: pointer;
+        &:nth-last-of-type(1){
+          margin-right: 0px;
+        }
+        &.active{
+          i {
+            color: purple;
+          }
+        }
+      }
+    }
   }
   .infoDiv {
     width: 100%;
