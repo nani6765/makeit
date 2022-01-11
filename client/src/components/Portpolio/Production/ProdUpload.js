@@ -8,16 +8,42 @@ import Project from "./UploadContent/Project.js";
 import Tag from "./UploadContent/Tag.js";
 
 function ProdUpload() {
-  const [ProfileImg, setProfileImg] = useState("https://kr.object.ncloudstorage.com/makeit/portfolio/default.png");
+  const [ProfileImg, setProfileImg] = useState(
+    "https://kr.object.ncloudstorage.com/makeit/portfolio/default.png"
+  );
+  const [LinkArr, setLinkArr] = useState([
+    { value: "" },
+    { value: "" },
+    { value: "" },
+  ]);
+  const [ProName, setProName] = useState("");
+  const [FieldArr, setFieldArr] = useState([]);
+  const [ProLocation, setProLocation] = useState("");
+  const [ProIntroduce, setProIntroduce] = useState("");
+  const [ProjectArr, setProjectArr] = useState([]);
 
   return (
     <CommonMarginDiv>
       <ProdUploadDiv>
         <form>
           <Title />
-          <Info ProfileImg={ProfileImg} setProfileImg={setProfileImg} />
-          <Introduce />
-          <Project />
+          <Info
+            ProfileImg={ProfileImg}
+            setProfileImg={setProfileImg}
+            LinkArr={LinkArr}
+            setLinkArr={setLinkArr}
+            ProName={ProName}
+            setProName={setProName}
+            FieldArr={FieldArr}
+            setFieldArr={setFieldArr}
+            ProLocation={ProLocation}
+            setProLocation={setProLocation}
+          />
+          <Introduce
+            ProIntroduce={ProIntroduce}
+            setProIntroduce={setProIntroduce}
+          />
+          <Project ProjectArr={ProjectArr} setProjectArr={setProjectArr} />
           <Tag />
         </form>
       </ProdUploadDiv>

@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router";
-import qs from "qs";
 
 function FPUploadFilter(props) {
   let history = useHistory();
@@ -11,7 +10,9 @@ function FPUploadFilter(props) {
       temp.push(e.target.id);
       props.setFilmType(temp);
     } else {
-      let temp = props.FilmType.filter((film) => { return e.target.id !== film});
+      let temp = props.FilmType.filter((film) => {
+        return e.target.id !== film;
+      });
       props.setFilmType(temp);
     }
   };
@@ -22,7 +23,9 @@ function FPUploadFilter(props) {
       temp.push(e.target.id);
       props.setClassification(temp);
     } else {
-      let temp = props.Classification.filter((classification) => { return e.target.id !== classification});
+      let temp = props.Classification.filter((classification) => {
+        return e.target.id !== classification;
+      });
       props.setClassification(temp);
     }
   };
