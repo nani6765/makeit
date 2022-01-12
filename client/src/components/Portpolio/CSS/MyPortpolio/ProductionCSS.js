@@ -270,7 +270,7 @@ const ModalDiv = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  zindex: 30;
+  z-index: 30;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;

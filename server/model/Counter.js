@@ -25,6 +25,9 @@ const counter = mongoose.Schema(
     participateNum: {
       type: Number,
     },
+    projectNum: {
+      type: Number,
+    },
   },
   { collection: "counter" }
 );
