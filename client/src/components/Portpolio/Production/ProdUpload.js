@@ -21,6 +21,7 @@ function ProdUpload() {
   const [ProLocation, setProLocation] = useState("");
   const [ProIntroduce, setProIntroduce] = useState("");
   const [ProjectArr, setProjectArr] = useState([]);
+  const [TagArr, setTagArr] = useState([]);
 
   return (
     <CommonMarginDiv>
@@ -44,7 +45,7 @@ function ProdUpload() {
             setProIntroduce={setProIntroduce}
           />
           <Project ProjectArr={ProjectArr} setProjectArr={setProjectArr} />
-          <Tag />
+          <Tag TagArr={TagArr} setTagArr={setTagArr} />
         </form>
       </ProdUploadDiv>
     </CommonMarginDiv>

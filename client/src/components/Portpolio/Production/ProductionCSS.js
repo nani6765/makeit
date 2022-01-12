@@ -15,6 +15,9 @@ const ProdUploadDiv = styled.div`
 
     section {
       margin-bottom: 2rem;
+      &:nth-last-of-type(1){
+        margin-bottom: 0px;
+      }
     }
 `;
 
@@ -24,11 +27,13 @@ const TitleSection = styled.section`
   grid-template-rows: auto;
   grid-template-areas: " . title link";
   grid-gap: 1rem;
+  margin-top: 1rem;
   input {
     grid-area: title;
     padding: 10px 20px;
     font-weight: bold;
     text-align: center;
+    border: 1px solid #acb0b4;
     background-color: white;
     &::placeholder {
       font-weight: bold;
@@ -220,6 +225,7 @@ const ProjectSection = styled.section`
       }
       &.project {
         padding: 20px;
+        cursor: pointer;
         p {
           margin-bottom: 0px;
         }
@@ -231,7 +237,32 @@ const ProjectSection = styled.section`
   }
 `;
 
-const TagSection = styled.section``;
+const TagSection = styled.section`
+  div {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    * {
+      margin-right: 1rem;
+      border-radius: 15px;
+      border: 1px solid #acb0b4;
+      padding: 5px 10px;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    input {
+      background-color: white;
+      width: 150px;
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
+    p {
+      min-width: 150px;
+    }
+  }
+`;
 
 const ModalDiv = styled.div`
   position: fixed;
@@ -350,11 +381,11 @@ const ModalDiv = styled.div`
           background-color: white;
           &.cancel {
             border: 1px solid #c6c6c6;
-            margin-right: 0px;
           }
           &.delete {
             border: 1px solid red;
             color: red;
+            margin-right: 0px;
           }
           &.submit {
             border: 1px solid #c6c6c6;

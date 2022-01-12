@@ -21,7 +21,11 @@ function Project(props) {
           </div>
           {props.ProjectArr.map((project, idx) => {
             return (
-              <div className="project" key={idx}>
+              <div
+                className="project"
+                key={idx}
+                onClick={() => setProjectFlag(idx + 1)}
+              >
                 <p className="title">{project.title}</p>
               </div>
             );
@@ -30,6 +34,7 @@ function Project(props) {
       </ProjectSection>
       {ProjectFlag && (
         <ProjectModal
+          ProjectFlag={ProjectFlag}
           setProjectFlag={setProjectFlag}
           ProjectArr={props.ProjectArr}
           setProjectArr={props.setProjectArr}
