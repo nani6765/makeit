@@ -44,10 +44,7 @@ function HeaderElement(props) {
 
             <HeaderNavArea className="PC" />
 
-            <HeaderSearch
-              className="PC"
-              style={{ alignItems: "center", display: "flex" }}
-            >
+            <HeaderSearch className="PC">
               <div>
                 <form action="/search" method="GET">
                   <input type="text" placeholder="Search" name="term" />

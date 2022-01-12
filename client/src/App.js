@@ -60,7 +60,7 @@ import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 import Portfolio from "./components/Portpolio/Portfolio.js";
 import ProdUpload from "./components/Portpolio/MyPortpolio/Production/ProdUpload.js";
 import ProjectUpload from "./components/Portpolio/Project/upload/ProjectUpload.js";
-import Project from "./components/Portpolio/MyPortpolio/Production/UploadContent/Project.js";
+import ProjectDetail from "./components/Portpolio/Project/detail/ProjectDetail.js";
 
 import MapPicker from "./components/utils/view/Area/MapPicker.js";
 function App() {
@@ -180,6 +180,11 @@ function App() {
             exact
             path="/portfolio/project/upload"
             component={ProjectUpload}
+          />
+          <Route
+            exact
+            path="/portfolio/project/:url"
+            component={ProjectDetail}
           />
           <Route exact path="/MapPicker" component={MapPicker} />
         </Switch>

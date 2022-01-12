@@ -200,7 +200,7 @@ const LocalData = {
     "화천군",
     "양구군",
   ],
-  Sejong: ["전체", "세종특별자치시"],
+  Sejong: ["세종특별자치시"],
 
   Chungbuk: [
     "전체",

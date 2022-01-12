@@ -25,7 +25,7 @@ const projectSchema = mongoose.Schema(
     thumbnail: {
       type: String,
     },
-    Introduce: {
+    introduce: {
       type: String,
     },
     detailContent: {

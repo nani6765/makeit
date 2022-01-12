@@ -27,6 +27,24 @@ router.post(
   }
 );
 
+router.post("/project/getDetail", (req, res) => {
+  Project.findOne({ url: req.body.url })
+    .populate("auther")
+    .exec()
+    .then((projectInfo) => {
+      return res.status(200).json({
+        success: true,
+        projectInfo: projectInfo,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
+    });
+});
+
 router.post("/project/submit", (req, res) => {
   let temp = {
     title: req.body.title,
