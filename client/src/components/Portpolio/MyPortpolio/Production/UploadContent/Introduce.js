@@ -1,5 +1,5 @@
 import React from "react";
-import { IntroSection } from "../ProductionCSS.js";
+import { IntroSection } from "../../../CSS/MyPortpolio/ProductionCSS";
 
 function Introduce(props) {
   return (

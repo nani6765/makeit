@@ -57,7 +57,8 @@ import ParticipateEdit from "./components/Participate/view/upload/ParticipateEdi
 import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 
 //Protfolio
-import ProdUpload from "./components/Portpolio/Production/ProdUpload.js";
+import Portfolio from "./components/Portpolio/Portfolio.js";
+import ProdUpload from "./components/Portpolio/MyPortpolio/Production/ProdUpload.js";
 
 function App() {
   let dispatch = useDispatch();
@@ -170,7 +171,8 @@ function App() {
           <Route exact path="/participate/post/:url" component={PartDetail} />
           <Route path="/participate" component={Participate} />
           {/*Portpolio*/}
-          <Route path="/protfolio/prod/upload" component={ProdUpload} />
+          <Route path="/portfolio" component={Portfolio} />
+          <Route path="/portfolio/prod/upload" component={ProdUpload} />
         </Switch>
         <Footer />
         <MobileFooter />

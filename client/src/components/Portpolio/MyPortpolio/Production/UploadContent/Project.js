@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import ProjectModal from "./ProjectModal.js";
 
-import { ProjectSection } from "../ProductionCSS.js";
+import { ProjectSection } from "../../../CSS/MyPortpolio/ProductionCSS";
 
 function Project(props) {
   const [ProjectFlag, setProjectFlag] = useState(false);

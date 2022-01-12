@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { ModalDiv } from "../ProductionCSS.js";
-import { Spinner } from "react-bootstrap";
+import { ModalDiv } from "../../../CSS/MyPortpolio/ProductionCSS";
 
 function ProjectModal(props) {
   const ref = useRef();

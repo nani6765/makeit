@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { CommonMarginDiv } from "../../CommonCSS.js";
-import { ProdUploadDiv } from "./ProductionCSS.js";
+import { CommonMarginDiv } from "../../../CommonCSS.js";
+import { ProdUploadDiv } from "../../CSS/MyPortpolio/ProductionCSS";
 import Title from "./UploadContent/Title.js";
 import Info from "./UploadContent/Info.js";
 import Introduce from "./UploadContent/Introduce.js";

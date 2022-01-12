@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { InfoSection } from "../ProductionCSS.js";
+import { InfoSection } from "../../../CSS/MyPortpolio/ProductionCSS";
 import { Spinner } from "react-bootstrap";
 import LinkModal from "./LinkModal.js";
 import axios from "axios";
