@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, withRouter } from "react-router-dom";
 import {
@@ -17,11 +17,13 @@ function ProjectDetailContent(props) {
   return (
     <>
       <BtnDiv>
-        {user.userData.uid === props.ProjectInfo.auther.uid ? (
-          <button>수정하기</button>
-        ) : (
-          <button>쪽지보내기</button>
-        )}
+        {user.userData !== null ? (
+          user.userData.uid === props.ProjectInfo.auther.uid ? (
+            <button>수정하기</button>
+          ) : (
+            <button>쪽지보내기</button>
+          )
+        ) : null}
       </BtnDiv>
 
       <ProjectDetailContentDiv>
@@ -72,11 +74,13 @@ function ProjectDetailContent(props) {
         </section>
         <section className="participants">
           <label>참여자 목록</label>
-          {user.userData.uid === props.ProjectInfo.auther.uid ? (
-            <div>참여자 목록~~~</div>
-          ) : (
-            <button>참여 신청하기</button>
-          )}
+          {user.userData !== null ? (
+            user.userData.uid === props.ProjectInfo.auther.uid ? (
+              <div>참여자 목록~~~</div>
+            ) : (
+              <button>참여 신청하기</button>
+            )
+          ) : null}
         </section>
         <section className="tag">
           <label>관련 태그</label>

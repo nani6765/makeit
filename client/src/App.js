@@ -173,6 +173,7 @@ function App() {
           />
           <Route exact path="/participate/post/:url" component={PartDetail} />
           <Route path="/participate" component={Participate} />
+
           {/*Portpolio*/}
           <Route exact path="/portfolio" component={Portfolio} />
           <Route exact path="/portfolio/prod/upload" component={ProdUpload} />

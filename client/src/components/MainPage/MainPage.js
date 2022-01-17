@@ -44,9 +44,7 @@ function MainPage() {
         }}
       >
         <CommonMarginDiv>
-          {
-            /*
-            <>
+          <>
             <p css={MainPageHading}>
               커뮤니티
               <Link to="/community">
@@ -58,9 +56,6 @@ function MainPage() {
             </p>
           </>
           <CommunityPost />
-            */
-          }
-          
         </CommonMarginDiv>
       </div>
 

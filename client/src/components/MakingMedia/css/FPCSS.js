@@ -114,7 +114,7 @@ const ProducerListContainer = styled.div`
     &:nth-of-type(4n) {
       margin-right: 0;
     }
-    &:nth-child(n):nth-child(-n+3) {
+    &:nth-child(n):nth-child(-n+4) {
       margin-top: 0;
     }
     ${mq[0]} {

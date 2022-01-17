@@ -106,7 +106,7 @@ const ProPostSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "proPost",
+    collection: "findingProducer",
   }
 );
 
@@ -185,7 +185,7 @@ const TempProPostSchema = mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "tempProPosts",
+    collection: "tempfindingProducer",
   }
 );
 
