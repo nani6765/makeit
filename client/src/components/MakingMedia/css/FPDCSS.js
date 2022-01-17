@@ -216,6 +216,25 @@ const DetailExplanationDiv = styled.div`
   }
 `;
 
+const PortFolioDiv = styled.div`
+  width: 100%;
+  .VideoOutterDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 62.5%;
+    position: relative;
+    .VideoInnerDiv {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  margin-bottom: 1rem;
+`;
+
 const PriceRuleDiv = styled.div`
   padding-top: 1rem;
 `;
@@ -568,6 +587,7 @@ export {
   ContentGNBUL,
   DetaulContentSubTitle,
   DetailExplanationDiv,
+  PortFolioDiv,
   PriceRuleDiv,
   FAQDiv,
   ReviewUploadDiv,

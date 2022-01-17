@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { YoutubeDiv } from "./ModalCSS.js";
 
-import FileUploadArea from "../Files/FileUploadArea.js";
-
 function YoutubeLinkModal(props) {
   const [VideoURL, setVideoURL] = useState("");
-  const [Thumbnail, setThumbnail] = useState("");
 
   const setURL = (originURL) => {
     var regExp =
@@ -20,13 +17,8 @@ function YoutubeLinkModal(props) {
       return;
     }
 
-    if (!Thumbnail) {
-      alert("썸네일을 선택하세요.");
-      return;
-    }
-
     let temp = [...props.VideoArr];
-    temp.push({ video: setURL(VideoURL), thumbnail: Thumbnail[0].path });
+    temp.push(setURL(VideoURL));
     props.setVideoArr(temp);
 
     props.setModalFlag(false);
@@ -48,24 +40,6 @@ function YoutubeLinkModal(props) {
             onChange={(e) => setVideoURL(e.currentTarget.value)}
           />
 
-          <label className="imgLabel">
-            썸네일
-            <br />
-            <span>권장: 1920 * 1080</span>
-          </label>
-          <div className="imgUpload">
-            <FileUploadArea
-              Images={Thumbnail}
-              setImages={setThumbnail}
-              type="thumbnail"
-              dirURL="making"
-            />
-          </div>
-          <div className="imgShow">
-            {Thumbnail[0] != undefined && Thumbnail[0].path != undefined ? (
-              <img src={Thumbnail[0].path} alt="" />
-            ) : null}
-          </div>
           <div className="btnDiv">
             <button onClick={() => props.setModalFlag(false)}>취소</button>
             <button onClick={setVideoHandler}>확인</button>

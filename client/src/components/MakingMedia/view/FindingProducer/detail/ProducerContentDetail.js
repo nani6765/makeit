@@ -21,7 +21,7 @@ function ProducerContentDetail(props) {
               VideoPurposeArr={props.PostInfo.videoPurposeArr}
               Content={props.PostInfo.content}
             />
-            <PortFolio />
+            <PortFolio VideoArr={props.PostInfo.videoArr} />
             <PriceRule PriceInfo={props.PostInfo.priceInfo} />
 
             <div id="edit" style={{ paddingTop: "1rem" }}>

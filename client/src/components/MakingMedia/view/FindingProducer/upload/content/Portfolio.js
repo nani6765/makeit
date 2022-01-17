@@ -6,6 +6,7 @@ import FileUploadArea from "../../../../../utils/view/Files/FileUploadArea.js";
 import FileShowArea from "../../../../../utils/view/Files/FileShowArea.js";
 //import YoutubeModal from "../../../../../utils/view/Modal/YoutubeCheckModal.js";
 import YoutubeLinkModal from "../../../../../utils/view/Modal/YoutubeLinkModal.js";
+import YouTube from "react-youtube";
 
 import { ProtFolioDiv } from "../../../../css/FPUCSS.js";
 
@@ -21,8 +22,7 @@ function Portfolio(props) {
   }, []);
 
   useEffect(() => {
-    if(props.Thumbnail)
-      setThumbnailArrLength(1);
+    if (props.Thumbnail) setThumbnailArrLength(1);
   }, [props.Thumbnail]);
 
   useEffect(() => {
@@ -48,6 +48,11 @@ function Portfolio(props) {
     props.setVideoArr([...temp]);
   };
 
+  const opts = {
+    width: "120px",
+    height: "80px",
+  };
+
   return (
     <ProtFolioDiv>
       <ContentHeadingArea HeadingTitle="포트폴리오" />
@@ -65,14 +70,15 @@ function Portfolio(props) {
           dirURL="making"
         />
       </div>
-      {
-        props.Thumbnail[0] !== undefined &&
+      {props.Thumbnail[0] !== undefined && (
         <div className="imgShow">
-          {props.Thumbnail[0].path !== undefined
-          ? <img src={props.Thumbnail[0].path} alt="" />
-          : <img src={props.Thumbnail} alt="" />}
+          {props.Thumbnail[0].path !== undefined ? (
+            <img src={props.Thumbnail[0].path} alt="" />
+          ) : (
+            <img src={props.Thumbnail} alt="" />
+          )}
         </div>
-      }
+      )}
 
       <p style={{ marginTop: "1rem" }}>
         상세이미지등록(선택)
@@ -87,11 +93,12 @@ function Portfolio(props) {
           setImages={props.setDetailImgArr}
           dirURL="making"
         />
-        {props.DetailImgArr.length > 0 &&
+        {props.DetailImgArr.length > 0 && (
           <FileShowArea
             Images={props.DetailImgArr}
             setImages={props.setDetailImgArr}
-          />}
+          />
+        )}
       </div>
 
       <div className="notice">
@@ -142,7 +149,7 @@ function Portfolio(props) {
           {props.VideoArr.map((Video, idx) => {
             return (
               <li key={idx}>
-                <div className="deleteArea">
+                <div className="deleteArea" style={{ marginRight: "10px" }}>
                   <p>삭제</p>
                   <input
                     type="checkbox"
@@ -152,11 +159,7 @@ function Portfolio(props) {
                     }}
                   />
                 </div>
-
-                <img src={Video.thumbnail} alt="" />
-                <div>
-                  <p className="title">{Video.video}</p>
-                </div>
+                <YouTube videoId={Video} opts={opts} />
               </li>
             );
           })}
