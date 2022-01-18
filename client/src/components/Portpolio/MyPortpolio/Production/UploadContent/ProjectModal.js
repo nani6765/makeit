@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ModalDiv } from "../../../CSS/MyPortpolio/ProductionCSS";
 
+import {useSelector} from "react-redux";
+import axios from "axios";
+
+
 function ProjectModal(props) {
   const ref = useRef();
+  const user = useSelector(state => state.user);
+
   useOnClickOutside(ref, () => props.setProjectFlag(false));
 
   const [ProjectTitle, setProjectTitle] = useState("");
   const [ProjectURL, setProjectURL] = useState("");
   const [ProjectContent, setProjectContent] = useState("");
+  const [ProjectList, setProjectList] = useState([]);
   const [Loading, setLoading] = useState(false);
+
   const SubmitHandler = (e) => {
     e.preventDefault();
 
@@ -48,6 +56,13 @@ function ProjectModal(props) {
         setProjectTitle(props.ProjectArr[props.ProjectFlag - 1].title);
         setProjectURL(props.ProjectArr[props.ProjectFlag - 1].url);
         setProjectContent(props.ProjectArr[props.ProjectFlag - 1].content);
+      } else {
+        let body = { uid: user.uid };
+        axios.post("/api/portfolio/upload/getProject", body).then((response) => {
+          if(response.data.success){
+            setProjectList([...response.data.projectList]);
+          }
+        })
       }
     } catch (error) {
       console.log(error);

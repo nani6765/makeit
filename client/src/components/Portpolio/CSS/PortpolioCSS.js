@@ -56,66 +56,76 @@ const PortHeader = styled.div`
 
 const MenuList = styled.div`
   width: 100%;
-  padding: 0px 15%;
   border-bottom: 1px solid #acb0b4;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-content: center;
-  ul {
-    height: 1rem;
+  .menu {
+    width: 1160px;
+    margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-bottom: 1rem !important;
-    margin-top: 3rem;
-    list-style: none;
-  }
-  .search {
-    background: #f7f7f7;
-    padding: 5px;
-    height: 100%;
-    margin-bottom: 0.5rem;
-    input {
-      background: none;
-      border: none;
-      text-align: right;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-content: center;
+    padding: 0;
+    ul {
+      height: 1rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding-bottom: 1rem !important;
+      margin-top: 3rem;
+      list-style: none;
+    }
+    .search {
+      background: #f7f7f7;
+      padding: 5px;
       height: 100%;
-      &::placeholder {
-        color: #bfbfbf;
+      margin-bottom: 0.5rem;
+      input {
+        background: none;
+        border: none;
+        text-align: right;
+        height: 100%;
+        &::placeholder {
+          color: #bfbfbf;
+        }
+      }
+      input:focus {
+        border: none;
+        outline: none;
+      }
+      svg {
+        margin-left: 5px;
+        height: 100%;
+        cursor: pointer;
       }
     }
-    input:focus {
-      border: none;
-      outline: none;
-    }
-    svg {
-      margin-left: 5px;
-      height: 100%;
-      cursor: pointer;
+    ${mq[0]} {
+      width: 100%;
+      margin: 0;
     }
   }
 
   ${mq[1]} {
-    padding: 0px 5%;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: flex-end;
-    ul {
-      width: 100%;
-      align-content: center;
+    .menu {
+      padding: 0px 5%;
       justify-content: space-evenly;
-      padding-bottom: 0px !important;
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-    .search {
-      padding: 3px;
-      width: 150px;
-      input {
-        width: 120px;
-        &::placeholder {
-          font-size: 10px;
+      flex-direction: column;
+      align-items: flex-end;
+      ul {
+        width: 100%;
+        align-content: center;
+        justify-content: space-evenly;
+        padding-bottom: 0px !important;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+      .search {
+        padding: 3px;
+        width: 150px;
+        input {
+          width: 120px;
+          &::placeholder {
+            font-size: 10px;
+          }
         }
       }
     }
@@ -149,4 +159,101 @@ const MenuItem = styled.li`
   }
 `;
 
-export { PortHeader, MenuList, MenuItem };
+const Filter = styled.div`
+  background: #fafafa;
+  border: none;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 1rem;
+  // ${mq[0]} {
+  //   padding: 10px 10%;
+  // }
+  // ${mq[1]} {
+  //   padding: 10px 5%;
+  // }
+  .select {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1160px;
+    margin: 0 auto;
+    // ${mq[0]} {
+    //   width: 100%;
+    //   margin: 0;
+    // }
+    .left {
+      width: 45%;
+      display: flex;
+    }
+    .right {
+      width: 55%;
+      display: flex;
+      position: relative;
+      .reset{
+        position: absolute;
+        right: 0;
+        height: calc(100% - 1rem);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        button{
+          border: 1px solid #acb0b4;
+          border-radius: 5px;
+          font-size: 15px;
+          background-color: #fafafa;
+          padding: 0.75rem;
+          width: 50px;
+          i {
+            font-weight: bold;
+            font-size: 15px;
+          }
+          &:hover {
+            background: #61057d;
+            border: 1px solid #61057d;
+            color: white;
+          }
+        }
+      }
+    }
+    .labelArea {
+      display: flex;
+      align-items: center;
+      user-select: none;
+      margin-bottom: 1rem;
+      font-weight: bold;
+      font-size: 15px;
+      margin-right: 1rem;
+    }
+    .contentArea {
+      display: flex;
+      flex-wrap: wrap;
+
+      div {
+        width: auto;
+        margin-bottom: 1rem;
+        margin-right: 1rem;
+        &:nth-last-of-type(1) {
+          margin-right: 0rem;
+        }
+        input {
+          display: none;
+        }
+        label {
+          padding: 0.75rem;
+          cursor: pointer;
+          border: 1px solid #acb0b4;
+          border-radius: 5px;
+          font-size: 15px;
+        }
+        input:checked + label {
+          background: #61057d;
+          border: 1px solid #61057d;
+          box-sizing: border-box;
+          border-radius: 5px;
+          color: white;
+        }
+      }
+    }
+  }
+`;
+export { PortHeader, MenuList, MenuItem, Filter };

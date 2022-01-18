@@ -1,10 +1,11 @@
 var router = require("express").Router();
 const setUpload = require("../module/multer/upload.js");
 
-const { Project } = require("../model/Portfolio.js");
+const { Project, ProdPortfolio, ProPortfolio } = require("../model/Portfolio.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 
+//
 router.post(
   "/prod/profile",
   setUpload(`makeit/portfoilo`),
@@ -16,6 +17,59 @@ router.post(
   }
 );
 
+router.post("/upload/getProject", (req, res) => {
+  Project.find({uid : req.body.uid}).exec().then((doc) => {
+    return res.json({
+      success: true,
+      projectList: doc,
+    });
+  })
+  }
+);
+
+router.post("/prod/submit", (req, res) => {
+  let temp = req.body;
+  Counter.findOne({name: "counter"})
+  .exec()
+  .then((counter) => {
+    temp.url = counter.prodNum;
+    User.findOne({uid: req.body.uid})
+    .exec()
+    .then((userInfo) => {
+      temp.auther = userInfo._id;
+      const NewProdPortfolio = new ProdPortfolio(temp);
+      NewProdPortfolio.save().then(() => {
+        Counter.findOneAndUpdate({name: "counter"},{ $inc : {prodNum: 1}})
+        .exec()
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+          });
+        })
+      })
+    })
+  }).catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+    });
+  })
+});
+
+router.post("/pro/submit", (req, res) => {
+  return res.json({
+    success: true,
+  });
+}
+);
+
+
+router.post("/pf/getList", (req, res) => {
+
+})
+
+
+//
 router.post(
   "/project/profile",
   setUpload(`makeit/portfoilo/project`),
@@ -26,6 +80,7 @@ router.post(
     });
   }
 );
+
 
 router.post("/project/getDetail", (req, res) => {
   Project.findOne({ url: req.body.url })
@@ -88,5 +143,41 @@ router.post("/project/submit", (req, res) => {
       });
     });
 });
+
+router.post("/project/getPortfolioList", (req, res) => {
+  ProdPortfolio.find({uid: req.body.uid})
+  .populate("auther")
+  .exec()
+  .then((prod) => {
+    ProPortfolio.find({uid: req.body.uid})
+    .populate("auther")
+    .exec()
+    .then((pro) => {
+      return res.status(200).json({
+        success: true,
+        portList: [...prod, ...pro],
+      });
+    })
+  })
+})
+
+router.post("/project/Participate", (req, res) => {
+  let temp = {
+    portfolio: req.body.portfilioId,
+    type: req.body.type,
+    accept: false,
+  };
+  Project.findOneAndUpdate({_id : req.body.projectId} , { $push : { participater : temp }})
+  .exec()
+  .then((doc) => {
+    return res.status(200).json({
+      success: true,
+    });
+  }).catch((err) => {
+    return res.status(400).json({
+      success: false,
+    });
+  })
+})
 
 module.exports = router;

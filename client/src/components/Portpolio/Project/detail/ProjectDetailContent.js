@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, withRouter } from "react-router-dom";
+import ParticipateModal from "./ParticipateModal.js";
 import {
   BtnDiv,
   ProjectDetailContentDiv,
@@ -10,9 +11,15 @@ function ProjectDetailContent(props) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
+  const [ModalFlag, setModalFlag] = useState(false);
+
   const EditHadler = () => {};
 
   const ChatHandler = () => {};
+
+  const PartSubmit = () => {
+
+  };
 
   return (
     <>
@@ -74,13 +81,21 @@ function ProjectDetailContent(props) {
         </section>
         <section className="participants">
           <label>참여자 목록</label>
-          {user.userData !== null ? (
+          {user.userData !== null && (
             user.userData.uid === props.ProjectInfo.auther.uid ? (
-              <div>참여자 목록~~~</div>
+              <>
+              <div><p>신청자 목록</p>
+              {props.ProjectInfo.pre}
+              </div>
+              <div><p>참여자 목록</p>
+              
+              </div>
+              </>
             ) : (
-              <button>참여 신청하기</button>
+              <button onClick={() => setModalFlag(true)}>참여 신청하기</button>
             )
-          ) : null}
+          )}
+          {ModalFlag && <ParticipateModal setModalFlag={setModalFlag} ProjectInfo = {props.ProjectInfo}/>}
         </section>
         <section className="tag">
           <label>관련 태그</label>

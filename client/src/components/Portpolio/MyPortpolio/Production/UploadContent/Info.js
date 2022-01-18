@@ -128,8 +128,8 @@ function Info(props) {
           <div>
             <input
               type="text"
-              value={props.ProName}
-              onChange={(e) => props.setProName(e.currentTarget.value)}
+              value={props.ProdName}
+              onChange={(e) => props.setProdName(e.currentTarget.value)}
             />
           </div>
         </div>
@@ -242,8 +242,8 @@ function Info(props) {
           <div>
             <input
               type="text"
-              value={props.ProLocation}
-              onChange={(e) => props.setProLocation(e.currentTarget.value)}
+              value={props.ProdLocation}
+              onChange={(e) => props.setProdLocation(e.currentTarget.value)}
             />
           </div>
         </div>
