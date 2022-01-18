@@ -1,8 +1,5 @@
 import React from "react";
 import { MobileSlideDivContent } from "../../css/HeaderElement.js";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 import { ReactComponent as SearchIcon } from "../../css/search.svg";

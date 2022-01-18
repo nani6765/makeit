@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ReviewUploadDiv } from "../../../../../css/FPDCSS.js";
-import { withRouter, useHistory } from "react-router";
 import axios from "axios";
 
 function ReviewForm(props) {
   const [Review, setReview] = useState("");
   const [Star, setStar] = useState(new Array(5).fill(null));
   const [StarValue, setStarValue] = useState(0);
-  let history = useHistory();
 
   const setReviewFunc = (e) => {
     if (e.currentTarget.value.length > 300) {
@@ -71,4 +69,4 @@ function ReviewForm(props) {
   );
 }
 
-export default withRouter(ReviewForm);
+export default ReviewForm;

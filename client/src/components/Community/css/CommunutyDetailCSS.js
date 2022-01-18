@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const breakpoints = [1200, 576];

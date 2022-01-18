@@ -228,4 +228,4 @@ function MakingSearch() {
   );
 }
 
-export default MakingSearch;
+export default withRouter(MakingSearch);

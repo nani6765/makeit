@@ -13,7 +13,6 @@ import {
   CommunityBody,
   FNBDiv,
 } from "../css/CommunityListCSS";
-import { ReactComponent as SearchIcon } from "../css/img/searchIcon.svg";
 
 function CommunityList() {
   let location = useLocation();

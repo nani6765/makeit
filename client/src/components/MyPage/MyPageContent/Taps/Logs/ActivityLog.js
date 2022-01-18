@@ -13,7 +13,6 @@ function ActivityLog(props) {
 
   const [IsLoading, setIsLoading] = useState(false);
   const [LogList, setLogList] = useState([]);
-  const [Limit, setLimit] = useState(0);
 
   const ScrollFunction = () => {
     let TargetDiv = document.querySelector("#AlarmListDiv");

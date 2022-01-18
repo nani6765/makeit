@@ -200,4 +200,4 @@ function CoSearch() {
   );
 }
 
-export default CoSearch;
+export default withRouter(CoSearch);

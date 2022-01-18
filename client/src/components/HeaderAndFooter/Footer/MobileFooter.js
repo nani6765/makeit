@@ -9,14 +9,9 @@ import {
   FooterMobileBottom5,
 } from "./FooterMobileBottom.js";
 
-function MobileFooter(props) {
+function MobileFooter() {
   let history = useHistory();
   const [Location, setLocation] = useState("");
-
-  useEffect(() => {
-    setLocation(history.location.pathname);
-    console.log("history : ", history);
-  }, [history.location.pathname]);
 
   return (
     <MobileFooterDiv>

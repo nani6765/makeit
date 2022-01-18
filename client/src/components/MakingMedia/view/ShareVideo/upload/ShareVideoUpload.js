@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 
 import axios from "axios";
 
-import PublicUpload from "./view/PublicUpload.js";
 import PrivateUpload from "./view/PrivateUpload.js";
 
 import { UploadHead, UploadForm } from "../../../css/CommonUploadCSS.js";
@@ -20,9 +19,9 @@ function ShareVideoUpload(props) {
   //const [ShareOpts, setShareOpts] = useState("공개");
 
   //const radioOptions = ["공개", "일부공개"];
-  
+
   useEffect(() => {
-    if(!user.userData) {
+    if (!user.userData) {
       props.history.push("/login");
     }
     window.scrollTo(0, 0);
@@ -71,8 +70,8 @@ function ShareVideoUpload(props) {
       uid: user.userData.uid,
       oneLineIntroduce: OneLineIntroduce,
       content: Content,
-      thumbnailUrl : Thumbnail[0].path,
-      videoUrl : setURL(VideoURL),
+      thumbnailUrl: Thumbnail[0].path,
+      videoUrl: setURL(VideoURL),
     };
 
     // if (ShareOpts === "공개") {
@@ -86,7 +85,9 @@ function ShareVideoUpload(props) {
     axios.post("/api/making/shareVideo/submit", body).then((response) => {
       if (response.data.success) {
         alert("제작 영상 게시가 완료되었습니다.");
-        props.history.push("/making?category=제작 영상 알리기&subCategory=전체&sort=인기순&pIdx=0")
+        props.history.push(
+          "/making?category=제작 영상 알리기&subCategory=전체&sort=인기순&pIdx=0"
+        );
       } else {
         alert("제작 영상 게시가 실패하였습니다.");
       }
@@ -113,8 +114,8 @@ function ShareVideoUpload(props) {
           placeholder="한줄 소개 작성( 30자 이내로 작성해주세요. )"
           value={OneLineIntroduce}
           onChange={(e) => {
-            if(e.currentTarget.value.length <= 30) {
-              setOneLineIntroduce(e.currentTarget.value)
+            if (e.currentTarget.value.length <= 30) {
+              setOneLineIntroduce(e.currentTarget.value);
             }
           }}
         />
@@ -154,11 +155,11 @@ function ShareVideoUpload(props) {
             />
           )} */}
           <PrivateUpload
-              Thumbnail={Thumbnail}
-              setThumbnail={setThumbnail}
-              VideoURL={VideoURL}
-              setVideoURL={setVideoURL}
-            />
+            Thumbnail={Thumbnail}
+            setThumbnail={setThumbnail}
+            VideoURL={VideoURL}
+            setVideoURL={setVideoURL}
+          />
           <div className="contentArea">
             <textarea
               value={Content}
@@ -169,7 +170,11 @@ function ShareVideoUpload(props) {
         <div className="BtnDiv">
           <button
             className="cancel"
-            onClick={() => props.history.push("/making?category=제작 영상 알리기&subCategory=전체&sort=인기순&pIdx=0") }
+            onClick={() =>
+              props.history.push(
+                "/making?category=제작 영상 알리기&subCategory=전체&sort=인기순&pIdx=0"
+              )
+            }
           >
             취소
           </button>

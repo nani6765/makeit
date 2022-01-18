@@ -9,7 +9,7 @@ import Loading from "../../utils/view/Page/Loading.js";
 import { SearchBody, SearchInput, PostCard } from "../css/SearchCSS.js";
 import SearchIcon from "./search.svg";
 
-function Search(props) {
+function Search() {
   let history = useHistory();
   let location = useLocation();
 
@@ -156,7 +156,9 @@ function Search(props) {
                 <span>"영상 참여"</span> 검색 결과 ({PartLength})
               </p>
               {PartLength > 5 ? (
-                <Link to={`/search/participate?term=${Term}&pIdx=0&category=all`}>
+                <Link
+                  to={`/search/participate?term=${Term}&pIdx=0&category=all`}
+                >
                   <button>더보기 &gt;</button>
                 </Link>
               ) : null}

@@ -7,7 +7,9 @@ import PostUploadFrom from "./content/Upload/PostUploadForm.js";
 import { PostUploadDiv } from "../css/CommunityFormCSS.js";
 
 function PostUpload(props) {
-  const [category, setcategory] = useState(props.history.location.state.category || "");
+  const [category, setcategory] = useState(
+    props.history.location.state.category || ""
+  );
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -16,17 +18,10 @@ function PostUpload(props) {
     }
   }, []);
 
-  function BackHandler() {
-    props.history.push({
-      pathname: "/community",
-      state: { category: category },
-    });
-  }
-
   return (
     <>
       <PostUploadDiv>
-        <PostUploadFrom category={category}/>
+        <PostUploadFrom category={category} />
       </PostUploadDiv>
     </>
   );

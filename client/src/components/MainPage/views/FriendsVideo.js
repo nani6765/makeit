@@ -5,10 +5,6 @@ import axios from "axios";
 
 import Videos from "./FriendsVideo/Videos.js";
 
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-
 import { MainPageDiv } from "../css/MainPageElement.js";
 
 function FriendsVideo() {

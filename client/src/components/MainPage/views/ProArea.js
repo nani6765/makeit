@@ -1,14 +1,7 @@
 import React from "react";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
-import ScrollContainer from "react-indiana-drag-scroll";
+
 import styled from "@emotion/styled";
-import {
-  MainPageDiv,
-  MainPageHading,
-  MainPageSubHading,
-} from "../css/MainPageElement.js";
+import { MainPageDiv } from "../css/MainPageElement.js";
 
 function ProArea() {
   return (

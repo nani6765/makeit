@@ -1,6 +1,3 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 const breakpoints = [1160, 480];
@@ -20,20 +17,20 @@ const HeaderDiv = styled.div`
   .PC {
     display: block;
   }
-  .Mobile{
+  .Mobile {
     display: none;
   }
-  ${mq[0]}{
+  ${mq[0]} {
     padding-top: 32px;
     padding-bottom: 23px;
     .PC {
       display: none;
     }
-    .Mobile{
+    .Mobile {
       display: block;
     }
   }
-  ${mq[1]}{
+  ${mq[1]} {
     padding-top: 20px;
     padding-bottom: 16px;
   }
@@ -50,11 +47,11 @@ const HeaderGrid = styled.div`
   grid-template-columns: 179.06px 1fr 200px 120px;
   grid-template-rows: auto;
   grid-template-areas: "logo nav search loginDiv";
-  ${mq[0]}{
+  ${mq[0]} {
     grid-template-columns: 120px 1fr 120px;
     grid-template-areas: "hambuck logo loginDiv";
   }
-  ${mq[1]}{
+  ${mq[1]} {
     grid-template-columns: 100px 1fr 100px;
     grid-template-areas: "hambuck logo loginDiv";
   }
@@ -173,7 +170,6 @@ const HeaderSearch = styled.div`
       }
     }
   }
-
 `;
 
 const HeaderLoginDiv = styled.div`
@@ -187,12 +183,12 @@ const HeaderLoginDiv = styled.div`
   align-items: center;
   //로그인 버튼
   a {
-    ${mq[0]}{
+    ${mq[0]} {
       width: 100px;
       margin-right: 20px;
-      height: 100%; 
+      height: 100%;
     }
-    ${mq[1]}{
+    ${mq[1]} {
       margin-right: 10px;
     }
     .loginBtn {
@@ -202,13 +198,13 @@ const HeaderLoginDiv = styled.div`
       border-radius: 5px;
       padding: 10px;
       color: #ada4a4;
-      ${mq[0]}{
-          width:100%;  
-          padding: 5px 10px;
-          height: 100%;
-          font-size: 18px;
+      ${mq[0]} {
+        width: 100%;
+        padding: 5px 10px;
+        height: 100%;
+        font-size: 18px;
       }
-      ${mq[1]}{
+      ${mq[1]} {
         font-size: 16px;
       }
     }
@@ -221,22 +217,22 @@ const HeaderLoginDiv = styled.div`
     align-items: center;
     position: relative;
   }
-  ${mq[0]}{
-   margin-right: 20px;
+  ${mq[0]} {
+    margin-right: 20px;
   }
-  ${mq[1]}{
+  ${mq[1]} {
     padding-right: 10px;
     justify-content: flex-end;
-      .hambuc {
-        &:nth-last-of-type(1){
-          margin-left: 10px;
-        }
-        &:nth-last-of-type(2){
-          width: 20px;
-          height: 20px;
-        }
+    .hambuc {
+      &:nth-last-of-type(1) {
+        margin-left: 10px;
       }
-   }
+      &:nth-last-of-type(2) {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 `;
 
 const MobileHambuck = styled.div`
@@ -246,13 +242,13 @@ const MobileHambuck = styled.div`
 
   display: flex;
   align-items: center;
-  
+
   background-color: white;
   i {
     color: #a95ddd;
     font-size: 30px;
   }
-  ${mq[0]}{
+  ${mq[0]} {
     margin-left: 20px;
     justify-content: flex-start;
   }

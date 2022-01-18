@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import Select from "react-select";
 
@@ -26,7 +26,6 @@ function PostEditForm(props) {
   const [Check, setCheck] = useState(0);
 
   const user = useSelector((state) => state.user);
-  let history = useHistory();
 
   const options = [
     { value: "자유게시판", label: "자유게시판" },
@@ -38,7 +37,7 @@ function PostEditForm(props) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   useEffect(() => {
     setTitle(props.PostInfo.title);
     setContent(props.PostInfo.content);

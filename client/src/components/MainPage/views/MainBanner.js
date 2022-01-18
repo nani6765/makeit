@@ -1,7 +1,5 @@
 import React from "react";
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import { jsx, css } from "@emotion/react";
+
 import styled from "@emotion/styled";
 
 function MainBanner() {

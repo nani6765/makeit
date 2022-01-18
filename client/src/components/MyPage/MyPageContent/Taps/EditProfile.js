@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { withRouter, useHistory } from "react-router-dom";
 import CropperModal from "../Func/CropperModal.js";
 import Avatar from "react-avatar";
-import { EditProfileDiv, LoadingDiv } from "../../css/MyPageContentElement.js";
+import { EditProfileDiv } from "../../css/MyPageContentElement.js";
 import { getCroppedImg } from "../Func/CanvasUtils.js";
 import axios from "axios";
 import firebase from "../../../../config/firebase.js";
@@ -202,9 +202,7 @@ function EditProfile(props) {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : null}
+      {isLoading ? <Loading /> : null}
       <EditProfileDiv>
         <div className="editProfileDiv">
           {imageSrc && ModalFlag ? (
