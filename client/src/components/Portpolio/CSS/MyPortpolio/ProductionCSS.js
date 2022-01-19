@@ -4,6 +4,23 @@ const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
 const ProdUploadDiv = styled.div`
+  .btnDiv {
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin-left: 1rem;
+      padding: 10px 30px;
+      color: white;
+      background: #5A278B;
+      border: 1px solid #5A278B;
+      border-radius: 3px;
+    }
+    .private {
+      color: #5A278B;
+      background: #fff;
+      border: 1px solid #5A278B;
+    }
+  }
   form {
     width: 100%;
     height: auto;
@@ -132,7 +149,7 @@ const InfoSection = styled.section`
             display: inline-flex;
             width: 1rem;
             height: 1rem;
-            background: rgba(179, 82, 255, 0.12);
+            background: white;
             border: 2px solid rgba(179, 82, 255, 0.24);
             border-radius: 4px;
             margin: 0 0.5rem 0 1.5rem;
@@ -162,6 +179,130 @@ const InfoSection = styled.section`
         }
       }
     }
+  }
+  .name {
+    grid-area: name;
+  }
+  .field {
+    grid-area: field;
+  }
+  .location {
+    grid-area: location;
+  }
+`;
+
+
+const ProInfoSection = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas:
+    "profileImg name proName"
+    "profileImg gender field"
+    "profileImg location location"
+    "links . .";
+  grid-gap: 0.5rem;
+  .profileImg {
+    grid-area: profileImg;
+    label {
+      width: 100%;
+      input {
+        display: none;
+      }
+      img {
+        cursor: pointer;
+        border-radius: 5px;
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+      }
+    }
+  }
+  .links {
+    grid-area: links;
+    display: flex;
+    justify-content: center;
+    div {
+      span {
+        margin-right: 10px;
+        cursor: pointer;
+        &:nth-last-of-type(1) {
+          margin-right: 0px;
+        }
+        &.active {
+          i {
+            color: purple;
+          }
+        }
+      }
+    }
+  }
+  .infoDiv {
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-items: flex-start;
+    &.location{
+      label{
+        width: 10%;
+      }
+      div{
+        width: 90%;
+      }
+    }
+    label {
+      width: 20%;
+      margin-bottom: 0px;
+      user-select: none;
+      text-align: center;
+
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    div {
+      width: 80%;
+      &.contentDiv {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        div {
+          width: auto;
+          margin-bottom: 10px;
+          label {
+            margin: 0px;
+            user-select: none;
+            width: auto;
+            ${mq[1]} {
+              font-size: 14px;
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+      &.dropdown{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        width: inherit;
+        max-width: 80%;
+      }
+      input {
+        width: 100%;
+        padding: 5px 10px;
+        border: 1px solid #acb0b4;
+        border-radius: 3px;
+        &:focus,
+        &:active {
+          outline: none;
+        }
+      }
+    }
+  }
+  .gender{
+    grid-area: gender;
   }
   .name {
     grid-area: name;
@@ -345,6 +486,7 @@ const ModalDiv = styled.div`
         justify-content: flex-end;
         flex-direction: row;
         button {
+          color: black;
           margin-right: 1rem;
           border-radius: 15px;
           padding: 5px 10px;
@@ -375,6 +517,7 @@ const ModalDiv = styled.div`
           justify-content: flex-end;
         }
         button {
+          color: black;
           margin-right: 1rem;
           border-radius: 15px;
           padding: 5px 10px;
@@ -394,6 +537,56 @@ const ModalDiv = styled.div`
         }
       }
     }
+    &.uploadModal{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas: 
+      "title title"
+      "pro prod";
+      grid-gap: 2rem;
+      padding: 50px 20px;
+      user-select: none;
+
+      .title{
+        grid-area: title;
+        font-size: 1.75rem;
+        font-weight: bold;
+        text-align: center;
+      }
+      .pro{
+        grid-area: pro;
+      }
+      .prod{
+        grid-area: prod;
+      }
+      .box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        border: 1px solid #EEEEEE;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 20px;
+
+        img {
+          width: 50%;
+          height: auto;
+          margin-bottom: 1rem;
+        }
+        p {
+          text-align: center;
+          font-size: 1.5rem;
+          line-height: 2rem;
+          font-weight: bold;
+          span{
+            font-size: 1.25rem;
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -401,6 +594,7 @@ export {
   ProdUploadDiv,
   TitleSection,
   InfoSection,
+  ProInfoSection,
   IntroSection,
   ProjectSection,
   TagSection,

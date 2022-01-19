@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { InfoSection } from "../../../CSS/MyPortpolio/ProductionCSS";
 import { Spinner } from "react-bootstrap";
 import LinkModal from "./LinkModal.js";
 import axios from "axios";
+import MapPicker from "../../../../utils/view/Area/MapPicker";
 
 function Info(props) {
+  const ref = useRef();
+  useOnClickOutside(ref, () => setLocatioFlag(false));
+
   const [Loading, setLoading] = useState(false);
   const [LinkFlag, setLinkFlag] = useState(false);
+  const [LocatioFlag, setLocatioFlag] = useState(false);
 
   const FieldHandler = (e) => {
     console.log("??");
@@ -71,6 +76,18 @@ function Info(props) {
           </svg>
         );
     }
+  };
+
+  
+  const LocationClickFunc = (e) => {
+    e.preventDefault();
+    setLocatioFlag(true);
+  };
+
+  const LocationDeleteHandler = (idx) => {
+    let temp = [...props.ProdLocation];
+    var removed = temp.splice(idx, 1);
+    props.setProdLocation([...temp]);
   };
 
   return (
@@ -240,12 +257,30 @@ function Info(props) {
         <div className="location infoDiv">
           <label>소재지</label>
           <div>
-            <input
-              type="text"
-              value={props.ProdLocation}
-              onChange={(e) => props.setProdLocation(e.currentTarget.value)}
-            />
-          </div>
+          {props.ProdLocation.map((location, idx) => {
+            return (
+              <div
+                className="list"
+                key={idx}
+                onClick={() => LocationDeleteHandler(idx)}
+              >
+                {location}
+              </div>
+            );
+          })}
+          {LocatioFlag && (
+            <div ref={ref}>
+              <MapPicker
+                LocationArr={props.ProdLocation}
+                setLocationArr={props.setProdLocation}
+                setLocatioFlag={setLocatioFlag}
+              />
+            </div>
+          )}
+          <button onClick={(e) => LocationClickFunc(e)} disabled={LocatioFlag}>
+            <i className="bi bi-plus-lg"></i>
+          </button>
+        </div>
         </div>
       </InfoSection>
       {LinkFlag && (
@@ -258,6 +293,23 @@ function Info(props) {
       )}
     </>
   );
+}
+
+function useOnClickOutside(ref, handler) {
+  useEffect(() => {
+    const listener = (event) => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      handler(event);
+    };
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, handler]);
 }
 
 export default Info;

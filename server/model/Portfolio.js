@@ -24,16 +24,16 @@ const prodPortfolioSchema = mongoose.Schema({
   titletext: {
     type: String,
   },
-  prodName: {
+  Name: {
     type: String,
   },
   fieldArr: {
     type: Array,
   },
-  prodLocation: {
+  Location: {
     type: Array,
   },
-  prodIntroduce: {
+  Introduce: {
     type: String,
   },
   projectArr: {
@@ -61,7 +61,8 @@ const prodPortfolioSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   }
-})
+},{ collection: "portfolios", timestamps: true }
+)
 
 const proPortfolioSchema = mongoose.Schema({
   auther: {
@@ -76,38 +77,48 @@ const proPortfolioSchema = mongoose.Schema({
     type: Number,
     unique: 1,
   },
-  title: {
+  titletext: {
     type: String,
   },
-  prodName: {
+  Name: {
     type: String,
   },
-  FieldArr: {
+  fieldArr: {
     type: Array,
   },
-  ProdLocation: {
+  Location: {
     type: Array,
   },
-  ProdIntroduce: {
+  Introduce: {
     type: String,
   },
-  ProjectArr: {
+  projectArr: {
     type: Array,
   },
+  /*
   MakeitProjectArr: [
     {
       type: Schema.Types.ObjectId,
       ref: "projectSchema",
     },
   ],
-  TagArr: {
+  */
+  profileImg: {
+    type: String,
+  },
+  type: {
+    type: String,
+    default: "프로"
+  },
+  tagArr: {
     type: Array,
   },
   public: {
     type: Boolean,
     default: false,
   }
-})
+},{ collection: "portfolios", timestamps: true }
+)
 
 const projectSchema = mongoose.Schema(
   {
@@ -147,10 +158,15 @@ const projectSchema = mongoose.Schema(
     },
     participater: [
       {
-        portfolio : { type: Schema.Types.ObjectId },
         type: {
           type: String,
           required : true,
+        },
+        uid: {
+          type: String,
+        },
+        portfolio : { 
+          type: Schema.Types.ObjectId,
         },
         accept : {
           type: Boolean,

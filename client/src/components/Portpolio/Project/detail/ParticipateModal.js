@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import { useSelector } from "react-redux";
-import {ParticipateModalDiv} from "../../CSS/Project/ProjectDetailCSS.js"
+import {ParticipateModalDiv, ParticipateSection} from "../../CSS/Project/ProjectDetailCSS.js"
 
 import axios from "axios";
 function ParticipateModal(props) {
@@ -28,14 +28,14 @@ function ParticipateModal(props) {
       let body = {
         projectId : props.ProjectInfo._id,
         portfilioId : id,
-        type: type
+        type: type,
+        uid: user.userData.uid,
       }
-      console.log(body);
       axios.post("/api/portfolio/project/Participate", body).then((response) => {
         if(!response.data.success){
           alert("등록실패했지렁 ㅋㅋ")
         } else {
-          props.setModalFlag(false);
+          window.location.reload();
         }
       })
     }
@@ -47,8 +47,13 @@ function ParticipateModal(props) {
     {!Loading &&
     (PortfolioList.length 
     ? PortfolioList.map((portfilio, idx) => {
-      return(
-        <section className="portfilio" key={idx} onClick={(e) => {
+      if(portfilio.type === "프로") {
+        return(<ParticipateSection key={idx} onClick={(e) => {
+          ClickFunc(e, portfilio.titletext, portfilio._id, portfilio.type)
+        }}>암튼 프로임</ParticipateSection>) 
+      }
+      else return(
+        <ParticipateSection key={idx} onClick={(e) => {
           ClickFunc(e, portfilio.titletext, portfilio._id, portfilio.type)
         }}>
           <figure className="img">
@@ -60,8 +65,9 @@ function ParticipateModal(props) {
           <div className="info">
             {portfilio.type} /  {portfilio.prodName}
           </div>
-        </section>
+        </ParticipateSection>
       )
+     
     })
     : <p>포폴등록먼저하셈</p>
     )}

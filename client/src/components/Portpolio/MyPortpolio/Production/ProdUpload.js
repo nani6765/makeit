@@ -27,10 +27,11 @@ function ProdUpload() {
   ]);
   const [ProdName, setProdName] = useState("");
   const [FieldArr, setFieldArr] = useState([]);
-  const [ProdLocation, setProdLocation] = useState("");
+  const [ProdLocation, setProdLocation] = useState([]);
   const [ProdIntroduce, setProdIntroduce] = useState("");
   const [ProjectArr, setProjectArr] = useState([]);
   const [TagArr, setTagArr] = useState([]);
+  const [IsPublic, setIsPublic] = useState(false);
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -47,13 +48,14 @@ function ProdUpload() {
     let body = {
       titletext: Titletext,
       profileImg: ProfileImg,
-      prodName: ProdName,
+      Name: ProdName,
       fieldArr: FieldArr,
-      prodLocation: ProdLocation,
-      prodIntroduce: ProdIntroduce,
+      Location: ProdLocation,
+      Introduce: ProdIntroduce,
       projectArr: ProjectArr,
       tagArr: TagArr,
       uid: user.userData.uid,
+      public: IsPublic,
     };
 
     await axios.post("/api/portfolio/prod/submit", body).then((response) => {
@@ -68,22 +70,18 @@ function ProdUpload() {
   return (
     <CommonMarginDiv>
       <ProdUploadDiv>
-        <form>
         <div className="btnDiv">
-            <button
-              className="cancel"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("url 아직 안정해져서 메인으로 보냄");
-                history.push("/");
-              }}
-            >
-              취소
-            </button>
-            <button className="submit" onClick={(e) => SubmitHandler(e)}>
-              등록
-            </button>
-          </div>
+          <button
+            className={IsPublic ? "" : "private"}
+            onClick={() => IsPublic ? setIsPublic(false) : setIsPublic(true)}
+          >
+            {IsPublic ? "공개" : "비공개"}
+          </button>
+          <button className="submit" onClick={(e) => SubmitHandler(e)}>
+            등록
+          </button>
+        </div>
+        <form>
           <Title Titletext={Titletext} setTitletext={setTitletext}/>
           <Info
             ProfileImg={ProfileImg}

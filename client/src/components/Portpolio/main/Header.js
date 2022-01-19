@@ -8,8 +8,8 @@ function Header(props) {
   let history = useHistory();
 
   const GNBList = [
-    {
-      text: "포트폴리오찾기",
+    { 
+      text: "포트폴리오 찾기",
       GNB: "PF",
     },
     {
@@ -27,9 +27,9 @@ function Header(props) {
     if (gnb === "PF") {
       history.push(`?category=${gnb}&sort=인기순&pIdx=0`);
     } else if (gnb === "MP") {
-      history.push(`?category=${gnb}&sort=인기순&pIdx=0&subCategory=전체`);
+      history.push(`?category=${gnb}&pIdx=0&subCategory=전체 목록`);
     } else {
-      history.push(`?category=${gnb}&sort=인기순&pIdx=0&subCategory=진행중`);
+      history.push(`?category=${gnb}&pIdx=0&subCategory=진행 중 프로젝트`);
     }
   };
 
