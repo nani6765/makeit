@@ -190,6 +190,87 @@ const ProjectDetailContentDiv = styled.div`
   }
 `;
 
-const ParticipateModalDiv = styled.div``;
+const ParticipateModalDiv = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  .innerDiv {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1rem;
+    max-height: 80vh;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: grey;
+      border-radius: 15px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #c6c6c6;
+      border-radius: 15px;
+      box-shadow: inset 0px 0px 5px white;
+    }
+    .portfilio{
+      width: 100%;
+      border: 1px solid #c6c6c6;
+      padding: 20px;
+      border-radius: 15px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "img title info";
+      grid-gap: 1rem;
+      margin-bottom: 1rem;
+      cursor:pointer;
+      user-select: none;
+      .img {
+         grid-area: img;
+         width: 100%;
+         padding-top: 62.5%;
+         position: relative;
+         overflow: hidden;
+         margin-bottom: 0px;
+         img{
+           position: absolute;
+           width: 100%;
+           top: 50%;
+           left: 50%;
+           transform: translate(-50%, -50%);
+           border-radius: 15px;
+         }
+      }
+      .title {
+        grid-area: title;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+      }
+      .info {
+        grid-area: info;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+      }
+    }
+  }
+`;
 
 export { BtnDiv, ProjectDetailContentDiv, ParticipateModalDiv };

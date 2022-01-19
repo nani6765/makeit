@@ -6,8 +6,8 @@ function Introduce(props) {
     <IntroSection>
       <label>소개 </label>
       <textarea
-        value={props.ProIntrodice}
-        onChange={(e) => props.setProIntroduce(e.currentTarget.value)}
+        value={props.ProdIntrodice}
+        onChange={(e) => props.setProdIntroduce(e.currentTarget.value)}
       />
     </IntroSection>
   );

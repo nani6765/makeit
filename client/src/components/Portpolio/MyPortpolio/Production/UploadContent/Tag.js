@@ -6,6 +6,7 @@ function Tag(props) {
 
   const TagKeyDown = (e) => {
     if (e.key === "Enter") {
+      e.preventDefault();
       let temp = [...props.TagArr, TagElement];
       props.setTagArr(temp);
       setTagElement("");
