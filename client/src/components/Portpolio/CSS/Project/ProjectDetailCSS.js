@@ -226,51 +226,51 @@ const ParticipateModalDiv = styled.div`
       border-radius: 15px;
       box-shadow: inset 0px 0px 5px white;
     }
-    .portfilio{
-      width: 100%;
-      border: 1px solid #c6c6c6;
-      padding: 20px;
-      border-radius: 15px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: auto;
-      grid-template-areas:
-        "img title info";
-      grid-gap: 1rem;
-      margin-bottom: 1rem;
-      cursor:pointer;
-      user-select: none;
-      .img {
-         grid-area: img;
-         width: 100%;
-         padding-top: 62.5%;
-         position: relative;
-         overflow: hidden;
-         margin-bottom: 0px;
-         img{
-           position: absolute;
-           width: 100%;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           border-radius: 15px;
-         }
-      }
-      .title {
-        grid-area: title;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-      }
-      .info {
-        grid-area: info;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-      }
-    }
   }
 `;
 
-export { BtnDiv, ProjectDetailContentDiv, ParticipateModalDiv };
+const ParticipateSection = styled.section`width: 100%;
+  border: 1px solid #c6c6c6;
+  padding: 20px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "img title info";
+  grid-gap: 1rem;
+  margin-bottom: 1rem;
+  cursor:pointer;
+  user-select: none;
+  .img {
+    grid-area: img;
+    width: 100%;
+    padding-top: 62.5%;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0px;
+    img{
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 15px;
+    }
+  }
+  .title {
+    grid-area: title;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+  }
+  .info {
+    grid-area: info;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }`
+;
+
+export { BtnDiv, ProjectDetailContentDiv, ParticipateModalDiv, ParticipateSection };

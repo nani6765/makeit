@@ -59,6 +59,7 @@ import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 //Protfolio
 import Portfolio from "./components/Portpolio/Portfolio.js";
 import ProdUpload from "./components/Portpolio/MyPortpolio/Production/ProdUpload.js";
+import ProUpload from "./components/Portpolio/MyPortpolio/Pro/ProUpload.js";
 import ProjectUpload from "./components/Portpolio/Project/upload/ProjectUpload.js";
 import ProjectDetail from "./components/Portpolio/Project/detail/ProjectDetail.js";
 
@@ -177,6 +178,7 @@ function App() {
           {/*Portpolio*/}
           <Route exact path="/portfolio" component={Portfolio} />
           <Route exact path="/portfolio/prod/upload" component={ProdUpload} />
+          <Route exact path="/portfolio/pro/upload" component={ProUpload} />
           <Route
             exact
             path="/portfolio/project/upload"

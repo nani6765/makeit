@@ -5,13 +5,17 @@ import ParticipateModal from "./ParticipateModal.js";
 import {
   BtnDiv,
   ProjectDetailContentDiv,
+  ParticipateSection
 } from "../../CSS/Project/ProjectDetailCSS.js";
+import axios from "axios";
+
 
 function ProjectDetailContent(props) {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
   const [ModalFlag, setModalFlag] = useState(false);
+  const [MyPortfolioIdx, setMyPortfolioIdx] = useState(-1);
 
   const EditHadler = () => {};
 
@@ -21,6 +25,11 @@ function ProjectDetailContent(props) {
 
   };
 
+  useEffect(() => {
+    if(user.userData.uid !== props.ProjectInfo.auther.uid) {
+      setMyPortfolioIdx(props.ProjectInfo.participater.findIndex(i => i.uid === user.userData.uid));
+    }
+  }, [])
   return (
     <>
       <BtnDiv>
@@ -80,19 +89,50 @@ function ProjectDetailContent(props) {
           })}
         </section>
         <section className="participants">
-          <label>참여자 목록</label>
           {user.userData !== null && (
             user.userData.uid === props.ProjectInfo.auther.uid ? (
               <>
-              <div><p>신청자 목록</p>
-              {props.ProjectInfo.pre}
-              </div>
-              <div><p>참여자 목록</p>
-              
+              <label>참여자 목록</label>
+              <div>
+                <p>신청자 목록</p>
+                {
+                  props.ProjectInfo.participater.map((temp, idx) => {
+                    if(!temp.accept) {    
+                      return (
+                      <ParticipateSection key={idx}>
+                        <figure className="img">
+                          <img src={temp.portfolio.profileImg} />
+                        </figure>
+                        <div className="title">
+                          {temp.portfolio.titletext}
+                        </div>
+                        <div className="info">
+                            {temp.type} / {temp.portfolio.Name}
+                        </div>
+                      </ParticipateSection> 
+                    )}
+                  })
+                }
               </div>
               </>
             ) : (
-              <button onClick={() => setModalFlag(true)}>참여 신청하기</button>
+               MyPortfolioIdx >= 0
+              ? (
+              <>
+              <label></label>
+              <ParticipateSection>
+                <figure className="img">
+                  <img src={props.ProjectInfo.participater[MyPortfolioIdx].portfolio.profileImg} />
+                </figure>
+                <div className="title">
+                  {props.ProjectInfo.participater[MyPortfolioIdx].portfolio.titletext}
+                </div>
+                <div className="info">
+                    {props.ProjectInfo.participater[MyPortfolioIdx].type} / {props.ProjectInfo.participater[MyPortfolioIdx].portfolio.Name}
+                </div>
+              </ParticipateSection> 
+              </>)
+              : ( <button onClick={() => setModalFlag(true)}>참여 신청하기</button> )
             )
           )}
           {ModalFlag && <ParticipateModal setModalFlag={setModalFlag} ProjectInfo = {props.ProjectInfo}/>}

@@ -4,7 +4,9 @@ import qs from "qs";
 
 import Header from "./main/Header.js";
 import PFFilter from "./main/PFFilter.js";
-import PFList from "./main/PFList.js";
+import PFList from "./PortfolioFind/PFList.js";
+import SubCategory from "./main/SubCategory.js";
+import MyPortfolio from "./MyPortpolio/MyPortfolio.js";
 
 function Portfolio() {
 
@@ -20,6 +22,17 @@ function Portfolio() {
         <PFFilter URL={URL} setURL={setURL} />
         <PFList  URL={URL}/>
       </>);
+
+      case "MP":
+        return (<>
+        <SubCategory URL={URL} />
+        <MyPortfolio URL={URL} />
+        </>)
+
+      case "Pr":
+        return (<>
+        <SubCategory URL={URL} />
+        </>)
     }
   }
 

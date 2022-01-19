@@ -56,13 +56,6 @@ router.post("/prod/submit", (req, res) => {
   })
 });
 
-router.post("/pro/submit", (req, res) => {
-  return res.json({
-    success: true,
-  });
-}
-);
-
 
 router.post("/pf/getList", (req, res) => {
 
@@ -84,8 +77,13 @@ router.post(
 
 router.post("/project/getDetail", (req, res) => {
   Project.findOne({ url: req.body.url })
-    .populate("auther")
-    .exec()
+    .populate(["auther", {path: "participater.portfolio", model: "ProdPortfolio"}])
+    .then((project) => { 
+      return project.populate({
+        path: "participater.portfolio",
+      })
+    })
+    //.exec()
     .then((projectInfo) => {
       return res.status(200).json({
         success: true,
@@ -118,7 +116,6 @@ router.post("/project/submit", (req, res) => {
       User.findOne({ uid: req.body.uid })
         .exec()
         .then((userInfo) => {
-          console.log("uid : ", req.body.uid, " userInfo : ", userInfo);
 
           temp.auther = userInfo._id;
           const NewProject = new Project(temp);
@@ -148,16 +145,11 @@ router.post("/project/getPortfolioList", (req, res) => {
   ProdPortfolio.find({uid: req.body.uid})
   .populate("auther")
   .exec()
-  .then((prod) => {
-    ProPortfolio.find({uid: req.body.uid})
-    .populate("auther")
-    .exec()
-    .then((pro) => {
-      return res.status(200).json({
-        success: true,
-        portList: [...prod, ...pro],
-      });
-    })
+  .then((total) => {
+    return res.status(200).json({
+      success: true,
+      portList: [...total],
+    });
   })
 })
 
@@ -166,6 +158,7 @@ router.post("/project/Participate", (req, res) => {
     portfolio: req.body.portfilioId,
     type: req.body.type,
     accept: false,
+    uid: req.body.uid,
   };
   Project.findOneAndUpdate({_id : req.body.projectId} , { $push : { participater : temp }})
   .exec()
@@ -179,5 +172,38 @@ router.post("/project/Participate", (req, res) => {
     });
   })
 })
+
+router.post("/pro/submit", (req, res) => {
+  let temp = {
+    uid : req.body.uid,
+    url : 1,
+    title: "1",
+    proName: "1",
+    FieldArr: ["1", "2"],
+    ProLocation: "1",
+    ProIntroduce: "1",
+    TagArr: ["1", "2"],
+    public: true
+
+  };
+  User.findOne({uid: req.body.uid})
+  .exec()
+  .then((userInfo) => {
+    temp.auther = userInfo._id;
+    const Pro = new ProPortfolio(temp);
+    Pro.save()
+    .then(() => {
+      return res.status(200).json({
+        success: true,
+      })
+    })
+  }).catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+    })
+  })
+});
+
 
 module.exports = router;
