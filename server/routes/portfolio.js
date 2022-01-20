@@ -85,7 +85,7 @@ router.post("/prod/submit", (req, res) => {
 router.post("/pro/submit", (req, res) => {
   let temp = req.body;
 
-  Counter.findOne({name: "counter"})
+  Counter.findOneAndUpdate({name: "counter"}, { $inc : {portfolioNum: 1}})
   .exec()
   .then((counter) => {
     temp.url = counter.portfolioNum;
@@ -95,31 +95,18 @@ router.post("/pro/submit", (req, res) => {
       temp.auther = userInfo._id;
       const NewProPortfolio = new ProPortfolio(temp);
       NewProPortfolio.save().then(() => {
-        Counter.findOneAndUpdate({name: "counter"},{ $inc : {portfolioNum: 1}})
-        .exec()
-        .then((userInfo) => {
-          temp.auther = userInfo._id;
-          const NewProdPortfolio = new ProdPortfolio(temp);
-          NewProdPortfolio.save().then(() => {
-            Counter.findOneAndUpdate(
-              { name: "counter" },
-              { $inc: { prodNum: 1 } }
-            )
-              .exec()
-              .then(() => {
-                return res.status(200).json({
-                  success: true,
-                });
-              });
-          });
+        return res.status(200).json({
+          success: true,
         });
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(400).json({
-        success: false,
       });
     });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+    });
+  });
 });
 
 
@@ -177,6 +164,7 @@ router.post("/project/submit", (req, res) => {
     location: req.body.location,
     timeline: req.body.timeline,
     tag: req.body.tag,
+    uid: req.body.uid,
   };
 
   Counter.findOne({ name: "counter" })
