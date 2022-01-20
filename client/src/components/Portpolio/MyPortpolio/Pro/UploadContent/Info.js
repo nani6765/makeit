@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ProInfoSection } from "../../../CSS/MyPortpolio/ProductionCSS";
+import { ProInfoSection } from "../../../CSS/MyPortpolio/UploadCSS.js";
 import { Spinner } from "react-bootstrap";
 import LinkModal from "./LinkModal.js";
 import Select from "react-select";
@@ -19,7 +19,7 @@ function Info(props) {
     { value: "미용", label: "미용" },
     { value: "기타", label: "기타" },
   ];
-  
+
   const genderOptions = [
     { value: "남자", label: "남자" },
     { value: "여자", label: "여자" },
@@ -50,8 +50,8 @@ function Info(props) {
       ...provided,
       width: "100% !important",
       border: "1px solid #acb0b4",
-    })
-  }
+    }),
+  };
 
   const ImgUploadHandler = async (e) => {
     setLoading(true);
@@ -184,7 +184,14 @@ function Info(props) {
               placeholder="성별"
               blurInputOnSelect="true"
               menuShouldBlockScroll="true"
-              defaultValue={props.Gender && options[options.findIndex((obj, idx) => {if(obj.value === props.Gender) return idx;})]}
+              defaultValue={
+                props.Gender &&
+                options[
+                  options.findIndex((obj, idx) => {
+                    if (obj.value === props.Gender) return idx;
+                  })
+                ]
+              }
               onChange={(e) => props.setGender(e.value)}
             />
           </div>
@@ -198,7 +205,14 @@ function Info(props) {
               placeholder="파트"
               blurInputOnSelect="true"
               menuShouldBlockScroll="true"
-              defaultValue={props.Field && options[options.findIndex((obj, idx) => {if(obj.value === props.Field) return idx;})]}
+              defaultValue={
+                props.Field &&
+                options[
+                  options.findIndex((obj, idx) => {
+                    if (obj.value === props.Field) return idx;
+                  })
+                ]
+              }
               onChange={(e) => props.setField(e.value)}
             />
           </div>

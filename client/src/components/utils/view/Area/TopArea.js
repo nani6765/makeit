@@ -8,12 +8,12 @@ const headerBp = [1160, 480];
 const headerbq = headerBp.map((bp) => `@media (max-width: ${bp}px)`);
 
 let TopAreaDiv = styled.div`
-  padding-top: 129px;
+  padding-top: 139px;
   ${headerbq[0]} {
-    padding-top: 105px;
+    padding-top: 115px;
   }
   ${headerbq[1]} {
-    padding-top: 78.35px;
+    padding-top: 88.35px;
   }
 `;
 

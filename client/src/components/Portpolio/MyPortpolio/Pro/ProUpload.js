@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { CommonMarginDiv } from "../../../CommonCSS.js";
-import { ProdUploadDiv } from "../../CSS/MyPortpolio/ProductionCSS";
+import { ProdUploadDiv } from "../../CSS/MyPortpolio/UploadCSS.js";
 import Title from "./UploadContent/Title.js";
 import Info from "./UploadContent/Info.js";
 import Introduce from "./UploadContent/Introduce.js";
@@ -52,12 +52,13 @@ function ProUpload() {
     let body = {
       titletext: Titletext,
       profileImg: ProfileImg,
-      Name: Name,
+      name: Name,
       proName: ProName,
       gender: Gender,
       field: Field,
-      Location: Location,
-      Introduce: ProIntroduce,
+      location: Location,
+      introduce: ProIntroduce,
+      profileImgList: ProfileImgList,
       projectArr: ProjectArr,
       tagArr: TagArr,
       uid: user.userData.uid,

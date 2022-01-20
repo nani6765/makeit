@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { InfoSection } from "../../../CSS/MyPortpolio/ProductionCSS";
+import { InfoSection } from "../../../CSS/MyPortpolio/UploadCSS.js";
 import { Spinner } from "react-bootstrap";
 import LinkModal from "./LinkModal.js";
 import axios from "axios";
@@ -78,7 +78,6 @@ function Info(props) {
     }
   };
 
-  
   const LocationClickFunc = (e) => {
     e.preventDefault();
     setLocatioFlag(true);
@@ -257,30 +256,33 @@ function Info(props) {
         <div className="location infoDiv">
           <label>소재지</label>
           <div>
-          {props.ProdLocation.map((location, idx) => {
-            return (
-              <div
-                className="list"
-                key={idx}
-                onClick={() => LocationDeleteHandler(idx)}
-              >
-                {location}
+            {props.ProdLocation.map((location, idx) => {
+              return (
+                <div
+                  className="list"
+                  key={idx}
+                  onClick={() => LocationDeleteHandler(idx)}
+                >
+                  {location}
+                </div>
+              );
+            })}
+            {LocatioFlag && (
+              <div ref={ref}>
+                <MapPicker
+                  LocationArr={props.ProdLocation}
+                  setLocationArr={props.setProdLocation}
+                  setLocatioFlag={setLocatioFlag}
+                />
               </div>
-            );
-          })}
-          {LocatioFlag && (
-            <div ref={ref}>
-              <MapPicker
-                LocationArr={props.ProdLocation}
-                setLocationArr={props.setProdLocation}
-                setLocatioFlag={setLocatioFlag}
-              />
-            </div>
-          )}
-          <button onClick={(e) => LocationClickFunc(e)} disabled={LocatioFlag}>
-            <i className="bi bi-plus-lg"></i>
-          </button>
-        </div>
+            )}
+            <button
+              onClick={(e) => LocationClickFunc(e)}
+              disabled={LocatioFlag}
+            >
+              <i className="bi bi-plus-lg"></i>
+            </button>
+          </div>
         </div>
       </InfoSection>
       {LinkFlag && (

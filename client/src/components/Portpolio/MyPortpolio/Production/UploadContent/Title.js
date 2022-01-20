@@ -1,10 +1,15 @@
 import React from "react";
-import { TitleSection } from "../../../CSS/MyPortpolio/ProductionCSS";
+import { TitleSection } from "../../../CSS/MyPortpolio/UploadCSS.js";
 
 function Title(props) {
   return (
     <TitleSection>
-      <input type="text" placeholder="포트폴리오 제목" value={props.Titletext} onChange={(e) => props.setTitletext(e.currentTarget.value)}/>
+      <input
+        type="text"
+        placeholder="포트폴리오 제목"
+        value={props.Titletext}
+        onChange={(e) => props.setTitletext(e.currentTarget.value)}
+      />
     </TitleSection>
   );
 }

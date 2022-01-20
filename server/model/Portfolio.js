@@ -8,37 +8,38 @@ function realTime() {
   return moment().format("YY-MM-DD[ ]HH:mm");
 }
 
-const prodPortfolioSchema = mongoose.Schema({
-  auther: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  uid: {
-    type: String,
-  },
-  url: {
-    type: Number,
-    unique: 1,
-  },
-  titletext: {
-    type: String,
-  },
-  Name: {
-    type: String,
-  },
-  fieldArr: {
-    type: Array,
-  },
-  Location: {
-    type: Array,
-  },
-  Introduce: {
-    type: String,
-  },
-  projectArr: {
-    type: Array,
-  },
+const prodPortfolioSchema = mongoose.Schema(
+  {
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    url: {
+      type: Number,
+      unique: 1,
+    },
+    titletext: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
+    fieldArr: {
+      type: Array,
+    },
+    location: {
+      type: Array,
+    },
+    introduce: {
+      type: String,
+    },
+    projectArr: {
+      type: Array,
+    },
     /*
   MakeitProjectArr: [
     {
@@ -47,84 +48,90 @@ const prodPortfolioSchema = mongoose.Schema({
     },
   ],
   */
-  profileImg: {
-    type: String,
+    profileImg: {
+      type: String,
+    },
+    type: {
+      type: String,
+      default: "프로덕션",
+    },
+    tagArr: {
+      type: Array,
+    },
+    public: {
+      type: Boolean,
+      default: false,
+    },
   },
-  type: {
-    type: String,
-    default: "프로덕션"
-  },
-  tagArr: {
-    type: Array,
-  },
-  public: {
-    type: Boolean,
-    default: false,
-  }
-},{ collection: "portfolios", timestamps: true }
-)
+  { collection: "portfolios", timestamps: true }
+);
 
-const proPortfolioSchema = mongoose.Schema({
-  auther: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  uid: {
-    type: String,
-  },
-  url: {
-    type: Number,
-    unique: 1,
-  },
-  titletext: {
-    type: String,
-  },
-  Name: {
-    type: String,
-  },
-  proName: {
-    type: String,
-  },
-  gender: {
-    type: String,
-  },
-  field: {
-    type: String,
-  },
-  Location: {
-    type: Array,
-  },
-  Introduce: {
-    type: String,
-  },
-  projectArr: {
-    type: Array,
-  },
-  /*
-  MakeitProjectArr: [
+const proPortfolioSchema = mongoose.Schema(
+  {
+    auther: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    uid: {
+      type: String,
+    },
+    url: {
+      type: Number,
+      unique: 1,
+    },
+    titletext: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
+    proName: {
+      type: String,
+    },
+    gender: {
+      type: String,
+    },
+    field: {
+      type: String,
+    },
+    location: {
+      type: Array,
+    },
+    introduce: {
+      type: String,
+    },
+    projectArr: {
+      type: Array,
+    },
+    /*
+    MakeitProjectArr: [
     {
       type: Schema.Types.ObjectId,
       ref: "projectSchema",
     },
   ],
   */
-  profileImg: {
-    type: String,
+    profileImg: {
+      type: String,
+    },
+    profileImgList: {
+      type: Array,
+    },
+    type: {
+      type: String,
+      default: "프로",
+    },
+    tagArr: {
+      type: Array,
+    },
+    public: {
+      type: Boolean,
+      default: false,
+    },
   },
-  type: {
-    type: String,
-    default: "프로"
-  },
-  tagArr: {
-    type: Array,
-  },
-  public: {
-    type: Boolean,
-    default: false,
-  }
-},{ collection: "portfolios", timestamps: true }
-)
+  { collection: "portfolios", timestamps: true }
+);
 
 const projectSchema = mongoose.Schema(
   {
@@ -132,6 +139,9 @@ const projectSchema = mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    uid: {
+      type: String,
     },
     url: {
       type: Number,
@@ -166,20 +176,20 @@ const projectSchema = mongoose.Schema(
       {
         type: {
           type: String,
-          required : true,
+          required: true,
         },
         uid: {
           type: String,
         },
-        portfolio : { 
+        portfolio: {
           type: Schema.Types.ObjectId,
         },
-        accept : {
+        accept: {
           type: Boolean,
-          default: false
-        }
+          default: false,
+        },
       },
-    ]
+    ],
   },
   { collection: "projects", timestamps: true }
 );
