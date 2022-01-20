@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { CommonMarginDiv } from "../../../CommonCSS.js";
-import { ProdUploadDiv } from "../../CSS/MyPortpolio/ProductionCSS";
+import { ProdUploadDiv } from "../../CSS/MyPortpolio/UploadCSS.js";
 import Title from "./UploadContent/Title.js";
 import Info from "./UploadContent/Info.js";
 import Introduce from "./UploadContent/Introduce.js";
@@ -14,7 +14,7 @@ import axios from "axios";
 
 function ProdUpload() {
   const history = useHistory();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
 
   const [Titletext, setTitletext] = useState("");
   const [ProfileImg, setProfileImg] = useState(
@@ -48,10 +48,10 @@ function ProdUpload() {
     let body = {
       titletext: Titletext,
       profileImg: ProfileImg,
-      Name: ProdName,
+      name: ProdName,
       fieldArr: FieldArr,
-      Location: ProdLocation,
-      Introduce: ProdIntroduce,
+      location: ProdLocation,
+      introduce: ProdIntroduce,
       projectArr: ProjectArr,
       tagArr: TagArr,
       uid: user.userData.uid,
@@ -66,14 +66,14 @@ function ProdUpload() {
         alert("게시글 등록 실패");
       }
     });
-  }
+  };
   return (
     <CommonMarginDiv>
       <ProdUploadDiv>
         <div className="btnDiv">
           <button
             className={IsPublic ? "" : "private"}
-            onClick={() => IsPublic ? setIsPublic(false) : setIsPublic(true)}
+            onClick={() => (IsPublic ? setIsPublic(false) : setIsPublic(true))}
           >
             {IsPublic ? "공개" : "비공개"}
           </button>
@@ -82,7 +82,7 @@ function ProdUpload() {
           </button>
         </div>
         <form>
-          <Title Titletext={Titletext} setTitletext={setTitletext}/>
+          <Title Titletext={Titletext} setTitletext={setTitletext} />
           <Info
             ProfileImg={ProfileImg}
             setProfileImg={setProfileImg}

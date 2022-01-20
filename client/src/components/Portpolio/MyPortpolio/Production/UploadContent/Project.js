@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import ProjectModal from "./ProjectModal.js";
+import ProjectModal from "../../ProjectModal.js";
 
-import { ProjectSection } from "../../../CSS/MyPortpolio/ProductionCSS";
+import { ProjectSection } from "../../../CSS/MyPortpolio/UploadCSS.js";
 
 function Project(props) {
   const [ProjectFlag, setProjectFlag] = useState(false);
@@ -21,11 +21,7 @@ function Project(props) {
           </div>
           {props.ProjectArr.map((project, idx) => {
             return (
-              <div
-                className="project"
-                key={idx}
-                onClick={() => setProjectFlag(idx + 1)}
-              >
+              <div className="project" key={idx}>
                 <p className="title">{project.title}</p>
               </div>
             );

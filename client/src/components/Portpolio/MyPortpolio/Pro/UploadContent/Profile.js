@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ProfileSection } from "../../../CSS/MyPortpolio/ProductionCSS.js";
+import { ProfileSection } from "../../../CSS/MyPortpolio/UploadCSS.js";
 import { Spinner } from "react-bootstrap";
 import axios from "axios";
 

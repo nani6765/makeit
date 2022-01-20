@@ -347,7 +347,7 @@ const ProfileSection = styled.section`
   .list {
     display: flex;
     flex-wrap: no-wrap;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     article {
       width: 300px;
@@ -399,7 +399,7 @@ const ProjectSection = styled.section`
     flex-wrap: wrap;
     div {
       width: calc(calc(100% - 3rem) / 3);
-      height: 100px;
+      height: 130px;
       border: 1px solid #9a9a9a;
       border-radius: 8px;
       margin-bottom: 1rem;
@@ -415,9 +415,17 @@ const ProjectSection = styled.section`
         cursor: pointer;
         p {
           margin-bottom: 0px;
-        }
-        .title {
-          font-weight: bold;
+          &.type {
+            color: grey;
+            font-size: 0.5em;
+            text-align: right;
+          }
+          &.title {
+            font-weight: bold;
+            font-size: 1em;
+          }
+          &.content {
+          }
         }
       }
     }
@@ -469,6 +477,8 @@ const ModalDiv = styled.div`
     width: 50%;
     display: flex;
     flex-direction: column;
+    .other {
+    }
     input {
       padding: 5px;
       border: 1px solid #acb0b4;
@@ -549,6 +559,21 @@ const ModalDiv = styled.div`
       }
     }
     &.projectModal {
+      .header {
+        span {
+          cursor: pointer;
+          user-select: none;
+          &.divider {
+            margin: 0 1rem;
+            cursor: auto;
+          }
+          &.target {
+            &:hover {
+              font-weight: bold;
+            }
+          }
+        }
+      }
       .btnDiv {
         margin-top: 1rem;
         padding: 0px;
@@ -636,12 +661,81 @@ const ModalDiv = styled.div`
   }
 `;
 
+const MakeItContentDiv = styled.div`
+  .list {
+    width: 100%;
+    padding: 0px;
+    border-radius: 0px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: no-wrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    &::-webkit-scrollbar {
+      width: 1px;
+      height: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: grey;
+      border-radius: 15px;
+      background-clip: padding-box;
+      border: 2px solid transparent;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #c6c6c6;
+      border-radius: 15px;
+      box-shadow: inset 0px 0px 5px white;
+    }
+
+    article {
+      width: 200px;
+
+      flex: 0 0 auto;
+      position: relative;
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+      padding: 20px;
+      border: 1px solid #c6c6c6;
+      border-radius: 15px;
+
+      cursor: pointer;
+
+      figure {
+        width: auto;
+        margin-bottom: 0px;
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+        figcaption {
+          color: lightgrey;
+          span {
+            font-weight: bold;
+            color: black;
+          }
+        }
+      }
+    }
+  }
+  .loading {
+    width: 100%;
+    margin: 1rem 0;
+    .spinner-border {
+      border-radius: 50%;
+      width: 2rem;
+      margin: 0 auto;
+    }
+  }
+`;
+
 const BtnDiv = styled.div`
   margin: 1rem 0;
   button {
     color: white;
-    background: #5A278B;
-    border: 1px solid #5A278B;
+    background: #5a278b;
+    border: 1px solid #5a278b;
     border-radius: 3px;
   }
 `;
@@ -656,5 +750,6 @@ export {
   ProjectSection,
   TagSection,
   ModalDiv,
+  MakeItContentDiv,
   BtnDiv,
 };

@@ -13,21 +13,21 @@ const { User } = require("../model/User.js");
 router.post("/getMyPortfolio", (req, res) => {
   let temp = req.body;
   ProdPortfolio.find(temp)
-  .exec()
-  .then((portfolio) => {
-    return res.status(200).json({
-      success: true,
-      portfolio: portfolio,
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
-      err: err,
+    .exec()
+    .then((portfolio) => {
+      return res.status(200).json({
+        success: true,
+        portfolio: portfolio,
+      });
     })
-  })
-})
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+        err: err,
+      });
+    });
+});
 
 router.post(
   "/prod/profile",
@@ -53,49 +53,11 @@ router.post("/upload/getProject", (req, res) => {
 
 router.post("/prod/submit", (req, res) => {
   let temp = req.body;
-  Counter.findOne({name: "counter"})
-  .exec()
-  .then((counter) => {
-    temp.url = counter.portfolioNum;
-    User.findOne({uid: req.body.uid})
+  Counter.findOne({ name: "counter" })
     .exec()
-    .then((userInfo) => {
-      temp.auther = userInfo._id;
-      const NewProdPortfolio = new ProdPortfolio(temp);
-      NewProdPortfolio.save().then(() => {
-        Counter.findOneAndUpdate({name: "counter"},{ $inc : {portfolioNum: 1}})
-        .exec()
-        .then(() => {
-          return res.status(200).json({
-            success: true,
-          });
-        })
-      })
-    })
-  }).catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
-    });
-  })
-});
-
-
-
-router.post("/pro/submit", (req, res) => {
-  let temp = req.body;
-
-  Counter.findOne({name: "counter"})
-  .exec()
-  .then((counter) => {
-    temp.url = counter.portfolioNum;
-    User.findOne({uid: req.body.uid})
-    .exec()
-    .then((userInfo) => {
-      temp.auther = userInfo._id;
-      const NewProPortfolio = new ProPortfolio(temp);
-      NewProPortfolio.save().then(() => {
-        Counter.findOneAndUpdate({name: "counter"},{ $inc : {portfolioNum: 1}})
+    .then((counter) => {
+      temp.url = counter.portfolioNum;
+      User.findOne({ uid: req.body.uid })
         .exec()
         .then((userInfo) => {
           temp.auther = userInfo._id;
@@ -103,7 +65,7 @@ router.post("/pro/submit", (req, res) => {
           NewProdPortfolio.save().then(() => {
             Counter.findOneAndUpdate(
               { name: "counter" },
-              { $inc: { prodNum: 1 } }
+              { $inc: { portfolioNum: 1 } }
             )
               .exec()
               .then(() => {
@@ -122,13 +84,62 @@ router.post("/pro/submit", (req, res) => {
     });
 });
 
+router.post("/pro/submit", (req, res) => {
+  let temp = req.body;
 
+  Counter.findOne({ name: "counter" })
+    .exec()
+    .then((counter) => {
+      temp.url = counter.portfolioNum;
+      User.findOne({ uid: req.body.uid })
+        .exec()
+        .then((userInfo) => {
+          temp.auther = userInfo._id;
+          const NewProPortfolio = new ProPortfolio(temp);
+          NewProPortfolio.save().then(() => {
+            Counter.findOneAndUpdate(
+              { name: "counter" },
+              { $inc: { portfolioNum: 1 } }
+            ).then(() => {
+              return res.status(200).json({
+                success: true,
+              });
+            });
+          });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
+    });
+});
+
+//플젝 찾기
+router.post("/getMyProject", (req, res) => {
+  Project.find({
+    $or: [
+      { uid: req.body.uid },
+      { "participater.uid": req.body.uid, "participater.accept": true },
+    ],
+  })
+    .exec()
+    .then((projectList) => {
+      res.status(200).json({
+        success: true,
+        projectList: projectList,
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        success: false,
+      });
+    });
+});
 
 //포폴 찾기
-router.post("/pf/getList", (req, res) => {
-
-})
-
+router.post("/pf/getList", (req, res) => {});
 
 //프로젝트
 router.post(
@@ -177,6 +188,7 @@ router.post("/project/submit", (req, res) => {
     location: req.body.location,
     timeline: req.body.timeline,
     tag: req.body.tag,
+    uid: req.body.uid,
   };
 
   Counter.findOne({ name: "counter" })
