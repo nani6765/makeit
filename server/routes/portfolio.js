@@ -107,13 +107,13 @@ router.post("/pro/submit", (req, res) => {
             });
           });
         });
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(400).json({
-        success: false,
-      });
+      })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
     });
+  });
 });
 
 //플젝 찾기
