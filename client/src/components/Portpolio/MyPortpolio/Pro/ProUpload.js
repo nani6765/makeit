@@ -6,7 +6,8 @@ import { CommonMarginDiv } from "../../../CommonCSS.js";
 import { ProdUploadDiv } from "../../CSS/MyPortpolio/ProductionCSS";
 import Title from "./UploadContent/Title.js";
 import Info from "./UploadContent/Info.js";
-import Introduce from "./UploadContent/Introduce.js"
+import Introduce from "./UploadContent/Introduce.js";
+import Profile from "./UploadContent/Profile.js";
 import Project from "./UploadContent/Project.js";
 import Tag from "./UploadContent/Tag.js";
 
@@ -14,7 +15,7 @@ import axios from "axios";
 
 function ProUpload() {
   const history = useHistory();
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
 
   const [Titletext, setTitletext] = useState("");
   const [ProfileImg, setProfileImg] = useState(
@@ -31,6 +32,7 @@ function ProUpload() {
   const [Field, setField] = useState("");
   const [Location, setLocation] = useState("");
   const [ProIntroduce, setProIntroduce] = useState("");
+  const [ProfileImgList, setProfileImgList] = useState([]);
   const [ProjectArr, setProjectArr] = useState([]);
   const [TagArr, setTagArr] = useState([]);
   const [IsPublic, setIsPublic] = useState(false);
@@ -70,14 +72,14 @@ function ProUpload() {
         alert("게시글 등록 실패");
       }
     });
-  }
+  };
   return (
     <CommonMarginDiv>
       <ProdUploadDiv>
         <div className="btnDiv">
           <button
             className={IsPublic ? "" : "private"}
-            onClick={() => IsPublic ? setIsPublic(false) : setIsPublic(true)}
+            onClick={() => (IsPublic ? setIsPublic(false) : setIsPublic(true))}
           >
             {IsPublic ? "공개" : "비공개"}
           </button>
@@ -86,7 +88,7 @@ function ProUpload() {
           </button>
         </div>
         <form>
-          <Title Titletext={Titletext} setTitletext={setTitletext}/>
+          <Title Titletext={Titletext} setTitletext={setTitletext} />
           <Info
             ProfileImg={ProfileImg}
             setProfileImg={setProfileImg}
@@ -106,6 +108,10 @@ function ProUpload() {
           <Introduce
             ProIntroduce={ProIntroduce}
             setProIntroduce={setProIntroduce}
+          />
+          <Profile
+            ProfileImgList={ProfileImgList}
+            setProfileImgList={setProfileImgList}
           />
           <Project ProjectArr={ProjectArr} setProjectArr={setProjectArr} />
           <Tag TagArr={TagArr} setTagArr={setTagArr} />

@@ -191,7 +191,6 @@ const InfoSection = styled.section`
   }
 `;
 
-
 const ProInfoSection = styled.section`
   display: grid;
   grid-template-columns: 1fr 1.5fr 1.5fr;
@@ -242,11 +241,11 @@ const ProInfoSection = styled.section`
     display: flex;
     align-content: center;
     align-items: flex-start;
-    &.location{
-      label{
+    &.location {
+      label {
         width: 10%;
       }
-      div{
+      div {
         width: 90%;
       }
     }
@@ -282,7 +281,7 @@ const ProInfoSection = styled.section`
           }
         }
       }
-      &.dropdown{
+      &.dropdown {
         height: 100%;
         display: flex;
         align-items: center;
@@ -301,7 +300,7 @@ const ProInfoSection = styled.section`
       }
     }
   }
-  .gender{
+  .gender {
     grid-area: gender;
   }
   .name {
@@ -340,6 +339,53 @@ const IntroSection = styled.section`
       background-color: #c6c6c6;
       border-radius: 15px;
       box-shadow: inset 0px 0px 5px white;
+    }
+  }
+`;
+
+const ProfileSection = styled.section`
+  .list {
+    display: flex;
+    flex-wrap: no-wrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    article {
+      width: 300px;
+      flex: 0 0 auto;
+      position: relative;
+      margin-right: 1rem;
+      label {
+        width: 100%;
+      }
+      figure {
+        width: 100%;
+        padding-top: 62.5%;
+        position: relative;
+        border: 1px solid #9a9a9a;
+        box-sizing: border-box;
+        border-radius: 8px;
+        margin-bottom: 0px;
+        overflow: hidden;
+        img {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 100%;
+          transform: translate(-50%, -50%);
+        }
+        &.add {
+          padding-top: 0px;
+          height: 100%;
+          min-height: 187.5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          input {
+            display: none;
+          }
+        }
+      }
     }
   }
 `;
@@ -537,36 +583,36 @@ const ModalDiv = styled.div`
         }
       }
     }
-    &.uploadModal{
+    &.uploadModal {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: auto auto;
-      grid-template-areas: 
-      "title title"
-      "pro prod";
+      grid-template-areas:
+        "title title"
+        "pro prod";
       grid-gap: 2rem;
       padding: 50px 20px;
       user-select: none;
 
-      .title{
+      .title {
         grid-area: title;
         font-size: 1.75rem;
         font-weight: bold;
         text-align: center;
       }
-      .pro{
+      .pro {
         grid-area: pro;
       }
-      .prod{
+      .prod {
         grid-area: prod;
       }
-      .box{
+      .box {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
 
-        border: 1px solid #EEEEEE;
+        border: 1px solid #eeeeee;
         border-radius: 10px;
         cursor: pointer;
         padding: 20px;
@@ -581,7 +627,7 @@ const ModalDiv = styled.div`
           font-size: 1.5rem;
           line-height: 2rem;
           font-weight: bold;
-          span{
+          span {
             font-size: 1.25rem;
           }
         }
@@ -606,6 +652,7 @@ export {
   InfoSection,
   ProInfoSection,
   IntroSection,
+  ProfileSection,
   ProjectSection,
   TagSection,
   ModalDiv,

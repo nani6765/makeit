@@ -1,7 +1,11 @@
 var router = require("express").Router();
 const setUpload = require("../module/multer/upload.js");
 
-const { Project, ProdPortfolio, ProPortfolio } = require("../model/Portfolio.js");
+const {
+  Project,
+  ProdPortfolio,
+  ProPortfolio,
+} = require("../model/Portfolio.js");
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 
@@ -27,7 +31,7 @@ router.post("/getMyPortfolio", (req, res) => {
 
 router.post(
   "/prod/profile",
-  setUpload(`makeit/portfoilo`),
+  setUpload(`makeit/portfolio`),
   (req, res, next) => {
     return res.json({
       success: true,
@@ -37,14 +41,15 @@ router.post(
 );
 
 router.post("/upload/getProject", (req, res) => {
-  Project.find({uid : req.body.uid}).exec().then((doc) => {
-    return res.json({
-      success: true,
-      projectList: doc,
+  Project.find({ uid: req.body.uid })
+    .exec()
+    .then((doc) => {
+      return res.json({
+        success: true,
+        projectList: doc,
+      });
     });
-  })
-  }
-);
+});
 
 router.post("/prod/submit", (req, res) => {
   let temp = req.body;
@@ -92,19 +97,29 @@ router.post("/pro/submit", (req, res) => {
       NewProPortfolio.save().then(() => {
         Counter.findOneAndUpdate({name: "counter"},{ $inc : {portfolioNum: 1}})
         .exec()
-        .then(() => {
-          return res.status(200).json({
-            success: true,
+        .then((userInfo) => {
+          temp.auther = userInfo._id;
+          const NewProdPortfolio = new ProdPortfolio(temp);
+          NewProdPortfolio.save().then(() => {
+            Counter.findOneAndUpdate(
+              { name: "counter" },
+              { $inc: { prodNum: 1 } }
+            )
+              .exec()
+              .then(() => {
+                return res.status(200).json({
+                  success: true,
+                });
+              });
           });
-        })
-      })
+        });
     })
-  }).catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
     });
-  })
 });
 
 
@@ -118,7 +133,7 @@ router.post("/pf/getList", (req, res) => {
 //프로젝트
 router.post(
   "/project/profile",
-  setUpload(`makeit/portfoilo/project`),
+  setUpload(`makeit/portfolio/project`),
   (req, res, next) => {
     return res.json({
       success: true,
@@ -127,14 +142,16 @@ router.post(
   }
 );
 
-
 router.post("/project/getDetail", (req, res) => {
   Project.findOne({ url: req.body.url })
-    .populate(["auther", {path: "participater.portfolio", model: "ProdPortfolio"}])
-    .then((project) => { 
+    .populate([
+      "auther",
+      { path: "participater.portfolio", model: "ProdPortfolio" },
+    ])
+    .then((project) => {
       return project.populate({
         path: "participater.portfolio",
-      })
+      });
     })
     //.exec()
     .then((projectInfo) => {
@@ -169,7 +186,6 @@ router.post("/project/submit", (req, res) => {
       User.findOne({ uid: req.body.uid })
         .exec()
         .then((userInfo) => {
-
           temp.auther = userInfo._id;
           const NewProject = new Project(temp);
           NewProject.save().then(() => {
@@ -195,16 +211,16 @@ router.post("/project/submit", (req, res) => {
 });
 
 router.post("/project/getPortfolioList", (req, res) => {
-  ProdPortfolio.find({uid: req.body.uid})
-  .populate("auther")
-  .exec()
-  .then((total) => {
-    return res.status(200).json({
-      success: true,
-      portList: [...total],
+  ProdPortfolio.find({ uid: req.body.uid })
+    .populate("auther")
+    .exec()
+    .then((total) => {
+      return res.status(200).json({
+        success: true,
+        portList: [...total],
+      });
     });
-  })
-})
+});
 
 router.post("/project/Participate", (req, res) => {
   let temp = {
@@ -213,17 +229,21 @@ router.post("/project/Participate", (req, res) => {
     accept: false,
     uid: req.body.uid,
   };
-  Project.findOneAndUpdate({_id : req.body.projectId} , { $push : { participater : temp }})
-  .exec()
-  .then((doc) => {
-    return res.status(200).json({
-      success: true,
+  Project.findOneAndUpdate(
+    { _id: req.body.projectId },
+    { $push: { participater: temp } }
+  )
+    .exec()
+    .then((doc) => {
+      return res.status(200).json({
+        success: true,
+      });
+    })
+    .catch((err) => {
+      return res.status(400).json({
+        success: false,
+      });
     });
-  }).catch((err) => {
-    return res.status(400).json({
-      success: false,
-    });
-  })
-})
+});
 
 module.exports = router;
