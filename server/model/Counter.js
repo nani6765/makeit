@@ -28,9 +28,9 @@ const counter = mongoose.Schema(
     projectNum: {
       type: Number,
     },
-    prodNum: {
+    portfolioNum: {
       type: Number,
-    }
+    },
   },
   { collection: "counter" }
 );

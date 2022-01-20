@@ -208,8 +208,8 @@ function Info(props) {
           <div className="contentDiv">
             <input
               type="text"
-              value={props.ProdLocation}
-              onChange={(e) => props.setProdLocation(e.currentTarget.value)}
+              value={props.Location}
+              onChange={(e) => props.setLocation(e.currentTarget.value)}
             />
           </div>
         </div>

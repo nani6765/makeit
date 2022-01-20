@@ -590,6 +590,16 @@ const ModalDiv = styled.div`
   }
 `;
 
+const BtnDiv = styled.div`
+  margin: 1rem 0;
+  button {
+    color: white;
+    background: #5A278B;
+    border: 1px solid #5A278B;
+    border-radius: 3px;
+  }
+`;
+
 export {
   ProdUploadDiv,
   TitleSection,
@@ -599,4 +609,5 @@ export {
   ProjectSection,
   TagSection,
   ModalDiv,
+  BtnDiv,
 };
