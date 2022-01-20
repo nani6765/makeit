@@ -28,6 +28,7 @@ function ProUpload() {
   ]);
   const [Name, setName] = useState("");
   const [ProName, setProName] = useState("");
+  const [Gender, setGender] = useState("");
   const [Field, setField] = useState("");
   const [Location, setLocation] = useState("");
   const [ProIntroduce, setProIntroduce] = useState("");
@@ -52,7 +53,8 @@ function ProUpload() {
       titletext: Titletext,
       profileImg: ProfileImg,
       Name: Name,
-      ProName: ProName,
+      proName: ProName,
+      gender: Gender,
       field: Field,
       Location: Location,
       Introduce: ProIntroduce,
@@ -96,6 +98,8 @@ function ProUpload() {
             setName={setName}
             ProName={ProName}
             setProName={setProName}
+            Gender={Gender}
+            setGender={setGender}
             Field={Field}
             setField={setField}
             Location={Location}

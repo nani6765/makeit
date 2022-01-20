@@ -83,8 +83,14 @@ const proPortfolioSchema = mongoose.Schema({
   Name: {
     type: String,
   },
-  fieldArr: {
-    type: Array,
+  proName: {
+    type: String,
+  },
+  gender: {
+    type: String,
+  },
+  field: {
+    type: String,
   },
   Location: {
     type: Array,

@@ -9,7 +9,26 @@ const {
 const { Counter } = require("../model/Counter.js");
 const { User } = require("../model/User.js");
 
-//
+//내 포폴
+router.post("/getMyPortfolio", (req, res) => {
+  let temp = req.body;
+  ProdPortfolio.find(temp)
+  .exec()
+  .then((portfolio) => {
+    return res.status(200).json({
+      success: true,
+      portfolio: portfolio,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+      err: err,
+    })
+  })
+})
+
 router.post(
   "/prod/profile",
   setUpload(`makeit/portfolio`),
@@ -34,11 +53,49 @@ router.post("/upload/getProject", (req, res) => {
 
 router.post("/prod/submit", (req, res) => {
   let temp = req.body;
-  Counter.findOne({ name: "counter" })
+  Counter.findOne({name: "counter"})
+  .exec()
+  .then((counter) => {
+    temp.url = counter.portfolioNum;
+    User.findOne({uid: req.body.uid})
     .exec()
-    .then((counter) => {
-      temp.url = counter.prodNum;
-      User.findOne({ uid: req.body.uid })
+    .then((userInfo) => {
+      temp.auther = userInfo._id;
+      const NewProdPortfolio = new ProdPortfolio(temp);
+      NewProdPortfolio.save().then(() => {
+        Counter.findOneAndUpdate({name: "counter"},{ $inc : {portfolioNum: 1}})
+        .exec()
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+          });
+        })
+      })
+    })
+  }).catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+    });
+  })
+});
+
+
+
+router.post("/pro/submit", (req, res) => {
+  let temp = req.body;
+
+  Counter.findOne({name: "counter"})
+  .exec()
+  .then((counter) => {
+    temp.url = counter.portfolioNum;
+    User.findOne({uid: req.body.uid})
+    .exec()
+    .then((userInfo) => {
+      temp.auther = userInfo._id;
+      const NewProPortfolio = new ProPortfolio(temp);
+      NewProPortfolio.save().then(() => {
+        Counter.findOneAndUpdate({name: "counter"},{ $inc : {portfolioNum: 1}})
         .exec()
         .then((userInfo) => {
           temp.auther = userInfo._id;
@@ -65,9 +122,15 @@ router.post("/prod/submit", (req, res) => {
     });
 });
 
-router.post("/pf/getList", (req, res) => {});
 
-//
+
+//포폴 찾기
+router.post("/pf/getList", (req, res) => {
+
+})
+
+
+//프로젝트
 router.post(
   "/project/profile",
   setUpload(`makeit/portfolio/project`),
@@ -177,37 +240,6 @@ router.post("/project/Participate", (req, res) => {
       });
     })
     .catch((err) => {
-      return res.status(400).json({
-        success: false,
-      });
-    });
-});
-
-router.post("/pro/submit", (req, res) => {
-  let temp = {
-    uid: req.body.uid,
-    url: 1,
-    title: "1",
-    proName: "1",
-    FieldArr: ["1", "2"],
-    ProLocation: "1",
-    ProIntroduce: "1",
-    TagArr: ["1", "2"],
-    public: true,
-  };
-  User.findOne({ uid: req.body.uid })
-    .exec()
-    .then((userInfo) => {
-      temp.auther = userInfo._id;
-      const Pro = new ProPortfolio(temp);
-      Pro.save().then(() => {
-        return res.status(200).json({
-          success: true,
-        });
-      });
-    })
-    .catch((err) => {
-      console.log(err);
       return res.status(400).json({
         success: false,
       });
