@@ -28,6 +28,7 @@
     "react-dropzone": "^11.3.2",
     "react-easy-crop": "3.5.2",
     "react-google-login": "5.2.2",
+    "react-image-gallery": "^1.2.7",
     "react-indiana-drag-scroll": "^2.0.1",
     "react-kakao-login": "2.1.0",
     "react-player": "^2.9.0",

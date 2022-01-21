@@ -29,6 +29,24 @@ router.post("/getMyPortfolio", (req, res) => {
     });
 });
 
+router.post("/get/Detail", (req, res) => {
+  ProdPortfolio.findOne({ url: req.body.url })
+    .populate("auther, '-logs -_id -updatedAt -createdAt'")
+    .exec()
+    .then((doc) => {
+      res.status(200).json({
+        success: doc ? true : false,
+        portfolio: doc,
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        success: doc ? true : false,
+        portfolio: doc,
+      });
+    });
+});
+
 router.post(
   "/prod/profile",
   setUpload(`makeit/portfolio`),
@@ -107,13 +125,13 @@ router.post("/pro/submit", (req, res) => {
             });
           });
         });
-      })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
     });
-  });
 });
 
 //플젝 찾기
@@ -159,12 +177,7 @@ router.post("/project/getDetail", (req, res) => {
       "auther",
       { path: "participater.portfolio", model: "ProdPortfolio" },
     ])
-    .then((project) => {
-      return project.populate({
-        path: "participater.portfolio",
-      });
-    })
-    //.exec()
+    .exec()
     .then((projectInfo) => {
       return res.status(200).json({
         success: true,
