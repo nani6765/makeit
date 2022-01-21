@@ -29,6 +29,24 @@ router.post("/getMyPortfolio", (req, res) => {
     });
 });
 
+router.post("/get/Detail", (req, res) => {
+  ProdPortfolio.findOne({ url: req.body.url })
+    .populate("auther, '-logs -_id -updatedAt -createdAt'")
+    .exec()
+    .then((doc) => {
+      res.status(200).json({
+        success: doc ? true : false,
+        portfolio: doc,
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        success: doc ? true : false,
+        portfolio: doc,
+      });
+    });
+});
+
 router.post(
   "/prod/profile",
   setUpload(`makeit/portfolio`),
@@ -107,13 +125,13 @@ router.post("/pro/submit", (req, res) => {
             });
           });
         });
-      })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
     });
-  });
 });
 
 //플젝 찾기
@@ -139,9 +157,77 @@ router.post("/getMyProject", (req, res) => {
 });
 
 //포폴 찾기
-router.post("/pf/getList", (req, res) => {});
+router.post("/pf/getList", (req, res) => {  
+  let temp = req.body;
+
+  let filter = {
+    public: true,
+    $or: [],
+  };
+
+  if (temp.type) {
+    for (let i = 0; i < temp.type.length; i++) {
+      filter["$or"].push({ type: temp.type[i] });
+    }
+  }
+  if (temp.class) {
+    for (let i = 0; i < temp.class.length; i++) {
+      filter["$or"].push({ class: temp.class[i] });
+    }
+  }
+  if (temp.filmType) {
+    for (let i = 0; i < temp.filmType.length; i++) {
+      filter["$or"].push({ filmType: temp.filmType[i] });
+    }
+  }
+
+  if (temp.field) {
+    for (let i = 0; i < temp.field.length; i++) {
+      filter["$or"].push({ field: temp.field[i] });
+    }
+  }
+
+  if (filter.$or && !filter.$or.length) delete filter.$or;
+
+  //최신순&&인기순 정렬
+  let sort = {};
+  if (temp.sort === "최신순") {
+    sort.createdAt = -1;
+  } else {
+    sort.likeNum = -1;
+  }
+
+  ProPortfolio.find(filter)
+  .exec()
+  .then((len) => {
+    ProPortfolio.find(filter)
+    .populate("auther, '-logs -_id -updatedAt -createdAt'")
+    .sort(sort)
+    .skip(req.body.skip)
+    .limit(16)
+    .exec()
+    .then((portfolio) => {
+      return res.status(200).json({
+        success: true,
+        portfolio: portfolio,
+        len: len,
+      });
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+    });
+  });
+
+});
 
 //프로젝트
+router.post("/project/getList", (req, res) => {
+  
+})
+
 router.post(
   "/project/profile",
   setUpload(`makeit/portfolio/project`),
@@ -159,12 +245,7 @@ router.post("/project/getDetail", (req, res) => {
       "auther",
       { path: "participater.portfolio", model: "ProdPortfolio" },
     ])
-    .then((project) => {
-      return project.populate({
-        path: "participater.portfolio",
-      });
-    })
-    //.exec()
+    .exec()
     .then((projectInfo) => {
       return res.status(200).json({
         success: true,

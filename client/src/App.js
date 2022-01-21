@@ -57,11 +57,12 @@ import ParticipateEdit from "./components/Participate/view/upload/ParticipateEdi
 import PartDetail from "./components/Participate/view/detail/PartDetail.js";
 
 //Protfolio
-import Portfolio from "./components/Portpolio/Portfolio.js";
-import ProdUpload from "./components/Portpolio/MyPortpolio/Production/ProdUpload.js";
-import ProUpload from "./components/Portpolio/MyPortpolio/Pro/ProUpload.js";
-import ProjectUpload from "./components/Portpolio/Project/upload/ProjectUpload.js";
-import ProjectDetail from "./components/Portpolio/Project/detail/ProjectDetail.js";
+import Portfolio from "./components/Portfolio/Portfolio.js";
+import PortfolioDetail from "./components/Portfolio/MyPortfolio/List/PortfolioDetail.js";
+import ProdUpload from "./components/Portfolio/MyPortfolio/Production/ProdUpload.js";
+import ProUpload from "./components/Portfolio/MyPortfolio/Pro/ProUpload.js";
+import ProjectUpload from "./components/Portfolio/Project/upload/ProjectUpload.js";
+import ProjectDetail from "./components/Portfolio/Project/detail/ProjectDetail.js";
 
 import MapPicker from "./components/utils/view/Area/MapPicker.js";
 function App() {
@@ -175,8 +176,9 @@ function App() {
           <Route exact path="/participate/post/:url" component={PartDetail} />
           <Route path="/participate" component={Participate} />
 
-          {/*Portpolio*/}
+          {/*Portfolio*/}
           <Route exact path="/portfolio" component={Portfolio} />
+          <Route exact path="/portfolio/:url" component={PortfolioDetail} />
           <Route exact path="/portfolio/prod/upload" component={ProdUpload} />
           <Route exact path="/portfolio/pro/upload" component={ProUpload} />
           <Route
