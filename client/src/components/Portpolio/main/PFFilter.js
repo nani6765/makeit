@@ -9,18 +9,18 @@ function PFFilter(props) {
 
     const PortfolioTypeFilterManager = (e) => {
       let temp = props.URL;
-      if (temp.class) {
-        if (temp.class.includes(e.target.id)) {
-          var idx = temp.class.indexOf(e.target.id);
+      if (temp.type) {
+        if (temp.type.includes(e.target.id)) {
+          var idx = temp.type.indexOf(e.target.id);
           if (idx !== -1) {
-            temp.class.splice(idx, 1);
+            temp.type.splice(idx, 1);
           }
         } else {
-          temp.class.push(e.target.id);
+          temp.type.push(e.target.id);
         }
       } else {
-        temp.class = [];
-        temp.class.push(e.target.id);
+        temp.type = [];
+        temp.type.push(e.target.id);
       }
       let temp2 = qs.stringify(temp);
       history.push(`?${decodeURI(temp2)}`);
@@ -68,18 +68,18 @@ function PFFilter(props) {
 
     const FieldFilterManager = (e) => {
       let temp = props.URL;
-      if (temp.class) {
-        if (temp.class.includes(e.target.id)) {
-          var idx = temp.class.indexOf(e.target.id);
+      if (temp.field) {
+        if (temp.field.includes(e.target.id)) {
+          var idx = temp.field.indexOf(e.target.id);
           if (idx !== -1) {
-            temp.class.splice(idx, 1);
+            temp.field.splice(idx, 1);
           }
         } else {
-          temp.class.push(e.target.id);
+          temp.field.push(e.target.id);
         }
       } else {
-        temp.class = [];
-        temp.class.push(e.target.id);
+        temp.field = [];
+        temp.field.push(e.target.id);
       }
       let temp2 = qs.stringify(temp);
       history.push(`?${decodeURI(temp2)}`);
@@ -107,42 +107,30 @@ function PFFilter(props) {
             <div className='left'>
                 <div className="labelArea">구분</div>
                 <div className="contentArea">
-                <div>
-                    <input
-                    className='filterInput'
-                    type="checkbox"
-                    id="prod"
-                    value="프로덕션"
-                    onClick={(e) => {
-                        PortfolioTypeFilterManager(e);
-                    }}
-                    />
-                    <label htmlFor="prod">프로덕션</label>
-                </div>
-                <div>
-                    <input
-                    className='filterInput'
-                    type="checkbox"
-                    id="pro"
-                    value="프로"
-                    onClick={(e) => {
-                        PortfolioTypeFilterManager(e);
-                    }}
-                    />
-                    <label htmlFor="pro">프로</label>
-                </div>
-                <div>
-                    <input
-                    className='filterInput'
-                    type="checkbox"
-                    id="portfolioEtc"
-                    value="기타"
-                    onClick={(e) => {
-                        PortfolioTypeFilterManager(e);
-                    }}
-                    />
-                    <label htmlFor="portfolioEtc">기타</label>
-                </div>
+                  <div>
+                      <input
+                      className='filterInput'
+                      type="checkbox"
+                      id="prod"
+                      value="프로덕션"
+                      onClick={(e) => {
+                          PortfolioTypeFilterManager(e);
+                      }}
+                      />
+                      <label htmlFor="prod">프로덕션</label>
+                  </div>
+                  <div>
+                      <input
+                      className='filterInput'
+                      type="checkbox"
+                      id="pro"
+                      value="프로"
+                      onClick={(e) => {
+                          PortfolioTypeFilterManager(e);
+                      }}
+                      />
+                      <label htmlFor="pro">프로</label>
+                  </div>
                 </div>
             </div>
             <div className='right'>

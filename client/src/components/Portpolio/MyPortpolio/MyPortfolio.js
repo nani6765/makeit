@@ -24,30 +24,35 @@ function MyPortfolio(props) {
       setisLoading(false);
       alert("로그인이 필요한 서비스입니다.");
       history.push("/login");
-    } else {
-      let body = {
-        uid: user.userData.uid,
-      };
-
-      if (props.URL.subCategory === "공개된 포트폴리오") {
-        body.public = true;
-      }
-      axios.post("/api/portfolio/getMyPortfolio", body).then((response) => {
-        if (response.data.success) {
-          console.log(response.data.portfolio);
-          setPortfolioList([...response.data.portfolio]);
-        } else {
-          alert("오류 발생", response.data.err);
-        }
-        setisLoading(false);
-      });
     }
+    setisLoading(false);
   }, []);
+
+  useEffect(() => {
+    setisLoading(true);
+    let body = {
+      uid: user.userData.uid,
+    };
+
+    if (props.URL.subCategory === "공개된 포트폴리오") {
+      body.public = true;
+    }
+
+    axios.post("/api/portfolio/getMyPortfolio", body).then((response) => {
+      if (response.data.success) {
+        console.log(response.data.portfolio);
+        setPortfolioList([...response.data.portfolio]);
+      } else {
+        alert("오류 발생", response.data.err);
+      }
+      setisLoading(false);
+    });
+  }, [props.URL])
 
   return (
     <CommonMarginDiv>
       <BtnDiv>
-        <button onClick={() => setModalFlag(true)}>등록</button>
+        <button onClick={() => setModalFlag(true)}>추가하기</button>
       </BtnDiv>
 
       {ModalFlag && <UploadModal setModalFlag={setModalFlag} />}
@@ -56,7 +61,7 @@ function MyPortfolio(props) {
       ) : (
         PortfolioList.map((temp, idx) => {
           return (
-            <ParticipateSection key={idx} onClick={(e) => {}}>
+            <ParticipateSection key={idx} onClick={(e) => {history.push(`/portfolio/${temp.url}`)}}>
               <figure className="img">
                 <img src={temp.profileImg} />
               </figure>

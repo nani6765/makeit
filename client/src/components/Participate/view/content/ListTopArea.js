@@ -17,22 +17,22 @@ function ListTopArea(props) {
           <Dropdown.Item
             onClick={() => {
               let temp = props.URL;
-              temp.sort = "인기순";
+              temp.sort = "hot";
               temp.pIdx = 0;
               history.push(`?${decodeURI(qs.stringify(temp))}`);
             }}
-            className={props.URL.sort === "인기순" ? "active" : null}
+            className={props.URL.sort === "hot" ? "active" : null}
           >
             인기순
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
               let temp = props.URL;
-              temp.sort = "최신순";
+              temp.sort = "new";
               temp.pIdx = 0;
               history.push(`?${decodeURI(qs.stringify(temp))}`);
             }}
-            className={props.URL.sort === "최신순" ? "active" : null}
+            className={props.URL.sort === "new" ? "active" : null}
           >
             최신순
           </Dropdown.Item>
