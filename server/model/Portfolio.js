@@ -40,16 +40,11 @@ const prodPortfolioSchema = mongoose.Schema(
     projectArr: {
       type: Array,
     },
-    /*
-  MakeitProjectArr: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "projectSchema",
-    },
-  ],
-  */
     profileImg: {
       type: String,
+    },
+    linkArr: {
+      type: Array,
     },
     type: {
       type: String,
@@ -104,16 +99,11 @@ const proPortfolioSchema = mongoose.Schema(
     projectArr: {
       type: Array,
     },
-    /*
-    MakeitProjectArr: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "projectSchema",
-    },
-  ],
-  */
     profileImg: {
       type: String,
+    },
+    linkArr: {
+      type: Array,
     },
     profileImgList: {
       type: Array,
