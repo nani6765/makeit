@@ -19,7 +19,7 @@ const DetailDiv = styled.div`
   }
   .info {
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1.5fr;
+    grid-template-columns: 300px 1fr 1fr;
     grid-template-rows: 50px 50px 1fr;
     grid-template-areas:
       "profileImg name proName"
@@ -32,8 +32,7 @@ const DetailDiv = styled.div`
         cursor: pointer;
         border-radius: 5px;
         width: 100%;
-        height: auto;
-        max-height: 200px;
+        height: 400px;
         border-radius: 15px;
         border: 1px solid #c6c6c6;
       }
@@ -56,7 +55,7 @@ const DetailDiv = styled.div`
       width: 100%;
       height: 100%;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       margin-left: 1rem;
       label {
         width: 30%;
@@ -85,7 +84,7 @@ const DetailDiv = styled.div`
       grid-area: location;
       margin-left: 1rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       label {
         width: 15%;
         margin-bottom: 0px;
