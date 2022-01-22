@@ -29,7 +29,7 @@ function PortplioDetail(props) {
         history.push("/portfolio");
       }
       if (!response.data.portfolio.public) {
-        if (user.uid !== response.data.portfolio.uid) {
+        if (user.userData.uid !== response.data.portfolio.uid) {
           alert("비공개 포트폴리오입니다.");
           history.push("/portfolio");
         }

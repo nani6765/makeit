@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DetailDiv } from "../../CSS/MyPortpolio/DetailCSS.js";
+import TextEllipsis from "react-text-ellipsis";
 import ImageModal from "./ImageModal.js";
 
 function ProContent(props) {
@@ -40,7 +41,7 @@ function ProContent(props) {
     <>
       <DetailDiv>
         <p className="title">{props.Portfolio.titletext}</p>
-        <section className="info">
+        <section className="info pro">
           <div className="profileImg">
             <img src={props.Portfolio.profileImg} />
             <div className="links">
@@ -49,11 +50,15 @@ function ProContent(props) {
                   /youtu|instagram|facebook|linkedin|twitter|vimeo/i
                 );
                 let Tag = LinkTypeCheck(key);
-                return (
-                  <a key={idx} href={item.value} target="_blank">
-                    <span>{Tag}</span>
-                  </a>
-                );
+                if (item.value == "") {
+                  return null;
+                } else {
+                  return (
+                    <a key={idx} href={item.value} target="_blank">
+                      <span>{Tag}</span>
+                    </a>
+                  );
+                }
               })}
             </div>
           </div>
@@ -100,6 +105,27 @@ function ProContent(props) {
                   </article>
                 );
               }
+            })}
+          </div>
+        </section>
+        <section className="project">
+          <p className="sub">참여 프로젝트</p>
+          <div className="list">
+            {props.Portfolio.projectArr.map((project, idx) => {
+              console.log(project);
+              return (
+                <div className="project" key={idx}>
+                  <p className="type">
+                    {project.type == "makeit"
+                      ? "메이킷 프로젝트"
+                      : "외부프로젝트"}
+                  </p>
+                  <p className="title">{project.content.title}</p>{" "}
+                  <TextEllipsis lines={2} tag={"p"} tagClass={"content"}>
+                    {project.content.content}
+                  </TextEllipsis>
+                </div>
+              );
             })}
           </div>
         </section>

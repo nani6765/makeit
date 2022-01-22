@@ -123,7 +123,7 @@ const InfoSection = styled.section`
       text-align: center;
     }
     div {
-      width: 85%;
+      width: 100%;
       &.contentDiv {
         display: flex;
         width: 80%;
@@ -152,7 +152,7 @@ const InfoSection = styled.section`
             background: white;
             border: 2px solid rgba(179, 82, 255, 0.24);
             border-radius: 4px;
-            margin: 0 0.5rem 0 1.5rem;
+            margin: 0 0.5rem;
             cursor: pointer;
             ${mq[1]} {
               margin: 0 0.5rem 0 1rem;
@@ -188,6 +188,41 @@ const InfoSection = styled.section`
   }
   .location {
     grid-area: location;
+    div {
+      width: 100%;
+      position: relative;
+      input,
+      .list {
+        margin-bottom: 1rem;
+      }
+      .list {
+        border: 1px solid #acb0b4;
+        padding: 5px 10px;
+        text-align: center;
+        color: #acb0b4;
+        user-select: none;
+        cursor: pointer;
+      }
+      input {
+        text-align: center;
+      }
+      button {
+        width: 100%;
+        border: 1px solid #acb0b4;
+        background-color: white;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #acb0b4;
+
+        &:hover:enabled {
+          border: 1px solid black;
+          color: black;
+          font-weight: bold;
+        }
+      }
+    }
   }
 `;
 

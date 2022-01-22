@@ -26,7 +26,7 @@ function ProjectModal(props) {
 
     let project = {
       content: {
-        id: user.uid + "_" + Date.now(),
+        id: user.userData.uid + "_" + Date.now(),
         title: ProjectTitle,
         url: ProjectURL,
         content: ProjectContent,
