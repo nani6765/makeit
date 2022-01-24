@@ -3,7 +3,39 @@ import styled from "@emotion/styled";
 const breakpoints = [1200, 576];
 const mq = breakpoints.map((bp) => `@media (max-width: ${bp}px)`);
 
-const BtnDiv = styled.div``;
+const BtnDiv = styled.div`
+  width: 100%;
+  margin-bottom: 1rem;
+  margin-top: 0rem;
+  padding-top: 2.2rem;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  position: relative;
+  button {
+    margin-left: 1rem;
+    padding: 10px 30px;
+    color: white;
+    background: #5a278b;
+    border: 1px solid #5a278b;
+    border-radius: 3px;
+    font-weight: bold;
+    &.edit {
+      color: #5a278b;
+      background: white;
+      border: 1px solid #5a278b;
+    }
+  }
+  p {
+    margin-bottom: 0px;
+    color: red;
+    position: absolute;
+    line-height: 1rem;
+    white-space: pre;
+    top: 0;
+    text-align: right;
+  }
+`;
 
 const DetailDiv = styled.div`
   width: 100%;

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { DetailDiv } from "../../CSS/MyPortpolio/DetailCSS.js";
+import { DetailDiv, BtnDiv } from "../../CSS/MyPortpolio/DetailCSS.js";
 import TextEllipsis from "react-text-ellipsis";
+import axios from "axios";
 
 function ProContent(props) {
+  const [Text, setText] = useState(``);
+
   const LinkTypeCheck = (type) => {
     if (type === null) {
       return <i className="bi bi-link-45deg" />;
@@ -59,8 +62,31 @@ function ProContent(props) {
     }
   };
 
+  const SwitchState = async () => {
+    setText(`공개 상태를 변경중입니다.\n창을 닫지 말아주세요.`);
+    let body = {
+      id: props.Portfolio._id,
+      state: props.Portfolio.public,
+    };
+    await axios
+      .post("/api/portfolio/myPortfolio/changeState", body)
+      .then(() => {
+        setText(``);
+      });
+    window.location.reload();
+  };
+
   return (
     <>
+      <BtnDiv>
+        {Text && <p>{Text}</p>}
+        <div>
+          <button onClick={() => SwitchState()}>
+            {props.Portfolio.public ? "공개" : "비공개"}
+          </button>
+          <button className="edit">수정</button>
+        </div>
+      </BtnDiv>
       <DetailDiv>
         <p className="title">{props.Portfolio.titletext}</p>
         <section className="info prod">

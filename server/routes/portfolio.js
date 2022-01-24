@@ -29,6 +29,24 @@ router.post("/getMyPortfolio", (req, res) => {
     });
 });
 
+router.post("/myPortfolio/changeState", (req, res) => {
+  ProdPortfolio.findOneAndUpdate(
+    { _id: req.body.id },
+    { public: !req.body.state }
+  )
+    .exec()
+    .then(() => {
+      res.status(200).json({
+        success: true,
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        success: false,
+      });
+    });
+});
+
 router.post("/get/Detail", (req, res) => {
   ProdPortfolio.findOne({ url: req.body.url })
     .populate("auther, '-logs -_id -updatedAt -createdAt'")
@@ -157,7 +175,7 @@ router.post("/getMyProject", (req, res) => {
 });
 
 //포폴 찾기
-router.post("/pf/getList", (req, res) => {  
+router.post("/pf/getList", (req, res) => {
   let temp = req.body;
 
   let filter = {
@@ -198,29 +216,28 @@ router.post("/pf/getList", (req, res) => {
   }
 
   ProPortfolio.find(filter)
-  .exec()
-  .then((len) => {
-    ProPortfolio.find(filter)
-    .populate("auther, '-logs -_id -updatedAt -createdAt'")
-    .sort(sort)
-    .skip(req.body.skip)
-    .limit(16)
     .exec()
-    .then((portfolio) => {
-      return res.status(200).json({
-        success: true,
-        portfolio: portfolio,
-        len: len,
-      });
+    .then((len) => {
+      ProPortfolio.find(filter)
+        .populate("auther, '-logs -_id -updatedAt -createdAt'")
+        .sort(sort)
+        .skip(req.body.skip)
+        .limit(16)
+        .exec()
+        .then((portfolio) => {
+          return res.status(200).json({
+            success: true,
+            portfolio: portfolio,
+            len: len,
+          });
+        });
     })
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
     });
-  });
-
 });
 
 //프로젝트

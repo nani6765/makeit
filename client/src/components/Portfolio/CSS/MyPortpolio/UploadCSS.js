@@ -69,13 +69,13 @@ const TitleSection = styled.section`
 const InfoSection = styled.section`
   display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: 40px 80px 40px auto;
   grid-template-areas:
     "profileImg name"
     "profileImg field"
     "profileImg location"
-    "links .";
-  grid-gap: 0.5rem;
+    ". location";
+  grid-gap: 1rem;
   .profileImg {
     grid-area: profileImg;
     label {
@@ -229,12 +229,12 @@ const InfoSection = styled.section`
 const ProInfoSection = styled.section`
   display: grid;
   grid-template-columns: 1fr 1.5fr 1.5fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: 80px 80px 80px auto;
   grid-template-areas:
     "profileImg name proName"
     "profileImg gender field"
     "profileImg location location"
-    "links . .";
+    ". location location";
   grid-gap: 0.5rem;
   .profileImg {
     grid-area: profileImg;
@@ -274,32 +274,19 @@ const ProInfoSection = styled.section`
   .infoDiv {
     width: 100%;
     display: flex;
-    align-content: center;
     align-items: flex-start;
-    &.location {
-      label {
-        width: 10%;
-      }
-      div {
-        width: 90%;
-      }
-    }
     label {
-      width: 20%;
+      width: 80px;
       margin-bottom: 0px;
       user-select: none;
       text-align: center;
-
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
+
     div {
       width: 80%;
       &.contentDiv {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         height: 100%;
         div {
           width: auto;
@@ -322,6 +309,7 @@ const ProInfoSection = styled.section`
         align-items: center;
         width: inherit;
         max-width: 80%;
+        align-items: flex-start;
       }
       input {
         width: 100%;
@@ -346,6 +334,43 @@ const ProInfoSection = styled.section`
   }
   .location {
     grid-area: location;
+    align-items: flex-start;
+
+    div {
+      width: 90%;
+      position: relative;
+      input,
+      .list {
+        margin-bottom: 1rem;
+      }
+      .list {
+        border: 1px solid #acb0b4;
+        padding: 5px 10px;
+        text-align: center;
+        color: #acb0b4;
+        user-select: none;
+        cursor: pointer;
+      }
+      input {
+        text-align: center;
+      }
+      button {
+        width: 90%;
+        border: 1px solid #acb0b4;
+        background-color: white;
+        padding: 5px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #acb0b4;
+
+        &:hover:enabled {
+          border: 1px solid black;
+          color: black;
+          font-weight: bold;
+        }
+      }
+    }
   }
 `;
 
@@ -769,7 +794,7 @@ const BtnDiv = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 1rem 0;
-  
+
   button {
     color: white;
     background: #5a278b;

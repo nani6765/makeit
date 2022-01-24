@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { ProInfoSection } from "../../../CSS/MyPortpolio/UploadCSS.js";
 import { Spinner } from "react-bootstrap";
+import MapPicker from "../../../../utils/view/Area/MapPicker";
 import LinkModal from "./LinkModal.js";
 import Select from "react-select";
 import axios from "axios";
 
 function Info(props) {
+  const ref = useRef();
+
   const [Loading, setLoading] = useState(false);
   const [LinkFlag, setLinkFlag] = useState(false);
+  const [LocatioFlag, setLocatioFlag] = useState(false);
+
   const options = [
     { value: "배우", label: "배우" },
     { value: "촬영", label: "촬영" },
@@ -104,6 +109,17 @@ function Info(props) {
     }
   };
 
+  const LocationClickFunc = (e) => {
+    e.preventDefault();
+    setLocatioFlag(true);
+  };
+
+  const LocationDeleteHandler = (idx) => {
+    let temp = [...props.Location];
+    var removed = temp.splice(idx, 1);
+    props.setLocation([...temp]);
+  };
+
   return (
     <>
       <ProInfoSection>
@@ -134,26 +150,27 @@ function Info(props) {
               <img src={props.ProfileImg} />
             </label>
           )}
-        </div>
-        <div className="links">
-          <div>
-            {props.LinkArr.map((item, idx) => {
-              let key = item.value.match(
-                /youtu|instagram|facebook|linkedin|twitter|vimeo/i
-              );
-              let Tag = LinkTypeCheck(key);
-              return (
-                <span
-                  className={item.value !== "" ? "active" : null}
-                  key={idx}
-                  onClick={() => setLinkFlag(idx + 1)}
-                >
-                  {Tag}
-                </span>
-              );
-            })}
+          <div className="links">
+            <div>
+              {props.LinkArr.map((item, idx) => {
+                let key = item.value.match(
+                  /youtu|instagram|facebook|linkedin|twitter|vimeo/i
+                );
+                let Tag = LinkTypeCheck(key);
+                return (
+                  <span
+                    className={item.value !== "" ? "active" : null}
+                    key={idx}
+                    onClick={() => setLinkFlag(idx + 1)}
+                  >
+                    {Tag}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
+
         <div className="name infoDiv">
           <label>이름</label>
           <div className="contentDiv">
@@ -219,12 +236,33 @@ function Info(props) {
         </div>
         <div className="location infoDiv">
           <label>소재지</label>
-          <div className="contentDiv">
-            <input
-              type="text"
-              value={props.Location}
-              onChange={(e) => props.setLocation(e.currentTarget.value)}
-            />
+          <div>
+            {props.Location.map((location, idx) => {
+              return (
+                <div
+                  className="list"
+                  key={idx}
+                  onClick={() => LocationDeleteHandler(idx)}
+                >
+                  {location}
+                </div>
+              );
+            })}
+            {LocatioFlag && (
+              <div ref={ref}>
+                <MapPicker
+                  LocationArr={props.Location}
+                  setLocationArr={props.setLocation}
+                  setLocatioFlag={setLocatioFlag}
+                />
+              </div>
+            )}
+            <button
+              onClick={(e) => LocationClickFunc(e)}
+              disabled={LocatioFlag}
+            >
+              <i className="bi bi-plus-lg"></i>
+            </button>
           </div>
         </div>
       </ProInfoSection>
