@@ -13,16 +13,14 @@ function UserModal(props) {
   function EditHandler() {
     if (props.modalType === "post") {
       return history.push({
-        pathname: "/community/update/" + props.Info.postNum,
+        pathname: "/community/update/" + props.Info.url,
         state: { postInfo: props.Info },
       });
-    }
-    else if (props.modalType === "review") {
+    } else if (props.modalType === "review") {
       props.setEditFlag(true);
-    }
-    else {
+    } else {
       return history.push({
-        pathname: props.modalType+"Edit",
+        pathname: props.modalType + "Edit",
         state: { postInfo: props.Info },
       });
     }
@@ -41,14 +39,15 @@ function UserModal(props) {
           <i className="bi bi-trash"></i>삭제
         </button>
       </div>
-      {ModalFlag && 
+      {ModalFlag && (
         <DeleteModal
           Info={props.Info}
           setModalFlag={setModalFlag}
           modalType={props.modalType}
           path={props.path}
           category={props.category}
-        />}
+        />
+      )}
     </ModalDiv>
   );
 }
