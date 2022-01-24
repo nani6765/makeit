@@ -11,6 +11,7 @@ const DetailDiv = styled.div`
   padding: 20px;
   border-radius: 15px;
   border: 1px solid #c6c6c6;
+  margin-bottom: 1rem;
   .title {
     font-weight: bold;
     font-size: 2rem;

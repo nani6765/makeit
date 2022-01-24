@@ -50,8 +50,12 @@ function PostEditForm(props) {
     if (Image != undefined) setCheck(Image.length);
   }, [Image]);
 
-  const submitHandler = (e) => {
+  const SubmitHandler = (e) => {
+
     e.preventDefault();
+
+    console.log("??");
+
     if (!Title || !Content) {
       return alert("제목과 내용을 입력해주세요.");
     }
@@ -62,6 +66,7 @@ function PostEditForm(props) {
       content: Content,
       images: Image,
       category: Category,
+      id: props.PostInfo._id,
     };
 
     axios.post("/api/community/postUpdate", body).then((response) => {
@@ -78,7 +83,7 @@ function PostEditForm(props) {
   };
 
   return (
-    <FormDiv onSubmit={submitHandler}>
+    <FormDiv>
       <input
         name="title"
         className="title"
@@ -124,7 +129,7 @@ function PostEditForm(props) {
         >
           취소
         </CancelBtn>
-        <button css={SubmitBtn} type="submit">
+        <button css={SubmitBtn} onClick={(e) => SubmitHandler(e)}>
           완료
         </button>
       </BtnDiv>

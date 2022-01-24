@@ -225,7 +225,23 @@ router.post("/pf/getList", (req, res) => {
 
 //프로젝트
 router.post("/project/getList", (req, res) => {
-  
+  let skip = req.body.skip;
+  let temp = req.body;
+  delete temp.skip;
+  Project.find(temp)
+  .exec()
+  .then((projects) => {
+    return res.status(200).json({
+      success: true,
+      projects: projects,
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+    return res.status(400).json({
+      success: false,
+    });
+  });
 })
 
 router.post(

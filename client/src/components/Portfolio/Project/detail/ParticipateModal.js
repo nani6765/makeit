@@ -41,33 +41,52 @@ function ParticipateModal(props) {
     }
   }
 
+  const FieldToKorean = (text) => {
+    switch (text) {
+      case "general":
+        return "일반영상";
+      case "youtube":
+        return "유튜브제작";
+      case "special":
+        return "특수영상";
+      case "ad":
+        return "광고/홍보영상";
+      case "online":
+        return "온라인생중계";
+      case "ani":
+        return "애니메이션";
+      case "filming":
+        return "촬영";
+      case "edit":
+        return "편집/자막";
+      case "etc":
+        return "기타";
+      default:
+        return "기타";
+    }
+  };
+
   useOnClickOutside(ref, () => props.setModalFlag(false));
   return <ParticipateModalDiv>
     <div className="innerDiv" ref={ref}>
+    <span>공개된 포트폴리오로만 지원할 수 있습니다.</span>
     {!Loading &&
     (PortfolioList.length 
-    ? PortfolioList.map((portfilio, idx) => {
-      if(portfilio.type === "프로") {
-        return(<ParticipateSection key={idx} onClick={(e) => {
-          ClickFunc(e, portfilio.titletext, portfilio._id, portfilio.type)
-        }}>암튼 프로임</ParticipateSection>) 
+    ? PortfolioList.map((portfolio, idx) => {
+      console.log(portfolio);
+      if(portfolio.public){
+        return(
+          <ParticipateSection key={idx} onClick={(e) => ClickFunc(e, portfolio.titletext, portfolio._id, portfolio.type)}>
+            <div className="img">
+              <img src={portfolio.profileImg}/>
+            </div>
+            <p className="title">{portfolio.titletext}</p>
+            <div className="info">
+            <p>{portfolio.name} / {portfolio.type} / {portfolio.type == "프로" ? `${portfolio.field}` : FieldToKorean(portfolio.fieldArr[0]) + "..."}</p>
+            </div>
+          </ParticipateSection>
+        )
       }
-      else return(
-        <ParticipateSection key={idx} onClick={(e) => {
-          ClickFunc(e, portfilio.titletext, portfilio._id, portfilio.type)
-        }}>
-          <figure className="img">
-            <img src={portfilio.profileImg} />
-          </figure>
-          <div className="title">
-           {portfilio.titletext}
-          </div>
-          <div className="info">
-            {portfilio.type} /  {portfilio.prodName}
-          </div>
-        </ParticipateSection>
-      )
-     
     })
     : <p>포폴등록먼저하셈</p>
     )}

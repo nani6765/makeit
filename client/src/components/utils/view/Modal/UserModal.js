@@ -13,7 +13,7 @@ function UserModal(props) {
   function EditHandler() {
     if (props.modalType === "post") {
       return history.push({
-        pathname: "/community/update/" + props.Info.postNum,
+        pathname: "/community/update/" + props.Info.url,
         state: { postInfo: props.Info },
       });
     }

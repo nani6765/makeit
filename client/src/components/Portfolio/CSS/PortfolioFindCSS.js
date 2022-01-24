@@ -114,6 +114,9 @@ const PortfolioCard = styled.div`
     border: none;
     display: grid;
     height: 100%;
+    border: 1px solid #c6c6c6;
+    border-radius: 10px;
+    margin-bottom: 1rem;
     grid-template-rows: auto auto auto auto;
     grid-template-columns: auto;
     grid-template-areas:

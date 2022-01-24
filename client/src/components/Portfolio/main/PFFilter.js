@@ -111,25 +111,25 @@ function PFFilter(props) {
                       <input
                       className='filterInput'
                       type="checkbox"
-                      id="prod"
+                      id="프로덕션"
                       value="프로덕션"
                       onClick={(e) => {
                           PortfolioTypeFilterManager(e);
                       }}
                       />
-                      <label htmlFor="prod">프로덕션</label>
+                      <label htmlFor="프로덕션">프로덕션</label>
                   </div>
                   <div>
                       <input
                       className='filterInput'
                       type="checkbox"
-                      id="pro"
+                      id="프로"
                       value="프로"
                       onClick={(e) => {
                           PortfolioTypeFilterManager(e);
                       }}
                       />
-                      <label htmlFor="pro">프로</label>
+                      <label htmlFor="프로">프로</label>
                   </div>
                 </div>
             </div>
