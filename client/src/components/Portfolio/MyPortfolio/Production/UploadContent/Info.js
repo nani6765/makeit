@@ -119,26 +119,27 @@ function Info(props) {
               <img src={props.ProfileImg} />
             </label>
           )}
-        </div>
-        <div className="links">
-          <div>
-            {props.LinkArr.map((item, idx) => {
-              let key = item.value.match(
-                /youtu|instagram|facebook|linkedin|twitter|vimeo/i
-              );
-              let Tag = LinkTypeCheck(key);
-              return (
-                <span
-                  className={item.value !== "" ? "active" : null}
-                  key={idx}
-                  onClick={() => setLinkFlag(idx + 1)}
-                >
-                  {Tag}
-                </span>
-              );
-            })}
+          <div className="links">
+            <div>
+              {props.LinkArr.map((item, idx) => {
+                let key = item.value.match(
+                  /youtu|instagram|facebook|linkedin|twitter|vimeo/i
+                );
+                let Tag = LinkTypeCheck(key);
+                return (
+                  <span
+                    className={item.value !== "" ? "active" : null}
+                    key={idx}
+                    onClick={() => setLinkFlag(idx + 1)}
+                  >
+                    {Tag}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
+
         <div className="name infoDiv">
           <label>프로덕션명</label>
           <div>

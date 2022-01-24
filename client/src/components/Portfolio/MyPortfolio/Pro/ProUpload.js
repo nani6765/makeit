@@ -30,7 +30,7 @@ function ProUpload() {
   const [ProName, setProName] = useState("");
   const [Gender, setGender] = useState("");
   const [Field, setField] = useState("");
-  const [Location, setLocation] = useState("");
+  const [Location, setLocation] = useState([]);
   const [ProIntroduce, setProIntroduce] = useState("");
   const [ProfileImgList, setProfileImgList] = useState([]);
   const [ProjectArr, setProjectArr] = useState([]);
