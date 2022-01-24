@@ -301,4 +301,36 @@ const SubCategoryDiv = styled.div`
   }
 `;
 
-export { PortHeader, MenuList, MenuItem, Filter, SubCategoryDiv };
+const PagiCSS = styled.div`
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .pagination {
+    .active {
+      font-weight: bold;
+    }
+    ul {
+      li {
+        display: inline-block;s
+        border-left: 1px solid black;
+        padding: 0.5rem;
+        text-decoration: none;
+        list-style: none;
+        p {
+          cursor: pointer;
+          margin: 0;
+        }
+        &:first-of-type(1) {
+        border: none;
+        }
+      }
+    }
+    button {
+      background: none;
+      border: none;
+    }
+  }
+`;
+
+export { PortHeader, MenuList, MenuItem, Filter, SubCategoryDiv, PagiCSS };

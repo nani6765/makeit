@@ -766,12 +766,16 @@ const MakeItContentDiv = styled.div`
 `;
 
 const BtnDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
   margin: 1rem 0;
+  
   button {
     color: white;
     background: #5a278b;
     border: 1px solid #5a278b;
     border-radius: 3px;
+    padding: 5px 10px;
   }
 `;
 

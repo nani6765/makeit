@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory, withRouter, Link } from "react-router-dom";
 import Dropdown from "react-bootstrap/Dropdown";
-import { ListTopAreaDiv } from "../../css/ParticipateCSS.js";
+import { ListTopAreaDiv } from "../CSS/PortfolioFindCSS.js";
 import qs from "qs";
 
 function ListTopArea(props) {
@@ -17,22 +17,22 @@ function ListTopArea(props) {
           <Dropdown.Item
             onClick={() => {
               let temp = props.URL;
-              temp.sort = "인기순";
+              temp.sort = "hot";
               temp.pIdx = 0;
               history.push(`?${decodeURI(qs.stringify(temp))}`);
             }}
-            className={props.URL.sort === "인기순" ? "active" : null}
+            className={props.URL.sort === "hot" ? "active" : null}
           >
             인기순
           </Dropdown.Item>
           <Dropdown.Item
             onClick={() => {
               let temp = props.URL;
-              temp.sort = "최신순";
+              temp.sort = "new";
               temp.pIdx = 0;
               history.push(`?${decodeURI(qs.stringify(temp))}`);
             }}
-            className={props.URL.sort === "최신순" ? "active" : null}
+            className={props.URL.sort === "new" ? "active" : null}
           >
             최신순
           </Dropdown.Item>
@@ -41,7 +41,7 @@ function ListTopArea(props) {
 
       <div className="upload">
         <Link
-          to="/"
+          to="/portfolio?category=MP&subCategory=전체 목록"
           className="submitBtn"
         >
           <button>게시하기</button>
