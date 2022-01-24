@@ -1,53 +1,48 @@
 @font-face {
-    font-family: "jalnan";
-    src: url(../font/Jalnan.ttf) format('truetype');
+  font-family: "jalnan";
+  src: url(../font/Jalnan.ttf) format("truetype");
 }
 
 @font-face {
-    font-family: "NotoSans";
-    src: url(../font/NotoSansKR-Regular.otf) format('truetype');
-    font-weight: normal;
+  font-family: "NotoSans";
+  src: url(../font/NotoSansKR-Regular.otf) format("truetype");
+  font-weight: normal;
 }
 
 @font-face {
-    font-family: "NotoSans";
-    src: url(../font/NotoSansKR-Bold.otf) format('truetype');
-    font-weight: bold;
+  font-family: "NotoSans";
+  src: url(../font/NotoSansKR-Bold.otf) format("truetype");
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: "NotoSans";
-    src: url(../font/NotoSansKR-Light.otf) format('truetype');
-    font-weight: lighter;
+  font-family: "NotoSans";
+  src: url(../font/NotoSansKR-Light.otf) format("truetype");
+  font-weight: lighter;
 }
 
 @font-face {
-    font-family: "NotoSans";
-    src: url(../font/NotoSansKR-Medium.otf) format('truetype');
-    font-weight: 600;
+  font-family: "NotoSans";
+  src: url(../font/NotoSansKR-Medium.otf) format("truetype");
+  font-weight: 600;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
-body{
-    overflow-x: hidden;
-    font-family: "NotoSans";
+body {
+  overflow-x: hidden;
+  font-family: "NotoSans";
 }
- @media (max-width: 576px) {
-     body{
-         min-height: 100vh;
-         display: flex;
-         flex-direction: column;
-     }
- }
-
-html,
-body,
-div,
-span,
-applet,
+@media (max-width: 576px) {
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+}
+z applet,
 object,
 iframe,
 h1,
@@ -56,7 +51,6 @@ h3,
 h4,
 h5,
 h6,
-p,
 blockquote,
 pre,
 a,
@@ -69,7 +63,6 @@ code,
 del,
 dfn,
 em,
-img,
 ins,
 kbd,
 q,
@@ -89,9 +82,6 @@ center,
 dl,
 dt,
 dd,
-ol,
-ul,
-li,
 fieldset,
 form,
 label,
@@ -109,8 +99,6 @@ aside,
 canvas,
 details,
 embed,
-figure,
-figcaption,
 footer,
 header,
 hgroup,
@@ -118,60 +106,37 @@ menu,
 nav,
 output,
 ruby,
-section,
 summary,
 time,
 mark,
 audio,
 video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
 details,
-figcaption,
 figure,
 footer,
 header,
 hgroup,
 menu,
-nav,
-section {
-    display: block;
+nav {
+  display: block;
 }
 
-body {
-    line-height: 1;
-}
-
-ol,
 ul {
-    list-style: none;
-    margin-bottom: 0px;
+  display: block;
+  list-style-type: disc;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
 }
-
-blockquote,
-q {
-    quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
