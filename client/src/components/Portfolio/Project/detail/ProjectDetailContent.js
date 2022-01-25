@@ -16,10 +16,29 @@ function ProjectDetailContent(props) {
 
   const [ModalFlag, setModalFlag] = useState(false);
   const [MyPortfolioIdx, setMyPortfolioIdx] = useState(-1);
+  const [TodayDate, setTodayDate] = useState(new Date());
+  const [EndDate, setEndDate] = useState(new Date(props.ProjectInfo.timeline[props.ProjectInfo.timeline.length - 1].endDate));
 
-  const EditHadler = () => {};
+  const EditHadler = () => {
 
-  const ChatHandler = () => {};
+  };
+
+  const ChatHandler = () => {
+    let body = {
+      me: user.userData.uid,
+      you: props.ProjectInfo.auther.uid,
+    };
+
+    axios.post("/api/chat/create", body).then((response) => {
+      console.log(response.data);
+      if (response.data.success) {
+        history.push(`/chat/${response.data.resultUrl}`);
+      } else {
+        console.log("error");
+      }
+    });
+
+  };
 
   const PartSubmit = () => {
 
@@ -29,7 +48,11 @@ function ProjectDetailContent(props) {
     if(user.userData.uid !== props.ProjectInfo.auther.uid) {
       setMyPortfolioIdx(props.ProjectInfo.participater.findIndex(i => i.uid === user.userData.uid));
     }
+    let date = new Date(props.ProjectInfo.timeline[props.ProjectInfo.timeline.length - 1].endDate);
+    date.setDate(date.getDate() + 1);
+    setEndDate(date);
   }, [])
+
   return (
     <>
       <BtnDiv>
@@ -37,7 +60,7 @@ function ProjectDetailContent(props) {
           user.userData.uid === props.ProjectInfo.auther.uid ? (
             <button>수정하기</button>
           ) : (
-            <button>쪽지보내기</button>
+            <button onClick={ChatHandler}>쪽지보내기</button>
           )
         ) : null}
       </BtnDiv>
@@ -99,7 +122,7 @@ function ProjectDetailContent(props) {
                   props.ProjectInfo.participater.map((temp, idx) => {
                     if(!temp.accept) {    
                       return (
-                      <ParticipateSection key={idx}>
+                      <ParticipateSection key={idx} onClick={() => history.push(`/portfolio/${temp.portfolio.url}`)}>
                         <figure className="img">
                           <img src={temp.portfolio.profileImg} />
                         </figure>
@@ -107,7 +130,7 @@ function ProjectDetailContent(props) {
                           {temp.portfolio.titletext}
                         </div>
                         <div className="info">
-                            {temp.type} / {temp.portfolio.Name}
+                            {temp.type} / {temp.portfolio.name}
                         </div>
                       </ParticipateSection> 
                     )}
@@ -119,7 +142,7 @@ function ProjectDetailContent(props) {
                MyPortfolioIdx >= 0
               ? (
               <>
-              <label></label>
+              <label>신청된 나의 포트폴리오</label>
               <ParticipateSection>
                 <figure className="img">
                   <img src={props.ProjectInfo.participater[MyPortfolioIdx].portfolio.profileImg} />
@@ -128,11 +151,14 @@ function ProjectDetailContent(props) {
                   {props.ProjectInfo.participater[MyPortfolioIdx].portfolio.titletext}
                 </div>
                 <div className="info">
-                    {props.ProjectInfo.participater[MyPortfolioIdx].type} / {props.ProjectInfo.participater[MyPortfolioIdx].portfolio.Name}
+                    {props.ProjectInfo.participater[MyPortfolioIdx].type} / {props.ProjectInfo.participater[MyPortfolioIdx].portfolio.name}
                 </div>
               </ParticipateSection> 
               </>)
-              : ( <button onClick={() => setModalFlag(true)}>참여 신청하기</button> )
+              : ( TodayDate <= EndDate
+                ? <button onClick={() => setModalFlag(true)}>참여 신청하기</button>
+                : "마감된 프로젝트입니다."
+              )
             )
           )}
           {ModalFlag && <ParticipateModal setModalFlag={setModalFlag} ProjectInfo = {props.ProjectInfo}/>}

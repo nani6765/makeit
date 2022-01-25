@@ -10,6 +10,8 @@ const BtnDiv = styled.div`
   display: flex;
   justify-content: flex-end;
 
+  margin: 1rem 0;
+
   button {
     background: #5a278b;
     border: 1px solid #5a278b;
@@ -212,6 +214,11 @@ const ParticipateModalDiv = styled.div`
     margin-right: 1rem;
     max-height: 80vh;
     overflow: auto;
+    span{
+      width: 100%;
+      text-align: right;
+      margin-bottom: 1rem;
+    }
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -229,7 +236,8 @@ const ParticipateModalDiv = styled.div`
   }
 `;
 
-const ParticipateSection = styled.section`width: 100%;
+const ParticipateSection = styled.figure`
+  width: 100%;
   border: 1px solid #c6c6c6;
   padding: 20px;
   border-radius: 15px;
@@ -270,6 +278,9 @@ const ParticipateSection = styled.section`width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
+    p {
+      margin-bottom: 0px;
+    }
   }`
 ;
 

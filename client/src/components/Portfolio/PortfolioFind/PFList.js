@@ -11,11 +11,38 @@ function FPList(props) {
     const [PageLen, setPageLen] = useState(1);
     const [PageIdxArr, setPageIdxArr] = useState([1]);
 
+    const FieldToKorean = (text) => {
+      switch (text) {
+        case "general":
+          return "일반영상";
+        case "youtube":
+          return "유튜브제작";
+        case "special":
+          return "특수영상";
+        case "ad":
+          return "광고/홍보영상";
+        case "online":
+          return "온라인생중계";
+        case "ani":
+          return "애니메이션";
+        case "filming":
+          return "촬영";
+        case "edit":
+          return "편집/자막";
+        case "etc":
+          return "기타";
+        default:
+          return "기타";
+      }
+    };
+
     useEffect(() => {
         let body = {
             skip: props.URL.pIdx * 16,
             sort: props.URL.sort,
         };
+
+        console.log(props.URL);
 
         if(props.URL.type) {
             body.type = props.URL.type;
@@ -66,7 +93,7 @@ function FPList(props) {
                                         <p className='field'>
                                             {post.type === "프로"
                                             ? post.field
-                                            : post.fieldArr[0]}
+                                            : FieldToKorean(post.fieldArr[0])}
                                         </p>
                                     </div>
                                 </PortfolioCard>

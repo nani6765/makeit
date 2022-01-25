@@ -7,6 +7,7 @@ import PFFilter from "./main/PFFilter.js";
 import PFList from "./PortfolioFind/PFList.js";
 import SubCategory from "./main/SubCategory.js";
 import MyPortfolio from "./MyPortfolio/MyPortfolio.js";
+import ProjectList from "./Project/ProjectList.js";
 
 function Portfolio() {
   let location = useLocation();
@@ -36,6 +37,7 @@ function Portfolio() {
         return (
           <>
             <SubCategory URL={URL} />
+            <ProjectList URL={URL} />
           </>
         );
     }
