@@ -24,7 +24,7 @@ function HeaderGNB(props) {
   return (
     <>
       <MenuList>
-        <ul>
+        <ul style={{ marginBottom: "0px" }}>
           {GNBList.map((GNB, idx) => {
             return (
               <MenuItem

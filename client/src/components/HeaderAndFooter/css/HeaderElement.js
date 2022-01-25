@@ -170,6 +170,9 @@ const HeaderSearch = styled.div`
       }
     }
   }
+  ${mq[0]} {
+    display: none;
+  }
 `;
 
 const HeaderLoginDiv = styled.div`

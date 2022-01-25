@@ -45,7 +45,7 @@ function GNBArea(props) {
 
   return (
     <MenuList>
-      <ul>
+      <ul style={{ marginBottom: "0px" }}>
         {GNBList.map((category, idx) => {
           return (
             <MenuItem

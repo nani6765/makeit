@@ -42,7 +42,7 @@ function HeaderElement(props) {
 
             <HeaderNavArea className="PC" />
 
-            <HeaderSearch className="PC">
+            <HeaderSearch>
               <div>
                 <form action="/search" method="GET">
                   <input type="text" placeholder="Search" name="term" />
