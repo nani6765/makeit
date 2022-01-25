@@ -14,7 +14,7 @@ function AlarmListFnc(props) {
 
   function SwitchCard(alarm) {
     let key = alarm.type;
-    let alarmType, contentType;
+    let alarmType;
     switch (key) {
       case "reple":
         alarmType = "댓글";
@@ -26,23 +26,22 @@ function AlarmListFnc(props) {
 
       case "rerepleToReple":
         alarmType = "대댓글";
-        contentType = "댓글";
         break;
 
       case "rerepleToPost":
         alarmType = "대댓글";
-        contentType = "게시글";
         break;
 
       case "likeToReple":
         alarmType = "공감";
-        contentType = "댓글";
         break;
 
       case "likeToRereple":
         alarmType = "공감";
-        contentType = "대댓글";
         break;
+
+      case "participate":
+        alarmType = "참여신청";
     }
     return (
       <AlarmContent

@@ -36,13 +36,7 @@ function AlarmContent(props) {
         {props.AlarmType === "공감" ? <Like /> : <Comment />}
       </div>
       <div className="Content">
-        <p>
-          {props.AlarmType === "댓글" ? (
-            <React.Fragment>{props.AlarmType}이 달렸어요</React.Fragment>
-          ) : (
-            <React.Fragment>{props.AlarmType}을 받았어요</React.Fragment>
-          )}
-        </p>
+        <p>{props.AlarmType}</p>
         <p className="date">{props.alarm.realTime}</p>
       </div>
     </AlarmContentDiv>
