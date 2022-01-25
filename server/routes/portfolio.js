@@ -1,13 +1,15 @@
 var router = require("express").Router();
-const setUpload = require("../module/multer/upload.js");
 
+const setUpload = require("../module/multer/upload.js");
 const {
   Project,
   ProdPortfolio,
   ProPortfolio,
 } = require("../model/Portfolio.js");
+
 const { Counter } = require("../model/Counter.js");
-const { User } = require("../model/User.js");
+const { User, Log } = require("../model/User.js");
+const { Alarm } = require("../model/Alarm.js");
 
 //내 포폴
 router.post("/getMyPortfolio", (req, res) => {
@@ -246,20 +248,20 @@ router.post("/project/getList", (req, res) => {
   let temp = req.body;
   delete temp.skip;
   Project.find(temp)
-  .exec()
-  .then((projects) => {
-    return res.status(200).json({
-      success: true,
-      projects: projects,
+    .exec()
+    .then((projects) => {
+      return res.status(200).json({
+        success: true,
+        projects: projects,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        success: false,
+      });
     });
-  })
-  .catch((err) => {
-    console.log(err);
-    return res.status(400).json({
-      success: false,
-    });
-  });
-})
+});
 
 router.post(
   "/project/profile",
@@ -364,7 +366,7 @@ router.post("/project/edit", (req, res) => {
 
 router.post("/project/getPortfolioList", (req, res) => {
   ProdPortfolio.find({ uid: req.body.uid })
-    .populate("auther")
+    .populate("auther, '-logs -_id -updatedAt -createdAt'")
     .exec()
     .then((total) => {
       return res.status(200).json({
@@ -385,10 +387,18 @@ router.post("/project/Participate", (req, res) => {
     { _id: req.body.projectId },
     { $push: { participater: temp } }
   )
+    .populate("auther, '-logs -_id -updatedAt -createdAt'")
     .exec()
     .then((doc) => {
-      return res.status(200).json({
-        success: true,
+      let alarmTemp = {
+        uid: doc.auther.uid,
+        url: doc.url,
+        type: "participate",
+        category: "/portfolio/project/",
+      };
+      const alarm = new Alarm(alarmTemp);
+      alarm.save(() => {
+        return res.status(200).send({ success: true });
       });
     })
     .catch((err) => {

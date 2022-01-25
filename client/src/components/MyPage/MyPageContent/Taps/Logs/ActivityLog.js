@@ -14,23 +14,7 @@ function ActivityLog(props) {
   const [IsLoading, setIsLoading] = useState(false);
   const [LogList, setLogList] = useState([]);
 
-  const ScrollFunction = () => {
-    let TargetDiv = document.querySelector("#AlarmListDiv");
-    if (
-      Math.ceil(TargetDiv.scrollTop) + Math.ceil(TargetDiv.clientHeight) >=
-      TargetDiv.scrollHeight
-    ) {
-      props.GetAlarmList(5);
-    }
-  };
-
-  useEffect(() => {
-    let TargetDiv = document.querySelector("#AlarmListDiv");
-    window.addEventListener("scorll", ScrollFunction, true);
-  }, []);
-
-  useEffect(() => {
-    setIsLoading(true);
+  const GetLogs = () => {
     let body = {
       uid: user.userData.uid,
     };
@@ -40,8 +24,13 @@ function ActivityLog(props) {
       } else {
         alert("error");
       }
-      setIsLoading(false);
     });
+  };
+
+  useEffect(async () => {
+    setIsLoading(true);
+    await GetLogs();
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -53,7 +42,7 @@ function ActivityLog(props) {
       {IsLoading ? (
         <Loading />
       ) : (
-        <AlarmListDiv id="AlarmListDiv" onScroll={ScrollFunction}>
+        <AlarmListDiv id="AlarmListDiv">
           {LogList.map((log, idx) => {
             return <LogContent key={idx} Log={log} />;
           })}
