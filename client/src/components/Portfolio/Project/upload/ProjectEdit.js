@@ -31,12 +31,12 @@ function ProjectEdit() {
     if (user.userData === null) {
       alert("로그인이 필요한 서비스입니다.");
       history.push("/login");
-    }
+    }    
 
     let body = {
         url: params.url,
     }
-    axios.post("/api/portfolio/getDetail", body).then((response) => {
+    axios.post("/api/portfolio/project/getDetail", body).then((response) => {
         if (response.data.success) {
             let project = response.data.projectInfo;
             setTitleText(project.title);
@@ -46,9 +46,15 @@ function ProjectEdit() {
             setLocationArr([...project.location]);
             setTimeLineArr([...project.timeline]);
             setTagArr([...project.tag]);
+            if(user.userData.uid !== project.uid) {
+              alert("게시글 작성자만 접근이 가능합니다.");
+              history.push(`/portfolio/project/${params.url}`);
+            }
+            console.log(project);
         }
     })
   }, [user]);
+  
 
   const SubmitHandler = async (e) => {
     e.preventDefault();
@@ -74,12 +80,12 @@ function ProjectEdit() {
       timeline: TimeLineArr,
       tag: TagArr,
       uid: user.userData.uid,
+      url: params.url,
     };
 
-    await axios.post("/api/portfolio/project/submit", body).then((response) => {
+    await axios.post("/api/portfolio/project/edit", body).then((response) => {
       if (response.data.success) {
-        alert("게시글 등록 성공했는데 list url 없어서 메인으로 보냄");
-        history.push("/");
+        history.push(`/portfolio/project/${params.url}`);
       } else {
         alert("게시글 등록 실패");
       }
@@ -89,36 +95,38 @@ function ProjectEdit() {
   return (
     <CommonMarginDiv>
       <ProjectUploadDiv>
-        <form>
-          <div className="btnDiv">
-            <button
-              className="cancel"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("url 아직 안정해져서 메인으로 보냄");
-                history.push("/");
-              }}
-            >
-              취소
-            </button>
-            <button className="submit" onClick={(e) => SubmitHandler(e)}>
-              등록
-            </button>
-          </div>
-          <Title TitleText={TitleText} setTitleText={setTitleText} />
-          <Info
-            Image={Image}
-            setImage={setImage}
-            Introduce={Introduce}
-            setIntroduce={setIntroduce}
-            DetailContent={DetailContent}
-            setDetailContent={setDetailContent}
-            LocationArr={LocationArr}
-            setLocationArr={setLocationArr}
-          />
-          <TimeLine TimeLineArr={TimeLineArr} setTimeLineArr={setTimeLineArr} />
-          <Tag TagArr={TagArr} setTagArr={setTagArr} />
-        </form>
+        {
+          TitleText && 
+          <form>
+            <div className="btnDiv">
+              <button
+                className="cancel"
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push(`/portfolio/project/${params.url}`);
+                }}
+              >
+                취소
+              </button>
+              <button className="submit" onClick={(e) => SubmitHandler(e)}>
+                등록
+              </button>
+            </div>
+            <Title TitleText={TitleText} setTitleText={setTitleText} />
+            <Info
+              Image={Image}
+              setImage={setImage}
+              Introduce={Introduce}
+              setIntroduce={setIntroduce}
+              DetailContent={DetailContent}
+              setDetailContent={setDetailContent}
+              LocationArr={LocationArr}
+              setLocationArr={setLocationArr}
+            />
+            <TimeLine TimeLineArr={TimeLineArr} setTimeLineArr={setTimeLineArr} />
+            <Tag TagArr={TagArr} setTagArr={setTagArr} />
+          </form>
+        }
       </ProjectUploadDiv>
     </CommonMarginDiv>
   );

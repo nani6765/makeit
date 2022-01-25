@@ -20,7 +20,7 @@ function Portfolio() {
       case "PF":
         return (
           <>
-            <PFFilter URL={URL} setURL={setURL} />
+            {/*<PFFilter URL={URL} setURL={setURL} />*/}
             <PFList URL={URL} />
           </>
         );

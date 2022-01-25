@@ -52,7 +52,7 @@ const DetailDiv = styled.div`
   }
   .info {
     display: grid;
-    grid-template-columns: 300px 1fr 1fr;
+    grid-template-columns: 180px 1fr 1fr;
     grid-template-rows: 50px 50px 1fr;
     grid-template-areas:
       "profileImg name proName"
@@ -60,7 +60,7 @@ const DetailDiv = styled.div`
       "profileImg location location";
     grid-gap: 0.5rem;
     &.prod {
-      grid-template-columns: 300px 1fr 1fr;
+      grid-template-columns: 180px 1fr 1fr;
       grid-template-rows: 50px auto 1fr;
       grid-template-areas:
         "profileImg name name"
@@ -78,7 +78,7 @@ const DetailDiv = styled.div`
         cursor: pointer;
         border-radius: 5px;
         width: 100%;
-        height: 400px;
+        height: 240px;
         border-radius: 15px;
         border: 1px solid #c6c6c6;
       }

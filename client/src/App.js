@@ -62,6 +62,7 @@ import PortfolioDetail from "./components/Portfolio/MyPortfolio/List/PortfolioDe
 import ProdUpload from "./components/Portfolio/MyPortfolio/Production/ProdUpload.js";
 import ProUpload from "./components/Portfolio/MyPortfolio/Pro/ProUpload.js";
 import ProjectUpload from "./components/Portfolio/Project/upload/ProjectUpload.js";
+import ProjectEdit from "./components/Portfolio/Project/upload/ProjectEdit.js";
 import ProjectDetail from "./components/Portfolio/Project/detail/ProjectDetail.js";
 
 import MapPicker from "./components/utils/view/Area/MapPicker.js";
@@ -186,6 +187,10 @@ function App() {
             path="/portfolio/project/upload"
             component={ProjectUpload}
           />
+          <Route
+            exact
+            path="/portfolio/project/edit/:url"
+            component={ProjectEdit} />
           <Route
             exact
             path="/portfolio/project/:url"

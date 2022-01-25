@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { BtnDiv, DetailDiv } from "../../CSS/MyPortpolio/DetailCSS.js";
 import TextEllipsis from "react-text-ellipsis";
 import ImageModal from "./ImageModal.js";
 import axios from "axios";
 
 function ProContent(props) {
+  const user = useSelector((state) => state.user);
+
   const [ImageFlag, setImageFlag] = useState(false);
   const [Text, setText] = useState(``);
 
@@ -55,6 +58,9 @@ function ProContent(props) {
 
   return (
     <>
+    {
+      user.userData &&
+      user.userData.uid === props.Portfolio.uid &&
       <BtnDiv>
         {Text && <p>{Text}</p>}
         <div>
@@ -64,6 +70,7 @@ function ProContent(props) {
           <button className="edit">수정</button>
         </div>
       </BtnDiv>
+    }
       <DetailDiv>
         <p className="title">{props.Portfolio.titletext}</p>
         <section className="info pro">

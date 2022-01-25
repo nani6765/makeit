@@ -15,6 +15,7 @@ function ProjectDetail() {
   const [ProjectInfo, setProjectInfo] = useState(null);
   const [LoadingFlag, setLoadingFlag] = useState(true);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     setLoadingFlag(true);
     let body = {

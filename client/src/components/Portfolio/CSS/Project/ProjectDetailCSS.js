@@ -11,6 +11,7 @@ const BtnDiv = styled.div`
   justify-content: flex-end;
 
   margin: 1rem 0;
+  user-select: none;
 
   button {
     background: #5a278b;
@@ -36,6 +37,8 @@ const ProjectDetailContentDiv = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 20px 30px;
+  
+  user-select: none;
 
   section {
     margin-bottom: 2rem;
@@ -97,6 +100,7 @@ const ProjectDetailContentDiv = styled.div`
           border-radius: 3px;
           p {
             margin-bottom: 0px;
+            white-space: pre-wrap;
           }
         }
       }
@@ -242,14 +246,15 @@ const ParticipateSection = styled.figure`
   padding: 20px;
   border-radius: 15px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr 1fr 50px;
+  grid-template-rows: 50px auto;
   grid-template-areas:
-    "img title info";
+    "img title . hambuc"
+    "img title info info";
   grid-gap: 1rem;
   margin-bottom: 1rem;
-  cursor:pointer;
   user-select: none;
+
   .img {
     grid-area: img;
     width: 100%;
@@ -281,7 +286,40 @@ const ParticipateSection = styled.figure`
     p {
       margin-bottom: 0px;
     }
-  }`
-;
+  }
+  .hambuc {
+    grid-area: hambuc;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+  }
+  .partModal {
+    position : absolute;
+    top: 20px;
+    right: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 6px -1px rgb(0 0 0 / 25%);
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100px;
+    height: auto;
+
+    span {
+      margin-bottom: 10px;
+      cursor: pointer;
+      &.reject{
+        color: red;
+      }
+      &:nth-last-of-type(1){
+        margin-bottom: 0px;
+      }
+    }
+  }
+`;
 
 export { BtnDiv, ProjectDetailContentDiv, ParticipateModalDiv, ParticipateSection };
