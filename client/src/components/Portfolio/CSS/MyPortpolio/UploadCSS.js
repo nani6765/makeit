@@ -794,6 +794,7 @@ const BtnDiv = styled.div`
   display: flex;
   justify-content: flex-end;
   margin: 1rem 0;
+  user-select: none;
 
   button {
     color: white;

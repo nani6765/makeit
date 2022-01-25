@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, withRouter } from "react-router-dom";
 import ParticipateModal from "./ParticipateModal.js";
+import ParticiPate from "./ParticiPate.js";
 import {
   BtnDiv,
   ProjectDetailContentDiv,
@@ -58,7 +59,7 @@ function ProjectDetailContent(props) {
       <BtnDiv>
         {user.userData !== null ? (
           user.userData.uid === props.ProjectInfo.auther.uid ? (
-            <button>수정하기</button>
+            <button onClick={() => history.push(`/portfolio/project/edit/${props.ProjectInfo.url}`)}>수정하기</button>
           ) : (
             <button onClick={ChatHandler}>쪽지보내기</button>
           )
@@ -115,23 +116,27 @@ function ProjectDetailContent(props) {
           {user.userData !== null && (
             user.userData.uid === props.ProjectInfo.auther.uid ? (
               <>
-              <label>참여자 목록</label>
+              <div>
+              <p>참여자 목록</p>
+              {
+                  props.ProjectInfo.participater.map((temp, idx) => {
+                    if(temp.accept) {    
+                      return (
+                      <ParticipateSection key={idx} /*onClick={() => history.push(`/portfolio/${temp.portfolio.url}`)}*/>
+                        <ParticiPate participate={temp} />
+                      </ParticipateSection> 
+                    )}
+                  })
+                }
+              </div>
               <div>
                 <p>신청자 목록</p>
                 {
                   props.ProjectInfo.participater.map((temp, idx) => {
                     if(!temp.accept) {    
                       return (
-                      <ParticipateSection key={idx} onClick={() => history.push(`/portfolio/${temp.portfolio.url}`)}>
-                        <figure className="img">
-                          <img src={temp.portfolio.profileImg} />
-                        </figure>
-                        <div className="title">
-                          {temp.portfolio.titletext}
-                        </div>
-                        <div className="info">
-                            {temp.type} / {temp.portfolio.name}
-                        </div>
+                      <ParticipateSection key={idx} /*onClick={() => history.push(`/portfolio/${temp.portfolio.url}`)}*/>
+                        <ParticiPate participate={temp} />
                       </ParticipateSection> 
                     )}
                   })

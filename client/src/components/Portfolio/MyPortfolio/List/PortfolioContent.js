@@ -8,7 +8,7 @@ function PortpolioContent(props) {
       </figure>
       <div className="title">{props.content.titletext}</div>
       <div className="info">
-        {props.content.type} / {props.content.Name}
+        {props.content.type} / {props.content.name}
       </div>
     </>
   );

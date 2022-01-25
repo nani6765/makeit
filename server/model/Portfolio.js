@@ -187,4 +187,5 @@ const projectSchema = mongoose.Schema(
 const ProdPortfolio = mongoose.model("ProdPortfolio", prodPortfolioSchema);
 const ProPortfolio = mongoose.model("ProPortfolio", proPortfolioSchema);
 const Project = mongoose.model("Project", projectSchema);
+
 module.exports = { Project, ProdPortfolio, ProPortfolio };

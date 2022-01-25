@@ -338,6 +338,32 @@ router.post("/project/submit", (req, res) => {
     });
 });
 
+router.post("/project/edit", (req, res) => {
+  let temp = {
+    title: req.body.title,
+    thumbnail: req.body.thumbnail,
+    introduce: req.body.introduce,
+    detailContent: req.body.detailContent,
+    location: req.body.location,
+    timeline: req.body.timeline,
+    tag: req.body.tag,
+    uid: req.body.uid,
+  };
+
+  Project.findOneAndUpdate({url: req.body.url}, temp)
+  .exec()
+  .then(() => {
+    return res.status(200).json({
+      success: true,
+    })
+  })
+  .catch((err) => {
+    return res.status(400).json({
+      success: false,
+    })
+  });
+});
+
 router.post("/project/getPortfolioList", (req, res) => {
   ProdPortfolio.find({ uid: req.body.uid })
     .populate("auther, '-logs -_id -updatedAt -createdAt'")
@@ -380,6 +406,50 @@ router.post("/project/Participate", (req, res) => {
         success: false,
       });
     });
+});
+
+router.post("/project/accept", (req, res) => {
+  Project.findOne({ "participater._id": req.body.id })
+  .exec()
+  .then((doc) => {
+    let tempArr = [...doc.participater];
+    let idx = tempArr.findIndex((temp) => temp._id == req.body.id);
+    tempArr[idx].accept = true;
+    doc.updateOne({$set : { "participater" : tempArr}})
+    .exec()
+    .then(() => {
+      return res.status(200).json({
+        success: true,
+      });
+    })
+  })
+  .catch((err) => {
+    return res.status(400).json({
+      success: false,
+    });
+  });
+});
+
+router.post("/project/reject", (req, res) => {
+  Project.findOne({ "participater._id": req.body.id })
+  .exec()
+  .then((doc) => {
+    let tempArr = [...doc.participater];
+    let idx = tempArr.findIndex((temp) => temp._id == req.body.id);
+    let removed = tempArr.splice(idx, 1);
+    doc.updateOne({$set : { "participater" : tempArr}})
+    .exec()
+    .then(() => {
+      return res.status(200).json({
+        success: true,
+      });
+    })
+  })
+  .catch((err) => {
+    return res.status(400).json({
+      success: false,
+    });
+  });
 });
 
 module.exports = router;
